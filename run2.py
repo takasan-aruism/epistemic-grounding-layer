@@ -41,15 +41,14 @@ def absence_slice(task, question, fail_repo):
 
     # ABSENCE candidate(AB-2: statement に調査範囲を参照)
     r3 = core.run_start("rd", "EXTRACTION", task_id=task)
-    CA = core.new_id("CC")
     cov_ref = "COV-TECH-STANDARD(公式doc+release notes+公式repo, en)"
-    core.append_event(r3, "CREATE", "CandidateClaim", CA, {
-        "id": CA, "object_kind": "CandidateClaim", "claim_type": "ABSENCE", "predicate": "documents",
+    CA = core.append_event(r3, "CREATE", "CandidateClaim", None, {
+        "id": core.SELF, "object_kind": "CandidateClaim", "claim_type": "ABSENCE", "predicate": "documents",
         "polarity": "ABSENCE", "task_id": task,
         "statement": f"{cov_ref}の範囲で、TensorRT-LLM が SM120 向け NVFP4 サポートを公式に明記した記述は見つからなかった",
         "scope": {"subject": "tensorrt-llm", "topic": "sm120_nvfp4_support",
                   "coverage_profile": "COV-TECH-STANDARD"},
-        "evidence_relations": [], "resolves_gap": G, "search_conclusion": scon})
+        "evidence_relations": [], "resolves_gap": G, "search_conclusion": scon}, new_prefix="CC")
     core.run_end(r3, [CA])
     line(f"   ABSENCE candidate {CA}  (AB-2: statement に coverage 参照)")
 

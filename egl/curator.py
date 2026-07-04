@@ -14,11 +14,11 @@ def _importance(con, cand):
 
 
 def _block(run, cand, gate2, outcome, reason):
-    dec = core.new_id("CDEC")
-    core.append_event(run, "DECISION", "CuratorDecision", dec,
-                      {"id": dec, "about": cand["id"], "outcome": outcome, "reason": reason,
-                       "finding": None, "claim_key": gate2.get("claim_key"),
-                       "decided_by_run": run, "decision_table_version": "DT-1a.0"})
+    dec = core.append_event(run, "DECISION", "CuratorDecision", None,
+                            {"id": core.SELF, "about": cand["id"], "outcome": outcome, "reason": reason,
+                             "finding": None, "claim_key": gate2.get("claim_key"),
+                             "decided_by_run": run, "decision_table_version": "DT-1a.0"},
+                            new_prefix="CDEC")
     core.run_end(run, [dec], "COMPLETED")
     return {"outcome": outcome, "reason": reason, "decision_id": dec}
 

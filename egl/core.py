@@ -4,7 +4,7 @@
 event は「部分 payload の merge」意味論(coarse event-sourcing)。
 rebuild は events を時系列 merge するだけ → RC-3/RC-4(time-travel)を満たす。
 """
-import json, os, sqlite3, datetime
+import json, os, re, sqlite3, datetime, fcntl, contextlib
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
@@ -16,7 +16,14 @@ DATA = Path(os.environ.get("EGL_DATA_DIR", str(BASE / "data")))
 DATA.mkdir(parents=True, exist_ok=True)
 EVENTS = DATA / "events.jsonl"
 SQLITE = DATA / "state.sqlite"
-COUNTERS = DATA / "counters.json"
+LOCK = DATA / ".idlock"          # H6: 採番+書込の critical section を跨プロセスで直列化
+
+# DE-0006 (H5/H6): counters.json(events から導出不能な第2 SoR)を廃止。
+# id は append_event 内で log の high-water から採番する。id が存在する ⟺ その id を刻む
+# event が log に存在する、を保証(『採番→後で書込』の分離を消す)。high-water 復元は帰結。
+# 採番と書込を同一 lock 内で行い、並行 run の id 衝突(H6)を防ぐ。
+SELF = "\x00SELF"                # payload 値がこれなら、採番した object_id で置換(自己参照 alias)
+_ID_RE = re.compile(r"^([A-Z]+)-(\d+)$")
 
 # ESTABLISHED axes (AX-6): claim_key はこの部分集合のみから作る(AX-2)
 ESTABLISHED_AXES = ["runtime", "runtime_version", "gpu_arch", "quant", "model",
@@ -31,21 +38,56 @@ def plus_days(days):
     return (datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(days=days)).isoformat()
 
 
-def new_id(prefix):
-    c = json.loads(COUNTERS.read_text()) if COUNTERS.exists() else {}
-    c[prefix] = c.get(prefix, 0) + 1
-    COUNTERS.write_text(json.dumps(c))
-    return f"{prefix}-{c[prefix]:05d}"
+@contextlib.contextmanager
+def _idlock():
+    """H6: 跨プロセス排他。high-water 読取〜event 書込を1つの critical section に。"""
+    fd = open(LOCK, "w")
+    try:
+        fcntl.flock(fd, fcntl.LOCK_EX)
+        yield
+    finally:
+        fcntl.flock(fd, fcntl.LOCK_UN)
+        fd.close()
+
+
+def _high_water():
+    """log 全 event の event_id / object_id から prefix 毎の最大連番を導出(単一 SoR)。
+    counters.json を持たない=喪失し得ない。high-water は log からの帰結にすぎない。"""
+    hw = {}
+    if not EVENTS.exists():
+        return hw
+    for line in EVENTS.read_text().splitlines():
+        if not line.strip():
+            continue
+        ev = json.loads(line)
+        for val in (ev.get("event_id"), ev.get("object_id")):
+            m = _ID_RE.match(val) if isinstance(val, str) else None
+            if m:
+                p, n = m.group(1), int(m.group(2))
+                if n > hw.get(p, 0):
+                    hw[p] = n
+    return hw
 
 
 # ---------- Event log (append-only, 正本) ----------
-def append_event(run_id, event_type, object_type, object_id, payload):
-    ev = {"event_id": new_id("EV"), "ts": now_iso(), "run_id": run_id,
-          "event_type": event_type, "object_type": object_type,
-          "object_id": object_id, "payload": payload}
-    with open(EVENTS, "a") as f:
-        f.write(json.dumps(ev, ensure_ascii=False) + "\n")
-    return ev
+def append_event(run_id, event_type, object_type, object_id, payload, new_prefix=None):
+    """new_prefix 指定時: object_id を log high-water から採番し返す(id-in-append, H5)。
+    payload 中および run_id の SELF 番兵は採番した id で置換(自己 alias を1 event で完結)。
+    採番と書込は _idlock 内=不可分(H6)。new_prefix 省略時は object_id をそのまま使う(UPDATE 等)。"""
+    with _idlock():
+        hw = _high_water()
+        evid = f"EV-{hw.get('EV', 0) + 1:05d}"
+        if new_prefix is not None:
+            object_id = f"{new_prefix}-{hw.get(new_prefix, 0) + 1:05d}"
+        if run_id is SELF:
+            run_id = object_id
+        pl = {k: (object_id if v is SELF else v) for k, v in payload.items()}
+        ev = {"event_id": evid, "ts": now_iso(), "run_id": run_id,
+              "event_type": event_type, "object_type": object_type,
+              "object_id": object_id, "payload": pl}
+        with open(EVENTS, "a") as f:
+            f.write(json.dumps(ev, ensure_ascii=False) + "\n")
+    return object_id
 
 
 def read_events(until_ts=None):
@@ -101,13 +143,12 @@ def by_type(con, object_type):
 
 # ---------- Run Ledger (RL-*) ----------
 def run_start(actor, activity_type, task_id=None, inputs=None, irr="REPLAYABLE"):
-    rid = new_id("RUN")
-    append_event(rid, "CREATE", "Run", rid,
-                 {"id": rid, "actor": actor, "activity_type": activity_type,
-                  "task_id": task_id, "inputs": inputs or [], "outputs": [],
-                  "irreversibility_class": irr, "status": "RUNNING",
-                  "started_at": now_iso()})
-    return rid
+    # Run は id == run_id。両方を採番済み id に(SELF 番兵で1 event 完結)。
+    return append_event(SELF, "CREATE", "Run", None,
+                        {"id": SELF, "actor": actor, "activity_type": activity_type,
+                         "task_id": task_id, "inputs": inputs or [], "outputs": [],
+                         "irreversibility_class": irr, "status": "RUNNING",
+                         "started_at": now_iso()}, new_prefix="RUN")
 
 
 def run_end(rid, outputs, status="COMPLETED"):
