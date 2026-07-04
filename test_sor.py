@@ -11,7 +11,7 @@ id が復元される』ことは検証できない。EGL_DATA_DIR で canonical
 """
 import os, sys, tempfile
 os.environ.setdefault("EGL_DATA_DIR", tempfile.mkdtemp(prefix="egl_sor_"))
-from egl import core
+from egl import core, gates, pipeline as P
 import multiprocessing as mp
 
 RESULTS = []
@@ -159,8 +159,62 @@ def t_m4_nested_sibling():
           f"temporal={st['temporal']}")
 
 
+# ---------------------------------------------------------------
+# T8 — L4 (DE-0008): validation_mode を provenance から導出。既定値を捏造しない。
+# ---------------------------------------------------------------
+def t_l4_derive_validation_mode():
+    reset()
+    r = core.run_start("rd", "CURATION")
+    sp = P.mk_source(r, "primary", "PRIMARY", "loc")
+    np_ = P.mk_observation(r, sp, "H", ["b0", "b1", "b2"])
+    fp = P.mk_fragment(r, np_, 1, "b1")
+    rel_p = P.mk_relation(r, fp, None, "SUPPORTS", {})
+    sg = P.mk_source(r, "generated", "GENERATED", "loc")
+    ng = P.mk_observation(r, sg, "H", ["b0", "b1", "b2"])
+    fg = P.mk_fragment(r, ng, 1, "b1")
+    rel_g = P.mk_relation(r, fg, None, "SUPPORTS", {})
+    core.run_end(r, [])
+    con = core.build_view()
+    prim = gates.derive_validation_mode(con, {"polarity": "POSITIVE", "evidence_relations": [rel_p]})
+    gen = gates.derive_validation_mode(con, {"polarity": "POSITIVE", "evidence_relations": [rel_g]})
+    absv = gates.derive_validation_mode(con, {"polarity": "ABSENCE"})
+    check("T8a L4 PRIMARY 由来 → DECLARED(provenance 導出)", prim == "DECLARED", prim)
+    check("T8b L4 counter-factual: GENERATED のみ → UNRESOLVED(既定を捏造しない)", gen == "UNRESOLVED", gen)
+    check("T8c L4 ABSENCE → SPECIFIED(SC-2 coverage provenance)", absv == "SPECIFIED", absv)
+
+
+# ---------------------------------------------------------------
+# T9 — L4: CORRECTION 機構。過去 event を書換えず訂正(本系初の RETRACTION 先例)。
+# ---------------------------------------------------------------
+def t_l4_correction_append_only():
+    reset()
+    r = core.run_start("rd", "CURATION")
+    cid = core.append_event(r, "CREATE", "Claim", None,
+                            {"id": core.SELF, "object_kind": "Claim", "status": "VERIFIED",
+                             "validation_mode": "DECLARED",
+                             "temporal": {"observation_time": "t0", "valid_until": "t9"}}, new_prefix="C")
+    core.run_end(r, [cid])
+    r2 = core.run_start("rd", "CURATION")
+    core.correct_object(r2, "Claim", cid, {"validation_mode": "UNRESOLVED"},
+                        reason="provenance 未確認: 既定 DECLARED は無根拠 (L4)")
+    core.run_end(r2, [cid])
+
+    evs = core.read_events()
+    st = core.get_state(cid)
+    fc = (st.get("corrections") or [{}])[-1].get("field_changes", {}).get("validation_mode")
+    orig_intact = any(e["object_id"] == cid and e["event_type"] == "CREATE"
+                      and e["payload"].get("validation_mode") == "DECLARED" for e in evs)
+    check("T9a L4 correction: 訂正値が view で有効", st.get("validation_mode") == "UNRESOLVED",
+          st.get("validation_mode"))
+    check("T9b L4 correction: from/to provenance が corrections に残る",
+          fc == {"from": "DECLARED", "to": "UNRESOLVED"}, str(fc))
+    check("T9c L4 correction: 原 CREATE event は書換えられず log に残る(append-only)", orig_intact)
+    check("T9d L4 correction: 完全 revision で nested 兄弟(temporal)保存",
+          st.get("temporal") == {"observation_time": "t0", "valid_until": "t9"}, str(st.get("temporal")))
+
+
 if __name__ == "__main__":
-    print("=== SoR 契約試験 (DE-0006 H5/H6 + DE-0007 M4) ===")
+    print("=== SoR 契約試験 (DE-0006 H5/H6 + DE-0007 M4 + DE-0008 L4) ===")
     print("\n[T1] H5 第2 SoR 廃止 / log 由来 id")
     t_h5_no_second_sor()
     print("\n[T2] H5 high-water を log から復元")
@@ -175,6 +229,10 @@ if __name__ == "__main__":
     t_m4_partial_rejected()
     print("\n[T7] M4 nested 兄弟キー保存")
     t_m4_nested_sibling()
+    print("\n[T8] L4 validation_mode 導出 (DE-0008)")
+    t_l4_derive_validation_mode()
+    print("\n[T9] L4 CORRECTION 機構(append-only 訂正)")
+    t_l4_correction_append_only()
 
     failed = [n for n, ok in RESULTS if not ok]
     print(f"\n=== {len(RESULTS)-len(failed)}/{len(RESULTS)} PASS ===")

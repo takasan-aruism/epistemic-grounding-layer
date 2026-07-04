@@ -76,7 +76,7 @@ def _check_complete_revision(event_type, object_id, payload):
     委ねず append_event 側で検査する。shallow-merge の兄弟キー喪失(M4)を構造的に不可能に。"""
     if "id" not in payload:
         raise ValueError(f"M4: event for {object_id} lacks 'id' (not a complete object)")
-    if event_type != "UPDATE":
+    if event_type not in ("UPDATE", "CORRECTION"):   # CORRECTION も state 変更=完全 revision 必須
         return
     cur = get_state(object_id)
     if not cur:
@@ -191,3 +191,21 @@ def run_end(rid, outputs, status="COMPLETED"):
     st = get_state(rid)
     st.update({"outputs": outputs, "status": status, "ended_at": now_iso()})
     append_event(rid, "UPDATE", "Run", rid, st)
+
+
+# ---------- Correction (L4 / DE-0008): append-only の訂正・撤回機構 ----------
+def correct_object(run, object_type, object_id, changes, reason):
+    """過去 event を書換えず、CORRECTION event で object の一部フィールドを訂正する。
+
+    append-only 準拠: 原 event は log にそのまま残り、訂正は後続 event として積む。
+    M4 に従い完全 revision(現状 + changes)を書く。訂正の provenance(field 毎の from/to /
+    reason / run / ts)を `corrections` 履歴に残す。これが本系初の RETRACTION/correction 機構=
+    Phase 1b の claim retraction / status 撤回の event 形式の先例(DE-0008, Taka forward req)。"""
+    st = get_state(object_id)
+    if not st:
+        raise ValueError(f"correction target {object_id} does not exist")
+    record = {"corrected_at": now_iso(), "corrected_by_run": run, "reason": reason,
+              "field_changes": {k: {"from": st.get(k), "to": v} for k, v in changes.items()}}
+    st.update(changes)
+    st["corrections"] = st.get("corrections", []) + [record]
+    return append_event(run, "CORRECTION", object_type, object_id, st)

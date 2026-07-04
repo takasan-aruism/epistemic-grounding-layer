@@ -68,6 +68,32 @@ def gate1_evidence(con, candidate):
     return True, "ok"
 
 
+# ---------- validation_mode derivation (L4 / DE-0008, AM-15 F3a) ----------
+def derive_validation_mode(con, candidate):
+    """validation_mode を provenance からコード導出。導出不能なら UNRESOLVED。
+    候補の *自己申告* validation_mode は用いない(L4: 『公式主体が宣言したと一次確認した』の
+    無根拠メタデータ捏造=本系が殺す無根拠 claim のメタデータ版。既定値の存在自体が誤り)。
+    - ABSENCE: SC-2 で coverage 完全性を leg event から再導出済 → 宣言済み profile 準拠が
+      provenance-backed = SPECIFIED
+    - POSITIVE: grounds を辿り一次資料(PRIMARY)の宣言に到達できれば DECLARED、
+      さもなくば UNRESOLVED(再現/測定 mode は再現 run の provenance が要るが未モデル→導出不能)"""
+    if candidate.get("polarity") == "ABSENCE":
+        return "SPECIFIED"
+    kinds = []
+    for rid in candidate.get("evidence_relations", []):
+        rel = core.get(con, rid)
+        if not rel:
+            continue
+        frag = core.get(con, rel.get("from_id"))
+        nobs = core.get(con, frag.get("norm_obs_id")) if frag else None
+        src = core.get(con, nobs.get("source_id")) if nobs else None
+        if src:
+            kinds.append(src.get("source_class"))
+    if kinds and any(k == "PRIMARY" for k in kinds) and all(k != "GENERATED" for k in kinds):
+        return "DECLARED"
+    return "UNRESOLVED"
+
+
 # ---------- Gate 2: dedup / conflict candidates (full scan CS-1, no vector) ----------
 def gate2_candidates(con, candidate):
     ck = core.claim_key(candidate)
