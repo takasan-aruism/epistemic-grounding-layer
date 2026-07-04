@@ -8,10 +8,10 @@
 python3 run.py             # Drop 1: EVIDENCE_INSUFFICIENT 経路(stream をリセット)
 python3 run2.py            # Drop 2: ABSENCE 経路 正/負(Drop 1 に append)
 python3 verify_rebuild.py  # RC-3(再構築一致)/ RC-4(time-travel)受入試験
-python3 test_enforce.py    # Challenge Set C(DE-0009): enforce 群の構造試験(data/ を reset)
+python3 test_enforce.py    # Challenge Set C(DE-0009): enforce 群の構造試験
 ```
-> `test_enforce.py` は `data/` を試験用に上書きする(AB-0005)。実行後に canonical stream を
-> 戻すには `run.py` → `run2.py` を再実行する。
+> `test_enforce.py` は import 前に `EGL_DATA_DIR` を隔離 temp dir へ向けるため、canonical
+> SoR(`data/`)を汚さない(AB-0005 解消)。`core.DATA` は env `EGL_DATA_DIR` で差し替え可能。
 
 ## 通した2つの型(walking skeleton の定石: 型の違う2本)
 **Drop 1 — EVIDENCE_INSUFFICIENT(断片が claim に足りない不足の型)**

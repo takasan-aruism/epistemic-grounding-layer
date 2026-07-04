@@ -11,7 +11,10 @@ DE-0009 の2故障型を独立に張る:
 この試験があれば、著者が過去に「SC-2 が構造ブロック」と過大報告したのを
 防げた(= DE-0005 の再発防止)。合格 = 各 enforce が driver 正直性に依存しない証拠。
 """
-import sys
+import os, sys, tempfile
+# AB-0005: canonical SoR(data/)を汚さないよう、egl を import する *前* に
+# 隔離 data dir へ向ける。以降 core.DATA/EVENTS/... は全てこの temp を指す。
+os.environ.setdefault("EGL_DATA_DIR", tempfile.mkdtemp(prefix="egl_test_"))
 from egl import core, gates, curator, judge, pipeline as P
 
 RESULTS = []

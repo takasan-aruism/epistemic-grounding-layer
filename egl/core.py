@@ -8,8 +8,12 @@ import json, os, sqlite3, datetime
 from pathlib import Path
 
 BASE = Path(__file__).resolve().parent.parent
-DATA = BASE / "data"
-DATA.mkdir(exist_ok=True)
+# AB-0005: DATA は env EGL_DATA_DIR で差し替え可能(既定 = canonical data/)。
+# 試験は import 前に EGL_DATA_DIR を別 dir に向け、canonical SoR を汚さない。
+# SoR=一次資産。特に H5(event log だけからの id 復元)検証は、log を汚すテストでは
+# 検証自体が信用できない → SoR 系変更(DE-0006〜)の前提としてこの分離を先行させる。
+DATA = Path(os.environ.get("EGL_DATA_DIR", str(BASE / "data")))
+DATA.mkdir(parents=True, exist_ok=True)
 EVENTS = DATA / "events.jsonl"
 SQLITE = DATA / "state.sqlite"
 COUNTERS = DATA / "counters.json"
