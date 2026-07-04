@@ -20,10 +20,13 @@ GUARD_CONTRACTS = {
             "H6: 並行採番の直列化(flock)",
         ],
         "non_guarantees": [
-            "semantic write authority: どの actor がどの event_type を発行してよいかは検査しない"
-            "(R1, capability registry 未実装。physical≠semantic authority)",
+            "semantic write authority の *prevention* は保証しない: 単一プロセスでは capability を"
+            "forge し得るため『違反不可能』は騙らない。保証は *検出可能性*(audit_write_authority が"
+            "GRANT 記録なき privileged write を機械検出、R1/DE-0021)",
+            "capability wiring は CORRECTION/COMPLETION のみ。Claim/Decision/leg 発行は未 wiring"
+            "(audit で unprotected として可視、enforce は incremental)",
         ],
-        "ref": "DE-0006 / R1",
+        "ref": "DE-0006 / DE-0021 / R1",
     },
     "core._check_complete_revision": {  # M4
         "guarantees": [
@@ -75,11 +78,11 @@ GUARD_CONTRACTS = {
             "gate2 の claim_key 衝突を判定に反映(dead でない)/ importance で審査バー",
         ],
         "non_guarantees": [
-            "claim identity: claim_key は RD の scope 由来で、値正規化(scope canonicalizer)未実装のため"
-            "表記揺れ(vllm/VLLM, 0.11/>=0.11)で key が割れ得る。dedup だけでなく conflict/ABSENCE reuse/"
-            "retraction 波及/lineage の分断に及ぶ(R3)",
+            "claim identity の surface 正規化(case/区切り/既知 alias)は canonicalize_scope で実施(R3/DE-0022)。"
+            "ただし version algebra(0.11 vs >=0.11 の包含)と entity 同一性(model variant)は未解決 →"
+            "これらの表記差では依然 key が割れ得る(AB-0009 残、Entity Registry/scope algebra は Phase 1b)",
         ],
-        "ref": "H3 / R3",
+        "ref": "H3 / DE-0022 / R3",
     },
     "gates.gc7_lint": {  # H4
         "guarantees": [

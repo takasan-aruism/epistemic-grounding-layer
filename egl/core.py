@@ -94,10 +94,12 @@ def _check_complete_revision(event_type, object_id, payload):
 
 
 # ---------- Event log (append-only, 正本) ----------
-def append_event(run_id, event_type, object_type, object_id, payload, new_prefix=None):
+def append_event(run_id, event_type, object_type, object_id, payload, new_prefix=None,
+                 principal=None, capability=None):
     """new_prefix 指定時: object_id を log high-water から採番し返す(id-in-append, H5)。
     payload 中および run_id の SELF 番兵は採番した id で置換(自己 alias を1 event で完結)。
-    採番と書込は _idlock 内=不可分(H6)。new_prefix 省略時は object_id をそのまま使う(UPDATE 等)。"""
+    採番と書込は _idlock 内=不可分(H6)。new_prefix 省略時は object_id をそのまま使う(UPDATE 等)。
+    R1: principal/capability を刻む(semantic write authority を audit で検出可能にする)。"""
     with _idlock():
         hw = _high_water()
         evid = f"EV-{hw.get('EV', 0) + 1:05d}"
@@ -110,9 +112,60 @@ def append_event(run_id, event_type, object_type, object_id, payload, new_prefix
         ev = {"event_id": evid, "ts": now_iso(), "run_id": run_id,
               "event_type": event_type, "object_type": object_type,
               "object_id": object_id, "payload": pl}
+        if principal is not None:
+            ev["principal"] = principal
+        if capability is not None:
+            ev["capability"] = capability
         with open(EVENTS, "a") as f:
             f.write(json.dumps(ev, ensure_ascii=False) + "\n")
     return object_id
+
+
+# ---------- R1 (DE-0021): semantic write authority(検出水準、prevention でない)----------
+# physical sole-writer(append_event)は成立するが、どの actor がどの event_type を発行してよいか
+# =semantic authority は別。単一プロセス内では capability を forge し得るので『違反不可能』は保証
+# しない(それを騙るのが本系列が繰返し捕まった過大報告)。保証は『違反が必ず検出可能』=
+# 発行(GRANT)記録なき capability での privileged write を audit_write_authority が機械検出。
+# 将来プロセス分離すれば同じ registry で prevention へ硬化できる。
+PRIVILEGED_EVENTS = {"CORRECTION": "CORRECTOR", "COMPLETION": "COMPLETER"}
+
+
+def issue_capability(run, principal, capability):
+    """capability の発行自体を event として記録(GRANT 記録なき token 使用を検出可能にする)。"""
+    core_id = append_event(run, "CAPABILITY_GRANT", "Capability", None,
+                           {"id": SELF, "principal": principal, "capability": capability,
+                            "granted_by_run": run}, new_prefix="CAP")
+    return {"principal": principal, "capability": capability, "grant_id": core_id}
+
+
+def _granted_caps(until_ts=None):
+    return {(e["payload"]["principal"], e["payload"]["capability"])
+            for e in read_events(until_ts) if e.get("event_type") == "CAPABILITY_GRANT"}
+
+
+def audit_write_authority(until_ts=None, enforce_types=None):
+    """privileged event が『発行済 capability を伴って』書かれているかを走査(R1 の保証=検出可能性)。
+    - violations: capability を claim しているが GRANT 記録が無い/registry と不一致(=forge)
+    - unprotected: privileged だが capability 無し(未 wiring)。enforce_types 指定でこれも violation 化
+    canonical stream は当面 unprotected(harden は incremental)。forge は常に violation。"""
+    enforce_types = set(enforce_types or [])
+    granted = _granted_caps(until_ts)
+    violations, unprotected = [], []
+    for ev in read_events(until_ts):
+        req = PRIVILEGED_EVENTS.get(ev.get("event_type"))
+        if not req:
+            continue
+        cap, pr = ev.get("capability"), ev.get("principal")
+        if cap is None:
+            rec = {"event_id": ev["event_id"], "event_type": ev["event_type"],
+                   "object_id": ev["object_id"], "reason": "no capability (unprotected)"}
+            (violations if ev["event_type"] in enforce_types else unprotected).append(rec)
+        elif cap != req or (pr, cap) not in granted:
+            violations.append({"event_id": ev["event_id"], "event_type": ev["event_type"],
+                               "object_id": ev["object_id"], "principal": pr, "capability": cap,
+                               "reason": "forged/ungranted capability" if (pr, cap) not in granted
+                                         else "wrong capability for event_type"})
+    return {"violations": violations, "unprotected": unprotected}
 
 
 def read_events(until_ts=None):
@@ -137,11 +190,33 @@ def get_state(object_id, until_ts=None):
     return st
 
 
+# R3(DE-0022): scope value canonicalization。v0.2 §7.1 は次元名の controlled vocab を規定したが
+# 値の正規化を規定し忘れていた → 表記揺れ(vllm/VLLM, nv-fp4/nvfp4)で claim_key が割れ、identity
+# gaming が dedup 以外(conflict/ABSENCE reuse/lineage)へ波及する。claim_key 生成前に必ず通す。
+# raw scope は state に保存されたまま(この関数は key 生成にのみ canonical を使う)。
+CANON_VERSION = "canon-1a.0"
+SCOPE_ALIASES = {"nvfp4": "nvfp4", "fp8": "fp8", "vllm": "vllm", "sglang": "sglang",
+                 "blackwell": "sm120", "sm120": "sm120"}   # 既知 alias(軽量 Entity Registry 代替)
+
+
+def canonicalize_scope(scope):
+    """surface 正規化: lowercase / whitespace・区切り(- _ 空白)除去 / 既知 alias。
+    ※ version algebra(0.11 vs >=0.11)や entity 同一性は解決しない=non_guarantee(AB-0009 残)。"""
+    out = {}
+    for k, v in (scope or {}).items():
+        if isinstance(v, str):
+            c = v.strip().lower().replace("-", "").replace("_", "").replace(" ", "")
+            out[k] = SCOPE_ALIASES.get(c, c)
+        else:
+            out[k] = v
+    return out
+
+
 def claim_key(state):
-    """OM/§14.2: ESTABLISHED 軸のみから安定 key を作る。"""
+    """OM/§14.2: ESTABLISHED 軸のみから安定 key を作る。R3: canonical scope から生成。"""
     if state.get("object_kind") not in ("CandidateClaim", "Claim"):
         return None
-    scope = state.get("scope", {})
+    scope = canonicalize_scope(state.get("scope", {}))
     axes = {k: scope[k] for k in ESTABLISHED_AXES if k in scope}
     body = ",".join(f"{k}={axes[k]}" for k in sorted(axes))
     return f"{state.get('claim_type')}:{state.get('predicate')}({body})"
@@ -201,7 +276,12 @@ EPISTEMIC_FIELDS = {"status", "polarity", "claim_type", "evidence_relations", "v
                     "absence_validation", "outcome", "finding"}   # METADATA 訂正で触れない(CR-2)
 
 
-def correct_object(run, object_type, object_id, changes, reason, correction_class, basis=None):
+def _cap(token):
+    return (token["principal"], token["capability"]) if token else (None, None)
+
+
+def correct_object(run, object_type, object_id, changes, reason, correction_class, basis=None,
+                   capability=None):
     """過去 event を書換えず CORRECTION event で訂正する。M4 完全 revision + from/to provenance。
     R2 mutation policy(GPT CR-1..4):
       CR-1 correction_class ∈ {FACTUAL, METADATA} 必須
@@ -228,10 +308,11 @@ def correct_object(run, object_type, object_id, changes, reason, correction_clas
               "field_changes": {k: {"from": st.get(k), "to": v} for k, v in changes.items()}}
     st.update(changes)
     st["corrections"] = st.get("corrections", []) + [record]
-    return append_event(run, "CORRECTION", object_type, object_id, st)
+    pr, cap = _cap(capability)
+    return append_event(run, "CORRECTION", object_type, object_id, st, principal=pr, capability=cap)
 
 
-def complete_object(run, object_type, object_id, fills, reason):
+def complete_object(run, object_type, object_id, fills, reason, capability=None):
     """先行生成時に未確定だったフィールドを埋める(完結)。M4 完全 revision + from/to provenance。
     R2 mutation policy(GPT CP-1..4):
       CP-1 missing/null → concrete のみ許可(fill 値は非 None)
@@ -254,4 +335,5 @@ def complete_object(run, object_type, object_id, fills, reason):
               "field_fills": {k: {"from": st.get(k), "to": v} for k, v in fills.items()}}
     st.update(fills)
     st["completions"] = st.get("completions", []) + [record]
-    return append_event(run, "COMPLETION", object_type, object_id, st)
+    pr, cap = _cap(capability)
+    return append_event(run, "COMPLETION", object_type, object_id, st, principal=pr, capability=cap)
