@@ -69,6 +69,30 @@ def _high_water():
     return hw
 
 
+# ---------- M4 (DE-0007): 完全 revision 契約を append_event が構造強制 ----------
+def _check_complete_revision(event_type, object_id, payload):
+    """partial-update を構造 reject。UPDATE の payload は現 object の全キー(top-level +
+    1段ネスト)を包含しなければならない。『完全 object を書く契約』を driver 正直性(M1)に
+    委ねず append_event 側で検査する。shallow-merge の兄弟キー喪失(M4)を構造的に不可能に。"""
+    if "id" not in payload:
+        raise ValueError(f"M4: event for {object_id} lacks 'id' (not a complete object)")
+    if event_type != "UPDATE":
+        return
+    cur = get_state(object_id)
+    if not cur:
+        return                                    # 未知 object への UPDATE は別問題(dangling)
+    miss = [k for k in cur if k not in payload]
+    if miss:
+        raise ValueError(f"M4: UPDATE {object_id} drops top-level keys {miss}; "
+                         "must carry complete revision (partial-update rejected)")
+    for k, v in cur.items():                       # 1段ネストの兄弟キー喪失も検出(例: temporal)
+        if isinstance(v, dict) and isinstance(payload.get(k), dict):
+            nmiss = [nk for nk in v if nk not in payload[k]]
+            if nmiss:
+                raise ValueError(f"M4: UPDATE {object_id} drops nested {k}.{nmiss}; "
+                                 "complete revision required")
+
+
 # ---------- Event log (append-only, 正本) ----------
 def append_event(run_id, event_type, object_type, object_id, payload, new_prefix=None):
     """new_prefix 指定時: object_id を log high-water から採番し返す(id-in-append, H5)。
@@ -82,6 +106,7 @@ def append_event(run_id, event_type, object_type, object_id, payload, new_prefix
         if run_id is SELF:
             run_id = object_id
         pl = {k: (object_id if v is SELF else v) for k, v in payload.items()}
+        _check_complete_revision(event_type, object_id, pl)   # M4: partial を構造 reject
         ev = {"event_id": evid, "ts": now_iso(), "run_id": run_id,
               "event_type": event_type, "object_type": object_type,
               "object_id": object_id, "payload": pl}
@@ -100,6 +125,16 @@ def read_events(until_ts=None):
             if until_ts is None or ev["ts"] <= until_ts:
                 out.append(ev)
     return out
+
+
+def get_state(object_id, until_ts=None):
+    """object の現在状態を log から merge して返す(RMW の read 面)。
+    DE-0007: UPDATE は完全 revision を書く必要があるため、変更前にこれで全キーを取得する。"""
+    st = {}
+    for ev in read_events(until_ts):
+        if ev.get("object_id") == object_id:
+            st = {**st, **ev["payload"]}
+    return st
 
 
 def claim_key(state):
@@ -152,5 +187,7 @@ def run_start(actor, activity_type, task_id=None, inputs=None, irr="REPLAYABLE")
 
 
 def run_end(rid, outputs, status="COMPLETED"):
-    append_event(rid, "UPDATE", "Run", rid,
-                 {"outputs": outputs, "status": status, "ended_at": now_iso()})
+    # M4: 完全 revision を書く(現 Run 状態を読み、lifecycle フィールドを更新して全体を再書込)。
+    st = get_state(rid)
+    st.update({"outputs": outputs, "status": status, "ended_at": now_iso()})
+    append_event(rid, "UPDATE", "Run", rid, st)

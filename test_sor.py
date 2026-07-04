@@ -119,8 +119,48 @@ def t_rc3_still_holds():
     check("T5 RC-3 view は log から決定的再構築(id-in-append 後も不変)", snap() == snap())
 
 
+# ---------------------------------------------------------------
+# T6 — M4 (DE-0007): partial-update を append_event が構造 reject
+# ---------------------------------------------------------------
+def t_m4_partial_rejected():
+    reset()
+    oid = core.append_event("R", "CREATE", "Thing", None,
+                            {"id": core.SELF, "a": 1, "b": 2}, new_prefix="TH")
+    try:
+        core.append_event("R", "UPDATE", "Thing", oid, {"id": oid, "a": 9})   # 'b' を落とす
+        rej = False
+    except ValueError:
+        rej = True
+    check("T6a M4 partial UPDATE(兄弟キー drop)を構造 reject", rej)
+    try:
+        core.append_event("R", "UPDATE", "Thing", oid, {"id": oid, "a": 9, "b": 2})
+        ok = True
+    except ValueError:
+        ok = False
+    check("T6b M4 counter-factual: 完全 revision の UPDATE は通る", ok)
+
+
+# ---------------------------------------------------------------
+# T7 — M4: nested 兄弟キー喪失(shallow-merge の M4 本体)も reject / 完全なら保存
+# ---------------------------------------------------------------
+def t_m4_nested_sibling():
+    reset()
+    oid = core.append_event("R", "CREATE", "Obj", None,
+                            {"id": core.SELF, "temporal": {"x": 1, "y": 2}}, new_prefix="OB")
+    try:
+        core.append_event("R", "UPDATE", "Obj", oid, {"id": oid, "temporal": {"x": 1}})  # y 消失
+        rej = False
+    except ValueError:
+        rej = True
+    check("T7a M4 nested 兄弟キー drop(temporal.y)を reject", rej)
+    core.append_event("R", "UPDATE", "Obj", oid, {"id": oid, "temporal": {"x": 1, "y": 2, "z": 3}})
+    st = core.get_state(oid)
+    check("T7b M4 完全 nested UPDATE は通り兄弟が保存される", st["temporal"] == {"x": 1, "y": 2, "z": 3},
+          f"temporal={st['temporal']}")
+
+
 if __name__ == "__main__":
-    print("=== SoR 契約試験 (DE-0006 H5/H6) ===")
+    print("=== SoR 契約試験 (DE-0006 H5/H6 + DE-0007 M4) ===")
     print("\n[T1] H5 第2 SoR 廃止 / log 由来 id")
     t_h5_no_second_sor()
     print("\n[T2] H5 high-water を log から復元")
@@ -131,6 +171,10 @@ if __name__ == "__main__":
     t_h6_concurrent_no_collision()
     print("\n[T5] RC-3 不変")
     t_rc3_still_holds()
+    print("\n[T6] M4 partial-update 構造 reject (DE-0007)")
+    t_m4_partial_rejected()
+    print("\n[T7] M4 nested 兄弟キー保存")
+    t_m4_nested_sibling()
 
     failed = [n for n, ok in RESULTS if not ok]
     print(f"\n=== {len(RESULTS)-len(failed)}/{len(RESULTS)} PASS ===")

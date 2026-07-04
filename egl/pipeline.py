@@ -59,11 +59,12 @@ def mk_search_leg(task_id, plan_id, source_kind, simulate_fail=False):
     SearchConclusion.status を信用するしかない(= DE-0005 の wrong-source 欠陥)。
     """
     rid = core.run_start("rd", "SEARCH", task_id=task_id, inputs=[plan_id])
-    # SoR に leg の意味的結果を刻む(gate3 が再導出の一次資料に使う)
-    core.append_event(rid, "UPDATE", "Run", rid,
-                      {"leg_plan_id": plan_id, "source_kind": source_kind})
     status = "FAILED" if simulate_fail else "COMPLETED"   # FAILED=RATE_LIMITED/timeout 相当
-    core.run_end(rid, [], status=status)
+    # M4: leg 情報 + lifecycle を1つの完全 revision で書く(gate3 が再導出の一次資料に使う)
+    st = core.get_state(rid)
+    st.update({"leg_plan_id": plan_id, "source_kind": source_kind,
+               "outputs": [], "status": status, "ended_at": core.now_iso()})
+    core.append_event(rid, "UPDATE", "Run", rid, st)
     return rid, source_kind, status == "COMPLETED"
 
 
@@ -113,11 +114,13 @@ def apply_outcome(run, candidate, outcome, reason, finding, gate2):
         # G4-7 / DF-3: required gap を OPEN へ戻し、追加調査の SearchPlan を添付
         gid = candidate.get("resolves_gap")
         if gid:
-            core.append_event(run, "UPDATE", "KnowledgeGap", gid,
-                              {"status": "OPEN", "last_insufficient_reason": reason})
+            g = core.get_state(gid)                        # M4: 完全 revision で再 OPEN
+            g.update({"status": "OPEN", "last_insufficient_reason": reason})
+            core.append_event(run, "UPDATE", "KnowledgeGap", gid, g)
             newplan = mk_search_plan(run, gid, "COV-TECH-STANDARD")
-            core.append_event(run, "UPDATE", "SearchPlan", newplan,
-                              {"note": "stress/stability test required (evidence insufficient)"})
+            p = core.get_state(newplan)                    # M4: 完全 revision で note 追記
+            p["note"] = "stress/stability test required (evidence insufficient)"
+            core.append_event(run, "UPDATE", "SearchPlan", newplan, p)
             result["reopened_gap"] = gid
             result["new_search_plan"] = newplan
     return result
