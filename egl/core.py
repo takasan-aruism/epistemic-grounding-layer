@@ -76,7 +76,7 @@ def _check_complete_revision(event_type, object_id, payload):
     委ねず append_event 側で検査する。shallow-merge の兄弟キー喪失(M4)を構造的に不可能に。"""
     if "id" not in payload:
         raise ValueError(f"M4: event for {object_id} lacks 'id' (not a complete object)")
-    if event_type not in ("UPDATE", "CORRECTION"):   # CORRECTION も state 変更=完全 revision 必須
+    if event_type not in ("UPDATE", "CORRECTION", "COMPLETION"):  # 後続 state 変更=完全 revision 必須
         return
     cur = get_state(object_id)
     if not cur:
@@ -209,3 +209,18 @@ def correct_object(run, object_type, object_id, changes, reason):
     st.update(changes)
     st["corrections"] = st.get("corrections", []) + [record]
     return append_event(run, "CORRECTION", object_type, object_id, st)
+
+
+def complete_object(run, object_type, object_id, fills, reason):
+    """後続 event で、先行生成時に未確定だったフィールドを埋める(完結)。CORRECTION と同型
+    (append-only・M4 完全 revision)だが意味は『訂正』でなく placeholder の結線。
+    AB-0007: cycle 回避で to_id=None 先行生成した Relation を candidate 確定後に結線するのがこれ。
+    OM-3(link は from/to を持つ第一級 object)の『恒久 null link は link でない』穴を塞ぐ。"""
+    st = get_state(object_id)
+    if not st:
+        raise ValueError(f"completion target {object_id} does not exist")
+    record = {"completed_at": now_iso(), "completed_by_run": run, "reason": reason,
+              "field_fills": {k: {"from": st.get(k), "to": v} for k, v in fills.items()}}
+    st.update(fills)
+    st["completions"] = st.get("completions", []) + [record]
+    return append_event(run, "COMPLETION", object_type, object_id, st)

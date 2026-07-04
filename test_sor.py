@@ -213,8 +213,34 @@ def t_l4_correction_append_only():
           st.get("temporal") == {"observation_time": "t0", "valid_until": "t9"}, str(st.get("temporal")))
 
 
+# ---------------------------------------------------------------
+# T10 — AB-0007: relation.to_id を candidate 確定後に COMPLETION で結線(恒久 null link を残さない)
+# ---------------------------------------------------------------
+def t_ab0007_relation_completion():
+    reset()
+    r = core.run_start("rd", "CURATION")
+    s = P.mk_source(r, "x", "PRIMARY", "loc")
+    n = P.mk_observation(r, s, "H", ["b0", "b1", "b2"])
+    f = P.mk_fragment(r, n, 1, "b1")
+    rel = P.mk_relation(r, f, None, "SUPPORTS", {})           # to=None で先行生成
+    cid = P.mk_candidate(r, {"object_kind": "CandidateClaim", "claim_type": "CAPABILITY",
+                             "predicate": "p", "polarity": "POSITIVE", "task_id": "T",
+                             "statement": "s", "scope": {"gpu_arch": "sm120"},
+                             "evidence_relations": [rel], "resolves_gap": None})
+    core.run_end(r, [cid])
+    evs = core.read_events()
+    st = core.get_state(rel)
+    orig_null = any(e["object_id"] == rel and e["event_type"] == "CREATE"
+                    and e["payload"].get("to_id") is None for e in evs)
+    ff = (st.get("completions") or [{}])[-1].get("field_fills", {}).get("to_id")
+    check("T10a AB-0007 candidate 確定後 relation.to_id が結線される", st.get("to_id") == cid, st.get("to_id"))
+    check("T10b AB-0007 原 CREATE は to_id=None のまま log 残存(append-only)", orig_null)
+    check("T10c AB-0007 完結 provenance(from None→to cid)が completions に残る",
+          ff == {"from": None, "to": cid}, str(ff))
+
+
 if __name__ == "__main__":
-    print("=== SoR 契約試験 (DE-0006 H5/H6 + DE-0007 M4 + DE-0008 L4) ===")
+    print("=== SoR 契約試験 (DE-0006 H5/H6 + DE-0007 M4 + DE-0008 L4 + AB-0007) ===")
     print("\n[T1] H5 第2 SoR 廃止 / log 由来 id")
     t_h5_no_second_sor()
     print("\n[T2] H5 high-water を log から復元")
@@ -233,6 +259,8 @@ if __name__ == "__main__":
     t_l4_derive_validation_mode()
     print("\n[T9] L4 CORRECTION 機構(append-only 訂正)")
     t_l4_correction_append_only()
+    print("\n[T10] AB-0007 relation 完結 event(COMPLETION 結線)")
+    t_ab0007_relation_completion()
 
     failed = [n for n, ok in RESULTS if not ok]
     print(f"\n=== {len(RESULTS)-len(failed)}/{len(RESULTS)} PASS ===")

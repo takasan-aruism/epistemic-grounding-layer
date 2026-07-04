@@ -44,7 +44,7 @@ def positive_candidate(run, scope, claim_type="CAPABILITY", predicate="runs_on",
                        resolves_gap=None, grounds_claims=None, scope_echo=None):
     f = evidence_fragment(run)
     rel = P.mk_relation(run, f, None, "SUPPORTS", {})   # DE-0006: candidate 前に to=None で先行
-    payload = {"id": core.SELF, "object_kind": "CandidateClaim", "claim_type": claim_type,
+    payload = {"object_kind": "CandidateClaim", "claim_type": claim_type,
                "predicate": predicate, "polarity": "POSITIVE", "task_id": "T",
                "statement": "s", "scope": scope, "evidence_relations": [rel],
                "resolves_gap": resolves_gap, "validation_mode": "DECLARED",
@@ -53,7 +53,7 @@ def positive_candidate(run, scope, claim_type="CAPABILITY", predicate="runs_on",
         payload["grounds_claims"] = grounds_claims
     if scope_echo:
         payload["scope_echo"] = scope_echo
-    return core.append_event(run, "CREATE", "CandidateClaim", None, payload, new_prefix="CC")
+    return P.mk_candidate(run, payload)   # AB-0007: to_id を結線
 
 
 def adj_for(cid, f1="SUPPORTED", f2="WITHIN", frag=True):
@@ -62,11 +62,11 @@ def adj_for(cid, f1="SUPPORTED", f2="WITHIN", frag=True):
 
 
 def absence_candidate(run, plan, scon, gap=None):
-    return core.append_event(run, "CREATE", "CandidateClaim", None, {
-        "id": core.SELF, "object_kind": "CandidateClaim", "claim_type": "ABSENCE", "predicate": "documents",
+    return P.mk_candidate(run, {
+        "object_kind": "CandidateClaim", "claim_type": "ABSENCE", "predicate": "documents",
         "polarity": "ABSENCE", "task_id": "T", "statement": "not found in coverage",
         "scope": {"subject": "x", "coverage_profile": "COV-TECH-STANDARD"},
-        "evidence_relations": [], "resolves_gap": gap, "search_conclusion": scon}, new_prefix="CC")
+        "evidence_relations": [], "resolves_gap": gap, "search_conclusion": scon})
 
 
 def claim_of(res):
@@ -190,10 +190,10 @@ def t5_m3_dangling():
                              {"id": core.SELF, "norm_obs_id": "NOBS-99999", "block_index": 0,
                               "excerpt": "x", "taint_flags": []}, new_prefix="EFRAG")
     rel = P.mk_relation(r, frag, None, "SUPPORTS", {})
-    C = core.append_event(r, "CREATE", "CandidateClaim", None, {
-        "id": core.SELF, "object_kind": "CandidateClaim", "claim_type": "CAPABILITY", "predicate": "p",
+    C = P.mk_candidate(r, {
+        "object_kind": "CandidateClaim", "claim_type": "CAPABILITY", "predicate": "p",
         "polarity": "POSITIVE", "task_id": "T", "statement": "s", "scope": {"gpu_arch": "sm120"},
-        "evidence_relations": [rel], "resolves_gap": None}, new_prefix="CC")
+        "evidence_relations": [rel], "resolves_gap": None})
     core.run_end(r, [C])
     try:
         o = curator.curate(C)["outcome"]

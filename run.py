@@ -38,22 +38,22 @@ line(f"[OBS]   {S1}(PRIMARY) → {N1} → {F1}: {blocks[1]!r}")
 r = core.run_start("rd", "EXTRACTION", task_id="TASK-NVFP4-STAB")
 # DE-0006: id-in-append。relation を candidate 生成前に to=None で先行生成し相互参照を断つ。
 rel1 = P.mk_relation(r, F1, None, "SUPPORTS", {"question": "runs on sm120", "scope": {"gpu_arch": "sm120"}})
-C1 = core.append_event(r, "CREATE", "CandidateClaim", None, {
-    "id": core.SELF, "object_kind": "CandidateClaim", "claim_type": "CAPABILITY", "predicate": "runs_on",
+C1 = P.mk_candidate(r, {
+    "object_kind": "CandidateClaim", "claim_type": "CAPABILITY", "predicate": "runs_on",
     "polarity": "POSITIVE", "task_id": "TASK-NVFP4-STAB",
     "statement": "NVFP4量子化チェックポイントはBlackwell(sm120)上でvLLMにより推論実行できる",
     "scope": {"runtime": "vllm", "gpu_arch": "sm120", "quant": "nvfp4"},
     "evidence_relations": [rel1], "resolves_gap": None, "validation_mode": "DECLARED",
     "representation_residual": {"known_omissions": ["operational_stability", "kernel_backend"],
-                                "scope_uncertainty": "LOW"}}, new_prefix="CC")
+                                "scope_uncertainty": "LOW"}})
 rel2 = P.mk_relation(r, F1, None, "SUPPORTS", {"question": "stable under sustained load", "scope": {"gpu_arch": "sm120"}})
-C2 = core.append_event(r, "CREATE", "CandidateClaim", None, {
-    "id": core.SELF, "object_kind": "CandidateClaim", "claim_type": "MEASUREMENT", "predicate": "stable_under",
+C2 = P.mk_candidate(r, {
+    "object_kind": "CandidateClaim", "claim_type": "MEASUREMENT", "predicate": "stable_under",
     "polarity": "POSITIVE", "task_id": "TASK-NVFP4-STAB",
     "statement": "NVFP4はdual RTX5090の持続(48h)agent負荷で安定動作する",
     "scope": {"runtime": "vllm", "gpu_arch": "sm120", "quant": "nvfp4", "load": "sustained_48h_agent"},
     "evidence_relations": [rel2], "resolves_gap": G, "validation_mode": "REPRODUCED",
-    "representation_residual": {"known_omissions": [], "scope_uncertainty": "HIGH"}}, new_prefix="CC")
+    "representation_residual": {"known_omissions": [], "scope_uncertainty": "HIGH"}})
 core.run_end(r, [C1, C2])
 line(f"[CAND]  {C1}(背景) / {C2}(gap回答, resolves {G})")
 

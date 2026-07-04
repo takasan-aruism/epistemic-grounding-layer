@@ -39,6 +39,19 @@ def mk_relation(run, from_frag, to_candidate, rel_type, context):
                               "relation_type": rel_type, "context": context, "created_by_run": run},
                              new_prefix="REL")
 
+def mk_candidate(run, payload):
+    """CandidateClaim を作り、その evidence_relations の to_id を完結 event で結線する(AB-0007)。
+    relation は id-in-append の cycle 回避で to_id=None 先行生成される → candidate 確定後にここで
+    COMPLETION により結線し、恒久 null link を残さない(OM-3)。seam-6(write surface 統一)の芽。"""
+    payload = dict(payload)
+    payload["id"] = core.SELF
+    cid = core.append_event(run, "CREATE", "CandidateClaim", None, payload, new_prefix="CC")
+    for rid in payload.get("evidence_relations", []):
+        core.complete_object(run, "Relation", rid, {"to_id": cid},
+                             reason="candidate 確定に伴う link 結線 (AB-0007)")
+    return cid
+
+
 def mk_gap(run, question, required_for, profile):
     return core.append_event(run, "CREATE", "KnowledgeGap", None,
                              {"id": core.SELF, "gap_id": core.SELF, "question": question,
