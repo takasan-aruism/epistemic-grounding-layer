@@ -103,11 +103,13 @@ def apply_outcome(run, candidate, outcome, reason, finding, gate2):
         # CB-5)由来で受理された」= 導出値。ABSENCE は adjudicator を持たず coverage 由来なので
         # bootstrap ではない → benchmark B(自律化原料)への混入を防ぐ(data-integrity)。
         bootstrap = bool(finding and getattr(finding, "teacher_signal", False))
-        # L4: validation_mode は provenance からコード導出(既定値を捏造しない)。導出不能=UNRESOLVED。
-        vmode = gates.derive_validation_mode(core.build_view(), candidate)
+        con_v = core.build_view()
         if candidate.get("polarity") == "ABSENCE":       # NOT_FOUND + AB-3 短TTL
+            # R5: ABSENCE は通常の validation_mode を持たず、別軸 absence_validation を持つ
+            #     (SPECIFIED=公式規定の不在 との再混同を避ける)。
             st.update({"id": core.SELF, "claim_id": core.SELF, "object_kind": "Claim", "claim_type": "ABSENCE",
-                       "status": "NOT_FOUND", "validation_mode": vmode, "revision": 1,
+                       "status": "NOT_FOUND",
+                       "absence_validation": gates.derive_absence_validation(con_v, candidate), "revision": 1,
                        "origin_candidate": candidate["id"], "bootstrap": bootstrap,
                        "volatility_class": "ABSENCE_VOLATILE",
                        "temporal": {"observation_time": core.now_iso(),
@@ -116,9 +118,10 @@ def apply_outcome(run, candidate, outcome, reason, finding, gate2):
                                     "last_verified": core.now_iso()},
                        "promoted_by_run": run})
         else:
+            # L4: validation_mode は provenance 導出(既定値を捏造しない)。導出不能=UNRESOLVED。
             st.update({"id": core.SELF, "claim_id": core.SELF, "object_kind": "Claim",
                        "status": "VERIFIED" if finding.f1_entailment == "SUPPORTED" else "REPORTED",
-                       "validation_mode": vmode,
+                       "validation_mode": gates.derive_validation_mode(con_v, candidate),
                        "revision": 1, "origin_candidate": candidate["id"],
                        "bootstrap": bootstrap, "promoted_by_run": run})
         cid = core.append_event(run, "CREATE", "Claim", None, st, new_prefix="C")

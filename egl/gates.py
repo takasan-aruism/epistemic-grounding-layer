@@ -73,12 +73,17 @@ def derive_validation_mode(con, candidate):
     """validation_mode を provenance からコード導出。導出不能なら UNRESOLVED。
     候補の *自己申告* validation_mode は用いない(L4: 『公式主体が宣言したと一次確認した』の
     無根拠メタデータ捏造=本系が殺す無根拠 claim のメタデータ版。既定値の存在自体が誤り)。
-    - ABSENCE: SC-2 で coverage 完全性を leg event から再導出済 → 宣言済み profile 準拠が
-      provenance-backed = SPECIFIED
-    - POSITIVE: grounds を辿り一次資料(PRIMARY)の宣言に到達できれば DECLARED、
-      さもなくば UNRESOLVED(再現/測定 mode は再現 run の provenance が要るが未モデル→導出不能)"""
-    if candidate.get("polarity") == "ABSENCE":
-        return "SPECIFIED"
+
+    R5(Taka 裁定): validation_mode は **positive/negative claim 専用**。
+    - POSITIVE: 一次資料(PRIMARY)の宣言に到達で DECLARED、さもなくば UNRESOLVED
+      (再現/測定 mode は再現 run の provenance が要るが未モデル→導出不能)
+    - NEGATIVE(明示的不支持: 公式が『X は非対応』と規定): PRIMARY 到達で SPECIFIED、else UNRESOLVED
+    - ABSENCE(調査完遂したが見つからない不在)は **この体系を使わない** → derive_absence_validation。
+      SPECIFIED を ABSENCE に与えるのは NOT_FOUND と『公式仕様に規定された不在』の再混同(この系の
+      第一日の禁忌)。polarity 層が既にこの区別を持つので mode 層で再融合させない。"""
+    polarity = candidate.get("polarity")
+    if polarity == "ABSENCE":
+        raise ValueError("R5: ABSENCE は validation_mode を持たない。derive_absence_validation を使う")
     kinds = []
     for rid in candidate.get("evidence_relations", []):
         rel = core.get(con, rid)
@@ -89,9 +94,19 @@ def derive_validation_mode(con, candidate):
         src = core.get(con, nobs.get("source_id")) if nobs else None
         if src:
             kinds.append(src.get("source_class"))
-    if kinds and any(k == "PRIMARY" for k in kinds) and all(k != "GENERATED" for k in kinds):
-        return "DECLARED"
-    return "UNRESOLVED"
+    has_primary = kinds and any(k == "PRIMARY" for k in kinds) and all(k != "GENERATED" for k in kinds)
+    if polarity == "NEGATIVE":
+        return "SPECIFIED" if has_primary else "UNRESOLVED"
+    return "DECLARED" if has_primary else "UNRESOLVED"
+
+
+def derive_absence_validation(con, candidate):
+    """ABSENCE claim の validation は別軸(R5)。通常の validation_mode を使わない。
+    根拠は『どの coverage profile の調査を完遂したか』= SC-2 の provenance。
+    NOT_FOUND(調査完遂したが無い)を『公式規定の不在』と読み違えさせない。"""
+    scon = core.get(con, candidate.get("search_conclusion"))
+    plan_id = scon.get("search_plan_id") if scon else None
+    return {"mode": "SEARCH_COVERAGE_COMPLETED", "search_plan_id": plan_id}
 
 
 # ---------- Gate 2: dedup / conflict candidates (full scan CS-1, no vector) ----------

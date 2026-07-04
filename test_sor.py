@@ -177,10 +177,19 @@ def t_l4_derive_validation_mode():
     con = core.build_view()
     prim = gates.derive_validation_mode(con, {"polarity": "POSITIVE", "evidence_relations": [rel_p]})
     gen = gates.derive_validation_mode(con, {"polarity": "POSITIVE", "evidence_relations": [rel_g]})
-    absv = gates.derive_validation_mode(con, {"polarity": "ABSENCE"})
+    neg = gates.derive_validation_mode(con, {"polarity": "NEGATIVE", "evidence_relations": [rel_p]})
+    try:
+        gates.derive_validation_mode(con, {"polarity": "ABSENCE"})
+        abs_raises = False
+    except ValueError:
+        abs_raises = True
+    absv = gates.derive_absence_validation(con, {"polarity": "ABSENCE", "search_conclusion": None})
     check("T8a L4 PRIMARY 由来 → DECLARED(provenance 導出)", prim == "DECLARED", prim)
     check("T8b L4 counter-factual: GENERATED のみ → UNRESOLVED(既定を捏造しない)", gen == "UNRESOLVED", gen)
-    check("T8c L4 ABSENCE → SPECIFIED(SC-2 coverage provenance)", absv == "SPECIFIED", absv)
+    check("T8c R5 NEGATIVE + PRIMARY → SPECIFIED(明示的不支持 claim 専用)", neg == "SPECIFIED", neg)
+    check("T8d R5 ABSENCE に validation_mode を求めると reject(NOT_FOUND と規定不在の再混同を封じる)", abs_raises)
+    check("T8e R5 ABSENCE は別軸 absence_validation(SEARCH_COVERAGE_COMPLETED)",
+          absv["mode"] == "SEARCH_COVERAGE_COMPLETED", str(absv))
 
 
 # ---------------------------------------------------------------
@@ -196,7 +205,8 @@ def t_l4_correction_append_only():
     core.run_end(r, [cid])
     r2 = core.run_start("rd", "CURATION")
     core.correct_object(r2, "Claim", cid, {"validation_mode": "UNRESOLVED"},
-                        reason="provenance 未確認: 既定 DECLARED は無根拠 (L4)")
+                        reason="provenance 未確認: 既定 DECLARED は無根拠 (L4)",
+                        correction_class="FACTUAL", basis="DE-0008 provenance 再検査")
     core.run_end(r2, [cid])
 
     evs = core.read_events()
@@ -239,8 +249,78 @@ def t_ab0007_relation_completion():
           ff == {"from": None, "to": cid}, str(ff))
 
 
+# ---------------------------------------------------------------
+# T11 — R2: CORRECTION/COMPLETION transition-legality guard(GPT CR/CP + 3 counter-factual)
+# ---------------------------------------------------------------
+def _raises(fn):
+    try:
+        fn(); return False
+    except ValueError:
+        return True
+
+
+def t_r2_correction_completion_policy():
+    reset()
+    r = core.run_start("rd", "CURATION")
+    cid = core.append_event(r, "CREATE", "Claim", None,
+                            {"id": core.SELF, "object_kind": "Claim", "status": "REJECTED",
+                             "polarity": "POSITIVE", "validation_mode": "DECLARED",
+                             "source_class": "COMMUNITY"}, new_prefix="C")
+    core.run_end(r, [cid])
+    r2 = core.run_start("rd", "CURATION")
+    # CR-1: class 無し
+    check("T11a CR-1 correction_class 無しは reject",
+          _raises(lambda: core.correct_object(r2, "Claim", cid, {"note": "x"}, "r", correction_class=None)))
+    # CR-4 / counter-factual①: REJECTED→VERIFIED を CORRECTION で復活 → reject
+    check("T11b CR-4 counter-factual: REJECTED→VERIFIED を CORRECTION で復活 → reject",
+          _raises(lambda: core.correct_object(r2, "Claim", cid, {"status": "VERIFIED"}, "revive",
+                                              correction_class="FACTUAL", basis="x")))
+    # CR-2: METADATA が epistemic(validation_mode)を変更 → reject
+    check("T11c CR-2 METADATA correction が validation_mode を変更 → reject",
+          _raises(lambda: core.correct_object(r2, "Claim", cid, {"validation_mode": "REPRODUCED"}, "r",
+                                              correction_class="METADATA")))
+    # CR-3: FACTUAL に basis 無し → reject
+    check("T11d CR-3 FACTUAL correction に basis 無し → reject",
+          _raises(lambda: core.correct_object(r2, "Claim", cid, {"validation_mode": "UNRESOLVED"}, "r",
+                                              correction_class="FACTUAL")))
+    # counter-factual②: 既存 source_class=COMMUNITY を COMPLETION で PRIMARY に → reject(CP-2)
+    check("T11e CP-2 counter-factual: 既存 source_class を COMPLETION で書換 → reject",
+          _raises(lambda: core.complete_object(r2, "Claim", cid, {"source_class": "PRIMARY"}, "upgrade")))
+    # counter-factual③: 欠落 validation_mode(別 object)を COMPLETION で UNRESOLVED に → accept(CP-1)
+    oid = core.append_event(r2, "CREATE", "Claim", None,
+                            {"id": core.SELF, "object_kind": "Claim", "status": "REPORTED"}, new_prefix="C")
+    core.complete_object(r2, "Claim", oid, {"validation_mode": "UNRESOLVED"}, "fill missing")
+    core.run_end(r2, [cid])
+    check("T11f CP-1 counter-factual: 欠落 field を COMPLETION で concrete 化 → accept",
+          core.get_state(oid).get("validation_mode") == "UNRESOLVED")
+    # METADATA で非 epistemic(locator 相当)は通る
+    ok_meta = True
+    try:
+        core.correct_object(r2, "Claim", cid, {"note": "typo fix"}, "r", correction_class="METADATA")
+    except ValueError:
+        ok_meta = False
+    check("T11g CR-2 counter-factual: METADATA で非 epistemic field は通る", ok_meta)
+
+
+# ---------------------------------------------------------------
+# T12 — 恒久対策: 全 guard が non_guarantees(guard の known_omissions)を宣言している
+# ---------------------------------------------------------------
+def t_guard_non_guarantees_declared():
+    from egl import contracts
+    missing = [g for g, c in contracts.GUARD_CONTRACTS.items() if not c.get("non_guarantees")]
+    check("T12a 全 guard が non_guarantees を宣言(guard の known_omissions)", not missing, str(missing))
+    # レビューで confirmed だった性質が宣言に載っているか(自認の事前化)
+    m4 = " ".join(contracts.GUARD_CONTRACTS["core._check_complete_revision"]["non_guarantees"])
+    gc7 = " ".join(contracts.GUARD_CONTRACTS["gates.gc7_lint"]["non_guarantees"])
+    ae = " ".join(contracts.GUARD_CONTRACTS["core.append_event"]["non_guarantees"])
+    check("T12b R2 が M4 の non_guarantee に事前記載(transition legality)", "transition legality" in m4)
+    check("T12c H4b が GC-7 の non_guarantee に事前記載(statement→scope)", "statement→scope" in gc7)
+    check("T12d R1 が append_event の non_guarantee に事前記載(semantic write authority)",
+          "semantic write authority" in ae)
+
+
 if __name__ == "__main__":
-    print("=== SoR 契約試験 (DE-0006 H5/H6 + DE-0007 M4 + DE-0008 L4 + AB-0007) ===")
+    print("=== SoR 契約試験 (DE-0006 H5/H6 + DE-0007 M4 + DE-0008 L4 + AB-0007 + R2/R5 + guard契約) ===")
     print("\n[T1] H5 第2 SoR 廃止 / log 由来 id")
     t_h5_no_second_sor()
     print("\n[T2] H5 high-water を log から復元")
@@ -261,6 +341,10 @@ if __name__ == "__main__":
     t_l4_correction_append_only()
     print("\n[T10] AB-0007 relation 完結 event(COMPLETION 結線)")
     t_ab0007_relation_completion()
+    print("\n[T11] R2 CORRECTION/COMPLETION transition-legality guard")
+    t_r2_correction_completion_policy()
+    print("\n[T12] 恒久対策: guard non_guarantees 宣言")
+    t_guard_non_guarantees_declared()
 
     failed = [n for n, ok in RESULTS if not ok]
     print(f"\n=== {len(RESULTS)-len(failed)}/{len(RESULTS)} PASS ===")

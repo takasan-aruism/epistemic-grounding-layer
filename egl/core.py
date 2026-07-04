@@ -194,17 +194,37 @@ def run_end(rid, outputs, status="COMPLETED"):
 
 
 # ---------- Correction (L4 / DE-0008): append-only の訂正・撤回機構 ----------
-def correct_object(run, object_type, object_id, changes, reason):
-    """過去 event を書換えず、CORRECTION event で object の一部フィールドを訂正する。
+# R2: M4 は completeness validator であって transition validator ではない。CORRECTION/COMPLETION が
+# 「何でも直せる/書き換えられる」特権経路にならないよう、mutation policy を明示強制する。
+LIFECYCLE_FIELDS = {"status", "polarity"}   # claim lifecycle は専用 transition event 管轄(CR-4)
+EPISTEMIC_FIELDS = {"status", "polarity", "claim_type", "evidence_relations", "validation_mode",
+                    "absence_validation", "outcome", "finding"}   # METADATA 訂正で触れない(CR-2)
 
-    append-only 準拠: 原 event は log にそのまま残り、訂正は後続 event として積む。
-    M4 に従い完全 revision(現状 + changes)を書く。訂正の provenance(field 毎の from/to /
-    reason / run / ts)を `corrections` 履歴に残す。これが本系初の RETRACTION/correction 機構=
-    Phase 1b の claim retraction / status 撤回の event 形式の先例(DE-0008, Taka forward req)。"""
+
+def correct_object(run, object_type, object_id, changes, reason, correction_class, basis=None):
+    """過去 event を書換えず CORRECTION event で訂正する。M4 完全 revision + from/to provenance。
+    R2 mutation policy(GPT CR-1..4):
+      CR-1 correction_class ∈ {FACTUAL, METADATA} 必須
+      CR-2 METADATA は epistemic fields(status/polarity/evidence/validation_mode 等)を変更禁止
+      CR-3 FACTUAL は basis(根拠 event / decision ref)必須
+      CR-4 lifecycle(status/polarity)遷移は CORRECTION でなく専用 transition event(未実装)で行う
+    ※ completeness(M4)と legality(遷移正当性)は別物。CORRECTION は後者を主張しない。"""
+    if correction_class not in ("FACTUAL", "METADATA"):                       # CR-1
+        raise ValueError("CR-1: correction_class must be FACTUAL or METADATA")
+    lc = [k for k in changes if k in LIFECYCLE_FIELDS]                        # CR-4
+    if lc:
+        raise ValueError(f"CR-4: lifecycle fields {lc} require a dedicated transition event, not CORRECTION")
+    if correction_class == "METADATA":                                       # CR-2
+        ep = [k for k in changes if k in EPISTEMIC_FIELDS]
+        if ep:
+            raise ValueError(f"CR-2: METADATA correction must not change epistemic fields {ep}")
+    if correction_class == "FACTUAL" and not basis:                          # CR-3
+        raise ValueError("CR-3: FACTUAL correction requires a basis (grounding event / decision ref)")
     st = get_state(object_id)
     if not st:
         raise ValueError(f"correction target {object_id} does not exist")
     record = {"corrected_at": now_iso(), "corrected_by_run": run, "reason": reason,
+              "correction_class": correction_class, "basis": basis,
               "field_changes": {k: {"from": st.get(k), "to": v} for k, v in changes.items()}}
     st.update(changes)
     st["corrections"] = st.get("corrections", []) + [record]
@@ -212,13 +232,24 @@ def correct_object(run, object_type, object_id, changes, reason):
 
 
 def complete_object(run, object_type, object_id, fills, reason):
-    """後続 event で、先行生成時に未確定だったフィールドを埋める(完結)。CORRECTION と同型
-    (append-only・M4 完全 revision)だが意味は『訂正』でなく placeholder の結線。
-    AB-0007: cycle 回避で to_id=None 先行生成した Relation を candidate 確定後に結線するのがこれ。
-    OM-3(link は from/to を持つ第一級 object)の『恒久 null link は link でない』穴を塞ぐ。"""
+    """先行生成時に未確定だったフィールドを埋める(完結)。M4 完全 revision + from/to provenance。
+    R2 mutation policy(GPT CP-1..4):
+      CP-1 missing/null → concrete のみ許可(fill 値は非 None)
+      CP-2 既存 non-null scalar の変更禁止(completion 名目の rewrite を封じる)
+      CP-3 既存 collection 要素の削除禁止
+      CP-4 完結後 revision は schema complete(append_event の M4 guard が担保)
+    AB-0007: to_id=None 先行生成 Relation の結線がこれ。OM-3 の恒久 null link を塞ぐ。"""
     st = get_state(object_id)
     if not st:
         raise ValueError(f"completion target {object_id} does not exist")
+    for k, v in fills.items():
+        cur = st.get(k, None)
+        if v is None:                                                        # CP-1
+            raise ValueError(f"CP-1: COMPLETION must fill {k} to a concrete value (got None)")
+        if isinstance(cur, (list, tuple, set, dict)) and cur:                # CP-3
+            raise ValueError(f"CP-2/3: {k} already has a non-empty collection; COMPLETION cannot mutate it")
+        if cur is not None and not (isinstance(cur, (list, tuple, set, dict)) and not cur):  # CP-2
+            raise ValueError(f"CP-2: COMPLETION cannot change existing non-null field {k} (={cur!r})")
     record = {"completed_at": now_iso(), "completed_by_run": run, "reason": reason,
               "field_fills": {k: {"from": st.get(k), "to": v} for k, v in fills.items()}}
     st.update(fills)
