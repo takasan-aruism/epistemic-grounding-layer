@@ -43,6 +43,19 @@ def curate(candidate_id, adjudicator=None, log=lambda *_: None):
         log(f"        Gate3 FAIL → {oc}: {msg}")
         return _block(run, cand, g2, oc, msg)
 
+    # H4: GC-7 を gate 連鎖に接続(従来は run.py demo で孤立)。候補が既存 Claim を
+    #     根拠に引く(claim-on-claim)場合、根拠 claim が known_omissions とした次元へ
+    #     新事実を足していないか構造検査する。現 2 滴は grounds_claims 無 → vacuous pass。
+    for gcid in cand.get("grounds_claims", []):
+        gclaim = core.get(con, gcid)
+        if not gclaim:
+            log(f"        GC-7 FAIL dangling ground claim {gcid}")
+            return _block(run, cand, g2, "DEFER", f"GC-7: dangling ground claim {gcid}")
+        ok, msg = gates.gc7_lint(con, cand, gclaim)
+        if not ok:
+            log(f"        GC-7 BLOCK: {msg}")
+            return _block(run, cand, g2, "GC7_BLOCKED", msg)
+
     if is_absence:
         finding, outcome, reason = None, "ACCEPT", "ABSENCE via COMPLETED conclusion (SC-2 satisfied)"
         log(f"        Gate4: (ABSENCE — entailment 対象なし、SC-2 で成立)")

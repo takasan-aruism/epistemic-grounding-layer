@@ -55,13 +55,19 @@ def mk_search_plan(run, gap_id, coverage_profile):
     return pid
 
 def mk_search_leg(task_id, plan_id, source_kind, simulate_fail=False):
-    """必須 source kind ごとの SearchRun。timeout 模擬で FAILED に落とせる(SC-2 負性試験用)。"""
+    """必須 source kind ごとの SearchRun。timeout 模擬で FAILED に落とせる(SC-2 負性試験用)。
+
+    H1(SC-2 enforce): leg の (plan_id, source_kind) を **event payload に記録** する。
+    これが無いと gate3 は coverage を leg event から再導出できず、driver が渡す
+    SearchConclusion.status を信用するしかない(= DE-0005 の wrong-source 欠陥)。
+    """
     rid = core.run_start("rd", "SEARCH", task_id=task_id, inputs=[plan_id])
-    if simulate_fail:
-        core.run_end(rid, [], status="FAILED")           # RATE_LIMITED/timeout 相当
-        return rid, source_kind, False
-    core.run_end(rid, [], status="COMPLETED")
-    return rid, source_kind, True
+    # SoR に leg の意味的結果を刻む(gate3 が再導出の一次資料に使う)
+    core.append_event(rid, "UPDATE", "Run", rid,
+                      {"leg_plan_id": plan_id, "source_kind": source_kind})
+    status = "FAILED" if simulate_fail else "COMPLETED"   # FAILED=RATE_LIMITED/timeout 相当
+    core.run_end(rid, [], status=status)
+    return rid, source_kind, status == "COMPLETED"
 
 
 def mk_search_conclusion(run, plan_id, status, outcome, coverage_result=None):
@@ -86,10 +92,14 @@ def apply_outcome(run, candidate, outcome, reason, finding, gate2):
     if outcome == "ACCEPT":
         cid = core.new_id("C")
         st = dict(candidate)
+        # AB-0003: bootstrap を一律 True にしない。bootstrap = 「teacher signal(Gate4 Claude,
+        # CB-5)由来で受理された」= 導出値。ABSENCE は adjudicator を持たず coverage 由来なので
+        # bootstrap ではない → benchmark B(自律化原料)への混入を防ぐ(data-integrity)。
+        bootstrap = bool(finding and getattr(finding, "teacher_signal", False))
         if candidate.get("polarity") == "ABSENCE":       # NOT_FOUND + AB-3 短TTL
             st.update({"id": cid, "claim_id": cid, "object_kind": "Claim", "claim_type": "ABSENCE",
                        "status": "NOT_FOUND", "validation_mode": "SPECIFIED", "revision": 1,
-                       "origin_candidate": candidate["id"], "bootstrap": True,
+                       "origin_candidate": candidate["id"], "bootstrap": bootstrap,
                        "volatility_class": "ABSENCE_VOLATILE",
                        "temporal": {"observation_time": core.now_iso(),
                                     "knowledge_time": core.now_iso(),
@@ -101,7 +111,7 @@ def apply_outcome(run, candidate, outcome, reason, finding, gate2):
                        "status": "VERIFIED" if finding.f1_entailment == "SUPPORTED" else "REPORTED",
                        "validation_mode": candidate.get("validation_mode", "DECLARED"),
                        "revision": 1, "origin_candidate": candidate["id"],
-                       "bootstrap": True, "promoted_by_run": run})
+                       "bootstrap": bootstrap, "promoted_by_run": run})
         core.append_event(run, "CREATE", "Claim", cid, st)
         result["global_claim"] = cid
 

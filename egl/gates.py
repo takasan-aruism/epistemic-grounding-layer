@@ -51,7 +51,13 @@ def gate1_evidence(con, candidate):
         frag = core.get(con, rel["from_id"])
         if not frag:
             return False, f"GC-4: dangling fragment {rel['from_id']}"
-        src = core.get(con, core.get(con, frag["norm_obs_id"])["source_id"])
+        # M3: nobs/source が dangling でも None 添字で crash せず clean-fail する
+        nobs = core.get(con, frag.get("norm_obs_id"))
+        if not nobs:
+            return False, f"GC-4: dangling normalized observation {frag.get('norm_obs_id')}"
+        src = core.get(con, nobs.get("source_id"))
+        if not src:
+            return False, f"GC-4: dangling source {nobs.get('source_id')}"
         kinds.append(src["source_class"])
         if frag.get("taint_flags"):
             tainted = True
@@ -70,11 +76,33 @@ def gate2_candidates(con, candidate):
 
 
 # ---------- Gate 3: authority + coverage (ABSENCE→SC-2) ----------
+def _derive_checked_kinds(con, plan_id):
+    """H1: SearchConclusion.status を信用せず、leg event(SearchRun)から
+    *COMPLETED* leg の source_kind を再収集する。これが SC-2 の一次資料。
+    driver が渡した status/coverage_result は一切参照しない(wrong-source 防止)。"""
+    checked = []
+    for r in core.by_type(con, "Run"):
+        if r.get("leg_plan_id") == plan_id and r.get("status") == "COMPLETED":
+            checked.append(r["source_kind"])
+    return checked
+
+
 def gate3_authority(con, candidate):
     if candidate.get("polarity") == "ABSENCE":
         scon = core.get(con, candidate.get("search_conclusion"))
-        if not scon or scon.get("status") != "COMPLETED" or scon.get("outcome") != "NO_POSITIVE_EVIDENCE":
-            return False, "SC-2: ABSENCE requires COMPLETED conclusion w/ NO_POSITIVE_EVIDENCE"
+        if not scon:
+            return False, "SC-2: ABSENCE requires a SearchConclusion"
+        plan = core.get(con, scon.get("search_plan_id"))
+        if not plan:
+            return False, "SC-2: SearchConclusion references dangling SearchPlan"
+        # coverage を leg event から再導出(scon.status は信用しない = H1 enforce)
+        checked = _derive_checked_kinds(con, plan["id"])
+        status, cov = evaluate_coverage(plan["coverage_profile_id"], checked)
+        if status != "COMPLETED":
+            return False, (f"SC-2: re-derived coverage={status} from legs "
+                           f"(unchecked={cov['unchecked']}); ABSENCE forbidden")
+        if scon.get("outcome") != "NO_POSITIVE_EVIDENCE":
+            return False, "SC-2: ABSENCE requires NO_POSITIVE_EVIDENCE outcome"
     return True, "ok"
 
 
@@ -89,17 +117,35 @@ def decide(finding, gate2, importance):
         return "REJECT_CONTRADICTED", "evidence contradicts statement"
     if finding.f2_scope == "EXCEEDS":                         # SN-4: 自動縮小せず差し戻し
         return "SCOPE_REDUCTION_REQUIRED", "scope exceeds evidence; RD must re-scope (SN-4)"
-    if finding.f1_entailment in ("SUPPORTED", "PARTIAL") and finding.f2_scope in ("WITHIN", "NARROWER"):
-        return "ACCEPT", f"supported within scope (f1={finding.f1_entailment})"
-    return "EVIDENCE_INSUFFICIENT", f"not supported (f1={finding.f1_entailment})"
+    supported = (finding.f1_entailment in ("SUPPORTED", "PARTIAL")
+                 and finding.f2_scope in ("WITHIN", "NARROWER"))
+    if not supported:
+        return "EVIDENCE_INSUFFICIENT", f"not supported (f1={finding.f1_entailment})"
+    # H3: gate2(dedup 全走査 CS-1)を判定に効かせる。同 claim_key の既存 Claim があれば
+    #     無条件 ACCEPT せず衝突解決へ回す(2つの矛盾 claim が両方 ACCEPT される穴を塞ぐ)。
+    if gate2 and gate2.get("dup_conflict_candidate_ids"):
+        return "CONFLICT_REVIEW_REQUIRED", (
+            f"claim_key conflicts with existing {gate2['dup_conflict_candidate_ids']} "
+            "(CS-1); resolve before accept")
+    # H3/M5: importance=REQUIRED_FOR_RESOLUTION は審査バーを上げる(PARTIAL では必須 gap を埋めない)。
+    if importance == "REQUIRED_FOR_RESOLUTION" and finding.f1_entailment != "SUPPORTED":
+        return "EVIDENCE_INSUFFICIENT", (
+            f"required-for-resolution needs SUPPORTED, got {finding.f1_entailment} (M5)")
+    return "ACCEPT", f"supported within scope (f1={finding.f1_entailment})"
 
 
 # ---------- GC-7: representation residual protection (assertion lint) ----------
 def gc7_lint(con, assertion, ground_claim):
     """FACT assertion が grounds claim の known_omissions 次元へ新事実を足していないか。
-    scope_echo の次元キー ∩ known_omissions ≠ ∅ かつ その次元を支持する別 grounds が無ければ error。"""
+    次元キー ∩ known_omissions ≠ ∅ かつ その次元を支持する別 grounds が無ければ error。
+
+    H4: 「省略で素通り」を塞ぐため、self-report の scope_echo/residual_ack だけでなく
+    assertion の *構造 scope キー* も asserted dimension として算入する。scope_echo を
+    省いても、構造上その次元に踏み込んでいれば検出される(自己申告非依存)。"""
     omit = set(ground_claim.get("representation_residual", {}).get("known_omissions", []))
-    echo = set(assertion.get("scope_echo", {}).keys()) | set(assertion.get("residual_ack", []))
+    echo = (set(assertion.get("scope_echo", {}).keys())
+            | set(assertion.get("residual_ack", []))
+            | set(assertion.get("scope", {}).keys()))
     hit = omit & echo
     if hit:
         return False, f"GC-7: asserts on omitted dimension(s) {sorted(hit)} with no supporting ground"
