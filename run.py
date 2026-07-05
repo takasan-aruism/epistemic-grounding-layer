@@ -29,7 +29,7 @@ S1 = P.mk_source(r, "RedHatAI/Qwen3.6-35B-A3B-NVFP4 model card", "PRIMARY",
 blocks = ["This checkpoint is quantized to NVFP4 with linear_attn kept in bf16.",
           "Supported Hardware: NVIDIA Hopper, NVIDIA Blackwell.",
           "To serve with vLLM, start vllm/vllm-openai:nightly and run: vllm serve ..."]
-N1 = P.mk_observation(r, S1, "Model Card / Deployment", blocks)
+N1 = P.mk_observation(r, S1, "Model Card / Deployment", blocks, observation_kind="DECLARATION")
 F1 = P.mk_fragment(r, N1, 1, blocks[1], mentions=["ENT-nvfp4", "ENT-blackwell"])
 scon = P.mk_search_conclusion(r, plan, "COMPLETED", "POSITIVE_EVIDENCE")
 core.run_end(r, [S1, N1, F1, scon])

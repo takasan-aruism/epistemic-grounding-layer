@@ -75,16 +75,22 @@ def derive_validation_mode(con, candidate):
     無根拠メタデータ捏造=本系が殺す無根拠 claim のメタデータ版。既定値の存在自体が誤り)。
 
     R5(Taka 裁定): validation_mode は **positive/negative claim 専用**。
-    - POSITIVE: 一次資料(PRIMARY)の宣言に到達で DECLARED、さもなくば UNRESOLVED
-      (再現/測定 mode は再現 run の provenance が要るが未モデル→導出不能)
-    - NEGATIVE(明示的不支持: 公式が『X は非対応』と規定): PRIMARY 到達で SPECIFIED、else UNRESOLVED
+    R6/DE-0025(Phase 1a): source_class(権威次元)だけでは mode を決定できない。authentic な
+    PRIMARY でも observation_kind(declaration/specification/measurement/reproduction)が別なら別 mode。
+    ゆえに DECLARED/SPECIFIED は **PRIMARY かつ明示宣言/規定の観測** に限定し、それ以外は UNRESOLVED
+    へ倒す(『無理に賢く導出しない』= measurement/reproduction からの MEASURED/REPRODUCED 導出は
+    Activity/run type を要する Phase 1b/F3a 送り)。PRIMARY と declaration は **同一観測** で成立を要求
+    (別 source の PRIMARY と別観測の DECLARATION を継ぎ合わせる gaming を封じる)。
+    - POSITIVE: PRIMARY+DECLARATION 観測に到達で DECLARED、さもなくば UNRESOLVED
+    - NEGATIVE(明示的不支持: 公式が『X は非対応』と規定): PRIMARY+(DECLARATION|SPECIFICATION)で SPECIFIED、else UNRESOLVED
     - ABSENCE(調査完遂したが見つからない不在)は **この体系を使わない** → derive_absence_validation。
       SPECIFIED を ABSENCE に与えるのは NOT_FOUND と『公式仕様に規定された不在』の再混同(この系の
       第一日の禁忌)。polarity 層が既にこの区別を持つので mode 層で再融合させない。"""
     polarity = candidate.get("polarity")
     if polarity == "ABSENCE":
         raise ValueError("R5: ABSENCE は validation_mode を持たない。derive_absence_validation を使う")
-    kinds = []
+    # 各 evidence relation から (source_class, observation_kind) の対を一次資料として収集
+    pairs = []
     for rid in candidate.get("evidence_relations", []):
         rel = core.get(con, rid)
         if not rel:
@@ -92,12 +98,17 @@ def derive_validation_mode(con, candidate):
         frag = core.get(con, rel.get("from_id"))
         nobs = core.get(con, frag.get("norm_obs_id")) if frag else None
         src = core.get(con, nobs.get("source_id")) if nobs else None
-        if src:
-            kinds.append(src.get("source_class"))
-    has_primary = kinds and any(k == "PRIMARY" for k in kinds) and all(k != "GENERATED" for k in kinds)
+        if src and nobs:
+            pairs.append((src.get("source_class"), nobs.get("observation_kind", "UNSPECIFIED")))
+    classes = [c for c, _ in pairs]
+    has_primary = bool(classes) and any(c == "PRIMARY" for c in classes) and all(c != "GENERATED" for c in classes)
+    if not has_primary:
+        return "UNRESOLVED"
+    # R6: 権威(PRIMARY)に加え観測種別が明示宣言/規定であることを同一観測で要求
     if polarity == "NEGATIVE":
-        return "SPECIFIED" if has_primary else "UNRESOLVED"
-    return "DECLARED" if has_primary else "UNRESOLVED"
+        return "SPECIFIED" if any(c == "PRIMARY" and k in ("DECLARATION", "SPECIFICATION")
+                                  for c, k in pairs) else "UNRESOLVED"
+    return "DECLARED" if any(c == "PRIMARY" and k == "DECLARATION" for c, k in pairs) else "UNRESOLVED"
 
 
 def derive_absence_validation(con, candidate):

@@ -106,14 +106,14 @@ GUARD_CONTRACTS = {
         "non_guarantees": [
             "source_class の真正性: PRIMARY 判定は mk_source の RD 供給ラベル依存"
             "(GENERATED を PRIMARY と偽れば DECLARED が導出される。H1 と同型の leaf self-report)",
-            "validation semantics の決定不能(R6/DE-0025): source_class は権威次元(PRIMARY/SECONDARY/"
-            "GENERATED)のみで、Observation kind(declaration/specification/measurement/reproduction)と "
-            "Activity/run type を持たない。ゆえに *authentic な* PRIMARY であっても mode を決定できない——"
-            "official source code(implementation artifact)/formal spec/benchmark output/official prose は"
-            "全て PRIMARY たり得るが別 mode に対応する。source_class-only 導出は declaration/specification/"
-            "measurement/reproduction を区別できない(元設計 F3a provenance_mode_candidate へ未到達)。"
-            "Phase 1a 安全側=DECLARED を『PRIMARY + explicit declaration observation kind』へ狭め、"
-            "それ以外は UNRESOLVED へ倒す",
+            "observation_kind の真正性(R6 の残余 leaf self-report): R6/DE-0025 Phase 1a で DECLARED は"
+            "『PRIMARY + DECLARATION 観測(同一観測)』、SPECIFIED は『PRIMARY + DECLARATION|SPECIFICATION』"
+            "に限定した——source_class 単独導出(authentic PRIMARY でも measurement/prose を DECLARED にする)は"
+            "封じた。ただし observation_kind 自体も RD 供給ラベルゆえ、種別詐称(MEASUREMENT を DECLARATION と"
+            "偽る)は単一プロセスでは検出不能(source_class 真正性と同型、根が一段下へ)",
+            "MEASURED/REPRODUCED 未導出(Phase 1b/F3a): measurement/reproduction 観測は現状 UNRESOLVED へ倒す"
+            "(『無理に賢く導出しない』)。Activity/run type と Measurement schema/Reproduction link を入力に持つ"
+            "mode candidate 導出は F3a フル(Phase 1b)。ゆえに測定/再現由来の claim は当面 mode を得ない",
         ],
         "ref": "L4 / R6 / DE-0025",
     },

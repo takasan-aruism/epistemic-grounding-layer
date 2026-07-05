@@ -166,30 +166,44 @@ def t_l4_derive_validation_mode():
     reset()
     r = core.run_start("rd", "CURATION")
     sp = P.mk_source(r, "primary", "PRIMARY", "loc")
-    np_ = P.mk_observation(r, sp, "H", ["b0", "b1", "b2"])
-    fp = P.mk_fragment(r, np_, 1, "b1")
-    rel_p = P.mk_relation(r, fp, None, "SUPPORTS", {})
+    # 同一 PRIMARY source に観測種別だけ異なる3観測 → mode が source_class でなく kind で変わる counter-factual
+    np_dec = P.mk_observation(r, sp, "H", ["b0", "b1", "b2"], observation_kind="DECLARATION")
+    rel_p = P.mk_relation(r, P.mk_fragment(r, np_dec, 1, "b1"), None, "SUPPORTS", {})
+    np_meas = P.mk_observation(r, sp, "H", ["b0", "b1", "b2"], observation_kind="MEASUREMENT")
+    rel_p_meas = P.mk_relation(r, P.mk_fragment(r, np_meas, 1, "b1"), None, "SUPPORTS", {})
+    np_spec = P.mk_observation(r, sp, "H", ["b0", "b1", "b2"], observation_kind="SPECIFICATION")
+    rel_p_spec = P.mk_relation(r, P.mk_fragment(r, np_spec, 1, "b1"), None, "SUPPORTS", {})
     sg = P.mk_source(r, "generated", "GENERATED", "loc")
-    ng = P.mk_observation(r, sg, "H", ["b0", "b1", "b2"])
+    ng = P.mk_observation(r, sg, "H", ["b0", "b1", "b2"], observation_kind="DECLARATION")
     fg = P.mk_fragment(r, ng, 1, "b1")
     rel_g = P.mk_relation(r, fg, None, "SUPPORTS", {})
     core.run_end(r, [])
     con = core.build_view()
-    prim = gates.derive_validation_mode(con, {"polarity": "POSITIVE", "evidence_relations": [rel_p]})
-    gen = gates.derive_validation_mode(con, {"polarity": "POSITIVE", "evidence_relations": [rel_g]})
-    neg = gates.derive_validation_mode(con, {"polarity": "NEGATIVE", "evidence_relations": [rel_p]})
+    dvm = lambda pol, rels: gates.derive_validation_mode(con, {"polarity": pol, "evidence_relations": rels})
+    prim = dvm("POSITIVE", [rel_p])
+    gen = dvm("POSITIVE", [rel_g])
+    neg = dvm("NEGATIVE", [rel_p])
+    prim_meas = dvm("POSITIVE", [rel_p_meas])   # R6: authentic PRIMARY だが非宣言観測
+    neg_spec = dvm("NEGATIVE", [rel_p_spec])
+    neg_meas = dvm("NEGATIVE", [rel_p_meas])
     try:
         gates.derive_validation_mode(con, {"polarity": "ABSENCE"})
         abs_raises = False
     except ValueError:
         abs_raises = True
     absv = gates.derive_absence_validation(con, {"polarity": "ABSENCE", "search_conclusion": None})
-    check("T8a L4 PRIMARY 由来 → DECLARED(provenance 導出)", prim == "DECLARED", prim)
+    check("T8a L4 PRIMARY+DECLARATION → DECLARED(provenance 導出)", prim == "DECLARED", prim)
     check("T8b L4 counter-factual: GENERATED のみ → UNRESOLVED(既定を捏造しない)", gen == "UNRESOLVED", gen)
-    check("T8c R5 NEGATIVE + PRIMARY → SPECIFIED(明示的不支持 claim 専用)", neg == "SPECIFIED", neg)
+    check("T8c R5 NEGATIVE + PRIMARY+DECLARATION → SPECIFIED(明示的不支持 claim 専用)", neg == "SPECIFIED", neg)
     check("T8d R5 ABSENCE に validation_mode を求めると reject(NOT_FOUND と規定不在の再混同を封じる)", abs_raises)
     check("T8e R5 ABSENCE は別軸 absence_validation(SEARCH_COVERAGE_COMPLETED)",
           absv["mode"] == "SEARCH_COVERAGE_COMPLETED", str(absv))
+    # R6/DE-0025: source_class だけでは mode を決められない。観測種別を反転すると mode が変わる。
+    check("T8f R6 counter-factual: PRIMARY だが MEASUREMENT 観測 → UNRESOLVED(DECLARED を格上げしない)",
+          prim_meas == "UNRESOLVED", prim_meas)
+    check("T8g R6 NEGATIVE + PRIMARY+SPECIFICATION → SPECIFIED(公式規定の不支持)", neg_spec == "SPECIFIED", neg_spec)
+    check("T8h R6 NEGATIVE + PRIMARY+MEASUREMENT → UNRESOLVED(測定は規定不支持を導かない)",
+          neg_meas == "UNRESOLVED", neg_meas)
 
 
 # ---------------------------------------------------------------
