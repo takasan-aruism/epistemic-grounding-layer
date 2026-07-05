@@ -168,10 +168,12 @@ def extract_fragment(run, raw_observation_id, blocks, block_index, excerpt,
         raise ValueError(f"extract: {raw_observation_id} は evidence-eligible な RawObservation でない(ACQ-4b)")
     src = core.get_state(rawobs["source_id"])
     obs_kind = SP.observation_kind_for(src.get("observed_source_kind"))    # §12 provenance-assisted
-    # ETB-5/EF-4: RawObservation の taint を継承し、抽出 block/excerpt の再走査分を加算
+    # ETB-5/EF-4: RawObservation の taint を継承し、抽出 block/excerpt/heading の再走査分を加算
+    # (JREV-0006: section_heading も judge packet に渡るため blocks/excerpt と対称に走査する)
     taint = ETB.merge_taint(rawobs.get("taint_flags", []),
                             ETB.scan_content("\n".join(str(b) for b in (blocks or []))),
-                            ETB.scan_content(excerpt))
+                            ETB.scan_content(excerpt),
+                            ETB.scan_content(section_heading or ""))
     nobs = core.append_event(run, "CREATE", "NormalizedObservation", None, {
         "id": core.SELF, "norm_obs_id": core.SELF, "raw_observation_id": raw_observation_id,
         "source_id": rawobs["source_id"], "section_heading": section_heading,
