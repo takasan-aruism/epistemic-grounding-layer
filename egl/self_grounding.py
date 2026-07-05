@@ -1,0 +1,203 @@
+"""SELF_GROUNDING(JREV-0006 directive §3-16)— EGL が自らの開発史を最初の実 system-level
+epistemic workload にする。EGL は自分が『今何を信じ / なぜ / 以前は何を / 何が supersede したか /
+未検証は何か / どの過去 failure pattern が現設計に似るか』を、自分の台帳から再構築できるか。
+
+first slice: bounded corpus = DESIGN_EVIDENCE_LEDGER + REVIEW_LEDGER(構造化済み self-history 記録)。
+retrieval → real Qwen が構造化 answer(answer_claims/historical_claims/open_gaps/source_trace)を生成。
+判定は NL 類似でなく **構造化 answer** を評価。2トラック: hermetic(構造・決定的)+ SELF_GROUNDING(意味・LLM)。
+
+authority は contextual(§6): DESIGN_LEDGER=決定が記録された証拠(実装真実でない)/ REVIEW_LEDGER=
+review verdict の証拠(実装挙動が真とは限らない)。author says implemented ≠ counter-factual test showed。
+"""
+import json, re, urllib.request, urllib.error, socket
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parent.parent
+
+# §6 self-history source classes(authority は contextual、単独の権威順位でない)
+SOURCE_CLASSES = {
+    "DESIGN_LEDGER": "設計決定が記録された強い証拠(実装が真とは限らない)",
+    "REVIEW_LEDGER": "review verdict の強い証拠(実装挙動が真とは限らない)",
+}
+# §7 claim classes
+CLAIM_CLASSES = ["IMPLEMENTATION_FACT", "TEST_RESULT", "REVIEW_FINDING", "DESIGN_DECISION",
+                 "CURRENT_SYSTEM_STATE", "HISTORICAL_STATE", "FAILURE_PATTERN"]
+
+# §5 bounded corpus(全 project file でなく、期待史が human-reviewable な範囲)
+CORPUS_FILES = [
+    ("DESIGN_EVIDENCE_LEDGER.jsonl", "DESIGN_LEDGER"),
+    ("REVIEW_LEDGER.jsonl", "REVIEW_LEDGER"),
+]
+
+
+def load_corpus(base=BASE):
+    """ledger jsonl を self-history 記録へ。ordinal=行順=時系列(supersession 判定の下地)。"""
+    records = []
+    for fname, sclass in CORPUS_FILES:
+        p = Path(base) / fname
+        if not p.exists():
+            continue
+        for i, line in enumerate(p.read_text().splitlines()):
+            line = line.strip()
+            if not line:
+                continue
+            obj = json.loads(line)
+            rid = obj.get("design_evidence_id") or obj.get("review_id") or f"{sclass}-{i}"
+            records.append({"record_id": rid, "source_class": sclass, "ordinal": len(records),
+                            "fields": obj, "text": json.dumps(obj, ensure_ascii=False)})
+    return records
+
+
+_RULE_TOKEN = re.compile(r"\b(R\d+|DE-\d{4}|JREV-\d{4}|ACQ-\d+[a-z]?|H\d[a-z]?|M\d|L\d|F\b|AB-\d+)\b")
+
+
+def detect_supersession(records):
+    """『supersede/撤回/解除/否定』を述べる後続記録が、参照する先行 rule token を superseded にする
+    (heuristic、§SG-D の version-aware answer の下地)。返り: {superseded_token: [{by, note}]}。"""
+    superseded = {}
+    for r in records:
+        t = r["text"]
+        # 保守的: 明示的な上書き語のみ(REJECTED 等の verdict 語は over-flag するので使わない=heuristic 残余)
+        if not re.search(r"supersede|撤回|廃止", t, re.I):
+            continue
+        for m in set(_RULE_TOKEN.findall(t)):
+            if m == r["record_id"]:
+                continue
+            superseded.setdefault(m, []).append({"by": r["record_id"], "ordinal": r["ordinal"]})
+    return superseded
+
+
+def retrieve(question, records, k=8):
+    """naive keyword retrieval(baseline)。question の語 ∩ record text で採点。上位 k。"""
+    q = set(re.findall(r"[A-Za-z0-9\-_]+|[ぁ-んァ-ヶ一-龠]+", question.lower()))
+    q = {w for w in q if len(w) >= 2}
+    scored = []
+    for r in records:
+        low = r["text"].lower()
+        score = sum(1 for w in q if w in low)
+        # id 直接言及は強い信号
+        for tok in _RULE_TOKEN.findall(question):
+            if tok.lower() in low:
+                score += 3
+        if score:
+            scored.append((score, r))
+    scored.sort(key=lambda x: (-x[0], x[1]["ordinal"]))
+    return [r for _, r in scored[:k]]
+
+
+# §8 Q1-Q16(凍結 benchmark)
+BENCHMARK = [
+    ("Q1", "What is the current Phase 1a completion claim?"),
+    ("Q2", "What does Phase 1a explicitly NOT guarantee?"),
+    ("Q3", "What was the DE-0005 failure?"),
+    ("Q4", "List every confirmed case where an upstream summary was replaced by a lower primitive that later proved self-reportable or forgeable."),
+    ("Q5", "What is the current root of trust for search-leg completion?"),
+    ("Q6", "What is still NOT verified about leg authenticity?"),
+    ("Q7", "Explain the difference between ABSENCE, NEGATIVE claim, and explicit negative specification."),
+    ("Q8", "What did R7 change?"),
+    ("Q9", "What did R8 change?"),
+    ("Q10", "What were the three JREV-0005 pre-remediation defects?"),
+    ("Q11", "What did DE-0036 change in each case?"),
+    ("Q12", "What does the current Gate4 actually guarantee, and what does it NOT guarantee?"),
+    ("Q13", "What does ETB structurally block? Does it guarantee that all prompt injection is detected?"),
+    ("Q14", "Why is a fabricated plausible official-looking document still dangerous after Gate4 + ETB?"),
+    ("Q15", "What are the current blockers before autonomous RD activation?"),
+    ("Q16", "Which current unresolved design boundary most closely resembles a previously observed EGL failure pattern, and why?"),
+]
+
+# §9 構造化 answer contract(NL は rendering 層。benchmark は構造化 answer を先に評価)
+ANSWER_KEYS = ["answer_claims", "historical_claims", "open_gaps", "source_trace"]
+
+_ENDPOINT = "http://localhost:8005/v1/chat/completions"
+_MODEL = "Qwen3.6-35B-A3B"
+SG_PROMPT_VERSION = "self-grounding-1b.0"
+
+_SYSTEM = (
+    "You reconstruct EGL's epistemic state from its own development-history records. "
+    "You are given RECORDS (each with record_id, source_class, ordinal). RULES: "
+    "(1) Use ONLY the provided records; do not use outside knowledge. "
+    "(2) A record marked as SUPERSEDED must NOT be presented as current belief — put it in historical_claims. "
+    "(3) Do NOT broaden a narrow/property-scoped verdict into a subsystem-wide guarantee. "
+    "(4) source_class DESIGN_LEDGER = a design decision was recorded (not that implementation is true); "
+    "REVIEW_LEDGER = a review verdict (not that behaviour is externally true). "
+    "(5) Every substantive claim in answer_claims/historical_claims MUST cite at least one record_id in source_trace. "
+    "(6) List relevant NOT_VERIFIED / DEFERRED / known non-guarantees in open_gaps. "
+    "Return ONLY a JSON object with keys: answer_claims (list of {text, record_ids, currentness:CURRENT|HISTORICAL}), "
+    "historical_claims (list of {text, record_ids, superseded_by}), open_gaps (list of strings), "
+    "source_trace (list of record_id)."
+)
+
+
+def _vllm_chat(prompt, max_tokens=1200):
+    body = json.dumps({"model": _MODEL, "temperature": 0, "max_tokens": max_tokens,
+                       "chat_template_kwargs": {"enable_thinking": False},
+                       "messages": [{"role": "system", "content": _SYSTEM},
+                                    {"role": "user", "content": prompt}]}).encode()
+    req = urllib.request.Request(_ENDPOINT, data=body, headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=240) as r:
+        return json.load(r)["choices"][0]["message"].get("content") or ""
+
+
+def _extract_json(text):
+    i, j = text.find("{"), text.rfind("}")
+    if i < 0 or j <= i:
+        return None
+    try:
+        return json.loads(text[i:j + 1])
+    except Exception:
+        return None
+
+
+def _records_block(records, superseded):
+    lines = []
+    for r in records:
+        sup = superseded.get(r["record_id"])
+        tag = f" SUPERSEDED_BY={[s['by'] for s in sup]}" if sup else ""
+        body = r["text"]
+        if len(body) > 1400:
+            body = body[:1400] + "…"
+        lines.append(f"[{r['record_id']} source_class={r['source_class']} ordinal={r['ordinal']}{tag}]\n{body}")
+    return "\n\n".join(lines)
+
+
+def answer_question(question, records=None, superseded=None):
+    """baseline: retrieve → Qwen が構造化 answer を生成。返り: (answer_dict|None, retrieved_ids, raw)。"""
+    records = records if records is not None else load_corpus()
+    superseded = superseded if superseded is not None else detect_supersession(records)
+    hits = retrieve(question, records)
+    prompt = (f"QUESTION: {question}\n\nRECORDS:\n{_records_block(hits, superseded)}\n\n"
+              "Return the JSON answer object now.")
+    try:
+        raw = _vllm_chat(prompt)
+    except (urllib.error.URLError, socket.timeout, TimeoutError, OSError) as e:
+        return None, [r["record_id"] for r in hits], f"vllm_unreachable:{e}"
+    return _extract_json(raw), [r["record_id"] for r in hits], raw
+
+
+def validate_answer(ans, corpus_ids):
+    """§9 contract 検証(構造・決定的、hermetic)。返り: {ok, problems, metrics}。"""
+    problems = []
+    if not isinstance(ans, dict):
+        return {"ok": False, "problems": ["not a JSON object"], "metrics": {}}
+    for k in ANSWER_KEYS:
+        if k not in ans:
+            problems.append(f"missing key: {k}")
+    ids = set(corpus_ids)
+    claims = (ans.get("answer_claims") or []) + (ans.get("historical_claims") or [])
+    traced = 0
+    for c in claims:
+        cids = c.get("record_ids") or []
+        if cids and all(x in ids for x in cids):
+            traced += 1
+        elif not cids:
+            problems.append("answer claim with empty record_ids (unsupported assertion)")
+        else:
+            problems.append(f"answer claim cites unknown record_id(s): {[x for x in cids if x not in ids]}")
+    bad_trace = [x for x in (ans.get("source_trace") or []) if x not in ids]
+    if bad_trace:
+        problems.append(f"source_trace has unknown ids: {bad_trace}")
+    metrics = {"n_answer_claims": len(ans.get("answer_claims") or []),
+               "n_historical_claims": len(ans.get("historical_claims") or []),
+               "n_open_gaps": len(ans.get("open_gaps") or []),
+               "source_trace_completeness": (traced / len(claims)) if claims else 0.0}
+    return {"ok": not problems, "problems": problems, "metrics": metrics}
