@@ -187,6 +187,14 @@ def validate_answer(ans, corpus_ids):
     ids = set(corpus_ids)
     answer_c = ans.get("answer_claims") or []
     hist_c = ans.get("historical_claims") or []
+    # C-TOTALITY(JREV-0007 §6): claim collections が list でない malformed 出力でも crash しない(total)。
+    if not isinstance(answer_c, list):
+        problems.append(f"answer_claims is not a list: {type(answer_c).__name__}"); answer_c = []
+    if not isinstance(hist_c, list):
+        problems.append(f"historical_claims is not a list: {type(hist_c).__name__}"); hist_c = []
+    st = ans.get("source_trace") or []
+    if not isinstance(st, list):
+        problems.append(f"source_trace is not a list: {type(st).__name__}"); st = []
     traced = 0
     total = 0
     for c in (answer_c + hist_c):
@@ -223,7 +231,7 @@ def validate_answer(ans, corpus_ids):
     for c in answer_c:
         if isinstance(c, dict) and c.get("currentness") == "HISTORICAL":
             problems.append("answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)")
-    bad_trace = [x for x in (ans.get("source_trace") or []) if x not in ids]
+    bad_trace = [x for x in st if x not in ids]
     if bad_trace:
         problems.append(f"source_trace has unknown ids: {bad_trace}")
     metrics = {"n_answer_claims": len(answer_c), "n_historical_claims": len(hist_c),

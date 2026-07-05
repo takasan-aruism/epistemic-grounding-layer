@@ -129,6 +129,21 @@ GUARD_CONTRACTS = {
         ],
         "ref": "Phase 1b ACQ-1..4c / AB-1/2/3 / DE-0032",
     },
+    "review_mechanisms": {  # JREV-0007 恒久機構 / DE-0044
+        "guarantees": [
+            "guarantee coverage sweep(§5): 登録 guard の宣言 guarantee が言及する全 reference-bearing field に"
+            "違反を注入し、guard が全検出することを機械 audit(記述>実装の scope 膨張を検出)。test_review_mechanisms",
+            "C-TOTALITY(§6): LLM 出力を消費する決定的 guard(validate_answer / Gate4 judge)を malformed-shape で"
+            "fuzz し、no crash / no fail-open(勝手に ok=True/SUPPORTED にしない)を要求。判定は決定的挙動のみ",
+        ],
+        "non_guarantees": [
+            "coverage sweep は *登録された* guard/field のみ audit(未登録 guarantee の field 網羅は不問)。"
+            "意味的正しさは検査しない——field 網羅と決定的検出のみ",
+            "C-TOTALITY は *登録された* malformed-shape 集合のみ(一般 parser/decoder totality は非含意)。"
+            "future の LLM-output guard(RD SearchPlan/Coder packet/attacker report parser)は個別に登録が要る",
+        ],
+        "ref": "JREV-0007 §5/§6 / DE-0044",
+    },
     "self_grounding.answer_question": {  # SELF_GROUNDING baseline / DE-0042
         "guarantees": [
             "構造化 answer contract を validate_answer が決定的に検査(hermetic, total): **全 citation class**"

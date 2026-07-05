@@ -94,7 +94,9 @@ class VLLMAdjudicator:
         f1 = (parsed or {}).get("f1_entailment")
         f2 = (parsed or {}).get("f2_scope")
         frag_ok = bool((parsed or {}).get("fragment_sufficient", False))
-        if f1 not in judge.F1_VALUES or f2 not in judge.F2_VALUES:
+        # C-TOTALITY(JREV-0007 §6): f1/f2 が str でない(list/dict/int 等 unhashable 含む)malformed 出力でも
+        # crash せず fail-closed。set membership 前に型を確かめる。
+        if not (isinstance(f1, str) and isinstance(f2, str)) or f1 not in judge.F1_VALUES or f2 not in judge.F2_VALUES:
             # fail-safe: 破損/未達は不足側へ倒す(勝手に SUPPORTED にしない)
             f1, f2, frag_ok = "UNJUDGEABLE", "UNRESOLVED", False
             rationale = f"fail-safe (unparseable judge output; {err or 'bad json'})"
