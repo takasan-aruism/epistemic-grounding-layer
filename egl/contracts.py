@@ -99,6 +99,18 @@ GUARD_CONTRACTS = {
         ],
         "ref": "H4 / H4b",
     },
+    "gates.gate1_evidence": {  # BA-REL-001 / JREV-0004
+        "guarantees": [
+            "ground relation の presence / 構造的受理可能性(evidence_relations が実在 fragment→source へ解決)",
+        ],
+        "non_guarantees": [
+            "relation_type の意味フィルタ: Gate1 は SUPPORTS/REFUTES/CONTRADICTS を区別せず構造受理する"
+            "(BA-REL-001)。『evidence 受理 = support 確立』ではない。mode 導出は derive_validation_mode が"
+            "別途 eligible SUPPORTS path のみに絞る(REFUTES-only 候補は Gate1 通過だが derive は UNRESOLVED"
+            "=fail-closed、unearned mode を grant しない)。Gate1 の意味責任が拡張する時に再訪",
+        ],
+        "ref": "BA-REL-001 / JREV-0004",
+    },
     "gates.derive_validation_mode": {  # L4
         "guarantees": [
             "validation_mode を provenance から導出、導出不能は UNRESOLVED(既定値を捏造しない)",
