@@ -11,7 +11,7 @@ ACQ-4(transport 失敗は coverage 不可)/ ACQ-4b(content≠OBSERVED は eviden
 ACQ-4c(source kind でなく search operation の実行+snapshot、AB-3)。
 """
 import hashlib
-from . import core, source_policy as SP
+from . import core, source_policy as SP, etb as ETB
 
 # §8 AB-2: 通信の成否と、取れた中身が観測に足るか を分ける。
 TRANSPORT_STATUSES = {"SUCCESS", "NOT_RETRIEVABLE", "ACCESS_DENIED", "AUTH_REQUIRED", "RATE_LIMITED",
@@ -88,6 +88,7 @@ def run_acquisition(run, leg_id, adapter_result):
     if ts == "SUCCESS" and cs not in CONTENT_STATUSES:
         raise ValueError(f"AB-2: SUCCESS transport requires content_status in {sorted(CONTENT_STATUSES)}")
     raw = adapter_result.get("raw_bytes")
+    taint = ETB.scan_content(raw) if raw else []       # ETB-4: 取得時に data を走査
     return core.append_event(run, "CREATE", "AcquisitionRun", None, {
         "id": core.SELF, "acquisition_run_id": core.SELF, "leg_id": leg_id,
         "adapter": leg["adapter_class"], "adapter_version": adapter_result.get("adapter_version", "0"),
@@ -96,6 +97,7 @@ def run_acquisition(run, leg_id, adapter_result):
         "http_status": adapter_result.get("http_status"),
         "content_type": adapter_result.get("content_type"),
         "raw_content_hash": content_hash(raw),
+        "taint_flags": taint,                                   # ETB-4/5: 以降へ伝播
         "adapter_provenance": adapter_result.get("adapter_provenance", {}),
     }, new_prefix="ARUN")
 
@@ -147,6 +149,7 @@ def emit_observation_if_eligible(run, acquisition_run_id):
         "source_id": src, "raw_content_hash": arun.get("raw_content_hash"),
         "raw_blob_ref": f"blob://{arun.get('raw_content_hash')}" if arun.get("raw_content_hash") else None,
         "content_type": arun.get("content_type"), "normalization_status": "NOT_NORMALIZED",
+        "taint_flags": arun.get("taint_flags", []),          # ETB-5: acquisition から継承
         "evidence_eligible": True,
     }, new_prefix="OBS")
     return {"observation_id": obs, "source_id": src, "observed_source_kind": observed_kind}
@@ -165,16 +168,20 @@ def extract_fragment(run, raw_observation_id, blocks, block_index, excerpt,
         raise ValueError(f"extract: {raw_observation_id} は evidence-eligible な RawObservation でない(ACQ-4b)")
     src = core.get_state(rawobs["source_id"])
     obs_kind = SP.observation_kind_for(src.get("observed_source_kind"))    # §12 provenance-assisted
+    # ETB-5/EF-4: RawObservation の taint を継承し、抽出 block/excerpt の再走査分を加算
+    taint = ETB.merge_taint(rawobs.get("taint_flags", []),
+                            ETB.scan_content("\n".join(str(b) for b in (blocks or []))),
+                            ETB.scan_content(excerpt))
     nobs = core.append_event(run, "CREATE", "NormalizedObservation", None, {
         "id": core.SELF, "norm_obs_id": core.SELF, "raw_observation_id": raw_observation_id,
         "source_id": rawobs["source_id"], "section_heading": section_heading,
         "observation_kind": obs_kind, "blocks": blocks, "normalized_by_run": run,
-        "extractor_model": extractor_model, "extractor_version": extractor_version,
+        "taint_flags": taint, "extractor_model": extractor_model, "extractor_version": extractor_version,
         "prompt_version": prompt_version,           # §13 extraction lineage
     }, new_prefix="NOBS")
-    frag = P.mk_fragment(run, nobs, block_index, excerpt, mentions)
+    frag = P.mk_fragment(run, nobs, block_index, excerpt, mentions, taint=taint)   # ETB-5: fragment へ
     return {"fragment_id": frag, "norm_obs_id": nobs, "observation_kind": obs_kind,
-            "source_id": rawobs["source_id"]}
+            "source_id": rawobs["source_id"], "taint_flags": taint}
 
 
 # ---------- §18 leg requirement 評価(ACQ-1/3/3b/4b/4c を1関数で強制)----------
