@@ -33,6 +33,9 @@ def evaluate_coverage(profile_id, checked_kinds, incomplete_reason=None):
 REQUIRED = ["id", "object_kind", "claim_type", "statement", "scope",
             "evidence_relations", "resolves_gap", "polarity"]
 POLARITY_VALUES = {"POSITIVE", "NEGATIVE", "ABSENCE"}   # F/JREV-0003: fail-open 封鎖
+# R7/DE-0029: 負の理由は mode でなく別軸で表現。NEGATIVE claim は negative_basis を要求。
+NEGATIVE_BASIS_VALUES = {"EXPLICITLY_UNSUPPORTED", "SPEC_PROHIBITED",
+                         "EMPIRICALLY_FAILED", "REPRODUCTION_FAILURE"}
 
 def gate0_schema(candidate):
     missing = [k for k in REQUIRED if k not in candidate]
@@ -43,6 +46,11 @@ def gate0_schema(candidate):
     pol = candidate.get("polarity")
     if pol not in POLARITY_VALUES:
         return False, f"invalid polarity {pol!r} (allowed={sorted(POLARITY_VALUES)})"
+    # R7/DE-0029: NEGATIVE(明示的不支持)は negative_basis で理由を宣言(mode と直交)。
+    if pol == "NEGATIVE":
+        nb = candidate.get("negative_basis")
+        if nb not in NEGATIVE_BASIS_VALUES:
+            return False, f"R7: NEGATIVE requires negative_basis in {sorted(NEGATIVE_BASIS_VALUES)} (got {nb!r})"
     return True, "ok"
 
 
@@ -89,8 +97,10 @@ def derive_validation_mode(con, candidate):
     へ倒す(『無理に賢く導出しない』= measurement/reproduction からの MEASURED/REPRODUCED 導出は
     Activity/run type を要する Phase 1b/F3a 送り)。PRIMARY と declaration は **同一観測** で成立を要求
     (別 source の PRIMARY と別観測の DECLARATION を継ぎ合わせる gaming を封じる)。
-    - POSITIVE: PRIMARY+DECLARATION 観測に到達で DECLARED、さもなくば UNRESOLVED
-    - NEGATIVE(明示的不支持: 公式が『X は非対応』と規定): PRIMARY+(DECLARATION|SPECIFICATION)で SPECIFIED、else UNRESOLVED
+    R7/DE-0029(Taka 裁定: R5『SPECIFIED=NEGATIVE 専用』を supersede): mode ⊥ polarity。
+    - DECLARATION 観測(PRIMARY)→ DECLARED(polarity 不問。POSITIVE も NEGATIVE〈公式が非対応と宣言〉も)
+    - SPECIFICATION 観測(PRIMARY)→ SPECIFIED(polarity 不問。仕様が許可も禁止も)
+    - 負の理由(なぜ不支持か)は mode でなく candidate.negative_basis で表現(Gate0 が enum 検査)。
     - ABSENCE(調査完遂したが見つからない不在)は **この体系を使わない** → derive_absence_validation。
       SPECIFIED を ABSENCE に与えるのは NOT_FOUND と『公式仕様に規定された不在』の再混同(この系の
       第一日の禁忌)。polarity 層が既にこの区別を持つので mode 層で再融合させない。"""
@@ -120,11 +130,15 @@ def derive_validation_mode(con, candidate):
         eligible.append((src.get("source_class"), nobs.get("observation_kind", "UNSPECIFIED")))
     if not any(c == "PRIMARY" for c, _ in eligible):
         return "UNRESOLVED"
-    # R6: 権威(PRIMARY)に加え観測種別が明示宣言/規定であることを同一 path(=同一観測)で要求
-    if polarity == "NEGATIVE":
-        return "SPECIFIED" if any(c == "PRIMARY" and k in ("DECLARATION", "SPECIFICATION")
-                                  for c, k in eligible) else "UNRESOLVED"
-    return "DECLARED" if any(c == "PRIMARY" and k == "DECLARATION" for c, k in eligible) else "UNRESOLVED"
+    # R6+R7/DE-0029(Taka 裁定 supersede R5): mode は evidence の epistemic kind(observation_kind)に
+    #   従い polarity と *直交* する。DECLARATION(公式が宣言)→ DECLARED / SPECIFICATION(公式仕様に
+    #   規定)→ SPECIFIED。正負(支持/不支持)は mode を変えない——『公式が非対応と宣言』は DECLARED+
+    #   NEGATIVE、『仕様が禁止』は SPECIFIED+NEGATIVE。負の理由は candidate.negative_basis が別軸で担う。
+    if any(c == "PRIMARY" and k == "DECLARATION" for c, k in eligible):
+        return "DECLARED"
+    if any(c == "PRIMARY" and k == "SPECIFICATION" for c, k in eligible):
+        return "SPECIFIED"
+    return "UNRESOLVED"
 
 
 def derive_absence_validation(con, candidate):

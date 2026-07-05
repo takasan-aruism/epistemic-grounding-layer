@@ -182,8 +182,9 @@ def t_l4_derive_validation_mode():
     dvm = lambda pol, rels: gates.derive_validation_mode(con, {"polarity": pol, "evidence_relations": rels})
     prim = dvm("POSITIVE", [rel_p])
     gen = dvm("POSITIVE", [rel_g])
-    neg = dvm("NEGATIVE", [rel_p])
+    neg = dvm("NEGATIVE", [rel_p])              # R7: DECLARATION+NEGATIVE → DECLARED(mode⊥polarity)
     prim_meas = dvm("POSITIVE", [rel_p_meas])   # R6: authentic PRIMARY だが非宣言観測
+    pos_spec = dvm("POSITIVE", [rel_p_spec])    # R7: SPECIFICATION+POSITIVE → SPECIFIED
     neg_spec = dvm("NEGATIVE", [rel_p_spec])
     neg_meas = dvm("NEGATIVE", [rel_p_meas])
     try:
@@ -194,14 +195,16 @@ def t_l4_derive_validation_mode():
     absv = gates.derive_absence_validation(con, {"polarity": "ABSENCE", "search_conclusion": None})
     check("T8a L4 PRIMARY+DECLARATION → DECLARED(provenance 導出)", prim == "DECLARED", prim)
     check("T8b L4 counter-factual: GENERATED のみ → UNRESOLVED(既定を捏造しない)", gen == "UNRESOLVED", gen)
-    check("T8c R5 NEGATIVE + PRIMARY+DECLARATION → SPECIFIED(明示的不支持 claim 専用)", neg == "SPECIFIED", neg)
+    check("T8c R7 NEGATIVE + PRIMARY+DECLARATION → DECLARED(mode⊥polarity: 公式が非対応と宣言も declaration)", neg == "DECLARED", neg)
     check("T8d R5 ABSENCE に validation_mode を求めると reject(NOT_FOUND と規定不在の再混同を封じる)", abs_raises)
     check("T8e R5 ABSENCE は別軸 absence_validation(SEARCH_COVERAGE_COMPLETED)",
           absv["mode"] == "SEARCH_COVERAGE_COMPLETED", str(absv))
     # R6/DE-0025: source_class だけでは mode を決められない。観測種別を反転すると mode が変わる。
     check("T8f R6 counter-factual: PRIMARY だが MEASUREMENT 観測 → UNRESOLVED(DECLARED を格上げしない)",
           prim_meas == "UNRESOLVED", prim_meas)
-    check("T8g R6 NEGATIVE + PRIMARY+SPECIFICATION → SPECIFIED(公式規定の不支持)", neg_spec == "SPECIFIED", neg_spec)
+    check("T8g R7 NEGATIVE + PRIMARY+SPECIFICATION → SPECIFIED(仕様が禁止)", neg_spec == "SPECIFIED", neg_spec)
+    check("T8j R7 POSITIVE + PRIMARY+SPECIFICATION → SPECIFIED(仕様が許可。旧 R5結合では UNRESOLVED だった)",
+          pos_spec == "SPECIFIED", pos_spec)
     check("T8h R6 NEGATIVE + PRIMARY+MEASUREMENT → UNRESOLVED(測定は規定不支持を導かない)",
           neg_meas == "UNRESOLVED", neg_meas)
     # R8/DE-0030: evidence を袋でなく関係付き path で見る。無関係な GENERATED を足しても

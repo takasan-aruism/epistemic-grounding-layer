@@ -179,6 +179,13 @@ def t_f_polarity_failopen():
     check("F Gate0: polarity 欠落を reject(旧: pass)", not ok_missing)
     check("F Gate0: polarity typo を reject", not ok_typo)
     check("F Gate0: 正規 polarity は pass(正常系不変)", ok_valid)
+    # R7/DE-0029: NEGATIVE claim は理由 negative_basis(enum)を Gate0 で要求(mode と直交)
+    ok_neg_none, _ = gates.gate0_schema({**base, "polarity": "NEGATIVE"})
+    ok_neg_bad, _ = gates.gate0_schema({**base, "polarity": "NEGATIVE", "negative_basis": "BOGUS"})
+    ok_neg_ok, _ = gates.gate0_schema({**base, "polarity": "NEGATIVE", "negative_basis": "SPEC_PROHIBITED"})
+    check("R7 Gate0: NEGATIVE に negative_basis 欠落 → reject", not ok_neg_none)
+    check("R7 Gate0: NEGATIVE に不正 negative_basis → reject", not ok_neg_bad)
+    check("R7 Gate0: NEGATIVE + 正規 negative_basis → pass", ok_neg_ok)
 
 
 _OMIT = object()   # polarity キー自体を落とすための番兵
