@@ -16,9 +16,16 @@ from . import self_grounding as SG
 
 ESDE_MEMORY = Path("/home/takasan/.claude/projects/-home-takasan-esde-ESDE-Research/memory")
 
-# directive §6: contextual source classes(単独の権威順位でない)
+# ⚠️ PROVISIONAL(DE-0047 / GPT 裁定待ち): これは v0.2 source taxonomy(PRIMARY/SECONDARY/COMMUNITY/
+# GENERATED)とは *別軸* の record-TYPE ラベルであり、実質的な Axis Reboot(AX-5)。裁定前に暫定使用。
+# 重要な線(Taka): ESDE 記録を EGL が claim 化する時の根拠は「ESDE 台帳がこう *記録している*」
+# (記録の存在=PRIMARY 相当)であって「記録の *内容* が真」(LLM 生成内容=GENERATED 相当・ST-3 対象)ではない。
+# contextual taxonomy がこの線を保存しているかは DE-0047 で GPT 裁定。現状 ESDE stream は Claim を
+# curator/gate1 経由で admit しない(= answer 再構成のみ)ので現時点で ST-3 迂回は起きていないが、
+# ESDE 出力を benchmark B/Claim 化する前に線の enforce が要る。
+ESDE_TAXONOMY_STATUS = "PROVISIONAL_PENDING_DE0047_ADJUDICATION"
 ESDE_SOURCE_CLASSES = {
-    "PROJECT_STATE": "project_* = ある版/実験の到達状態が記録された(現行性は要判定)",
+    "PROJECT_STATE": "project_* = ある版/実験の到達状態が *記録された*(記録存在=PRIMARY 相当。内容真偽は別)",
     "REVIEW_FINDING": "feedback_* = 規律/レビュー知見(何を主張してよいかの上限・失敗の教訓)",
     "SPECIFICATION": "reference_* = 技術仕様/公理/正式参照",
     "INDEX": "index_* = 索引(retrieval の地図であって事実の ground でない)",

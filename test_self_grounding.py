@@ -101,6 +101,25 @@ def t_jrev0007_validator_fixes():
           not SG.validate_answer(misplaced, ids)["ok"])
 
 
+def t_ab0021_supersession_refs():
+    ids = ["DE-0001", "project_v1304b"]
+    def hist(sb):
+        return {"answer_claims": [], "historical_claims": [{"text": "old", "record_ids": ["DE-0001"], "superseded_by": sb}],
+                "open_gaps": [], "source_trace": ["DE-0001"]}
+    # (1) RECORD ref: 外部 record による置換
+    check("AB-0021(1): RECORD ref(実在 id)→ ok", SG.validate_answer(hist([{"type": "RECORD", "id": "DE-0001"}]), ids)["ok"])
+    check("AB-0021(1): RECORD ref(捏造 id)→ reject", not SG.validate_answer(hist([{"type": "RECORD", "id": "DE-FAKE"}]), ids)["ok"])
+    # (1) INLINE ref: 同一 record 内の自己訂正(ESDE の v1304c 型)
+    inline = [{"type": "INLINE", "record_id": "project_v1304b", "locator": "v1304c 訂正"}]
+    check("AB-0021(1): INLINE ref(record 内 inline 訂正、locator 有)→ ok(discrete 後継 record 無しを表現)",
+          SG.validate_answer(hist(inline), ids)["ok"])
+    check("AB-0021(1): INLINE ref(locator 欠落)→ reject", not SG.validate_answer(hist([{"type": "INLINE", "record_id": "project_v1304b"}]), ids)["ok"])
+    check("AB-0021(1): INLINE ref(捏造 record_id)→ reject", not SG.validate_answer(hist([{"type": "INLINE", "record_id": "X", "locator": "y"}]), ids)["ok"])
+    # legacy string element は従来通り(実在 record_id)
+    check("AB-0021(1): legacy string element(実在)は後方互換で ok", SG.validate_answer(hist(["DE-0001"]), ids)["ok"])
+    check("AB-0021(1): 未知 type の ref → reject", not SG.validate_answer(hist([{"type": "BOGUS"}]), ids)["ok"])
+
+
 if __name__ == "__main__":
     print("=== SELF_GROUNDING 構造トラック (hermetic) ===")
     print("\n[corpus] bounded corpus 取込"); t_corpus()
@@ -109,6 +128,8 @@ if __name__ == "__main__":
     print("\n[contract] 構造化 answer contract 検証(無出典/捏造出典を検出)"); t_validate_contract()
     print("\n[JREV-0007] validator hardening(superseded_by 検証 / total 関数 / currentness placement)")
     t_jrev0007_validator_fixes()
+    print("\n[AB-0021(1)] inline 訂正 schema(superseded_by = RECORD/INLINE supersession refs)")
+    t_ab0021_supersession_refs()
     print("\n[CI drift-gate] config 変更で challenge 再走を強制")
     t_challenge_drift_gate()
     failed = [n for n, ok in RESULTS if not ok]

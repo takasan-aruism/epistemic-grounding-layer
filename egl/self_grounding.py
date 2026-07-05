@@ -176,6 +176,25 @@ def answer_question(question, records=None, superseded=None, system=None, k=8, r
     return _extract_json(raw), [r["record_id"] for r in hits], raw
 
 
+def _supersession_ref_problem(ref, ids):
+    """AB-0021(1): supersession reference を検証。3型を許容——外部 record による置換(RECORD)、
+    同一 record 内の自己訂正(INLINE: record 内 inline 訂正で discrete 後継 record が無い場合、ESDE で実在)、
+    legacy な record_id 文字列。id の実在を要求(INLINE は locator 必須)。"""
+    if isinstance(ref, str):
+        return None if ref in ids else f"unknown record_id {ref!r}"
+    if isinstance(ref, dict):
+        t = ref.get("type")
+        if t == "RECORD":
+            return None if ref.get("id") in ids else f"RECORD ref unknown id {ref.get('id')!r}"
+        if t == "INLINE":
+            if ref.get("record_id") not in ids:
+                return f"INLINE ref unknown record_id {ref.get('record_id')!r}"
+            loc = ref.get("locator")
+            return None if isinstance(loc, str) and loc.strip() else "INLINE ref missing locator"
+        return f"unknown supersession ref type {t!r}"
+    return f"supersession ref must be str/RECORD/INLINE, got {type(ref).__name__}"
+
+
 def validate_answer(ans, corpus_ids):
     """§9 contract 検証(構造・決定的、hermetic)。返り: {ok, problems, metrics}。
     JREV-0007: **全 citation class**(claim.record_ids / historical.superseded_by / source_trace)を検証。
@@ -223,12 +242,13 @@ def validate_answer(ans, corpus_ids):
         sb = h.get("superseded_by")
         if sb is None:
             continue
-        if not isinstance(sb, list):           # bare string も不正(SG-I で発現)
-            problems.append(f"superseded_by is not a list of record_ids: {sb!r}")
+        if not isinstance(sb, list):           # bare string は top-level 不正(coerce は AB-0021(2), 後段)
+            problems.append(f"superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): {sb!r}")
             continue
-        unknown_sb = [x for x in sb if x not in ids]
-        if unknown_sb:
-            problems.append(f"superseded_by cites unknown record_id(s): {unknown_sb}")
+        for ref in sb:                          # AB-0021(1): 各 ref を RECORD/INLINE/legacy-string で検証
+            prob = _supersession_ref_problem(ref, ids)
+            if prob:
+                problems.append(f"superseded_by ref invalid: {prob}")
     # scope-clarity: currentness placement の決定的整合(明白な誤配置を検出。意味的正しさは非保証)
     for c in answer_c:
         if isinstance(c, dict) and c.get("currentness") == "HISTORICAL":

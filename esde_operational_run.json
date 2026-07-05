@@ -175,5 +175,7 @@
         ]
       }
     }
-  ]
+  ],
+  "taxonomy_status": "PRE_ADJUDICATION (DE-0047): source_class は暫定 contextual axis、GPT 裁定前の run",
+  "note": "成果物は破棄せず taxonomy 裁定前 run としてマーク(Taka)。裁定後に source_class basis を確定"
 }

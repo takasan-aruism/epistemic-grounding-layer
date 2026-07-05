@@ -1,7 +1,7 @@
 {
   "version": "SELF_GROUNDING_CHALLENGE_SET_V1",
-  "config_fingerprint": "sha256:94193cbb02eb2b54",
-  "recorded_at": "2026-07-05T22:35:36.389935+00:00",
+  "config_fingerprint": "sha256:4bf9a26ffbad16e6",
+  "recorded_at": "2026-07-05T22:53:15.463187+00:00",
   "drift_baseline": {
     "config": {
       "model": "Qwen3.6-35B-A3B",
@@ -27,15 +27,15 @@
       "Q8",
       "Q16"
     ],
-    "contract_ok": "1/4",
+    "contract_ok": "2/4",
     "avg_source_trace_completeness": 1.0,
     "per_question": {
       "Q3": {
         "contract_ok": false,
         "metrics": {
-          "n_answer_claims": 3,
-          "n_historical_claims": 2,
-          "n_open_gaps": 3,
+          "n_answer_claims": 4,
+          "n_historical_claims": 1,
+          "n_open_gaps": 2,
           "source_trace_completeness": 1.0
         },
         "problems": [
@@ -47,7 +47,7 @@
         "contract_ok": true,
         "metrics": {
           "n_answer_claims": 4,
-          "n_historical_claims": 2,
+          "n_historical_claims": 1,
           "n_open_gaps": 2,
           "source_trace_completeness": 1.0
         },
@@ -56,7 +56,7 @@
       "Q8": {
         "contract_ok": false,
         "metrics": {
-          "n_answer_claims": 4,
+          "n_answer_claims": 5,
           "n_historical_claims": 2,
           "n_open_gaps": 2,
           "source_trace_completeness": 1.0
@@ -66,16 +66,14 @@
         ]
       },
       "Q16": {
-        "contract_ok": false,
+        "contract_ok": true,
         "metrics": {
-          "n_answer_claims": 3,
-          "n_historical_claims": 4,
+          "n_answer_claims": 4,
+          "n_historical_claims": 1,
           "n_open_gaps": 3,
           "source_trace_completeness": 1.0
         },
-        "problems": [
-          "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)"
-        ]
+        "problems": []
       }
     }
   }
