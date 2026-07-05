@@ -1,0 +1,84 @@
+{
+  "version": "SELF_GROUNDING_CHALLENGE_SET_V1",
+  "config_fingerprint": "sha256:f70b90a06b705e77",
+  "recorded_at": "2026-07-05T22:12:11.179435+00:00",
+  "drift_baseline": {
+    "config": {
+      "model": "Qwen3.6-35B-A3B",
+      "prompt_version": "self-grounding-1b.0",
+      "corpus": "47-record bounded EGL history",
+      "attacker": "1 independent local",
+      "rounds": 1
+    },
+    "metrics": {
+      "behavioral_pass": "9/9",
+      "current_superseded_confusion": "0/3",
+      "unsupported_assertion": "0/9",
+      "scope_overreach": 0,
+      "missing_source_fabrication": 0,
+      "failure_pattern_retrieval": "PASS",
+      "source_trace_completeness": 1.0
+    }
+  },
+  "rerun_metrics": {
+    "questions": [
+      "Q3",
+      "Q7",
+      "Q8",
+      "Q16"
+    ],
+    "contract_ok": "1/4",
+    "avg_source_trace_completeness": 1.0,
+    "per_question": {
+      "Q3": {
+        "contract_ok": false,
+        "metrics": {
+          "n_answer_claims": 4,
+          "n_historical_claims": 2,
+          "n_open_gaps": 2,
+          "source_trace_completeness": 1.0
+        },
+        "problems": [
+          "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)",
+          "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)",
+          "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)"
+        ]
+      },
+      "Q7": {
+        "contract_ok": true,
+        "metrics": {
+          "n_answer_claims": 5,
+          "n_historical_claims": 2,
+          "n_open_gaps": 2,
+          "source_trace_completeness": 1.0
+        },
+        "problems": []
+      },
+      "Q8": {
+        "contract_ok": false,
+        "metrics": {
+          "n_answer_claims": 4,
+          "n_historical_claims": 2,
+          "n_open_gaps": 2,
+          "source_trace_completeness": 1.0
+        },
+        "problems": [
+          "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)",
+          "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)"
+        ]
+      },
+      "Q16": {
+        "contract_ok": false,
+        "metrics": {
+          "n_answer_claims": 3,
+          "n_historical_claims": 2,
+          "n_open_gaps": 3,
+          "source_trace_completeness": 1.0
+        },
+        "problems": [
+          "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)"
+        ]
+      }
+    }
+  }
+}

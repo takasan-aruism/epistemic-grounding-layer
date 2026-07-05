@@ -71,3 +71,26 @@ SELF_GROUNDING_CHALLENGE_SET_V1 = {
                            "retrieval logic", "supersession logic", "answer contract",
                            "Source Policy", "status taxonomy", "Claim lifecycle rules"],
 }
+
+# --- CI hookup(締め作業): config 変更時に challenge set の再走を強制する ---
+import hashlib
+from pathlib import Path
+_BASE = Path(__file__).resolve().parent.parent
+# rerun_on_change_of の実体 = これらの source。変われば fingerprint が変わり drift test が再走要求。
+CHALLENGE_TRIGGER_FILES = ["egl/self_grounding.py", "egl/judge_vllm.py", "egl/source_policy.py",
+                           "egl/review_mechanisms.py", "egl/pipeline.py"]
+
+
+def config_fingerprint(base=_BASE):
+    """SELF_GROUNDING の挙動を決める surface の内容 hash。変更で challenge 再走が要る(rerun_on_change_of)。"""
+    h = hashlib.sha256()
+    for f in CHALLENGE_TRIGGER_FILES:
+        p = Path(base) / f
+        h.update(p.read_bytes() if p.exists() else b"")
+    return "sha256:" + h.hexdigest()[:16]
+
+
+def load_challenge_baseline(base=_BASE):
+    p = Path(base) / "challenge_baseline.json"
+    import json as _j
+    return _j.loads(p.read_text()) if p.exists() else None

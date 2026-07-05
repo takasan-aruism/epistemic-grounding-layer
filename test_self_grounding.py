@@ -57,6 +57,20 @@ def t_validate_contract():
     check("contract: 非 JSON → not ok", not v4["ok"])
 
 
+def t_challenge_drift_gate():
+    # CI 締め: config fingerprint が baseline stamp と一致するか(変われば challenge 再走が要る)。
+    from egl import review_mechanisms as RM
+    base = RM.load_challenge_baseline()
+    if base is None:
+        check("drift-gate: challenge_baseline.json が存在(run_challenge_set.py で確立)", False,
+              "run `python3 run_challenge_set.py` to establish baseline")
+        return
+    cur = RM.config_fingerprint()
+    check("drift-gate: config fingerprint == baseline(SELF_GROUNDING の trigger surface 未変更)",
+          cur == base.get("config_fingerprint"),
+          f"changed → rerun run_challenge_set.py。cur={cur} base={base.get('config_fingerprint')}")
+
+
 def t_jrev0007_validator_fixes():
     ids = ["DE-0001", "DE-0002"]
     # NEW_DEFECT-1: superseded_by の捏造 id を検出
@@ -95,6 +109,8 @@ if __name__ == "__main__":
     print("\n[contract] 構造化 answer contract 検証(無出典/捏造出典を検出)"); t_validate_contract()
     print("\n[JREV-0007] validator hardening(superseded_by 検証 / total 関数 / currentness placement)")
     t_jrev0007_validator_fixes()
+    print("\n[CI drift-gate] config 変更で challenge 再走を強制")
+    t_challenge_drift_gate()
     failed = [n for n, ok in RESULTS if not ok]
     print(f"\n=== {len(RESULTS)-len(failed)}/{len(RESULTS)} PASS ===")
     if failed:
