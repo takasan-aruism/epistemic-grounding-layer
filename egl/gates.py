@@ -31,11 +31,19 @@ def evaluate_coverage(profile_id, checked_kinds, incomplete_reason=None):
 
 # ---------- Gate 0: schema ----------
 REQUIRED = ["id", "object_kind", "claim_type", "statement", "scope",
-            "evidence_relations", "resolves_gap"]
+            "evidence_relations", "resolves_gap", "polarity"]
+POLARITY_VALUES = {"POSITIVE", "NEGATIVE", "ABSENCE"}   # F/JREV-0003: fail-open 封鎖
 
 def gate0_schema(candidate):
     missing = [k for k in REQUIRED if k not in candidate]
-    return (not missing, f"missing:{missing}" if missing else "ok")
+    if missing:
+        return False, f"missing:{missing}"
+    # F/JREV-0003: polarity を enum 検査。未知/typo/None を最特権分岐へ素通りさせない
+    # (derive_validation_mode / apply_outcome が非 ABSENCE を positive 扱いするため上流で止める)
+    pol = candidate.get("polarity")
+    if pol not in POLARITY_VALUES:
+        return False, f"invalid polarity {pol!r} (allowed={sorted(POLARITY_VALUES)})"
+    return True, "ok"
 
 
 # ---------- Gate 1: evidence integrity + taint (GC-1/GC-4/GC-8) ----------
@@ -89,6 +97,10 @@ def derive_validation_mode(con, candidate):
     polarity = candidate.get("polarity")
     if polarity == "ABSENCE":
         raise ValueError("R5: ABSENCE は validation_mode を持たない。derive_absence_validation を使う")
+    # F/JREV-0003: 未知/欠落/typo の polarity は POSITIVE→DECLARED 分岐へ倒さず fail-closed。
+    # 『既定値の存在自体が誤り』の原則を polarity 層にも適用(Gate0 が上流で弾くが二重防御)。
+    if polarity not in ("POSITIVE", "NEGATIVE"):
+        return "UNRESOLVED"
     # 各 evidence relation から (source_class, observation_kind) の対を一次資料として収集
     pairs = []
     for rid in candidate.get("evidence_relations", []):

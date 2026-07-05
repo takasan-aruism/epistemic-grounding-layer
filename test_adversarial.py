@@ -150,8 +150,42 @@ def t_h4b_statement_scope():
     check("H4b counter-factual: scope に軸が出れば GC-7 は block(scope-key ベースの証拠)", not ok2)
 
 
+# ===============================================================
+# F(JREV-0003 local-agent 検出)— polarity fail-open。未知/欠落 polarity が
+# POSITIVE→DECLARED 分岐へ素通りしていた。修正=Gate0 enum 検査 + derive fail-closed。
+# ===============================================================
+def t_f_polarity_failopen():
+    reset()
+    r = core.run_start("rd", "CURATION")
+    sp = P.mk_source(r, "primary", "PRIMARY", "loc")
+    nd = P.mk_observation(r, sp, "H", ["b0", "b1", "b2"], observation_kind="DECLARATION")
+    rel = P.mk_relation(r, P.mk_fragment(r, nd, 1, "b1"), None, "SUPPORTS", {})
+    core.run_end(r, [])
+    con = core.build_view()
+    dvm = lambda pol: gates.derive_validation_mode(
+        con, ({"evidence_relations": [rel]} if pol is _OMIT else {"polarity": pol, "evidence_relations": [rel]}))
+    # derive: 正規 polarity は従来通り、未知/欠落/typo/None は DECLARED でなく UNRESOLVED に fail-closed
+    check("F derive: POSITIVE+PRIMARY+DECLARATION → DECLARED(正規は不変)", dvm("POSITIVE") == "DECLARED", dvm("POSITIVE"))
+    check("F counter-factual: polarity 欠落 → UNRESOLVED(旧: DECLARED に素通り)", dvm(_OMIT) == "UNRESOLVED", dvm(_OMIT))
+    check("F counter-factual: polarity typo 'NEGATVE' → UNRESOLVED(旧: DECLARED)", dvm("NEGATVE") == "UNRESOLVED", dvm("NEGATVE"))
+    check("F counter-factual: polarity None → UNRESOLVED", dvm(None) == "UNRESOLVED", dvm(None))
+    check("F counter-factual: polarity 'garbage' → UNRESOLVED", dvm("garbage") == "UNRESOLVED", dvm("garbage"))
+    # Gate0: 未知/欠落 polarity は schema gate で reject(apply_outcome の positive 誤路へ到達させない)
+    base = {"id": "CC-x", "object_kind": "CandidateClaim", "claim_type": "CAPABILITY",
+            "statement": "s", "scope": {}, "evidence_relations": [], "resolves_gap": None}
+    ok_missing, _ = gates.gate0_schema(dict(base))
+    ok_typo, _ = gates.gate0_schema({**base, "polarity": "NEGATVE"})
+    ok_valid, _ = gates.gate0_schema({**base, "polarity": "POSITIVE"})
+    check("F Gate0: polarity 欠落を reject(旧: pass)", not ok_missing)
+    check("F Gate0: polarity typo を reject", not ok_typo)
+    check("F Gate0: 正規 polarity は pass(正常系不変)", ok_valid)
+
+
+_OMIT = object()   # polarity キー自体を落とすための番兵
+
+
 if __name__ == "__main__":
-    print("=== JREV-0001 敵対テスト (R1/R3/R4/H4b) ===")
+    print("=== JREV-0001 敵対テスト (R1/R3/R4/H4b) + JREV-0003 F ===")
     print("\n[R1] semantic write authority(検出水準)")
     t_r1_write_authority()
     print("\n[R1-self-grant] JREV-0002: 発行者権限(who may issue grant)")
@@ -162,6 +196,8 @@ if __name__ == "__main__":
     t_r4_leg_binding_vuln()
     print("\n[H4b] statement→scope self-report(gap 記録)")
     t_h4b_statement_scope()
+    print("\n[F] JREV-0003 local-agent: polarity fail-open(未知 polarity→DECLARED 素通り)")
+    t_f_polarity_failopen()
 
     failed = [n for n, ok in RESULTS if not ok]
     print(f"\n=== {len(RESULTS)-len(failed)}/{len(RESULTS)} PASS ===")

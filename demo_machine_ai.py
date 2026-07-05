@@ -64,10 +64,12 @@ rel1 = P.mk_relation(r, F1, None, "SUPPORTS",
 C1 = P.mk_candidate(r, {
     "object_kind": "CandidateClaim", "claim_type": "MEASUREMENT", "predicate": "served_with",
     "polarity": "POSITIVE", "task_id": "TASK-HOST-QWEN",
+    # 主張は adjudicated fragment(VLLM_PROC[1]=serve 引数行)が支持する範囲に限定する。
+    # port 8005 は別 block(ss 観測)由来ゆえ、この fragment だけでは主張しない(過大主張の回避)。
     "statement": "Qwen3.6-35B-A3B はこのホストで vLLM により tensor-parallel=2 / kv-cache-dtype=fp8 / "
-                 "max-model-len=32768 / port 8005 で serve されている",
+                 "max-model-len=32768 で serve されている",
     "scope": {"host": "this", "runtime": "vllm", "tensor_parallel": "2",
-              "kv_cache_dtype": "fp8", "port": "8005"},
+              "kv_cache_dtype": "fp8", "max_model_len": "32768"},
     "evidence_relations": [rel1], "resolves_gap": G, "validation_mode": None,
     "representation_residual": {"known_omissions": ["operational_stability", "throughput_tok_s"],
                                 "scope_uncertainty": "LOW"}})

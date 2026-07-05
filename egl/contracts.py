@@ -102,6 +102,8 @@ GUARD_CONTRACTS = {
     "gates.derive_validation_mode": {  # L4
         "guarantees": [
             "validation_mode を provenance から導出、導出不能は UNRESOLVED(既定値を捏造しない)",
+            "polarity fail-closed(F/JREV-0003): 未知/欠落/typo の polarity は Gate0 で reject かつ derive で "
+            "UNRESOLVED。POSITIVE→DECLARED の最特権分岐へ素通りさせない(『既定値の存在自体が誤り』の polarity 層適用)",
         ],
         "non_guarantees": [
             "source_class の真正性: PRIMARY 判定は mk_source の RD 供給ラベル依存"
