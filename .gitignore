@@ -6,3 +6,4 @@ __pycache__/
 *.pyc
 *.sqlite
 data_acq_task/
+data_gate4/
