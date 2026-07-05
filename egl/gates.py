@@ -101,26 +101,30 @@ def derive_validation_mode(con, candidate):
     # 『既定値の存在自体が誤り』の原則を polarity 層にも適用(Gate0 が上流で弾くが二重防御)。
     if polarity not in ("POSITIVE", "NEGATIVE"):
         return "UNRESOLVED"
-    # 各 evidence relation から (source_class, observation_kind) の対を一次資料として収集
-    pairs = []
+    # R8/DE-0030: evidence を *袋* でなく *関係付き support path* として見る。各 SUPPORTS relation を
+    # 独立の support path とし、その (source_class, observation_kind) を集める。GENERATED path は
+    # 独立に mode を確立できない=eligible から除くが、**別の適格 primary path を大域無効化しない**
+    # (旧 all(c!=GENERATED) の大域 veto は非単調——無関係な生成物1件で valid PRIMARY path が壊れた)。
+    eligible = []   # non-GENERATED な SUPPORTS path の (source_class, observation_kind)
     for rid in candidate.get("evidence_relations", []):
         rel = core.get(con, rid)
-        if not rel:
+        if not rel or rel.get("relation_type") != "SUPPORTS":
             continue
         frag = core.get(con, rel.get("from_id"))
         nobs = core.get(con, frag.get("norm_obs_id")) if frag else None
         src = core.get(con, nobs.get("source_id")) if nobs else None
-        if src and nobs:
-            pairs.append((src.get("source_class"), nobs.get("observation_kind", "UNSPECIFIED")))
-    classes = [c for c, _ in pairs]
-    has_primary = bool(classes) and any(c == "PRIMARY" for c in classes) and all(c != "GENERATED" for c in classes)
-    if not has_primary:
+        if not (src and nobs):
+            continue
+        if src.get("source_class") == "GENERATED":   # 独立資格なし。ただし他 path を veto しない
+            continue
+        eligible.append((src.get("source_class"), nobs.get("observation_kind", "UNSPECIFIED")))
+    if not any(c == "PRIMARY" for c, _ in eligible):
         return "UNRESOLVED"
-    # R6: 権威(PRIMARY)に加え観測種別が明示宣言/規定であることを同一観測で要求
+    # R6: 権威(PRIMARY)に加え観測種別が明示宣言/規定であることを同一 path(=同一観測)で要求
     if polarity == "NEGATIVE":
         return "SPECIFIED" if any(c == "PRIMARY" and k in ("DECLARATION", "SPECIFICATION")
-                                  for c, k in pairs) else "UNRESOLVED"
-    return "DECLARED" if any(c == "PRIMARY" and k == "DECLARATION" for c, k in pairs) else "UNRESOLVED"
+                                  for c, k in eligible) else "UNRESOLVED"
+    return "DECLARED" if any(c == "PRIMARY" and k == "DECLARATION" for c, k in eligible) else "UNRESOLVED"
 
 
 def derive_absence_validation(con, candidate):

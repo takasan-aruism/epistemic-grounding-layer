@@ -204,6 +204,11 @@ def t_l4_derive_validation_mode():
     check("T8g R6 NEGATIVE + PRIMARY+SPECIFICATION → SPECIFIED(公式規定の不支持)", neg_spec == "SPECIFIED", neg_spec)
     check("T8h R6 NEGATIVE + PRIMARY+MEASUREMENT → UNRESOLVED(測定は規定不支持を導かない)",
           neg_meas == "UNRESOLVED", neg_meas)
+    # R8/DE-0030: evidence を袋でなく関係付き path で見る。無関係な GENERATED を足しても
+    # 適格 PRIMARY path は壊れない(旧大域 veto は非単調で UNRESOLVED に落としていた)。
+    mono = dvm("POSITIVE", [rel_p, rel_g])
+    check("T8i R8 monotonic: PRIMARY+DECLARATION に無関係 GENERATED を足しても DECLARED(大域 veto 除去)",
+          mono == "DECLARED", mono)
 
 
 # ---------------------------------------------------------------

@@ -116,8 +116,14 @@ GUARD_CONTRACTS = {
             "MEASURED/REPRODUCED 未導出(Phase 1b/F3a): measurement/reproduction 観測は現状 UNRESOLVED へ倒す"
             "(『無理に賢く導出しない』)。Activity/run type と Measurement schema/Reproduction link を入力に持つ"
             "mode candidate 導出は F3a フル(Phase 1b)。ゆえに測定/再現由来の claim は当面 mode を得ない",
+            "taint-lineage 未実装(R8/DE-0030 残余): mode は eligible な非 GENERATED SUPPORTS path から導出"
+            "(袋の大域 GENERATED veto は撤廃、単調)。ただし generated 素材が primary fragment の抽出に"
+            "*関与* した場合の taint 伝播(DERIVED_FROM_GENERATED/TAINT_RELEVANT)は未表現=Phase 1b",
+            "★R7/DE-0029 未修正(Taka ruling 待ち): 現状 mode が polarity に部分依存(DECLARATION+NEGATIVE→"
+            "SPECIFIED、SPECIFICATION+POSITIVE→UNRESOLVED)。mode は observation_kind に従い polarity と直交"
+            "すべき(R5『SPECIFIED=NEGATIVE 専用』を supersede する value-ruling ゆえ未着手)",
         ],
-        "ref": "L4 / R6 / DE-0025",
+        "ref": "L4 / R6 DE-0025 / R8 DE-0030(fixed) / R7 DE-0029(open)",
     },
 }
 
