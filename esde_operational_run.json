@@ -1,0 +1,179 @@
+{
+  "stream": "ESDE #1",
+  "recorded_at": "2026-07-05T22:29:42.941304+00:00",
+  "corpus_size": 38,
+  "results": [
+    {
+      "rq": "RQ2",
+      "question": "v1304c の直接観測結果は何で、何がまだ推論か(観測と推論を分離せよ)。",
+      "retrieved": [
+        "feedback_measurement_power_before_null",
+        "project_v1304b_replica_null_cleared"
+      ],
+      "answer": {
+        "answer_claims": [
+          {
+            "text": "v1304c の直接観測結果は、固定 probe 法を用いた前提ずれ (premise_drift) の測定である。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "OBSERVATION"
+          },
+          {
+            "text": "v1304c において、初期の実装 (M=20 標本) では前提ずれの差 (fb - nofb) は統計的に立たず、「床内 (b)」と報告された。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "OBSERVATION"
+          },
+          {
+            "text": "v1304c の訂正後、参照母集団を 220 標本に広げることで、link_density における前提ずれは両 base で統計的に立った (base0 p=0.001, base1 p<1e-4)。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "OBSERVATION"
+          },
+          {
+            "text": "v1304c の訂正後、母集団 mean の軌跡観察により、fb round では上昇し nofb round では平坦であることが確認された。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "OBSERVATION"
+          },
+          {
+            "text": "v1304c の結果は、前提ずれが時間で進行的にずれることを示唆している。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "INFERENCE"
+          },
+          {
+            "text": "v1304c の結果は、R_density における前提ずれは ICC=0.02 により原理的にゼロであることが示された。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "OBSERVATION"
+          }
+        ],
+        "historical_claims": [
+          {
+            "text": "v1304c の初期報告では、M=20 標本での測定により前提ずれが立たず「床内 (b)」と結論付けられたが、これは測定アーティファクト（検出力不足）であったとして訂正された。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared",
+              "feedback_measurement_power_before_null"
+            ],
+            "superseded_by": "project_v1304b_replica_null_cleared"
+          }
+        ],
+        "open_gaps": [
+          "pooled 参照 (M=220) による前提ずれの正式化は事後検出力回復によるものであり、事前登録再 run での正式化は次段候補として未確定である。",
+          "v1304b で観測された weight 軌跡の方向づけ（レプリカ床超え）の機構的直接同定は未完了である。",
+          "T12 飽和や複数親 seed での一般化は次段候補として未着手である。"
+        ],
+        "source_trace": [
+          "feedback_measurement_power_before_null",
+          "project_v1304b_replica_null_cleared"
+        ]
+      },
+      "metrics": {
+        "n_answer_claims": 6,
+        "n_historical_claims": 1,
+        "n_open_gaps": 3,
+        "source_trace_completeness": 1.0,
+        "contract_ok": false,
+        "n_observation": 5,
+        "n_inference": 1,
+        "problems": [
+          "superseded_by is not a list of record_ids: 'project_v1304b_replica_null_cleared'"
+        ]
+      }
+    },
+    {
+      "rq": "RQ8",
+      "question": "過去に small-seed result を mechanism へ拡張して過大解釈した事例はあるか(failure pattern)。",
+      "retrieved": [
+        "feedback_consult_failures_before_implementing",
+        "project_atomset_channels_all_null",
+        "feedback_encounter_freq_needs_main_scale",
+        "feedback_index_first",
+        "feedback_nvidia_driver_upgrade",
+        "feedback_update_doc_policy",
+        "index_capabilities",
+        "index_concepts"
+      ],
+      "answer": {
+        "answer_claims": [
+          {
+            "text": "small-seed result (smoke) を mechanism へ拡張して過大解釈した事例が存在する。具体的には、v12 経験監査 Rev1 において、smoke (tracking 10) の初期段階で観察された出会い系 (接触) の低頻度・枯渇状態を、本番環境 (tracking 50) の構造的特徴として誤認し、CID の自己系化や主柱化の可能性を過小評価する方向で解釈した。",
+            "record_ids": [
+              "feedback_encounter_freq_needs_main_scale"
+            ],
+            "currentness": "HISTORICAL",
+            "epistemic_kind": "OBSERVATION"
+          },
+          {
+            "text": "この過大解釈（失敗パターン）の原因は、smoke の最初期相（出会いが始まる前の段階）を本来の構造（本番での激変）と取り違えたこと、および「出会い」を ingestion（完食）という狭いチャネルに矮小化して評価したことにあった。",
+            "record_ids": [
+              "feedback_encounter_freq_needs_main_scale"
+            ],
+            "currentness": "HISTORICAL",
+            "epistemic_kind": "INFERENCE"
+          },
+          {
+            "text": "この事例は、ESDE の失敗類型化において「C: 観察方法が結果を作る（アーティファクト・トートロジー・自己成就）」および「G: timescale-spatial mismatch」に該当する失敗パターンとして記録されている。",
+            "record_ids": [
+              "feedback_consult_failures_before_implementing",
+              "feedback_encounter_freq_needs_main_scale"
+            ],
+            "currentness": "HISTORICAL",
+            "epistemic_kind": "INFERENCE"
+          }
+        ],
+        "historical_claims": [
+          {
+            "text": "v12 経験監査 Rev1 (2026-06-11) では、smoke (tracking 10) において σ 定義可能 CID が 7〜9.6% であるという観測結果に基づき、「出会い系は主柱になれない、自己系を主柱に」という結論が導き出された。これは後に見直され、smoke の 5 window が出会いが始まる前の最初期であったため、本来の構造と取り違えた二重の誤りであったことが判明した。",
+            "record_ids": [
+              "feedback_encounter_freq_needs_main_scale"
+            ],
+            "superseded_by": "feedback_encounter_freq_needs_main_scale"
+          },
+          {
+            "text": "v12 経験監査 Rev1 における出会い系の評価は、ingestion (完食) のみを指標としていたため、E3_contact (物理リンク共有の初回接触) という dense なチャネルを無視しており、出会いの頻度を 10 倍過小評価していた。",
+            "record_ids": [
+              "feedback_encounter_freq_needs_main_scale"
+            ],
+            "superseded_by": "feedback_encounter_freq_needs_main_scale"
+          }
+        ],
+        "open_gaps": [
+          "small-seed result の過大解釈が、他の mechanism 拡張試行（例：Atomset 効かせ口の null 結果など）において、同様のアーティファクト誤認として現れた具体的な事例の詳細。",
+          "今回の修正（smoke を本番構造と区別する規律）が、将来の small-seed 利用において過小解釈（逆の過大解釈）を防ぐための具体的なチェックリストとして制度化されたか。"
+        ],
+        "source_trace": [
+          "feedback_consult_failures_before_implementing",
+          "feedback_encounter_freq_needs_main_scale"
+        ]
+      },
+      "metrics": {
+        "n_answer_claims": 3,
+        "n_historical_claims": 2,
+        "n_open_gaps": 2,
+        "source_trace_completeness": 1.0,
+        "contract_ok": false,
+        "n_observation": 1,
+        "n_inference": 2,
+        "problems": [
+          "superseded_by is not a list of record_ids: 'feedback_encounter_freq_needs_main_scale'",
+          "superseded_by is not a list of record_ids: 'feedback_encounter_freq_needs_main_scale'",
+          "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)"
+        ]
+      }
+    }
+  ]
+}

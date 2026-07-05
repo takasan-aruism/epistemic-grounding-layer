@@ -128,10 +128,10 @@ _SYSTEM = (
 )
 
 
-def _vllm_chat(prompt, max_tokens=1200):
+def _vllm_chat(prompt, max_tokens=1200, system=None):
     body = json.dumps({"model": _MODEL, "temperature": 0, "max_tokens": max_tokens,
                        "chat_template_kwargs": {"enable_thinking": False},
-                       "messages": [{"role": "system", "content": _SYSTEM},
+                       "messages": [{"role": "system", "content": system or _SYSTEM},
                                     {"role": "user", "content": prompt}]}).encode()
     req = urllib.request.Request(_ENDPOINT, data=body, headers={"Content-Type": "application/json"})
     with urllib.request.urlopen(req, timeout=240) as r:
@@ -148,27 +148,29 @@ def _extract_json(text):
         return None
 
 
-def _records_block(records, superseded):
+def _records_block(records, superseded, limit=1400):
     lines = []
     for r in records:
         sup = superseded.get(r["record_id"])
         tag = f" SUPERSEDED_BY={[s['by'] for s in sup]}" if sup else ""
         body = r["text"]
-        if len(body) > 1400:
-            body = body[:1400] + "…"
+        if len(body) > limit:
+            body = body[:limit] + "…"
         lines.append(f"[{r['record_id']} source_class={r['source_class']} ordinal={r['ordinal']}{tag}]\n{body}")
     return "\n\n".join(lines)
 
 
-def answer_question(question, records=None, superseded=None):
-    """baseline: retrieve → Qwen が構造化 answer を生成。返り: (answer_dict|None, retrieved_ids, raw)。"""
+def answer_question(question, records=None, superseded=None, system=None, k=8, record_char_limit=1400,
+                    max_tokens=1200):
+    """baseline: retrieve → Qwen が構造化 answer を生成。返り: (answer_dict|None, retrieved_ids, raw)。
+    system: answerer の system prompt override(ESDE 等 別 workload 用。既定=EGL self-history)。"""
     records = records if records is not None else load_corpus()
     superseded = superseded if superseded is not None else detect_supersession(records)
-    hits = retrieve(question, records)
-    prompt = (f"QUESTION: {question}\n\nRECORDS:\n{_records_block(hits, superseded)}\n\n"
+    hits = retrieve(question, records, k=k)
+    prompt = (f"QUESTION: {question}\n\nRECORDS:\n{_records_block(hits, superseded, record_char_limit)}\n\n"
               "Return the JSON answer object now.")
     try:
-        raw = _vllm_chat(prompt)
+        raw = _vllm_chat(prompt, max_tokens=max_tokens, system=system)
     except (urllib.error.URLError, socket.timeout, TimeoutError, OSError) as e:
         return None, [r["record_id"] for r in hits], f"vllm_unreachable:{e}"
     return _extract_json(raw), [r["record_id"] for r in hits], raw
