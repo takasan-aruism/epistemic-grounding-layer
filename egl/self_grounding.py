@@ -175,7 +175,9 @@ def answer_question(question, records=None, superseded=None):
 
 
 def validate_answer(ans, corpus_ids):
-    """§9 contract 検証(構造・決定的、hermetic)。返り: {ok, problems, metrics}。"""
+    """§9 contract 検証(構造・決定的、hermetic)。返り: {ok, problems, metrics}。
+    JREV-0007: **全 citation class**(claim.record_ids / historical.superseded_by / source_trace)を検証。
+    total 関数(非 dict claim で crash せず problem)。currentness placement の決定的整合検査。"""
     problems = []
     if not isinstance(ans, dict):
         return {"ok": False, "problems": ["not a JSON object"], "metrics": {}}
@@ -183,21 +185,48 @@ def validate_answer(ans, corpus_ids):
         if k not in ans:
             problems.append(f"missing key: {k}")
     ids = set(corpus_ids)
-    claims = (ans.get("answer_claims") or []) + (ans.get("historical_claims") or [])
+    answer_c = ans.get("answer_claims") or []
+    hist_c = ans.get("historical_claims") or []
     traced = 0
-    for c in claims:
-        cids = c.get("record_ids") or []
-        if cids and all(x in ids for x in cids):
-            traced += 1
-        elif not cids:
+    total = 0
+    for c in (answer_c + hist_c):
+        total += 1
+        if not isinstance(c, dict):            # NEW_DEFECT-2: 非 dict でも crash せず problem 化(total)
+            problems.append(f"claim entry is not an object: {c!r}")
+            continue
+        cids = c.get("record_ids")
+        if cids is None or cids == []:
             problems.append("answer claim with empty record_ids (unsupported assertion)")
+            continue
+        if not isinstance(cids, list):
+            problems.append(f"record_ids is not a list: {cids!r}")
+            continue
+        unknown = [x for x in cids if x not in ids]
+        if unknown:
+            problems.append(f"answer claim cites unknown record_id(s): {unknown}")
         else:
-            problems.append(f"answer claim cites unknown record_id(s): {[x for x in cids if x not in ids]}")
+            traced += 1
+    # NEW_DEFECT-1: superseded_by も load-bearing な citation class(supersede 証拠を名指す)ゆえ検証
+    for h in hist_c:
+        if not isinstance(h, dict):
+            continue
+        sb = h.get("superseded_by")
+        if sb is None:
+            continue
+        if not isinstance(sb, list):           # bare string も不正(SG-I で発現)
+            problems.append(f"superseded_by is not a list of record_ids: {sb!r}")
+            continue
+        unknown_sb = [x for x in sb if x not in ids]
+        if unknown_sb:
+            problems.append(f"superseded_by cites unknown record_id(s): {unknown_sb}")
+    # scope-clarity: currentness placement の決定的整合(明白な誤配置を検出。意味的正しさは非保証)
+    for c in answer_c:
+        if isinstance(c, dict) and c.get("currentness") == "HISTORICAL":
+            problems.append("answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)")
     bad_trace = [x for x in (ans.get("source_trace") or []) if x not in ids]
     if bad_trace:
         problems.append(f"source_trace has unknown ids: {bad_trace}")
-    metrics = {"n_answer_claims": len(ans.get("answer_claims") or []),
-               "n_historical_claims": len(ans.get("historical_claims") or []),
+    metrics = {"n_answer_claims": len(answer_c), "n_historical_claims": len(hist_c),
                "n_open_gaps": len(ans.get("open_gaps") or []),
-               "source_trace_completeness": (traced / len(claims)) if claims else 0.0}
+               "source_trace_completeness": (traced / total) if total else 0.0}
     return {"ok": not problems, "problems": problems, "metrics": metrics}

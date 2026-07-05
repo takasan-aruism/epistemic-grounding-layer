@@ -131,8 +131,10 @@ GUARD_CONTRACTS = {
     },
     "self_grounding.answer_question": {  # SELF_GROUNDING baseline / DE-0042
         "guarantees": [
-            "構造化 answer contract を validate_answer が決定的に検査(hermetic): 各 answer/historical claim は"
-            "実在 record_id を引く必要があり、無出典 assertion・捏造 record_id を検出。source_trace_completeness を計測",
+            "構造化 answer contract を validate_answer が決定的に検査(hermetic, total): **全 citation class**"
+            "(claim.record_ids / historical.superseded_by / source_trace)の実在を検証し、無出典 assertion・"
+            "捏造 record_id・非 dict claim entry・currentness=HISTORICAL の誤配置を検出(JREV-0007 DE-0043)。"
+            "source_trace_completeness を計測",
             "2トラック分離(JREV-0006 §13): 構造トラック(corpus 取込/supersession/retrieval/contract)は"
             "hermetic・決定的で LLM 非依存。意味トラック(Qwen 生成)は teacher_signal",
         ],
@@ -140,6 +142,9 @@ GUARD_CONTRACTS = {
             "baseline のみ: retrieval は naive keyword(関連 record を miss し得る)、supersession は heuristic"
             "(supersede/撤回/廃止 語 + rule token で over/under-flag する)、answerer は単一 Qwen(teacher_signal、"
             "prompt 依存)。answer の正しさは保証しない——構造(出典の実在)のみ検査",
+            "current/superseded の *正しさ* は LLM-behavioral(JREV-0007 scope-clarity): validate_answer は"
+            "currentness placement の *整合*(answer に HISTORICAL ラベルを置かない)は決定的検査するが、どの claim が"
+            "実際に current/superseded かの判断は Qwen 依存で構造保証でない。SG-A..I 1ラウンドで behavioral 9/9 PASS だが統計的",
             "§10 metrics は baseline 部分実装(source_trace_completeness のみ算出)。CURRENT/SUPERSEDED 混同率 /"
             "Missing Critical Claim / Scope Overreach / Failure-Pattern Retrieval は gold key + 独立 attacker の"
             "SG-A..I mutation 敵対ラウンド(JREV-0007)まで未計測。corpus は 2 ledger のみ(report/packet 未取込)",

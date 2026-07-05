@@ -57,12 +57,44 @@ def t_validate_contract():
     check("contract: 非 JSON → not ok", not v4["ok"])
 
 
+def t_jrev0007_validator_fixes():
+    ids = ["DE-0001", "DE-0002"]
+    # NEW_DEFECT-1: superseded_by の捏造 id を検出
+    bad_sb = {"answer_claims": [], "historical_claims": [{"text": "old", "record_ids": ["DE-0001"], "superseded_by": ["DE-FAKE-1234"]}],
+              "open_gaps": [], "source_trace": ["DE-0001"]}
+    v = SG.validate_answer(bad_sb, ids)
+    check("NEW_DEFECT-1: superseded_by の捏造 record_id を検出(出典 class を漏らさない)",
+          not v["ok"] and any("superseded_by" in p and "unknown" in p for p in v["problems"]), str(v["problems"]))
+    good_sb = {"answer_claims": [], "historical_claims": [{"text": "old", "record_ids": ["DE-0001"], "superseded_by": ["DE-0002"]}],
+               "open_gaps": [], "source_trace": ["DE-0001"]}
+    check("NEW_DEFECT-1: 実在 superseded_by は ok", SG.validate_answer(good_sb, ids)["ok"])
+    bare = {"answer_claims": [], "historical_claims": [{"text": "old", "record_ids": ["DE-0001"], "superseded_by": "DE-0002"}],
+            "open_gaps": [], "source_trace": []}
+    check("NEW_DEFECT-1: bare string の superseded_by(SG-I で発現)を不正検出",
+          not SG.validate_answer(bare, ids)["ok"])
+    # NEW_DEFECT-2: 非 dict claim entry で crash せず problem
+    malformed = {"answer_claims": ["just a sentence"], "historical_claims": [], "open_gaps": [], "source_trace": []}
+    try:
+        v2 = SG.validate_answer(malformed, ids)
+        crashed = False
+    except Exception:
+        crashed = True
+    check("NEW_DEFECT-2: 非 dict claim entry で crash せず ok=False(total 関数)", (not crashed) and not v2["ok"])
+    # scope-clarity: answer_claims に currentness=HISTORICAL の誤配置を検出
+    misplaced = {"answer_claims": [{"text": "x", "record_ids": ["DE-0001"], "currentness": "HISTORICAL"}],
+                 "historical_claims": [], "open_gaps": [], "source_trace": ["DE-0001"]}
+    check("scope-clarity: answer_claims の currentness=HISTORICAL 誤配置を決定的検出",
+          not SG.validate_answer(misplaced, ids)["ok"])
+
+
 if __name__ == "__main__":
     print("=== SELF_GROUNDING 構造トラック (hermetic) ===")
     print("\n[corpus] bounded corpus 取込"); t_corpus()
     print("\n[supersession] 撤回/上書きの version-aware 検出"); t_supersession()
     print("\n[retrieve] naive keyword retrieval(baseline)"); t_retrieve()
     print("\n[contract] 構造化 answer contract 検証(無出典/捏造出典を検出)"); t_validate_contract()
+    print("\n[JREV-0007] validator hardening(superseded_by 検証 / total 関数 / currentness placement)")
+    t_jrev0007_validator_fixes()
     failed = [n for n, ok in RESULTS if not ok]
     print(f"\n=== {len(RESULTS)-len(failed)}/{len(RESULTS)} PASS ===")
     if failed:
