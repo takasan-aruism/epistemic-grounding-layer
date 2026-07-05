@@ -128,28 +128,55 @@ def append_event(run_id, event_type, object_type, object_id, payload, new_prefix
 # 発行(GRANT)記録なき capability での privileged write を audit_write_authority が機械検出。
 # 将来プロセス分離すれば同じ registry で prevention へ硬化できる。
 PRIVILEGED_EVENTS = {"CORRECTION": "CORRECTOR", "COMPLETION": "COMPLETER"}
+# capability を発行してよい principal(宣言された root authority)。
+# self-grant 対策(JREV-0002): grant は『発行者が当該 capability の authorized issuer』の時のみ有効。
+# ⚠️ 残余(non_guarantee): GRANT の issuer 欄自体は self-report。issuer=root の詐称は単一プロセスでは
+#    検出不能(署名/プロセス分離まで)。honest self-grant(issuer==grantee)は検出可能。
+CAPABILITY_ISSUERS = {"CORRECTOR": {"root"}, "COMPLETER": {"root"}}
 
 
-def issue_capability(run, principal, capability):
-    """capability の発行自体を event として記録(GRANT 記録なき token 使用を検出可能にする)。"""
-    core_id = append_event(run, "CAPABILITY_GRANT", "Capability", None,
-                           {"id": SELF, "principal": principal, "capability": capability,
-                            "granted_by_run": run}, new_prefix="CAP")
-    return {"principal": principal, "capability": capability, "grant_id": core_id}
+def issue_capability(run, grantee, capability, issuer="root"):
+    """capability の発行を event 記録。issuer(発行者)も刻む=『誰が発行したか』を audit が見る。
+    既定 issuer=root(系の bootstrap authority)。self-grant は issuer=grantee を明示して行われる。"""
+    gid = append_event(run, "CAPABILITY_GRANT", "Capability", None,
+                       {"id": SELF, "principal": grantee, "capability": capability,
+                        "issuer": issuer, "granted_by_run": run}, new_prefix="CAP")
+    return {"principal": grantee, "capability": capability, "grant_id": gid}
 
 
-def _granted_caps(until_ts=None):
-    return {(e["payload"]["principal"], e["payload"]["capability"])
-            for e in read_events(until_ts) if e.get("event_type") == "CAPABILITY_GRANT"}
+def _valid_grants(until_ts=None):
+    """発行者が当該 capability の authorized issuer である GRANT のみ有効(self-grant を排除)。"""
+    out = set()
+    for e in read_events(until_ts):
+        if e.get("event_type") == "CAPABILITY_GRANT":
+            p = e["payload"]
+            if p.get("issuer") in CAPABILITY_ISSUERS.get(p["capability"], set()):
+                out.add((p["principal"], p["capability"]))
+    return out
+
+
+def _unauthorized_grants(until_ts=None):
+    """authorized issuer でない者が発行した GRANT(honest self-grant 等)を可視化する。"""
+    bad = []
+    for e in read_events(until_ts):
+        if e.get("event_type") == "CAPABILITY_GRANT":
+            p = e["payload"]
+            if p.get("issuer") not in CAPABILITY_ISSUERS.get(p["capability"], set()):
+                bad.append({"grant": e["object_id"], "issuer": p.get("issuer"),
+                            "grantee": p["principal"], "capability": p["capability"],
+                            "reason": "self-grant / unauthorized issuer"})
+    return bad
 
 
 def audit_write_authority(until_ts=None, enforce_types=None):
-    """privileged event が『発行済 capability を伴って』書かれているかを走査(R1 の保証=検出可能性)。
-    - violations: capability を claim しているが GRANT 記録が無い/registry と不一致(=forge)
-    - unprotected: privileged だが capability 無し(未 wiring)。enforce_types 指定でこれも violation 化
-    canonical stream は当面 unprotected(harden は incremental)。forge は常に violation。"""
+    """privileged event が『authorized issuer 発行の capability を伴って』書かれているかを走査
+    (R1 の保証=検出可能性)。
+    - violations: capability を claim しているが *有効な* GRANT が無い(forge / self-grant で得た token)
+    - unauthorized_grants: authorized issuer 以外が発行した GRANT(honest self-grant を可視化)
+    - unprotected: privileged だが capability 無し。enforce_types 指定でこれも violation 化
+    canonical stream は当面 unprotected。forge/self-grant は常に検出。issuer 詐称は非保証。"""
     enforce_types = set(enforce_types or [])
-    granted = _granted_caps(until_ts)
+    granted = _valid_grants(until_ts)
     violations, unprotected = [], []
     for ev in read_events(until_ts):
         req = PRIVILEGED_EVENTS.get(ev.get("event_type"))
@@ -163,9 +190,10 @@ def audit_write_authority(until_ts=None, enforce_types=None):
         elif cap != req or (pr, cap) not in granted:
             violations.append({"event_id": ev["event_id"], "event_type": ev["event_type"],
                                "object_id": ev["object_id"], "principal": pr, "capability": cap,
-                               "reason": "forged/ungranted capability" if (pr, cap) not in granted
-                                         else "wrong capability for event_type"})
-    return {"violations": violations, "unprotected": unprotected}
+                               "reason": "no valid grant (forged / self-granted capability)"
+                                         if (pr, cap) not in granted else "wrong capability for event_type"})
+    return {"violations": violations, "unprotected": unprotected,
+            "unauthorized_grants": _unauthorized_grants(until_ts)}
 
 
 def read_events(until_ts=None):

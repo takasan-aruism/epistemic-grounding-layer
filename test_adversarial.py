@@ -52,6 +52,34 @@ def t_r1_write_authority():
           any(v["event_type"] == "COMPLETION" for v in a4["violations"]))
 
 
+def t_r1_self_grant():
+    """JREV-0002: audit は grant 存在だけでなく『誰が発行したか』を見る必要がある。"""
+    reset()
+    r = core.run_start("rd", "CURATION")
+    cid = core.append_event(r, "CREATE", "Claim", None,
+                            {"id": core.SELF, "object_kind": "Claim", "status": "REPORTED", "note": "x"},
+                            new_prefix="C")
+    # honest self-grant: RD が自分に CORRECTOR を発行(issuer=grantee=rd)して CORRECTION
+    tok = core.issue_capability(r, "rd", "CORRECTOR", issuer="rd")
+    core.correct_object(r, "Claim", cid, {"note": "y"}, "fix", "METADATA", capability=tok)
+    a = core.audit_write_authority()
+    check("R1e self-grant(issuer==grantee)での CORRECTION を audit が violation 検出",
+          any(v["object_id"] == cid for v in a["violations"]), str(a["violations"]))
+    check("R1f self-grant の GRANT 自体が unauthorized_grants に可視化される",
+          any(g["grantee"] == "rd" for g in a["unauthorized_grants"]), str(a["unauthorized_grants"]))
+    # 宣言境界(残余): issuer=root を *詐称* した grant は検出できない(self-report のため)
+    reset()
+    r2 = core.run_start("rd", "CURATION")
+    cid2 = core.append_event(r2, "CREATE", "Claim", None,
+                             {"id": core.SELF, "object_kind": "Claim", "status": "REPORTED", "note": "x"},
+                             new_prefix="C")
+    forged = core.issue_capability(r2, "rd", "CORRECTOR", issuer="root")   # issuer 詐称
+    core.correct_object(r2, "Claim", cid2, {"note": "z"}, "fix", "METADATA", capability=forged)
+    a2 = core.audit_write_authority()
+    check("R1g 宣言境界: issuer=root 詐称は検出不能(issuer 欄が self-report=プロセス分離待ち)",
+          not a2["violations"], str(a2["violations"]))
+
+
 # ===============================================================
 # R3 — claim_key identity gaming を scope canonicalizer が封鎖(surface 層)。
 # ===============================================================
@@ -126,6 +154,8 @@ if __name__ == "__main__":
     print("=== JREV-0001 敵対テスト (R1/R3/R4/H4b) ===")
     print("\n[R1] semantic write authority(検出水準)")
     t_r1_write_authority()
+    print("\n[R1-self-grant] JREV-0002: 発行者権限(who may issue grant)")
+    t_r1_self_grant()
     print("\n[R3] claim_key identity gaming / scope canonicalizer")
     t_r3_identity_canon()
     print("\n[R4] leg_plan_id binding forgery(vuln 記録・LegIntent 待ち)")

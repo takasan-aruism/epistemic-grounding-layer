@@ -34,18 +34,26 @@ JREV-0002 として記録してください。
 
 ## 2. property 再判定表(著者要求は REQUESTED)
 
-| component/property | JREV-0001 | remediation 後の証拠 | 著者要求(REQUESTED) | 残る非保証 |
+property は AC-1(単一主語・単一述語)に従い atomic 化(JREV-0002 で Taka が指定した分割を採用)。
+大きな複合 property は、片側 VERIFIED・片側 NOT_VERIFIED を潰してしまうため。
+
+| component/property(atomic) | JREV-0001 | remediation 後の証拠 | 著者要求(REQUESTED) | 残る非保証 |
 |---|---|---|---|---|
 | DE0006/id_event_atomicity | VERIFIED | (据置) | 維持 | — |
-| L4/validation_mode_derivation | **REJECTED** | test_sor T8c-e(NEGATIVE→SPECIFIED / ABSENCE reject / 別軸)。canonical C-00002 は absence_validation | 再評価(REJECTED 解消?) | source_class 真正性(leaf self-report) |
-| CORRECTION_COMPLETION/transition_legality | NOT_VERIFIED | test_sor T11(CR-1/2/3/4・CP-1/2 + GPT 3 counter-factual 全通過) | VERIFIED 候補 | 専用 transition event 未実装(lifecycle 遷移は別途) |
-| APPEND_EVENT/semantic_write_authority | NOT_VERIFIED | test_adversarial R1(forge 検出・enforce ratchet) | **検出水準のみ**(prevention 非目標) | prevention 不可(単一プロセス)/ Claim・Decision・leg 未 wiring |
-| H3/claim_key_identity | NOT_VERIFIED | test_adversarial R3(case gaming 封鎖) | **surface 層のみ** | version algebra / entity 同一性(Phase 1b) |
+| DE0007/shallow_revision_completeness | VERIFIED | (据置) | 維持 | 2段以深 nested(RMW 規律) |
+| L4/absence_vs_negative_separation | **REJECTED** | test_sor T8c-e(ABSENCE→別軸 absence_validation / NEGATIVE→SPECIFIED / derive は ABSENCE reject)。canonical C-00002 | 再評価(REJECTED 解消?) | polarity 判定自体の self-report |
+| L4/validation_mode_derivation | (R5 と束) | source_class から DECLARED/UNRESOLVED 導出 | 維持 | source_class 真正性(leaf self-report) |
+| CORRECTION/mutation_legality | (旧複合) | test_sor T11a-d(CR-1..4 + REJECTED→VERIFIED 復活 reject) | VERIFIED 候補 | correction reason の意味的妥当性 |
+| COMPLETION/mutation_legality | (旧複合) | test_sor T11e-f(CP-1/2/3 + source_class 書換 reject) | VERIFIED 候補 | fill 値の意味的真正性 |
+| CLAIM_LIFECYCLE/transition_legality | NOT_VERIFIED | (未実装) | **未修正** | 専用 transition event 未実装(正当な撤回等) |
+| APPEND_EVENT/unauthorized_write_detectability | NOT_VERIFIED | test_adversarial R1b/e(forge・self-grant 検出)、R1g(issuer 詐称 残余) | **検出水準のみ** | issuer 詐称(self-report)/ prevention 不可(単一プロセス)/ Claim・Decision・leg 未 wiring |
+| H3/surface_claim_key_canonicalization | NOT_VERIFIED | test_adversarial R3b(case/alias gaming 封鎖) | VERIFIED 候補 | — |
+| H3/semantic_claim_identity | NOT_VERIFIED | (未実装) | **未修正** | version algebra / entity 同一性(Phase 1b) |
 | H1/leg_authenticity | NOT_VERIFIED | test_adversarial R4(forgery 再現=vuln 確定) | **未修正(仕様確定のみ)** | leg binding 真正性 → LegIntent 待ち |
 | H4/statement_scope_binding | NOT_VERIFIED | test_adversarial H4b(GC-7 miss 確定) | **未修正(gap 記録のみ)** | statement→scope self-report → GC-6 待ち |
-| DE0007/revision_completeness | VERIFIED | (据置) | 維持 | 2段以深 nested |
 
 **evidence_basis は全て test-verified(counter-factual 含む)。コードレベル敵対レビューは本 JREV-0002 が初回。**
+**self-grant(JREV-0002 で GPT が指摘)は DE-0024 で検出水準対応済(honest self-grant 検出、issuer 詐称は残余宣言)。**
 
 ---
 

@@ -22,11 +22,14 @@ GUARD_CONTRACTS = {
         "non_guarantees": [
             "semantic write authority の *prevention* は保証しない: 単一プロセスでは capability を"
             "forge し得るため『違反不可能』は騙らない。保証は *検出可能性*(audit_write_authority が"
-            "GRANT 記録なき privileged write を機械検出、R1/DE-0021)",
+            "有効 GRANT なき privileged write を機械検出、R1/DE-0021)",
+            "self-grant 対策(DE-0024): grant は authorized issuer 発行時のみ有効。honest self-grant"
+            "(issuer==grantee)は検出。ただし GRANT の issuer 欄自体が self-report ゆえ issuer=root の"
+            "*詐称* は単一プロセスでは検出不能(署名/プロセス分離まで)= 根が一段下へ移る",
             "capability wiring は CORRECTION/COMPLETION のみ。Claim/Decision/leg 発行は未 wiring"
             "(audit で unprotected として可視、enforce は incremental)",
         ],
-        "ref": "DE-0006 / DE-0021 / R1",
+        "ref": "DE-0006 / DE-0021 / DE-0024 / R1",
     },
     "core._check_complete_revision": {  # M4
         "guarantees": [
