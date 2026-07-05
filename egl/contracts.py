@@ -102,10 +102,13 @@ GUARD_CONTRACTS = {
     "acquisition.evaluate_leg_requirement": {  # Phase 1b / ACQ-1..4c
         "guarantees": [
             "leg requirement 充足を RD 宣言でなく primitive から計算(ACQ-1): 実行済 SearchResultSnapshot"
-            "(ACQ-4c)+ content_status=OBSERVED な evidence-eligible RawObservation(ACQ-4b)+ observed_"
-            "source_kind が required に policy 一致(ACQ-3b/AB-1)を全て要求。required は immutable LegIntent"
-            "から解決(AcquisitionRun payload でない=ACQ-3)。transport 成功でも content≠OBSERVED や "
-            "observed≠required は UNSATISFIED",
+            "(ACQ-4c、同一 leg の AcquisitionRun に束縛)+ content_status=OBSERVED な evidence-eligible "
+            "RawObservation(ACQ-4b)+ observed_source_kind が required に policy 一致(ACQ-3b/AB-1)を全て要求。"
+            "required は immutable LegIntent から解決(AcquisitionRun payload でない=ACQ-3)。transport 成功でも "
+            "content≠OBSERVED や observed≠required は UNSATISFIED",
+            "final_url binding(JREV-0005 Probe C 後): source qualification は adapter-reported final_url を"
+            "根に分類する(requested locator でない)。registry 一致 host への redirect 詐称でも、実取得先が"
+            "未登録なら UNKNOWN=強い種別を得ない",
         ],
         "non_guarantees": [
             "adapter honesty(新 leaf): transport_status/content_status は adapter が付す。嘘をつく adapter"
@@ -114,8 +117,9 @@ GUARD_CONTRACTS = {
             "observed_source_kind は code 候補(§11 上界): 最小 Entity Registry 由来で、未登録 host は "
             "UNKNOWN(=required 不充足の安全側)。JREV-0005 Probe B/C 修正で over-classification は封鎖"
             "(segment 単位照合で UGC ホスト全体の公式化を防ぐ / 実取得先 final_url で分類し redirect 詐称を防ぐ)。"
-            "残余: registry の *網羅性*・entity 同一性は未(不明は UNKNOWN で安全側)。final_url 自体は adapter "
-            "供給ゆえ adapter honesty の leaf(嘘 final_url は検出不能)",
+            "残余: registry の *網羅性*・entity 同一性・所有権継続・repo 移管・侵害された公式アカウントは範囲外"
+            "(不明は UNKNOWN で fail-closed)。final_url は adapter-reported 実行 metadata で、外部 transport "
+            "attestation 境界に対して独立検証されない(adapter/code-trust 境界内=adapter honesty leaf)",
             "policy_match は first slice 厳密一致: substitution(OFFICIAL_RELEASE が OFFICIAL_DOCS を満たす等)"
             "は未実装。coverage_requirements 駆動の matcher は後続",
             "ACQ-4c の search operation 意味検証(JREV-0005 Probe D): snapshot は同一 leg の実 AcquisitionRun へ "
