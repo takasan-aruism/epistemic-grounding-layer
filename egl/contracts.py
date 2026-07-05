@@ -129,6 +129,26 @@ GUARD_CONTRACTS = {
         ],
         "ref": "Phase 1b ACQ-1..4c / AB-1/2/3 / DE-0032",
     },
+    "pipeline.apply_outcome": {  # DE-0039/0040/0041 (JREV-0006 data-integrity)
+        "guarantees": [
+            "DE-0040 factual admission: VERIFIED は judge entailment(SUPPORTED)*かつ* policy-eligible な "
+            "PRIMARY SUPPORTS path を要する。SECONDARY/policy 非適格 source は entail されても REPORTED 止まり"
+            "(judge entailment ≠ claim admission)。admission_basis に eligible path を記録",
+            "DE-0039 bootstrap_eligible: teacher_signal と分離した code 導出。VERIFIED + validation_mode∈"
+            "{DECLARED,SPECIFIED} + policy-eligible + no-taint のみ True。UNRESOLVED/非適格/PARTIAL/taint を"
+            "自律化原料(benchmark B)から fail-closed で排除",
+            "DE-0041: entailment_status を分離記録。VERIFIED=EVIDENCE_SUPPORTED(judge-entailment + policy-"
+            "eligible admission)であって外的真理でない",
+        ],
+        "non_guarantees": [
+            "★source authenticity は依然 leaf(Gate4+ETB の脅威モデル外): policy-eligible な PRIMARY source でも"
+            "*捏造された内容* は judge に正しく entail され VERIFIED を mint し得る(JREV-0006 attack 7)。"
+            "『VERIFIED = 外的真理』ではない。source 真正性は adapter honesty/registry/署名の領域",
+            "policy-eligibility は first slice で source_class==PRIMARY を proxy(observed_source_kind の "
+            "policy.preferred/supplementary 照合は後続)。knowledge_status lifecycle(SUPERSEDED/RETRACTED)未",
+        ],
+        "ref": "DE-0039/0040/0041 / JREV-0006",
+    },
     "etb.scan_content": {  # ETB §16.2 / DE-0038
         "guarantees": [
             "ETB-4: 取得内容を data として走査し zero-width / bidi(trojan-source)/ instruction-like "

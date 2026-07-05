@@ -141,6 +141,35 @@ def derive_validation_mode(con, candidate):
     return "UNRESOLVED"
 
 
+def eligible_support_paths(con, candidate):
+    """DE-0040: policy-eligible な qualifying SUPPORTS path の relation id 群を返す。
+    first slice: source_class==PRIMARY な非 GENERATED SUPPORTS path(観測種別の policy 照合は
+    取得境界 evaluate_leg_requirement 側。curation では source_class を保守 proxy にする)。
+    factual admission(VERIFIED)はこれが空でないことを要する = judge entailment ≠ claim admission。"""
+    out = []
+    for rid in candidate.get("evidence_relations", []):
+        rel = core.get(con, rid)
+        if not rel or rel.get("relation_type") != "SUPPORTS":
+            continue
+        frag = core.get(con, rel.get("from_id"))
+        nobs = core.get(con, frag.get("norm_obs_id")) if frag else None
+        src = core.get(con, nobs.get("source_id")) if nobs else None
+        if src and src.get("source_class") == "PRIMARY":
+            out.append(rid)
+    return out
+
+
+def candidate_has_taint(con, candidate):
+    """DE-0039: 候補の evidence fragment に taint があるか(bootstrap 除外用の defense-in-depth。
+    tainted は通常 gate1 GC-8 で先に block されるが、bootstrap 適格判定でも明示的に排除する)。"""
+    for rid in candidate.get("evidence_relations", []):
+        rel = core.get(con, rid)
+        frag = core.get(con, rel.get("from_id")) if rel else None
+        if frag and frag.get("taint_flags"):
+            return True
+    return False
+
+
 def derive_absence_validation(con, candidate):
     """ABSENCE claim の validation は別軸(R5)。通常の validation_mode を使わない。
     根拠は『どの coverage profile の調査を完遂したか』= SC-2 の provenance。

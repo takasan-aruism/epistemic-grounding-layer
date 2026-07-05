@@ -115,18 +115,14 @@ def apply_outcome(run, candidate, outcome, reason, finding, gate2):
 
     if outcome == "ACCEPT":
         st = dict(candidate)
-        # AB-0003: bootstrap を一律 True にしない。bootstrap = 「teacher signal(Gate4 Claude,
-        # CB-5)由来で受理された」= 導出値。ABSENCE は adjudicator を持たず coverage 由来なので
-        # bootstrap ではない → benchmark B(自律化原料)への混入を防ぐ(data-integrity)。
-        bootstrap = bool(finding and getattr(finding, "teacher_signal", False))
         con_v = core.build_view()
         if candidate.get("polarity") == "ABSENCE":       # NOT_FOUND + AB-3 短TTL
             # R5: ABSENCE は通常の validation_mode を持たず、別軸 absence_validation を持つ
-            #     (SPECIFIED=公式規定の不在 との再混同を避ける)。
+            #     (SPECIFIED=公式規定の不在 との再混同を避ける)。AB-0003: ABSENCE は bootstrap でない。
             st.update({"id": core.SELF, "claim_id": core.SELF, "object_kind": "Claim", "claim_type": "ABSENCE",
                        "status": "NOT_FOUND",
                        "absence_validation": gates.derive_absence_validation(con_v, candidate), "revision": 1,
-                       "origin_candidate": candidate["id"], "bootstrap": bootstrap,
+                       "origin_candidate": candidate["id"], "bootstrap": False, "bootstrap_eligible": False,
                        "volatility_class": "ABSENCE_VOLATILE",
                        "temporal": {"observation_time": core.now_iso(),
                                     "knowledge_time": core.now_iso(),
@@ -135,11 +131,32 @@ def apply_outcome(run, candidate, outcome, reason, finding, gate2):
                        "promoted_by_run": run})
         else:
             # L4: validation_mode は provenance 導出(既定値を捏造しない)。導出不能=UNRESOLVED。
+            vmode = gates.derive_validation_mode(con_v, candidate)
+            entail = finding.f1_entailment                       # DE-0041: entailment ≠ admission
+            elig = gates.eligible_support_paths(con_v, candidate)  # DE-0040: policy-eligible SUPPORTS path
+            # DE-0040: judge entailment(SUPPORTED)だけで VERIFIED にしない。policy-eligible な
+            #   support path を要する。捏造 SECONDARY source は entail されても REPORTED 止まり。
+            if entail == "SUPPORTED" and elig:
+                status = "VERIFIED"                              # =EVIDENCE_SUPPORTED(judge 支持+admission、外的真理でない)
+            elif entail in ("SUPPORTED", "PARTIAL"):
+                status = "REPORTED"                              # entail するが policy-eligible source path なし / PARTIAL
+            else:
+                status = "REPORTED"
+            # DE-0039: bootstrap_eligible は teacher_signal だけでなく code 導出。UNRESOLVED / policy 非適格 /
+            #   taint / 非 VERIFIED を自律化原料(benchmark B)から fail-closed で排除。
+            bootstrap_eligible = (bool(getattr(finding, "teacher_signal", False))
+                                  and status == "VERIFIED" and entail == "SUPPORTED"
+                                  and vmode in ("DECLARED", "SPECIFIED") and bool(elig)
+                                  and not gates.candidate_has_taint(con_v, candidate))
             st.update({"id": core.SELF, "claim_id": core.SELF, "object_kind": "Claim",
-                       "status": "VERIFIED" if finding.f1_entailment == "SUPPORTED" else "REPORTED",
-                       "validation_mode": gates.derive_validation_mode(con_v, candidate),
-                       "revision": 1, "origin_candidate": candidate["id"],
-                       "bootstrap": bootstrap, "promoted_by_run": run})
+                       "status": status, "entailment_status": entail,           # DE-0041
+                       "validation_mode": vmode, "revision": 1,
+                       "admission_basis": {"claim_class": candidate.get("claim_type"),  # DE-0040
+                                           "eligible_support_path_ids": elig,
+                                           "policy_match": bool(elig)},
+                       "origin_candidate": candidate["id"],
+                       "bootstrap": bootstrap_eligible, "bootstrap_eligible": bootstrap_eligible,  # DE-0039
+                       "promoted_by_run": run})
         cid = core.append_event(run, "CREATE", "Claim", None, st, new_prefix="C")
         result["global_claim"] = cid
 

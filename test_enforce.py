@@ -34,15 +34,16 @@ def check(name, passed, detail=""):
 
 
 # ---------- fixtures ----------
-def evidence_fragment(run, source_class="PRIMARY"):
+def evidence_fragment(run, source_class="PRIMARY", observation_kind="UNSPECIFIED"):
     s = P.mk_source(run, "src", source_class, "http://x")
-    n = P.mk_observation(run, s, "Heading", ["b0", "b1", "b2"])
+    n = P.mk_observation(run, s, "Heading", ["b0", "b1", "b2"], observation_kind=observation_kind)
     return P.mk_fragment(run, n, 1, "b1")
 
 
 def positive_candidate(run, scope, claim_type="CAPABILITY", predicate="runs_on",
-                       resolves_gap=None, grounds_claims=None, scope_echo=None):
-    f = evidence_fragment(run)
+                       resolves_gap=None, grounds_claims=None, scope_echo=None,
+                       observation_kind="UNSPECIFIED"):
+    f = evidence_fragment(run, observation_kind=observation_kind)
     rel = P.mk_relation(run, f, None, "SUPPORTS", {})   # DE-0006: candidate 前に to=None で先行
     payload = {"object_kind": "CandidateClaim", "claim_type": claim_type,
                "predicate": predicate, "polarity": "POSITIVE", "task_id": "T",
@@ -212,7 +213,9 @@ def t6_ab0003_bootstrap():
     reset()
     r = core.run_start("rd", "CURATION", task_id="T")
     core.run_end(r, [])
-    c = positive_candidate(r, {"gpu_arch": "sm120"})
+    # DE-0039: bootstrap_eligible は teacher_signal だけでなく DECLARED/SPECIFIED + PRIMARY を要する。
+    #   AB-0003 の stratify(positive は原料候補 / ABSENCE は非)は、正しく grounded な positive で成立。
+    c = positive_candidate(r, {"gpu_arch": "sm120"}, observation_kind="DECLARATION")
     pos_claim = claim_of(curator.curate(c, adj_for(c)))
     # ABSENCE 成立(全 leg COMPLETED)
     r2 = core.run_start("rd", "CURATION", task_id="T2")
@@ -227,7 +230,7 @@ def t6_ab0003_bootstrap():
     ca = absence_candidate(ra, plan, scon)
     core.run_end(ra, [ca])
     abs_claim = claim_of(curator.curate(ca))
-    check("T6a AB-0003 positive(teacher signal)= bootstrap True",
+    check("T6a AB-0003+DE-0039 positive(teacher signal + PRIMARY + DECLARED)= bootstrap_eligible True",
           pos_claim and pos_claim.get("bootstrap") is True, f"bootstrap={pos_claim and pos_claim.get('bootstrap')}")
     check("T6b AB-0003 ABSENCE(judge 無)= bootstrap False(benchmark B 非汚染)",
           abs_claim and abs_claim.get("bootstrap") is False, f"bootstrap={abs_claim and abs_claim.get('bootstrap')}")
