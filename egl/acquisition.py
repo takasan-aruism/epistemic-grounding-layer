@@ -56,6 +56,24 @@ def mk_leg_intent(run, plan_id, task_id, required_source_kind, target_locator, a
     }, new_prefix="LEG")
 
 
+# ---------- §6 acquire: adapter dispatch(実 fetch or injected/manual)----------
+def acquire(run, leg_id, injected=None):
+    """leg の adapter_class に応じて実 adapter を呼ぶ(or injected を使う)。
+    injected: テスト/ACQ_MANUAL 用に adapter_result を直接与える(hermetic)。
+    実 adapter(ACQ_HTTP_STATIC/ACQ_GITHUB)は egl.adapters が transport/content status を付す。"""
+    leg = core.get_state(leg_id)
+    if not leg:
+        raise ValueError(f"unknown leg {leg_id}")
+    if injected is not None:
+        result = injected
+    elif leg["adapter_class"] == "ACQ_MANUAL":
+        raise ValueError("ACQ_MANUAL は injected content を要求する(手動投入)")
+    else:
+        from . import adapters
+        result = adapters.fetch(leg)
+    return run_acquisition(run, leg_id, result)
+
+
 # ---------- §8 AcquisitionRun(adapter が terminal status を付す)----------
 def run_acquisition(run, leg_id, adapter_result):
     """adapter_result = adapter が付けた終端状態。RD は付けない(ACQ-1)。

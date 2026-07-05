@@ -159,6 +159,30 @@ def t_acq1_acq3_no_rd_completion():
           s_after["required_source_kind"] == "OFFICIAL_DOCS" == legstate["required_source_kind"])
 
 
+# ---------------------------------------------------------------
+# 実 adapter の分類ロジック(pure, hermetic — ネットワーク非依存)
+# ---------------------------------------------------------------
+def t_adapter_classification():
+    from egl import adapters as A
+    # AB-2 content classification: 200 でも中身で content_status が変わる
+    cc = A.classify_content
+    check("adapter: 正常 body → OBSERVED", cc(b"<html>NVFP4 supported hardware: Blackwell</html>", "text/html", 200, {}) == "OBSERVED")
+    check("adapter: Cloudflare challenge → CHALLENGE_PAGE",
+          cc(b"<title>Just a moment...</title>challenge-platform", "text/html", 200, {}) == "CHALLENGE_PAGE")
+    check("adapter: cloudflare server + 403 → CHALLENGE_PAGE",
+          cc(b"blocked", "text/html", 403, {"Server": "cloudflare"}) == "CHALLENGE_PAGE")
+    check("adapter: auth wall → AUTH_WALL", cc(b"Please log in to continue", "text/html", 200, {}) == "AUTH_WALL")
+    check("adapter: 空 body → EMPTY", cc(b"   ", "text/html", 200, {}) == "EMPTY")
+    # AB-2 transport 失敗 taxonomy(FAILED に潰さない)
+    tf = A._transport_from
+    check("adapter: 200 → SUCCESS", tf({"error": None, "status": 200}) == "SUCCESS")
+    check("adapter: 403 → ACCESS_DENIED", tf({"error": None, "status": 403}) == "ACCESS_DENIED")
+    check("adapter: 404 → NOT_FOUND_REMOTE", tf({"error": None, "status": 404}) == "NOT_FOUND_REMOTE")
+    check("adapter: 429 → RATE_LIMITED", tf({"error": None, "status": 429}) == "RATE_LIMITED")
+    check("adapter: timeout → TIMEOUT", tf({"error": "timeout", "status": None}) == "TIMEOUT")
+    check("adapter: network → NETWORK_ERROR", tf({"error": "network", "status": None}) == "NETWORK_ERROR")
+
+
 if __name__ == "__main__":
     print("=== Phase 1b Acquisition Boundary 受入テスト (ACQ-1…4c) ===")
     print("\n[ACQ-3b] required_source_kind ≠ observed source qualification (AB-1)")
@@ -171,6 +195,8 @@ if __name__ == "__main__":
     t_acq4c_search_operation()
     print("\n[ACQ-1/3] RD は leg を COMPLETED にできない / plan・required は LegIntent から解決")
     t_acq1_acq3_no_rd_completion()
+    print("\n[adapter] 実 adapter の分類ロジック(pure, ネットワーク非依存)")
+    t_adapter_classification()
 
     failed = [n for n, ok in RESULTS if not ok]
     print(f"\n=== {len(RESULTS)-len(failed)}/{len(RESULTS)} PASS ===")
