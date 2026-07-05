@@ -183,6 +183,89 @@ def t_adapter_classification():
     check("adapter: network → NETWORK_ERROR", tf({"error": "network", "status": None}) == "NETWORK_ERROR")
 
 
+# ---------------------------------------------------------------
+# 統合(§13): 取得境界 → Extraction → 既存 curation spine → Claim(hermetic)
+# ---------------------------------------------------------------
+def _acquire_extract(run, required, locator, injected):
+    leg = _leg(run, required, locator)
+    a = ACQ.acquire(run, leg, injected=injected)
+    ACQ.mk_search_result_snapshot(run, leg, result_count=1)
+    obs = ACQ.emit_observation_if_eligible(run, a)
+    return leg, a, obs
+
+
+def _curate_claim(cand_id, statement="X"):
+    from egl import judge, curator
+    adj = judge.ClaudeAdjudicator({cand_id: {"f1": "SUPPORTED", "f2": "WITHIN",
+                                             "fragment_sufficient": True, "rationale": "r"}})
+    curator.curate(cand_id, adj)
+    con = core.build_view()
+    return next((c for c in core.by_type(con, "Claim") if c.get("origin_candidate") == cand_id), None)
+
+
+def _mk_candidate_from_fragment(run, frag_id, statement):
+    from egl import pipeline as P
+    rel = P.mk_relation(run, frag_id, None, "SUPPORTS", {"scope": {"model": "x"}})
+    return P.mk_candidate(run, {
+        "object_kind": "CandidateClaim", "claim_type": "CAPABILITY", "predicate": "p",
+        "polarity": "POSITIVE", "task_id": "TASK-1", "statement": statement, "scope": {"model": "x"},
+        "evidence_relations": [rel], "resolves_gap": None,
+        "representation_residual": {"known_omissions": [], "scope_uncertainty": "LOW"}})
+
+
+def t_integration_to_claim():
+    from egl import pipeline as P
+    # (a) OFFICIAL_DOCS → observation_kind=DECLARATION → Claim validation_mode=DECLARED
+    reset()
+    r = core.run_start("rd", "ACQUISITION", task_id="TASK-1")
+    _, _, obs = _acquire_extract(r, "OFFICIAL_DOCS", "https://docs.vllm.ai/x", adapter_ok("official decl"))
+    core.run_end(r, [])
+    re_ = core.run_start("extractor", "EXTRACTION", task_id="TASK-1")
+    ext = ACQ.extract_fragment(re_, obs["observation_id"], blocks=["X supported"], block_index=0, excerpt="X supported")
+    core.run_end(re_, [])
+    check("integration: OFFICIAL_DOCS → observation_kind=DECLARATION", ext["observation_kind"] == "DECLARATION")
+    rc = core.run_start("rd", "EXTRACTION", task_id="TASK-1")
+    C = _mk_candidate_from_fragment(rc, ext["fragment_id"], "X supported")
+    core.run_end(rc, [])
+    claim = _curate_claim(C)
+    check("integration: 取得→抽出→curate で Claim 生成(status=VERIFIED)", claim and claim["status"] == "VERIFIED")
+    check("integration: OFFICIAL_DOCS(DECLARATION)由来 → validation_mode=DECLARED",
+          claim and claim.get("validation_mode") == "DECLARED", claim.get("validation_mode") if claim else None)
+
+    # (b) counter-factual: OFFICIAL_REPOSITORY → IMPLEMENTATION_ARTIFACT → validation_mode=UNRESOLVED
+    reset()
+    r = core.run_start("rd", "ACQUISITION", task_id="TASK-1")
+    _, _, obs = _acquire_extract(r, "OFFICIAL_REPOSITORY",
+                                 "https://github.com/vllm-project/vllm/blob/main/x.py", adapter_ok("code"))
+    core.run_end(r, [])
+    re_ = core.run_start("extractor", "EXTRACTION", task_id="TASK-1")
+    ext = ACQ.extract_fragment(re_, obs["observation_id"], blocks=["code"], block_index=0, excerpt="code")
+    core.run_end(re_, [])
+    rc = core.run_start("rd", "EXTRACTION", task_id="TASK-1")
+    C = _mk_candidate_from_fragment(rc, ext["fragment_id"], "code path exists")
+    core.run_end(rc, [])
+    claim = _curate_claim(C)
+    check("integration counter-factual: OFFICIAL_REPOSITORY(IMPLEMENTATION_ARTIFACT)→ validation_mode=UNRESOLVED"
+          "(公式 repo は PRIMARY だが declaration でない, R6/R7)",
+          claim and claim.get("validation_mode") == "UNRESOLVED", claim.get("validation_mode") if claim else None)
+
+    # (c) 非 evidence-eligible(challenge)からは抽出できない(ACQ-4b が curation まで貫通)
+    reset()
+    r = core.run_start("rd", "ACQUISITION", task_id="TASK-1")
+    leg = _leg(r, "OFFICIAL_DOCS", "https://docs.vllm.ai/x")
+    a = ACQ.acquire(r, leg, injected=adapter_challenge())
+    obs = ACQ.emit_observation_if_eligible(r, a)
+    core.run_end(r, [])
+    raised = False
+    re_ = core.run_start("extractor", "EXTRACTION", task_id="TASK-1")
+    try:
+        ACQ.extract_fragment(re_, "OBS-99999", blocks=["x"], block_index=0, excerpt="x")
+    except ValueError:
+        raised = True
+    check("integration: challenge は Observation を生まず、抽出対象が存在しない(ACQ-4b が curation へ貫通)",
+          obs is None and raised)
+
+
 if __name__ == "__main__":
     print("=== Phase 1b Acquisition Boundary 受入テスト (ACQ-1…4c) ===")
     print("\n[ACQ-3b] required_source_kind ≠ observed source qualification (AB-1)")
@@ -197,6 +280,8 @@ if __name__ == "__main__":
     t_acq1_acq3_no_rd_completion()
     print("\n[adapter] 実 adapter の分類ロジック(pure, ネットワーク非依存)")
     t_adapter_classification()
+    print("\n[integration] 取得境界 → Extraction → curation spine → Claim(hermetic)")
+    t_integration_to_claim()
 
     failed = [n for n, ok in RESULTS if not ok]
     print(f"\n=== {len(RESULTS)-len(failed)}/{len(RESULTS)} PASS ===")

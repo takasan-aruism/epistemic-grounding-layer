@@ -78,6 +78,22 @@ def qualify_locator(locator, adapter=None, provenance=None):
     return "UNKNOWN", None
 
 
+# §12: observed_source_kind → observation_kind 候補(code 上界、LLM は downgrade のみ)。
+# 保守的: 大半は UNSPECIFIED(=validation_mode UNRESOLVED)。DECLARED/SPECIFIED を生むのは
+# 公式宣言/仕様のみ。公式 repo は IMPLEMENTATION_ARTIFACT(PRIMARY だが declaration でない=R6)。
+_OBS_KIND = {
+    "OFFICIAL_DOCS": "DECLARATION", "OFFICIAL_RELEASE": "DECLARATION",
+    "FORMAL_SPEC": "SPECIFICATION",
+    "OFFICIAL_REPOSITORY": "IMPLEMENTATION_ARTIFACT",
+    "REPRODUCIBLE_RUN": "REPRODUCTION_RUN", "REPRODUCTION_RUN": "REPRODUCTION_RUN",
+    "INDEPENDENT_BENCHMARK": "MEASUREMENT",
+}
+
+def observation_kind_for(observed_source_kind):
+    """acquired source の種別から観測種別候補を導く(§12 provenance-assisted)。未知は UNSPECIFIED。"""
+    return _OBS_KIND.get(observed_source_kind, "UNSPECIFIED")
+
+
 def policy_match(required_source_kind, observed_source_kind, policy=None):
     """AB-1 Policy Matcher: observed が required を policy 下で満たすか。
     first slice は厳密一致(richer substitution — 例: OFFICIAL_RELEASE が OFFICIAL_DOCS を満たす等 —

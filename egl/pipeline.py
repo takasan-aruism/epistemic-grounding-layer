@@ -9,7 +9,12 @@ from . import core, gates, judge
 # validation_mode を決定できない — 同じ PRIMARY でも declaration/specification/measurement/reproduction
 # で mode が別。Phase 1a は DECLARED/SPECIFIED を明示宣言/規定に限定するための最小信号のみ導入し、
 # MEASURED/REPRODUCED の導出(Activity/run type を要する)は Phase 1b(F3a フル)に残す。
-OBSERVATION_KINDS = {"DECLARATION", "SPECIFICATION", "MEASUREMENT", "REPRODUCTION", "UNSPECIFIED"}
+# §12(Phase 1b)で語彙拡張。derive_validation_mode は DECLARATION→DECLARED / SPECIFICATION→SPECIFIED の
+# みを grant し、他(IMPLEMENTATION_ARTIFACT 等)は UNRESOLVED へ倒す(R6/R7)=公式ソースコードは PRIMARY
+# でも declaration ではない、を構造で保つ。
+OBSERVATION_KINDS = {"DECLARATION", "SPECIFICATION", "IMPLEMENTATION_ARTIFACT", "MEASUREMENT",
+                     "REPRODUCTION", "REPRODUCTION_RUN", "PROCEDURE", "LEGAL_TEXT",
+                     "USAGE_OCCURRENCE", "LEXICOGRAPHIC_ENTRY", "UNSPECIFIED"}
 
 
 # ---------- constructors (すべて OM-2: run_id を刻む) ----------

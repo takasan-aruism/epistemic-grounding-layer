@@ -145,6 +145,31 @@ def emit_observation_if_eligible(run, acquisition_run_id):
     return {"observation_id": obs, "source_id": src, "observed_source_kind": observed_kind}
 
 
+# ---------- §13 Extraction Run(Raw Observation → NormalizedObservation → Evidence Fragment)----------
+# 正しく fetch ≠ 正しく fragment 選択 ゆえ Acquisition Run とは *別 Run*。取得境界(Phase 1b)と
+# 既存 curation spine(Phase 1a)の橋: NormalizedObservation の observation_kind を acquired Source の
+# observed_source_kind から provenance-assisted で導出(§12)。以降は既存 gate1..gate5 が変更なしで動く。
+def extract_fragment(run, raw_observation_id, blocks, block_index, excerpt,
+                     section_heading="", mentions=None, extractor_model="claude",
+                     extractor_version="0", prompt_version="ext-1a.0"):
+    from . import pipeline as P
+    rawobs = core.get_state(raw_observation_id)
+    if not rawobs or not rawobs.get("evidence_eligible"):
+        raise ValueError(f"extract: {raw_observation_id} は evidence-eligible な RawObservation でない(ACQ-4b)")
+    src = core.get_state(rawobs["source_id"])
+    obs_kind = SP.observation_kind_for(src.get("observed_source_kind"))    # §12 provenance-assisted
+    nobs = core.append_event(run, "CREATE", "NormalizedObservation", None, {
+        "id": core.SELF, "norm_obs_id": core.SELF, "raw_observation_id": raw_observation_id,
+        "source_id": rawobs["source_id"], "section_heading": section_heading,
+        "observation_kind": obs_kind, "blocks": blocks, "normalized_by_run": run,
+        "extractor_model": extractor_model, "extractor_version": extractor_version,
+        "prompt_version": prompt_version,           # §13 extraction lineage
+    }, new_prefix="NOBS")
+    frag = P.mk_fragment(run, nobs, block_index, excerpt, mentions)
+    return {"fragment_id": frag, "norm_obs_id": nobs, "observation_kind": obs_kind,
+            "source_id": rawobs["source_id"]}
+
+
 # ---------- §18 leg requirement 評価(ACQ-1/3/3b/4b/4c を1関数で強制)----------
 def evaluate_leg_requirement(con, leg_id):
     """leg の required_source_kind が満たされたか。**満足は RD の宣言でなく primitive から計算**(ACQ-1)。

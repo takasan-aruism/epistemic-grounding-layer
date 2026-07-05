@@ -5,3 +5,4 @@ data_acq_live/
 __pycache__/
 *.pyc
 *.sqlite
+data_acq_task/
