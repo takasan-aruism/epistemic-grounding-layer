@@ -106,8 +106,16 @@ GUARD_CONTRACTS = {
         "non_guarantees": [
             "source_class の真正性: PRIMARY 判定は mk_source の RD 供給ラベル依存"
             "(GENERATED を PRIMARY と偽れば DECLARED が導出される。H1 と同型の leaf self-report)",
+            "validation semantics の決定不能(R6/DE-0025): source_class は権威次元(PRIMARY/SECONDARY/"
+            "GENERATED)のみで、Observation kind(declaration/specification/measurement/reproduction)と "
+            "Activity/run type を持たない。ゆえに *authentic な* PRIMARY であっても mode を決定できない——"
+            "official source code(implementation artifact)/formal spec/benchmark output/official prose は"
+            "全て PRIMARY たり得るが別 mode に対応する。source_class-only 導出は declaration/specification/"
+            "measurement/reproduction を区別できない(元設計 F3a provenance_mode_candidate へ未到達)。"
+            "Phase 1a 安全側=DECLARED を『PRIMARY + explicit declaration observation kind』へ狭め、"
+            "それ以外は UNRESOLVED へ倒す",
         ],
-        "ref": "L4",
+        "ref": "L4 / R6 / DE-0025",
     },
 }
 
