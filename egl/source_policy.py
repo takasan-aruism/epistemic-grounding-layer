@@ -54,26 +54,42 @@ def mk_source_policy(run, policy):
 
 
 # §11 最小 Entity Registry: machine-observable provenance(locator host/path)→ (entity, source_kind)。
-# code 由来の候補上界。registry 不明は UNKNOWN(強い種別を code が捏造しない)。
+# code 由来の *保守的上界*(§11: LLM は downgrade のみ)。registry 不明は UNKNOWN(強い種別を捏造しない)。
+# JREV-0005 Probe B: path="" は UGC ホスト(huggingface.co)全体を公式化する over-classification。
+#   → path は segment 単位で照合し、UGC ホストは公式部分パス(docs/ 等)のみ登録する。
+# JREV-0005 latent: startswith の raw 一致は vllm-project/vllmZZZ を誤マッチ → _path_under で segment 境界。
 ENTITY_REGISTRY = [
     {"host": "github.com", "path": "vllm-project/vllm", "entity": "vLLM", "kind": "OFFICIAL_REPOSITORY"},
-    {"host": "github.com", "path": "huggingface/", "entity": None, "kind": "OFFICIAL_REPOSITORY"},
-    {"host": "docs.vllm.ai", "path": "", "entity": "vLLM", "kind": "OFFICIAL_DOCS"},
-    {"host": "huggingface.co", "path": "", "entity": None, "kind": "OFFICIAL_DOCS"},
+    {"host": "github.com", "path": "huggingface/transformers", "entity": "transformers", "kind": "OFFICIAL_REPOSITORY"},
+    {"host": "docs.vllm.ai", "path": "", "entity": "vLLM", "kind": "OFFICIAL_DOCS"},        # host 全体が公式
+    {"host": "huggingface.co", "path": "docs", "entity": None, "kind": "OFFICIAL_DOCS"},    # /docs/ のみ公式(UGC 除外, Probe B)
 ]
 
 
+def _host_path(url):
+    if not url:
+        return "", ""
+    u = urlparse(url if "//" in url else "//" + url)
+    return (u.hostname or "").lower(), (u.path or "").lstrip("/").rstrip("/")
+
+
+def _path_under(path, prefix):
+    """segment 境界での包含。prefix="" は host 全体。vllm-project/vllm は vllm-project/vllmZZZ に
+    マッチしない(== か prefix + '/' 始まりのみ)。"""
+    if prefix == "":
+        return True
+    prefix = prefix.strip("/")
+    return path == prefix or path.startswith(prefix + "/")
+
+
 def qualify_locator(locator, adapter=None, provenance=None):
-    """AB-1: 取得した source の provenance から observed_source_kind 候補を評価(code 上界)。
-    registry に無い host は UNKNOWN(=required を満たせない安全側)。将来は adapter provenance
-    (git commit/path 等)や entity registry 拡張で精緻化。"""
-    host, path = "", ""
-    if locator:
-        u = urlparse(locator if "//" in locator else "//" + locator)
-        host = (u.hostname or "").lower()
-        path = (u.path or "").lstrip("/")
+    """AB-1 + JREV-0005 Probe C: observed_source_kind 候補を *実際に content が来た先* から評価する。
+    adapter provenance の final_url があればそれで分類(requested locator でなく)——redirect で
+    registry 一致 host を騙って attacker content に強い種別を付ける経路を塞ぐ。registry 不明は UNKNOWN。"""
+    effective = (provenance or {}).get("final_url") or locator     # Probe C: 取得先を根に
+    host, path = _host_path(effective)
     for r in ENTITY_REGISTRY:
-        if host == r["host"] and path.startswith(r["path"]):
+        if host == r["host"] and _path_under(path, r["path"]):     # Probe B: segment 単位
             return r["kind"], r["entity"]
     return "UNKNOWN", None
 

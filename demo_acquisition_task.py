@@ -42,7 +42,7 @@ a = ACQ.acquire(r, leg)                                                  # 実 f
 arun = core.get_state(a)
 line(f"[FETCH] transport={arun['transport_status']} content={arun['content_status']} "
      f"http={arun['http_status']} sha={arun.get('adapter_provenance',{}).get('sha','')[:16]}")
-ACQ.mk_search_result_snapshot(r, leg, result_count=1, result_refs=[TARGET])
+ACQ.mk_search_result_snapshot(r, leg, a, result_count=1, result_refs=[TARGET])
 obs = ACQ.emit_observation_if_eligible(r, a)
 core.run_end(r, [])
 if not obs:

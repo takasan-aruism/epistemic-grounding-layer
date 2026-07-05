@@ -101,14 +101,21 @@ def run_acquisition(run, leg_id, adapter_result):
 
 
 # ---------- §9/§15 SearchResultSnapshot(AB-3: 実行した探索操作を記録)----------
-def mk_search_result_snapshot(run, leg_id, result_count, result_refs=None):
+def mk_search_result_snapshot(run, leg_id, acquisition_run_id, result_count, result_refs=None):
     """『どう探したか』を LegIntent の search_* から写し、返った result set(0 件含む)を記録。
-    coverage は source kind を『見た』でなく『この search operation を実行し snapshot を保存した』で見る。"""
+    JREV-0005 Probe D: snapshot は実 AcquisitionRun に **束縛**する(未束縛だと『searched の self-report』に
+    退化する)。acquisition_run_id は同一 leg の run でなければならない=coverage(ACQ-4c)は『この leg の
+    実取得を伴う search operation を実行し snapshot を保存した』で見る。"""
     leg = core.get_state(leg_id)
     if not leg:
         raise ValueError(f"unknown leg {leg_id}")
+    arun = core.get_state(acquisition_run_id)
+    if not arun or arun.get("leg_id") != leg_id:
+        raise ValueError(f"ACQ-4c: snapshot は同一 leg の AcquisitionRun に束縛必須 "
+                         f"(got acquisition_run leg={arun.get('leg_id') if arun else None} != {leg_id})")
     return core.append_event(run, "CREATE", "SearchResultSnapshot", None, {
         "id": core.SELF, "snapshot_id": core.SELF, "leg_id": leg_id, "executed": True,
+        "acquisition_run_id": acquisition_run_id,               # Probe D: 実取得への束縛
         "search_method": leg.get("search_method"), "query": leg.get("query"),
         "scope_locator": leg.get("scope_locator"), "revision": leg.get("revision"),
         "pagination_policy": leg.get("pagination_policy"),
@@ -184,10 +191,17 @@ def evaluate_leg_requirement(con, leg_id):
     required = leg.get("required_source_kind")               # ACQ-3: LegIntent が根
     reasons = []
 
-    snaps = [s for s in core.by_type(con, "SearchResultSnapshot")
-             if s.get("leg_id") == leg_id and s.get("executed")]
+    # ACQ-4c(Probe D 修正): snapshot は同一 leg の実 AcquisitionRun に束縛されていなければならない
+    # (未束縛の executed=True は『searched の self-report』ゆえ coverage を満たさせない)。
+    snaps = []
+    for s in core.by_type(con, "SearchResultSnapshot"):
+        if s.get("leg_id") != leg_id or not s.get("executed"):
+            continue
+        ar = core.get(con, s.get("acquisition_run_id"))
+        if ar and ar.get("leg_id") == leg_id:
+            snaps.append(s)
     if not snaps:
-        reasons.append("ACQ-4c: no executed SearchResultSnapshot (search operation not recorded)")
+        reasons.append("ACQ-4c: no executed SearchResultSnapshot bound to this leg's AcquisitionRun")
 
     obs = [o for o in core.by_type(con, "RawObservation")
            if o.get("evidence_eligible")

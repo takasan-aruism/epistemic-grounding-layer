@@ -112,9 +112,15 @@ GUARD_CONTRACTS = {
             "(challenge を OBSERVED と偽る等)は単一プロセスでは検出不能。RD self-report の根が adapter へ"
             "移った(H1/source_class と同型。プロセス分離/署名まで prevention でなく検出水準)",
             "observed_source_kind は code 候補(§11 上界): 最小 Entity Registry 由来で、未登録 host は "
-            "UNKNOWN(=required 不充足の安全側)。registry の網羅性・entity 同一性は未保証(Phase 1b 拡張)",
+            "UNKNOWN(=required 不充足の安全側)。JREV-0005 Probe B/C 修正で over-classification は封鎖"
+            "(segment 単位照合で UGC ホスト全体の公式化を防ぐ / 実取得先 final_url で分類し redirect 詐称を防ぐ)。"
+            "残余: registry の *網羅性*・entity 同一性は未(不明は UNKNOWN で安全側)。final_url 自体は adapter "
+            "供給ゆえ adapter honesty の leaf(嘘 final_url は検出不能)",
             "policy_match は first slice 厳密一致: substitution(OFFICIAL_RELEASE が OFFICIAL_DOCS を満たす等)"
             "は未実装。coverage_requirements 駆動の matcher は後続",
+            "ACQ-4c の search operation 意味検証(JREV-0005 Probe D): snapshot は同一 leg の実 AcquisitionRun へ "
+            "束縛必須にした(未束縛 self-report を封鎖)。ただし search_method/query/scope が Source Policy の"
+            "要求 search operation に *意味的に* 一致するかの検証は first slice 未実装(束縛のみ)",
             "taint-lineage / MEASURED・REPRODUCED / extraction 独立性は未(Phase 1b 後段)",
         ],
         "ref": "Phase 1b ACQ-1..4c / AB-1/2/3 / DE-0032",

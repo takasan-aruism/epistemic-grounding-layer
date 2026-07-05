@@ -54,17 +54,17 @@ def t_acq3b_required_vs_observed():
     # 正: docs.vllm.ai を required=OFFICIAL_DOCS で取得 → observed=OFFICIAL_DOCS → SATISFIED
     good = _leg(r, "OFFICIAL_DOCS", "https://docs.vllm.ai/nvfp4")
     a1 = ACQ.run_acquisition(r, good, adapter_ok())
-    ACQ.mk_search_result_snapshot(r, good, result_count=1)
+    ACQ.mk_search_result_snapshot(r, good, a1, result_count=1)
     ACQ.emit_observation_if_eligible(r, a1)
     # 誤分類: required=OFFICIAL_DOCS だが target=github repo → observed=OFFICIAL_REPOSITORY ≠ 要求
     mis = _leg(r, "OFFICIAL_DOCS", "https://github.com/vllm-project/vllm/blob/main/x.py")
     a2 = ACQ.run_acquisition(r, mis, adapter_ok())
-    ACQ.mk_search_result_snapshot(r, mis, result_count=1)
+    ACQ.mk_search_result_snapshot(r, mis, a2, result_count=1)
     ACQ.emit_observation_if_eligible(r, a2)
     # 誤分類2: required=OFFICIAL_DOCS だが target=random blog → observed=UNKNOWN
     blog = _leg(r, "OFFICIAL_DOCS", "https://random-blog.example/foo")
     a3 = ACQ.run_acquisition(r, blog, adapter_ok())
-    ACQ.mk_search_result_snapshot(r, blog, result_count=1)
+    ACQ.mk_search_result_snapshot(r, blog, a3, result_count=1)
     ACQ.emit_observation_if_eligible(r, a3)
     core.run_end(r, [])
 
@@ -84,7 +84,7 @@ def t_acq4b_transport_vs_content():
     r = core.run_start("rd", "ACQUISITION", task_id="TASK-1")
     leg = _leg(r, "OFFICIAL_DOCS", "https://docs.vllm.ai/x")
     a = ACQ.run_acquisition(r, leg, adapter_challenge())   # 200 だが Cloudflare challenge
-    ACQ.mk_search_result_snapshot(r, leg, result_count=1)
+    ACQ.mk_search_result_snapshot(r, leg, a, result_count=1)
     obs = ACQ.emit_observation_if_eligible(r, a)
     core.run_end(r, [])
     s = satisfied(leg)
@@ -101,7 +101,7 @@ def t_acq4_transport_fail():
     r = core.run_start("rd", "ACQUISITION", task_id="TASK-1")
     leg = _leg(r, "OFFICIAL_DOCS", "https://docs.vllm.ai/x")
     a = ACQ.run_acquisition(r, leg, adapter_denied())      # ACCESS_DENIED
-    ACQ.mk_search_result_snapshot(r, leg, result_count=0)
+    ACQ.mk_search_result_snapshot(r, leg, a, result_count=0)
     obs = ACQ.emit_observation_if_eligible(r, a)
     core.run_end(r, [])
     s = satisfied(leg)
@@ -118,7 +118,7 @@ def t_acq4c_search_operation():
     # snapshot 有り → OK
     withsnap = _leg(r, "OFFICIAL_DOCS", "https://docs.vllm.ai/a")
     a1 = ACQ.run_acquisition(r, withsnap, adapter_ok())
-    ACQ.mk_search_result_snapshot(r, withsnap, result_count=1)
+    ACQ.mk_search_result_snapshot(r, withsnap, a1, result_count=1)
     ACQ.emit_observation_if_eligible(r, a1)
     # snapshot 無し(取得はしたが『どう探したか』を記録していない)→ NG
     nosnap = _leg(r, "OFFICIAL_DOCS", "https://docs.vllm.ai/b")
@@ -146,7 +146,7 @@ def t_acq1_acq3_no_rd_completion():
               "adapter_version": "1.0"}
     # evaluate は snapshot も要求する。RD が snapshot 無しに『COMPLETED』宣言する術は存在しない。
     s_before = satisfied(leg)
-    ACQ.mk_search_result_snapshot(r, leg, result_count=1)
+    ACQ.mk_search_result_snapshot(r, leg, a, result_count=1)
     ACQ.emit_observation_if_eligible(r, a)
     core.run_end(r, [])
     s_after = satisfied(leg)
@@ -184,12 +184,46 @@ def t_adapter_classification():
 
 
 # ---------------------------------------------------------------
+# JREV-0005 修正の counter-factual(Probe B/C/D)
+# ---------------------------------------------------------------
+def t_jrev0005_fixes():
+    # Probe B: registry は UGC ホスト全体を公式化しない(segment 照合 + docs/ のみ)
+    check("B: huggingface.co/attacker-user/... → UNKNOWN(UGC は公式化しない)",
+          SP.qualify_locator("https://huggingface.co/attacker-user/malicious/blob/main/README.md")[0] == "UNKNOWN")
+    check("B: huggingface.co/docs/... → OFFICIAL_DOCS(公式部分のみ)",
+          SP.qualify_locator("https://huggingface.co/docs/transformers/index")[0] == "OFFICIAL_DOCS")
+    check("B latent: github vllm-project/vllmZZZ → UNKNOWN(segment 境界、prefix 誤マッチ封鎖)",
+          SP.qualify_locator("https://github.com/vllm-project/vllmZZZ/blob/main/x")[0] == "UNKNOWN")
+    check("B: github vllm-project/vllm/... → OFFICIAL_REPOSITORY(正規は不変)",
+          SP.qualify_locator("https://github.com/vllm-project/vllm/blob/main/README.md")[0] == "OFFICIAL_REPOSITORY")
+    # Probe C: qualify は実取得先(final_url)を根にする。redirect で公式 host を騙れない
+    docs = "https://docs.vllm.ai/latest/"
+    check("C: redirect 先 evil.example → UNKNOWN(final_url を分類、requested locator でない)",
+          SP.qualify_locator(docs, provenance={"final_url": "https://evil.example/phish"})[0] == "UNKNOWN")
+    check("C: final_url が公式のまま → OFFICIAL_DOCS(正規は不変)",
+          SP.qualify_locator(docs, provenance={"final_url": docs})[0] == "OFFICIAL_DOCS")
+    # Probe D: snapshot は同一 leg の実 AcquisitionRun に束縛必須
+    reset()
+    r = core.run_start("rd", "ACQUISITION", task_id="TASK-1")
+    legA = _leg(r, "OFFICIAL_DOCS", "https://docs.vllm.ai/a")
+    aA = ACQ.run_acquisition(r, legA, adapter_ok())
+    legB = _leg(r, "OFFICIAL_DOCS", "https://docs.vllm.ai/b")
+    raised = False
+    try:
+        ACQ.mk_search_result_snapshot(r, legB, aA, result_count=1)   # 別 leg の run に束縛しようとする
+    except ValueError:
+        raised = True
+    core.run_end(r, [])
+    check("D: cross-leg の AcquisitionRun に snapshot を束縛 → reject(未束縛 self-report 封鎖)", raised)
+
+
+# ---------------------------------------------------------------
 # 統合(§13): 取得境界 → Extraction → 既存 curation spine → Claim(hermetic)
 # ---------------------------------------------------------------
 def _acquire_extract(run, required, locator, injected):
     leg = _leg(run, required, locator)
     a = ACQ.acquire(run, leg, injected=injected)
-    ACQ.mk_search_result_snapshot(run, leg, result_count=1)
+    ACQ.mk_search_result_snapshot(run, leg, a, result_count=1)
     obs = ACQ.emit_observation_if_eligible(run, a)
     return leg, a, obs
 
@@ -280,6 +314,8 @@ if __name__ == "__main__":
     t_acq1_acq3_no_rd_completion()
     print("\n[adapter] 実 adapter の分類ロジック(pure, ネットワーク非依存)")
     t_adapter_classification()
+    print("\n[JREV-0005 fixes] Probe B(registry over-classification)/ C(redirect)/ D(snapshot 束縛)")
+    t_jrev0005_fixes()
     print("\n[integration] 取得境界 → Extraction → curation spine → Claim(hermetic)")
     t_integration_to_claim()
 

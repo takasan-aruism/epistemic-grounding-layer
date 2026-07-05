@@ -42,7 +42,7 @@ arunA = core.get_state(aA)
 line(f"[ACQ A] transport={arunA['transport_status']} content={arunA['content_status']} "
      f"http={arunA['http_status']} hash={(arunA.get('raw_content_hash') or '')[:20]}")
 line(f"        provenance sha={arunA.get('adapter_provenance',{}).get('sha','')[:16]}")
-ACQ.mk_search_result_snapshot(r, legA, result_count=1, result_refs=[TARGET])
+ACQ.mk_search_result_snapshot(r, legA, aA, result_count=1, result_refs=[TARGET])
 obsA = ACQ.emit_observation_if_eligible(r, aA)
 line(f"        observed_source_kind={obsA['observed_source_kind'] if obsA else None}")
 
@@ -55,7 +55,7 @@ legB = ACQ.mk_leg_intent(r, plan_id="PLAN-1", task_id="TASK-VLLM-EVID",
                          search_method="REPOSITORY_FILE_FETCH", query=["README"],
                          scope_locator="vllm-project/vllm", revision="main")
 aB = ACQ.acquire(r, legB)
-ACQ.mk_search_result_snapshot(r, legB, result_count=1, result_refs=[TARGET])
+ACQ.mk_search_result_snapshot(r, legB, aB, result_count=1, result_refs=[TARGET])
 ACQ.emit_observation_if_eligible(r, aB)
 core.run_end(r, [])
 
