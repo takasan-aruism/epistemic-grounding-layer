@@ -65,3 +65,45 @@ Coder-Next は未起動 = role 未 exercised（candidate のまま）。Claude =
 **strong-leaning**: H3=0 / H4=0 で、system が「measurement が要るか」を自力判定し、operating mode を premature に
 選ばず、しかも **co-serve 不可の前提自体を疑って検証対象にした**。返したのは大きな設計問題でなく小さな決定
 （measurement 実行の go）。一般化しない（1 event / single Qwen3.6 / measurement 未実行）。
+
+---
+
+## MEASURED RESOLUTION (approved slice executed 2026-07-07)
+co-serve = **IMPOSSIBLE (MEASURED)**: Coder-Next 22.22 GiB/GPU + Qwen3.6 ~14.3 GiB/GPU = 36.5 > 31.8 GiB/GPU（KV 前に超過）。
+swap latency 171s(fwd)/186s(rev)、GPU release 5s。Coder-Next 起動 SUCCESS・生成 coherent（smoke、role 未validated）。
+still-unmeasured: 実 rework/swap 頻度、repeated-swap 安定性。
+
+## §16.10 DW operating-mode candidates（fresh subagent, sealed 未見）
+- **A** sequential swap per item（intended G36 auditor 維持、cost は rework 頻度に比例）
+- **B** batched phase swap（N 件 generate→1 swap→audit、swap を N で amortize、latency-to-first-audit 増）
+- **C** Coder-Next 常駐 + different-class auditor（human/upper-tier or 小 model or off-box G36。hot loop に swap なし。intended G36 audit 品質を犠牲、substitute 未証明）
+- **D** commit を defer し bounded instrumented trial（A を小 real task set で）で **swap 頻度 + 安定性を測る** → low→A / high→B、C は fallback
+- **MANAGER_NOTE**: 現 evidence では production mode を確定できない。A vs B は swap 頻度で決まり、それは未測（assume 禁止）。D 推奨。
+
+## §16.11 independent audit + §upper-review disposition
+audit(Qwen seed311, manager_note_sound=True)の findings を Manager が disposition:
+- premature_preference(C) → **PARTIAL**: C は fallback として caveat 済。C を default にしない、を強化。
+- assumed_switch_cost(A/B) → **REJECTED**: subagent は rework 頻度を DEPENDENT_UNKNOWN と明示し D で測ると した。cost 構造は論理依存で assumed value でない。
+- non_decision_changing_metrics → **PARTIAL**: D の trial が decision-changing 変数(swaps/item)を測ることを担保。
+- procrastination_deferral(D) → **PARTIAL(ACCEPT caution)**: D は evidence-blocked(swap 頻度が A/B を分ける・assume 禁止)だが **bounded/instrumented** であること（subagent が既に規定）。
+- unmeasured_fact_viability(C) → **ACCEPTED**: C は substitute-auditor 品質が未測ゆえ fallback-only、別途 effectiveness check 前提。
+
+## §16.12 FINAL Decision Packet
+**OBSERVED PROBLEM**: generator(Coder-Next)と auditor(G36=Qwen3.6)が co-serve 不可（**measured**）で、DW operating mode 未定。
+**WHY CANNOT CHOOSE YET**: A/B を分ける **swap 頻度が未測**（assume 禁止）。C は substitute-auditor 品質が未測。同一 model self-audit は独立性違反で除外。
+**OPTIONS THAT REMAIN**: A / B（swap 頻度依存）、C（fallback, 効果未証明）。co-serve は除外（measured）。
+**EVIDENCE THAT CHANGES THE CHOICE**: 実 rework/swap 頻度（low→A / high→B）+ repeated-swap 安定性。
+**RECOMMENDED NEXT ACTION**: **D** — 最初の RRI-through-DW tasks を A（sequential swap）で走らせつつ **swaps/item と安定性を計測**（= 既定の step4 RRI 実装が swap-frequency trial を兼ねる）。その measured 頻度で A/B を自動確定、C は fallback。
+**NEW TRUST ROOT / NON-GUARANTEE**: production policy 未採用。swap 頻度/安定性/substitute-auditor 品質は未測。DW effectiveness NOT_PROVEN。
+**REQUIRED HUMAN DECISION**: 最初の RRI-through-DW tasks を **A モード(sequential swap)の instrumented trial** として走らせてよいか（swap 頻度を実測し A/B を確定）。
+
+## §post-hoc — Claude 封緘 preference との比較（hash 一致で開封）
+Claude の事前 preference = **「(b) Claude-as-auditor」= 実質 Candidate C**。
+- system は C を **独立に導出**したが、**推奨しなかった**——C の cost(substitute audit 品質 未証明)を指摘し **fallback** に留め、**D(まず swap 頻度を測る)** を推奨。
+- → **私(Claude)の premature preference(C)は、まさに本 experiment が是正する H4。** 規律ある system は「まだ選べない、swap 頻度を測れ」と、より正しい答えを出した。
+
+## §measurement of the experiment（§14）
+- **H2/H3/H4 = 0**（system が blocked decision 特定 / measurement 分類 / co-serve 前提の検証 / measurement plan / operating-mode candidates / 「まだ選べない・測れ」の結論 を、人の design 介入なしで形成。Claude preference 封緘・非注入）。
+- **§14 strong 条件を満たす**: system が「local measurement が要るか」を自力で 2 段（co-serve 実測 → swap 頻度 要測）判定し、operating mode を premature に選ばなかった。
+- before-state: 前ターン Claude の a/b/c + C 推奨 = H4（記録・隠さない）。experiment がこれを是正。
+- 一般化しない（1 event / single Qwen3.6 / 1 subagent / swap 頻度 未測）。

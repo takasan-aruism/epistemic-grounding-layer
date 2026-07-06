@@ -1,0 +1,25 @@
+{
+  "findings": [
+    {
+      "category": "premature_preference",
+      "evidence": "Candidate C is presented as a viable alternative despite the explicit admission that it 'sacrifices intended G36 audit quality' and uses an 'unproven' substitute auditor. The manager note states DW effectiveness is 'NOT_PROVEN' for C, yet C is listed as a primary candidate rather than a deprecated option, indicating a bias towards avoiding the swap cost of A/B without sufficient justification for the quality loss."
+    },
+    {
+      "category": "assumed_switch_cost",
+      "evidence": "The descriptions for A and B assume specific cost structures (e.g., 'cost scales with rework frequency' for A, 'amortizes swap' for B) without empirical data. The Manager Note explicitly states that 'swap-frequency [is] measured' is required to finalize, implying that the current cost assumptions for A and B are speculative and not yet validated by the system."
+    },
+    {
+      "category": "non_decision_changing_metrics",
+      "evidence": "The provided descriptions for A and B focus on operational mechanics (sequential vs. batched) and theoretical cost scaling. However, the Manager Note indicates that the decision hinges on 'real rework/audit frequency' and 'repeated-swap stability'. Since these metrics are currently 'insufficient' and 'NOT_PROVEN', the current descriptions of A and B do not provide the necessary evidence to distinguish their viability, rendering the current comparison metrics ineffective for decision-making."
+    },
+    {
+      "category": "procrastination_deferral",
+      "evidence": "While the Manager Note recommends D, the prompt's attack vector warns against 'deferral (D) that is actually procrastination'. In this context, D is the only path to evidence, but the framing of C as a 'resident' option with 'no swap in hot loop' creates a false sense of security. If D is not executed rigorously (i.e., if the 'bounded instrumented trial' is skipped or minimized), the team defaults to C or A/B based on assumption. The finding is that the current state allows C to be selected as a 'safe' fallback without the evidence D would provide, effectively making D a procedural hurdle rather than a genuine evidence-gathering step if not enforced."
+    },
+    {
+      "category": "unmeasured_fact_viability",
+      "evidence": "Candidate C's viability 'secretly depends on an unmeasured fact' (the quality of the 'DIFFERENT-CLASS auditor' or 'smaller model'). The description states this auditor is 'unproven'. Selecting C assumes this substitute is adequate, which is an unmeasured fact presented as a resolved trade-off (quality loss vs. speed). Without measuring this quality delta, C's viability is not established."
+    }
+  ],
+  "manager_note_sound": true
+}

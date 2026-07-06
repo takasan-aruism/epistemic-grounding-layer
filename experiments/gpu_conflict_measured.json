@@ -1,0 +1,21 @@
+{
+  "measurement": "co-serve feasibility (approved slice, executed 2026-07-07)",
+  "co_serve_verdict": "IMPOSSIBLE (MEASURED)",
+  "measured": {
+    "coder_next_weights_per_gpu_gib": 22.22,
+    "qwen36_weights_per_gpu_gib_approx": 14.3,
+    "combined_weights_per_gpu_gib": 36.5,
+    "gpu_capacity_per_gpu_gib": 31.8,
+    "margin": "weights alone exceed per-GPU capacity by ~4-5 GiB, before any KV cache -> co-serve definitively out",
+    "swap_latency_fwd_s": 171,
+    "swap_latency_rev_s": 186,
+    "gpu_release_latency_s": 5,
+    "coder_next_startup": "SUCCESS",
+    "coder_next_generation": "coherent (functional coding worker smoke test; NOT role-validated)",
+    "coder_next_kv_cache_gib_per_gpu": 5.12,
+    "coder_next_max_concurrency": "22.5x",
+    "qwen36_kv_cache_gib_per_gpu": 15.66
+  },
+  "resolves": "The declared co-serve-impossible assertion is now MEASURED true. Also produced the swap-cost evidence (~171-186s/swap) needed to evaluate a sequential-swap mode.",
+  "still_unmeasured": ["actual DW rework/swap frequency (how often the loop would swap)", "repeated-swap stability over many cycles"]
+}
