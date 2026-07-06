@@ -16,20 +16,18 @@ from . import self_grounding as SG
 
 ESDE_MEMORY = Path("/home/takasan/.claude/projects/-home-takasan-esde-ESDE-Research/memory")
 
-# ⚠️ PROVISIONAL(DE-0047 / GPT 裁定待ち): これは v0.2 source taxonomy(PRIMARY/SECONDARY/COMMUNITY/
-# GENERATED)とは *別軸* の record-TYPE ラベルであり、実質的な Axis Reboot(AX-5)。裁定前に暫定使用。
-# 重要な線(Taka): ESDE 記録を EGL が claim 化する時の根拠は「ESDE 台帳がこう *記録している*」
-# (記録の存在=PRIMARY 相当)であって「記録の *内容* が真」(LLM 生成内容=GENERATED 相当・ST-3 対象)ではない。
-# contextual taxonomy がこの線を保存しているかは DE-0047 で GPT 裁定。現状 ESDE stream は Claim を
-# curator/gate1 経由で admit しない(= answer 再構成のみ)ので現時点で ST-3 迂回は起きていないが、
-# ESDE 出力を benchmark B/Claim 化する前に線の enforce が要る。
-ESDE_TAXONOMY_STATUS = "PROVISIONAL_PENDING_DE0047_ADJUDICATION"
-ESDE_SOURCE_CLASSES = {
-    "PROJECT_STATE": "project_* = ある版/実験の到達状態が *記録された*(記録存在=PRIMARY 相当。内容真偽は別)",
-    "REVIEW_FINDING": "feedback_* = 規律/レビュー知見(何を主張してよいかの上限・失敗の教訓)",
+# DE-0047(Taka 暫定裁定): これは v0.2 provenance taxonomy(source_class)とは別物の **record-TYPE ラベル**
+# (corpus/answering 層の metadata)であって provenance ではない。記録存在 vs 内容真偽 vs 挙動 の線は
+# provenance でなく **VALIDATION_TARGET 軸**(egl/validation_target.py)で表す。record_type を source_class
+# に押し込まない。⚠ 正式 property-level 裁定は packet 本文(REVIEW_PACKET_TAXONOMY_DE0047.md)で未完。
+ESDE_TAXONOMY_STATUS = "VALIDATION_TARGET_AXIS (Taka 暫定裁定, formal packet adjudication 未)"
+ESDE_RECORD_TYPES = {          # ← record-TYPE(corpus label)であって provenance source_class でない
+    "PROJECT_STATE": "project_* = ある版/実験の到達状態が記録された(record occurrence)",
+    "REVIEW_FINDING": "feedback_* = 規律/レビュー知見(主張の上限・失敗の教訓)",
     "SPECIFICATION": "reference_* = 技術仕様/公理/正式参照",
     "INDEX": "index_* = 索引(retrieval の地図であって事実の ground でない)",
 }
+ESDE_SOURCE_CLASSES = ESDE_RECORD_TYPES   # 後方互換 alias(旧名。record-TYPE の意味)
 _PREFIX = {"project": "PROJECT_STATE", "feedback": "REVIEW_FINDING",
            "reference": "SPECIFICATION", "index": "INDEX"}
 
@@ -64,7 +62,11 @@ ESDE_SYSTEM = (
     "(6) Put NOT_VERIFIED / open questions / next-step-pending items in open_gaps. "
     "Return ONLY a JSON object: answer_claims (list of {text, record_ids, currentness:CURRENT|HISTORICAL, "
     "epistemic_kind}), historical_claims (list of {text, record_ids, superseded_by}), "
-    "open_gaps (list of strings), source_trace (list of record_id)."
+    "open_gaps (list of strings), source_trace (list of record_id). "
+    "superseded_by must be a list of record_ids only (or {\"type\":\"INLINE\",\"record_id\":...,\"locator\":...} "
+    "when the correction is INSIDE the same record, e.g. a v1304c correction inside the v1304b record); "
+    "NEVER write explanatory prose in superseded_by. If no valid superseding record exists, use [] and explain "
+    "the relation in the claim text or open_gaps."
 )
 
 # directive §6: 初期 operational RQ(実 ESDE 資料を読んだ結果に基づき置換可・理由記録)

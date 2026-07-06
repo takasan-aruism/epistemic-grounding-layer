@@ -82,10 +82,37 @@ def t_jrev0007_validator_fixes():
     good_sb = {"answer_claims": [], "historical_claims": [{"text": "old", "record_ids": ["DE-0001"], "superseded_by": ["DE-0002"]}],
                "open_gaps": [], "source_trace": ["DE-0001"]}
     check("NEW_DEFECT-1: 実在 superseded_by は ok", SG.validate_answer(good_sb, ids)["ok"])
-    bare = {"answer_claims": [], "historical_claims": [{"text": "old", "record_ids": ["DE-0001"], "superseded_by": "DE-0002"}],
-            "open_gaps": [], "source_trace": []}
-    check("NEW_DEFECT-1: bare string の superseded_by(SG-I で発現)を不正検出",
-          not SG.validate_answer(bare, ids)["ok"])
+    # AB-0021(2): bare string superseded_by は *実在 record_id なら coerce*(recorded)、*散文なら reject*
+    bare_real = {"answer_claims": [], "historical_claims": [{"text": "old", "record_ids": ["DE-0001"], "superseded_by": "DE-0002"}],
+                 "open_gaps": [], "source_trace": []}
+    v_real = SG.validate_answer(bare_real, ids)
+    check("AB-0021(2): bare string(実在 record_id)→ safe coerce(ok + coercions 記録、silent でない)",
+          v_real["ok"] and any("DE-0002" in c for c in v_real["coercions"]), str(v_real.get("coercions")))
+    bare_prose = {"answer_claims": [], "historical_claims": [{"text": "old", "record_ids": ["DE-0001"],
+                  "superseded_by": "later corrected by the validation-mode change"}], "open_gaps": [], "source_trace": []}
+    v_prose = SG.validate_answer(bare_prose, ids)
+    check("AB-0021(2): bare string(散文、非 record_id)→ coerce 禁止・M3 reject",
+          not v_prose["ok"] and not v_prose["axes"]["M1_grounding_integrity"], str(v_prose["axes"]))
+
+
+def t_ab0022_three_axis_split():
+    ids = ["DE-0001"]
+    # M1 clean, M2 misplacement, M3 format(bare-string 非解決)を同時に含む answer
+    a = {"answer_claims": [{"text": "current", "record_ids": ["DE-0001"], "currentness": "HISTORICAL"}],  # M2 誤配置
+         "historical_claims": [{"text": "h", "record_ids": ["DE-0001"], "superseded_by": "prose not id"}],  # M3
+         "open_gaps": [], "source_trace": ["DE-0001"]}
+    v = SG.validate_answer(a, ids)
+    m = v["metrics"]
+    check("AB-0022: M1 grounding_integrity pass(出典実在・非捏造)", m["m1_grounding_integrity_pass"] is True)
+    check("AB-0022: M2 semantic_placement fail(HISTORICAL 誤配置)", m["m2_semantic_placement_pass"] is False)
+    check("AB-0022: M3 format_adherence fail(散文 superseded_by)", m["m3_format_adherence_pass"] is False)
+    check("AB-0022: contract_ok は M1&&M2&&M3 の derived aggregate", v["ok"] == (m["m1_grounding_integrity_pass"] and m["m2_semantic_placement_pass"] and m["m3_format_adherence_pass"]))
+    # 捏造 ref は M1 に入る(placement/format と別軸)
+    a2 = {"answer_claims": [{"text": "x", "record_ids": ["DE-FAKE"], "currentness": "CURRENT"}],
+          "historical_claims": [], "open_gaps": [], "source_trace": []}
+    v2 = SG.validate_answer(a2, ids)
+    check("AB-0022: 捏造 record_id は M1(grounding)fail、M2/M3 は pass",
+          not v2["metrics"]["m1_grounding_integrity_pass"] and v2["metrics"]["m2_semantic_placement_pass"] and v2["metrics"]["m3_format_adherence_pass"])
     # NEW_DEFECT-2: 非 dict claim entry で crash せず problem
     malformed = {"answer_claims": ["just a sentence"], "historical_claims": [], "open_gaps": [], "source_trace": []}
     try:
@@ -130,6 +157,8 @@ if __name__ == "__main__":
     t_jrev0007_validator_fixes()
     print("\n[AB-0021(1)] inline 訂正 schema(superseded_by = RECORD/INLINE supersession refs)")
     t_ab0021_supersession_refs()
+    print("\n[AB-0022] contract metric を M1 grounding / M2 placement / M3 format に3分離")
+    t_ab0022_three_axis_split()
     print("\n[CI drift-gate] config 変更で challenge 再走を強制")
     t_challenge_drift_gate()
     failed = [n for n, ok in RESULTS if not ok]

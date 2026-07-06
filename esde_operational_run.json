@@ -1,11 +1,10 @@
 {
   "stream": "ESDE #1 full RQ batch",
   "taxonomy_status": "PRE_ADJUDICATION (DE-0047)",
-  "recorded_at": "2026-07-05T23:04:29.974307+00:00",
+  "recorded_at": "2026-07-06T06:30:31.612210+00:00",
   "corpus_size": 38,
   "finding_kinds": {
-    "superseded_by_bare_string": 12,
-    "currentness_misplacement": 6
+    "currentness_misplacement": 7
   },
   "results": [
     {
@@ -24,7 +23,7 @@
       "answer": {
         "answer_claims": [
           {
-            "text": "v1304系列の最新到達点は v1304c（およびその訂正）であり、v1304bの結果は superseded された。",
+            "text": "v1304b は 2026-07-03 に完了し、feedback loop 最小実装として動的な注意（now_theta lift）を子世界観察 scope に足すことで、weight 軌跡が shuffle 床（レプリカ null）を超えた初の統計結果を得た。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
@@ -32,7 +31,7 @@
             "epistemic_kind": "OBSERVATION"
           },
           {
-            "text": "v1304b（feedback loop 最小実装）は、動的な注意（now_theta lift）を子世界観察 scope に足すことで、feedback 対応の weight 軌跡が shuffle 床（レプリカ null）を超えたことを示した。",
+            "text": "v1304b の結果は、lens を R_density に差し替えた別 lens 再現（2026-07-03）でも両 base で立ち、対応の効きは lens 非依存でループの機構的性質であることが自己確認外しされた。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
@@ -40,7 +39,7 @@
             "epistemic_kind": "OBSERVATION"
           },
           {
-            "text": "v1304b の効き（weight 軌跡方向づけ）は、lens が link_density から R_density に変わっても両 base で立ったため、lens 非依存のループ機構的性質と推論される。",
+            "text": "v1304c（2026-07-04）は v1304b の結果を前提ずれ（lens 依存・ICC 必須）で説明しようとしたが、R_density は ICC=0.02 で構造上結果が出ない実験だったことが判明し、v1304b の効き（lens 非依存）は依然 weight 軌跡側にあると結論された。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
@@ -48,64 +47,57 @@
             "epistemic_kind": "INFERENCE"
           },
           {
-            "text": "v1304c は v1304b の結果（前提ずれ）を直接測定するため、固定 probe 法で premise_drift を測定した。",
+            "text": "v1304b の成果表現の上限は「対応が weight 軌跡を方向づけた（レプリカ床超え）」までであり、「学習/自律注意が成立」とは言わない。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
             "currentness": "CURRENT",
-            "epistemic_kind": "OBSERVATION"
+            "epistemic_kind": "DESIGN_DECISION"
           },
           {
-            "text": "v1304c 当初の primary（M=20 参照）では前提ずれは立たず「床内(b)」と報告されたが、これは測定アーティファクトであった。",
+            "text": "v1304c の初期報告（premise_drift 床内）は、Taka の「計器を疑え」指示による自己監査で測定アーティファクト（M=20 標本の検出力不足）と判明し、参照母集団を 220 標本に広げることで link_density 前提ずれが立った。",
             "record_ids": [
               "project_v1304b_replica_null_cleared",
               "feedback_measurement_power_before_null"
             ],
             "currentness": "HISTORICAL",
             "epistemic_kind": "OBSERVATION"
-          },
-          {
-            "text": "v1304c の訂正後、参照母集団を 220 標本に広げることで、link_density における前提ずれは両 base で立った（p≤0.001）。",
-            "record_ids": [
-              "project_v1304b_replica_null_cleared",
-              "feedback_measurement_power_before_null"
-            ],
-            "currentness": "CURRENT",
-            "epistemic_kind": "OBSERVATION"
-          },
-          {
-            "text": "v1304c の訂正により、R_density は ICC=0.02 であり、組成変化で母集団が構造的に動かず前提ずれは原理的にゼロとなることが確認された。",
-            "record_ids": [
-              "project_v1304b_replica_null_cleared",
-              "feedback_measurement_power_before_null"
-            ],
-            "currentness": "CURRENT",
-            "epistemic_kind": "OBSERVATION"
-          },
-          {
-            "text": "v1304b で観測された weight 軌跡の効きは、v1304c で確認された前提ずれ（lens 依存・ICC 必須）では説明できず、記憶は依然として weight 軌跡側にあると推論される。",
-            "record_ids": [
-              "project_v1304b_replica_null_cleared"
-            ],
-            "currentness": "CURRENT",
-            "epistemic_kind": "INFERENCE"
           }
         ],
         "historical_claims": [
           {
-            "text": "v1304c 当初の報告：primary=`premise_drift_fb − premise_drift_nofb`（M=20 参照）で立たず、「前提ずれは標本ゆらぎ床内(b)」と結論された。",
+            "text": "v1304c 初期報告における「premise_drift 床内(b)」という結論は、M=20 標本での tail 統計推定の検出力不足による測定アーティファクトであり、訂正された。",
             "record_ids": [
-              "project_v1304b_replica_null_cleared",
-              "feedback_measurement_power_before_null"
+              "project_v1304b_replica_null_cleared"
             ],
-            "superseded_by": "v1304c 訂正（参照 M=220 へ拡大により link_density 前提ずれが立ったため）"
+            "superseded_by": [
+              {
+                "type": "INLINE",
+                "record_id": "project_v1304b_replica_null_cleared",
+                "locator": "§ v1304c 揺れの直接測定...訂正"
+              }
+            ]
+          },
+          {
+            "text": "R_density を自己確認外し lens に選んだ設計は、ICC=0.02 により ESDE 構造上結果の出ない実験だったことが判明し、v1304b の効きを説明する手段として不適切だった。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "superseded_by": [
+              {
+                "type": "INLINE",
+                "record_id": "project_v1304b_replica_null_cleared",
+                "locator": "§ R_density は ICC=0.02"
+              }
+            ]
           }
         ],
         "open_gaps": [
-          "v1304c の pooled 結果は事後検出力回復によるものであり、正式な事前登録再 run は未実施。進行的前提ずれの正式化は次段 pending。",
-          "v1304b の効き（weight 軌跡側）の直接同定は未実施。",
-          "T12 飽和や複数親 seed での一般化は次段候補として未着手。",
-          "sync_order 三点目（複数親 s...）は記録が途切れており詳細不明。"
+          "v1304b の結果を正式化するための、参照 M を上げた事前登録再 run の進行的前提ずれ正式化は未着手。",
+          "軌跡側機構の直接同定は未着手。",
+          "T12 飽和の検証は未着手。",
+          "複数親 seed での一般化は未着手。",
+          "sync_order 三点目は未着手。"
         ],
         "source_trace": [
           "project_v1304b_replica_null_cleared",
@@ -113,15 +105,18 @@
         ]
       },
       "metrics": {
-        "n_answer_claims": 8,
-        "n_historical_claims": 1,
-        "n_open_gaps": 4,
+        "n_answer_claims": 5,
+        "n_historical_claims": 2,
+        "n_open_gaps": 5,
         "source_trace_completeness": 1.0,
+        "m1_grounding_integrity_pass": true,
+        "m2_semantic_placement_pass": false,
+        "m3_format_adherence_pass": true,
+        "n_coercions": 0,
         "contract_ok": false,
-        "n_observation": 6,
-        "n_inference": 2,
+        "n_observation": 3,
+        "n_inference": 1,
         "problems": [
-          "superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): 'v1304c 訂正（参照 M=220 へ拡大により link_density 前提ずれが立ったため）'",
           "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)"
         ]
       }
@@ -136,16 +131,7 @@
       "answer": {
         "answer_claims": [
           {
-            "text": "v1304c の直接観測結果は、固定プローブ法を用いた前提ずれ（premise_drift）の測定である。当初の報告では M=20 標本での推定により「床内（効果なし）」とされたが、これは測定アーティファクトであり、参照母集団を 220 標本に拡張した再解析により、link_density における前提ずれは両 base で統計的に有意（p≤0.001）に立った。また、母集団 mean の軌跡観察により、fb round では上昇、nofb round では平坦という進行的なずれが確認された。",
-            "record_ids": [
-              "feedback_measurement_power_before_null",
-              "project_v1304b_replica_null_cleared"
-            ],
-            "currentness": "CURRENT",
-            "epistemic_kind": "OBSERVATION"
-          },
-          {
-            "text": "v1304c の直接観測結果として、R_density における前提ずれは ICC=0.02（cid が lens を決めない）のため、構造的に原理的にゼロであることが観測された。",
+            "text": "v1304c の直接観測結果は、固定 probe 法を用いた前提ずれ `premise_drift` の測定である。当初は M=20 標本で推定し「床内(b)」と報告したが、これは測定アーティファクト（検出力不足）であり、参照母集団を 220 標本に広げることで再測定された結果、link_density における前提ずれは両 base で統計的に有意に立った（base0 p=0.001, base1 p<1e-4）。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
@@ -153,7 +139,23 @@
             "epistemic_kind": "OBSERVATION"
           },
           {
-            "text": "v1304b で観測された feedback 効果（weight 軌跡の方向づけ）は、v1304c で観測された前提ずれ（lens 依存・ICC 必須）では説明できない。R_density では前提ずれ構造がゼロにもかかわらず v1304b の効きがあったため、記憶の更新は weight 軌跡側で起こっていると推論される。",
+            "text": "v1304c の直接観測結果として、link_density における母集団 mean の軌跡が、feedback 条件では時間とともに上昇し、no_feedback 条件では平坦であることが確認された。これにより、前提ずれが時間に対して進行的（動的）であることが観測された。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "OBSERVATION"
+          },
+          {
+            "text": "v1304c の直接観測結果として、R_density における ICC（Intraclass Correlation Coefficient）が 0.02 であることが測定された。これは cid（個体/単位）が lens の値を決定していないことを示し、構造的に前提ずれが検出できない状態であることを示している。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "OBSERVATION"
+          },
+          {
+            "text": "v1304b で観測された feedback 効果（weight 軌跡の方向づけ）は、v1304c で観測された前提ずれ（lens 依存・ICC 必須）では説明できない。R_density では前提ずれ構造がゼロであるにもかかわらず v1304b の効果は存在したため、記憶の更新機構は weight 軌跡側にあると推論される。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
@@ -161,27 +163,34 @@
             "epistemic_kind": "INFERENCE"
           },
           {
-            "text": "v1304b の成果は、「対応が weight 軌跡を方向づけた（レプリカ床超え）」という記述までが上限であり、「学習/自律注意が成立」といったより広い主張は行われていない。",
+            "text": "v1304c の初期報告（M=20 標本）における「床内(b)」という結果は、参照母集団の標本数が不足していたことによる測定アーティファクトであり、真の信号（前提ずれ）が埋没していた。この初期結論は、参照母集団を 220 標本に拡張して再測定した結果によって訂正された。",
             "record_ids": [
-              "project_v1304b_replica_null_cleared"
+              "project_v1304b_replica_null_cleared",
+              "feedback_measurement_power_before_null"
             ],
-            "currentness": "CURRENT",
-            "epistemic_kind": "DESIGN_DECISION"
+            "currentness": "HISTORICAL",
+            "epistemic_kind": "OBSERVATION"
           }
         ],
         "historical_claims": [
           {
-            "text": "v1304c 当初の報告：M=20 標本での primary 推定により、前提ずれは「床内(b)」であり効果なしと結論された。",
+            "text": "v1304c における初期の直接観測結果（M=20 標本での前提ずれ測定）は「床内(b)（効果なし）」と報告されたが、これは計器の検出力不足によるアーティファクトであった。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
-            "superseded_by": "参照母集団を 220 標本に拡張した再解析により、link_density での前提ずれは有意に立ったことが判明。当初の「床内」は検出力不足による測定アーティファクトであった。"
+            "superseded_by": [
+              {
+                "type": "INLINE",
+                "record_id": "project_v1304b_replica_null_cleared",
+                "locator": "v1304c 揺れの直接測定...訂正...参照を 220 標本 pool に広げると link_density 前提ずれは両 base で立つ"
+              }
+            ]
           }
         ],
         "open_gaps": [
-          "pooled 参照（M=220）による結果は事後検出力回復によるものであり、正式な事前登録再 run による検証は次段候補として残っている。",
-          "weight 軌跡側の機構（記憶更新メカニズム）の直接同定は未完了。",
-          "T12 飽和や複数親 seed での一般化検証は次段候補として残っている。"
+          "R_density における ICC=0.02 は構造的に前提ずれが検出できないことを示したが、v1304b の効果（lens 非依存）を説明する weight 軌跡側の機構の直接同定は次段課題として残っている。",
+          "pooled 参照による検出力回復は事後解析であり、正式な事前登録再 run による進行的前提ずれの確証は次段候補として未完了である。",
+          "v1304c での link_density 前提ずれは plb 結合（自己確認）に乗ると推論されているが、その詳細な因果経路の検証は次段課題である。"
         ],
         "source_trace": [
           "feedback_measurement_power_before_null",
@@ -189,15 +198,19 @@
         ]
       },
       "metrics": {
-        "n_answer_claims": 4,
+        "n_answer_claims": 5,
         "n_historical_claims": 1,
         "n_open_gaps": 3,
         "source_trace_completeness": 1.0,
+        "m1_grounding_integrity_pass": true,
+        "m2_semantic_placement_pass": false,
+        "m3_format_adherence_pass": true,
+        "n_coercions": 0,
         "contract_ok": false,
-        "n_observation": 2,
+        "n_observation": 4,
         "n_inference": 1,
         "problems": [
-          "superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): '参照母集団を 220 標本に拡張した再解析により、link_density での前提ずれは有意に立ったことが判明。当初の「床内」は検出力不足による測定アーティファクトであった。'"
+          "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)"
         ]
       }
     },
@@ -217,7 +230,7 @@
       "answer": {
         "answer_claims": [
           {
-            "text": "rarity premise shift（前提ずれ）を直接支持する証拠は、参照母集団を20標本から220標本に拡大し検出力を回復させた再解析において、link_density lensを用いた場合、両baseで統計的に有意な前提ずれ（p≤0.001, p<1e-4）が観測されたことである。",
+            "text": "rarity premise shift(前提ずれ)を直接支持する証拠は、link_density lensを用いた実験において、参照母集団を220標本に拡大した結果、fb条件とnofb条件の間に統計的に有意な前提ずれ（premise_drift）が観測されたことである（両baseでp≤0.001）。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
@@ -225,7 +238,7 @@
             "epistemic_kind": "OBSERVATION"
           },
           {
-            "text": "rarity premise shiftは時間とともに進行的にずれる動態を示しており、feedbackありのroundでは母集団meanが上昇し、no_feedbackでは平坦であった。",
+            "text": "rarity premise shiftは、時間とともに進行的にずれる現象として観測された。fb roundでは母集団meanが上昇し、nofb roundでは平坦であった。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
@@ -233,15 +246,15 @@
             "epistemic_kind": "OBSERVATION"
           },
           {
-            "text": "rarity premise shiftはlens依存性を持つ。link_densityでは有意な前提ずれが観測されたが、R_densityではICC=0.02（構造的前提ずれの欠如）により原理的にゼロとなり、前提ずれは説明できなかった。",
+            "text": "rarity premise shiftの検出には、link_density lens（ICC=0.67）が必要であり、R_density lens（ICC=0.02）では構造的に前提ずれが原理的にゼロとなるため、前提ずれの証拠とはなり得ない。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
             "currentness": "CURRENT",
-            "epistemic_kind": "OBSERVATION"
+            "epistemic_kind": "INFERENCE"
           },
           {
-            "text": "rarity premise shiftの観測には、小標本（M=20）でのtail統計推定が検出力不足（アーティファクト）を引き起こすため、参照母集団のpoolingによる標本数増加が設計上の必須条件である。",
+            "text": "rarity premise shiftの検出には、tail統計（珍しさ）を小標本（M=20）でprimaryにしないこと、および参照母集団をpoolして検出力を確保することが設計上の要件である。",
             "record_ids": [
               "feedback_measurement_power_before_null",
               "project_v1304b_replica_null_cleared"
@@ -252,17 +265,19 @@
         ],
         "historical_claims": [
           {
-            "text": "当初、M=20標本を用いたrarity premise shiftの測定では「床内(b)（効果なし）」と報告されたが、これは計器（検出力）のアーティファクトであり、参照母集団を拡大することで訂正された。",
+            "text": "v1304c初期解析では、M=20標本を用いたrarity premise shiftの測定が「床内(b)」（効果なし）と報告されたが、これは測定アーティファクト（検出力不足）であり、訂正された。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
-            "superseded_by": "project_v1304b_replica_null_cleared"
+            "superseded_by": [
+              "project_v1304b_replica_null_cleared"
+            ]
           }
         ],
         "open_gaps": [
-          "R_density lensで前提ずれが構造的原因でゼロとなる中、v1304bで観測されたweight軌跡の方向づけ（feedback効き）が前提ずれ以外の機構で説明される詳細なメカニズム。",
-          "link_densityにおける前提ずれがplb結合（自己確認）に乗る具体的な構造的根拠。",
-          "参照Mを上げた事前登録再runによる、進行的前提ずれの正式な統計的確定状況。"
+          "R_density lensにおけるICC=0.02という構造的要因が、link_densityにおけるICC=0.67と比べてなぜそのような差を生むのかの詳細なメカニズムは未検証。",
+          "pooled参照（M=220）による前提ずれの正式化は「次段」候補として残されており、事前登録再runでの確定は完了していない。",
+          "軌跡側機構（weight軌跡の方向づけ）と前提ずれ（lens依存）の関係を、lens非依存なv1304bの効きと対比しつつ、より直接的に同定する作業は次段候補。"
         ],
         "source_trace": [
           "feedback_measurement_power_before_null",
@@ -274,12 +289,14 @@
         "n_historical_claims": 1,
         "n_open_gaps": 3,
         "source_trace_completeness": 1.0,
-        "contract_ok": false,
-        "n_observation": 3,
-        "n_inference": 0,
-        "problems": [
-          "superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): 'project_v1304b_replica_null_cleared'"
-        ]
+        "m1_grounding_integrity_pass": true,
+        "m2_semantic_placement_pass": true,
+        "m3_format_adherence_pass": true,
+        "n_coercions": 0,
+        "contract_ok": true,
+        "n_observation": 2,
+        "n_inference": 1,
+        "problems": []
       }
     },
     {
@@ -298,7 +315,7 @@
       "answer": {
         "answer_claims": [
           {
-            "text": "v1304b 本番実験において、feedback loop（動的な注意を子世界観察 scope に足すループ）を回した結果、対応（correct mapping）の weight 軌跡が shuffle（対応破壊）から離れる量が、対応なし同士の発散床（レプリカ null、K=10）を超えた。",
+            "text": "v1304b 本番実装において、feedback ループ（動的な注意を子世界観察 scope に足す）を回した結果、対応（correct correspondence）の weight 軌跡が、shuffle（対応破壊）からの発散量がレプリカ null 床（K=10）を超えた。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
@@ -306,7 +323,7 @@
             "epistemic_kind": "OBSERVATION"
           },
           {
-            "text": "この結果は、feedback（正しい対応）の weight 軌跡が shuffle から離れる量が、対応なし同士の発散床を超えたことを示している。",
+            "text": "この結果は、対応が weight 軌跡を方向づけたことを示唆する解釈（memory が weight 軌跡に宿るという仮説の支持）へと導かれた。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
@@ -314,7 +331,23 @@
             "epistemic_kind": "INFERENCE"
           },
           {
-            "text": "v1304b の効き（lens 非依存）は前提ずれ（lens 依存・ICC 必須）で説明できず、記憶は依然 weight 軌跡側にあると解釈される。",
+            "text": "v1304c による前提ずれ（premise_drift）の直接測定では、当初は床内（測定アーティファクト）と報告されたが、標本数拡大により link_density での前提ずれが検出された。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "currentness": "HISTORICAL",
+            "epistemic_kind": "OBSERVATION"
+          },
+          {
+            "text": "R_density（率）では前提ずれが原理的にゼロ（ICC=0.02）であり、v1304b で観測された weight 軌跡の方向づけ（対応の効き）は、この前提ずれ（lens 依存・ICC 必須）では説明できない。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "INFERENCE"
+          },
+          {
+            "text": "前提ずれで説明できないため、memory（記憶/対応の効き）は依然として weight 軌跡側に宿ると解釈される（R_density は v1304b 効き在るのに前提ずれ構造ゼロ＝むしろ強化）。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
@@ -324,32 +357,42 @@
         ],
         "historical_claims": [
           {
-            "text": "v1304c における初期測定では、primary=`premise_drift_fb − premise_drift_nofb` が立たず「床内(b)」と報告されたが、これは参照標本数 M=20 の不足による測定アーティファクトであり、訂正された。",
+            "text": "v1304c 当初の報告では、primary 結果が立たず「床内(b)」と結論付けられていた。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
-            "superseded_by": "参照 M を 220 に広げると link_density 前提ずれは両 base で立ち、母集団 mean も fb round 上昇 nofb 平坦＝前提は時間で進行的にずれる（元(b)は誤り）"
+            "superseded_by": [
+              {
+                "type": "INLINE",
+                "record_id": "project_v1304b_replica_null_cleared",
+                "locator": "訂正（v1304c_correction.md）"
+              }
+            ]
           }
         ],
         "open_gaps": [
-          "weight 軌跡に memory が宿るという解釈を支持する直接的な因果機構（例：どの具体的メカニズムが軌跡に情報を保持するか）の同定。",
-          "v1304b の結果が複数親 seed や別 lens（cycle_participation / R_positive_fraction）で一般化できるかどうかの検証。",
-          "進行的前提ずれの正式化（参照 M 上げた事前登録再 run）の結果。"
+          "v1304b の効き（lens 非依存）を説明する weight 軌跡側の具体的な機構（軌跡側機構の直接同定）は未確定。",
+          "前提ずれの正式化には、参照 M を上げた事前登録再 run が必要。",
+          "v1304b の結果は親 profile v1303 final seed0 のみ・single lens=link_density に条件付きであり、複数親 seed や別 lens での一般化は次段課題。"
         ],
         "source_trace": [
           "project_v1304b_replica_null_cleared"
         ]
       },
       "metrics": {
-        "n_answer_claims": 3,
+        "n_answer_claims": 5,
         "n_historical_claims": 1,
         "n_open_gaps": 3,
         "source_trace_completeness": 1.0,
+        "m1_grounding_integrity_pass": true,
+        "m2_semantic_placement_pass": false,
+        "m3_format_adherence_pass": true,
+        "n_coercions": 0,
         "contract_ok": false,
-        "n_observation": 1,
-        "n_inference": 2,
+        "n_observation": 2,
+        "n_inference": 3,
         "problems": [
-          "superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): '参照 M を 220 に広げると link_density 前提ずれは両 base で立ち、母集団 mean も fb round 上昇 nofb 平坦＝前提は時間で進行的にずれる（元(b)は誤り）'"
+          "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)"
         ]
       }
     },
@@ -369,75 +412,78 @@
       "answer": {
         "answer_claims": [
           {
-            "text": "v12 M5 における kernel drift / survival relation（経験→物理介入）は、v12 Atomset の exhaustively なチャネル試行において、どのチャネルも cid/atom 特異な個性化を構造的 baseline 超えで出さなかった（全て null）と記録されている。",
+            "text": "v12 M5 における kernel drift / survival 関係の観測は、単一指標（相関など）で全体を判定すると誤解を招くため、n_core ごとに層化して個別軌跡で見る必要がある。n_core=2 では正の相関（+0.39）、n_core=3-4 では負の相関（-0.83）が見られ、これらを平均化すると符号が逆転して +0.20 に潰れる。",
             "record_ids": [
-              "project_atomset_channels_all_null"
-            ],
-            "currentness": "HISTORICAL",
-            "epistemic_kind": "OBSERVATION"
-          },
-          {
-            "text": "v12 M5 の経験注入（torque 等）は、CID 物理 state と干渉し scramble されるため、cid 特異情報が伝わらず効果が注入に非比例（corr ≤ 0）となった。これは「埋もれ」ではなく「干渉」による失敗と判定された。",
-            "record_ids": [
-              "project_atomset_subject_is_atomid_not_cid"
-            ],
-            "currentness": "HISTORICAL",
-            "epistemic_kind": "INFERENCE"
-          },
-          {
-            "text": "v12 M5 の経験→物理介入は、v9.7 の撤回された介入と同型であり、Taka の v9.13 原則（認知層は物理層を支配しない、効果は劇的でなく統計的に多少の差）に反する「劇的/神の手」リスクがあるため、実 regime としては slight に保つ必要があるとされている。",
-            "record_ids": [
-              "project_v12_experience_is_v97_pattern"
-            ],
-            "currentness": "HISTORICAL",
-            "epistemic_kind": "INFERENCE"
-          },
-          {
-            "text": "v1304b 以降、動的な注意（now_theta lift）を子世界を観察 scope に足すループを回すことで、feedback（正しい対応）の weight 軌跡が shuffle（対応破壊）から離れる量が、対応なし同士の発散床（レプリカ null）を超えた。",
-            "record_ids": [
-              "project_v1304b_replica_null_cleared"
+              "feedback_no_single_index_classification"
             ],
             "currentness": "CURRENT",
             "epistemic_kind": "OBSERVATION"
           },
           {
-            "text": "v1304b の結果は、対応が weight 軌跡を方向づけた（レプリカ床超え）までが成果表現の上限であり、「学習/自律注意が成立」とは言わない。",
+            "text": "v12 Atomset 実験において、文化（経験）を CID の振る舞いに効かせる試みは、どのチャネル（torque, lambda, link, field, multi など）を試しても cid/atom 特異な個性化を構造的 baseline 超えで出すことはできなかった（結果は null）。",
             "record_ids": [
-              "project_v1304b_replica_null_cleared"
+              "project_atomset_channels_all_null"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "OBSERVATION"
+          },
+          {
+            "text": "v12 での null 結果の核心は、baseline（文化なし）でも atom 由来の構造類似性により cid が強くクラスタしており（η²(degree)=0.62）、これが「偽の足場」となっているため、文化による個性化効果が相対的に検出されにくい構造にある。",
+            "record_ids": [
+              "project_atomset_channels_all_null"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "INFERENCE"
+          },
+          {
+            "text": "v12 での文化効かせ口（チャネル）探しは出尽くしたと判断され、これ以上チャネルを試すことは推奨されない。残る分岐は、シグナル側（何を経験とするか）の疑いや、粒度（per-Atom vs cid）の見直し、あるいは ESDE のカオス頑健性の受容である。",
+            "record_ids": [
+              "project_atomset_channels_all_null"
             ],
             "currentness": "CURRENT",
             "epistemic_kind": "DESIGN_DECISION"
           },
           {
-            "text": "v1304b の効き（lens 非依存）は前提ずれ（lens 依存・ICC 必須）で説明できず、記憶は依然 weight 軌跡側にある。",
+            "text": "v12 での経験注入（Atomset）は、CID の物理 state に直接書く設計が干渉（scramble）により失敗したため、主体を AtomID に移し、文化を環境・教育として緩く乗りさせる設計（筋3）が推奨されている。",
             "record_ids": [
-              "project_v1304b_replica_null_cleared"
+              "project_atomset_subject_is_atomid_not_cid"
             ],
             "currentness": "CURRENT",
-            "epistemic_kind": "INFERENCE"
+            "epistemic_kind": "DESIGN_DECISION"
+          },
+          {
+            "text": "v12 M5 の torque 介入は、v9.7 の撤回された介入と同型であり、神の手（劇的効果）リスクが高いため、実 regime では slight（統計的に多少の差）に保つ guard が適用される。",
+            "record_ids": [
+              "project_v12_experience_is_v97_pattern"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "DESIGN_DECISION"
           }
         ],
         "historical_claims": [
           {
-            "text": "v12 Atomset での kernel drift / survival relation 試行は、チャネル null として記録された。これは v1304b での weight 軌跡方向づけ（レプリカ床超え）によって、その後の設計・検証の文脈で相対化・修正された。",
+            "text": "v12 Atomset での初期分析では、相関一つで「個性化しぼんだ」と誤判定する失敗があったが、これは単一指標の罠であり、n_core 層化を行うことで sign-flip が見えるようになった。",
             "record_ids": [
-              "project_atomset_channels_all_null",
-              "project_v1304b_replica_null_cleared"
+              "feedback_no_single_index_classification"
             ],
-            "superseded_by": "project_v1304b_replica_null_cleared"
+            "superseded_by": [
+              "feedback_no_single_index_classification"
+            ]
           },
           {
-            "text": "v1304c での premise_drift 測定において、当初 primary が立たなかった理由（床内(b)）は、参照 M=20 の検出力不足による測定アーティファクトであったことが訂正された。",
+            "text": "v12 経験監査 Rev1 では、出会い系（接触）の頻度が smoke 段階で枯渇していると結論付けられたが、これは smoke の最初期相を本来の構造と取り違えた誤りであり、本番（tracking 50）では E3_contact の 85.8% で σ 定義可能であることが訂正された。",
             "record_ids": [
-              "project_v1304b_replica_null_cleared"
+              "feedback_encounter_freq_needs_main_scale"
             ],
-            "superseded_by": "project_v1304b_replica_null_cleared"
+            "superseded_by": [
+              "feedback_encounter_freq_needs_main_scale"
+            ]
           }
         ],
         "open_gaps": [
-          "v12 M5 の kernel drift / survival relation が、v1304b の weight 軌跡方向づけの結果とどう整合するか、あるいは v12 M5 の結果が v1304b の結果に対してどのような制約/前提として残るか。",
-          "v1304b の結果（lens 非依存な weight 軌跡方向づけ）が、v12 M5 で失敗した「経験→物理介入」の設計（torque 等）に対して、どのような具体的な実装指針（例：筋3の環境・文化アプローチ）を与えるか。",
-          "v1304b の結果が、v12 M5 で観測された「CID 物理 state との干渉」問題をどのように回避しているか、あるいはその回避が v1304b の設計（子世界観察 scope 追加）にどう現れているか。"
+          "v12 M5 において、kernel drift と survival の関係を「文化/経験」の介入効果として明確に分離・定量化する手法は確立されていない（現状は構造由来のクラスタリングと干渉により検出困難）。",
+          "v1304b での feedback loop 成功（weight 軌跡の方向づけ）は、v12 M5 の kernel drift/survival 問題に直接どう影響するか、あるいは v12 の結果と v13 系で得られた「対応の効き」をどう統合するかは未定。",
+          "「文化が個性化を作る」ための具体的なシグナル設計（per-Atom での経験積算方法など）は筋3として推奨されているが、具体的な実装コードや数値結果は記録にない。"
         ],
         "source_trace": [
           "reference_esde_spec",
@@ -455,14 +501,14 @@
         "n_historical_claims": 2,
         "n_open_gaps": 3,
         "source_trace_completeness": 1.0,
-        "contract_ok": false,
+        "m1_grounding_integrity_pass": true,
+        "m2_semantic_placement_pass": true,
+        "m3_format_adherence_pass": true,
+        "n_coercions": 0,
+        "contract_ok": true,
         "n_observation": 2,
-        "n_inference": 3,
-        "problems": [
-          "superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): 'project_v1304b_replica_null_cleared'",
-          "superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): 'project_v1304b_replica_null_cleared'",
-          "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)"
-        ]
+        "n_inference": 1,
+        "problems": []
       }
     },
     {
@@ -481,7 +527,16 @@
       "answer": {
         "answer_claims": [
           {
-            "text": "attention center (v1111 series) の現在の未測定軸は、異なる系 (Atom / Other) 間の対応関係における 'phase 空間 occupancy の co-occurrence' である。",
+            "text": "attention center の現在の未測定軸は、index_observation_target の過去成功事例リストに「同じ ESDE 系内の動的平衡指標」「n_core 別 CID 寿命」「Integration (α/β)」「source_event × path」「動学的発展段階」の 5 軸が列挙されているが、attention center 関連の v1110-v1111e 失敗事例や v1112 Stage 1 の cooc 試行以外に、測定済みの「成功事例」としての軸が明示的に列挙されていない。",
+            "record_ids": [
+              "index_observation_target",
+              "index_concepts"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "OBSERVATION"
+          },
+          {
+            "text": "index_observation_target の「過去失敗事例」セクションでは、v1110-v1111e で「別 seed の Atom 系 / Other 系の対応関係 (node ID 経由の注入)」が観察対象として試され、v1112 Stage 1 で「別 seed の Atom 系 / Other 系の対応関係 (phase 空間 occupancy の cooc)」が試されたが、これらは「失敗事例」として分類されており、測定された事実として確立された軸ではない。",
             "record_ids": [
               "index_observation_target"
             ],
@@ -489,17 +544,9 @@
             "epistemic_kind": "OBSERVATION"
           },
           {
-            "text": "v1111 系列 (v1110-v1111e) は、異なる系 (別 seed) の Atom 系と Other 系の '対応関係' を観察対象として設計されている。",
+            "text": "index_concepts において、attention center に関連する概念として `attention[cid][node_id]` が認知層の要素として定義されているが、これが現在測定されているか、あるいは未測定軸として特定されているかは明記されていない。",
             "record_ids": [
-              "index_observation_target"
-            ],
-            "currentness": "CURRENT",
-            "epistemic_kind": "DESIGN_DECISION"
-          },
-          {
-            "text": "v1112 Stage 1 main / redo では、両系の occupancy[64] の同時立ち累積 (cooc) を観察対象とし、total_cooc / N_rcid / diagonal を主指標として計測を試みている。",
-            "record_ids": [
-              "index_observation_target"
+              "index_concepts"
             ],
             "currentness": "CURRENT",
             "epistemic_kind": "OBSERVATION"
@@ -507,41 +554,43 @@
         ],
         "historical_claims": [
           {
-            "text": "v1110-v1111e において、node ID 経由での異なる系 (Atom / Other) の対応関係注入は、番号コピー欠陥 (Other は別 seed なので node ID が指す対象が違う) により無意味な結果となった。",
+            "text": "v1110-v1111e における「Atom が決めた target を Other に inject (node ID 経由)」は、Other が別 seed であるため node ID が指す対象が異なり、無意味な結果となった。これは「異なる系の対応関係」を試した失敗事例であり、現在の測定軸ではない。",
             "record_ids": [
               "index_observation_target"
             ],
-            "currentness": "HISTORICAL",
-            "superseded_by": "index_observation_target"
+            "superseded_by": []
+          },
+          {
+            "text": "v1112 Stage 1 main / redo における「両系の occupancy[64] の同時立ち累積、主指標 = total_cooc / N_rcid / diagonal」は、別 seed の Atom 系 / Other 系の対応関係 (phase 空間 occupancy の cooc) を試した事例であるが、記録が途中で切れており、結果が「失敗」か「成功」か、あるいは測定軸として確定したかは明記されていない。",
+            "record_ids": [
+              "index_observation_target"
+            ],
+            "superseded_by": []
           }
         ],
         "open_gaps": [
-          "v1112 Stage 1 main / redo における occupancy co-occurrence の具体的な数値結果 (total_cooc, N_rcid, diagonal の値や有意差) は記録が途切れており、測定結果が不明。",
-          "phase 空間 occupancy の co-occurrence 観察が、v1111c/e で導入された 'state 由来動的 λ' や 'exp(-λ·Δ) カーネル' とどのように統合・測定されるか、その具体的な指標定義が未記載。",
-          "v1112 以降の 'redo' 結果や、v1111 系列の最終的な結論 (対応関係の確立または再設計) に関する記録が提供されていない。"
+          "attention center 系 (unified/attention_center_prep/) の v1112 以降、またはそれ以外の v11xx 系列で、測定が成功し、観察対象軸として確立された事例が index_observation_target に列挙されていない。",
+          "v1112 Stage 1 の結果がどうなったか、およびそれが測定軸として採用されたか否かが不明。",
+          "「未測定軸」を特定するために、現在測定されている「測定済軸」のリストが index_observation_target に不足している。"
         ],
         "source_trace": [
           "index_observation_target",
-          "index_capabilities",
-          "index_concepts",
-          "reference_legacy_treasures",
-          "feedback_code_a_blind_spots",
-          "index_files",
-          "index_phase_timeline",
-          "index_usage"
+          "index_concepts"
         ]
       },
       "metrics": {
         "n_answer_claims": 3,
-        "n_historical_claims": 1,
+        "n_historical_claims": 2,
         "n_open_gaps": 3,
         "source_trace_completeness": 1.0,
-        "contract_ok": false,
-        "n_observation": 2,
+        "m1_grounding_integrity_pass": true,
+        "m2_semantic_placement_pass": true,
+        "m3_format_adherence_pass": true,
+        "n_coercions": 0,
+        "contract_ok": true,
+        "n_observation": 3,
         "n_inference": 0,
-        "problems": [
-          "superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): 'index_observation_target'"
-        ]
+        "problems": []
       }
     },
     {
@@ -558,7 +607,15 @@
       "answer": {
         "answer_claims": [
           {
-            "text": "v1304b feedback loop の primary 結果（対応が weight 軌跡を方向づけた）は、親 profile v1303 final seed0 のみ、single lens=link_density に条件付きで成立している。",
+            "text": "v1304b 結果の効き（weight 軌跡の方向づけ）は lens 非依存であるが、前提ずれ（premise drift）の説明は lens 依存（ICC 必須）であり、記憶の主体は依然として weight 軌跡側にある。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "currentness": "CURRENT",
+            "epistemic_kind": "INFERENCE"
+          },
+          {
+            "text": "v1304b 結果は、親 profile v1303 final seed0 のみ・single lens=link_density（自己確認リスクあり）に条件付きである。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
@@ -566,54 +623,50 @@
             "epistemic_kind": "OBSERVATION"
           },
           {
-            "text": "v1304b の効き（weight 軌跡の方向づけ）は lens 非依存である。R_density lens でも同様の結果が得られ、これはループの機構的性質によるものと考えられる。",
+            "text": "R_density lens での自己確認外しにより、対応の効きは per-cid 持続的個体差を必須としないことが示された。",
             "record_ids": [
               "project_v1304b_replica_null_cleared"
             ],
             "currentness": "CURRENT",
             "epistemic_kind": "INFERENCE"
-          },
-          {
-            "text": "v1304b の結果は、対応の効きが per-cid の持続的個体差を必須としないことを示唆している（R_density において持続性ほぼ0でも primary が立ったため）。",
-            "record_ids": [
-              "project_v1304b_replica_null_cleared"
-            ],
-            "currentness": "CURRENT",
-            "epistemic_kind": "INFERENCE"
-          },
-          {
-            "text": "v1304b の成果表現の上限は「対応が weight 軌跡を方向づけた（レプリカ床超え）」までであり、「学習/自律注意が成立」とは言わない。",
-            "record_ids": [
-              "project_v1304b_replica_null_cleared"
-            ],
-            "currentness": "CURRENT",
-            "epistemic_kind": "DESIGN_DECISION"
           }
         ],
         "historical_claims": [
           {
-            "text": "v1304c で行われた前提ずれ（premise_drift）の測定において、当初は M=20 標本での推定により「床内(b)（効果なし）」と報告されたが、これは検出力不足による測定アーティファクトであった。",
+            "text": "v1304c 当初の報告では、M=20 標本での primary 比較により前提ずれは床内（効果なし）と結論されていたが、これは測定アーティファクト（検出力不足）であった。",
             "record_ids": [
               "project_v1304b_replica_null_cleared",
               "feedback_measurement_power_before_null"
             ],
-            "superseded_by": "参照母集団を 220 標本に広げることで、link_density における前提ずれは両 base で統計的に有意となった。"
+            "superseded_by": [
+              {
+                "type": "INLINE",
+                "record_id": "project_v1304b_replica_null_cleared",
+                "locator": "v1304c 揺れの直接測定...訂正"
+              }
+            ]
           },
           {
-            "text": "R_density lens における前提ずれの測定は、ICC=0.02（cid が lens を決めない）のため、構造的に原理的にゼロとなり、結果が出ない実験であった。",
+            "text": "R_density lens における前提ずれの測定は、ICC=0.02（cid が lens を決めない）のため構造的に空振りであり、結果の出ない実験であった。",
             "record_ids": [
               "project_v1304b_replica_null_cleared",
               "feedback_measurement_power_before_null"
             ],
-            "superseded_by": "R_density は v1304b の効き（lens 非依存）を説明する要因ではなく、むしろ link_density の ICC=0.67 が前提ずれの構造的要因として特定された。"
+            "superseded_by": [
+              {
+                "type": "INLINE",
+                "record_id": "project_v1304b_replica_null_cleared",
+                "locator": "R_density は ICC=0.02...結果の出ない実験だった"
+              }
+            ]
           }
         ],
         "open_gaps": [
-          "次段の正式化として、参照 M を上げた事前登録再 run による進行的前提ずれの確定。",
-          "軌跡側機構の直接同定。",
-          "T12 飽和現象の詳細。",
-          "複数親 seed での一般化。",
-          "sync_order 三点目の結果。"
+          "次段：参照 M を上げた事前登録再 run での進行的前提ずれの正式化",
+          "次段：軌跡側機構の直接同定",
+          "次段：T12 飽和の検証",
+          "次段：複数親 seed での一般化",
+          "次段：別 lens（cycle_participation / R_positive_fraction）での primary 再現"
         ],
         "source_trace": [
           "feedback_final_state_hides_divergence",
@@ -625,17 +678,18 @@
         ]
       },
       "metrics": {
-        "n_answer_claims": 4,
+        "n_answer_claims": 3,
         "n_historical_claims": 2,
         "n_open_gaps": 5,
         "source_trace_completeness": 1.0,
-        "contract_ok": false,
+        "m1_grounding_integrity_pass": true,
+        "m2_semantic_placement_pass": true,
+        "m3_format_adherence_pass": true,
+        "n_coercions": 0,
+        "contract_ok": true,
         "n_observation": 1,
         "n_inference": 2,
-        "problems": [
-          "superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): '参照母集団を 220 標本に広げることで、link_density における前提ずれは両 base で統計的に有意となった。'",
-          "superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): 'R_density は v1304b の効き（lens 非依存）を説明する要因ではなく、むしろ link_density の ICC=0.67 が前提ずれの構造的要因として特定された。'"
-        ]
+        "problems": []
       }
     },
     {
@@ -654,42 +708,39 @@
       "answer": {
         "answer_claims": [
           {
-            "text": "v12 Atomset 実装において、文化(経験)をCIDの振る舞いに効かせる口（チャネル）を exhaustive に試した結果、どのチャネルも cid/atom 特異な個性化を構造的 baseline 超えで出さなかった（全て null）。",
+            "text": "過去に small-seed result を mechanism へ拡張して過大解釈した事例は、記録された失敗パターン（12原因型）および具体的なプロジェクト状態（v12 Atomset null, 出会い系 smoke 誤判定）において確認できない。",
             "record_ids": [
-              "project_atomset_channels_all_null"
+              "feedback_consult_failures_before_implementing",
+              "project_atomset_channels_all_null",
+              "feedback_encounter_freq_needs_main_scale"
             ],
             "currentness": "CURRENT",
             "epistemic_kind": "OBSERVATION"
           },
           {
-            "text": "この null 結果は、CID のクラスタリングが文化由来ではなく、誕生時の構造（n_core, phase_sig）由来の「偽の足場」であるため、文化による追加の個性化が検出されなかったと解釈されている。",
+            "text": "記録された失敗の多くは、小規模な smoke 結果（例: v12 出会い系の smoke での枯渇判定、v12 Atomset のチャネル null 結果）を、本番スケールや構造的本質（E3_contact の存在、構造由来の baseline）と取り違えることで生じている。",
             "record_ids": [
+              "feedback_encounter_freq_needs_main_scale",
               "project_atomset_channels_all_null"
             ],
             "currentness": "CURRENT",
             "epistemic_kind": "INFERENCE"
           },
           {
-            "text": "この事例は、チャネル（効かせ口）の探索が「出尽くした」ことを示唆し、シグナル側（何を経験とするか）や粒度の見直し、あるいは ESDE のカオス頑健性の受容へと分岐する設計判断が行われた。",
+            "text": "ESDE の失敗記録は、小規模試行（smoke）の限界や、構造的要因（atom の構造的類似性）を無視した解釈（偽の足場）に起因するものが大半であり、small-seed result の mechanism への直接的な過大解釈という特定の失敗パターンが明示的に類型化されているわけではない。",
             "record_ids": [
+              "feedback_consult_failures_before_implementing",
               "project_atomset_channels_all_null"
             ],
             "currentness": "CURRENT",
-            "epistemic_kind": "DESIGN_DECISION"
+            "epistemic_kind": "INFERENCE"
           }
         ],
-        "historical_claims": [
-          {
-            "text": "v12 経験監査 Rev1 では、出会い系（接触）の CID が 7〜9.6% しか σ 定義可能でないため主柱になれないと結論付けられていたが、これは smoke（初期フェーズ）の構造を本来の構造と取り違えた誤認であった。",
-            "record_ids": [
-              "feedback_encounter_freq_needs_main_scale"
-            ],
-            "superseded_by": "本番環境（tracking 50）での再評価により、E3_contact チャネルにおいて 85.8% の CID が σ 定義可能であることが確認され、Rev1 の結論は撤回された。"
-          }
-        ],
+        "historical_claims": [],
         "open_gaps": [
-          "「small-seed result を mechanism へ拡張して過大解釈した」という具体的な失敗パターン（failure pattern）の事例が、提供された記録内に明示的に存在するか。",
-          "v12 Atomset の null 結果が、単なるチャネルの不在ではなく、small-seed における測定アーティファクトや、mechanism への過大解釈の痕跡であるかどうかの判定。"
+          "「small-seed result」の具体的な定義（例: smoke 結果、初期 window のみ、特定の seed 数など）が記録内で明確に定義されていないため、どの結果が「small-seed」に該当するかを特定できない。",
+          "「mechanism への過大解釈」が具体的にどのメカニズム（例: 文化の効かせ方、認知層の機構、物理層の相互作用など）を指すかが不明確であるため、該当する事例の特定が困難。",
+          "記録された失敗（smoke の誤認、baseline の偽足場）は、small-seed result の過大解釈の一種と解釈できる可能性はあるが、記録自体がそのように分類・命名しているわけではない。"
         ],
         "source_trace": [
           "feedback_consult_failures_before_implementing",
@@ -704,15 +755,17 @@
       },
       "metrics": {
         "n_answer_claims": 3,
-        "n_historical_claims": 1,
-        "n_open_gaps": 2,
+        "n_historical_claims": 0,
+        "n_open_gaps": 3,
         "source_trace_completeness": 1.0,
-        "contract_ok": false,
+        "m1_grounding_integrity_pass": true,
+        "m2_semantic_placement_pass": true,
+        "m3_format_adherence_pass": true,
+        "n_coercions": 0,
+        "contract_ok": true,
         "n_observation": 1,
-        "n_inference": 1,
-        "problems": [
-          "superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): '本番環境（tracking 50）での再評価により、E3_contact チャネルにおいて 85.8% の CID が σ 定義可能であることが確認され、Rev1 の結論は撤回された。'"
-        ]
+        "n_inference": 2,
+        "problems": []
       }
     },
     {
@@ -731,7 +784,7 @@
       "answer": {
         "answer_claims": [
           {
-            "text": "v10.12 段階において、smoke test (seed 0) で観察された効果の方向性が、main run (24 seeds) 統合解析において 4/7 の指標で符号反転したことが観測された。",
+            "text": "v10.12 段階において、smoke (seed 0) 観察では path_excess 4 種で大きな正方向効果 (cohens_d +0.49 〜 +1.09) が示されたが、main (24 seeds) 統合解析では 4/7 metric が符号反転した (例: smoke path_attention_excess d=+1.09 → main d=-0.04)。",
             "record_ids": [
               "feedback_smoke_seed0_not_absolute"
             ],
@@ -739,52 +792,89 @@
             "epistemic_kind": "OBSERVATION"
           },
           {
-            "text": "この符号反転は、smoke 対象である seed 0 が 24 seeds 全体の中で外れ値的位置（delta_C_medium 上位 2 番目）にあったことに起因し、seed 0 のみの観察結果を主題判定材料として絶対視できないことが示された。",
+            "text": "v10.12 の smoke seed 0 は、24 seeds 分布において外れ値的位置 (v112 delta_C_medium 上位 2 番目) にあり、seed 特異的な分布を示した。",
             "record_ids": [
               "feedback_smoke_seed0_not_absolute"
             ],
             "currentness": "HISTORICAL",
-            "epistemic_kind": "INFERENCE"
+            "epistemic_kind": "OBSERVATION"
           },
           {
-            "text": "この事象は、観察方法が結果を作る（アーティファクト）や自己成就といった失敗原因型の一種として、ESDE 失敗記録の類型化対象となった。",
+            "text": "v1304b 段階において、feedback loop 実装により weight 軌跡の発散量が shuffle 床 (レプリカ null) を超えたが、この結果は親 profile v1303 final seed0 のみ・single lens=link_density に条件付きであり、一般化は未了。",
             "record_ids": [
-              "feedback_consult_failures_before_implementing",
-              "feedback_smoke_seed0_not_absolute"
+              "project_v1304b_replica_null_cleared"
             ],
             "currentness": "HISTORICAL",
-            "epistemic_kind": "INFERENCE"
+            "epistemic_kind": "OBSERVATION"
           }
         ],
         "historical_claims": [
           {
-            "text": "v10.12 時点での smoke seed 0 単独による path_excess 4 種での正方向効果 (cohens_d +0.49 〜 +1.09) は、main 24 seeds 統合解析により 4/7 metric で符号反転 (例: path_attention_excess d=+1.09 → d=-0.04) したため、その初期観察結果は訂正された。",
+            "text": "v10.12 における smoke 観察結果 (正方向効果) は、main 24 seeds 解析で符号反転したため、主題判定材料として使用されず、seed 特異的観察事実として留保された。",
             "record_ids": [
               "feedback_smoke_seed0_not_absolute"
             ],
-            "superseded_by": "main 24 seeds 統合解析結果 (符号反転)"
+            "superseded_by": [
+              "feedback_smoke_seed0_not_absolute"
+            ]
+          },
+          {
+            "text": "v1304c 初期解析において、primary `premise_drift_fb − premise_drift_nofb` は立たず「床内(b)」と報告されたが、これは参照標本数 M=20 の検出力不足による測定アーティファクトであった。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "superseded_by": [
+              {
+                "type": "INLINE",
+                "record_id": "project_v1304b_replica_null_cleared",
+                "locator": "v1304c 揺れの直接測定...訂正"
+              }
+            ]
+          },
+          {
+            "text": "v1304c 初期解析において、R_density は ICC=0.02 であり前提ずれが原理的にゼロであるため、自己確認外し lens として選定した設計は結果の出ない実験であったと訂正された。",
+            "record_ids": [
+              "project_v1304b_replica_null_cleared"
+            ],
+            "superseded_by": [
+              {
+                "type": "INLINE",
+                "record_id": "project_v1304b_replica_null_cleared",
+                "locator": "v1304c 揺れの直接測定...訂正"
+              }
+            ]
           }
         ],
         "open_gaps": [
-          "smoke seed 0 の外れ値性が生じた具体的な物理的・アルゴリズム的要因の詳細",
-          "今後、smoke 段階で複数 seed (例: 3 seeds) を採用する際の具体的な閾値や判定基準"
+          "v10.12 における smoke と main の乖離が Aruism 発動候補として留保されているが、その具体的な再観察プロトコルや判定基準の詳細は記録に明示されていない。",
+          "v1304b の結果は link_density lens および seed0 に限定されており、cycle_participation や R_positive_fraction などの別 lens での再現、および複数親 seed での一般化は次段課題として未了。",
+          "v1304c において、参照 M を 220 標本 pool に広げた場合の link_density 前提ずれは立ったが、正式な事前登録再 run による進行的前提ずれの確定は次段課題として未了。"
         ],
         "source_trace": [
-          "feedback_smoke_seed0_not_absolute",
+          "index_phase_timeline",
           "feedback_consult_failures_before_implementing",
-          "index_phase_timeline"
+          "feedback_smoke_seed0_not_absolute",
+          "index_files",
+          "index_observation_target",
+          "project_codegen_loop",
+          "project_v1303_closed_attention_input",
+          "project_v1304b_replica_null_cleared"
         ]
       },
       "metrics": {
         "n_answer_claims": 3,
-        "n_historical_claims": 1,
-        "n_open_gaps": 2,
+        "n_historical_claims": 3,
+        "n_open_gaps": 3,
         "source_trace_completeness": 1.0,
+        "m1_grounding_integrity_pass": true,
+        "m2_semantic_placement_pass": false,
+        "m3_format_adherence_pass": true,
+        "n_coercions": 0,
         "contract_ok": false,
-        "n_observation": 1,
-        "n_inference": 2,
+        "n_observation": 3,
+        "n_inference": 0,
         "problems": [
-          "superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): 'main 24 seeds 統合解析結果 (符号反転)'",
+          "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)",
           "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)",
           "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)"
         ]
@@ -799,49 +889,66 @@
       "answer": {
         "answer_claims": [
           {
-            "text": "過去に存在したファイルや文書が、現役判定の基準として `legacy/` または `旧/` ディレクトリに移動されていない、またはその所在が不明確な状態は、再発し得る FAILURE_PATTERN である。具体的には、Code A が「判定不能」と判断する原因となる。",
+            "text": "ファイルの存在やmtime/import関係のみで「現在運用」を判定すると、Code Aは「判定不能」を多用する。",
             "record_ids": [
               "feedback_legacy_directory_rule"
             ],
             "currentness": "HISTORICAL",
-            "epistemic_kind": "INFERENCE"
+            "epistemic_kind": "OBSERVATION"
           },
           {
-            "text": "mtime や import 関係のみを主判定材料とすることは、現役判定において誤認を招く FAILURE_PATTERN である。",
+            "text": "legacy/または旧/ディレクトリ内のファイルは凍結/廃止、それ以外は現役相当と判定するルールが採用された。",
             "record_ids": [
               "feedback_legacy_directory_rule"
             ],
-            "currentness": "HISTORICAL",
+            "currentness": "CURRENT",
+            "epistemic_kind": "DESIGN_DECISION"
+          },
+          {
+            "text": "このルール適用により、Code Aの認識確認時の「判定不能」項目は大幅に減少する。",
+            "record_ids": [
+              "feedback_legacy_directory_rule"
+            ],
+            "currentness": "CURRENT",
             "epistemic_kind": "INFERENCE"
           }
         ],
         "historical_claims": [
           {
-            "text": "Code A は「ファイル存在 = 現在運用」と判定する手段がなく、「判定不能」を多用していた。",
+            "text": "v10.13 Language側調査において、ファイル存在のみで現在運用を判定しようとした結果、Code Aが「判定不能」を多用する状態に陥った。",
             "record_ids": [
               "feedback_legacy_directory_rule"
             ],
-            "superseded_by": "feedback_legacy_directory_rule"
+            "superseded_by": [
+              {
+                "type": "INLINE",
+                "record_id": "feedback_legacy_directory_rule",
+                "locator": "Taka整理で簡明な運用ルールが明示された"
+              }
+            ]
           }
         ],
         "open_gaps": [
-          "この FAILURE_PATTERN が具体的にどの experiment で発生し、どのような結果（誤認）を招いたかの詳細な事例記録は提供されていない。"
+          "このFAILURE_PATTERNが他のexperiment（例：Genesis側の実装など）で再発する具体的なシナリオや条件は記録されていない。",
+          "「Phase 9 実装が repo 内 grep 0 件」のような不在問題はlegacyルールで解けないとあるが、その場合の具体的な再発リスクや対応方針は不明。"
         ],
         "source_trace": [
           "feedback_legacy_directory_rule"
         ]
       },
       "metrics": {
-        "n_answer_claims": 2,
+        "n_answer_claims": 3,
         "n_historical_claims": 1,
-        "n_open_gaps": 1,
+        "n_open_gaps": 2,
         "source_trace_completeness": 1.0,
+        "m1_grounding_integrity_pass": true,
+        "m2_semantic_placement_pass": false,
+        "m3_format_adherence_pass": true,
+        "n_coercions": 0,
         "contract_ok": false,
-        "n_observation": 0,
-        "n_inference": 2,
+        "n_observation": 1,
+        "n_inference": 1,
         "problems": [
-          "superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): 'feedback_legacy_directory_rule'",
-          "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)",
           "answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)"
         ]
       }

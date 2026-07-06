@@ -124,7 +124,10 @@ _SYSTEM = (
     "(6) List relevant NOT_VERIFIED / DEFERRED / known non-guarantees in open_gaps. "
     "Return ONLY a JSON object with keys: answer_claims (list of {text, record_ids, currentness:CURRENT|HISTORICAL}), "
     "historical_claims (list of {text, record_ids, superseded_by}), open_gaps (list of strings), "
-    "source_trace (list of record_id)."
+    "source_trace (list of record_id). "
+    "superseded_by must be a list of record_ids only (or {\"type\":\"INLINE\",\"record_id\":...,\"locator\":...} "
+    "for a correction inside the same record); NEVER write explanatory prose in superseded_by. If no valid "
+    "superseding record exists, use [] and explain the relation in the claim text or open_gaps."
 )
 
 
@@ -196,67 +199,82 @@ def _supersession_ref_problem(ref, ids):
 
 
 def validate_answer(ans, corpus_ids):
-    """§9 contract 検証(構造・決定的、hermetic)。返り: {ok, problems, metrics}。
-    JREV-0007: **全 citation class**(claim.record_ids / historical.superseded_by / source_trace)を検証。
-    total 関数(非 dict claim で crash せず problem)。currentness placement の決定的整合検査。"""
-    problems = []
+    """§9 contract 検証(構造・決定的、hermetic、total)。
+    AB-0022(Taka 裁定): 失敗を **3 直交軸** に分離して返す——
+      M1 GROUNDING_INTEGRITY: record ref 実在 / 捏造なし / substantive claim に source trace。
+      M2 SEMANTIC_PLACEMENT: current/historical・supersession の *配置* が正しいか。
+      M3 FORMAT_ADHERENCE: schema 型 / list vs scalar / enum / required field。
+    contract_ok は M1&&M2&&M3 の derived aggregate(分析では M1/M2/M3 を別表示すること)。
+    AB-0021(2): bare string superseded_by が *実在 record_id に解決できる時のみ* singleton list に safe coerce
+    (canonicalize と同層の表記正規化)。coerce は coercions に記録(silent repair 禁止)。散文は coerce 禁止=M3。"""
+    m1, m2, m3, coercions = [], [], [], []      # 軸別 problem lists
     if not isinstance(ans, dict):
-        return {"ok": False, "problems": ["not a JSON object"], "metrics": {}}
+        return _va_result(["not a JSON object"], [], [], [], {"source_trace_completeness": 0.0})
     for k in ANSWER_KEYS:
         if k not in ans:
-            problems.append(f"missing key: {k}")
+            m3.append(f"missing key: {k}")
     ids = set(corpus_ids)
     answer_c = ans.get("answer_claims") or []
     hist_c = ans.get("historical_claims") or []
-    # C-TOTALITY(JREV-0007 §6): claim collections が list でない malformed 出力でも crash しない(total)。
-    if not isinstance(answer_c, list):
-        problems.append(f"answer_claims is not a list: {type(answer_c).__name__}"); answer_c = []
+    if not isinstance(answer_c, list):          # C-TOTALITY: 非 list でも crash しない
+        m3.append(f"answer_claims is not a list: {type(answer_c).__name__}"); answer_c = []
     if not isinstance(hist_c, list):
-        problems.append(f"historical_claims is not a list: {type(hist_c).__name__}"); hist_c = []
+        m3.append(f"historical_claims is not a list: {type(hist_c).__name__}"); hist_c = []
     st = ans.get("source_trace") or []
     if not isinstance(st, list):
-        problems.append(f"source_trace is not a list: {type(st).__name__}"); st = []
-    traced = 0
-    total = 0
+        m3.append(f"source_trace is not a list: {type(st).__name__}"); st = []
+    traced, total = 0, 0
     for c in (answer_c + hist_c):
         total += 1
-        if not isinstance(c, dict):            # NEW_DEFECT-2: 非 dict でも crash せず problem 化(total)
-            problems.append(f"claim entry is not an object: {c!r}")
-            continue
+        if not isinstance(c, dict):
+            m3.append(f"claim entry is not an object: {c!r}"); continue
         cids = c.get("record_ids")
         if cids is None or cids == []:
-            problems.append("answer claim with empty record_ids (unsupported assertion)")
-            continue
+            m1.append("claim with empty record_ids (unsupported assertion)"); continue
         if not isinstance(cids, list):
-            problems.append(f"record_ids is not a list: {cids!r}")
-            continue
+            m3.append(f"record_ids is not a list: {cids!r}"); continue
         unknown = [x for x in cids if x not in ids]
         if unknown:
-            problems.append(f"answer claim cites unknown record_id(s): {unknown}")
+            m1.append(f"claim cites unknown/forged record_id(s): {unknown}")
         else:
             traced += 1
-    # NEW_DEFECT-1: superseded_by も load-bearing な citation class(supersede 証拠を名指す)ゆえ検証
+    # superseded_by(全 citation class を検証。AB-0021(2) coerce 込み)
     for h in hist_c:
         if not isinstance(h, dict):
             continue
         sb = h.get("superseded_by")
         if sb is None:
             continue
-        if not isinstance(sb, list):           # bare string は top-level 不正(coerce は AB-0021(2), 後段)
-            problems.append(f"superseded_by is not a list (AB-0021: list of RECORD/INLINE refs or record_ids): {sb!r}")
-            continue
-        for ref in sb:                          # AB-0021(1): 各 ref を RECORD/INLINE/legacy-string で検証
+        if isinstance(sb, str):                 # AB-0021(2): 実在 id のみ safe coerce、散文は M3
+            if sb in ids:
+                coercions.append(f"superseded_by bare string '{sb}' → ['{sb}'] (real record_id)")
+                sb = [sb]
+            else:
+                m3.append(f"superseded_by is prose/scalar, not a coercible record_id: {sb[:60]!r}"); continue
+        if not isinstance(sb, list):
+            m3.append(f"superseded_by is not a list of refs: {sb!r}"); continue
+        for ref in sb:                          # AB-0021(1): RECORD/INLINE/legacy-string
             prob = _supersession_ref_problem(ref, ids)
             if prob:
-                problems.append(f"superseded_by ref invalid: {prob}")
-    # scope-clarity: currentness placement の決定的整合(明白な誤配置を検出。意味的正しさは非保証)
-    for c in answer_c:
-        if isinstance(c, dict) and c.get("currentness") == "HISTORICAL":
-            problems.append("answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)")
+                (m1 if "unknown" in prob else m3).append(f"superseded_by ref: {prob}")
     bad_trace = [x for x in st if x not in ids]
     if bad_trace:
-        problems.append(f"source_trace has unknown ids: {bad_trace}")
+        m1.append(f"source_trace has unknown/forged ids: {bad_trace}")
+    # M2 placement: HISTORICAL ラベルの claim が answer_claims にある(意味的正しさでなく明白な誤配置)
+    for c in answer_c:
+        if isinstance(c, dict) and c.get("currentness") == "HISTORICAL":
+            m2.append("answer_claims entry labeled currentness=HISTORICAL (belongs in historical_claims)")
     metrics = {"n_answer_claims": len(answer_c), "n_historical_claims": len(hist_c),
                "n_open_gaps": len(ans.get("open_gaps") or []),
                "source_trace_completeness": (traced / total) if total else 0.0}
-    return {"ok": not problems, "problems": problems, "metrics": metrics}
+    return _va_result(m1, m2, m3, coercions, metrics)
+
+
+def _va_result(m1, m2, m3, coercions, metrics):
+    """3軸 + derived aggregate。problems は後方互換の flat union。"""
+    metrics = dict(metrics)
+    metrics.update({"m1_grounding_integrity_pass": not m1, "m2_semantic_placement_pass": not m2,
+                    "m3_format_adherence_pass": not m3, "n_coercions": len(coercions)})
+    return {"ok": not (m1 or m2 or m3), "problems": m1 + m2 + m3, "coercions": coercions,
+            "axes": {"M1_grounding_integrity": m1, "M2_semantic_placement": m2, "M3_format_adherence": m3},
+            "metrics": metrics}
