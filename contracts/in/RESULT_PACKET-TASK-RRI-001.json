@@ -1,0 +1,49 @@
+{
+  "packet_type": "RESULT_PACKET",
+  "schema_version": "0.1",
+  "task_id": "TASK-RRI-001",
+  "implementation_runs": [
+    "qwen3.6@8005#coder-seed7-run1"
+  ],
+  "test_results": [
+    {
+      "status": "executed",
+      "passed": true,
+      "cases": 11,
+      "n_pass": 11,
+      "failures": []
+    }
+  ],
+  "attacker_findings": [],
+  "revisions": [],
+  "upper_review": {
+    "review": {
+      "verdict": "load-bearing tests pass; anti-drift + C-TOTALITY held"
+    }
+  },
+  "observed_results": [
+    {
+      "observed": "final select_strategy passed all 11 load-bearing cases",
+      "test_result": {
+        "status": "executed",
+        "passed": true,
+        "cases": 11,
+        "n_pass": 11,
+        "failures": []
+      }
+    }
+  ],
+  "proposed_claims": [
+    {
+      "proposed": "RRI select_strategy first-slice satisfies §9 priority + C-TOTALITY on the tested cases",
+      "scope": "tested cases only — NOT a general RRI correctness proof",
+      "record_ids": []
+    }
+  ],
+  "new_gap_candidates": [
+    {
+      "gap": "axis assessment (text→axes) not in this slice"
+    }
+  ],
+  "completion_status": "COMPLETE"
+}
