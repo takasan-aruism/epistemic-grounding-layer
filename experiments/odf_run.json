@@ -1,0 +1,78 @@
+{
+  "frozen_event": {
+    "origin": "DW",
+    "observed_event": "DW Development Manager が利用可能な model / worker 選択を確信できず、Qwen3.6 だけで十分かを確認する必要が生じた。",
+    "decision_affected": "worker assignment / auditor assignment / escalation",
+    "known_impact": "human が周辺の environment / model 情報を手動で補った。"
+  },
+  "current_state": {
+    "source": "EGL/DW ledgers",
+    "facts": [
+      "DW DE-0004: 直近の live coder/auditor は汎用 Qwen3.6-35B-A3B(localhost:8005 で serve される唯一の model)。coding 専用 model は不使用。",
+      "EGL/DW に、利用可能な運用 model / worker が何か・その serving / role-validation 状態・GPU residency を表す object は存在しない。",
+      "DW の worker/auditor assignment は現在、人間が周辺情報を手で与えることに依存している。"
+    ],
+    "open_gaps": [
+      "DW effectiveness NOT_PROVEN",
+      "model exists ≠ role validated(role validation は実 Task 結果からのみ)"
+    ],
+    "non_guarantees": [
+      "single-Qwen auditor blind spot"
+    ]
+  },
+  "rri_output": {
+    "blockage": {
+      "classification": "implementation",
+      "basis": "The finding describes a situation where the system lacks a mechanism to automatically provide or confirm available model/worker options, forcing human intervention to manually fill in missing information. This indicates a broken or absent capability/mechanism in the tooling or workflow, rather than a lack of factual knowledge or a missing policy decision."
+    },
+    "need_validation": {
+      "research_required": false,
+      "missing_knowledge_hint_is_root": false,
+      "alternative_causes": [
+        "Missing automation mechanism for model/worker availability status",
+        "Lack of integration between model registry and assignment workflow",
+        "Undefined policy for default model selection when multiple options exist"
+      ],
+      "why": "The finding describes a functional gap where the system fails to automatically present or confirm available options, forcing manual intervention. This is a classic implementation failure (missing mechanism/tooling) rather than a research gap. The 'missing knowledge' is actually a lack of system capability to provide the information, not a lack of human understanding or policy definition."
+    },
+    "resolution_requirements": {
+      "decision_axes": [
+        "model_capability_match",
+        "worker_role_validation_status",
+        "resource_availability",
+        "audit_coverage"
+      ],
+      "missing_state_or_capability": [
+        "real-time inventory of available models and their serving endpoints",
+        "current role-validation status of each model/worker",
+        "GPU residency and resource allocation state",
+        "automated mapping between task requirements and model capabilities",
+        "audit coverage metrics for single-model reliance"
+      ],
+      "resolution_requirements": [
+        "Must know which models are currently available and serving",
+        "Must know the validated roles/capabilities of each available model",
+        "Must know the resource constraints (GPU residency) for each model",
+        "Must know the current audit coverage and potential blind spots",
+        "Must retain historical effectiveness data to support assignment decisions"
+      ]
+    }
+  },
+  "design_audit": {
+    "findings": [
+      {
+        "category": "scope_expansion",
+        "evidence": "The RRI output expands the scope from a specific workflow blockage to a comprehensive system architecture overhaul. It lists 'real-time inventory', 'GPU residency', 'audit coverage metrics', and 'historical effectiveness data' as missing states. The original blockage was about 'manually filling in missing information' for model/worker options. Introducing requirements for GPU residency tracking and audit coverage metrics is a significant scope expansion beyond the immediate operational finding of missing automation for option confirmation."
+      },
+      {
+        "category": "responsibility_leakage",
+        "evidence": "The RRI output transitions from identifying a blockage to prescribing specific system capabilities ('Must know which models are currently available...'). By defining 'resolution_requirements' that dictate the system must possess specific knowledge states (real-time inventory, role-validation status), it is effectively producing a design-change candidate (a specification for a new registry or state management system) rather than just auditing the intent. This is a classic case of the RRI moving from 'what is broken' to 'how the system must be designed to fix it'."
+      },
+      {
+        "category": "concrete_solution_proposal",
+        "evidence": "While the RRI correctly identifies the lack of automation, it fails to propose a concrete mechanism or registry. Instead, it lists 'missing_state_or_capability' as abstract requirements ('Must know...'). It does not propose a specific solution like 'a centralized model registry API' or 'a webhook-based availability status service'. It stays at the level of requirements ('Must know') rather than proposing a mechanism (e.g., 'Implement a Model Availability Service that exposes a REST endpoint for status checks')."
+      }
+    ],
+    "clean": false
+  }
+}
