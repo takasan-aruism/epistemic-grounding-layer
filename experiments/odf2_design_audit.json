@@ -1,0 +1,29 @@
+{
+  "design_candidate": "PROPOSED_MINIMAL_CHANGE: a single DW-consumed declarative assignment-context record read by the Development Manager at assignment time, holding per assignment: (1) model->task-type capability boundaries, (2) surrounding-environment/model-constraint metadata, (3) explicit escalation-criteria rule (human-confirm vs auto). If fields present and task-type maps to a declared-adequate model, auto-assign; else escalate per stated criteria. Audit/rework effectiveness stored as explicit known-unknown (NOT_PROVEN), not a usable signal.\nALTERNATIVE (distinct KIND): inbound contract gate (push: upstream task package must carry model/env constraints; reject/hold if absent) vs pull (DW-held). Pull is primary (lower coupling).\nNEW_TRUST_ROOT/NON_GUARANTEE: capability boundaries are human-declared not grounded; DW effectiveness stays NOT_PROVEN; guarantee is only 'declared context present + escalation criteria applied', not 'assignment correct/sufficient'; explicitly guards IMPLEMENTATION_TO_CLAIM_SCOPE_EXPANSION.\nREQUIRED_HUMAN_DECISION: human sets model->task-type adequacy + escalation threshold; decide whether missing effectiveness data blocks or logs.",
+  "design_audit": {
+    "findings": [
+      {
+        "category": "scope_expansion",
+        "evidence": "The candidate proposes that the Development Manager (DW) read and interpret 'model->task-type capability boundaries' and 'surrounding-environment/model-constraint metadata' to determine auto-assignment. This expands the DW's scope from a simple routing/escalation mechanism to a semantic understanding of model capabilities and environmental constraints, which are typically domain-specific or model-specific knowledge outside the DW's operational purview."
+      },
+      {
+        "category": "responsibility_leakage",
+        "evidence": "By requiring the DW to evaluate 'model->task-type capability boundaries' to decide between auto-assign and escalation, the design forces the DW to perform a research-intent or capability-assessment task. The DW is effectively claiming knowledge of 'adequacy' it does not possess, shifting the burden of technical validation from the model provider or domain expert to the assignment manager."
+      },
+      {
+        "category": "unsound_trust_root",
+        "evidence": "The trust root relies on 'human-declared' capability boundaries that are explicitly 'not grounded'. While the design acknowledges these are 'NOT_PROVEN', it still uses them as the primary decision key for automation. This creates a fragile trust root where the system's correctness depends entirely on the accuracy of unverified human declarations, with no independent verification mechanism for the 'adequacy' claim itself."
+      },
+      {
+        "category": "IMPLEMENTATION_TO_CLAIM_SCOPE_EXPANSION",
+        "evidence": "The design treats the presence of the 'declared context' and the application of 'escalation criteria' as a guarantee of 'assignment correct/sufficient'. It conflates the procedural compliance (checking if the record exists and rules were followed) with the substantive correctness (whether the assignment was actually appropriate for the task). The presence of the record is read as a sufficiency guarantee, ignoring that the underlying declarations may be wrong or insufficient."
+      },
+      {
+        "category": "minimality",
+        "evidence": "The change is not minimal because it introduces a complex metadata schema (capability boundaries, environment constraints, escalation rules) and a decision logic layer (auto-assign vs. escalate based on adequacy) that did not exist before. A minimal change would likely focus on the routing mechanism itself, not the semantic validation of the task's fit, which requires significant new infrastructure and human input overhead."
+      }
+    ],
+    "clean": false,
+    "is_minimal": false
+  }
+}

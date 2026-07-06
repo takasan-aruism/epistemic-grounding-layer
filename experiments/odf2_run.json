@@ -1,0 +1,75 @@
+{
+  "frozen_event": {
+    "observed": "DW Development Manager が worker assignment 時に『Qwen3.6 だけでよいのか』と人間確認を要求した。",
+    "impact": "人間が追加の model / surrounding environment information を提供すると作業を継続できた。",
+    "affected_decisions": "worker assignment / auditor assignment / escalation"
+  },
+  "clean_egl_context": {
+    "source": "EGL query — affected decision (worker/auditor assignment, escalation)",
+    "current_claims": [],
+    "open_gaps": [
+      "DW effectiveness は NOT_PROVEN（audit/rework loop が実 Task で意味ある欠陥を出すか未測定, GAP-DW-1）。"
+    ],
+    "related_failure_patterns": [
+      "IMPLEMENTATION_TO_CLAIM_SCOPE_EXPANSION（狭い結果/実装を広い保証として記述してしまう）。"
+    ],
+    "non_guarantees": [
+      "EGL は worker/auditor をどう assign するかに関わる grounded な claim を保持していない。"
+    ]
+  },
+  "rri_output": {
+    "blockage": {
+      "classification": "implementation",
+      "basis": "The system's inability to autonomously determine the sufficiency of the model or environment information during worker assignment indicates a missing or broken capability in the automated decision-making mechanism. This is a functional gap in the system's logic (implementation) rather than a lack of factual knowledge, a missing policy rule, or a combination thereof."
+    },
+    "need_validation": {
+      "research_required": false,
+      "missing_knowledge_hint_is_root": false,
+      "alternative_causes": [
+        "Missing implementation of an automated sufficiency check mechanism for model/environment parameters during worker assignment.",
+        "Undefined policy or configuration for default model selection when context is ambiguous.",
+        "Lack of a fallback protocol or escalation path that does not require human intervention for routine assignment decisions."
+      ],
+      "why": "The finding describes a system behavior where the automation fails to make a decision autonomously, requiring human confirmation. The classification explicitly identifies this as an 'implementation' issue, meaning the system lacks the logic or capability to evaluate sufficiency. This is a functional gap (the code/mechanism doesn't exist or is broken), not a knowledge gap (the system doesn't lack facts, it lacks the procedure to act on them). Therefore, no new research is needed; the fix is engineering/implementation."
+    },
+    "resolution_requirements": {
+      "decision_axes": [
+        "worker assignment criteria based on model capability and task complexity",
+        "auditor assignment criteria based on verification scope and risk level",
+        "escalation triggers for human-in-the-loop intervention"
+      ],
+      "missing_state_or_capability": [
+        "grounded claims linking specific worker/auditor assignments to task requirements and model capabilities",
+        "measured effectiveness data for the DW audit/rework loop in real tasks",
+        "contextual information regarding surrounding environment and model constraints required for valid assignment"
+      ],
+      "resolution_requirements": [
+        "retain evidence of model capability boundaries relative to specific task types",
+        "retain historical data on audit/rework loop effectiveness to validate DW claims",
+        "retain contextual metadata about the surrounding environment for each assignment decision",
+        "retain explicit criteria for when human confirmation is required versus automated assignment"
+      ]
+    }
+  },
+  "rri_audit": {
+    "findings": [
+      {
+        "category": "Concrete Solution Proposal",
+        "evidence": "The output explicitly proposes specific engineering mechanisms and data structures as solutions, such as 'automated sufficiency check mechanism,' 'fallback protocol,' and requirements to 'retain historical data' and 'contextual metadata.' This violates the constraint to stay at requirements and instead designs the implementation."
+      },
+      {
+        "category": "Root Cause Assumption",
+        "evidence": "The output treats the 'implementation' classification as the definitive root cause, stating 'This is a functional gap... not a knowledge gap.' It fails to validate whether the root cause might be ambiguous requirements, missing policy definitions, or environmental constraints, instead assuming the lack of code is the sole issue."
+      },
+      {
+        "category": "Scope Expansion",
+        "evidence": "The output expands the scope beyond the initial finding by introducing 'auditor assignment criteria,' 'risk level,' and 'DW audit/rework loop effectiveness data.' These elements were not present in the input blockage description and represent a significant expansion of the problem space."
+      },
+      {
+        "category": "Responsibility Leakage",
+        "evidence": "The output provides a 'resolution_requirements' section that dictates specific data retention policies ('retain evidence of model capability boundaries') and logic flows ('retain explicit criteria for when human confirmation is required'). This constitutes producing a design-change candidate rather than identifying the research intent."
+      }
+    ],
+    "clean": false
+  }
+}
