@@ -1,0 +1,140 @@
+{
+  "frozen": {
+    "observed_event": "Qwen3.6 and Qwen3-Coder-Next cannot currently co-serve on the available 2x RTX 5090 under their intended serving configurations. DW's intended standard role flow requires GENERATE=Qwen3-Coder-Next and AUDIT=Qwen3.6. The Development Manager requested human selection of an audit / model-switch operating mode before continuing the next RRI-through-DW work. A human decision is currently required because the system does not yet know which operating mode is operationally preferable.",
+    "affected_decisions": [
+      "WORKER_EXECUTION_MODE",
+      "AUDITOR_EXECUTION_MODE",
+      "MODEL_SWITCH_POLICY",
+      "DW_TASK_SCHEDULING",
+      "ESCALATION_FALLBACK_POLICY"
+    ],
+    "known_consequence": "Human is currently acting as the operational scheduler and architecture glue."
+  },
+  "observations": {
+    "hardware": "2x RTX 5090, 32607 MiB each (~64 GB total VRAM)",
+    "currently_serving": {
+      "served_model_name": "Qwen3.6-35B-A3B",
+      "container": "qwen36_vllm",
+      "image": "vllm/vllm-openai:nightly",
+      "port": 8005,
+      "gpu_use": "both GPUs, ~30.5 GB used each",
+      "tp": 2,
+      "uptime": "~46h"
+    },
+    "coder_next": {
+      "model_dir": "/storage/models/Qwen3-Coder-Next-NVFP4",
+      "on_disk_size": "45 GB",
+      "serve_script": "models_trtllm/serve_codernext_vllm.sh",
+      "target_port": 8006,
+      "served_model_name": "Qwen3-Coder-Next",
+      "tp": 2,
+      "container_name": "codernext_vllm"
+    },
+    "serve_scripts_present": [
+      "serve_qwen36_vllm.sh",
+      "serve_codernext_vllm.sh"
+    ],
+    "co_serve_status": "DECLARED/INFERRED (not measured): the serve_codernext script's own comment asserts co-serve with Qwen3.6 is impossible due to VRAM (~46 GB Coder-Next + Qwen3.6's footprint > 64 GB). No co-serve attempt has actually been run and observed.",
+    "not_yet_measured": [
+      "model swap latency",
+      "GPU release latency",
+      "server-ready latency after swap",
+      "first-real-request latency",
+      "host RAM peak during swap",
+      "startup failure rate",
+      "repeated-swap stability",
+      "actual DW task-switch / rework frequency"
+    ]
+  },
+  "rri": {
+    "blocked_decision": "Determine the optimal MODEL_SWITCH_POLICY (co-serve vs. sequential swap vs. single-model fallback) for the DW task flow given the 2x RTX 5090 hardware constraints.",
+    "blockage_classification": "measurement",
+    "currently_known": [
+      "Hardware: 2x RTX 5090, ~64 GB total VRAM.",
+      "Qwen3.6-35B-A3B is currently serving on both GPUs (~30.5 GB each, TP=2).",
+      "Qwen3-Coder-Next model files exist (45 GB on disk) and have a serve script.",
+      "The serve script for Qwen3-Coder-Next contains a comment asserting co-serve is impossible due to VRAM constraints.",
+      "No actual co-serve attempt has been executed or measured.",
+      "Human is currently acting as the operational scheduler."
+    ],
+    "currently_unknown": [
+      "Actual VRAM footprint of Qwen3-Coder-Next under the intended serving configuration (TP=2, NVFP4, etc.).",
+      "Whether Qwen3.6 and Qwen3-Coder-Next can physically co-exist in VRAM simultaneously (resolving the comment's assertion).",
+      "Model swap latency (time to unload Qwen3.6 and load Qwen3-Coder-Next).",
+      "Server-ready latency after a model swap.",
+      "First-real-request latency after a model swap.",
+      "Host RAM peak during model swap.",
+      "Startup failure rate of Qwen3-Coder-Next.",
+      "Repeated-swap stability (memory leaks, fragmentation).",
+      "Actual DW task-switch / rework frequency (to determine if swap overhead is acceptable)."
+    ],
+    "resolution_requirements": [
+      "Measure actual VRAM usage of Qwen3-Coder-Next when loaded.",
+      "Attempt to load both models simultaneously to verify co-serve feasibility.",
+      "Measure end-to-end latency for switching between models.",
+      "Measure stability of repeated model swaps.",
+      "Quantify the operational cost of human-in-the-loop scheduling vs. automated switching."
+    ],
+    "research_axes": [
+      "Qwen3-Coder-Next model architecture and VRAM requirements for NVFP4 quantization with TP=2.",
+      "vLLM memory management behavior for multi-model serving on single-node GPU clusters.",
+      "TRT-LLM vs. vLLM memory overhead differences for the same model."
+    ],
+    "measurement_axes": [
+      "VRAM usage of Qwen3-Coder-Next under intended serving config.",
+      "Co-serve feasibility test (simultaneous loading).",
+      "Model swap latency (unload/load cycle).",
+      "Server-ready latency after swap.",
+      "First-request latency after swap.",
+      "Host RAM peak during swap.",
+      "Startup failure rate for Qwen3-Coder-Next.",
+      "Stability of repeated swap cycles (error rate, memory growth)."
+    ],
+    "stop_condition": "Sufficient measurement data exists to compare the operational cost (latency, stability, complexity) of co-serve vs. sequential swap vs. single-model fallback, allowing a decision on the MODEL_SWITCH_POLICY.",
+    "measurement_required": true,
+    "measurement_required_basis": "The blockage is due to unknown local machine behavior (VRAM usage, swap latency, stability) that cannot be resolved by external documentation. The serve script's comment is an assertion, not a measurement, and actual performance characteristics must be observed on the specific hardware."
+  },
+  "measurement_plan": {
+    "benchmarks": [
+      {
+        "decision_property": "VRAM Capacity Sufficiency",
+        "measured_variable": "Actual VRAM usage of Qwen3-Coder-Next under intended serving config",
+        "why_it_can_change_the_decision": "The current assumption is that co-serving is impossible due to VRAM limits. If the actual VRAM usage is significantly lower than the estimated footprint (e.g., due to quantization efficiency or lower batch size), co-serving becomes viable, which is the most efficient mode. If it exceeds limits, the system must fall back to sequential swapping, making swap metrics critical.",
+        "procedure": "Run Qwen3-Coder-Next in isolation on the 2x RTX 5090 setup using the intended serving config (TP=2, target batch size). Record peak VRAM usage via nvidia-smi or vLLM metrics.",
+        "runs_and_stop_condition": "1 run. Stop when the model is fully loaded and stable for 1 minute.",
+        "failure_recording": "Record if OOM occurs or if VRAM usage > 60 GB (leaving insufficient headroom for Qwen3.6).",
+        "result_format": "Integer (MiB)"
+      },
+      {
+        "decision_property": "Model Swap Latency",
+        "measured_variable": "Model swap latency (unload/load cycle)",
+        "why_it_can_change_the_decision": "If the system must use sequential swapping (because co-serving is impossible), the latency of swapping models becomes the primary cost factor. High swap latency may make the 'single-model fallback' (running only Qwen3.6) more attractive if the DW task-switch frequency is low, or it may necessitate a more complex caching strategy.",
+        "procedure": "Measure the time to unload Qwen3.6 and load Qwen3-Coder-Next, then unload Qwen3-Coder-Next and reload Qwen3.6. Use `time` command around the container restarts or vLLM model load calls.",
+        "runs_and_stop_condition": "5 runs. Stop when the mean and variance stabilize.",
+        "failure_recording": "Record if any swap fails or times out.",
+        "result_format": "Float (seconds)"
+      },
+      {
+        "decision_property": "Service Availability Impact",
+        "measured_variable": "Server-ready latency after swap",
+        "why_it_can_change_the_decision": "This measures the 'downtime' or 'cold start' penalty for the swapped model. If this latency is high, it impacts the user experience for the DW task. Comparing this against the 'first-request latency' helps determine if the swap overhead is acceptable for the intended workload frequency.",
+        "procedure": "After a model swap completes, measure the time until the model is ready to accept requests (e.g., health check endpoint returns 200).",
+        "runs_and_stop_condition": "5 runs. Stop when variance is low.",
+        "failure_recording": "Record if the server fails to start or times out.",
+        "result_format": "Float (seconds)"
+      },
+      {
+        "decision_property": "Operational Stability",
+        "measured_variable": "Stability of repeated swap cycles (error rate, memory growth)",
+        "why_it_can_change_the_decision": "If sequential swapping is chosen, the system must handle frequent swaps. If repeated swaps lead to memory leaks (VRAM or Host RAM) or increased error rates, the operational complexity and risk may outweigh the benefits, pushing the decision towards a single-model fallback or a different architecture.",
+        "procedure": "Perform 10 consecutive swap cycles (Qwen3.6 -> Qwen3-Coder-Next -> Qwen3.6...). Monitor for OOM errors, request failures, and track VRAM/Host RAM usage trends.",
+        "runs_and_stop_condition": "10 cycles. Stop if an error occurs or cycles complete.",
+        "failure_recording": "Record error count and peak memory usage at each step.",
+        "result_format": "Object {error_count: int, peak_vram: int, peak_host_ram: int}"
+      }
+    ]
+  },
+  "design_audit": {
+    "findings": []
+  }
+}

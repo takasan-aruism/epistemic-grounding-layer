@@ -1,0 +1,8 @@
+{
+  "hardware": "2x RTX 5090, 32607 MiB each (~64 GB total VRAM)",
+  "currently_serving": {"served_model_name": "Qwen3.6-35B-A3B", "container": "qwen36_vllm", "image": "vllm/vllm-openai:nightly", "port": 8005, "gpu_use": "both GPUs, ~30.5 GB used each", "tp": 2, "uptime": "~46h"},
+  "coder_next": {"model_dir": "/storage/models/Qwen3-Coder-Next-NVFP4", "on_disk_size": "45 GB", "serve_script": "models_trtllm/serve_codernext_vllm.sh", "target_port": 8006, "served_model_name": "Qwen3-Coder-Next", "tp": 2, "container_name": "codernext_vllm"},
+  "serve_scripts_present": ["serve_qwen36_vllm.sh", "serve_codernext_vllm.sh"],
+  "co_serve_status": "DECLARED/INFERRED (not measured): the serve_codernext script's own comment asserts co-serve with Qwen3.6 is impossible due to VRAM (~46 GB Coder-Next + Qwen3.6's footprint > 64 GB). No co-serve attempt has actually been run and observed.",
+  "not_yet_measured": ["model swap latency", "GPU release latency", "server-ready latency after swap", "first-real-request latency", "host RAM peak during swap", "startup failure rate", "repeated-swap stability", "actual DW task-switch / rework frequency"]
+}

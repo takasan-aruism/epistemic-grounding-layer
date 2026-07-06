@@ -1,0 +1,5 @@
+{
+  "observed_event": "Qwen3.6 and Qwen3-Coder-Next cannot currently co-serve on the available 2x RTX 5090 under their intended serving configurations. DW's intended standard role flow requires GENERATE=Qwen3-Coder-Next and AUDIT=Qwen3.6. The Development Manager requested human selection of an audit / model-switch operating mode before continuing the next RRI-through-DW work. A human decision is currently required because the system does not yet know which operating mode is operationally preferable.",
+  "affected_decisions": ["WORKER_EXECUTION_MODE", "AUDITOR_EXECUTION_MODE", "MODEL_SWITCH_POLICY", "DW_TASK_SCHEDULING", "ESCALATION_FALLBACK_POLICY"],
+  "known_consequence": "Human is currently acting as the operational scheduler and architecture glue."
+}

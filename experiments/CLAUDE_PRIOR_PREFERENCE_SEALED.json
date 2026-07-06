@@ -1,0 +1,5 @@
+{
+  "_SEAL": "DO NOT inject into system formation. Post-hoc only. Claude(orchestrator) is contaminated by this.",
+  "claude_prior_options_offered": ["sequential model swap per phase", "Claude as auditor", "same-model (Coder-Next self-audit)", "do not swap yet"],
+  "claude_prior_recommendation": "(b) Claude-as-auditor — to avoid co-serve conflict while keeping generator != auditor"
+}
