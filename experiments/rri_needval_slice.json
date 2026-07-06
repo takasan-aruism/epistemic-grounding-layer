@@ -1,0 +1,37 @@
+{
+  "slice": "needval",
+  "swaps": [
+    {
+      "to": "coder",
+      "latency_s": 166.8,
+      "ok": true
+    },
+    {
+      "to": "qwen",
+      "latency_s": 181.8,
+      "ok": true
+    },
+    {
+      "to": "coder",
+      "latency_s": 166.9,
+      "ok": true
+    },
+    {
+      "to": "qwen",
+      "latency_s": 181.8,
+      "ok": true
+    }
+  ],
+  "final_state": "READY_FOR_UPPER_REVIEW",
+  "completed": true,
+  "swap_count": 4,
+  "swap_latencies_s": [
+    166.8,
+    181.8,
+    166.9,
+    181.8
+  ],
+  "swap_failures": 0,
+  "avg_swap_s": 174.3,
+  "final_source": "def validate_research_need(need):\n    # N1: C-TOTALITY — need must be a dict\n    if not isinstance(need, dict):\n        return {\"may_enter\": False, \"reason\": \"need must be a dict\"}\n    \n    # N2: nec must be present and a dict\n    if \"nec\" not in need or not isinstance(need[\"nec\"], dict):\n        return {\"may_enter\": False, \"reason\": \"nec must be present and a dict\"}\n    \n    nec = need[\"nec\"]\n    \n    # N3: nec['validated'] must be exactly True (strict boolean check)\n    if nec.get(\"validated\") is not True:\n        return {\"may_enter\": False, \"reason\": \"nec['validated'] must be exactly True\"}\n    \n    # N4: alternative_causes must be a non-empty list\n    alt_causes = nec.get(\"alternative_causes\")\n    if not isinstance(alt_causes, list) or len(alt_causes) == 0:\n        return {\"may_enter\": False, \"reason\": \"nec['alternative_causes'] must be a non-empty list\"}\n    \n    # N5: observed_block_refs must be a non-empty list\n    obs_blocks = nec.get(\"observed_block_refs\")\n    if not isinstance(obs_blocks, list) or len(obs_blocks) == 0:\n        return {\"may_enter\": False, \"reason\": \"nec['observed_block_refs'] must be a non-empty list\"}\n    \n    # N6: decision_to_support must be a non-empty string\n    decision = need.get(\"decision_to_support\")\n    if not isinstance(decision, str) or len(decision) == 0:\n        return {\"may_enter\": False, \"reason\": \"decision_to_support must be a non-empty string\"}\n    \n    # Semantic validation: ensure alternative_causes and observed_block_refs contain only valid string references\n    # — each element must be a non-empty string (no None, no numbers, no dicts, no empty strings)\n    for i, item in enumerate(alt_causes):\n        if not isinstance(item, str) or len(item) == 0:\n            return {\"may_enter\": False, \"reason\": f\"nec['alternative_causes'][{i}] must be a non-empty string\"}\n    \n    for i, item in enumerate(obs_blocks):\n        if not isinstance(item, str) or len(item) == 0:\n            return {\"may_enter\": False, \"reason\": f\"nec['observed_block_refs'][{i}] must be a non-empty string\"}\n    \n    # All checks passed\n    return {\"may_enter\": True, \"reason\": \"All validation rules satisfied\"}\n"
+}

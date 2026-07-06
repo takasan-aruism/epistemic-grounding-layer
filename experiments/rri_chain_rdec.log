@@ -1,0 +1,10 @@
+  [swap #1 -> coder] OK in 166.8s
+[GENERATE] executed passed=True 8/8
+  [swap #2 -> qwen] OK in 181.8s
+[AUDIT] findings=5
+  [swap #3 -> coder] OK in 166.8s
+[REGEN #1] passed=True 8/8
+  [swap #4 -> qwen] OK in 181.8s
+[re-AUDIT] findings=0
+[COMPLETE]
+[DONE rdec] completed=True state=READY_FOR_UPPER_REVIEW swaps=4 failures=0 avg=174.3s

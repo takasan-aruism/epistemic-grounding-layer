@@ -1,0 +1,14 @@
+  [swap #1 -> coder] OK in 166.8s
+[GENERATE] executed passed=True 7/7
+  [swap #2 -> qwen] OK in 186.8s
+[AUDIT] findings=3
+  [swap #3 -> coder] OK in 166.8s
+[REGEN #1] passed=True 7/7
+  [swap #4 -> qwen] OK in 181.8s
+[re-AUDIT] findings=2
+  [swap #5 -> coder] OK in 166.8s
+[REGEN #2] passed=False 6/7
+  [swap #6 -> qwen] OK in 181.8s
+[re-AUDIT] findings=2
+[NO COMPLETE] JUDGE_REQUIRED
+[DONE axis] completed=False state=JUDGE_REQUIRED swaps=6 failures=0 avg=175.1s

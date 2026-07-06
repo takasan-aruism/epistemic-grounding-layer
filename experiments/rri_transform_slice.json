@@ -1,0 +1,49 @@
+{
+  "slice": "transform",
+  "swaps": [
+    {
+      "to": "coder",
+      "latency_s": 166.8,
+      "ok": true
+    },
+    {
+      "to": "qwen",
+      "latency_s": 181.8,
+      "ok": true
+    },
+    {
+      "to": "coder",
+      "latency_s": 166.8,
+      "ok": true
+    },
+    {
+      "to": "qwen",
+      "latency_s": 181.8,
+      "ok": true
+    },
+    {
+      "to": "coder",
+      "latency_s": 167.0,
+      "ok": true
+    },
+    {
+      "to": "qwen",
+      "latency_s": 181.8,
+      "ok": true
+    }
+  ],
+  "final_state": "JUDGE_REQUIRED",
+  "completed": false,
+  "swap_count": 6,
+  "swap_latencies_s": [
+    166.8,
+    181.8,
+    166.8,
+    181.8,
+    167.0,
+    181.8
+  ],
+  "swap_failures": 0,
+  "avg_swap_s": 174.3,
+  "final_source": "def validate_transformation(xform):\n    problems = []\n    \n    # T1: Check all listed fields are present\n    required_fields = [\n        'transformation_id',\n        'transformation_type',\n        'input_refs',\n        'output_refs',\n        'basis_refs',\n        'operation',\n        'retained_uncertainty',\n        'excluded_scope',\n        'revision_triggers'\n    ]\n    \n    for field in required_fields:\n        if field not in xform:\n            return {\"ok\": False, \"problems\": [f\"Missing required field: {field}\"]}\n    \n    # T2: transformation_type must be one of the allowed values\n    allowed_types = [\n        'RAW_REQUEST_TO_RESOLVED_INTENT',\n        'RESOLVED_INTENT_TO_RESEARCH_DESIGN',\n        'RESEARCH_AXIS_TO_RQ',\n        'OBSERVATION_TO_EVIDENCE',\n        'EVIDENCE_TO_CLAIM'\n    ]\n    if xform['transformation_type'] not in allowed_types:\n        return {\"ok\": False, \"problems\": [\"Invalid transformation_type\"]}\n    \n    # T3: input_refs, output_refs, basis_refs must each be a non-empty list\n    list_fields_required = ['input_refs', 'output_refs', 'basis_refs']\n    for field in list_fields_required:\n        val = xform[field]\n        if not isinstance(val, list):\n            return {\"ok\": False, \"problems\": [f\"{field} must be a list\"]}\n        if len(val) == 0:\n            return {\"ok\": False, \"problems\": [f\"{field} must be non-empty\"]}\n    \n    # T4: retained_uncertainty, excluded_scope, revision_triggers must each be a list\n    list_fields_optional = ['retained_uncertainty', 'excluded_scope', 'revision_triggers']\n    for field in list_fields_optional:\n        val = xform[field]\n        if not isinstance(val, list):\n            return {\"ok\": False, \"problems\": [f\"{field} must be a list\"]}\n    \n    # T5: operation must be a non-empty string\n    if not isinstance(xform['operation'], str) or len(xform['operation']) == 0:\n        return {\"ok\": False, \"problems\": [\"operation must be a non-empty string\"]}\n    \n    # T6: C-TOTALITY: Check all fields are of correct type (non-dict or wrong-type -> ok False)\n    # Check transformation_id is a string\n    if not isinstance(xform['transformation_id'], str):\n        return {\"ok\": False, \"problems\": [\"transformation_id must be a string\"]}\n    \n    # Check operation is a string (already checked above, but included for completeness)\n    # Already handled in T5\n    \n    # Check all list fields are actually lists (already handled in T3 and T4)\n    \n    # If we reach here, all validations passed\n    return {\"ok\": True, \"problems\": []}\n"
+}

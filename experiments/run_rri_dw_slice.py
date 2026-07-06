@@ -13,7 +13,24 @@ from dw import workcell as W
 QWEN_EP, QWEN_M = "http://localhost:8005/v1/chat/completions", "Qwen3.6-35B-A3B"
 CODER_EP, CODER_M = "http://localhost:8006/v1/chat/completions", "Qwen3-Coder-Next"
 SCRIPTS = "/home/takasan/models_trtllm"
+RUN_SOR = "/home/takasan/dev-workcell/run_sor"  # F-1: persistent append-only DW run SoR (NOT a temp dir)
 SWAPS = []
+CURRENT_TASK = None
+CURRENT_MODEL = "qwen"  # 起動時は Qwen3.6 が上がっている前提
+
+
+def _iso(t=None):
+    import datetime as _dt
+    return _dt.datetime.fromtimestamp(t if t is not None else time.time(), _dt.timezone.utc).isoformat()
+
+
+def _proc(kind, payload, ts):
+    """F-1: 実行過程 primitive を DW SoR に append(best-effort、run を壊さない)。"""
+    try:
+        if CURRENT_TASK:
+            W.record_process_event(CURRENT_TASK, kind, payload, ts)
+    except Exception as e:
+        print(f"  (proc-event {kind} skipped: {type(e).__name__})", flush=True)
 
 # ── slice registry ───────────────────────────────────────────────────────────
 XT = "RAW_REQUEST_TO_RESOLVED_INTENT|RESOLVED_INTENT_TO_RESEARCH_DESIGN|RESEARCH_AXIS_TO_RQ|OBSERVATION_TO_EVIDENCE|EVIDENCE_TO_CLAIM"
@@ -172,7 +189,9 @@ def serving(ep, name):
             return any(name in m.get("id","") for m in json.load(r).get("data",[]))
     except Exception: return False
 def swap_to(target):
-    t0=time.time()
+    global CURRENT_MODEL
+    t0=time.time(); frm=CURRENT_MODEL
+    _proc("SWAP_START", {"to":target,"from":frm}, _iso(t0))   # F-1 primitive (real ts)
     if target=="coder": sh("docker rm -f qwen36_vllm"); sh(f"bash {SCRIPTS}/serve_codernext_vllm.sh"); ep,name,cont=CODER_EP,CODER_M,"codernext_vllm"
     else: sh("docker rm -f codernext_vllm"); sh(f"bash {SCRIPTS}/serve_qwen36_vllm.sh"); ep,name,cont=QWEN_EP,QWEN_M,"qwen36_vllm"
     ok=False
@@ -181,6 +200,8 @@ def swap_to(target):
         if cont not in sh("docker ps --format '{{.Names}}'").stdout: break
         time.sleep(5)
     lat=round(time.time()-t0,1); SWAPS.append({"to":target,"latency_s":lat,"ok":ok})
+    _proc("SWAP_END", {"to":target,"from":frm,"ok":ok}, _iso())  # F-1 primitive (real ts) -> duration は log から導出
+    if ok: CURRENT_MODEL=target
     print(f"  [swap #{len(SWAPS)} -> {target}] {'OK' if ok else 'FAIL'} in {lat}s", flush=True); return ok,lat
 def chat(ep,model,system,user,max_tokens=1100,seed=0):
     body=json.dumps({"model":model,"temperature":0,"seed":seed,"max_tokens":max_tokens,"chat_template_kwargs":{"enable_thinking":False},"messages":[{"role":"system","content":system},{"role":"user","content":user}]}).encode()
@@ -213,13 +234,16 @@ def run_tests(source, cfg):
     return {"status":"executed","passed":not fails,"cases":len(res),"n_pass":len(res)-len(fails),"failures":[{"lbl":r["lbl"],"got":r["got"]} for r in fails]}
 
 def main(name):
-    cfg=SLICES[name]; trial={"slice":name,"swaps":SWAPS}; final=None
+    global CURRENT_TASK, CURRENT_MODEL
+    cfg=SLICES[name]; trial={"slice":name,"swaps":SWAPS,"authority":"BOOTSTRAP_REPORTED"}; final=None
     try:
-        with tempfile.TemporaryDirectory() as dd:
-            os.environ["DW_DATA_DIR"]=dd; import importlib; importlib.reload(W)
-            TASK,mgr=cfg["task"],"claude-manager"; tk=[0]
-            def ts(): tk[0]+=1; return f"2026-07-07T13:00:{tk[0]:02d}Z"
+        os.makedirs(RUN_SOR, exist_ok=True)
+        if True:  # F-1: DW SoR = persistent RUN_SOR。temp dir は hermetic test 専用(run_tests のみ)
+            os.environ["DW_DATA_DIR"]=RUN_SOR; import importlib; importlib.reload(W)
+            TASK=f"{cfg['task']}-{int(time.time())}"; mgr="claude-manager"; CURRENT_TASK=TASK; CURRENT_MODEL="qwen"
+            def ts(): return _iso()  # 実 wall-clock ISO。process trace timeline を authoritative にする
             W.create_task(TASK,"RRI",cfg["goal"],{"related_failure_patterns":["IMPLEMENTATION_TO_CLAIM_SCOPE_EXPANSION"]},ts(),mgr)
+            _proc("RUN_START",{"slice":name},_iso())
             W.record_plan(TASK,{"narrow_goal":cfg["goal"]},ts(),mgr)
             assert swap_to("coder")[0],"coder swap failed"
             raw=chat(CODER_EP,CODER_M,"You are a careful Python coding worker. Implement EXACTLY the spec.",cfg["spec"],seed=3)
@@ -258,11 +282,14 @@ def main(name):
                 except W.WorkflowViolation as e: trial["completed"]=False; print(f"[REJECTED] {e}",flush=True)
             else: trial["completed"]=False; print(f"[NO COMPLETE] {st}",flush=True)
     finally:
+        _proc("RUN_END",{"slice":name},_iso())   # F-1: run 境界 primitive(restore swap の前に閉じる)
         if not serving(QWEN_EP,QWEN_M): swap_to("qwen")
         ok=[s for s in SWAPS if s["ok"]]
-        trial.update({"swap_count":len(SWAPS),"swap_latencies_s":[s["latency_s"] for s in SWAPS],"swap_failures":len([s for s in SWAPS if not s["ok"]]),"avg_swap_s":round(sum(s["latency_s"] for s in ok)/len(ok),1) if ok else None,"final_source":final})
+        trial.update({"swap_count":len(SWAPS),"swap_latencies_s":[s["latency_s"] for s in SWAPS],"swap_failures":len([s for s in SWAPS if not s["ok"]]),"avg_swap_s":round(sum(s["latency_s"] for s in ok)/len(ok),1) if ok else None,"final_source":final,
+                      "dw_task_id":CURRENT_TASK,
+                      "authoritative_process_trace":f"dw.workcell.derive_process_trace({CURRENT_TASK!r}) over run_sor/events.jsonl — NOT these self-reported metrics"})
         Path(f"/home/takasan/egl/experiments/rri_{name}_slice.json").write_text(json.dumps(trial,ensure_ascii=False,indent=2))
-        print(f"[DONE {name}] completed={trial.get('completed')} state={trial.get('final_state')} swaps={trial['swap_count']} failures={trial['swap_failures']} avg={trial['avg_swap_s']}s",flush=True)
+        print(f"[DONE {name}] completed={trial.get('completed')} state={trial.get('final_state')} swaps={trial['swap_count']} failures={trial['swap_failures']} avg={trial['avg_swap_s']}s dw_task={CURRENT_TASK}",flush=True)
 
 if __name__=="__main__":
     main(sys.argv[1])

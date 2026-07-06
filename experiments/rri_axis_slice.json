@@ -1,0 +1,49 @@
+{
+  "slice": "axis",
+  "swaps": [
+    {
+      "to": "coder",
+      "latency_s": 166.8,
+      "ok": true
+    },
+    {
+      "to": "qwen",
+      "latency_s": 186.8,
+      "ok": true
+    },
+    {
+      "to": "coder",
+      "latency_s": 166.8,
+      "ok": true
+    },
+    {
+      "to": "qwen",
+      "latency_s": 181.8,
+      "ok": true
+    },
+    {
+      "to": "coder",
+      "latency_s": 166.8,
+      "ok": true
+    },
+    {
+      "to": "qwen",
+      "latency_s": 181.8,
+      "ok": true
+    }
+  ],
+  "final_state": "JUDGE_REQUIRED",
+  "completed": false,
+  "swap_count": 6,
+  "swap_latencies_s": [
+    166.8,
+    186.8,
+    166.8,
+    181.8,
+    166.8,
+    181.8
+  ],
+  "swap_failures": 0,
+  "avg_swap_s": 175.1,
+  "final_source": "def validate_research_axis(axis, known_decisions):\n    # A5: C-TOTALITY: ensure axis is a dict; if not, return failure\n    if not isinstance(axis, dict):\n        return {\"ok\": False, \"problems\": [\"axis must be a dict\"]}\n    \n    problems = []\n    \n    # A1: Check all required fields are present\n    required_fields = ['axis_id', 'supports_decisions', 'required', 'safe_behavior_if_unknown', 'rdec_ref']\n    missing_fields = [f for f in required_fields if f not in axis]\n    if missing_fields:\n        problems.append(f\"Missing required fields: {', '.join(missing_fields)}\")\n        return {\"ok\": False, \"problems\": problems}\n    \n    # A2: Validate supports_decisions\n    supports_decisions = axis['supports_decisions']\n    if not isinstance(supports_decisions, list) or len(supports_decisions) == 0:\n        problems.append(\"supports_decisions must be a non-empty list\")\n    else:\n        for dec_id in supports_decisions:\n            if dec_id not in known_decisions:\n                problems.append(f\"Fabricated decision ID '{dec_id}' in supports_decisions (not in known_decisions)\")\n    \n    # A3: Validate safe_behavior_if_unknown\n    safe_behavior = axis.get('safe_behavior_if_unknown')\n    if not isinstance(safe_behavior, str) or safe_behavior == '':\n        problems.append(\"safe_behavior_if_unknown must be a non-empty string\")\n    \n    # A4: Validate rdec_ref when required is True\n    if axis.get('required') is True:\n        rdec_ref = axis.get('rdec_ref')\n        if not isinstance(rdec_ref, str) or rdec_ref == '':\n            problems.append(\"rdec_ref must be a non-empty string when required is True\")\n    \n    # Additional validation: axis_id must be non-empty string (implied by A1, but make explicit)\n    axis_id = axis.get('axis_id')\n    if not isinstance(axis_id, str) or axis_id == '':\n        problems.append(\"axis_id must be a non-empty string\")\n    \n    # Additional validation: rdec_ref must be non-empty string when present (even if required=False)\n    # This addresses the audit concern about missing rdec_ref when required=False\n    rdec_ref = axis.get('rdec_ref')\n    if rdec_ref is None:\n        problems.append(\"rdec_ref must be present (even if required=False)\")\n    elif not isinstance(rdec_ref, str) or rdec_ref == '':\n        problems.append(\"rdec_ref must be a non-empty string\")\n    \n    # If no problems, return success\n    if not problems:\n        return {\"ok\": True, \"problems\": []}\n    else:\n        return {\"ok\": False, \"problems\": problems}\n"
+}
