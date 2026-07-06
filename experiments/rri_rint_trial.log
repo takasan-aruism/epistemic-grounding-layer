@@ -1,0 +1,14 @@
+### Instrumented A-mode trial: RRI validate_iec through DW ###
+
+  [swap #1 -> coder] OK in 167.6s
+[GENERATE Coder-Next] test=executed passed=True 9/9
+  [swap #2 -> qwen] OK in 186.8s
+[AUDIT Qwen3.6] findings=[]
+
+[state] READY_FOR_UPPER_REVIEW
+[COMPLETE] RESULT_PACKET (proposed_claims only)
+
+=== instrumentation ===
+  swaps: 2 (failures 0), latencies [167.6, 186.8]s, avg 177.2s
+  completed: True  final_state: READY_FOR_UPPER_REVIEW
+  → swaps/item = 2 (this item). A vs B は複数 item で判断。

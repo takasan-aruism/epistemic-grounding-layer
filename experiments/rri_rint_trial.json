@@ -1,0 +1,26 @@
+{
+  "mode": "A (sequential swap)",
+  "task": "RRI validate_resolved_intent (§11)",
+  "swaps": [
+    {
+      "to": "coder",
+      "latency_s": 167.6,
+      "ok": true
+    },
+    {
+      "to": "qwen",
+      "latency_s": 186.8,
+      "ok": true
+    }
+  ],
+  "final_state": "READY_FOR_UPPER_REVIEW",
+  "completed": true,
+  "swap_count": 2,
+  "swap_latencies_s": [
+    167.6,
+    186.8
+  ],
+  "swap_failures": 0,
+  "avg_swap_s": 177.2,
+  "final_source": "def validate_resolved_intent(rint, known_iec_refs, known_request_refs):\n    problems = []\n    \n    # R6: Check if rint is a dict\n    if not isinstance(rint, dict):\n        return {\"ok\": False, \"problems\": [\"rint is not a dict\"]}\n    \n    # Required fields\n    required_fields = [\"resolved_intent_id\", \"request_id\", \"primary_intent\", \"intent_status\", \"strategy\", \"iec_ref\"]\n    \n    # R1: Check all required fields present\n    missing_fields = [f for f in required_fields if f not in rint]\n    if missing_fields:\n        return {\"ok\": False, \"problems\": [f\"Missing required fields: {missing_fields}\"]}\n    \n    # R6: Check types of required fields (all should be str except retained_intent_branches which is optional)\n    for field in required_fields:\n        if not isinstance(rint[field], str):\n            return {\"ok\": False, \"problems\": [f\"Field '{field}' has wrong type (expected str)\"]}\n    \n    # Check optional retained_intent_branches if present\n    if \"retained_intent_branches\" in rint:\n        if not isinstance(rint[\"retained_intent_branches\"], list):\n            return {\"ok\": False, \"problems\": [\"retained_intent_branches must be a list or not present\"]}\n    \n    # R2: intent_status must be one of the 6 values\n    valid_intent_statuses = [\"RESOLVED\", \"RESOLVED_WITH_RESIDUAL\", \"MULTI_INTENT\", \"CLARIFICATION_REQUIRED\", \"PREMISE_UNRESOLVED\", \"DEFERRED\"]\n    if rint[\"intent_status\"] not in valid_intent_statuses:\n        return {\"ok\": False, \"problems\": [f\"intent_status '{rint['intent_status']}' is not valid\"]}\n    \n    # R3: strategy must be one of the 7 values\n    valid_strategies = [\"DIRECT\", \"CONTEXT_RESOLVE\", \"CHOICE\", \"BOUNDED_MULTI_VIEW\", \"INTENT_PROBE\", \"PREMISE_PROBE\", \"DEFER\"]\n    if rint[\"strategy\"] not in valid_strategies:\n        return {\"ok\": False, \"problems\": [f\"strategy '{rint['strategy']}' is not valid\"]}\n    \n    # R4: iec_ref must be in known_iec_refs\n    if rint[\"iec_ref\"] not in known_iec_refs:\n        return {\"ok\": False, \"problems\": [f\"iec_ref '{rint['iec_ref']}' is not in known_iec_refs (FABRICATION)\"]}\n    \n    # R5: request_id must be in known_request_refs\n    if rint[\"request_id\"] not in known_request_refs:\n        return {\"ok\": False, \"problems\": [f\"request_id '{rint['request_id']}' is not in known_request_refs\"]}\n    \n    # R7: Check retained_intent_branches for residual/multi-intent cases\n    if rint[\"intent_status\"] in [\"RESOLVED_WITH_RESIDUAL\", \"MULTI_INTENT\"]:\n        retained = rint.get(\"retained_intent_branches\")\n        if retained is None or not isinstance(retained, list) or len(retained) == 0:\n            return {\"ok\": False, \"problems\": [f\"intent_status '{rint['intent_status']}' requires non-empty retained_intent_branches\"]}\n    \n    return {\"ok\": True, \"problems\": []}"
+}
