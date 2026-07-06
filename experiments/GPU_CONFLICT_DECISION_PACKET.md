@@ -107,3 +107,14 @@ Claude の事前 preference = **「(b) Claude-as-auditor」= 実質 Candidate C*
 - **§14 strong 条件を満たす**: system が「local measurement が要るか」を自力で 2 段（co-serve 実測 → swap 頻度 要測）判定し、operating mode を premature に選ばなかった。
 - before-state: 前ターン Claude の a/b/c + C 推奨 = H4（記録・隠さない）。experiment がこれを是正。
 - 一般化しない（1 event / single Qwen3.6 / 1 subagent / swap 頻度 未測）。
+
+---
+
+## MEASURED — A-mode instrumented trial (RRI validate_iec, executed 2026-07-07)
+2 items 実行(run1 + patched run2)。両 item とも **4 swaps**（各 1 rework）。
+- **swap latency ≈ 174.5s/swap（~2.9 min）**、8 swaps 全成功（**failures 0** = repeated-swap 安定）。
+- **swaps/item ≈ 4**（rework 起因）。→ mode A の swap overhead ≈ 4×174.5 ≈ **~11.6 min/item**（1 rework 時）。
+- rework の駆動源: run1=auditor over-flag、run2=coder 初回 error → **F5 gate**（auditor findings=[] でも failing test で rework）。
+- validate_iec は run2 で **DW gate COMPLETE**（Coder-Next 生成 + Qwen3.6 独立監査 + F5 + upper-review probe）→ RRI に commit。
+- **A vs B の含意（narrow, N=2）**: 両 item が 1 rework=4 swaps ゆえ mode A は ~12 min/item の swap 支配。rework が続くなら
+  **B（batched）で swap を amortize** が効く方向。ただし N=2、rework 頻度は本格運用で再測が要る。commit は Taka 判断。

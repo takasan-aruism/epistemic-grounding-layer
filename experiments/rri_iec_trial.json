@@ -1,0 +1,38 @@
+{
+  "mode": "A (sequential swap)",
+  "task": "RRI validate_iec (§10)",
+  "swaps": [
+    {
+      "to": "coder",
+      "latency_s": 167.6,
+      "ok": true
+    },
+    {
+      "to": "qwen",
+      "latency_s": 181.8,
+      "ok": true
+    },
+    {
+      "to": "coder",
+      "latency_s": 166.8,
+      "ok": true
+    },
+    {
+      "to": "qwen",
+      "latency_s": 181.9,
+      "ok": true
+    }
+  ],
+  "final_state": "READY_FOR_UPPER_REVIEW",
+  "completed": true,
+  "swap_count": 4,
+  "swap_latencies_s": [
+    167.6,
+    181.8,
+    166.8,
+    181.9
+  ],
+  "swap_failures": 0,
+  "avg_swap_s": 174.5,
+  "final_source": "def validate_iec(iec, known_refs):\n    problems = []\n    \n    # R4: Type check - iec must be a dict\n    if not isinstance(iec, dict):\n        return {\"ok\": False, \"problems\": [\"iec must be a dict\"]}\n    \n    # R1: Required fields check\n    required_fields = ['selected_interpretation', 'strategy', 'basis_refs', 'residual', 'alternatives', 'revision_triggers']\n    for field in required_fields:\n        if field not in iec:\n            problems.append(f\"missing required field: {field}\")\n    \n    if problems:\n        return {\"ok\": False, \"problems\": problems}\n    \n    # R4: Type checks for fields\n    if not isinstance(iec['selected_interpretation'], str):\n        problems.append(\"selected_interpretation must be a string\")\n    if not isinstance(iec['strategy'], str):\n        problems.append(\"strategy must be a string\")\n    if not isinstance(iec['basis_refs'], list):\n        problems.append(\"basis_refs must be a list\")\n    else:\n        for ref in iec['basis_refs']:\n            if not isinstance(ref, str):\n                problems.append(f\"basis_refs must contain only strings, found {type(ref).__name__}\")\n                break\n    if not isinstance(iec['residual'], list):\n        problems.append(\"residual must be a list\")\n    if not isinstance(iec['alternatives'], list):\n        problems.append(\"alternatives must be a list\")\n    if not isinstance(iec['revision_triggers'], list):\n        problems.append(\"revision_triggers must be a list\")\n    \n    if problems:\n        return {\"ok\": False, \"problems\": problems}\n    \n    # R2: Strategy validation\n    valid_strategies = {'DIRECT', 'CONTEXT_RESOLVE', 'CHOICE', 'BOUNDED_MULTI_VIEW', 'INTENT_PROBE', 'PREMISE_PROBE', 'DEFER'}\n    if iec['strategy'] not in valid_strategies:\n        problems.append(f\"invalid strategy: {iec['strategy']}\")\n    \n    # R3: Basis refs validation - all must be in known_refs\n    # Convert known_refs to a set for efficient lookup if it's not already\n    known_refs_set = set(known_refs)\n    for ref in iec['basis_refs']:\n        if ref not in known_refs_set:\n            problems.append(f\"fabrication detected: basis_ref '{ref}' not in known_refs\")\n    \n    return {\"ok\": len(problems) == 0, \"problems\": problems}\n"
+}
