@@ -5,8 +5,9 @@ PRIMARY/SECONDARY/COMMUNITY/GENERATED)を増やすのでなく、Claim/Evidence 
 provenance は target 判定の *入力* であって、PRIMARY/GENERATED の shortcut で代替しない。
 同じ Source/Observation からでも、Claim 化する時の target に応じて eligible evidence path が変わる。
 
-⚠ PROVISIONAL: これは Taka の *要約ベース* 暫定裁定に沿う実装。packet 本文
-(docs/report/REVIEW_PACKET_TAXONOMY_DE0047.md)による正式 property-level 裁定は未(独立 review 待ち)。
+ADOPTED(DE-0059, Taka formal verdict, packet 精査済): Option 1(直交する新軸)採用、Option 3 semantics は
+**mandatory claimization discipline**(record exists/states X と X is true/implementation behaves as X を別 claim)、
+Option 2(record type→provenance mapping)は category conflation として REJECT。
 """
 
 VALIDATION_TARGETS = {

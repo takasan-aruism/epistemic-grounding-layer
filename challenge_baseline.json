@@ -1,7 +1,7 @@
 {
   "version": "SELF_GROUNDING_CHALLENGE_SET_V1",
-  "config_fingerprint": "sha256:8e53858f4ef72b73",
-  "recorded_at": "2026-07-06T06:29:27.391200+00:00",
+  "config_fingerprint": "sha256:e58e8a76a94afe24",
+  "recorded_at": "2026-07-06T10:58:26.065253+00:00",
   "drift_baseline": {
     "config": {
       "model": "Qwen3.6-35B-A3B",
@@ -27,13 +27,13 @@
       "Q8",
       "Q16"
     ],
-    "contract_ok": "3/4",
-    "avg_source_trace_completeness": 1.0,
+    "contract_ok": "2/4",
+    "avg_source_trace_completeness": 0.75,
     "per_question": {
       "Q3": {
         "contract_ok": false,
         "metrics": {
-          "n_answer_claims": 6,
+          "n_answer_claims": 3,
           "n_historical_claims": 1,
           "n_open_gaps": 2,
           "source_trace_completeness": 1.0,
@@ -51,8 +51,8 @@
       "Q7": {
         "contract_ok": true,
         "metrics": {
-          "n_answer_claims": 3,
-          "n_historical_claims": 2,
+          "n_answer_claims": 4,
+          "n_historical_claims": 1,
           "n_open_gaps": 2,
           "source_trace_completeness": 1.0,
           "m1_grounding_integrity_pass": true,
@@ -65,7 +65,7 @@
       "Q8": {
         "contract_ok": true,
         "metrics": {
-          "n_answer_claims": 4,
+          "n_answer_claims": 5,
           "n_historical_claims": 1,
           "n_open_gaps": 2,
           "source_trace_completeness": 1.0,
@@ -77,18 +77,17 @@
         "problems": []
       },
       "Q16": {
-        "contract_ok": true,
+        "contract_ok": false,
         "metrics": {
-          "n_answer_claims": 3,
-          "n_historical_claims": 2,
-          "n_open_gaps": 3,
-          "source_trace_completeness": 1.0,
-          "m1_grounding_integrity_pass": true,
+          "source_trace_completeness": 0.0,
+          "m1_grounding_integrity_pass": false,
           "m2_semantic_placement_pass": true,
           "m3_format_adherence_pass": true,
           "n_coercions": 0
         },
-        "problems": []
+        "problems": [
+          "not a JSON object"
+        ]
       }
     }
   }

@@ -95,6 +95,31 @@ def t_jrev0007_validator_fixes():
           not v_prose["ok"] and not v_prose["axes"]["M1_grounding_integrity"], str(v_prose["axes"]))
 
 
+def t_ab0023_corpus_domain_coverage():
+    import tempfile, os
+    check("AB-0023: 自律 RD query → AUTONOMY_GATE_STATUS", SG.classify_query("自律 RD は有効化できるか?") == "AUTONOMY_GATE_STATUS")
+    check("AB-0023: open gap query → OPEN_GAP_QUERY", SG.classify_query("RRI 前に扱うべき open gaps は?") == "OPEN_GAP_QUERY")
+    check("AB-0023: JREV 発見 query → PROPERTY_HISTORY", SG.classify_query("JREV-0007 で何が発見されたか?") == "PROPERTY_HISTORY")
+    # 実 corpus: OPEN_GAP は AUDIT_BACKLOG を候補集合に含む(R5 の穴)
+    recs, cov = SG.build_candidate_corpus("RRI 実装前に扱うべき open gaps は?")
+    ids = {r["record_id"] for r in recs}
+    check("AB-0023: OPEN_GAP_QUERY の required domain に AUDIT_BACKLOG", "AUDIT_BACKLOG" in cov["required_domains"])
+    check("AB-0023: audit_backlog の GAP record が候補集合へ(R5 修正)", any(x.startswith("GAP-") for x in ids), sorted(x for x in ids if x.startswith("GAP-"))[:3])
+    check("AB-0023: 全 required domain load 済 → coverage_ok", cov["coverage_ok"])
+    # autonomy: gate-condition lineage(DE-0039/0040)を force_include(R6 の D-regression)
+    _, cov6 = SG.build_candidate_corpus("自律 RD は現在有効化できるか?")
+    check("AB-0023: AUTONOMY_GATE_STATUS が DE-0039/DE-0040 を force_include(R6 修正)",
+          "DE-0039" in cov6["force_include"] and "DE-0040" in cov6["force_include"], str(cov6["force_include"]))
+    check("AB-0023: gate lineage 欠落なし", not cov6["lineage_missing"])
+    # required domain 不在 → DEFER(silent reconstruction 禁止、network も呼ばない = hermetic)
+    with tempfile.TemporaryDirectory() as d:
+        open(os.path.join(d, "DESIGN_EVIDENCE_LEDGER.jsonl"), "w").write('{"design_evidence_id":"DE-0001"}\n')
+        open(os.path.join(d, "REVIEW_LEDGER.jsonl"), "w").write("")
+        ans, hits, raw, cov = SG.answer_with_coverage("扱うべき open gaps は?", base=d)
+        check("AB-0023: required domain 不在 → DEFER(fabricate せず、Qwen も呼ばない)",
+              ans is None and raw.startswith("COVERAGE_DEFER") and "AUDIT_BACKLOG" in cov["missing_domains"])
+
+
 def t_ab0022_three_axis_split():
     ids = ["DE-0001"]
     # M1 clean, M2 misplacement, M3 format(bare-string 非解決)を同時に含む answer
@@ -159,6 +184,8 @@ if __name__ == "__main__":
     t_ab0021_supersession_refs()
     print("\n[AB-0022] contract metric を M1 grounding / M2 placement / M3 format に3分離")
     t_ab0022_three_axis_split()
+    print("\n[AB-0023] SELF_GROUNDING corpus domain coverage(候補集合の完全性)")
+    t_ab0023_corpus_domain_coverage()
     print("\n[CI drift-gate] config 変更で challenge 再走を強制")
     t_challenge_drift_gate()
     failed = [n for n, ok in RESULTS if not ok]

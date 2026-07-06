@@ -23,29 +23,117 @@ SOURCE_CLASSES = {
 CLAIM_CLASSES = ["IMPLEMENTATION_FACT", "TEST_RESULT", "REVIEW_FINDING", "DESIGN_DECISION",
                  "CURRENT_SYSTEM_STATE", "HISTORICAL_STATE", "FAILURE_PATTERN"]
 
-# §5 bounded corpus(全 project file でなく、期待史が human-reviewable な範囲)
-CORPUS_FILES = [
-    ("DESIGN_EVIDENCE_LEDGER.jsonl", "DESIGN_LEDGER"),
-    ("REVIEW_LEDGER.jsonl", "REVIEW_LEDGER"),
-]
+# §5 bounded corpus。AB-0023(Taka 裁定): ledger を **domain** 単位で扱い、query class ごとに
+# required domain を versioned mapping する(retrieval が正しくても候補集合に record が無ければ
+# current state を誤構成する=INCOMPLETE_EPISTEMIC_CANDIDATE_SET を塞ぐ)。
+LEDGER_DOMAINS = {
+    "DESIGN_EVIDENCE": ("DESIGN_EVIDENCE_LEDGER.jsonl", "DESIGN_LEDGER", ("design_evidence_id",)),
+    "REVIEW":          ("REVIEW_LEDGER.jsonl", "REVIEW_LEDGER", ("review_id",)),
+    "AUDIT_BACKLOG":   ("audit_backlog.jsonl", "AUDIT_BACKLOG", ("backlog_id",)),
+}
 
 
-def load_corpus(base=BASE):
-    """ledger jsonl を self-history 記録へ。ordinal=行順=時系列(supersession 判定の下地)。"""
-    records = []
-    for fname, sclass in CORPUS_FILES:
-        p = Path(base) / fname
-        if not p.exists():
+def _load_domain(domain, base=BASE):
+    """1 domain の ledger を record 列へ。file 不在なら None(= required domain の coverage gap、
+    silent skip でなく呼び手が DEFER/warning できるよう区別する)。"""
+    spec = LEDGER_DOMAINS.get(domain)
+    if not spec:
+        return None
+    fname, sclass, idkeys = spec
+    p = Path(base) / fname
+    if not p.exists():
+        return None
+    recs = []
+    for i, line in enumerate(p.read_text().splitlines()):
+        line = line.strip()
+        if not line:
             continue
-        for i, line in enumerate(p.read_text().splitlines()):
-            line = line.strip()
-            if not line:
-                continue
-            obj = json.loads(line)
-            rid = obj.get("design_evidence_id") or obj.get("review_id") or f"{sclass}-{i}"
-            records.append({"record_id": rid, "source_class": sclass, "ordinal": len(records),
-                            "fields": obj, "text": json.dumps(obj, ensure_ascii=False)})
+        obj = json.loads(line)
+        rid = next((obj[k] for k in idkeys if obj.get(k)), None) or f"{sclass}-{i}"
+        recs.append({"record_id": rid, "source_class": sclass, "domain": domain, "ordinal": 0,
+                     "fields": obj, "text": json.dumps(obj, ensure_ascii=False)})
+    return recs
+
+
+def load_corpus(base=BASE, domains=("DESIGN_EVIDENCE", "REVIEW")):
+    """domain 群を self-history 記録へ(既定=従来の DESIGN_EVIDENCE+REVIEW、後方互換)。
+    ordinal=連結順=時系列(supersession 判定の下地)。"""
+    records = []
+    for dom in domains:
+        recs = _load_domain(dom, base)
+        if recs:
+            records.extend(recs)
+    for i, r in enumerate(records):
+        r["ordinal"] = i
     return records
+
+
+# AB-0023: query class → required ledger domains(versioned)。
+COVERAGE_POLICY_VERSION = "sg-coverage-v1"
+QUERY_CLASS_DOMAINS = {
+    "OPEN_GAP_QUERY":       ["DESIGN_EVIDENCE", "REVIEW", "AUDIT_BACKLOG"],
+    "AUTONOMY_GATE_STATUS": ["DESIGN_EVIDENCE", "REVIEW", "AUDIT_BACKLOG"],
+    "PROPERTY_HISTORY":     ["DESIGN_EVIDENCE", "REVIEW"],
+    "GENERAL":              ["DESIGN_EVIDENCE", "REVIEW"],
+}
+# autonomy gate query は gate-condition lineage を candidate universe へ *固定包含*
+# (答えの injection でなく、gate の各条件を定義する record を retrieval ranking に依らず候補へ)。
+ACQ10_CONDITION_LINEAGE = {
+    "A": ["JREV-0005"], "B": ["JREV-0006"], "C": ["DE-0042", "JREV-0007"],
+    "D": ["DE-0039", "DE-0040"], "overall": ["DE-0056"],
+}
+
+
+def classify_query(question):
+    """SELF_GROUNDING query を最小 class へ(決定的 keyword、SELF_GROUNDING 専用・非一般化)。"""
+    if re.search(r"自律|autonomous|acq-?10|\bgate\b|有効化", question, re.I):
+        return "AUTONOMY_GATE_STATUS"
+    if re.search(r"open gap|\bgap\b|未解決|扱うべき|残課題|残務|課題は", question, re.I):
+        return "OPEN_GAP_QUERY"
+    if re.search(r"発見|見つか|JREV|履歴|history|property|変更|chang", question, re.I):
+        return "PROPERTY_HISTORY"
+    return "GENERAL"
+
+
+def build_candidate_corpus(question, base=BASE):
+    """AB-0023: query class の required domain を集めた候補集合 + coverage report を返す。
+    required domain 不在 → coverage gap(呼び手が DEFER)。autonomy gate は lineage を force_include。"""
+    cls = classify_query(question)
+    required = QUERY_CLASS_DOMAINS.get(cls, QUERY_CLASS_DOMAINS["GENERAL"])
+    records, loaded, missing = [], [], []
+    for dom in required:
+        recs = _load_domain(dom, base)
+        if recs is None:
+            missing.append(dom)
+        else:
+            loaded.append(dom)
+            records.extend(recs)
+    for i, r in enumerate(records):
+        r["ordinal"] = i
+    force_include, lineage_missing = [], []
+    if cls == "AUTONOMY_GATE_STATUS":
+        present = {r["record_id"] for r in records}
+        want = [rid for lin in ACQ10_CONDITION_LINEAGE.values() for rid in lin]
+        force_include = [rid for rid in want if rid in present]
+        lineage_missing = [rid for rid in want if rid not in present]
+    coverage = {"policy_version": COVERAGE_POLICY_VERSION, "query_class": cls,
+                "required_domains": required, "loaded_domains": loaded, "missing_domains": missing,
+                "force_include": force_include, "lineage_missing": lineage_missing,
+                "coverage_ok": not missing and not lineage_missing}
+    return records, coverage
+
+
+def answer_with_coverage(question, base=BASE, superseded=None, **kw):
+    """AB-0023: coverage 付き answer。required domain 不在なら **DEFER**(silent reconstruction 禁止)。
+    返り: (answer|None, retrieved_ids, raw, coverage)。"""
+    records, coverage = build_candidate_corpus(question, base)
+    if coverage["missing_domains"]:
+        return None, [], f"COVERAGE_DEFER: missing required domains {coverage['missing_domains']}", coverage
+    superseded = superseded if superseded is not None else detect_supersession(records)
+    ans, hits, raw = answer_question(question, records, superseded,
+                                     force_include=coverage["force_include"], **kw)
+    coverage["retrieved"] = hits
+    return ans, hits, raw, coverage
 
 
 _RULE_TOKEN = re.compile(r"\b(R\d+|DE-\d{4}|JREV-\d{4}|ACQ-\d+[a-z]?|H\d[a-z]?|M\d|L\d|F\b|AB-\d+)\b")
@@ -164,12 +252,19 @@ def _records_block(records, superseded, limit=1400):
 
 
 def answer_question(question, records=None, superseded=None, system=None, k=8, record_char_limit=1400,
-                    max_tokens=1200):
+                    max_tokens=1200, force_include=None):
     """baseline: retrieve → Qwen が構造化 answer を生成。返り: (answer_dict|None, retrieved_ids, raw)。
-    system: answerer の system prompt override(ESDE 等 別 workload 用。既定=EGL self-history)。"""
+    system: answerer の system prompt override(ESDE 等 別 workload 用。既定=EGL self-history)。
+    force_include(AB-0023): retrieval ranking に依らず候補へ固定包含する record_id 群(gate lineage 等)。"""
     records = records if records is not None else load_corpus()
     superseded = superseded if superseded is not None else detect_supersession(records)
     hits = retrieve(question, records, k=k)
+    if force_include:                       # AB-0023: candidate-set coverage は retrieval 順位に依らない
+        have = {r["record_id"] for r in hits}
+        by_id = {r["record_id"]: r for r in records}
+        for rid in force_include:
+            if rid not in have and rid in by_id:
+                hits.append(by_id[rid])
     prompt = (f"QUESTION: {question}\n\nRECORDS:\n{_records_block(hits, superseded, record_char_limit)}\n\n"
               "Return the JSON answer object now.")
     try:

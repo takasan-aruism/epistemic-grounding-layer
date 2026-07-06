@@ -20,7 +20,7 @@ ESDE_MEMORY = Path("/home/takasan/.claude/projects/-home-takasan-esde-ESDE-Resea
 # (corpus/answering 層の metadata)であって provenance ではない。記録存在 vs 内容真偽 vs 挙動 の線は
 # provenance でなく **VALIDATION_TARGET 軸**(egl/validation_target.py)で表す。record_type を source_class
 # に押し込まない。⚠ 正式 property-level 裁定は packet 本文(REVIEW_PACKET_TAXONOMY_DE0047.md)で未完。
-ESDE_TAXONOMY_STATUS = "VALIDATION_TARGET_AXIS (Taka 暫定裁定, formal packet adjudication 未)"
+ESDE_TAXONOMY_STATUS = "VALIDATION_TARGET_AXIS ADOPTED (DE-0059 formal verdict: Opt1 adopt/Opt3 mandatory/Opt2 reject)"
 ESDE_RECORD_TYPES = {          # ← record-TYPE(corpus label)であって provenance source_class でない
     "PROJECT_STATE": "project_* = ある版/実験の到達状態が記録された(record occurrence)",
     "REVIEW_FINDING": "feedback_* = 規律/レビュー知見(主張の上限・失敗の教訓)",

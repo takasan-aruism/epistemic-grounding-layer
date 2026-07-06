@@ -1,14 +1,42 @@
 {
   "test": "SGQ-R1..R6 registration acceptance",
-  "recorded_at": "2026-07-06T10:34:16.817936+00:00",
+  "recorded_at": "2026-07-06T10:58:51.764896+00:00",
   "results": [
     {
       "sgq": "SGQ-R1",
       "question": "現在の bootstrap 順序は?(何が current で、SRC-A §4 の bootstrap-order proposition は historical/superseded か)",
+      "coverage": {
+        "policy_version": "sg-coverage-v1",
+        "query_class": "GENERAL",
+        "required_domains": [
+          "DESIGN_EVIDENCE",
+          "REVIEW"
+        ],
+        "loaded_domains": [
+          "DESIGN_EVIDENCE",
+          "REVIEW"
+        ],
+        "missing_domains": [],
+        "force_include": [],
+        "lineage_missing": [],
+        "coverage_ok": true,
+        "retrieved": [
+          "DE-0055",
+          "DE-0056",
+          "DE-0054",
+          "DE-0042",
+          "DE-0043",
+          "DE-0046",
+          "DE-0049",
+          "JREV-0007",
+          "DE-0041",
+          "DE-0050"
+        ]
+      },
       "answer": {
         "answer_claims": [
           {
-            "text": "現在の bootstrap 順序は、DE-0055 で定義される DD-ARCH-3 に基づく 7段階のシーケンスである：(1)本 registration、(2)DS Phase 0 を従来方式、(3)DW walking skeleton を従来方式、(4)DW が最小 Task Unit を一周可能に、(5)RRI 本実装を DW 最初の大型 real workload として、(6)RRI 開発結果を RESULT_PACKET 候補として EGL へ還流、(7)DS intelligence Phase 1 へ。",
+            "text": "CURRENT bootstrap sequence is: (1)本 registration, (2)DS Phase 0 via conventional method, (3)DW walking skeleton via conventional method, (4)DW becomes capable of one loop of minimal Task Unit, (5)RRI main implementation as DW's first large real workload, (6)RRI development results returned to EGL as RESULT_PACKET candidates, (7)DS intelligence Phase 1.",
             "record_ids": [
               "DE-0055"
             ],
@@ -17,7 +45,7 @@
         ],
         "historical_claims": [
           {
-            "text": "SRC-A §4 の bootstrap-order proposition (DS Phase 0 → RRI implementation → DW walking skeleton) は、DE-0055 により HISTORICAL/SUPERSEDED として扱われる。",
+            "text": "SRC-A §4 bootstrap-order proposition (DS Phase 0 → RRI implementation → DW walking skeleton) is superseded.",
             "record_ids": [
               "DE-0055"
             ],
@@ -27,12 +55,11 @@
           }
         ],
         "open_gaps": [
-          "SRC-A §4 の artifact 自体は supersede されていないが、その中の bootstrap-order proposition のみが superseded されている点の境界は DE-0055 で明確化されている。",
-          "DE-0054 で指摘された RRI の repository strategy (独立 repo vs EGL 同居) の CURRENT 状態は、Taka/independent adjudication に上がっているため、bootstrap 順序の文脈での RRI の配置詳細は確定していない。"
+          "SRC-A §4 artifact itself is not superseded, only the specific bootstrap-order proposition within it.",
+          "DD-ARCH-3 is the current bootstrap directive, but its basis includes SRC-A §4 which is marked UNAVAILABLE."
         ],
         "source_trace": [
-          "DE-0055",
-          "DE-0054"
+          "DE-0055"
         ]
       },
       "validate": {
@@ -54,40 +81,58 @@
     {
       "sgq": "SGQ-R2",
       "question": "RRI は実装済みか?",
+      "coverage": {
+        "policy_version": "sg-coverage-v1",
+        "query_class": "GENERAL",
+        "required_domains": [
+          "DESIGN_EVIDENCE",
+          "REVIEW"
+        ],
+        "loaded_domains": [
+          "DESIGN_EVIDENCE",
+          "REVIEW"
+        ],
+        "missing_domains": [],
+        "force_include": [],
+        "lineage_missing": [],
+        "coverage_ok": true,
+        "retrieved": [
+          "DE-0052",
+          "DE-0053",
+          "DE-0054",
+          "DE-0055",
+          "DE-0056",
+          "DE-0057",
+          "DE-0058"
+        ]
+      },
       "answer": {
         "answer_claims": [
           {
-            "text": "RRI の実装は完了していません。設計決定 (DE-0055) により、RRI の本実装は DW (Development Execution) の最初の大型 real workload として将来実行される予定であり、現在の bootstrap sequence ではまだ実行段階に至っていません。",
+            "text": "RRI の実装は完了していません。設計決定 (DE-0055) により、RRI の本実装は DW (Development Execution) の最初の大型実 workload として計画されており、現在の bootstrap sequence では DS Phase 0 や DW の walking skeleton の後に位置する段階です。",
             "record_ids": [
               "DE-0055"
             ],
             "currentness": "CURRENT"
           },
           {
-            "text": "RRI のリポジトリ構成については、設計上の戦略 (DD-ARCH-2) と実際のセッションでの決定 (DE-0054) の間に不一致があり、RRI が EGL と同居するか独立したリポジトリ (request-resolution-intent) として作成されるかについて、CURRENT_SYSTEM_STATE が確定していません。",
+            "text": "RRI に関連する設計仕様書 (SRC-A) および研究意図仕様 (SRC-B) は on-disk に存在せず (SOURCE_UNAVAILABLE)、実装の基盤となるドキュメントが未提供の状態です (DE-0052)。",
             "record_ids": [
-              "DE-0054"
+              "DE-0052"
             ],
             "currentness": "CURRENT"
           },
           {
-            "text": "RRI は RRI=MEAN (request resolution / research intent) として責任分離されており、EGL/RRI/DS/DW の4系統によるアーキテクチャ設計が採用されています (DE-0053)。",
+            "text": "RRI のリポジトリ戦略について、設計上の提案 (epistemic-ledger への同居) と実際のセッションでの決定 (独立リポジトリ request-resolution-intent の作成) の間に不一致があり、どちらが CURRENT かは Taka または独立した裁定を要する状態です (DE-0054)。",
             "record_ids": [
-              "DE-0053"
+              "DE-0054"
             ],
             "currentness": "CURRENT"
           }
         ],
         "historical_claims": [
           {
-            "text": "SRC-A および SRC-B のドキュメントは on-disk に存在せず (SOURCE_UNAVAILABLE)、実装事実への昇格はしていません (DE-0052)。",
-            "record_ids": [
-              "DE-0052"
-            ],
-            "superseded_by": []
-          },
-          {
-            "text": "SRC-A §4 に記載されていた bootstrap order (DS Phase 0 → RRI implementation → DW walking skeleton) は、DE-0055 により SUPERSEDED されました。",
+            "text": "SRC-A §4 に記載されていた 'DS Phase 0 → RRI 実装 → DW walking skeleton' という bootstrap order の提案は、DE-0055 により HISTORICAL/SUPERSEDED となりました。",
             "record_ids": [
               "DE-0055"
             ],
@@ -97,15 +142,16 @@
           }
         ],
         "open_gaps": [
-          "RRI のリポジトリ戦略：DE-0054 で指摘された通り、DD-ARCH-2 の 'epistemic-ledger=EGL+RRI' という設計と、本セッションでの '独立 repo (request-resolution-intent)' という事実の整合性が取れておらず、どちらが CURRENT かは Taka/independent adjudication に委ねられています。",
-          "RRI の実装進捗：DE-0055 によれば RRI 本実装は将来のワークロードとして位置づけられており、現在の実装ステータスは '未着手' または '計画段階' です。",
-          "RRI の実装完了・有効性：DE-0053 の note で明示されている通り、architecture responsibility split の採用は、各 subsystem の実装完成や有効性を証明するものではありません。"
+          "RRI のリポジトリ戦略 (独立リポジトリ vs EGL 同居) の最終的な CURRENT 状態の裁定が未完了である (DE-0054)。",
+          "SRC-A および SRC-B の on-disk 提供が必須であり、これらが提供されるまで fuller registration および実装検証の基盤が不十分である (DE-0052, DE-0058)。",
+          "RRI は 'request resolution / research intent' を担う subsystem として設計されているが、実装そのものはまだ 'DECIDED' な bootstrap order の後の段階にあり、実装済みではない (DE-0053, DE-0055)。"
         ],
         "source_trace": [
           "DE-0052",
           "DE-0053",
           "DE-0054",
-          "DE-0055"
+          "DE-0055",
+          "DE-0058"
         ]
       },
       "validate": {
@@ -115,7 +161,7 @@
       },
       "metrics": {
         "n_answer_claims": 3,
-        "n_historical_claims": 2,
+        "n_historical_claims": 1,
         "n_open_gaps": 3,
         "source_trace_completeness": 1.0,
         "m1_grounding_integrity_pass": true,
@@ -127,10 +173,35 @@
     {
       "sgq": "SGQ-R3",
       "question": "DW の有効性は証明されているか?",
+      "coverage": {
+        "policy_version": "sg-coverage-v1",
+        "query_class": "GENERAL",
+        "required_domains": [
+          "DESIGN_EVIDENCE",
+          "REVIEW"
+        ],
+        "loaded_domains": [
+          "DESIGN_EVIDENCE",
+          "REVIEW"
+        ],
+        "missing_domains": [],
+        "force_include": [],
+        "lineage_missing": [],
+        "coverage_ok": true,
+        "retrieved": [
+          "DE-0052",
+          "DE-0053",
+          "DE-0054",
+          "DE-0055",
+          "DE-0056",
+          "DE-0057",
+          "DE-0058"
+        ]
+      },
       "answer": {
         "answer_claims": [
           {
-            "text": "DW（Development Execution）の有効性（実装の完成度、機能の正しさ、またはアーキテクチャ上の役割遂行能力）は、提供された記録では証明されていません。",
+            "text": "DW（Development Execution）の有効性（実装の完成度、保証の履行、または効果の証明）は、記録された設計決定や登録状態から証明されていない。",
             "record_ids": [
               "DE-0053",
               "DE-0057"
@@ -138,21 +209,21 @@
             "currentness": "CURRENT"
           },
           {
-            "text": "記録 DE-0053 は、DW が 'DO'（development execution / audit / rework）という責任区分として採用されたことを示していますが、この決定自体が各サブシステムの実装完了や有効性を証明するものではないと明示されています。",
+            "text": "DWは「DO（development execution / audit / rework）」という責任区分として設計決定されたが、この決定は責任の分割を示すものであり、各サブシステムの実装完了や有効性を証明するものではない。",
             "record_ids": [
               "DE-0053"
             ],
             "currentness": "CURRENT"
           },
           {
-            "text": "記録 DE-0057 は、JREV-0007 における narrow な機構的証拠（narrow mechanism evidence）を記録していますが、これが 'DW effectiveness proven'（DWの有効性証明）や 'independent audit generally superior' へ昇格しないよう禁止遵守（prohibition）されていると明記しています。",
+            "text": "JREV-0007における狭い範囲のレビュー証拠（narrow mechanism evidence）は、DWの仮説（mandatory independent challengeが依存を減らし得る）に関連するが、DWそのものの有効性や独立監査の一般的最優性を証明するものではない。",
             "record_ids": [
               "DE-0057"
             ],
             "currentness": "CURRENT"
           },
           {
-            "text": "DW の実装状況については、DE-0055 にて 'DW walking skeleton' が従来方式で構築され、最小 Task Unit を一周可能になることが bootstrap sequence の一部として計画・記録されていますが、これが現在完了し有効であるという確証は提供されていません。",
+            "text": "DWのブートストラップ順序は、RRIの重量な実装を避けるため、DWのwalking skeletonを従来方式で先に実行するよう設計決定されたが、これは計画段階の決定であり、有効性の証明ではない。",
             "record_ids": [
               "DE-0055"
             ],
@@ -161,9 +232,9 @@
         ],
         "historical_claims": [],
         "open_gaps": [
-          "DW の実装が 'walking skeleton' の段階から、完全な開発実行環境として機能しているかどうかの検証記録が存在しない。",
-          "DW が 'mandatory independent challenge' を通じて手動人間懐疑への依存を減らすという仮説（DE-0057 参照）が、実際に有効であるかどうかの証明は行われていない。",
-          "DE-0053 で言及されている 'scope guard'（決定が有効性を証明しない）の枠組みにおいて、DW の具体的な有効性指標やテスト結果の記録は欠落している。"
+          "DWの実装状態（Phase 0, walking skeleton, 本実装など）が現在どの程度完了しているかの具体的な検証記録は、本記録群では確認できない。",
+          "DWが設計された役割（development execution / audit / rework）を実際に履行し、期待される効果（独立懐疑の機械化など）を発揮しているという実証データは存在しない。",
+          "DE-0057で言及されている「DW 仮説」の有効性については、記録内で「禁止遵守: DW effectiveness proven ... へ昇格しない」と明記されており、証明は行われていない。"
         ],
         "source_trace": [
           "DE-0052",
@@ -171,7 +242,8 @@
           "DE-0054",
           "DE-0055",
           "DE-0056",
-          "DE-0057"
+          "DE-0057",
+          "DE-0058"
         ]
       },
       "validate": {
@@ -193,10 +265,38 @@
     {
       "sgq": "SGQ-R4",
       "question": "JREV-0007 で何が発見されたか?(実在 record ID 付き、捏造ゼロ)",
+      "coverage": {
+        "policy_version": "sg-coverage-v1",
+        "query_class": "PROPERTY_HISTORY",
+        "required_domains": [
+          "DESIGN_EVIDENCE",
+          "REVIEW"
+        ],
+        "loaded_domains": [
+          "DESIGN_EVIDENCE",
+          "REVIEW"
+        ],
+        "missing_domains": [],
+        "force_include": [],
+        "lineage_missing": [],
+        "coverage_ok": true,
+        "retrieved": [
+          "DE-0042",
+          "DE-0043",
+          "DE-0056",
+          "DE-0057",
+          "DE-0058",
+          "JREV-0007",
+          "DE-0044",
+          "DE-0045",
+          "DE-0048",
+          "DE-0049"
+        ]
+      },
       "answer": {
         "answer_claims": [
           {
-            "text": "JREV-0007 は、SELF_GROUNDING baseline の adversarial round (SG-A..I) において、LLM が構造化回答契約を保持したことを確認した後、独立した攻撃者が決定的な検証ロジック (validate_answer) に対して直接攻撃を行い、2つの新規欠陥 (NEW_DEFECT) を発見した。",
+            "text": "JREV-0007 は、SELF_GROUNDING ベースラインの敵対的テスト (SG-A..I) において、LLM の振る舞い (behavioral) は 9/9 で合格したが、決定的バリデーター (validate_answer) の実装欠陥 (NEW_DEFECT) を 2 つ発見した。",
             "record_ids": [
               "JREV-0007",
               "DE-0043"
@@ -204,7 +304,7 @@
             "currentness": "CURRENT"
           },
           {
-            "text": "NEW_DEFECT-1: validate_answer が historical_claims[].superseded_by フィールドの検証を行っていなかった。これにより、捏造された supersession 出典 (record_id) が ok=True/completeness=1.0 で通過し、看板保証 (sign-off guarantee) が1フィールド分 over-scoped になっていた。",
+            "text": "欠陥 1 (N-1): validate_answer が historical_claims[].superseded_by フィールドの内容を検証していなかった。これにより、捏造された supersession 出典 (record_id) が ok=True/completeness=1.0 で通過する「看板保証」の過大適用 (over-scoped) が発生していた。",
             "record_ids": [
               "JREV-0007",
               "DE-0043"
@@ -212,7 +312,7 @@
             "currentness": "CURRENT"
           },
           {
-            "text": "NEW_DEFECT-2: validate_answer が非 dict の claim entry (実 LLM が出力し得る形式) に対して crash していた (total 化されていなかった)。",
+            "text": "欠陥 2 (N-2): validate_answer が非 dict の claim entry に対して crash する (total 関数ではなかった)。",
             "record_ids": [
               "JREV-0007",
               "DE-0043"
@@ -220,65 +320,24 @@
             "currentness": "CURRENT"
           },
           {
-            "text": "JREV-0007 は、これらの欠陥を DE-0043 および DE-0044 によって修正 (remediation) した結果、PASS_AFTER_REMEDIATION の verdict を下した。",
+            "text": "JREV-0007 は、これらの欠陥を DE-0043 および DE-0044 によって修正 (remediation) し、post_remediation で PASSED と判定された。",
             "record_ids": [
               "JREV-0007",
               "DE-0043",
               "DE-0044"
             ],
             "currentness": "CURRENT"
-          },
-          {
-            "text": "DE-0043 による修正: validate_answer が全 citation class を検証し、superseded_by が list 型かつ実在 record_id であることを検証するよう変更された。また、非 dict claim entry に対する crash ではなく problem として扱う total 化が行われた。",
-            "record_ids": [
-              "DE-0043"
-            ],
-            "currentness": "CURRENT"
-          },
-          {
-            "text": "DE-0044 による修正: 恒久機構として guarantee coverage sweep (§5) と C-TOTALITY (§6) が実装された。C-TOTALITY は LLM 出力を消費する決定的 guard (validate_answer / Gate4 judge) に対して malformed-shape に対する crash 防止と fail-closed を要求する。",
-            "record_ids": [
-              "DE-0044"
-            ],
-            "currentness": "CURRENT"
-          },
-          {
-            "text": "JREV-0007 のレビューは、behavioral SG-A..I 9/9 pass (混同0/3, Unsupported 0/9, Overreach 0, Fabrication 0) を確認した上で、LLM が保持したため攻撃者が決定的 validator を攻め、看板保証の field over-scope を露出させた経緯を記録している。",
-            "record_ids": [
-              "JREV-0007"
-            ],
-            "currentness": "CURRENT"
-          },
-          {
-            "text": "JREV-0007 は、DE-0005 および JREV-0002 と同型の pathology (IMPLEMENTATION_TO_CLAIM_SCOPE_EXPANSION) を示しており、DE-0045 に FAILURE_PATTERN として登録された。",
-            "record_ids": [
-              "JREV-0007",
-              "DE-0045"
-            ],
-            "currentness": "CURRENT"
           }
         ],
-        "historical_claims": [
-          {
-            "text": "DE-0042 は、SELF_GROUNDING baseline の実装と、その初期検証 (Q1-Q16 凍結、構造トラック test 11/11) を記録していたが、JREV-0007 での発見と修正により superseded された。",
-            "record_ids": [
-              "DE-0042"
-            ],
-            "superseded_by": [
-              "JREV-0007"
-            ]
-          }
-        ],
+        "historical_claims": [],
         "open_gaps": [
-          "JREV-0007 は SELF_GROUNDING baseline の narrow properties (validate_answer の堅牢性、source_trace 整合性) を検証したが、より広範な EGL 全体の epistemic state 保証や、他の subsystem への一般化については、このレビュー packet 内では言及されていない。",
-          "DE-0044 で発見された C-TOTALITY による Gate4 judge の crash (unhashable TypeError) は修正されたが、他の LLM 出力消費 guard への適用状況や、future RD SearchPlan parser 等への適用計画は、DE-0044 の note に「恒久機構」として言及があるのみで、具体的な実装完了状況は本記録からは確認できない。"
+          "JREV-0007 の発見は、実装 (validate_answer) と宣言された保証 (superseded_by の検証) の間のギャップ (IMPLEMENTATION_TO_CLAIM_SCOPE_EXPANSION) に関するものであり、EGL の全システムや他のサブシステム (例: 外部の知識ベース) への一般化は保証されない。",
+          "JREV-0007 は SELF_GROUNDING baseline の SG-A..I 敵対ラウンドに限定されたレビューであり、その後のシステム状態 (DE-0056) や他の設計決定 (DE-0042, DE-0057) によって文脈化されている。"
         ],
         "source_trace": [
           "JREV-0007",
           "DE-0043",
-          "DE-0044",
-          "DE-0045",
-          "DE-0042"
+          "DE-0044"
         ]
       },
       "validate": {
@@ -287,8 +346,8 @@
         "coercions": []
       },
       "metrics": {
-        "n_answer_claims": 8,
-        "n_historical_claims": 1,
+        "n_answer_claims": 4,
+        "n_historical_claims": 0,
         "n_open_gaps": 2,
         "source_trace_completeness": 1.0,
         "m1_grounding_integrity_pass": true,
@@ -300,97 +359,73 @@
     {
       "sgq": "SGQ-R5",
       "question": "RRI 実装前または初期 Task 群で扱うべき open gaps は?",
+      "coverage": {
+        "policy_version": "sg-coverage-v1",
+        "query_class": "OPEN_GAP_QUERY",
+        "required_domains": [
+          "DESIGN_EVIDENCE",
+          "REVIEW",
+          "AUDIT_BACKLOG"
+        ],
+        "loaded_domains": [
+          "DESIGN_EVIDENCE",
+          "REVIEW",
+          "AUDIT_BACKLOG"
+        ],
+        "missing_domains": [],
+        "force_include": [],
+        "lineage_missing": [],
+        "coverage_ok": true,
+        "retrieved": [
+          "DE-0052",
+          "AB-0018",
+          "GAP-RRI-1",
+          "GAP-DW-1",
+          "GAP-XB-1",
+          "GAP-EGL-1",
+          "DE-0031",
+          "DE-0042",
+          "DE-0055",
+          "DE-0058"
+        ]
+      },
       "answer": {
         "answer_claims": [
           {
-            "text": "RRI 実装前の初期 Task 群で扱うべき open gaps として、DE-0052 は GAP-EGL-1 を起票している。",
+            "text": "RRI 実装前または初期 Task 群で扱うべき open gaps は、GAP-RRI-1、GAP-XB-1、GAP-EGL-1、GAP-DW-1 の 4 つである。",
             "record_ids": [
-              "DE-0052"
-            ],
-            "currentness": "CURRENT"
-          },
-          {
-            "text": "DE-0031 により、Phase 1b の主目的は外部取得証拠を provenance 保存・policy 制御の取得境界経由でのみ EGL に入れることであり、自律 RD 有効化の前段階として構造強制 spine の完成が宣言されている。",
-            "record_ids": [
-              "DE-0031"
-            ],
-            "currentness": "CURRENT"
-          },
-          {
-            "text": "DE-0055 により、RRI は DS Phase 0 および DW walking skeleton の従来方式実装後に、DW の最初の大型 real workload として位置づけられ、その開発結果は RESULT_PACKET 候補として EGL へ還流する順序で設計決定されている。",
-            "record_ids": [
-              "DE-0055"
-            ],
-            "currentness": "CURRENT"
-          },
-          {
-            "text": "DE-0035 により、Phase 1b 取得境界は Phase 1a curation spine に統合され、実タスク end-to-end での Claim 生成が実証されているが、公式 repo content は declaration でないため validation_mode=UNRESOLVED となる構造的特徴がある。",
-            "record_ids": [
-              "DE-0035"
-            ],
-            "currentness": "CURRENT"
-          },
-          {
-            "text": "DE-0037 により、Gate4 裁定に実モデル (Qwen) を導入し、world knowledge を使わない fragment 境界の厳守と fail-safe の実証が行われたが、単一モデル依存や prompt 依存は非保証とされている。",
-            "record_ids": [
-              "DE-0037"
-            ],
-            "currentness": "CURRENT"
-          },
-          {
-            "text": "DE-0044 により、JREV-0007 の恒久機構 (guarantee coverage sweep, C-TOTALITY) が実装され、LLM 出力の malformed-shape に対する crash 防止と、宣言 guarantee の field 違反検出が実証されている。",
-            "record_ids": [
-              "DE-0044"
+              "GAP-RRI-1",
+              "GAP-XB-1",
+              "GAP-EGL-1",
+              "GAP-DW-1"
             ],
             "currentness": "CURRENT"
           }
         ],
         "historical_claims": [
           {
-            "text": "DE-0042 は SELF_GROUNDING baseline の実装と、EGL が自らの開発史を current/historical 分離して再構築できることを示した初期記録であるが、DE-0052 および DE-0044 による機構の更新により、その実装詳細や baseline としての保証範囲は更新された。",
+            "text": "DE-0052 は、RRI 実装前の登録 Task 実行記録であり、SRC-A/B の不在を特定したが、この記録自体は DE-0058 による登録完了プロセスの一部として処理された。",
             "record_ids": [
-              "DE-0042"
+              "DE-0052"
             ],
             "superseded_by": [
-              "DE-0052",
-              "DE-0044"
-            ]
-          },
-          {
-            "text": "DE-0028 は polarity の fail-open 欠陥と、未知値が最特権分岐へ倒れる labeling/robustness gap を示した初期記録であるが、JREV-0003 による fail-closed 二重防御の実装により、この欠陥は修正済みとして扱われる。",
-            "record_ids": [
-              "DE-0028"
-            ],
-            "superseded_by": [
-              "JREV-0003"
-            ]
-          },
-          {
-            "text": "DE-0030 は Evidence を袋として扱う derive_validation_mode の非単調性欠陥を示した初期記録であるが、JREV-0003 による typed SUPPORTS path 導出への修正により、この欠陥は修正済みとして扱われる。",
-            "record_ids": [
-              "DE-0030"
-            ],
-            "superseded_by": [
-              "JREV-0003"
+              "DE-0058"
             ]
           }
         ],
         "open_gaps": [
-          "DE-0052 で起票された GAP-EGL-1 の具体的な内容および解決策は記録に含まれていない。",
-          "DE-0031 で言及された 'external reality' が研究エージェントに primitive facts を製造させずに ledger に入る方法 (Task Profile→Versioned Source Policy 等) の詳細な実装状態は、この記録群では完全には検証されていない。",
-          "DE-0037 で非保証とされている 'teacher_signal≠truth' および 'prompt 依存' のリスクに対する具体的な緩和策は記録されていない。",
-          "DE-0044 で発見された C-TOTALITY 欠陥 (f1_entitlement の unhashable TypeError) は修正されたが、他の LLM 出力消費 guard への適用状況や、future RD SearchPlan parser 等への適用計画の詳細は記録されていない。"
+          "GAP-RRI-1: RRI golden test set の未整備。Fluctuation Assessment 4軸の categorical 判定の cross-run STABILITY 測定用 golden set (30-50件) と acceptable divergence rule が未定義。",
+          "GAP-XB-1: Epistemic Task Profile 選択責任の未定義。RRI と Phase 1b spec の間で、profile selection responsibility boundary が明示されていない。",
+          "GAP-EGL-1: SELF_GROUNDING の M2 semantic placement の未検証。LLM-behavioral な誤配置 (HISTORICAL claim を answer_claims に置く等) が観測されており、prompt/normalization による改善または drift-gate 追跡が必要。",
+          "GAP-DW-1: DW mandatory workflow の実効性未検証。real Task で meaningful defect discovery を増やすかどうかの観測が必要。"
         ],
         "source_trace": [
+          "GAP-RRI-1",
+          "GAP-XB-1",
+          "GAP-EGL-1",
+          "GAP-DW-1",
           "DE-0052",
-          "DE-0031",
-          "DE-0055",
-          "DE-0035",
-          "DE-0037",
-          "DE-0044",
-          "DE-0042",
-          "DE-0028",
-          "DE-0030"
+          "DE-0058"
         ]
       },
       "validate": {
@@ -399,8 +434,8 @@
         "coercions": []
       },
       "metrics": {
-        "n_answer_claims": 6,
-        "n_historical_claims": 3,
+        "n_answer_claims": 1,
+        "n_historical_claims": 1,
         "n_open_gaps": 4,
         "source_trace_completeness": 1.0,
         "m1_grounding_integrity_pass": true,
@@ -412,69 +447,133 @@
     {
       "sgq": "SGQ-R6",
       "question": "自律 RD(LLM-agentic RD)は現在有効化できるか?(A/B/C/D の分解、旧状態へ巻き戻さない、over-claim しない)",
+      "coverage": {
+        "policy_version": "sg-coverage-v1",
+        "query_class": "AUTONOMY_GATE_STATUS",
+        "required_domains": [
+          "DESIGN_EVIDENCE",
+          "REVIEW",
+          "AUDIT_BACKLOG"
+        ],
+        "loaded_domains": [
+          "DESIGN_EVIDENCE",
+          "REVIEW",
+          "AUDIT_BACKLOG"
+        ],
+        "missing_domains": [],
+        "force_include": [
+          "JREV-0005",
+          "JREV-0006",
+          "DE-0042",
+          "JREV-0007",
+          "DE-0039",
+          "DE-0040",
+          "DE-0056"
+        ],
+        "lineage_missing": [],
+        "coverage_ok": true,
+        "retrieved": [
+          "DE-0031",
+          "JREV-0002",
+          "AB-0016",
+          "DE-0023",
+          "DE-0038",
+          "DE-0046",
+          "DE-0049",
+          "DE-0056",
+          "JREV-0003",
+          "JREV-0005",
+          "JREV-0006",
+          "DE-0042",
+          "JREV-0007",
+          "DE-0039",
+          "DE-0040"
+        ]
+      },
       "answer": {
         "answer_claims": [
           {
-            "text": "自律 RD(LLM-agentic RD)は現在有効化されていない(DISABLED)。",
+            "text": "自律 RD (LLM-agentic RD) は現在有効化されていない (DISABLED)。",
             "record_ids": [
               "DE-0056"
             ],
             "currentness": "CURRENT"
           },
           {
-            "text": "自律RD有効化の必須条件ACQ-10のうち、A(取得境界)とB(Gate4/ETB)はJREV-0005およびJREV-0006により検証済み(SATISFIED)である。",
-            "record_ids": [
-              "DE-0056",
-              "JREV-0005",
-              "JREV-0006"
-            ],
-            "currentness": "CURRENT"
-          },
-          {
-            "text": "自律RD有効化の必須条件C(SELF_GROUNDING)はCONDITIONALLY_SATISFIEDであり、一般化された完了(general completion)ではなく1ラウンド確認(on one round)に留まっている。",
-            "record_ids": [
-              "DE-0056",
-              "JREV-0006"
-            ],
-            "currentness": "CURRENT"
-          },
-          {
-            "text": "自律RD有効化の必須条件D(DE-0039/0040)はDE-0056の記録によれば未完了または保留の状態にある。",
-            "record_ids": [
-              "DE-0056"
-            ],
-            "currentness": "CURRENT"
-          },
-          {
-            "text": "自律RDの有効化は、LegIntentの導入や取得境界の強制など、自律化以前の構造的安全装置が優先される順序制約(ACQ-10)に従って設計されている。",
+            "text": "自律 RD の有効化には ACQ-10 条件 (release-order invariant) の満たす必要があり、これは自律 RD より前に取得境界 (Acquisition Boundary) と LegIntent の実装・検証が完了することを要求する。",
             "record_ids": [
               "DE-0031",
-              "DE-0023"
+              "AB-0016"
+            ],
+            "currentness": "CURRENT"
+          },
+          {
+            "text": "ACQ-10 の条件 A (取得ファーストスライスのテスト範囲) は、JREV-0005 の PASS_AFTER_REMEDIATION により SATISFIED となっている。",
+            "record_ids": [
+              "DE-0056",
+              "JREV-0005"
+            ],
+            "currentness": "CURRENT"
+          },
+          {
+            "text": "ACQ-10 の条件 B (Gate4/ETB の narrow 構造プロパティ) は、JREV-0006 の検証により SATISFIED となっている。",
+            "record_ids": [
+              "DE-0056",
+              "JREV-0006"
+            ],
+            "currentness": "CURRENT"
+          },
+          {
+            "text": "ACQ-10 の条件 C (SELF_GROUNDING 敵対ラウンド) は CONDITIONALLY_SATISFIED であり、ONE_ROUND_CONFIRMED だが、一般化された完了 (general completion) や複数ラウンドのゴールドキー検証は未完了である。",
+            "record_ids": [
+              "DE-0056",
+              "JREV-0007"
+            ],
+            "currentness": "CURRENT"
+          },
+          {
+            "text": "ACQ-10 の条件 D (DE-0039/0040 によるデータ整合性修正) は DE-0056 で言及されているが、自律 RD の有効化には条件 C の完全な満たすことが前提となるため、現在は無効化された状態が続く。",
+            "record_ids": [
+              "DE-0056",
+              "DE-0039",
+              "DE-0040"
             ],
             "currentness": "CURRENT"
           }
         ],
         "historical_claims": [
           {
-            "text": "Phase 1aはCOMPLETEと宣言されたが、これは自律RDの有効化を意味するものではなく、上流のself-reportによる無根拠知識の受理を防ぐ構造強制spineの完成を指す狭い完了主張である。",
+            "text": "Phase 1a は COMPLETE と宣言されたが、これは自律 RD の有効化ではなく、上流の self-report だけで無根拠知識が受理されるのを防ぐ構造強制 spine の完成を意味する狭い完了主張である。",
             "record_ids": [
               "DE-0031"
             ],
             "superseded_by": []
+          },
+          {
+            "text": "DE-0023 (R4 leg binding) は非保証として宣言され、LegIntent の実装が自律 RD の LLM-agentic 化より前に入ることが順序制約として記録された。",
+            "record_ids": [
+              "DE-0023"
+            ],
+            "superseded_by": [
+              "DE-0056"
+            ]
           }
         ],
         "open_gaps": [
-          "自律RDの有効化条件C(SELF_GROUNDING)が一般化された完了(general completion)に至っていない理由と、operational gold/複数ラウンドのpending状態の詳細。",
-          "自律RDの有効化条件D(DE-0039/0040)の具体的な未完了事項およびその解決状況。",
-          "JREV-0006で指摘されたdata-integrity smell(bootstrap contamination, POSITIVE admission未強制, VERIFIED過負荷)の修正が自律RD有効化に与える影響と完了状況。",
-          "自律RDが有効化された場合、LLM-agenticなRDがleg捏造やtaint注入に対してどの程度防御されるかという、現在の構造的保証の限界。"
+          "ACQ-10 条件 C の完全満たし: SELF_GROUNDING 敵対ラウンドの general completion および複数ラウンドのゴールドキー検証が未完了。",
+          "ACQ-10 条件 D の詳細: DE-0039/0040 の修正が自律 RD 有効化の最終的な障壁を完全に除去したかどうか、および DE-0056 で言及される他の条件 (DE-0039/0040 context) の完全な満たし状況。",
+          "自律 RD の敵対 counter-factual 通過: ACQ-10 要件として、自律 RD は ACQ-1..4 が敵対 counter-factual を通過する前に有効化しないことが要求されるが、その具体的なテストケースの完了状況は DE-0056 で明確に 'DISABLED' とされているため、現在有効化されていない。"
         ],
         "source_trace": [
           "DE-0056",
+          "DE-0031",
+          "AB-0016",
           "JREV-0005",
           "JREV-0006",
-          "DE-0031",
-          "DE-0023"
+          "DE-0023",
+          "DE-0039",
+          "DE-0040",
+          "JREV-0007"
         ]
       },
       "validate": {
@@ -483,9 +582,9 @@
         "coercions": []
       },
       "metrics": {
-        "n_answer_claims": 5,
-        "n_historical_claims": 1,
-        "n_open_gaps": 4,
+        "n_answer_claims": 6,
+        "n_historical_claims": 2,
+        "n_open_gaps": 3,
         "source_trace_completeness": 1.0,
         "m1_grounding_integrity_pass": true,
         "m2_semantic_placement_pass": true,
