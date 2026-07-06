@@ -15,6 +15,8 @@ CODER_EP, CODER_M = "http://localhost:8006/v1/chat/completions", "Qwen3-Coder-Ne
 SCRIPTS = "/home/takasan/models_trtllm"
 RUN_SOR = "/home/takasan/dev-workcell/run_sor"  # F-1: persistent append-only DW run SoR (NOT a temp dir)
 SWAPS = []
+# §7 display-alias hygiene(historical Task/record ID は書き換えない。future display のみ曖昧さ回避):
+NICKNAMES = {"approved_rq_set_gate": "approved_rq_gate", "validate_rq_candidate": "rq_candidate_gate"}
 CURRENT_TASK = None
 CURRENT_MODEL = "qwen"  # 起動時は Qwen3.6 が上がっている前提
 
@@ -45,7 +47,9 @@ SLICES = {
      "decides whether a research design may proceed to an Approved RQ Set. design is a dict with: audit_findings "
      "(list of dicts, each {finding_id, severity ('MAJOR'|'MINOR'), disposition ('RESOLVED'|'REJECTED'|"
      "'MOVED_TO_GAP'|'OPEN')}), revision_ref (str, optional), rq_candidates (list). Return {\"may_proceed\": bool, "
-     "\"reason\": str}. RULES: (D1) C-TOTALITY: if design is not a dict, return may_proceed False (never crash). "
+     "\"reason\": str}. RULES: (D1) C-TOTALITY: if design is not a dict, OR audit_findings is present but not a "
+     "list (None, int, etc.), OR rq_candidates is not a list, return may_proceed False — NEVER crash on any "
+     "malformed shape. "
      "(D2) EVERY finding with severity 'MAJOR' must be a dict that HAS a 'disposition' key whose value is one of "
      "RESOLVED, REJECTED, MOVED_TO_GAP (NOT 'OPEN'). CRITICAL finding-level C-TOTALITY: a MAJOR finding that is not "
      "a dict, or lacks a 'disposition' key, or whose disposition is 'OPEN' or any unrecognized value, must be "
@@ -64,6 +68,8 @@ SLICES = {
      ({"audit_findings":[{"finding_id":"F1","severity":"MAJOR","disposition":"RESOLVED"}],"rq_candidates":["RQ-1"]}, False, "RESOLVED but no revision_ref -> reject (D3)"),
      ({"audit_findings":[{"finding_id":"F1","severity":"MAJOR","disposition":"MOVED_TO_GAP"}],"rq_candidates":["RQ-1"]}, True, "MAJOR MOVED_TO_GAP no revision -> proceed"),
      ({"audit_findings":[{"finding_id":"F1","severity":"MAJOR","disposition":"RESOLVED"}],"revision_ref":"R1","rq_candidates":[]}, False, "empty rq_candidates -> reject (D4)"),
+     ({"audit_findings":None,"rq_candidates":["RQ-1"]}, False, "§4: audit_findings None -> reject no crash"),
+     ({"audit_findings":123,"rq_candidates":["RQ-1"]}, False, "§4: audit_findings int -> reject no crash"),
      (None, False, "non-dict -> reject no crash (D1)"),
    ]},
  "rdec": {
@@ -233,6 +239,67 @@ def run_tests(source, cfg):
     fails=[r for r in res if not r["ok"]]
     return {"status":"executed","passed":not fails,"cases":len(res),"n_pass":len(res)-len(fails),"failures":[{"lbl":r["lbl"],"got":r["got"]} for r in fails]}
 
+# ── §5 auditor (test-set adequacy attack) + §3 counterexample-based disposition ───────────────
+def _case_shapes(cfg):
+    """auditor に渡す test inventory の要約(どんな shape が既にテスト済みか)。"""
+    return [lbl for *_rest, lbl in cfg["cases"]]
+
+def audit_once(code, tr, cfg, run_id, seed):
+    """§5: auditor は supplied test の adequacy を攻撃し、各 finding に concrete counterexample_input を付ける。
+    実装が現テストを通るかでなく、tested surface が claimed property より狭くないかを attack。"""
+    AUD = ("You are an independent code auditor (a DIFFERENT model from the coder). You are given the "
+           "implementation, its test result, the TEST INVENTORY it was checked against, and the acceptance goal. "
+           "Do NOT merely confirm it passes the supplied tests. ATTACK whether the supplied tests are load-bearing "
+           "and whether the tested surface is NARROWER than the claimed property: identify malformed shapes, "
+           "counter-factuals, trust-root paths, semantic cases, or state transitions NOT covered by the test set. "
+           "For EACH finding you MUST provide `counterexample_input` = a concrete JSON input value passed as the "
+           "first argument to the function that you claim is mishandled (or null if you truly cannot construct one), "
+           "and `uncovered_shape` = the shape the tests miss. Return ONLY JSON "
+           "{\"findings\":[{\"category\":\"...\",\"evidence\":\"...\",\"counterexample_input\":<json>,\"uncovered_shape\":\"...\"}]}.")
+    u = (f"CODE:\n{code}\nTEST_RESULT:\n{json.dumps(tr)}\nTEST_INVENTORY (shapes already tested):\n"
+         f"{json.dumps(_case_shapes(cfg), ensure_ascii=False)}\nACCEPTANCE_GOAL:\n{cfg['goal']}\n\nReturn the JSON.")
+    af = parse_findings(chat(QWEN_EP, QWEN_M, AUD, u, max_tokens=800, seed=seed))
+    findings = []
+    for k, f in enumerate(af):
+        if not isinstance(f, dict):
+            continue
+        findings.append({"finding_id": f"F{k}", "category": f.get("category", "other"), "severity": "MAJOR",
+                         "evidence": f.get("evidence", ""), "status": "OPEN",
+                         "counterexample_input": f.get("counterexample_input", "__NONE__"),
+                         "uncovered_shape": f.get("uncovered_shape")})
+    return findings
+
+def _reproduce(fn, cfg, ce):
+    """counterexample を実行。crash か malformed-output(objective C-TOTALITY 違反)なら True。"""
+    try:
+        out = eval(cfg["call"], {"item": ce, cfg["fn"]: fn})
+    except Exception as e:
+        return True, f"CRASH:{type(e).__name__}"
+    if not isinstance(out, dict) or cfg["key"] not in out:
+        return True, f"malformed_output:{out!r}"[:80]
+    return False, "handled"
+
+def dispose_findings(code, cfg, findings):
+    """§3 Manager disposition(deterministic, oracle-free): counterexample が objective defect を
+    reproduce する finding のみ ACCEPTED、それ以外 REJECTED。over-flag した spurious finding は rework を駆動しない。"""
+    ns = {}
+    try:
+        exec(code, ns); fn = ns.get(cfg["fn"])
+    except Exception:
+        fn = None
+    disp = []
+    for f in findings:
+        fid, ce = f.get("finding_id"), f.get("counterexample_input", "__NONE__")
+        verdict, basis = "REJECTED", "no reproducing counterexample (unsubstantiated)"
+        if fn is not None and ce != "__NONE__" and ce is not None:
+            defect, obs = _reproduce(fn, cfg, ce)
+            if defect:
+                verdict, basis = "ACCEPTED", f"reproduced objective defect on {json.dumps(ce, ensure_ascii=False)[:60]} -> {obs}"
+        disp.append({"finding_id": fid, "verdict": verdict, "basis": basis,
+                     "uncovered_shape": f.get("uncovered_shape")})
+    return disp
+
+
 def main(name):
     global CURRENT_TASK, CURRENT_MODEL
     cfg=SLICES[name]; trial={"slice":name,"swaps":SWAPS,"authority":"BOOTSTRAP_REPORTED"}; final=None
@@ -251,28 +318,33 @@ def main(name):
             W.record_generate(TASK,{"identity":"qwen3-coder-next@8006","run_id":"gen1","diff":final,"test_result":tr,"problems":tr.get("failures",[])},ts())
             print(f"[GENERATE] {tr.get('status')} passed={tr.get('passed')} {tr.get('n_pass')}/{tr.get('cases')}",flush=True)
             assert swap_to("qwen")[0],"qwen swap failed"
-            AUD=("You are an independent code auditor (separate model from the coder). Attack the function for fail-open on malformed input, "
-                 "missing required-field checks, fabricated-reference acceptance, wrong-enum acceptance, or scope expansion. "
-                 "Return ONLY JSON {\"findings\":[{\"category\":\"...\",\"evidence\":\"...\"}]}.")
-            af=parse_findings(chat(QWEN_EP,QWEN_M,AUD,f"CODE:\n{final}\nTEST_RESULT:\n{json.dumps(tr)}\n\nReturn JSON.",max_tokens=600,seed=41))
-            findings=[{"finding_id":f"F{k}","category":"other","severity":"MAJOR","evidence":f.get("evidence",""),"status":"OPEN"} for k,f in enumerate(af)]
+            findings=audit_once(final,tr,cfg,"aud1",seed=41)   # §5: test-set adequacy attack + counterexamples
             W.record_audit(TASK,{"identity":"qwen3.6@8005-auditor","run_id":"aud1","findings":findings},ts())
-            print(f"[AUDIT] findings={len(findings)}",flush=True)
-            rework=0
+            print(f"[AUDIT] findings={len(findings)} cats={[f['category'] for f in findings]}",flush=True)
+            aud_n=1
             while True:
-                st,_=W.derive_state(TASK)
-                if st!="AUDIT_FAILED" or rework>=W.REWORK_ESCALATION_THRESHOLD: break
-                assert swap_to("coder")[0],"coder swap failed (rework)"
-                fb=json.dumps({"test_failures":tr.get("failures"),"audit":[f["evidence"] for f in findings]},ensure_ascii=False)[:900]
-                raw=chat(CODER_EP,CODER_M,"Fix ALL findings; resubmit FULL corrected source.",cfg["spec"]+"\nPRIOR FAILED:\n"+fb,seed=4+rework)
-                final=extract(raw,cfg["fn"]); tr=run_tests(final,cfg)
-                W.record_regenerate(TASK,{"identity":"qwen3-coder-next@8006","run_id":f"regen{rework+1}","diff":final,"test_result":tr},ts())
-                print(f"[REGEN #{rework+1}] passed={tr.get('passed')} {tr.get('n_pass')}/{tr.get('cases')}",flush=True)
-                assert swap_to("qwen")[0],"qwen swap failed (re-audit)"
-                af=parse_findings(chat(QWEN_EP,QWEN_M,AUD,f"CODE:\n{final}\nTEST_RESULT:\n{json.dumps(tr)}\n\nReturn JSON.",max_tokens=600,seed=42+rework))
-                findings=[{"finding_id":f"F{k}","category":"other","severity":"MAJOR","evidence":f.get("evidence",""),"status":"OPEN"} for k,f in enumerate(af)]
-                W.record_audit(TASK,{"identity":"qwen3.6@8005-auditor","run_id":f"aud{rework+2}","findings":findings},ts())
-                print(f"[re-AUDIT] findings={len(findings)}",flush=True); rework+=1
+                st,view=W.derive_state(TASK)
+                if st=="DISPOSITION_REQUIRED":                 # §3: Manager が counterexample で disposition
+                    disp=dispose_findings(final,cfg,W._latest_findings(view))
+                    W.record_disposition(TASK,disp,ts(),mgr)
+                    acc=[d for d in disp if d["verdict"]=="ACCEPTED"]
+                    print(f"[DISPOSE] {len(acc)}/{len(disp)} ACCEPTED (残りは reproduce せず REJECTED)",flush=True)
+                    continue
+                if st=="READY_FOR_REGENERATE":                 # accepted のみが rework を駆動
+                    items=W.rework_items(TASK)
+                    assert swap_to("coder")[0],"coder swap failed (rework)"
+                    fb=json.dumps({"test_failures":tr.get("failures"),"accepted_to_fix":[i.get("finding") for i in items]},ensure_ascii=False,default=str)[:1100]
+                    raw=chat(CODER_EP,CODER_M,"Fix ONLY these accepted issues; resubmit FULL corrected source.",cfg["spec"]+"\nACCEPTED_TO_FIX:\n"+fb,seed=4+aud_n)
+                    final=extract(raw,cfg["fn"]); tr=run_tests(final,cfg)
+                    W.record_regenerate(TASK,{"identity":"qwen3-coder-next@8006","run_id":f"regen{aud_n}","diff":final,"test_result":tr,"resolved_findings":[i["finding_id"] for i in items]},ts())
+                    print(f"[REGEN #{aud_n}] passed={tr.get('passed')} {tr.get('n_pass')}/{tr.get('cases')}",flush=True)
+                    assert swap_to("qwen")[0],"qwen swap failed (re-audit)"
+                    aud_n+=1
+                    findings=audit_once(final,tr,cfg,f"aud{aud_n}",seed=41+aud_n)
+                    W.record_audit(TASK,{"identity":"qwen3.6@8005-auditor","run_id":f"aud{aud_n}","findings":findings},ts())
+                    print(f"[re-AUDIT] findings={len(findings)}",flush=True)
+                    continue
+                break                                          # READY_FOR_UPPER_REVIEW / JUDGE_REQUIRED
             st,view=W.derive_state(TASK); trial["final_state"]=st
             if st=="READY_FOR_UPPER_REVIEW":
                 W.record_upper_review(TASK,{"verdict":"tests pass + audit clean"},ts(),mgr)
