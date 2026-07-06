@@ -1,0 +1,22 @@
+{
+  "final_design": {
+    "load_bearing_fields": [
+      "human_declaration",
+      "escalation_trigger"
+    ],
+    "trust_root": "explicit_human_declaration",
+    "presence_not_sufficiency": true,
+    "escalation_rule": "IF human_declaration IS NULL THEN ESCALATE",
+    "scope_excluded": [
+      "environment",
+      "inventory",
+      "effectiveness",
+      "GPU",
+      "monitoring",
+      "model_capability_boundaries",
+      "task_context"
+    ],
+    "rationale": "The design is narrowed to exactly two load-bearing fields: the human's explicit declaration of sufficiency and a binary trigger for escalation. The trust root is strictly the human's declaration, which is accepted as a procedural artifact rather than a grounded truth claim. Context-presence (the existence of the record) is explicitly stated as NOT an assignment-sufficiency guarantee, forcing the human to provide the declaration. The escalation rule is singular and deterministic: if the declaration is missing, the system escalates. All other fields (environment, capabilities, etc.) are excluded from load-bearing status to prevent scope expansion and responsibility leakage, ensuring the human performs the necessary adequacy judgment via the declaration rather than the system inferring it."
+  },
+  "state": "JUDGE_REQUIRED"
+}
