@@ -1,0 +1,26 @@
+{
+  "mode": "A (sequential swap)",
+  "task": "RRI approved_rq_set_gate (§29)",
+  "swaps": [
+    {
+      "to": "coder",
+      "latency_s": 167.6,
+      "ok": true
+    },
+    {
+      "to": "qwen",
+      "latency_s": 181.8,
+      "ok": true
+    }
+  ],
+  "final_state": "READY_FOR_UPPER_REVIEW",
+  "completed": true,
+  "swap_count": 2,
+  "swap_latencies_s": [
+    167.6,
+    181.8
+  ],
+  "swap_failures": 0,
+  "avg_swap_s": 174.7,
+  "final_source": "def approved_rq_set_gate(rq_set):\n    # G1: C-TOTALITY - ensure rq_set is a dict\n    if not isinstance(rq_set, dict):\n        return {\"may_proceed\": False, \"reason\": \"rq_set must be a dict\"}\n    \n    # G2: approval_status must equal 'APPROVED'\n    if rq_set.get(\"approval_status\") != \"APPROVED\":\n        return {\"may_proceed\": False, \"reason\": \"approval_status must be 'APPROVED'\"}\n    \n    # G3: SANCTIONED PATH - both source_research_design_id and source_revision_id must be present and non-empty\n    source_research_design_id = rq_set.get(\"source_research_design_id\")\n    source_revision_id = rq_set.get(\"source_revision_id\")\n    \n    if not source_research_design_id or not source_revision_id:\n        return {\"may_proceed\": False, \"reason\": \"both source_research_design_id and source_revision_id must be present and non-empty\"}\n    \n    # G4: required_rqs must be a non-empty list\n    required_rqs = rq_set.get(\"required_rqs\")\n    if not isinstance(required_rqs, list) or len(required_rqs) == 0:\n        return {\"may_proceed\": False, \"reason\": \"required_rqs must be a non-empty list\"}\n    \n    # G5: at least one of resolved_intent_ref or validated_need_ref must be present and non-empty\n    resolved_intent_ref = rq_set.get(\"resolved_intent_ref\")\n    validated_need_ref = rq_set.get(\"validated_need_ref\")\n    \n    if not resolved_intent_ref and not validated_need_ref:\n        return {\"may_proceed\": False, \"reason\": \"at least one of resolved_intent_ref or validated_need_ref must be present and non-empty\"}\n    \n    return {\"may_proceed\": True, \"reason\": \"RQ set meets all gate requirements\"}"
+}
