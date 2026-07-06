@@ -1,7 +1,8 @@
 # Plan — Operational Design-Formation Experiment
 
-状態: **AWAITING_INDEPENDENT_REVIEW**（実装・設計変更は本 plan の独立 review 後）。
-発行: EGL Claude Code。宛先: 独立 review（GPT / Taka）。
+状態: **REVIEWED — PASS_WITH_THREE_AMENDMENTS（2026-07-07）**。Phase 0 は Amendment A 適用で承認、
+Phase 1 は Amendment B 適用で承認（DW dogfooding で build）。amendments を §A/§B/§C に記録。
+発行: EGL Claude Code。review: GPT。
 
 ## 中心質問
 
@@ -126,3 +127,103 @@ static inventory ↔ current operational state 分離 / DW への environment・
 4. Phase 1 の build 自体を DW loop（dogfooding）で回すか、通常実装か。
 
 承認まで実装・設計変更は行わない。
+
+---
+
+# AMENDMENTS（independent review 2026-07-07, PASS_WITH_THREE_AMENDMENTS）
+
+## §A — Phase 0 は true reach test（narrated walk-through にしない）
+Phase 0 は **現在実装済みの sanctioned interface のみ** を呼ぶ。実験継続のためだけに RESEARCH_NEED 後継 object /
+Research Design object / Approved RQ Set / Knowledge Packet を **手で捏造しない**。実装済み interface が無ければ
+その seam で止める。各 stop の記録形式:
+```
+STOP_ID / LAST_REAL_OBJECT / NEXT_REQUIRED_OBJECT / RESPONSIBLE_SYSTEM /
+MISSING_INTERFACE_OR_TRANSITION / WHY_CONTINUATION_IS_UNSANCTIONED
+```
+
+## §B — Phase 1 は「Research Design」と「Design-Change Formation」を分離（最重要）
+責任境界を明示。**RRI は what must be known、DW は what change to execute。**
+```
+RRI Research Intent worker  → BLOCKAGE CLASSIFICATION / NEED VALIDATION /
+                              RESEARCH-DECISION AXES / MISSING STATE OR CAPABILITY /
+                              RESOLUTION_REQUIREMENTS   ← RRI の最終 output はこれ（提案でない）
+EGL                         → CURRENT KNOWLEDGE / OPEN GAPS / FAILURE PATTERNS / NON-GUARANTEES
+DW Development Manager       → MINIMAL DESIGN-CHANGE CANDIDATE（grounded requirements を翻訳）
+Independent Design Auditor   → attack scope / trust root / responsibility leakage
+```
+RRI worker(Qwen3.6)が env registry を直接提案してはならない。それは「local model が design を発明できる」の
+測定にすぎず、「4-system loop が責任境界を通して design need を形成できる」を測れない。
+
+## §C — Human intervention taxonomy（H0–H5）
+```
+H0 mechanical execution（command/handoff/run）      — design 介入に数えない
+H1 format repair（schema/syntax、意味なし）          — 別集計
+H2 routing（どの system が問題を持つか人が特定）
+H3 missing-axis（essential な knowledge/state/capability axis を人が追加）
+H4 design（人が minimal change / architecture を供給）
+H5 adjudication（形成済み candidate から人が選ぶ）
+```
+Primary: **DESIGN_FORMATION_INTERVENTION = H2 + H3 + H4**。Secondary: TOTAL_SEMANTIC = H2+H3+H4+H5。
+成功信号: **H3 = 0 かつ H4 = 0**（または human/GPT baseline より有意に低い）。
+
+## §D — Role / model 分担（review §6 + Taka finding）
+```
+PLAN        → Claude Code(Development Manager) — design action は system role action として記録（隠れ orchestration にしない）
+GENERATE    → Qwen3-Coder-Next（Coding Worker candidate）
+AUDIT       → Qwen3.6（別 run/context）
+REGENERATE  → Qwen3-Coder-Next
+UPPER REVIEW→ Claude Code
+Research Intent 形成 → Qwen3.6（Claude は形成 output を audit 前に書き換えない）
+```
+**model exists ≠ role validated**: Qwen3-Coder-Next は candidate、role validation は実 DW Task 結果から測る。
+Manager と Auditor が同一 Claude の場合、run/context 分離を必須とし shared-weights 限界を記録。
+
+## §E — Pre-seed leakage control（sealed artifact）
+`experiments/HUMAN_CANDIDATE_SEALED.json`（sha256=`e7b289b3628f07eb0dc1b150fc174a591adbc5ef01c11be23c2957188ba37a04`）を
+**Phase 0 前に封緘**。model context / prompt / retrieval corpus に入れない。system Decision Packet 凍結後にのみ開封。
+⚠ 汚染: Claude(orchestrator)は会話中に candidate を既見。緩和=形成は Qwen、Claude の形成介入は H として計上。
+
+## §F — Outcome 解釈（review §9）
+```
+O1 strong positive : missing operational state 特定 → resolution requirements 形成 → DW が bounded な
+                     persistent/current capability 表現を独立提案 → 人が essential axis を足さない
+O2 partial positive: missing state/capability は正しく特定、だが人が load-bearing axis を追加
+O3 routing/formation failure: 汎用 web/model research へ送る、または「Qwen3.6 で十分か」を root question に据える
+O4 architecture seam failure : 必要な object/transition が無く need を形成できない
+```
+**O4 は Phase 0 では実験失敗でない=reach baseline**。Phase 1 slice を正当化し得る。
+
+## §G — Phase 1 を DW dogfooding で build（review §7, APPROVE）
+Task Unit 分割（general autonomous design engine は作らない）:
+```
+TASK-ODF-01 Blockage classification contract
+TASK-ODF-02 Need Validation narrow slice
+TASK-ODF-03 Resolution Requirements / Research Axis output contract
+TASK-ODF-04 EGL context intake for design formation
+TASK-ODF-05 DW minimal design-candidate formation contract
+TASK-ODF-06 Independent Design Audit finding contract
+TASK-ODF-07 Decision Packet renderer
+TASK-ODF-08 Frozen-input operational experiment
+```
+
+---
+
+# PHASE 0 RESULT — reach test（§A 準拠, 2026-07-07, code なし・interface 監査）
+
+凍結入力を現状 system の sanctioned interface のみで進めた。**最初の seam で停止**:
+
+```
+STOP_ID:                    ODF-STOP-01
+LAST_REAL_OBJECT:           external OPERATIONAL EVENT（内部 object 化されていない）
+NEXT_REQUIRED_OBJECT:       OPERATIONAL_FINDING → BLOCKAGE_CLASSIFICATION → RESEARCH_NEED（DW spec §7.17）
+RESPONSIBLE_SYSTEM:         DW（operational-finding intake + RESEARCH_NEED 発行）
+MISSING_INTERFACE:          DW workcell は TASK(goal+knowledge_packet)しか受けない。operational-finding intake も
+                            RESEARCH_NEED emitter も未実装。
+WHY_UNSANCTIONED:           継続には RESEARCH_NEED/OPERATIONAL_FINDING を手で捏造する必要=§A で禁止（narration）。
+```
+仮に ODF-STOP-01 を越えても次の seam で停止（**ODF-STOP-02**: RRI Need Validation / Research Design=§19-29 未実装、
+GAP-XB-2）、さらに **ODF-STOP-03**: EGL KNOWLEDGE_PACKET emitter 未実装（GAP-XB-3）。
+
+**判定: O4（architecture seam failure）= reach baseline。** 現状 system は observed event を内部 finding に
+する intake すら持たず、design need 形成に入れない。→ **Phase 1 の minimal machinery（§G）が正当化される。**
+これは実験失敗でなく「現在 human が中間設計をやる理由」の構造的裏取り。手で補完して成功にはしていない。

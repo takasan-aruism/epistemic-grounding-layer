@@ -1,0 +1,12 @@
+{
+  "_SEAL": "DO NOT OPEN until the system Decision Packet is frozen. Post-hoc comparison only.",
+  "_rule": "この内容を実験の input/prompt/schema/rule/retrieval corpus に一切入れない。Qwen 形成 worker には渡さない。",
+  "_caveat": "Claude(orchestrator)は本内容を会話中に既に見ている=汚染あり。緩和: 形成は Qwen が行い、Claude は形成に手を出さない。Claude の形成介入は human-intervention として計上。",
+  "created_before": "Phase 0",
+  "human_gpt_candidate_solutions_for_operational_event": [
+    "versioned operational environment representation",
+    "static inventory vs current operational state separation",
+    "DW への environment / capability packet"
+  ],
+  "human_supplied_missing_capability_axis": "Qwen3-Coder-Next = local Coding Worker candidate (H3 missing-axis, DW DE-0004)"
+}
