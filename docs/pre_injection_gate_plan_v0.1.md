@@ -1,3 +1,5 @@
+> **SUPERSEDED (2026-07-08, EGL DE-0096)**: Taka 裁定 (b) — inject-gate は放棄し『常時 abstract representation』を採用。本 plan の B/C/D/E injection-gate slice は不採用。gate pilot(DE-0095)で representation 判定が injection 判定より safety を支配することが示された。以下は歴史的記録。
+
 # Pre-Injection Applicability / NULL-Injection Gate — Walking-Slice Plan v0.1
 
 Status: **PLAN — pre-implementation, subject to independent review** (per Taka directive). Date 2026-07-08.
