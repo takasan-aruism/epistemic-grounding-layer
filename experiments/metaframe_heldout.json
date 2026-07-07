@@ -1,0 +1,202 @@
+{
+  "heldout": [
+    {
+      "id": "HO-1",
+      "family": "artifact/signal-vs-inflated",
+      "missing_axis": "Is each finding substantiated by a reproducing counterexample (real defect) or an over-flag? Disposition before rework; reject findings that do not reproduce.",
+      "pre_frame_hash": "bfda89876962",
+      "axes": {
+        "A_ordinary": [
+          "Verify if findings represent critical security vulnerabilities or logic errors",
+          "Assess if findings constitute performance bottlenecks affecting throughput",
+          "Evaluate if findings are style violations or non-functional code smells"
+        ],
+        "B_skepticism": [
+          "Verify if findings are in production-critical paths or dead code",
+          "Assess if findings violate explicit security or compliance requirements",
+          "Check if findings represent actual exploit vectors or theoretical edge cases"
+        ],
+        "C_lessons": [
+          "Verify if the reported findings are artifacts of specific test configurations or load conditions rather than intrinsic code flaws.",
+          "Assess whether the 'load-bearing tests' adequately cover edge cases and failure modes not captured by standard validation suites.",
+          "Determine if the findings represent a deviation from the intended logical specification or merely a stylistic/structural difference."
+        ],
+        "D_retrieval": [
+          "Audit finding reproducibility under randomized input conditions",
+          "Validation of audit tool's own false-positive rate on known-good code",
+          "Impact analysis of proposed changes on existing load-bearing test suite"
+        ],
+        "T1_MF001": [
+          "Semantic Gap: Load-bearing test coverage vs. real-world adversarial inputs",
+          "Audit Validity: Source of findings (formal verification vs. heuristic fuzzing)",
+          "Risk Tolerance: Cost of false negatives vs. cost of rework"
+        ],
+        "T2_MFM2artifact": [
+          "Verify if the reported issues are reproducible under adversarial or edge-case inputs rather than standard load-bearing scenarios",
+          "Determine if the code changes are required to satisfy explicit specification constraints or are merely stylistic/preference-based",
+          "Assess if the findings represent a security vulnerability or data integrity risk versus a non-functional implementation detail"
+        ]
+      }
+    },
+    {
+      "id": "HO-2",
+      "family": "artifact/test-set-adequacy",
+      "missing_axis": "Do the supplied tests cover all malformed shapes? The tested surface may be narrower than the claimed property (a fail-open on an untested shape). Attack test-set adequacy.",
+      "pre_frame_hash": "5b180d81179c",
+      "axes": {
+        "A_ordinary": [
+          "Fuzz testing with edge-case inputs",
+          "Formal verification of security properties",
+          "Third-party security audit"
+        ],
+        "B_skepticism": [
+          "Verify coverage of edge cases and boundary conditions not included in the 7 tests",
+          "Assess performance and latency under peak load or stress testing",
+          "Audit for security vulnerabilities and input validation bypasses"
+        ],
+        "C_lessons": [
+          "Verify gate behavior under perturbed qubit initialization states (birth mode)",
+          "Audit for statistical averaging artifacts that mask localized errors",
+          "Map abstract gate failure modes to physical control signal deviations"
+        ],
+        "D_retrieval": [
+          "Verify label-to-structure mapping integrity against ground truth",
+          "Confirm event-driven execution replaces fixed-timing artifacts",
+          "Insert paired audit checkpoints for bit-identity verification prior to runtime"
+        ],
+        "T1_MF001": [
+          "Coverage: Unobserved edge cases in the 7-test suite",
+          "Adversarial: Robustness against inputs outside test distribution",
+          "Context: Environmental or dependency changes post-audit"
+        ],
+        "T2_MFM2artifact": [
+          "Edge case coverage beyond the 7 supplied tests",
+          "Security and side-effect audit of the implementation",
+          "Performance and resource usage under load"
+        ]
+      }
+    },
+    {
+      "id": "HO-3",
+      "family": "declared-vs-local",
+      "missing_axis": "Does the SPECIFIED capability actually work / perform in OUR local config? Docs give no local numbers; measure local behavior — it may fail locally. Specification != local applicability.",
+      "pre_frame_hash": "4b9b7640b55d",
+      "axes": {
+        "A_ordinary": [
+          "Verify actual latency reduction of model switching with fast resume enabled versus baseline",
+          "Audit memory footprint and fragmentation during rapid model load/unload cycles",
+          "Measure data consistency and state integrity after resume operations under concurrent load"
+        ],
+        "B_skepticism": [
+          "Verify actual latency reduction under production load vs. vendor benchmarks",
+          "Audit state persistence integrity and corruption risks during resume",
+          "Measure cold-start penalty if resume cache is evicted or invalidated"
+        ],
+        "C_lessons": [
+          "Verify state serialization compatibility across model version upgrades to prevent silent data corruption",
+          "Measure actual latency overhead of resume vs. cold start to confirm cost reduction claims",
+          "Audit checkpoint integrity and recovery success rates under simulated failure conditions"
+        ],
+        "D_retrieval": [
+          "verify state serialization completeness against model architecture changes",
+          "measure latency overhead of resume vs cold-start across different hardware",
+          "audit data integrity and bit-identity of restored tensors after deserialization"
+        ],
+        "T1_MF001": [
+          "Control Source: Verify if resume state is managed by vendor black-box or exposed for internal validation",
+          "State Nature: Audit if resumed state preserves full probabilistic distribution or collapses to deterministic shortcuts",
+          "Timing: Measure latency variance between cold start and resume to ensure 'fast' claim holds under load"
+        ],
+        "T2_MFM2artifact": [
+          "Verify if 'fast resume' preserves full model state fidelity or only partial/quantized state",
+          "Measure the actual latency and memory overhead of the resume operation versus a cold start",
+          "Check for side-effects such as cache invalidation penalties or consistency errors during state restoration"
+        ]
+      }
+    },
+    {
+      "id": "HO-4",
+      "family": "measure-the-assertion",
+      "missing_axis": "The co-serve impossibility is a DECLARED assertion, not measured — measure it first. And the operating-mode choice depends on an unmeasured variable (swap frequency); measure before deciding.",
+      "pre_frame_hash": "472edf4c5016",
+      "axes": {
+        "A_ordinary": [
+          "GPU memory footprint and peak VRAM usage per model",
+          "Inference latency and throughput requirements for each model",
+          "Batch size compatibility and memory fragmentation risks"
+        ],
+        "B_skepticism": [
+          "Verify actual VRAM consumption per model including activation memory and optimizer states",
+          "Measure GPU utilization and memory bandwidth saturation under concurrent load",
+          "Check for kernel launch overhead and context-switch penalties in mixed-mode execution"
+        ],
+        "C_lessons": [
+          "GPU memory footprint and peak utilization per model",
+          "Inference latency and throughput under concurrent load",
+          "Batch size compatibility and memory fragmentation risks"
+        ],
+        "D_retrieval": [
+          "GPU memory footprint and peak utilization under concurrent load",
+          "Inference latency distribution and tail-percentile stability",
+          "Batching efficiency and throughput degradation when co-located"
+        ],
+        "T1_MF001": [
+          "Control Source: External vs. Internal",
+          "Timing: Fixed/Interval vs. Event/Unpredictable",
+          "State Nature: Deterministic Output vs. Probabilistic Claim"
+        ],
+        "T2_MFM2artifact": [
+          "GPU Memory Fragmentation and Allocation Overlap",
+          "CUDA Context and Stream Interference",
+          "Shared Resource Contention (e.g., NVLink, PCIe Bandwidth)"
+        ]
+      }
+    },
+    {
+      "id": "HO-5",
+      "family": "artifact-vs-grounded",
+      "missing_axis": "Confirm the firing CONDITION mechanism: is 77% a property of the mechanism, or an artifact of the experimental setup (tracking length / accumulation)? Check the construction before treating the metric as a finding.",
+      "pre_frame_hash": "406c47d814a3",
+      "axes": {
+        "A_ordinary": [
+          "Verify sample size and statistical significance of the 77% figure",
+          "Check for selection bias in the 'main run' vs 'short smoke run' datasets",
+          "Analyze temporal trends to rule out transient anomalies or drift"
+        ],
+        "B_skepticism": [
+          "Verify if the 25.6% baseline is statistically robust or an artifact of low sample size in the smoke test",
+          "Check for selection bias in the 'main run' cohort (e.g., did only stable users trigger the full firing logic?)",
+          "Audit the definition of 'one-directional' to ensure it isn't conflated with 'successful' vs 'failed' attempts"
+        ],
+        "C_lessons": [
+          "Verify if the 77% statistic is an artifact of the 'one-directional' definition or binning thresholds.",
+          "Check for temporal or spatial averaging effects that mask multi-directional or oscillatory firing patterns.",
+          "Confirm the sensor calibration and noise floor to ensure 'one-directional' is not a detection limit artifact."
+        ],
+        "D_retrieval": [
+          "audit_directional_bias_in_sampling_logic",
+          "verify_asymmetry_independence_from_initial_conditions",
+          "check_for_deterministic_state_locking_or_deadlocks"
+        ],
+        "T1_MF001": [
+          "Control Source: External vs. Internal",
+          "Timing: Fixed/Interval vs. Event/Unpredictable",
+          "State Nature: Deterministic Output vs. Probabilistic Claim"
+        ],
+        "T2_MFM2artifact": [
+          "Signal vs. Noise",
+          "Implementation Detail vs. Abstract Principle",
+          "Error State vs. Intentional State"
+        ]
+      }
+    }
+  ],
+  "conditions": [
+    "A_ordinary",
+    "B_skepticism",
+    "C_lessons",
+    "D_retrieval",
+    "T1_MF001",
+    "T2_MFM2artifact"
+  ]
+}

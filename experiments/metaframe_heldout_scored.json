@@ -1,0 +1,107 @@
+{
+  "score": {
+    "HO-1": {
+      "A": "MISS",
+      "B": "PARTIAL",
+      "C": "PARTIAL",
+      "D": "HIT",
+      "T1": "PARTIAL",
+      "T2": "HIT"
+    },
+    "HO-2": {
+      "A": "HIT",
+      "B": "HIT",
+      "C": "XDOMAIN",
+      "D": "XDOMAIN",
+      "T1": "HIT",
+      "T2": "HIT"
+    },
+    "HO-3": {
+      "A": "HIT",
+      "B": "HIT",
+      "C": "HIT",
+      "D": "HIT",
+      "T1": "HIT",
+      "T2": "HIT"
+    },
+    "HO-4": {
+      "A": "PARTIAL",
+      "B": "PARTIAL",
+      "C": "PARTIAL",
+      "D": "PARTIAL",
+      "T1": "IRRELEVANT",
+      "T2": "PARTIAL"
+    },
+    "HO-5": {
+      "A": "PARTIAL",
+      "B": "PARTIAL",
+      "C": "HIT",
+      "D": "PARTIAL",
+      "T1": "IRRELEVANT",
+      "T2": "PARTIAL"
+    }
+  },
+  "tally": {
+    "A": {
+      "HIT": 2,
+      "PARTIAL": 2,
+      "MISS": 1,
+      "IRRELEVANT": 0,
+      "XDOMAIN": 0
+    },
+    "B": {
+      "HIT": 2,
+      "PARTIAL": 3,
+      "MISS": 0,
+      "IRRELEVANT": 0,
+      "XDOMAIN": 0
+    },
+    "C": {
+      "HIT": 2,
+      "PARTIAL": 2,
+      "MISS": 0,
+      "IRRELEVANT": 0,
+      "XDOMAIN": 1
+    },
+    "D": {
+      "HIT": 2,
+      "PARTIAL": 2,
+      "MISS": 0,
+      "IRRELEVANT": 0,
+      "XDOMAIN": 1
+    },
+    "T1": {
+      "HIT": 2,
+      "PARTIAL": 1,
+      "MISS": 0,
+      "IRRELEVANT": 2,
+      "XDOMAIN": 0
+    },
+    "T2": {
+      "HIT": 3,
+      "PARTIAL": 2,
+      "MISS": 0,
+      "IRRELEVANT": 0,
+      "XDOMAIN": 0
+    }
+  },
+  "cond_names": {
+    "A": "A_ordinary",
+    "B": "B_skepticism",
+    "C": "C_lessons",
+    "D": "D_retrieval",
+    "T1": "T1_MF001(admitted,observer-subject)",
+    "T2": "T2_MFM2(candidate,artifact,under-populated)"
+  },
+  "verdict": "NOT_DEMONSTRATED (induction が control を明確に上回らず)",
+  "key_findings": [
+    "T2(artifact meta-frame, Qwen独立induced, 封緘gold family と一致)が最多 3 HIT・over-trigger 0。subtle な HO-1(reproducibility)を A/B が外す中で回収。→ 構造family自体は実在し transfer する。",
+    "但し T2 は under-populated(2 incidents<3)で gate 不通=promotable でない。HO-1 では D(retrieval)も同時に回収 → 『CONTROL D ≈ TREATMENT: retrieval で十分な可能性』(MF-R15)。",
+    "T1(admitted PROVISIONAL, observer-subject)は 2 HIT だが HO-4/HO-5 で observer-subject軸を無関係な GPU/発火率に強制 → over-trigger 2件(MF-R5 実観測)。gate-valid な admitted frame が held-out には wrong family。",
+    "HO-2/HO-3 は missing axis が common software instinct(edge-case/vendor-claim実測)ゆえ A/B が T と同点 → 『CONTROL B ≈ TREATMENT: prompt効果』。",
+    "C/D は HO-2 で ESDE 固有概念(qubit/label/bit-identity)を software gate に literal 適用し誤射(XDOMAIN)=lesson/incident memory の cross-domain 誤転移。"
+  ],
+  "narrow_conclusion": "pilot(N=5)では『incident-derived meta-frame induction が ordinary/skepticism/lesson/retrieval を上回って missing axis を回収する』は **実証されず**。最良の transfer を示したのは under-populated な artifact candidate で、しかもその優位は retrieval(CONTROL D)と同等。promoted frame は over-trigger。→ 前登録解釈の『CONTROL D ≈ TREATMENT(retrieval で足りる)』+『CONTROL B ≈ TREATMENT(prompt効果)』に整合。",
+  "positive_signal_not_overclaimed": "ただし: (1)Qwen が封緘 gold の artifact family を独立発見(収束)、(2)その family が subtle な HO-1 を唯一(D と並び)回収。構造family memory 自体には価値がある可能性。induction という mechanism が retrieval を超える価値は本 pilot では未実証。",
+  "outcome_neutral": "本結果は前登録の解釈表(§25.1)に沿って解釈。induction 成功方向のみでの解釈をしていない。"
+}

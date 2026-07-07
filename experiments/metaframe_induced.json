@@ -1,0 +1,644 @@
+{
+  "frame_deltas": [
+    {
+      "frame_delta_id": "FD-01",
+      "incident_id": "INC-01",
+      "origin": "DERIVED_FROM_INCIDENT",
+      "decision_effect": "REDIRECTED",
+      "pre_frame": {
+        "terminal_or_active_claim": "Valid structures are defined by S≥0.20; this is a necessary but arbitrary 'God's hand' for basic research.",
+        "represented_distinctions": [],
+        "available_operations": []
+      },
+      "post_frame": {
+        "added_variables": [
+          "Randomness in label selection for frozenset generation",
+          "Integration of S-value into B_Gen"
+        ],
+        "added_distinctions": [
+          {
+            "left": "Structure (frozenset, topology)",
+            "relation": "is decoupled from",
+            "right": "Formula/Field (probabilistic generation, S distribution)"
+          }
+        ],
+        "added_operations": [
+          "Replacing hard threshold filtering (S≥0.20) with probabilistic generation based on calculation complexity/risk"
+        ],
+        "revised_claim": "Valid structures should emerge through probabilistic generation (random label selection) integrated with field properties, removing the S≥0.20 threshold to align with dynamic equilibrium philosophy."
+      },
+      "delta_summary": "Valid structures are defined by S≥0.20; this is a necessary  -> Valid structures should emerge through probabilistic generat"
+    },
+    {
+      "frame_delta_id": "FD-02",
+      "incident_id": "INC-02",
+      "origin": "DERIVED_FROM_INCIDENT",
+      "decision_effect": "REDIRECTED",
+      "pre_frame": {
+        "terminal_or_active_claim": "v9.11 の知見（n=2主体支配など）は現実的な構造を示している。",
+        "represented_distinctions": [],
+        "available_operations": []
+      },
+      "post_frame": {
+        "added_variables": [
+          "R>0 純度 (birth 時)"
+        ],
+        "added_distinctions": [
+          {
+            "left": "見かけ構造 (R=0混入)",
+            "relation": "excludes",
+            "right": "純粋な構造 (R>0参加)"
+          }
+        ],
+        "added_operations": [
+          "R=0リンクの除去",
+          "label数の削減（純度優先）"
+        ],
+        "revised_claim": "v9.11 の知見はアーティファクトであり、真の構造は n=5 が最頻で、n=2 は過大評価されていた。"
+      },
+      "delta_summary": "v9.11 の知見（n=2主体支配など）は現実的な構造を示している。 -> v9.11 の知見はアーティファクトであり、真の構造は n=5 が最頻で、n=2 は過大評価されていた。"
+    },
+    {
+      "frame_delta_id": "FD-03",
+      "incident_id": "INC-03",
+      "origin": "DERIVED_FROM_INCIDENT",
+      "decision_effect": "REDIRECTED",
+      "pre_frame": {
+        "terminal_or_active_claim": "認知層は物理層を支配し、劇的な効果を生み出す。記憶は外部に蓄積される。",
+        "represented_distinctions": [],
+        "available_operations": []
+      },
+      "post_frame": {
+        "added_variables": [
+          "物理状態を記憶として読む関数"
+        ],
+        "added_distinctions": [
+          {
+            "left": "外部 dict (SubjectLayer) への蓄積",
+            "relation": "is_not",
+            "right": "CID の記憶"
+          }
+        ],
+        "added_operations": [
+          "認知層の役割を「支配」から「予測・適応」へ変更",
+          "記憶の保存先を外部蓄積から物理構造の読み出しへ変更"
+        ],
+        "revised_claim": "認知層は物理層を支配せず、統計的差を生む。記憶は物理構造の痕跡として存在する。"
+      },
+      "delta_summary": "認知層は物理層を支配し、劇的な効果を生み出す。記憶は外部に蓄積される。 -> 認知層は物理層を支配せず、統計的差を生む。記憶は物理構造の痕跡として存在する。"
+    },
+    {
+      "frame_delta_id": "FD-05",
+      "incident_id": "INC-05",
+      "origin": "DERIVED_FROM_INCIDENT",
+      "decision_effect": "REDIRECTED",
+      "pre_frame": {
+        "terminal_or_active_claim": "B_Gen should be unified as the runtime subject immediately.",
+        "represented_distinctions": [],
+        "available_operations": []
+      },
+      "post_frame": {
+        "added_variables": [
+          "Layer B (event-driven spend ledger)",
+          "Paired Audit Mechanism"
+        ],
+        "added_distinctions": [
+          {
+            "left": "Layer A",
+            "relation": "vs",
+            "right": "Layer B"
+          },
+          {
+            "left": "Runtime Operation",
+            "relation": "vs",
+            "right": "Audit Observation"
+          }
+        ],
+        "added_operations": [
+          "Parallel execution of Layer A and Layer B",
+          "Bit-identity preservation of Layer A state"
+        ],
+        "revised_claim": "B_Gen resource utilization must be audited via paired Layer B before runtime promotion; E3 is the primary driver of cognitive activity."
+      },
+      "delta_summary": "B_Gen should be unified as the runtime subject immediately. -> B_Gen resource utilization must be audited via paired Layer "
+    },
+    {
+      "frame_delta_id": "FD-06",
+      "incident_id": "INC-06",
+      "origin": "DERIVED_FROM_INCIDENT",
+      "decision_effect": "REDIRECTED",
+      "pre_frame": {
+        "terminal_or_active_claim": "E3 implies immediate need for tripartite resonance implementation.",
+        "represented_distinctions": [],
+        "available_operations": []
+      },
+      "post_frame": {
+        "added_variables": [
+          "Tripartite Emergence (deferred)",
+          "Memory Retrieval Function (v9.15 focus)"
+        ],
+        "added_distinctions": [
+          {
+            "left": "E3 as Resonance",
+            "relation": "is",
+            "right": "Condition for Higher Layer"
+          },
+          {
+            "left": "Implementation",
+            "relation": "vs",
+            "right": "Theoretical Foundation"
+          }
+        ],
+        "added_operations": [
+          "Deferral of Tripartite Resonance implementation",
+          "Focus shift to Memory Retrieval"
+        ],
+        "revised_claim": "E3 provides the rational conditions for higher layers, but implementation is deferred; current focus is cognitive layer and memory."
+      },
+      "delta_summary": "E3 implies immediate need for tripartite resonance implement -> E3 provides the rational conditions for higher layers, but i"
+    },
+    {
+      "frame_delta_id": "FD-07",
+      "incident_id": "INC-07",
+      "origin": "DERIVED_FROM_INCIDENT",
+      "decision_effect": "REVERSED",
+      "pre_frame": {
+        "terminal_or_active_claim": "v9.16 implements probabilistic failure of Fetch.",
+        "represented_distinctions": [],
+        "available_operations": []
+      },
+      "post_frame": {
+        "added_variables": [
+          "Semantic precision of 'failure' vs 'selective recognition'"
+        ],
+        "added_distinctions": [
+          {
+            "left": "Probabilistic Failure (Claude)",
+            "relation": "incorrectly_mapped_to",
+            "right": "Selective Recognition (Taka/Rule 4)"
+          }
+        ],
+        "added_operations": [
+          "Reframing the mechanism's output from 'error state' to 'probabilistic visibility state'"
+        ],
+        "revised_claim": "v9.16 implements probabilistic selection of nodes for observation, where unselected nodes are 'missing', not 'failed'."
+      },
+      "delta_summary": "v9.16 implements probabilistic failure of Fetch. -> v9.16 implements probabilistic selection of nodes for observ"
+    },
+    {
+      "frame_delta_id": "FD-08",
+      "incident_id": "INC-08",
+      "origin": "DERIVED_FROM_INCIDENT",
+      "decision_effect": "REVERSED",
+      "pre_frame": {
+        "terminal_or_active_claim": "Using B_Gen for judgment is potentially arbitrary or 'God's hand'.",
+        "represented_distinctions": [],
+        "available_operations": []
+      },
+      "post_frame": {
+        "added_variables": [
+          "Philosophical boundary of 'God's hand' vs 'Physical derivation'"
+        ],
+        "added_distinctions": [
+          {
+            "left": "Researcher Arbitrariness",
+            "relation": "excluded_from",
+            "right": "Physical Layer Derivation"
+          }
+        ],
+        "added_operations": [
+          "Validating B_Gen/Q as legitimate physical anchors for identity judgment"
+        ],
+        "revised_claim": "Using B_Gen/Q is a consistent extension of the probabilistic physical design, not arbitrary."
+      },
+      "delta_summary": "Using B_Gen for judgment is potentially arbitrary or 'God's  -> Using B_Gen/Q is a consistent extension of the probabilistic"
+    },
+    {
+      "frame_delta_id": "FD-10",
+      "incident_id": "INC-10",
+      "origin": "DERIVED_FROM_INCIDENT",
+      "decision_effect": "REDIRECTED",
+      "pre_frame": {
+        "terminal_or_active_claim": "CID memory reading is a function for researchers to quantify physical states.",
+        "represented_distinctions": [],
+        "available_operations": []
+      },
+      "post_frame": {
+        "added_variables": [
+          "Perspective (Researcher vs. CID)"
+        ],
+        "added_distinctions": [
+          {
+            "left": "External Observation (A)",
+            "relation": "vs",
+            "right": "Internal Self-Reading (B)"
+          }
+        ],
+        "added_operations": [
+          "Separation of Researcher/CID roles in memory access"
+        ],
+        "revised_claim": "CID memory reading must be an internal operation where CID occupies and reads its own state, distinct from researcher observation."
+      },
+      "delta_summary": "CID memory reading is a function for researchers to quantify -> CID memory reading must be an internal operation where CID o"
+    },
+    {
+      "frame_delta_id": "FD-11",
+      "incident_id": "INC-11",
+      "origin": "DERIVED_FROM_INCIDENT",
+      "decision_effect": "REDIRECTED",
+      "pre_frame": {
+        "terminal_or_active_claim": "Fixed interval reading is a valid step towards CID self-reading.",
+        "represented_distinctions": [],
+        "available_operations": []
+      },
+      "post_frame": {
+        "added_variables": [
+          "Unpredictability of Timing"
+        ],
+        "added_distinctions": [
+          {
+            "left": "Fixed Interval (Researcher Control)",
+            "relation": "vs",
+            "right": "Event-Driven (Unpredictable)"
+          }
+        ],
+        "added_operations": [
+          "Switching from time-based polling to event-based triggering"
+        ],
+        "revised_claim": "Fixed interval reading is still researcher-controlled; subjectivity requires unpredictable, event-driven timing."
+      },
+      "delta_summary": "Fixed interval reading is a valid step towards CID self-read -> Fixed interval reading is still researcher-controlled; subje"
+    },
+    {
+      "frame_delta_id": "FD-12",
+      "incident_id": "INC-12",
+      "origin": "DERIVED_FROM_INCIDENT",
+      "decision_effect": "REDIRECTED",
+      "pre_frame": {
+        "terminal_or_active_claim": "Self-reading is about detecting changes in state.",
+        "represented_distinctions": [],
+        "available_operations": []
+      },
+      "post_frame": {
+        "added_variables": [
+          "Unpredictability of Outcome (Stage 3)"
+        ],
+        "added_distinctions": [
+          {
+            "left": "Deterministic Output (Computer)",
+            "relation": "vs",
+            "right": "Probabilistic Claim (Self)"
+          }
+        ],
+        "added_operations": [
+          "Defining 'Self' as 'Ability to claim state with unpredictability'"
+        ],
+        "revised_claim": "Self-reading is about claiming state in a way that is unpredictable to the researcher, using randomness as a pillar of the argument."
+      },
+      "delta_summary": "Self-reading is about detecting changes in state. -> Self-reading is about claiming state in a way that is unpred"
+    }
+  ],
+  "views": {
+    "full": [
+      {
+        "name": "Deterministic-Threshold-to-Probabilistic-Emergence",
+        "derived_from_incidents": [
+          "INC-01",
+          "INC-07",
+          "INC-12"
+        ],
+        "shared_pre_frame": "System validity or state is determined by fixed thresholds, deterministic rules, or binary success/failure states (e.g., S≥0.20, Error vs. Success, Deterministic Output).",
+        "shared_failure_shape": "Rigidity leads to arbitrary boundaries, false negatives (treating valid noise as error), or inability to model complex, dynamic systems where 'noise' is actually a feature.",
+        "shared_missing_dimension_shape": "Lacks a dimension for 'stochastic emergence' or 'probabilistic visibility', treating randomness as a defect or noise rather than a generative mechanism.",
+        "shared_frame_delta": "Replace hard thresholds/deterministic outputs with probabilistic generation or visibility states, where validity emerges from statistical distribution or unpredictable selection rather than fixed criteria.",
+        "applicability_predicate": {
+          "required_conditions": [
+            "System involves high-dimensional or complex data where fixed rules fail to capture nuance.",
+            "Current model treats 'noise' or 'failure' as binary errors rather than potential signals.",
+            "Goal is to model dynamic equilibrium or emergent behavior."
+          ],
+          "supporting_signals": [
+            "Frustration with 'arbitrary' thresholds.",
+            "Observation of 'missing' or 'failed' states that correlate with other phenomena.",
+            "Need to distinguish between 'error' and 'unobserved'."
+          ],
+          "disqualifying_conditions": [
+            "System requires strict safety-critical determinism (e.g., flight control).",
+            "Data is low-dimensional and clearly separable by simple rules."
+          ]
+        },
+        "suggested_axes": [
+          "Threshold Rigidity vs. Probabilistic Continuum",
+          "Deterministic Output vs. Stochastic Claim",
+          "Error State vs. Visibility State"
+        ],
+        "non_applicable_cases": [
+          "Simple arithmetic verification.",
+          "Legal compliance checks with explicit binary rules.",
+          "Systems where predictability is the sole metric of success."
+        ],
+        "meta_frame_id": "MF-F1",
+        "version": 1,
+        "origin": "INDUCED_FROM_INCIDENT_CLUSTER",
+        "status": "CANDIDATE",
+        "source_frame_delta_refs": [
+          "FD-01",
+          "FD-07",
+          "FD-12"
+        ],
+        "_gate": {
+          "valid": true,
+          "problems": []
+        },
+        "_claude_audit": {
+          "disposition": "PARTIAL_TOPICAL",
+          "rationale": "probabilistic-vs-deterministic は ESDE 設計の topic 語彙駆動の疑い(masked で分裂)",
+          "auditor": "Claude external-weight §19"
+        }
+      },
+      {
+        "name": "External-Arbitration-to-Internal-Self-Reference",
+        "derived_from_incidents": [
+          "INC-03",
+          "INC-10",
+          "INC-11"
+        ],
+        "shared_pre_frame": "System state or memory is managed, observed, or defined by an external agent (Researcher/SubjectLayer) via fixed intervals or external dict storage.",
+        "shared_failure_shape": "Loss of agency, artificial coupling between observer and observed, and inability to achieve true autonomy or self-consistency because the 'self' is defined externally.",
+        "shared_missing_dimension_shape": "Lacks the dimension of 'internal self-referentiality' or 'event-driven autonomy', relying instead on 'polling' or 'external assignment'.",
+        "shared_frame_delta": "Shift from external observation/control (fixed intervals, external storage) to internal self-reading (event-driven, self-occupied state), where the system defines its own state and timing.",
+        "applicability_predicate": {
+          "required_conditions": [
+            "System aims for autonomy or self-modeling.",
+            "Current architecture relies on external polling or centralized state management.",
+            "Goal is to reduce latency or increase fidelity of self-state."
+          ],
+          "supporting_signals": [
+            "Latency issues in external observation.",
+            "Conflict between 'what is stored' and 'what is experienced'.",
+            "Desire for 'unpredictable' or 'organic' behavior."
+          ],
+          "disqualifying_conditions": [
+            "System requires strict auditability by a central authority.",
+            "State must be globally consistent across all nodes simultaneously.",
+            "External control is a security requirement."
+          ]
+        },
+        "suggested_axes": [
+          "External Control vs. Internal Autonomy",
+          "Fixed Interval vs. Event-Driven",
+          "Observer-Dependent vs. Self-Defined State"
+        ],
+        "non_applicable_cases": [
+          "Centralized database management.",
+          "Batch processing systems.",
+          "Systems where external oversight is the primary business requirement."
+        ],
+        "meta_frame_id": "MF-F2",
+        "version": 1,
+        "origin": "INDUCED_FROM_INCIDENT_CLUSTER",
+        "status": "CANDIDATE",
+        "source_frame_delta_refs": [
+          "FD-03",
+          "FD-10",
+          "FD-11"
+        ],
+        "_gate": {
+          "valid": true,
+          "problems": []
+        },
+        "_claude_audit": {
+          "disposition": "PROVISIONAL_ACCEPT",
+          "rationale": "MF-M1 と同 family(external-vs-internal-self)、3 incidents、structural",
+          "auditor": "Claude external-weight §19"
+        }
+      },
+      {
+        "name": "Structural-Artefact-to-Physical-Anchoring",
+        "derived_from_incidents": [
+          "INC-02",
+          "INC-05",
+          "INC-08"
+        ],
+        "shared_pre_frame": "System structures or layers are defined by abstract, arbitrary, or 'noise-like' criteria (e.g., R=0 links, Layer A/B separation, B_Gen as arbitrary hand), leading to perceived artefacts or inefficiencies.",
+        "shared_failure_shape": "Misinterpretation of physical anchors as noise or arbitrary choices, leading to over-engineering (tripartite resonance) or dismissal of valid physical states (B_Gen).",
+        "shared_missing_dimension_shape": "Lacks a dimension for 'physical grounding' or 'identity preservation', treating structural elements as interchangeable or secondary to higher-level abstractions.",
+        "shared_frame_delta": "Re-identify 'noise' or 'separation' as legitimate physical anchors or identity-preserving states, validating them as the basis for higher-layer conditions rather than deferring or removing them.",
+        "applicability_predicate": {
+          "required_conditions": [
+            "System has multiple layers where lower layers are dismissed as 'noise'.",
+            "Current design defers implementation of core physical mechanisms.",
+            "Need to justify the existence of specific structural components."
+          ],
+          "supporting_signals": [
+            "Presence of 'R=0' or 'empty' states that are actually significant.",
+            "Confusion between 'runtime' and 'audit' states.",
+            "Tendency to prioritize theoretical purity over physical reality."
+          ],
+          "disqualifying_conditions": [
+            "System is purely abstract with no physical implementation.",
+            "Lower layers are genuinely redundant or buggy.",
+            "Goal is to simplify by removing complexity, not to ground it."
+          ]
+        },
+        "suggested_axes": [
+          "Abstract Artefact vs. Physical Anchor",
+          "Deferred Implementation vs. Immediate Validation",
+          "Layer Separation vs. Identity Preservation"
+        ],
+        "non_applicable_cases": [
+          "Pure software algorithms without physical constraints.",
+          "Systems where simplification is the primary goal.",
+          "Theoretical models not intended for implementation."
+        ],
+        "meta_frame_id": "MF-F3",
+        "version": 1,
+        "origin": "INDUCED_FROM_INCIDENT_CLUSTER",
+        "status": "CANDIDATE",
+        "source_frame_delta_refs": [
+          "FD-02",
+          "FD-05",
+          "FD-08"
+        ],
+        "_gate": {
+          "valid": true,
+          "problems": []
+        },
+        "_claude_audit": {
+          "disposition": "REJECT_UNSUPPORTED",
+          "rationale": "artifact+audit+godhand の混成、shared_frame_delta が muddled",
+          "auditor": "Claude external-weight §19"
+        }
+      }
+    ],
+    "masked": [
+      {
+        "name": "The Observer-Subject Decoupling",
+        "derived_from_incidents": [
+          "INC-03",
+          "INC-10",
+          "INC-11",
+          "INC-12"
+        ],
+        "shared_pre_frame": "The system's state is defined by an external observer's measurement or a fixed, deterministic internal routine. The 'Self' or 'Subject' is either a passive object of study or a deterministic machine executing fixed protocols.",
+        "shared_failure_shape": "Loss of Autonomy/Agency. The system fails to exhibit genuine 'selfhood' or 'internal logic' because its state is either externally imposed (researcher control) or rigidly deterministic (fixed intervals), preventing the emergence of unpredictable, self-referential behavior.",
+        "shared_missing_dimension_shape": "The dimension of 'Unpredictable Self-Reference'. The pre-frame lacks the capacity for the system to generate state claims that are internally driven and unpredictable to the external observer, which is required for true 'Subjectivity'.",
+        "shared_frame_delta": "Shift from External/Deterministic Control to Internal/Probabilistic Agency. The operation involves separating the 'Researcher's View' (external, fixed, deterministic) from the 'Unit's View' (internal, event-driven, probabilistic), redefining validity as the ability to claim state unpredictably.",
+        "applicability_predicate": {
+          "required_conditions": [
+            "System involves an agent or process that can be observed.",
+            "Current definition of 'validity' or 'truth' relies on external metrics or fixed internal rules.",
+            "Goal is to introduce autonomy, creativity, or genuine subjectivity."
+          ],
+          "supporting_signals": [
+            "Complaints about 'arbitrary' external control.",
+            "Frustration with 'rigid' or 'predictable' internal behaviors.",
+            "Desire for 'emergent' or 'self-generated' outcomes."
+          ],
+          "disqualifying_conditions": [
+            "System requires strict, auditable determinism (e.g., safety-critical control loops).",
+            "No distinction between observer and observed is relevant."
+          ]
+        },
+        "suggested_axes": [
+          "Control Source: External vs. Internal",
+          "Timing: Fixed/Interval vs. Event/Unpredictable",
+          "State Nature: Deterministic Output vs. Probabilistic Claim"
+        ],
+        "non_applicable_cases": [
+          "Simple data logging systems.",
+          "Systems where predictability is the primary value (e.g., assembly line robots)."
+        ],
+        "meta_frame_id": "MF-M1",
+        "version": 1,
+        "origin": "INDUCED_FROM_INCIDENT_CLUSTER",
+        "status": "CANDIDATE",
+        "source_frame_delta_refs": [
+          "FD-03",
+          "FD-10",
+          "FD-11",
+          "FD-12"
+        ],
+        "_gate": {
+          "valid": true,
+          "problems": []
+        },
+        "_claude_audit": {
+          "disposition": "PROVISIONAL_ACCEPT",
+          "rationale": "4 incidents、masked view で発見=structural(topical でない)、applicability+disqualifier+axes 具体、generic virtue でない。最強",
+          "auditor": "Claude external-weight §19"
+        }
+      },
+      {
+        "name": "The Artifact vs. Essence Distinction",
+        "derived_from_incidents": [
+          "INC-02",
+          "INC-07"
+        ],
+        "shared_pre_frame": "Observed phenomena or structures are accepted at face value, conflating noise, artifacts, or specific implementation details with the core underlying principle or 'true' structure.",
+        "shared_failure_shape": "Misidentification of the Core Mechanism. The system or analysis is misled by superficial features (ZERO_STATE links, 'error' states) that do not represent the fundamental operational logic, leading to incorrect conclusions about what constitutes a 'valid' or 'pure' state.",
+        "shared_missing_dimension_shape": "The dimension of 'Structural Purity' or 'Fundamental Mapping'. The pre-frame fails to distinguish between the 'container' or 'side-effect' and the 'content' or 'intention', missing the layer that defines the essential nature of the phenomenon.",
+        "shared_frame_delta": "Shift from Surface Acceptance to Structural Purification. The operation involves explicitly excluding 'noise' or 'mis-mapped' elements (ZERO_STATE, Probabilistic Failure as Error) to reveal the 'pure' or 'correct' underlying structure (n=5, Selective Recognition).",
+        "applicability_predicate": {
+          "required_conditions": [
+            "System produces complex outputs with significant noise or side-effects.",
+            "There is a suspicion that the observed 'main' feature is actually an artifact.",
+            "Goal is to find the 'true' or 'minimal' valid structure."
+          ],
+          "supporting_signals": [
+            "Presence of 'outliers' or 'errors' that seem structurally significant.",
+            "Confusion between different layers of abstraction (e.g., implementation vs. theory).",
+            "Need to simplify a complex model to its core components."
+          ],
+          "disqualifying_conditions": [
+            "System is inherently noisy and the noise is the feature (e.g., stochastic resonance).",
+            "No clear distinction between 'artifact' and 'essence' can be established."
+          ]
+        },
+        "suggested_axes": [
+          "Signal vs. Noise",
+          "Implementation Detail vs. Abstract Principle",
+          "Error State vs. Intentional State"
+        ],
+        "non_applicable_cases": [
+          "Systems where all output is equally valid.",
+          "Purely aesthetic evaluations where 'noise' is part of the style."
+        ],
+        "meta_frame_id": "MF-M2",
+        "version": 1,
+        "origin": "INDUCED_FROM_INCIDENT_CLUSTER",
+        "status": "CANDIDATE",
+        "source_frame_delta_refs": [
+          "FD-02",
+          "FD-07"
+        ],
+        "_gate": {
+          "valid": false,
+          "problems": [
+            "meta-frame requires >= 3 VERIFIED incidents (§18)"
+          ]
+        },
+        "_claude_audit": {
+          "disposition": "NARROW_DETECTED_UNDERPOPULATED",
+          "rationale": "artifact-vs-essence = 私の gold ARTIFACT_VS_GROUNDED と一致(Qwen独立発見)。但し 2 incidents<3(v9.17 G3 未抽出のため)。要 incident 追加",
+          "auditor": "Claude external-weight §19"
+        }
+      },
+      {
+        "name": "The Arbitrary Anchor vs. Derived Consistency",
+        "derived_from_incidents": [
+          "INC-01",
+          "INC-08"
+        ],
+        "shared_pre_frame": "System parameters or validation criteria are set by 'God's hand' (arbitrary thresholds, researcher choice) rather than being derived from the system's own physical or probabilistic properties.",
+        "shared_failure_shape": "Fragility and Lack of Justification. The system's validity depends on external, unexplained choices, making it brittle and philosophically inconsistent with a 'dynamic equilibrium' or 'physical' worldview.",
+        "shared_missing_dimension_shape": "The dimension of 'Internal Consistency' or 'Physical Derivation'. The pre-frame lacks a mechanism to justify parameters based on the system's own operational logic (complexity, risk, physical anchors), relying instead on external fiat.",
+        "shared_frame_delta": "Shift from Arbitrary External Control to Internal Physical Derivation. The operation involves replacing hard thresholds or arbitrary choices with probabilistic generation or validated physical anchors that are consistent with the system's underlying design philosophy.",
+        "applicability_predicate": {
+          "required_conditions": [
+            "System has parameters that are currently set manually or arbitrarily.",
+            "Goal is to make the system self-justifying or physically grounded.",
+            "There is a desire to remove 'human-in-the-loop' arbitrariness."
+          ],
+          "supporting_signals": [
+            "Complaints about 'arbitrary' rules.",
+            "Need for 'robust' or 'adaptive' thresholds.",
+            "Desire to align system behavior with 'natural' or 'physical' laws."
+          ],
+          "disqualifying_conditions": [
+            "System requires strict regulatory compliance with fixed, non-negotiable standards.",
+            "No physical or probabilistic basis exists for the parameters."
+          ]
+        },
+        "suggested_axes": [
+          "Arbitrary vs. Derived",
+          "Hard Threshold vs. Probabilistic Generation",
+          "External Fiat vs. Internal Consistency"
+        ],
+        "non_applicable_cases": [
+          "Systems with legally mandated fixed parameters.",
+          "Systems where human judgment is the primary value (e.g., artistic curation)."
+        ],
+        "meta_frame_id": "MF-M3",
+        "version": 1,
+        "origin": "INDUCED_FROM_INCIDENT_CLUSTER",
+        "status": "CANDIDATE",
+        "source_frame_delta_refs": [
+          "FD-01",
+          "FD-08"
+        ],
+        "_gate": {
+          "valid": false,
+          "problems": [
+            "meta-frame requires >= 3 VERIFIED incidents (§18)"
+          ]
+        },
+        "_claude_audit": {
+          "disposition": "NARROW_DETECTED_UNDERPOPULATED",
+          "rationale": "arbitrary-anchor = 私の gold ARBITRARY_GODHAND_VS_PHYSICS と一致(Qwen独立発見)。2 incidents<3",
+          "auditor": "Claude external-weight §19"
+        }
+      }
+    ]
+  }
+}
