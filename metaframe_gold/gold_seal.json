@@ -1,0 +1,16 @@
+{
+  "gold_artifact": "metaframe_gold/gold_incidents.json",
+  "sha256": "5d04b78807cc9c94d10cc8a75dfb4f32e4881e1322c4cbfd9028d8a610854eba",
+  "sealed_at": "2026-07-07T11:44:29.782738+00:00",
+  "builder_identity": "Claude (senior annotator, external weight vs Qwen extractor)",
+  "gold_count": 7,
+  "families_hypothesized": [
+    "ARTIFACT_VS_GROUNDED",
+    "DONT_PERTURB_SUBSTRATE",
+    "DORMANT_NOT_DELETE",
+    "SIGNAL_VS_INFLATED",
+    "TERM_NOT_REDUCED_TO_OPERATION"
+  ],
+  "limitation": "gold builder(Claude)と pipeline implementer(Claude Code)は同一 Claude-family=不完全な分離(§12.2、独立とは呼ばない)。GPT cross-review 未実施。",
+  "policy": "評価専用。Qwen 抽出/induction プロセスには非開示。抽出prompt凍結前に封緘。"
+}

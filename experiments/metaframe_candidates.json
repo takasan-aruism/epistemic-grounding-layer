@@ -1,0 +1,558 @@
+{
+  "prompt_hash": "e89a0035b8c4b6b965891a1d8a44237c7e71be56b5a51d70c435341eb793a9d5",
+  "n_chunks": 8,
+  "candidates": [
+    {
+      "incident_id": "INC-01",
+      "topic_surface": "Separation of Structure and Formulas / Removal of 'God's Hand' in Frozenset generation",
+      "observation": "Taka explicitly identifies the threshold S≥0.20 as a 'God's hand' (神の手) that was originally necessary for basic research but must now be removed due to the philosophy of dynamic equilibrium. He notes that keeping it indefinitely makes adjustments difficult.",
+      "initial_interpretation": "The current system relies on a hard threshold (S≥0.20) to define valid structures (frozensets), which acts as an arbitrary intervention ('God's hand') rather than a natural emergent property.",
+      "tension_or_failure": "The tension is between the 'philosophy of dynamic equilibrium' (which requires natural emergence) and the current reliance on an arbitrary threshold (S≥0.20) that constitutes a 'God's hand'. Taka states that 'somewhere we must cut it off' and that delaying it makes adjustments harder.",
+      "intervention": {
+        "actor": "TAKA",
+        "statement_or_action": "Proposes to remove the S≥0.20 threshold by introducing randomness to the generation of frozensets. Specifically, suggests that while the specific label selection remains unknown (random), the calculation determines it, and potentially adds S-value to B_Gen to handle this transition."
+      },
+      "added_dimensions": [
+        "Randomness in label selection for frozenset generation",
+        "Integration of S-value into B_Gen"
+      ],
+      "added_distinctions": [
+        {
+          "left": "Structure (frozenset, topology)",
+          "relation": "is decoupled from",
+          "right": "Formula/Field (probabilistic generation, S distribution)"
+        }
+      ],
+      "added_operations": [
+        "Replacing hard threshold filtering (S≥0.20) with probabilistic generation based on calculation complexity/risk"
+      ],
+      "post_intervention_test_or_action": "Implementing the random selection of labels for frozensets and potentially modifying B_Gen to include S-value, moving towards a birth probability Pbirth that is a product of structure and field properties.",
+      "outcome": "The 'God's hand' (S≥0.20) is identified for removal. The direction shifts from a deterministic structural filter to a probabilistic generation process that respects the 'field's nature' and removes arbitrary designer intervention.",
+      "claim_before": "Valid structures are defined by S≥0.20; this is a necessary but arbitrary 'God's hand' for basic research.",
+      "claim_after": "Valid structures should emerge through probabilistic generation (random label selection) integrated with field properties, removing the S≥0.20 threshold to align with dynamic equilibrium philosophy.",
+      "decision_changed": true,
+      "field_support": {
+        "observation": "EXPLICIT",
+        "initial_interpretation": "EXPLICIT",
+        "tension_or_failure": "EXPLICIT",
+        "intervention": "EXPLICIT",
+        "outcome": "EXPLICIT"
+      },
+      "source_span_hint": "## v9.12 — 構造と数式の分離統合 (2026-04-16) through S≥0.20 への態度 (Taka 発言)",
+      "source_document": "/home/takasan/esde/ESDE-Research/docs/概念理解.md",
+      "source_span_refs": [
+        "## v9.12 — 構造と数式の分離統合 (2026-04-16) through S≥0.20 への態度 (Taka 発言)"
+      ],
+      "origin": "CORPUS_EXTRACTION",
+      "corpus_tier": "TIER_1_RETROSPECTIVE_CORPUS",
+      "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
+      "extraction_status": "VERIFIED",
+      "_gate": {
+        "valid": true,
+        "eligible": true,
+        "problems": []
+      },
+      "_claude_audit": {
+        "verdict": "VERIFIED",
+        "gold_recovered": null,
+        "auditor": "Claude external-weight"
+      }
+    },
+    {
+      "incident_id": "INC-02",
+      "topic_surface": "Audit of link participation and label validity",
+      "observation": "全 link の 99.64% は一度も R>0 に参加しない (R=0 のまま死ぬ) / v9.11 label の約 2/3 が R=0 リンク構成の「見かけ構造」だった",
+      "initial_interpretation": "v9.11 の結果はアーティファクト（経路 B + R=0 混入）を含んでおり、n=2 主体や phase+r 支配といった知見は構造的誤差によるものだった。",
+      "tension_or_failure": "v9.11 で得られた「n=2 主体 (67%)」や「phase+r 72% 支配」といった主要な知見が、R=0 の混入による見かけ構造であったことが判明し、それまでの設計前提（認知層による劇的な介入効果など）が誤りである可能性が生じた。",
+      "intervention": {
+        "actor": "TAKA",
+        "statement_or_action": "数より純度。結果を受け入れる。Genesis 原理 (閉路 = 共鳴 = 構造の核) に沿った label だけを残す。数が減ることを許容する。"
+      },
+      "added_dimensions": [
+        "R>0 純度 (birth 時)"
+      ],
+      "added_distinctions": [
+        {
+          "left": "見かけ構造 (R=0混入)",
+          "relation": "excludes",
+          "right": "純粋な構造 (R>0参加)"
+        }
+      ],
+      "added_operations": [
+        "R=0リンクの除去",
+        "label数の削減（純度優先）"
+      ],
+      "post_intervention_test_or_action": "v9.13 本番 run 結果 (τ=50 と τ=100 の 2 条件で実行)",
+      "outcome": "R>0 純度 100% 達成。n_core 分布が n=2 (67%) から n=5 (最頻) へ激変し、v9.11 のアーティファクトが解消された。",
+      "claim_before": "v9.11 の知見（n=2主体支配など）は現実的な構造を示している。",
+      "claim_after": "v9.11 の知見はアーティファクトであり、真の構造は n=5 が最頻で、n=2 は過大評価されていた。",
+      "decision_changed": true,
+      "field_support": {
+        "observation": "EXPLICIT",
+        "initial_interpretation": "EXPLICIT",
+        "tension_or_failure": "EXPLICIT",
+        "intervention": "EXPLICIT",
+        "outcome": "EXPLICIT"
+      },
+      "source_span_hint": "## v9.13 — 神の手の撤去と認知層の方向性確定 (2026-04-16〜17) / ### Step 0 Audit で判明した事実",
+      "source_document": "/home/takasan/esde/ESDE-Research/docs/概念理解.md",
+      "source_span_refs": [
+        "## v9.13 — 神の手の撤去と認知層の方向性確定 (2026-04-16〜17) / ### Step 0 Audit で判明した事実"
+      ],
+      "origin": "CORPUS_EXTRACTION",
+      "corpus_tier": "TIER_1_RETROSPECTIVE_CORPUS",
+      "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
+      "extraction_status": "VERIFIED",
+      "_gate": {
+        "valid": true,
+        "eligible": true,
+        "problems": []
+      },
+      "_claude_audit": {
+        "verdict": "VERIFIED",
+        "gold_recovered": "G1",
+        "auditor": "Claude external-weight"
+      }
+    },
+    {
+      "incident_id": "INC-03",
+      "topic_surface": "Cognitive layer's role and memory location",
+      "observation": "CID の記憶は物理層の中に既にある。足りないのは「記憶を作る仕組み」ではなく「物理状態を記憶として読む関数」。",
+      "initial_interpretation": "v9.7 の「認知→存在介入」は誤りだった。認知層の効果は統計的に多少の差に留める。劇的な効果を期待する設計は神の手に近づく。",
+      "tension_or_failure": "v9.7 で想定されていた「認知層が物理層を支配し、劇的な介入効果を生む」という設計が、現実の物理的痕跡（θ分布、S/R分布の変化）との整合性や、人間の寿命延長のような統計的差の限界から矛盾を生じた。",
+      "intervention": {
+        "actor": "TAKA",
+        "statement_or_action": "認知層は物理層を支配しない。物理層の動きを予測しながら認知的に自分の存在を生かす方向。"
+      },
+      "added_dimensions": [
+        "物理状態を記憶として読む関数"
+      ],
+      "added_distinctions": [
+        {
+          "left": "外部 dict (SubjectLayer) への蓄積",
+          "relation": "is_not",
+          "right": "CID の記憶"
+        }
+      ],
+      "added_operations": [
+        "認知層の役割を「支配」から「予測・適応」へ変更",
+        "記憶の保存先を外部蓄積から物理構造の読み出しへ変更"
+      ],
+      "post_intervention_test_or_action": "CID の物理構造自体が記憶を持っていて、それを私たちは覗いている、という理想への移行。",
+      "outcome": "認知層の設計指針が「介入」から「適応」へ変更され、記憶の所在が物理層内部の構造変化に再定義された。",
+      "claim_before": "認知層は物理層を支配し、劇的な効果を生み出す。記憶は外部に蓄積される。",
+      "claim_after": "認知層は物理層を支配せず、統計的差を生む。記憶は物理構造の痕跡として存在する。",
+      "decision_changed": true,
+      "field_support": {
+        "observation": "EXPLICIT",
+        "initial_interpretation": "EXPLICIT",
+        "tension_or_failure": "EXPLICIT",
+        "intervention": "EXPLICIT",
+        "outcome": "EXPLICIT"
+      },
+      "source_span_hint": "### 認知層の方向性 (Taka 発言、2026-04-16) / ### CID の記憶の所在 (Taka 発言、2026-04-16)",
+      "source_document": "/home/takasan/esde/ESDE-Research/docs/概念理解.md",
+      "source_span_refs": [
+        "### 認知層の方向性 (Taka 発言、2026-04-16) / ### CID の記憶の所在 (Taka 発言、2026-04-16)"
+      ],
+      "origin": "CORPUS_EXTRACTION",
+      "corpus_tier": "TIER_1_RETROSPECTIVE_CORPUS",
+      "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
+      "extraction_status": "VERIFIED",
+      "_gate": {
+        "valid": true,
+        "eligible": true,
+        "problems": []
+      },
+      "_claude_audit": {
+        "verdict": "VERIFIED",
+        "gold_recovered": null,
+        "auditor": "Claude external-weight"
+      }
+    },
+    {
+      "incident_id": "INC-04",
+      "topic_surface": "Handling of low-effect components (pickup)",
+      "observation": "pickup (v9.8c) は現状効果薄だが、「CID が他者の経験を取り込む」フレームワークとして将来活用候補。",
+      "initial_interpretation": "現状で効果がないコードは削除すべきというデフォルトの判断に対し、将来のフレームワークとしての潜在性を評価する必要がある。",
+      "tension_or_failure": "「無駄だから切る」という開発効率至上主義の発想が、長期的なフレームワークの再利用可能性を損なうリスクがある。",
+      "intervention": {
+        "actor": "TAKA",
+        "statement_or_action": "「無駄だから切る」は無駄な発想。どう活かすか考える方が賢い。適用例: pickup (v9.8c) は現状効果薄だが... 休眠させて残す。"
+      },
+      "added_dimensions": [
+        "将来活用候補としての休眠状態"
+      ],
+      "added_distinctions": [
+        {
+          "left": "現状の無効性",
+          "relation": "does_not_imply",
+          "right": "将来の無価値性"
+        }
+      ],
+      "added_operations": [
+        "pickup モジュールの削除保留（休眠）"
+      ],
+      "post_intervention_test_or_action": "pickup を削除せず、将来の「他者経験取り込み」フレームワークのために保持する。",
+      "outcome": "即効性のないコードでも、概念的な再利用可能性があれば保持するという判断基準が導入された。",
+      "claim_before": "効果の薄いコードは削除すべきである。",
+      "claim_after": "効果の薄いコードでも、将来のフレームワークとして活用可能であれば保持すべきである。",
+      "decision_changed": true,
+      "field_support": {
+        "observation": "EXPLICIT",
+        "initial_interpretation": "INFERRED",
+        "tension_or_failure": "EXPLICIT",
+        "intervention": "EXPLICIT",
+        "outcome": "EXPLICIT"
+      },
+      "source_span_hint": "### 「無駄だから切る」の禁止 (Taka 発言、2026-04-16)",
+      "source_document": "/home/takasan/esde/ESDE-Research/docs/概念理解.md",
+      "source_span_refs": [
+        "### 「無駄だから切る」の禁止 (Taka 発言、2026-04-16)"
+      ],
+      "origin": "CORPUS_EXTRACTION",
+      "corpus_tier": "TIER_1_RETROSPECTIVE_CORPUS",
+      "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
+      "extraction_status": "PARTIAL",
+      "_gate": {
+        "valid": false,
+        "eligible": true,
+        "problems": [
+          "initial_interpretation=INFERRED requires inference_basis.initial_interpretation (span refs + inference statement)"
+        ]
+      },
+      "_claude_audit": {
+        "verdict": "PARTIAL",
+        "gold_recovered": "G6",
+        "auditor": "Claude external-weight"
+      }
+    },
+    {
+      "incident_id": "INC-05",
+      "topic_surface": "B_Gen resource utilization strategy and E3 definition",
+      "observation": "Gemini designed v9.14 to replace v9.11 as the runtime subject, but Taka identified that B_Gen was merely a numerical value not actually used in cid cognitive activity.",
+      "initial_interpretation": "Gemini's plan to unify operations in v9.14 was premature; the system needed an audit phase first to validate the resource mechanism.",
+      "tension_or_failure": "Taka intervened against Gemini's runtime-first design, arguing for a paired audit approach to ensure bit-identity with existing baselines.",
+      "intervention": {
+        "actor": "TAKA",
+        "statement_or_action": "Stopped the runtime unification plan and mandated a 'Probabilistic Expenditure Audit' with Layer A (existing) and Layer B (new event-driven) running in parallel."
+      },
+      "added_dimensions": [
+        "Layer B (event-driven spend ledger)",
+        "Paired Audit Mechanism"
+      ],
+      "added_distinctions": [
+        {
+          "left": "Layer A",
+          "relation": "vs",
+          "right": "Layer B"
+        },
+        {
+          "left": "Runtime Operation",
+          "relation": "vs",
+          "right": "Audit Observation"
+        }
+      ],
+      "added_operations": [
+        "Parallel execution of Layer A and Layer B",
+        "Bit-identity preservation of Layer A state"
+      ],
+      "post_intervention_test_or_action": "Long run (25000 step) analysis of event distribution and ablation tests disabling E3.",
+      "outcome": "Discovery that E3 (Familiarity Contact Onset) dominates 83.1% of events; E3 ablation causes exhaustion to drop to 0%, proving E3 is critical for Q consumption. E3 redefined as 'cid-to-cid resonance'.",
+      "claim_before": "B_Gen should be unified as the runtime subject immediately.",
+      "claim_after": "B_Gen resource utilization must be audited via paired Layer B before runtime promotion; E3 is the primary driver of cognitive activity.",
+      "decision_changed": true,
+      "field_support": {
+        "observation": "EXPLICIT",
+        "initial_interpretation": "EXPLICIT",
+        "tension_or_failure": "EXPLICIT",
+        "intervention": "EXPLICIT",
+        "outcome": "EXPLICIT"
+      },
+      "source_span_hint": "Sections: 'Gemini 初期設計と Taka の横槍', 'Paired Audit の設計哲学', 'Phase 2 の発見', 'E3 = cid 間共鳴'",
+      "source_document": "/home/takasan/esde/ESDE-Research/docs/概念理解.md",
+      "source_span_refs": [
+        "Sections: 'Gemini 初期設計と Taka の横槍', 'Paired Audit の設計哲学', 'Phase 2 の発見', 'E3 = cid 間共鳴'"
+      ],
+      "origin": "CORPUS_EXTRACTION",
+      "corpus_tier": "TIER_1_RETROSPECTIVE_CORPUS",
+      "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
+      "extraction_status": "VERIFIED",
+      "_gate": {
+        "valid": true,
+        "eligible": true,
+        "problems": []
+      },
+      "_claude_audit": {
+        "verdict": "VERIFIED",
+        "gold_recovered": null,
+        "auditor": "Claude external-weight"
+      }
+    },
+    {
+      "incident_id": "INC-06",
+      "topic_surface": "Scope of E3 and Tripartite Emergence",
+      "observation": "Taka observed that E3 (first contact between two cids) structurally resembles 'resonance' and consumes 2 units of Q, aligning with Aruism's symmetry of existence.",
+      "initial_interpretation": "E3 represents a 'tripartite emergence' or higher-level structure formation, potentially warranting immediate implementation of tripartite resonance in v9.15.",
+      "tension_or_failure": "Consultant Claude proposed implementing tripartite resonance in v9.15, but Taka identified this as premature given the current structural simplicity of cids and the need to focus on cognitive layer development.",
+      "intervention": {
+        "actor": "TAKA",
+        "statement_or_action": "Cooled down the proposal, stating that higher-level connections should be deferred to the next theme, and v9.15 should focus on memory retrieval functions."
+      },
+      "added_dimensions": [
+        "Tripartite Emergence (deferred)",
+        "Memory Retrieval Function (v9.15 focus)"
+      ],
+      "added_distinctions": [
+        {
+          "left": "E3 as Resonance",
+          "relation": "is",
+          "right": "Condition for Higher Layer"
+        },
+        {
+          "left": "Implementation",
+          "relation": "vs",
+          "right": "Theoretical Foundation"
+        }
+      ],
+      "added_operations": [
+        "Deferral of Tripartite Resonance implementation",
+        "Focus shift to Memory Retrieval"
+      ],
+      "post_intervention_test_or_action": "GPT and Taka confirmed the deferral logic, citing v3.4 tripartite loop instability and cid structural simplicity.",
+      "outcome": "Tripartite resonance implementation was shelved; v9.15 scope was narrowed to memory retrieval, preserving the 'cognitive layer' development path.",
+      "claim_before": "E3 implies immediate need for tripartite resonance implementation.",
+      "claim_after": "E3 provides the rational conditions for higher layers, but implementation is deferred; current focus is cognitive layer and memory.",
+      "decision_changed": true,
+      "field_support": {
+        "observation": "EXPLICIT",
+        "initial_interpretation": "EXPLICIT",
+        "tension_or_failure": "EXPLICIT",
+        "intervention": "EXPLICIT",
+        "outcome": "EXPLICIT"
+      },
+      "source_span_hint": "Sections: '三項創発の棚上げ', 'Taka の計算訂正'",
+      "source_document": "/home/takasan/esde/ESDE-Research/docs/概念理解.md",
+      "source_span_refs": [
+        "Sections: '三項創発の棚上げ', 'Taka の計算訂正'"
+      ],
+      "origin": "CORPUS_EXTRACTION",
+      "corpus_tier": "TIER_1_RETROSPECTIVE_CORPUS",
+      "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
+      "extraction_status": "VERIFIED",
+      "_gate": {
+        "valid": true,
+        "eligible": true,
+        "problems": []
+      },
+      "_claude_audit": {
+        "verdict": "VERIFIED",
+        "gold_recovered": null,
+        "auditor": "Claude external-weight"
+      }
+    },
+    {
+      "incident_id": "INC-07",
+      "topic_surface": "Semantic drift of 'probabilistic failure' in Fetch mechanism",
+      "observation": "Claude defined v9.16 as 'Fetch probabilistic failure'. Taka questioned the meaning of 'failure' (A: call failure, B: noise injection, C: node loss, D: retention failure, E: judgment uncertainty).",
+      "initial_interpretation": "Claude's use of 'failure' was ambiguous and potentially misleading regarding the mechanism's intent.",
+      "tension_or_failure": "Taka's Rule 4 (v9.15 draft) defined the mechanism as 'consuming differential information probabilistically', which is 'selective recognition', not 'failure'. Claude's 'failure' expression deviated from this rule.",
+      "intervention": {
+        "actor": "TAKA",
+        "statement_or_action": "Corrected the definition from 'failure' to 'selective recognition' (making seeing probabilistic rather than invisible) and clarified that 'failure' was not the correct term for the rule."
+      },
+      "added_dimensions": [
+        "Semantic precision of 'failure' vs 'selective recognition'"
+      ],
+      "added_distinctions": [
+        {
+          "left": "Probabilistic Failure (Claude)",
+          "relation": "incorrectly_mapped_to",
+          "right": "Selective Recognition (Taka/Rule 4)"
+        }
+      ],
+      "added_operations": [
+        "Reframing the mechanism's output from 'error state' to 'probabilistic visibility state'"
+      ],
+      "post_intervention_test_or_action": "Explicitly defined v9.16 §0.2: 'cid compares physical state with birth snapshot... selects nodes probabilistically based on age_factor... unselected nodes treated as missing.'",
+      "outcome": "The concept of 'failure' was replaced by 'missing' (structural absence due to sampling), aligning with the physical layer's probabilistic design.",
+      "claim_before": "v9.16 implements probabilistic failure of Fetch.",
+      "claim_after": "v9.16 implements probabilistic selection of nodes for observation, where unselected nodes are 'missing', not 'failed'.",
+      "decision_changed": true,
+      "field_support": {
+        "observation": "EXPLICIT",
+        "initial_interpretation": "EXPLICIT",
+        "tension_or_failure": "EXPLICIT",
+        "intervention": "EXPLICIT",
+        "outcome": "EXPLICIT"
+      },
+      "source_span_hint": "## v9.16 — 段階 3: 観察サンプリング機構 (2026-04-21) / ### Claude の先走りと軌道修正",
+      "source_document": "/home/takasan/esde/ESDE-Research/docs/概念理解.md",
+      "source_span_refs": [
+        "## v9.16 — 段階 3: 観察サンプリング機構 (2026-04-21) / ### Claude の先走りと軌道修正"
+      ],
+      "origin": "CORPUS_EXTRACTION",
+      "corpus_tier": "TIER_1_RETROSPECTIVE_CORPUS",
+      "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
+      "extraction_status": "VERIFIED",
+      "_gate": {
+        "valid": true,
+        "eligible": true,
+        "problems": []
+      },
+      "_claude_audit": {
+        "verdict": "VERIFIED",
+        "gold_recovered": "G2",
+        "auditor": "Claude external-weight"
+      }
+    },
+    {
+      "incident_id": "INC-08",
+      "topic_surface": "Ontological grounding of B_Gen and Q as judgment criteria",
+      "observation": "Taka questioned why B_Gen was designed on a probabilistic basis, noting it felt like an excuse but was necessary for the probabilistic design.",
+      "initial_interpretation": "Using B_Gen and Q as judgment criteria might be seen as 'God's hand' (arbitrary researcher intervention) rather than a derived physical property.",
+      "tension_or_failure": "Risk of violating '§5 Anti-Drift' (claims not tied to measurability should not be design decisions) and '§6 Demarcation' (falsifiable stories vs metaphysical notes).",
+      "intervention": {
+        "actor": "TAKA",
+        "statement_or_action": "Asserted that B_Gen and Q are values derived probabilistically from the physical layer, not researcher arbitrariness. Using them as criteria is an extension of the probabilistic design, not 'God's hand'."
+      },
+      "added_dimensions": [
+        "Philosophical boundary of 'God's hand' vs 'Physical derivation'"
+      ],
+      "added_distinctions": [
+        {
+          "left": "Researcher Arbitrariness",
+          "relation": "excluded_from",
+          "right": "Physical Layer Derivation"
+        }
+      ],
+      "added_operations": [
+        "Validating B_Gen/Q as legitimate physical anchors for identity judgment"
+      ],
+      "post_intervention_test_or_action": "Incorporated into the '2 AI Integrated Answer' which confirmed B_Gen indirect usage and age_factor linearity as correct.",
+      "outcome": "The use of B_Gen/Q was legitimized as a physical-layer extension, removing the 'arbitrary' stigma.",
+      "claim_before": "Using B_Gen for judgment is potentially arbitrary or 'God's hand'.",
+      "claim_after": "Using B_Gen/Q is a consistent extension of the probabilistic physical design, not arbitrary.",
+      "decision_changed": true,
+      "field_support": {
+        "observation": "EXPLICIT",
+        "initial_interpretation": "EXPLICIT",
+        "tension_or_failure": "EXPLICIT",
+        "intervention": "EXPLICIT",
+        "outcome": "EXPLICIT"
+      },
+      "source_span_hint": "## v9.16 — 段階 3: 観察サンプリング機構 (2026-04-21) / ### 神の手問題への Taka 自答",
+      "source_document": "/home/takasan/esde/ESDE-Research/docs/概念理解.md",
+      "source_span_refs": [
+        "## v9.16 — 段階 3: 観察サンプリング機構 (2026-04-21) / ### 神の手問題への Taka 自答"
+      ],
+      "origin": "CORPUS_EXTRACTION",
+      "corpus_tier": "TIER_1_RETROSPECTIVE_CORPUS",
+      "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
+      "extraction_status": "VERIFIED",
+      "_gate": {
+        "valid": true,
+        "eligible": true,
+        "problems": []
+      },
+      "_claude_audit": {
+        "verdict": "VERIFIED",
+        "gold_recovered": null,
+        "auditor": "Claude external-weight"
+      }
+    },
+    {
+      "incident_id": "INC-09",
+      "topic_surface": "Temporal structure of explainability and future projection",
+      "observation": "Taka observed that 'past' expands with time (deterministic but decaying in explainability) and proposed a new temporal model: Present -> (max explainability) -> Past/Future (lower explainability).",
+      "initial_interpretation": "Standard time perception (Past -> Present -> Future) is insufficient for describing the system's identity stability.",
+      "tension_or_failure": "The current v9.16 mechanism only handles 'past' (birth snapshot) comparison. The 'future' (predicting differential meaning) is not yet implemented, creating a gap in the temporal model.",
+      "intervention": {
+        "actor": "TAKA",
+        "statement_or_action": "Defined 'Explainability' as a principle 'not decide, but describe'. Proposed that 'future' might be interpreted as probabilistically showing structural deviation from self."
+      },
+      "added_dimensions": [
+        "Explainability as a temporal dimension"
+      ],
+      "added_distinctions": [
+        {
+          "left": "Standard Time (Past->Present->Future)",
+          "relation": "replaced_by",
+          "right": "Explainability Gradient (Present->Past/Future)"
+        }
+      ],
+      "added_operations": [
+        "Framing v9.16's 'past comparison' as the implementation of 'past explainability'"
+      ],
+      "post_intervention_test_or_action": "Marked 'future explainability' as a candidate for Stage 5, linking it to 'differential meaning prediction'.",
+      "outcome": "The system's temporal identity is now framed around 'explainability decay' rather than just chronological time.",
+      "claim_before": "Time is a linear progression of events.",
+      "claim_after": "Time is a gradient of explainability, with the present as the peak and past/future as diverging paths of decreasing certainty.",
+      "decision_changed": true,
+      "field_support": {
+        "observation": "EXPLICIT",
+        "initial_interpretation": "EXPLICIT",
+        "tension_or_failure": "EXPLICIT",
+        "intervention": "EXPLICIT",
+        "outcome": "EXPLICIT"
+      },
+      "source_span_hint": "## v9.16 — 段階 3: 観察サンプリング機構 (2026-04-21) / ### Taka 追加論点 (2026-04-21) / 説明可能性の時間的構造",
+      "source_document": "/home/takasan/esde/ESDE-Research/docs/概念理解.md",
+      "source_span_refs": [
+        "## v9.16 — 段階 3: 観察サンプリング機構 (2026-04-21) / ### Taka 追加論点 (2026-04-21) / 説明可能性の時間的構造"
+      ],
+      "origin": "CORPUS_EXTRACTION",
+      "corpus_tier": "TIER_1_RETROSPECTIVE_CORPUS",
+      "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
+      "extraction_status": "PARTIAL",
+      "_gate": {
+        "valid": true,
+        "eligible": true,
+        "problems": []
+      },
+      "_claude_audit": {
+        "verdict": "PARTIAL",
+        "gold_recovered": null,
+        "auditor": "Claude external-weight"
+      }
+    }
+  ],
+  "n_candidates": 9,
+  "n_gate_pass": 8,
+  "audit_summary": {
+    "verified": 7,
+    "partial": 2,
+    "rejected": 0,
+    "gold_recovered": [
+      "G1",
+      "G2",
+      "G6"
+    ],
+    "gold_missing": [
+      "G3",
+      "G4",
+      "G5(v9.17 chunk truncated→0抽出)",
+      "G7(INC-02と重複)"
+    ],
+    "lesson_copy_backfill": "検出なし(教訓除外blindness機能)",
+    "coverage_gap": "v9.17(gold G3/G4/G5含む)が chunk truncation で 0 抽出 → 再抽出でカバー要",
+    "candidate_families(私の観察, Qwenには非開示)": {
+      "ARBITRARY_GODHAND_VS_PHYSICS": [
+        "INC-01",
+        "INC-08",
+        "INC-03(部分)"
+      ],
+      "PREMATURE_VS_DEFER_OR_AUDIT_FIRST": [
+        "INC-05",
+        "INC-06"
+      ],
+      "ARTIFACT_VS_GROUNDED": [
+        "INC-02"
+      ],
+      "VAGUE_TERM_VS_REDUCED_OPERATION": [
+        "INC-07"
+      ]
+    },
+    "note": "induction では Qwen が独立に family を発見する。私の観察は eval 用で入力しない。"
+  }
+}
