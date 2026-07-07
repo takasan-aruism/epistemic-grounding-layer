@@ -1,163 +1,5 @@
 {
-  "new_candidates": [
-    {
-      "incident_id": "INC-10",
-      "topic_surface": "Claude's initial proposal for CID self-reading mechanism",
-      "observation": "Claude proposed a mechanism where researchers quantify CID's physical state (R1-R5 candidates) to record it, effectively treating it as 'A: CID's movement processed by us in py to visualize'.",
-      "initial_interpretation": "The team initially considered this as a standard data logging or observation layer for the CID's physical state.",
-      "tension_or_failure": "Taka identified a fundamental category error: the proposal conflated 'us reading the memory' (Researcher perspective) with 'CID reading its own memory' (CID perspective). The tension was that the proposed mechanism was entirely 'A' (external observation) rather than 'B' (internal占有/reading).",
-      "intervention": {
-        "actor": "TAKA",
-        "statement_or_action": "Explicitly distinguished between A (Researcher's numerical reading) and B (CID's own state expansion and reading). Directed the team to shift implementation from A to B."
-      },
-      "added_dimensions": [
-        "Perspective (Researcher vs. CID)"
-      ],
-      "added_distinctions": [
-        {
-          "left": "External Observation (A)",
-          "relation": "vs",
-          "right": "Internal Self-Reading (B)"
-        }
-      ],
-      "added_operations": [
-        "Separation of Researcher/CID roles in memory access"
-      ],
-      "post_intervention_test_or_action": "Implementation of B principles (Taka's Rules 1-6) focusing on CID's internal probabilistic handling of structure.",
-      "outcome": "The project direction shifted from external logging to internal self-referential mechanisms, establishing the 'B' implementation path.",
-      "claim_before": "CID memory reading is a function for researchers to quantify physical states.",
-      "claim_after": "CID memory reading must be an internal operation where CID occupies and reads its own state, distinct from researcher observation.",
-      "decision_changed": true,
-      "field_support": {
-        "observation": "EXPLICIT",
-        "initial_interpretation": "INFERRED",
-        "tension_or_failure": "EXPLICIT",
-        "intervention": "EXPLICIT",
-        "outcome": "EXPLICIT"
-      },
-      "source_span_hint": "## v9.15 — CID が自分を読む機構 (2026-04-18〜20) / ### Claude 草案の根本的失敗",
-      "source_document": "/home/takasan/esde/ESDE-Research/docs/概念理解.md",
-      "source_span_refs": [
-        "## v9.15 — CID が自分を読む機構 (2026-04-18〜20) / ### Claude 草案の根本的失敗"
-      ],
-      "origin": "CORPUS_EXTRACTION",
-      "corpus_tier": "TIER_1_RETROSPECTIVE_CORPUS",
-      "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
-      "extraction_status": "CANDIDATE",
-      "_gate": {
-        "valid": true,
-        "eligible": true,
-        "problems": []
-      },
-      "inference_basis": {
-        "initial_interpretation": {
-          "basis_spans": [
-            "v9.15 CID が自分を読む機構 / Claude 初期提案部"
-          ],
-          "inference": "Claude の初期提案文(研究者が CID 状態を定量化)を『外部観察層』としての解釈と推定"
-        }
-      }
-    },
-    {
-      "incident_id": "INC-11",
-      "topic_surface": "Implementation and interpretation of Stage 1 (Fixed Interval Fetch)",
-      "observation": "Stage 1 implemented a `CidSelfBuffer` with a fixed 50-step pulse for `read_own_state`. Results showed bit-identity maintenance and specific divergence metrics.",
-      "initial_interpretation": "Claude interpreted the results as 'CID knows change', implying successful self-awareness.",
-      "tension_or_failure": "Taka pointed out that because the fetch timing was fixed (50 steps), the researcher was still dictating the protocol. This made the perspective fundamentally 'Researcher's view' rather than 'CID's subjective view'. The tension was the lack of 'unpredictability' required for true subjectivity.",
-      "intervention": {
-        "actor": "TAKA",
-        "statement_or_action": "Critiqued the fixed timing as 'Researcher specifying the experiment protocol'. Defined 'Minimum condition for subjectivity = Unpredictability of timing'."
-      },
-      "added_dimensions": [
-        "Unpredictability of Timing"
-      ],
-      "added_distinctions": [
-        {
-          "left": "Fixed Interval (Researcher Control)",
-          "relation": "vs",
-          "right": "Event-Driven (Unpredictable)"
-        }
-      ],
-      "added_operations": [
-        "Switching from time-based polling to event-based triggering"
-      ],
-      "post_intervention_test_or_action": "Switched fetch trigger from fixed 50 steps to event-driven (E1/E2/E3).",
-      "outcome": "Stage 2 implementation reduced fetch count to ~33.6% of Stage 1 and aligned with event frequency, moving closer to the 'unpredictable' condition.",
-      "claim_before": "Fixed interval reading is a valid step towards CID self-reading.",
-      "claim_after": "Fixed interval reading is still researcher-controlled; subjectivity requires unpredictable, event-driven timing.",
-      "decision_changed": true,
-      "field_support": {
-        "observation": "EXPLICIT",
-        "initial_interpretation": "EXPLICIT",
-        "tension_or_failure": "EXPLICIT",
-        "intervention": "EXPLICIT",
-        "outcome": "EXPLICIT"
-      },
-      "source_span_hint": "### Taka 指摘: 段階 1 はまだ研究者視点 (2026-04-20) / ### Taka 発想: event 駆動への切り替え",
-      "source_document": "/home/takasan/esde/ESDE-Research/docs/概念理解.md",
-      "source_span_refs": [
-        "### Taka 指摘: 段階 1 はまだ研究者視点 (2026-04-20) / ### Taka 発想: event 駆動への切り替え"
-      ],
-      "origin": "CORPUS_EXTRACTION",
-      "corpus_tier": "TIER_1_RETROSPECTIVE_CORPUS",
-      "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
-      "extraction_status": "CANDIDATE",
-      "_gate": {
-        "valid": true,
-        "eligible": true,
-        "problems": []
-      }
-    },
-    {
-      "incident_id": "INC-12",
-      "topic_surface": "Strategic justification of Randomness and Subjectivity",
-      "observation": "Stage 2 results showed that event-driven reading resulted in similar divergence metrics to fixed timing, and that 1% of CIDs had no events. Taka noted that comparing event frequencies across different types (E1/E2/E3) was meaningless.",
-      "initial_interpretation": "The team recognized that the 'randomness' of event occurrence was key to preventing researcher prediction.",
-      "tension_or_failure": "Taka articulated a philosophical tension: The researcher can always peek inside (weakness), but if the timing and outcome are unpredictable, the 'self' claim holds. The tension was between the 'weakness' of observability and the 'strength' of unpredictability.",
-      "intervention": {
-        "actor": "TAKA",
-        "statement_or_action": "Formalized the strategy: 'Subjectivity is established on a strange balance where randomness guarantees unpredictability, preventing the researcher from fully predicting the outcome even if they can observe the state.'"
-      },
-      "added_dimensions": [
-        "Unpredictability of Outcome (Stage 3)"
-      ],
-      "added_distinctions": [
-        {
-          "left": "Deterministic Output (Computer)",
-          "relation": "vs",
-          "right": "Probabilistic Claim (Self)"
-        }
-      ],
-      "added_operations": [
-        "Defining 'Self' as 'Ability to claim state with unpredictability'"
-      ],
-      "post_intervention_test_or_action": "Planned Stage 3 (v9.16) to introduce probabilistic failure/unpredictability of results, not just timing.",
-      "outcome": "The project established a strategic framework where 'Self-like' status is defended by maintaining unpredictability, rather than achieving perfect proof or denial.",
-      "claim_before": "Self-reading is about detecting changes in state.",
-      "claim_after": "Self-reading is about claiming state in a way that is unpredictable to the researcher, using randomness as a pillar of the argument.",
-      "decision_changed": true,
-      "field_support": {
-        "observation": "EXPLICIT",
-        "initial_interpretation": "EXPLICIT",
-        "tension_or_failure": "EXPLICIT",
-        "intervention": "EXPLICIT",
-        "outcome": "EXPLICIT"
-      },
-      "source_span_hint": "### Taka の核心発見 — サイコロの比喩 (2026-04-20) / ### 奇妙なバランス",
-      "source_document": "/home/takasan/esde/ESDE-Research/docs/概念理解.md",
-      "source_span_refs": [
-        "### Taka の核心発見 — サイコロの比喩 (2026-04-20) / ### 奇妙なバランス"
-      ],
-      "origin": "CORPUS_EXTRACTION",
-      "corpus_tier": "TIER_1_RETROSPECTIVE_CORPUS",
-      "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
-      "extraction_status": "CANDIDATE",
-      "_gate": {
-        "valid": true,
-        "eligible": true,
-        "problems": []
-      }
-    },
+  "new": [
     {
       "incident_id": "INC-13",
       "topic_surface": "Transition from CID-centric unit to Contact Body (X) unit",
@@ -205,47 +47,11 @@
       "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
       "extraction_status": "CANDIDATE",
       "_gate": {
-        "valid": true,
+        "valid": false,
         "eligible": true,
-        "problems": []
-      },
-      "inference_basis": {
-        "observation": {
-          "basis_spans": [
-            "## v9.17 段階 4: 他者読み + 接触体記録 (2026-04-22 〜 2026-04-23) through 肝臓の比喩 (Taka 2026-04-21)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "initial_interpretation": {
-          "basis_spans": [
-            "## v9.17 段階 4: 他者読み + 接触体記録 (2026-04-22 〜 2026-04-23) through 肝臓の比喩 (Taka 2026-04-21)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "tension_or_failure": {
-          "basis_spans": [
-            "## v9.17 段階 4: 他者読み + 接触体記録 (2026-04-22 〜 2026-04-23) through 肝臓の比喩 (Taka 2026-04-21)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "intervention": {
-          "basis_spans": [
-            "## v9.17 段階 4: 他者読み + 接触体記録 (2026-04-22 〜 2026-04-23) through 肝臓の比喩 (Taka 2026-04-21)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "post_intervention_test_or_action": {
-          "basis_spans": [
-            "## v9.17 段階 4: 他者読み + 接触体記録 (2026-04-22 〜 2026-04-23) through 肝臓の比喩 (Taka 2026-04-21)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "outcome": {
-          "basis_spans": [
-            "## v9.17 段階 4: 他者読み + 接触体記録 (2026-04-22 〜 2026-04-23) through 肝臓の比喩 (Taka 2026-04-21)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        }
+        "problems": [
+          "initial_interpretation=INFERRED requires inference_basis.initial_interpretation (span refs + inference statement)"
+        ]
       }
     },
     {
@@ -295,47 +101,11 @@
       "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
       "extraction_status": "CANDIDATE",
       "_gate": {
-        "valid": true,
+        "valid": false,
         "eligible": true,
-        "problems": []
-      },
-      "inference_basis": {
-        "observation": {
-          "basis_spans": [
-            "過去の失敗の回避"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "initial_interpretation": {
-          "basis_spans": [
-            "過去の失敗の回避"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "tension_or_failure": {
-          "basis_spans": [
-            "過去の失敗の回避"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "intervention": {
-          "basis_spans": [
-            "過去の失敗の回避"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "post_intervention_test_or_action": {
-          "basis_spans": [
-            "過去の失敗の回避"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "outcome": {
-          "basis_spans": [
-            "過去の失敗の回避"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        }
+        "problems": [
+          "initial_interpretation=INFERRED requires inference_basis.initial_interpretation (span refs + inference statement)"
+        ]
       }
     },
     {
@@ -386,47 +156,11 @@
       "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
       "extraction_status": "CANDIDATE",
       "_gate": {
-        "valid": true,
+        "valid": false,
         "eligible": true,
-        "problems": []
-      },
-      "inference_basis": {
-        "observation": {
-          "basis_spans": [
-            "Code A 事前質問への回答 (Q1-Q5)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "initial_interpretation": {
-          "basis_spans": [
-            "Code A 事前質問への回答 (Q1-Q5)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "tension_or_failure": {
-          "basis_spans": [
-            "Code A 事前質問への回答 (Q1-Q5)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "intervention": {
-          "basis_spans": [
-            "Code A 事前質問への回答 (Q1-Q5)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "post_intervention_test_or_action": {
-          "basis_spans": [
-            "Code A 事前質問への回答 (Q1-Q5)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "outcome": {
-          "basis_spans": [
-            "Code A 事前質問への回答 (Q1-Q5)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        }
+        "problems": [
+          "initial_interpretation=INFERRED requires inference_basis.initial_interpretation (span refs + inference statement)"
+        ]
       }
     },
     {
@@ -481,47 +215,11 @@
       "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
       "extraction_status": "CANDIDATE",
       "_gate": {
-        "valid": true,
+        "valid": false,
         "eligible": true,
-        "problems": []
-      },
-      "inference_basis": {
-        "observation": {
-          "basis_spans": [
-            "### Code A 調査: Layer B の片方向発火 (2026-04-23) through ### Taka 核心発言 (2026-04-23)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "initial_interpretation": {
-          "basis_spans": [
-            "### Code A 調査: Layer B の片方向発火 (2026-04-23) through ### Taka 核心発言 (2026-04-23)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "tension_or_failure": {
-          "basis_spans": [
-            "### Code A 調査: Layer B の片方向発火 (2026-04-23) through ### Taka 核心発言 (2026-04-23)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "intervention": {
-          "basis_spans": [
-            "### Code A 調査: Layer B の片方向発火 (2026-04-23) through ### Taka 核心発言 (2026-04-23)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "post_intervention_test_or_action": {
-          "basis_spans": [
-            "### Code A 調査: Layer B の片方向発火 (2026-04-23) through ### Taka 核心発言 (2026-04-23)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "outcome": {
-          "basis_spans": [
-            "### Code A 調査: Layer B の片方向発火 (2026-04-23) through ### Taka 核心発言 (2026-04-23)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        }
+        "problems": [
+          "initial_interpretation=INFERRED requires inference_basis.initial_interpretation (span refs + inference statement)"
+        ]
       }
     },
     {
@@ -578,47 +276,12 @@
       "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
       "extraction_status": "CANDIDATE",
       "_gate": {
-        "valid": true,
+        "valid": false,
         "eligible": true,
-        "problems": []
-      },
-      "inference_basis": {
-        "observation": {
-          "basis_spans": [
-            "GPT 監査運用指針 v1 導入 (2026-04-23)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "initial_interpretation": {
-          "basis_spans": [
-            "GPT 監査運用指針 v1 導入 (2026-04-23)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "tension_or_failure": {
-          "basis_spans": [
-            "GPT 監査運用指針 v1 導入 (2026-04-23)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "intervention": {
-          "basis_spans": [
-            "GPT 監査運用指針 v1 導入 (2026-04-23)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "post_intervention_test_or_action": {
-          "basis_spans": [
-            "GPT 監査運用指針 v1 導入 (2026-04-23)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "outcome": {
-          "basis_spans": [
-            "GPT 監査運用指針 v1 導入 (2026-04-23)"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        }
+        "problems": [
+          "initial_interpretation=INFERRED requires inference_basis.initial_interpretation (span refs + inference statement)",
+          "tension_or_failure=INFERRED requires inference_basis.tension_or_failure (span refs + inference statement)"
+        ]
       }
     },
     {
@@ -673,49 +336,12 @@
       "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
       "extraction_status": "CANDIDATE",
       "_gate": {
-        "valid": true,
+        "valid": false,
         "eligible": true,
-        "problems": []
-      },
-      "inference_basis": {
-        "observation": {
-          "basis_spans": [
-            "Taka 仮説の確認状況 (Code A 調査を通じて) - 仮説 B"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "initial_interpretation": {
-          "basis_spans": [
-            "Taka 仮説の確認状況 (Code A 調査を通じて) - 仮説 B"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "tension_or_failure": {
-          "basis_spans": [
-            "Taka 仮説の確認状況 (Code A 調査を通じて) - 仮説 B"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "intervention": {
-          "basis_spans": [
-            "Taka 仮説の確認状況 (Code A 調査を通じて) - 仮説 B"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "post_intervention_test_or_action": {
-          "basis_spans": [
-            "Taka 仮説の確認状況 (Code A 調査を通じて) - 仮説 B"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        },
-        "outcome": {
-          "basis_spans": [
-            "Taka 仮説の確認状況 (Code A 調査を通じて) - 仮説 B"
-          ],
-          "inference": "v9.17 narrative からの因果再構成"
-        }
+        "problems": [
+          "initial_interpretation=INFERRED requires inference_basis.initial_interpretation (span refs + inference statement)"
+        ]
       }
     }
-  ],
-  "prompt_hash": "e89a0035b8c4b6b965891a1d8a44237c7e71be56b5a51d70c435341eb793a9d5"
+  ]
 }

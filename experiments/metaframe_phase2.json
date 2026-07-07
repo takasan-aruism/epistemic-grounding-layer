@@ -1,0 +1,55 @@
+{
+  "phase2_finding": {
+    "phase": "PHASE 2 — v9.17 repair + re-induction (16 incidents)",
+    "v917_recovered": [
+      "INC-13..18 verified",
+      "INC-14=gold G5(取り込む→物理層)",
+      "INC-16=77% one-way ghost(artifact候補3例目)"
+    ],
+    "artifact_family_reformed": false,
+    "why": "16-incident 再induction で ARTIFACT_VS_GROUNDED が ≥3 安定clusterとして再形成されず。INC-02(label artifact)は主要clusterに入らず、INC-11 は 'Internalization of Agency'、INC-16 は 'Asymmetry of Interaction' に吸収。",
+    "clustering_instability": {
+      "run1_10incidents": "MF-M1 Observer-Subject[03,10,11,12] / M2 Artifact[02,07] / M3 Arbitrary[01,08]",
+      "run2_16incidents": "MF-M1 Abstraction[01,14,15] / M2 Agency[10,11,12] / M3 Failure-Visibility[07,18<3]",
+      "observation": "N を 10→16 にすると family が変化。同じ incident(例INC-11)が別familyへ移動。**cluster は N/構成に不安定**=MF-R3/cluster-stability の実観測。induced meta-frame は robust な structural family と断定できない。"
+    },
+    "honest_conclusion": "gold ARTIFACT_VS_GROUNDED(私の仮説 3件)は Qwen の再induction では安定して ≥3 化しなかった。artifact meta-frame は under-populated/unstable のまま。→ Round 2 の treatment library は『安定した特定family』でなく『現時点の gate-valid induced 集合』として扱い、instability を caveat として明記する。",
+    "implication_for_round2": "H1(meta-frame abstraction が retrieval より XDOMAIN を減らす)は特定family非依存で検証可能——abstract な meta-frame は具体名詞を持たないので cross-domain 誤射しにくい、という性質は cluster が不安定でも成立し得る。ただし『どの meta-frame も安定しない』は library の価値自体への caveat。"
+  },
+  "induced_run2": {
+    "full": {
+      "MF-F1": [
+        "INC-01",
+        "INC-07",
+        "INC-10",
+        "INC-12"
+      ],
+      "MF-F2": [
+        "INC-16",
+        "INC-18",
+        "INC-13"
+      ],
+      "MF-F3": [
+        "INC-14",
+        "INC-15",
+        "INC-05"
+      ]
+    },
+    "masked": {
+      "MF-M1": [
+        "INC-01",
+        "INC-14",
+        "INC-15"
+      ],
+      "MF-M2": [
+        "INC-10",
+        "INC-11",
+        "INC-12"
+      ],
+      "MF-M3": [
+        "INC-07",
+        "INC-18"
+      ]
+    }
+  }
+}
