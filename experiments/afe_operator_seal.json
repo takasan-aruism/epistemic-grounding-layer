@@ -1,0 +1,23 @@
+{
+  "object": "OPERATOR_SET_SEAL",
+  "operator_set_version": "AFE-OPS-v1-draft",
+  "sha256": "e2ff5f497080dc6786ccce0ef85d846484857ca92da87550f18a124a8e27edc2",
+  "sealed_at": "2026-07-07T19:26:46.308211+00:00",
+  "builder_identity": "Claude (compile) + independent general-purpose subagent (source-fidelity audit)",
+  "source_concept_refs": [
+    "SRC-ARUISM-ORIGINAL"
+  ],
+  "admitted_operators": [
+    "OP-SYMMETRY-001",
+    "OP-EQUALITY-001",
+    "OP-INTERDEPENDENCE-001",
+    "OP-HIERARCHY-001",
+    "OP-AXIS-001",
+    "OP-CREATION-001"
+  ],
+  "rejected": [
+    "OP-UNDERSTANDING-000 (DUPLICATES OP-AXIS-001 + experiential NOT_COMPILABLE)"
+  ],
+  "audit": "6/6 SOURCE_FAITHFUL, negative tests (CREATION-resonance / AXIS-non-totality) both PASS, 存在の了解 DUPLICATE 確認",
+  "policy": "held-out finalization 前に seal。in-place 改訂禁止(新version+新seal)。"
+}

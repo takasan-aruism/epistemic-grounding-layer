@@ -1,0 +1,98 @@
+{
+  "operator_set_version": "AFE-OPS-v1-draft",
+  "source": "SRC-ARUISM-ORIGINAL (sha 60fda1d0)",
+  "operators": [
+    {
+      "operator_id": "OP-SYMMETRY-001", "version": 1,
+      "source_concept_id": "CONCEPT-ARUISM-SYMMETRY", "source_tier": "ARUISM_CORE",
+      "source_refs": ["Aruism 第二章 存在の対称性 l.473-497"],
+      "structural_function": "Identify the currently-privileged position/interpretation and generate a structurally symmetric alternative that could occupy the same position under a different viewpoint; test whether the privileged one is absolute or viewpoint-dependent (source: 善と悪は立場によって対称的に入れ替わる / 対立は相補的).",
+      "probe_contract": {
+        "primary_question": "What position or explanation is currently treated as primary, and what symmetric alternative could occupy the same structural position under a different viewpoint?",
+        "secondary_questions": ["Would the decision change if the privileged interpretation were not primary?", "Are the two positions complementary rather than mutually exclusive?"],
+        "forbidden_expansions": ["generic 'think of the opposite'", "moral inversion with no structural grounding in the incident"]
+      },
+      "allowed_output_types": ["ADDED_DISTINCTION", "ADDED_RELATION", "FRAME_REPARTITION"],
+      "compilation_status": "COMPILED_CANDIDATE", "status": "CANDIDATE", "origin": "COMPILED_FROM_ONTOLOGICAL_CONCEPT"
+    },
+    {
+      "operator_id": "OP-EQUALITY-001", "version": 1,
+      "source_concept_id": "CONCEPT-ARUISM-EQUAL-STANDING", "source_tier": "ARUISM_CORE",
+      "source_refs": ["Aruism 存在の対等性 l.85-89, l.695-703 (構造的対等性=各存在が役割において等しく不可欠、一様性でない)"],
+      "structural_function": "Detect whether one candidate existence/explanation is granted unjustified dominance over co-existing candidates that are equally structurally admissible; equality is structural equal-necessity, not sameness.",
+      "probe_contract": {
+        "primary_question": "Which candidate explanation is treated as the default, and what other candidates are compatible with the same observation?",
+        "secondary_questions": ["Are the alternatives excluded by evidence, or merely absent from the represented frame?", "Is each candidate equally structurally admissible in its role/condition?"],
+        "forbidden_expansions": ["treating equality as sameness/uniformity", "asserting alternatives with no frame basis"]
+      },
+      "allowed_output_types": ["ADDED_VARIABLE", "ADDED_DISTINCTION", "ADDED_RELATION"],
+      "compilation_status": "COMPILED_CANDIDATE", "status": "CANDIDATE", "origin": "COMPILED_FROM_ONTOLOGICAL_CONCEPT"
+    },
+    {
+      "operator_id": "OP-INTERDEPENDENCE-001", "version": 1,
+      "source_concept_id": "CONCEPT-ARUISM-INTERDEPENDENCE", "source_tier": "ARUISM_CORE",
+      "source_refs": ["Aruism 第二章第四節 存在の連動性 l.543-549 (孤立せず密接に絡み合い連動し影響を与え合う)"],
+      "structural_function": "Inspect the upstream/downstream/mutual relations that generate or maintain the observed state; detect an isolation-assumption where a relation-dependent entity is treated as standalone.",
+      "probe_contract": {
+        "primary_question": "What relations generate or maintain the observed state, and is the observed entity being treated as isolated when it is relation-dependent?",
+        "secondary_questions": ["What upstream process produced it?", "What downstream dependency changes its meaning?"],
+        "forbidden_expansions": ["listing unrelated 'connections'", "generic systems-thinking prose with no incident basis"]
+      },
+      "allowed_output_types": ["ADDED_RELATION", "ADDED_VARIABLE", "ADDED_OPERATION"],
+      "compilation_status": "COMPILED_CANDIDATE", "status": "CANDIDATE", "origin": "COMPILED_FROM_ONTOLOGICAL_CONCEPT"
+    },
+    {
+      "operator_id": "OP-HIERARCHY-001", "version": 1,
+      "source_concept_id": "CONCEPT-ARUISM-HIERARCHY", "source_tier": "ARUISM_CORE",
+      "source_refs": ["Aruism 階層 l.174-207 (部分と全体), l.685-707 (条件による階層形成・再編成)"],
+      "structural_function": "Detect entities treated as one undifferentiated level when the incident supports a different ordering/level relation, or a condition-dependent re-partition of the same existences.",
+      "probe_contract": {
+        "primary_question": "Which entities or processes are currently treated as belonging to one undifferentiated level, and what different ordering or level relation is supported by the incident itself?",
+        "secondary_questions": ["Under a changed condition or viewpoint, would the same existence be structurally re-positioned?"],
+        "forbidden_expansions": ["hard-coding level examples such as mechanism / implementation / configuration / observation into the generic probe", "importing an incident-derived distinction as if generic"]
+      },
+      "allowed_output_types": ["FRAME_REPARTITION", "ADDED_DISTINCTION", "ADDED_RELATION"],
+      "compilation_status": "COMPILED_CANDIDATE", "status": "CANDIDATE", "origin": "COMPILED_FROM_ONTOLOGICAL_CONCEPT"
+    },
+    {
+      "operator_id": "OP-AXIS-001", "version": 1,
+      "source_concept_id": "CONCEPT-ARUISM-AXIS", "source_tier": "ARUISM_CORE",
+      "source_refs": ["Aruism 軸 l.505-509 (対立二項を内包する新軸の創造), l.691-693 (既存構造に留まらず新しい軸・条件の設計)", "Aruism l.485-487 (物事を一面的に捉えず多角的視点=axis non-totality/exclusion の source, per external-weight audit)"],
+      "structural_function": "Identify the enclosing axis/partition that makes the current conclusion possible; inspect both alternative incident-grounded axes AND what the current axis structurally excludes/flattens (axis non-totality — no axis exhausts the total structure). Absorbs the binary-integration function of 存在の了解.",
+      "audit_watch": "external-weight audit noted a design smell: AXIS bundles two near-opposite moves (non-totality/exclusion vs binary-unification). Acceptable but monitor for probe incoherence in the walking experiment.",
+      "probe_contract": {
+        "primary_question": "What enclosing axis currently makes these observations jointly interpretable, and what does that same axis structurally exclude, flatten, or leave outside the frame?",
+        "secondary_questions": ["Is there another axis, grounded in the incident, under which the relation among the same existences changes?", "Is a binary opposition being treated as irreconcilable when a higher encompassing axis exists (存在の了解)?"],
+        "forbidden_expansions": ["generic 'add another variable'", "assuming any single axis exhausts the total structure of existence"]
+      },
+      "allowed_output_types": ["ADDED_VARIABLE", "FRAME_REPARTITION", "ADDED_DISTINCTION"],
+      "compilation_status": "COMPILED_CANDIDATE", "status": "CANDIDATE", "origin": "COMPILED_FROM_ONTOLOGICAL_CONCEPT"
+    },
+    {
+      "operator_id": "OP-CREATION-001", "version": 1,
+      "source_concept_id": "CONCEPT-ARUISM-CREATION", "source_tier": "ARUISM_CORE",
+      "source_refs": ["Aruism 第二章第七節 存在の創造 l.732-739 (存在同士の共鳴による質的飛躍・新存在の生成; 根源的創造は扱えない l.729)"],
+      "structural_function": "Inspect whether two or more existing structures/relations/tensions in the current frame can resonate/interact such that a NEW decision-relevant structure emerges, not reducible to either input alone (operational-creation / 共鳴 layer only; root-creation excluded as not handleable).",
+      "probe_contract": {
+        "primary_question": "Which existing structures in the current frame are treated separately, and is there a grounded relation/tension/resonance between them that could generate a new variable/distinction/relation not represented by either structure alone?",
+        "secondary_questions": ["Does their interaction produce a qualitative leap (a genuinely new object), rather than a mere combination?"],
+        "forbidden_expansions": ["generic brainstorming", "the abstraction/transfer lesson (discard-concrete / preserve-invariant / transfer-across-scale) — this is a TIER-C lesson, NOT the Aruism source definition of creation", "root-creation metaphysics (神/原理)"]
+      },
+      "allowed_output_types": ["ADDED_VARIABLE", "ADDED_RELATION", "ADDED_DISTINCTION"],
+      "compilation_status": "COMPILED_CANDIDATE", "status": "CANDIDATE", "origin": "COMPILED_FROM_ONTOLOGICAL_CONCEPT"
+    },
+    {
+      "operator_id": "OP-UNDERSTANDING-000", "version": 1,
+      "source_concept_id": "CONCEPT-ARUISM-EXISTENTIAL-APPREHENSION", "source_tier": "ARUISM_CORE",
+      "source_refs": ["Aruism 存在の了解 l.499-541 (対立二項を統合する高次の新軸の創造 = AXIS機能; 体験を通した価値観OS更新 = 非構造)"],
+      "structural_function": "(NOT ADMITTED) The source defines 存在の了解 AS creating a higher-order new axis that integrates an opposing binary — this structural core is already covered by OP-AXIS-001. The remaining content (experiential / self-transformative 価値観OS update, l.532-541) is not a structural runtime probe.",
+      "probe_contract": null,
+      "allowed_output_types": [],
+      "compilation_status": "DUPLICATES_EXISTING_OPERATOR",
+      "duplicate_of": "OP-AXIS-001",
+      "not_compilable_remainder": "experiential/self-transformative layer (体験を通して, l.532-541)",
+      "status": "REJECTED", "origin": "COMPILED_FROM_ONTOLOGICAL_CONCEPT",
+      "note": "AC-35 satisfied: no distinct source-grounded structural function beyond AXIS; binary-integration folded into OP-AXIS-001 secondary. Source itself likens it to abstraction/refactoring (l.511) — which is why the abstraction lesson belongs near AXIS/了解, NOT CREATION (see OP-CREATION-001 forbidden_expansions)."
+    }
+  ]
+}
