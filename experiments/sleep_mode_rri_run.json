@@ -1,0 +1,149 @@
+{
+  "frozen_need": {
+    "origin": "Process Optimizer (DE-0080) + AEC AC-2/AC-4",
+    "blocked_decision": "REDUCE_MODEL_SWITCH_OVERHEAD",
+    "observed": "model-switch が wall-clock の 98% を支配(overhead_ratio 0.981, DE-0074/DE-0080)。vLLM Sleep Mode / concurrent-serve 等の native capability は EGL 未 admit(AEC AC-2 = UNRESOLVED)。",
+    "optimizer_candidate": "parallelize independent validators(batching)= workflow 選択肢(research 不要)"
+  },
+  "rri_decomposition": {
+    "decision_to_support": "RESEARCH_NEED_VALIDATED_WITH_DISTINCTION",
+    "research_requirement_summary": "The need to reduce model-switch overhead is valid, but the root cause analysis in the input conflates external specification gaps (vLLM capabilities) with local measurement gaps (actual latency). Research must first confirm if vLLM's native switching mechanisms are actually applicable to the current deployment architecture (EGL admission status) and then measure the specific latency components of the current switch to identify if the 98% overhead is due to context restoration, memory bandwidth, or scheduler contention.",
+    "alternative_causes": [
+      "Implementation Choice: The '98% overhead' may be an artifact of the profiling tool or the specific 'model-switch' definition used by DE-0074/DE-0080, rather than a true system bottleneck. For example, if the switch involves a full context cache flush vs. a partial restore, the cost is expected to be high.",
+      "Policy/Configuration: The 'EGL unadmitted' status for vLLM Sleep Mode suggests a policy decision or environment constraint preventing the use of native capabilities. Researching vLLM internals is moot if the deployment policy forbids the required kernel modules or memory mappings.",
+      "Architecture Mismatch: The candidate 'parallelize independent validators' assumes the bottleneck is in the validation logic, but the observed 'model-switch' overhead suggests the bottleneck is in the model serving layer. If the validators are not truly independent of the model state, this optimization will not reduce the switch overhead.",
+      "Hardware Limitation: The overhead may be dominated by PCIe/NVLink bandwidth saturation during context switching, which is a hardware constraint, not a software research target."
+    ],
+    "external_specification_rqs": [
+      "What are the documented semantics and performance characteristics of vLLM's 'Sleep Mode' and 'concurrent-serve' capabilities? Specifically, what is the expected latency reduction for model switching when these features are active?",
+      "Does vLLM support 'partial context restoration' or 'KV-cache swapping' for the specific model architecture in use, and what are the documented overheads for these operations compared to full context switching?",
+      "What are the official requirements for 'EGL admission' in the vLLM ecosystem? Is 'unadmitted' a technical limitation of the current vLLM version or a configuration policy?"
+    ],
+    "local_measurement_rqs": [
+      "Measure the actual wall-clock time breakdown of a 'model-switch' event: separate the time spent in context restoration, memory allocation, and scheduler overhead.",
+      "Measure the TP=2/NVFP4 behavior specifically: what is the actual latency impact of using NVFP4 quantization on the model-switch overhead compared to FP16/BF16?",
+      "Observe the memory bandwidth utilization during the model-switch phase to determine if the 98% overhead is bandwidth-bound.",
+      "Measure the actual latency of the 'parallelize independent validators' workflow to confirm if it bypasses the model-switch overhead or if it still incurs the same cost."
+    ],
+    "observed_block_refs": [
+      "DE-0074",
+      "DE-0080",
+      "AEC AC-2"
+    ]
+  },
+  "need_validation": {
+    "need": {
+      "need_id": "RNEED-SLEEPMODE-1",
+      "origin_system": "ProcessOptimizer/AEC",
+      "decision_to_support": "RESEARCH_NEED_VALIDATED_WITH_DISTINCTION",
+      "blocked_state": "OPERATING_MODE_UNDECIDED",
+      "nec": {
+        "validated": true,
+        "origin_decision": "RESEARCH_NEED_VALIDATED_WITH_DISTINCTION",
+        "observed_block_refs": [
+          "DE-0074",
+          "DE-0080",
+          "AEC AC-2"
+        ],
+        "alternative_causes": [
+          "Implementation Choice: The '98% overhead' may be an artifact of the profiling tool or the specific 'model-switch' definition used by DE-0074/DE-0080, rather than a true system bottleneck. For example, if the switch involves a full context cache flush vs. a partial restore, the cost is expected to be high.",
+          "Policy/Configuration: The 'EGL unadmitted' status for vLLM Sleep Mode suggests a policy decision or environment constraint preventing the use of native capabilities. Researching vLLM internals is moot if the deployment policy forbids the required kernel modules or memory mappings.",
+          "Architecture Mismatch: The candidate 'parallelize independent validators' assumes the bottleneck is in the validation logic, but the observed 'model-switch' overhead suggests the bottleneck is in the model serving layer. If the validators are not truly independent of the model state, this optimization will not reduce the switch overhead.",
+          "Hardware Limitation: The overhead may be dominated by PCIe/NVLink bandwidth saturation during context switching, which is a hardware constraint, not a software research target."
+        ],
+        "research_requirement_summary": "The need to reduce model-switch overhead is valid, but the root cause analysis in the input conflates external specification gaps (vLLM capabilities) with local measurement gaps (actual latency). Research must first confirm if vLLM's native switching mechanisms are actually applicable to the current deployment architecture (EGL admission status) and then measure the specific latency components of the current switch to identify if the 98% overhead is due to context restoration, memory bandwidth, or scheduler contention."
+      }
+    },
+    "result": {
+      "may_enter": true,
+      "reason": "All validation rules satisfied"
+    }
+  },
+  "research_design": {
+    "axis": {
+      "axis_id": "AX-NATIVE-CAP",
+      "supports_decisions": [
+        "REDUCE_MODEL_SWITCH_OVERHEAD"
+      ],
+      "required": true,
+      "safe_behavior_if_unknown": "treat native capability as NOT_ESTABLISHED; keep sequential-swap; do not assume Sleep Mode",
+      "rdec_ref": "RDEC-NATIVE-CAP"
+    },
+    "rdec": {
+      "rdec_id": "RDEC-NATIVE-CAP",
+      "decision": "REDUCE_MODEL_SWITCH_OVERHEAD",
+      "axis": "AX-NATIVE-CAP",
+      "why_required": "if a documented native weight-offload/concurrent-serve capability exists, it changes the operating-mode choice",
+      "expected_decision_effect": "may change swap-based A/B mode vs a native-capability mode",
+      "omission_risk": "design a swap workaround while a native capability already solves it",
+      "stop_condition_ref": "STOP-NATIVE-CAP"
+    },
+    "rq_candidate": {
+      "rq_candidate_id": "RQ-NATIVE-CAP-1",
+      "question": "What are the documented semantics and performance characteristics of vLLM's 'Sleep Mode' and 'concurrent-serve' capabilities? Specifically, what is the expected latency reduction for model switching when these features are active?",
+      "derived_from_axes": [
+        "AX-NATIVE-CAP"
+      ],
+      "decision_relevance": "determines whether a native capability mode is available for REDUCE_MODEL_SWITCH_OVERHEAD",
+      "priority": "REQUIRED",
+      "rdec_refs": [
+        "RDEC-NATIVE-CAP"
+      ]
+    },
+    "approved_rq_set": {
+      "approval_status": "APPROVED",
+      "source_research_design_id": "RDES-SLEEPMODE-1",
+      "source_revision_id": "RDRV-SLEEPMODE-1",
+      "required_rqs": [
+        "RQ-NATIVE-CAP-1"
+      ],
+      "validated_need_ref": "RNEED-SLEEPMODE-1"
+    },
+    "gates": {
+      "research_axis": {
+        "ok": true,
+        "problems": []
+      },
+      "rdec": {
+        "ok": true,
+        "problems": []
+      },
+      "rq_candidate": {
+        "ok": true,
+        "problems": []
+      },
+      "approved_rq_set_gate": {
+        "may_proceed": true,
+        "reason": "RQ set meets all gate requirements"
+      }
+    }
+  },
+  "routing": {
+    "external_specification": {
+      "route": "EGL acquisition (SearchPlan over vLLM official docs)",
+      "rqs": [
+        "What are the documented semantics and performance characteristics of vLLM's 'Sleep Mode' and 'concurrent-serve' capabilities? Specifically, what is the expected latency reduction for model switching when these features are active?",
+        "Does vLLM support 'partial context restoration' or 'KV-cache swapping' for the specific model architecture in use, and what are the documented overheads for these operations compared to full context switching?",
+        "What are the official requirements for 'EGL admission' in the vLLM ecosystem? Is 'unadmitted' a technical limitation of the current vLLM version or a configuration policy?"
+      ],
+      "execution": "NOT executed — autonomous RD not enabled (ACQ-10); awaits authorization"
+    },
+    "local_measurement": {
+      "route": "local MEASUREMENT need (this machine only, NOT web research)",
+      "rqs": [
+        "Measure the actual wall-clock time breakdown of a 'model-switch' event: separate the time spent in context restoration, memory allocation, and scheduler overhead.",
+        "Measure the TP=2/NVFP4 behavior specifically: what is the actual latency impact of using NVFP4 quantization on the model-switch overhead compared to FP16/BF16?",
+        "Observe the memory bandwidth utilization during the model-switch phase to determine if the 98% overhead is bandwidth-bound.",
+        "Measure the actual latency of the 'parallelize independent validators' workflow to confirm if it bypasses the model-switch overhead or if it still incurs the same cost."
+      ],
+      "note": "§5: do not convert local wake-latency into generic web research"
+    },
+    "non_research_alternatives": [
+      "Implementation Choice: The '98% overhead' may be an artifact of the profiling tool or the specific 'model-switch' definition used by DE-0074/DE-0080, rather than a true system bottleneck. For example, if the switch involves a full context cache flush vs. a partial restore, the cost is expected to be high.",
+      "Policy/Configuration: The 'EGL unadmitted' status for vLLM Sleep Mode suggests a policy decision or environment constraint preventing the use of native capabilities. Researching vLLM internals is moot if the deployment policy forbids the required kernel modules or memory mappings.",
+      "Architecture Mismatch: The candidate 'parallelize independent validators' assumes the bottleneck is in the validation logic, but the observed 'model-switch' overhead suggests the bottleneck is in the model serving layer. If the validators are not truly independent of the model state, this optimization will not reduce the switch overhead.",
+      "Hardware Limitation: The overhead may be dominated by PCIe/NVLink bandwidth saturation during context switching, which is a hardware constraint, not a software research target."
+    ]
+  },
+  "status": "RESEARCH_DESIGN_FORMED_AWAITING_ACQUISITION_AUTHORIZATION"
+}
