@@ -1,0 +1,184 @@
+{
+  "preregistration": {
+    "metric": "normalized word-level n-gram overlap = |shared n-grams| / |target n-grams| (lowercased, punctuation-stripped), probe corpus = union of 6 admitted operators' primary+secondary questions",
+    "thresholds": {
+      "PROBE_HANDED": "5-gram overlap >= 0.20 OR a distinctive target key-phrase appears verbatim in the probe corpus",
+      "RECOVERED_HIGH_OVERLAP": "4-gram overlap >= 0.15 (and not PROBE_HANDED)",
+      "RECOVERED_LOW_OVERLAP": "otherwise"
+    },
+    "policy": "fixed before evaluation; not tuned to results. High-overlap recovery is scored separately, PROBE_HANDED is discounted."
+  },
+  "probe_corpus_seal": "d0e1679585672f7eb2f64b97",
+  "overlaps": [
+    {
+      "id": "AH-01",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-02",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-03",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-04",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-05",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-06",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-07",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-08",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-09",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-10",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-11",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-12",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-13",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-14",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-15",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-16",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-17",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-18",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-19",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-20",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-21",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-22",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-23",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    },
+    {
+      "id": "AH-24",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "prereg_class": "RECOVERED_LOW_OVERLAP"
+    }
+  ],
+  "generated_at": "2026-07-07T19:32:04.316221+00:00",
+  "note": "answer scoring 前に生成。結果で改変しない。"
+}
