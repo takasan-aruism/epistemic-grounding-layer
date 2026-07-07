@@ -1,0 +1,12 @@
+{
+  "experiment": "AFE hybrid (skepticism-generate + AFE-discipline filter) test",
+  "no_regeneration": "Stage1 = existing B outputs; only Stage2 discipline filter is new",
+  "design": "Stage1 skepticism wide generation (recall) -> Stage2 AFE discipline filter (basis-in-frame + decision-relevance + reject irrelevant/over-trigger/unsupported) (precision)",
+  "preregistered_interpretation": {
+    "hybrid_success": "hybrid recall ~= B recall(19) AND hybrid problematic ~= D(~0) -> hybrid captures skepticism recall + AFE precision discipline; the tradeoff is resolvable",
+    "over_filter": "hybrid recall << B recall(drops target-matches) -> AFE discipline over-filters",
+    "filter_ineffective": "hybrid problematic ~= B(7) -> discipline filter fails to remove skepticism noise"
+  },
+  "filter_does_not_see_target": true,
+  "fixed_before_run": true
+}

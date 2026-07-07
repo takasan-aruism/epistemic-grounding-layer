@@ -1,0 +1,705 @@
+{
+  "filtered": [
+    {
+      "anon": "X-052c51",
+      "_id": "AH-09",
+      "_arm": "B",
+      "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+      "situation": "AH-09",
+      "axis": "Check for direct coupling artifacts masquerading as formation events",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-0573b8",
+      "_id": "AH-04",
+      "_arm": "B",
+      "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+      "situation": "AH-04",
+      "axis": "Check for age-related confounding variables in the dataset",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-07771b",
+      "_id": "AH-06",
+      "_arm": "B",
+      "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+      "situation": "AH-06",
+      "axis": "Check for systematic bias in node ID generation across both systems",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-098277",
+      "_id": "AH-15",
+      "_arm": "B",
+      "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+      "situation": "AH-15",
+      "axis": "Verify if the M=20 reference value is statistically robust against the observed variance",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-1aa714",
+      "_id": "AH-18",
+      "_arm": "B",
+      "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+      "situation": "AH-18",
+      "axis": "Confirm no race conditions exist between TTL expiration and starvation logic",
+      "keep": true,
+      "ew_disp": "I"
+    },
+    {
+      "anon": "X-1cf5b5",
+      "_id": "AH-21",
+      "_arm": "B",
+      "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+      "situation": "AH-21",
+      "axis": "Check if the re-clustering algorithm preserves the semantic integrity of the original 10 incidents",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-21537c",
+      "_id": "AH-09",
+      "_arm": "B",
+      "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+      "situation": "AH-09",
+      "axis": "Validate throughput measurement against independent structural benchmarks",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-26186a",
+      "_id": "AH-02",
+      "_arm": "B",
+      "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+      "situation": "AH-02",
+      "axis": "Verify if the familiarity threshold of 2.0 is statistically significant compared to the noise floor of the input data",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-2ef093",
+      "_id": "AH-24",
+      "_arm": "B",
+      "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+      "situation": "AH-24",
+      "axis": "\"message\": \"The request asks to simulate a system that individualizes and stores experiences in a physical state, which implies a capability or scenario that is not grounded in reality or standard technical specifications. As an AI, I cannot perform actions that involve physical states or subjective experience storage. Therefore, I cannot fulfill the request to propose checks for such an incident, as the premise itself is invalid.\"",
+      "keep": false,
+      "ew_disp": "S"
+    },
+    {
+      "anon": "X-31971b",
+      "_id": "AH-07",
+      "_arm": "B",
+      "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+      "situation": "AH-07",
+      "axis": "Confirm if the sample size is statistically significant for the entire population",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-34371a",
+      "_id": "AH-01",
+      "_arm": "B",
+      "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+      "situation": "AH-01",
+      "axis": "Check if the 67% statistic represents a local maximum in a multimodal distribution rather than the global mode",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-3769fb",
+      "_id": "AH-17",
+      "_arm": "B",
+      "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+      "situation": "AH-17",
+      "axis": "Verify if the system exhibits non-monotonic scaling where higher thresholds suppress large cluster formation",
+      "keep": false,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-3a7052",
+      "_id": "AH-11",
+      "_arm": "B",
+      "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+      "situation": "AH-11",
+      "axis": "Check if the grammar signal persists when the dialogue context is truncated or shuffled",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-3a93bd",
+      "_id": "AH-20",
+      "_arm": "B",
+      "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+      "situation": "AH-20",
+      "axis": "Verify if the 'load-bearing tests' actually cover the specific edge cases identified in the auditor's findings",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-3be157",
+      "_id": "AH-01",
+      "_arm": "B",
+      "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+      "situation": "AH-01",
+      "axis": "Confirm that the S>=0.20 threshold does not artificially suppress smaller clusters that would otherwise dominate the distribution",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-3c621c",
+      "_id": "AH-18",
+      "_arm": "B",
+      "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+      "situation": "AH-18",
+      "axis": "Verify if the starvation rule actually triggers turnover under load",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-3e4415",
+      "_id": "AH-24",
+      "_arm": "B",
+      "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+      "situation": "AH-24",
+      "axis": "error\": \"Invalid request",
+      "keep": false,
+      "ew_disp": "S"
+    },
+    {
+      "anon": "X-41fd02",
+      "_id": "AH-13",
+      "_arm": "B",
+      "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+      "situation": "AH-13",
+      "axis": "Check if the 'incorporation' metric is actually measuring a different variable",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-43b429",
+      "_id": "AH-15",
+      "_arm": "B",
+      "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+      "situation": "AH-15",
+      "axis": "Check if the 'within floor' threshold was pre-specified or post-hoc adjusted to ensure no effect",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-478e7f",
+      "_id": "AH-12",
+      "_arm": "B",
+      "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+      "situation": "AH-12",
+      "axis": "Check for confounding variables such as shared environmental factors or phylogenetic history",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-5065a9",
+      "_id": "AH-21",
+      "_arm": "B",
+      "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+      "situation": "AH-21",
+      "axis": "Confirm that batch re-induction does not overwrite or corrupt the original incident data",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-532414",
+      "_id": "AH-02",
+      "_arm": "B",
+      "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+      "situation": "AH-02",
+      "axis": "Check if the social, stability, and spread scores were normalized correctly before the weighted sum calculation",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-5415f8",
+      "_id": "AH-03",
+      "_arm": "B",
+      "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+      "situation": "AH-03",
+      "axis": "Audit for race conditions where concurrent growth updates corrupt the physical state",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-5f5697",
+      "_id": "AH-06",
+      "_arm": "B",
+      "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+      "situation": "AH-06",
+      "axis": "Verify seed node uniqueness to prevent false positive co-occurrence from duplicate IDs",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-60ee5f",
+      "_id": "AH-08",
+      "_arm": "B",
+      "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+      "situation": "AH-08",
+      "axis": "Check for memory leaks or dangling pointers in the old Layer A instance",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-63d629",
+      "_id": "AH-16",
+      "_arm": "B",
+      "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+      "situation": "AH-16",
+      "axis": "Confirm that 'Match Ratio' is not skewed by the total number of records in the aggregate calculation",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-64706a",
+      "_id": "AH-22",
+      "_arm": "B",
+      "target": "A reasoning prior at low applicability distorts content-branching — injecting memory can lower expected value vs no-injection when task/frame mismatch; do not assume 'memory available' implies 'inject'.",
+      "situation": "AH-22",
+      "axis": "Check for correlated external network events",
+      "keep": true,
+      "ew_disp": "I"
+    },
+    {
+      "anon": "X-67d697",
+      "_id": "AH-08",
+      "_arm": "B",
+      "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+      "situation": "AH-08",
+      "axis": "Confirm runtime type safety checks pass for the new mechanism's interface",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-75cef0",
+      "_id": "AH-12",
+      "_arm": "B",
+      "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+      "situation": "AH-12",
+      "axis": "Verify if Mantel correlation accounts for spatial autocorrelation in structural data",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-7a1212",
+      "_id": "AH-10",
+      "_arm": "B",
+      "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+      "situation": "AH-10",
+      "axis": "Verify if the smoke run seed 0 is representative of the general population or an outlier",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-809171",
+      "_id": "AH-22",
+      "_arm": "B",
+      "target": "A reasoning prior at low applicability distorts content-branching — injecting memory can lower expected value vs no-injection when task/frame mismatch; do not assume 'memory available' implies 'inject'.",
+      "situation": "AH-22",
+      "axis": "Audit access logs for unauthorized post-incident changes",
+      "keep": true,
+      "ew_disp": "I"
+    },
+    {
+      "anon": "X-870f72",
+      "_id": "AH-16",
+      "_arm": "B",
+      "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+      "situation": "AH-16",
+      "axis": "Check if 'Match Ratio' aggregates correctly when the dataset contains null or missing values",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-87a44d",
+      "_id": "AH-05",
+      "_arm": "B",
+      "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+      "situation": "AH-05",
+      "axis": "Confirm that the phase locking is not an artifact of signal filtering or noise injection",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-88d0e8",
+      "_id": "AH-10",
+      "_arm": "B",
+      "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+      "situation": "AH-10",
+      "axis": "Inspect the visual evidence for artifacts or rendering errors that mimic an effect",
+      "keep": true,
+      "ew_disp": "I"
+    },
+    {
+      "anon": "X-89654b",
+      "_id": "AH-19",
+      "_arm": "B",
+      "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+      "situation": "AH-19",
+      "axis": "Check if the wake_up failure is caused by specific hardware state (e.g., GPU context) that can be reset without disabling sleep mode entirely",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-8af37d",
+      "_id": "AH-04",
+      "_arm": "B",
+      "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+      "situation": "AH-04",
+      "axis": "Analyze residual plots for non-linear developmental patterns",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-8b125b",
+      "_id": "AH-17",
+      "_arm": "B",
+      "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+      "situation": "AH-17",
+      "axis": "Confirm that the persistence algorithm correctly identifies n=5 structures without merging them into larger components",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-8b4a95",
+      "_id": "AH-23",
+      "_arm": "B",
+      "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+      "situation": "AH-23",
+      "axis": "Validate if the 'un-co-servable' claim is based on a specific batch size or input dimension",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-8c6246",
+      "_id": "AH-20",
+      "_arm": "B",
+      "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+      "situation": "AH-20",
+      "axis": "Check if the rework was applied to the correct version of the codebase before re-testing",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-9805d8",
+      "_id": "AH-01",
+      "_arm": "B",
+      "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+      "situation": "AH-01",
+      "axis": "Verify if the 'core-size' definition excludes the initial R>0 pair from the count, which would shift the mode to n=1",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-981acc",
+      "_id": "AH-10",
+      "_arm": "B",
+      "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+      "situation": "AH-10",
+      "axis": "Check for statistical significance by running additional seeds to confirm reproducibility",
+      "keep": false,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-9a1bbc",
+      "_id": "AH-11",
+      "_arm": "B",
+      "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+      "situation": "AH-11",
+      "axis": "Verify if loop_rate correlates with token count or is an artifact of the reporting metric",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-9e0a6d",
+      "_id": "AH-12",
+      "_arm": "B",
+      "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+      "situation": "AH-12",
+      "axis": "Assess statistical power and sample size to ensure the correlation is not a false positive",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-a4819b",
+      "_id": "AH-17",
+      "_arm": "B",
+      "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+      "situation": "AH-17",
+      "axis": "Check if the dataset size is insufficient to statistically support structures of size n=5 at tau=100",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-a74592",
+      "_id": "AH-06",
+      "_arm": "B",
+      "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+      "situation": "AH-06",
+      "axis": "Validate that co-occurrence rates exceed random chance baselines",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-a8d455",
+      "_id": "AH-18",
+      "_arm": "B",
+      "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+      "situation": "AH-18",
+      "axis": "Check if GHOST_TTL=10 causes premature eviction of valid entries",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-b92038",
+      "_id": "AH-23",
+      "_arm": "B",
+      "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+      "situation": "AH-23",
+      "axis": "Verify GPU memory utilization metrics for both models during peak load",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-be038a",
+      "_id": "AH-23",
+      "_arm": "B",
+      "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+      "situation": "AH-23",
+      "axis": "Check for driver version incompatibilities or known bugs in the inference engine",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-c0682f",
+      "_id": "AH-11",
+      "_arm": "B",
+      "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+      "situation": "AH-11",
+      "axis": "Confirm if the 'emergent grammar' is distinguishable from random noise using a null model",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-c23f5a",
+      "_id": "AH-13",
+      "_arm": "B",
+      "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+      "situation": "AH-13",
+      "axis": "Confirm if the 'step' interval aligns with the actual processing cycle",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-c52ac3",
+      "_id": "AH-07",
+      "_arm": "B",
+      "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+      "situation": "AH-07",
+      "axis": "Verify if the 95.7% metric excludes outlier sub-populations",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-c78fc5",
+      "_id": "AH-08",
+      "_arm": "B",
+      "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+      "situation": "AH-08",
+      "axis": "Verify Layer A is not still referenced by any active pointers or handles",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-c7c879",
+      "_id": "AH-13",
+      "_arm": "B",
+      "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+      "situation": "AH-13",
+      "axis": "Verify if the 6,552 boost value is capped by a hidden system limit",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-cd5b2d",
+      "_id": "AH-04",
+      "_arm": "B",
+      "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+      "situation": "AH-04",
+      "axis": "Verify if n_labels is a proxy for data collection duration",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-cfc0e4",
+      "_id": "AH-07",
+      "_arm": "B",
+      "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+      "situation": "AH-07",
+      "axis": "Check for systematic bias in the alignment measurement tool",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-d47da9",
+      "_id": "AH-05",
+      "_arm": "B",
+      "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+      "situation": "AH-05",
+      "axis": "Verify if the rise in V_unified correlates with a decrease in functional diversity or modularity",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-d8561b",
+      "_id": "AH-16",
+      "_arm": "B",
+      "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+      "situation": "AH-16",
+      "axis": "Verify if 'tol 1e-6 equality' handles floating-point precision errors correctly for all data types",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-db0171",
+      "_id": "AH-03",
+      "_arm": "B",
+      "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+      "situation": "AH-03",
+      "axis": "Check if the upper layer has write permissions to the physical layer's memory space",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-dbbbef",
+      "_id": "AH-15",
+      "_arm": "B",
+      "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+      "situation": "AH-15",
+      "axis": "Inspect the raw data distribution for outliers that might be masking a significant drift",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-dca9a6",
+      "_id": "AH-03",
+      "_arm": "B",
+      "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+      "situation": "AH-03",
+      "axis": "Verify if 'incorporation' modifies immutable physical constants or only dynamic state variables",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-df6964",
+      "_id": "AH-19",
+      "_arm": "B",
+      "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+      "situation": "AH-19",
+      "axis": "Verify if the tensor error is a transient state issue during the resume phase rather than a fundamental incompatibility",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-e289d9",
+      "_id": "AH-14",
+      "_arm": "B",
+      "target": "Read the upstream material first — this reduces to a trivial re-observation of an already-established mechanism (v10.5) that no one on the team had read; check prior work before observing.",
+      "situation": "AH-14",
+      "axis": "check_1\": \"Verify if q_c_inherited was actually updated or reset to a default state before the observation started.",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-e38367",
+      "_id": "AH-20",
+      "_arm": "B",
+      "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+      "situation": "AH-20",
+      "axis": "Confirm that the auditor's findings were interpreted correctly and not misattributed to a different module",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-e38532",
+      "_id": "AH-14",
+      "_arm": "B",
+      "target": "Read the upstream material first — this reduces to a trivial re-observation of an already-established mechanism (v10.5) that no one on the team had read; check prior work before observing.",
+      "situation": "AH-14",
+      "axis": "check_2\": \"Confirm that the observation scope strictly adhered to the within-cid boundary and did not leak external signals.",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-e43fbe",
+      "_id": "AH-05",
+      "_arm": "B",
+      "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+      "situation": "AH-05",
+      "axis": "Check if V_unified is driven by a single dominant mode rather than global synchronization",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-e733c2",
+      "_id": "AH-19",
+      "_arm": "B",
+      "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+      "situation": "AH-19",
+      "axis": "Confirm if the 28GB free memory indicates successful suspension, suggesting the failure is isolated to the restoration logic rather than the sleep mechanism itself",
+      "keep": true,
+      "ew_disp": "T"
+    },
+    {
+      "anon": "X-f37106",
+      "_id": "AH-22",
+      "_arm": "B",
+      "target": "A reasoning prior at low applicability distorts content-branching — injecting memory can lower expected value vs no-injection when task/frame mismatch; do not assume 'memory available' implies 'inject'.",
+      "situation": "AH-22",
+      "axis": "Verify raw telemetry logs for unreported anomalies",
+      "keep": true,
+      "ew_disp": "I"
+    },
+    {
+      "anon": "X-f77ee2",
+      "_id": "AH-02",
+      "_arm": "B",
+      "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+      "situation": "AH-02",
+      "axis": "Inspect the raw input vectors to see if any single high-familiarity entity disproportionately skewed the aggregate result",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-f7e80c",
+      "_id": "AH-21",
+      "_arm": "B",
+      "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+      "situation": "AH-21",
+      "axis": "Verify if the 6 new incidents are outliers that distort the centroid of existing families",
+      "keep": true,
+      "ew_disp": "U"
+    },
+    {
+      "anon": "X-fff1c7",
+      "_id": "AH-09",
+      "_arm": "B",
+      "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+      "situation": "AH-09",
+      "axis": "Verify if 27k births correlate with actual structural metrics or just noise",
+      "keep": true,
+      "ew_disp": "T"
+    }
+  ],
+  "kept_count": 66
+}
