@@ -67,44 +67,55 @@
     {
       "packet": {
         "answer_claim_id": "AEC-AC-2",
-        "statement": "vLLM に Sleep Mode があるかは、現時点では確認できていません。",
-        "claim_class": "HYPOTHESIS",
-        "basis_kind": "UNRESOLVED",
-        "validation_mode": "UNRESOLVED",
+        "statement": "vLLM は公式ドキュメントで Sleep Mode(level 1: weights を CPU にオフロードし KV cache を破棄)を記述しています。",
+        "claim_class": "FACT",
+        "basis_kind": "EXTERNAL_SPECIFICATION",
+        "validation_mode": "DECLARED",
         "egl_claim_ref": null,
-        "evidence_refs": [],
-        "evidence_summary": "vLLM Sleep Mode は EGL に未 admit(SearchPlan 未実行)",
+        "evidence_refs": [
+          "AcquisitionRun docs.vllm.ai/.../sleep_mode (SUCCESS/OBSERVED, http 200)",
+          "Observation OFFICIAL_DOCS/PRIMARY (leg satisfied)",
+          "DE-0085"
+        ],
+        "evidence_summary": "vLLM 公式ドキュメント(docs.vllm.ai, OFFICIAL_DOCS, PRIMARY)を実取得・OBSERVED・qualify",
         "source_policy": "SOFTWARE_TECHNICAL",
-        "source_role": null,
-        "scope": "vLLM 公式仕様(未調査)",
-        "currentness": null,
-        "claim_registration_status": "NOT_ADMITTED",
+        "source_role": "PRIMARY_OFFICIAL",
+        "supports_dimension": "documented capability existence + semantics",
+        "unsupported_dimension": "local wake latency / current-config swap-cost reduction",
+        "scope": "vLLM documented capability",
+        "currentness": "docs.vllm.ai latest (fetched 2026-07-07)",
+        "local_applicability": "NOT_MEASURED",
+        "claim_registration_status": "DEFERRED_AT_ETB (Gate1 GC-8 HIDDEN_HTML — 正式 admission は clearance 待ち)",
         "residuals": [
-          "vLLM 公式ドキュメントを未調査(EGL 未admit)",
-          "→ RESEARCH_NEED 経由で RRI Need Validation / Research Design / EGL acquisition が必要"
+          "formal Claim admission は Gate1 GC-8(HIDDEN_HTML taint)で DEFERRED(ETB clearance 未実装=gap)",
+          "docs は latency 数値を示さない → local wake latency は依然 MEASUREMENT need(§5)"
         ]
       },
-      "compact": "vLLM に Sleep Mode があるかは、現時点では確認できていません。\n\n[未解決]\n根拠: vLLM Sleep Mode は EGL に未 admit(SearchPlan 未実行)\n不足: vLLM 公式ドキュメントを未調査(EGL 未admit)",
+      "compact": "vLLM は公式ドキュメントで Sleep Mode(level 1: weights を CPU にオフロードし KV cache を破棄)を記述しています。\n\n[公式仕様]\n根拠: vLLM 公式ドキュメント(docs.vllm.ai, OFFICIAL_DOCS, PRIMARY)を実取得・OBSERVED・qualify\n実機確認: 未",
       "expanded": {
-        "statement": "vLLM に Sleep Mode があるかは、現時点では確認できていません。",
-        "claim_class": "HYPOTHESIS",
-        "basis_kind": "UNRESOLVED",
-        "validation_mode": "UNRESOLVED",
+        "statement": "vLLM は公式ドキュメントで Sleep Mode(level 1: weights を CPU にオフロードし KV cache を破棄)を記述しています。",
+        "claim_class": "FACT",
+        "basis_kind": "EXTERNAL_SPECIFICATION",
+        "validation_mode": "DECLARED",
         "source_policy": "SOFTWARE_TECHNICAL",
-        "source_role": null,
-        "supports_dimension": null,
-        "unsupported_dimension": null,
-        "scope": "vLLM 公式仕様(未調査)",
-        "currentness": null,
-        "evidence_refs": [],
+        "source_role": "PRIMARY_OFFICIAL",
+        "supports_dimension": "documented capability existence + semantics",
+        "unsupported_dimension": "local wake latency / current-config swap-cost reduction",
+        "scope": "vLLM documented capability",
+        "currentness": "docs.vllm.ai latest (fetched 2026-07-07)",
+        "evidence_refs": [
+          "AcquisitionRun docs.vllm.ai/.../sleep_mode (SUCCESS/OBSERVED, http 200)",
+          "Observation OFFICIAL_DOCS/PRIMARY (leg satisfied)",
+          "DE-0085"
+        ],
         "egl_claim_ref": null,
         "discovered_by": null,
         "evidence_source": null,
-        "claim_registration_status": "NOT_ADMITTED",
-        "local_applicability": null,
+        "claim_registration_status": "DEFERRED_AT_ETB (Gate1 GC-8 HIDDEN_HTML — 正式 admission は clearance 待ち)",
+        "local_applicability": "NOT_MEASURED",
         "residuals": [
-          "vLLM 公式ドキュメントを未調査(EGL 未admit)",
-          "→ RESEARCH_NEED 経由で RRI Need Validation / Research Design / EGL acquisition が必要"
+          "formal Claim admission は Gate1 GC-8(HIDDEN_HTML taint)で DEFERRED(ETB clearance 未実装=gap)",
+          "docs は latency 数値を示さない → local wake latency は依然 MEASUREMENT need(§5)"
         ],
         "component_bases": null
       },
@@ -314,15 +325,16 @@
     "packet_validity_rate": 1.0,
     "basis_kind_distribution": {
       "LOCAL_MEASUREMENT": 2,
-      "UNRESOLVED": 2,
-      "AI_INFERENCE": 1
+      "EXTERNAL_SPECIFICATION": 1,
+      "AI_INFERENCE": 1,
+      "UNRESOLVED": 1
     },
-    "claims_with_source_or_evidence_refs": 3,
+    "claims_with_source_or_evidence_refs": 4,
     "claims_with_measurement_refs": 2,
     "claims_with_residuals": 5,
-    "unresolved_claims": 2,
+    "unresolved_claims": 1,
     "strength_violations": 0,
-    "not_admitted": 3,
+    "not_admitted": 2,
     "note": "composite 'trust score' は作らない(§19)。dimension は raw のまま。"
   }
 }
