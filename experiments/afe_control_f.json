@@ -1,0 +1,15 @@
+{
+  "object": "CONTROL_F_SEALED",
+  "placebo_prompts": [
+    "Check the assumptions behind the current conclusion.",
+    "Consider alternative explanations for the observation.",
+    "Look for hidden causes not stated in the frame.",
+    "Reconsider whether the conclusion follows from the evidence.",
+    "Inspect the reasoning for possible bias.",
+    "Ask what important information might be missing."
+  ],
+  "count": 6,
+  "sha256": "c2da8f32a5738559297251fb197c27eeccc9c70821b2294f24e3280136f41f6a",
+  "sealed_at": "2026-07-07T19:34:59.793067+00:00",
+  "note": "same call count / SIGNAL schema / aggregation / orchestrator as AFE; only operator content replaced by generic skepticism"
+}
