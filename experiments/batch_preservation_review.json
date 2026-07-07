@@ -1,0 +1,60 @@
+{
+  "review": {
+    "property_verdicts": [
+      {
+        "property_id": "P1",
+        "verdict": "PRESERVED",
+        "argument": "The optimization explicitly states that the generate and audit models remain separate (Coder-Next / Qwen3.6) and that the audit is a separate isolated call. The batching applies to the amortization of the SWAP operation (the transition between phases), not the merging of the generator and auditor roles. Independence is maintained.",
+        "mechanism_ref": "OPT-001: 'generate/audit の model は従来通り別(Coder-Next / Qwen3.6)'"
+      },
+      {
+        "property_id": "P2",
+        "verdict": "PRESERVED",
+        "argument": "The text confirms that the DW gate (which includes mandatory audit) is 'per-item に変更なく通す' (passes per-item without change). The audit is still a prerequisite for the item to proceed, ensuring the mandatory independent audit before completion is preserved.",
+        "mechanism_ref": "OPT-001: 'DW gate(mandatory audit ... )は per-item に変更なく通す'"
+      },
+      {
+        "property_id": "P3",
+        "verdict": "PRESERVED",
+        "argument": "The DW gate includes the 'F5 test' as part of the mandatory per-item checks. The optimization does not remove or bypass the F5 test; it only changes how the SWAP operations are amortized around the generation/audit/disposition cycle.",
+        "mechanism_ref": "OPT-001: 'DW gate(... / F5 test / ...)は per-item に変更なく通す'"
+      },
+      {
+        "property_id": "P4",
+        "verdict": "PRESERVED",
+        "argument": "The workflow explicitly includes 'audit+dispose' before 'rework subset'. The disposition (dispose) step is part of the per-item audit flow, ensuring every finding is dispositioned before rework/complete.",
+        "mechanism_ref": "OPT-001: '1 swap→全 N item を audit+dispose→rework subset のみ再 swap'"
+      },
+      {
+        "property_id": "P5",
+        "verdict": "PRESERVED",
+        "argument": "The rework is applied to a 'subset' after audit+dispose. This implies that only items with accepted findings (or specific dispositions) are selected for rework, rather than raw items. The logic of 'accepted findings drive rework' is consistent with the audit+dispose-then-rework flow.",
+        "mechanism_ref": "OPT-001: 'audit+dispose→rework subset のみ再 swap'"
+      },
+      {
+        "property_id": "P6",
+        "verdict": "PRESERVED",
+        "argument": "The DW gate includes 'upper review' as a mandatory per-item check. The optimization does not remove this gate, so the upper review requirement before completion is preserved.",
+        "mechanism_ref": "OPT-001: 'DW gate(... / upper review)は per-item に変更なく通す'"
+      },
+      {
+        "property_id": "P7",
+        "verdict": "PRESERVED",
+        "argument": "The primitive history is stored in 'run_sor/events.jsonl'. The optimization keeps the 'primitive' as a 'run_sor' task. As long as the events are logged per item (which is implied by the per-item audit/disposition flow), the history remains reconstructable.",
+        "mechanism_ref": "OPT-001: 'primitive は per-item DW task + batch process task の run_sor に残る'"
+      },
+      {
+        "property_id": "P8",
+        "verdict": "PRESERVED",
+        "argument": "The optimization explicitly states that the audit is a 'SEPARATE isolated call' with 'no shared prompt/context' across items. This directly satisfies the requirement for cross-item audit context isolation despite the batching of the SWAP operations.",
+        "mechanism_ref": "OPT-001: 'audit は item ごとに SEPARATE な isolated 呼び出し(shared prompt/context 無し)'"
+      }
+    ]
+  },
+  "gate": {
+    "auto_adoptable": true,
+    "problems": [],
+    "missing": []
+  },
+  "property_set_version": 2
+}

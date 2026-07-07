@@ -1,0 +1,27 @@
+### B-mode batched run: ['rdec', 'needval', 'transform', 'axis', 'rqgate'] ###
+
+  [swap #1 -> coder] OK in 167.7s
+  [GEN rdec] executed passed=True 8/8
+  [GEN needval] executed passed=True 7/7
+  [GEN transform] executed passed=False 7/8
+  [GEN axis] executed passed=True 7/7
+  [GEN rqgate] executed passed=True 8/8
+  [swap #2 -> qwen] OK in 181.9s
+  [AUD rdec] findings=0 state=READY_FOR_UPPER_REVIEW
+  [AUD needval] findings=0 state=READY_FOR_UPPER_REVIEW
+  [AUD transform] findings=0 state=READY_FOR_REGENERATE
+  [AUD axis] findings=0 state=READY_FOR_UPPER_REVIEW
+  [AUD rqgate] findings=4 dispose 0 ACCEPTED
+  [REWORK round 1] subset=['transform']
+  [swap #3 -> coder] OK in 166.8s
+  [swap #4 -> qwen] OK in 181.8s
+  [REWORK round 2] subset=['transform']
+  [swap #5 -> coder] OK in 166.8s
+  [swap #6 -> qwen] OK in 181.8s
+
+=== MEASURED B-mode ===
+  swaps: A per-item baseline 10 -> B batched 6  (avg 174.5s/swap)
+  measured switch-time saved: 698.0s (rework rounds=2)
+  results: {'rdec': 'COMPLETE', 'needval': 'COMPLETE', 'transform': 'JUDGE_REQUIRED', 'axis': 'COMPLETE', 'rqgate': 'COMPLETE'}
+
+-> rri_batch_run.json 保存
