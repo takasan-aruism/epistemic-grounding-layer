@@ -1,0 +1,84 @@
+{
+  "scorers": [
+    "Round1 Claude(label-aware)",
+    "PHASE1 Qwen(blind, condition非開示)"
+  ],
+  "gpt": "unavailable(tool無)",
+  "comparison": {
+    "A_ordinary": {
+      "round1": {
+        "HIT": 2,
+        "over": 0,
+        "XDOM": 0
+      },
+      "blind": {
+        "HIT": 2,
+        "over": 1,
+        "XDOM": 0
+      }
+    },
+    "B_skepticism": {
+      "round1": {
+        "HIT": 2,
+        "over": 0,
+        "XDOM": 0
+      },
+      "blind": {
+        "HIT": 4,
+        "over": 1,
+        "XDOM": 0
+      }
+    },
+    "C_lessons": {
+      "round1": {
+        "HIT": 2,
+        "over": 0,
+        "XDOM": 1
+      },
+      "blind": {
+        "HIT": 4,
+        "over": 3,
+        "XDOM": 1
+      }
+    },
+    "D_retrieval": {
+      "round1": {
+        "HIT": 2,
+        "over": 0,
+        "XDOM": 1
+      },
+      "blind": {
+        "HIT": 4,
+        "over": 0,
+        "XDOM": 1
+      }
+    },
+    "T1_MF001": {
+      "round1": {
+        "HIT": 2,
+        "over": 2,
+        "XDOM": 0
+      },
+      "blind": {
+        "HIT": 3,
+        "over": 1,
+        "XDOM": 0
+      }
+    },
+    "T2_MFM2artifact": {
+      "round1": {
+        "HIT": 3,
+        "over": 0,
+        "XDOM": 0
+      },
+      "blind": {
+        "HIT": 3,
+        "over": 0,
+        "XDOM": 0
+      }
+    }
+  },
+  "safety_signal_survives": true,
+  "finding": "meta-frame(T1/T2)の XDOMAIN=0 + T2 over-trigger=0 が blind でも維持。retrieval(D)/lesson(C)は XDOMAIN>0。→ cross-domain safety signal は label-bias でなく頑健。Round 2(H1: meta-frame は retrieval より XDOMAIN を減らす)の根拠成立。",
+  "caveat": "Qwen は HIT に甘く(全条件high)HIT絶対値は不安定。safety(XDOMAIN/over-trigger)signal のみ両scorerで一致。GPT scorer は tool 未提供で欠。"
+}

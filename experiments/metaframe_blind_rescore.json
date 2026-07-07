@@ -1,0 +1,563 @@
+{
+  "scorer": "Qwen3.6 blind (condition非開示)",
+  "scored": [
+    {
+      "anon_id": "R-04b0",
+      "_ho": "HO-3",
+      "_cond": "T2_MFM2artifact",
+      "missing_axis": "Does the SPECIFIED capability actually work / perform in OUR local config? Docs give no local numbers; measure local behavior — it may fail locally. Specification != local applicability.",
+      "pre_frame_of": "HO-3",
+      "axes": [
+        "Verify if 'fast resume' preserves full model state fidelity or only partial/quantized state",
+        "Measure the actual latency and memory overhead of the resume operation versus a cold start",
+        "Check for side-effects such as cache invalidation penalties or consistency errors during state restoration"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-0f27",
+      "_ho": "HO-5",
+      "_cond": "D_retrieval",
+      "missing_axis": "Confirm the firing CONDITION mechanism: is 77% a property of the mechanism, or an artifact of the experimental setup (tracking length / accumulation)? Check the construction before treating the metric as a finding.",
+      "pre_frame_of": "HO-5",
+      "axes": [
+        "audit_directional_bias_in_sampling_logic",
+        "verify_asymmetry_independence_from_initial_conditions",
+        "check_for_deterministic_state_locking_or_deadlocks"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-2a25",
+      "_ho": "HO-1",
+      "_cond": "B_skepticism",
+      "missing_axis": "Is each finding substantiated by a reproducing counterexample (real defect) or an over-flag? Disposition before rework; reject findings that do not reproduce.",
+      "pre_frame_of": "HO-1",
+      "axes": [
+        "Verify if findings are in production-critical paths or dead code",
+        "Assess if findings violate explicit security or compliance requirements",
+        "Check if findings represent actual exploit vectors or theoretical edge cases"
+      ],
+      "blind": {
+        "recovery": "PARTIAL",
+        "flags": [
+          "OVER_TRIGGER",
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon_id": "R-2f7e",
+      "_ho": "HO-4",
+      "_cond": "A_ordinary",
+      "missing_axis": "The co-serve impossibility is a DECLARED assertion, not measured — measure it first. And the operating-mode choice depends on an unmeasured variable (swap frequency); measure before deciding.",
+      "pre_frame_of": "HO-4",
+      "axes": [
+        "GPU memory footprint and peak VRAM usage per model",
+        "Inference latency and throughput requirements for each model",
+        "Batch size compatibility and memory fragmentation risks"
+      ],
+      "blind": {
+        "recovery": "MISS",
+        "flags": [
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon_id": "R-2fb9",
+      "_ho": "HO-1",
+      "_cond": "T2_MFM2artifact",
+      "missing_axis": "Is each finding substantiated by a reproducing counterexample (real defect) or an over-flag? Disposition before rework; reject findings that do not reproduce.",
+      "pre_frame_of": "HO-1",
+      "axes": [
+        "Verify if the reported issues are reproducible under adversarial or edge-case inputs rather than standard load-bearing scenarios",
+        "Determine if the code changes are required to satisfy explicit specification constraints or are merely stylistic/preference-based",
+        "Assess if the findings represent a security vulnerability or data integrity risk versus a non-functional implementation detail"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-30f7",
+      "_ho": "HO-5",
+      "_cond": "B_skepticism",
+      "missing_axis": "Confirm the firing CONDITION mechanism: is 77% a property of the mechanism, or an artifact of the experimental setup (tracking length / accumulation)? Check the construction before treating the metric as a finding.",
+      "pre_frame_of": "HO-5",
+      "axes": [
+        "Verify if the 25.6% baseline is statistically robust or an artifact of low sample size in the smoke test",
+        "Check for selection bias in the 'main run' cohort (e.g., did only stable users trigger the full firing logic?)",
+        "Audit the definition of 'one-directional' to ensure it isn't conflated with 'successful' vs 'failed' attempts"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-44b4",
+      "_ho": "HO-4",
+      "_cond": "C_lessons",
+      "missing_axis": "The co-serve impossibility is a DECLARED assertion, not measured — measure it first. And the operating-mode choice depends on an unmeasured variable (swap frequency); measure before deciding.",
+      "pre_frame_of": "HO-4",
+      "axes": [
+        "GPU memory footprint and peak utilization per model",
+        "Inference latency and throughput under concurrent load",
+        "Batch size compatibility and memory fragmentation risks"
+      ],
+      "blind": {
+        "recovery": "PARTIAL",
+        "flags": [
+          "OVER_TRIGGER"
+        ]
+      }
+    },
+    {
+      "anon_id": "R-5c28",
+      "_ho": "HO-5",
+      "_cond": "A_ordinary",
+      "missing_axis": "Confirm the firing CONDITION mechanism: is 77% a property of the mechanism, or an artifact of the experimental setup (tracking length / accumulation)? Check the construction before treating the metric as a finding.",
+      "pre_frame_of": "HO-5",
+      "axes": [
+        "Verify sample size and statistical significance of the 77% figure",
+        "Check for selection bias in the 'main run' vs 'short smoke run' datasets",
+        "Analyze temporal trends to rule out transient anomalies or drift"
+      ],
+      "blind": {
+        "recovery": "PARTIAL",
+        "flags": [
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon_id": "R-6535",
+      "_ho": "HO-2",
+      "_cond": "T2_MFM2artifact",
+      "missing_axis": "Do the supplied tests cover all malformed shapes? The tested surface may be narrower than the claimed property (a fail-open on an untested shape). Attack test-set adequacy.",
+      "pre_frame_of": "HO-2",
+      "axes": [
+        "Edge case coverage beyond the 7 supplied tests",
+        "Security and side-effect audit of the implementation",
+        "Performance and resource usage under load"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-6722",
+      "_ho": "HO-3",
+      "_cond": "B_skepticism",
+      "missing_axis": "Does the SPECIFIED capability actually work / perform in OUR local config? Docs give no local numbers; measure local behavior — it may fail locally. Specification != local applicability.",
+      "pre_frame_of": "HO-3",
+      "axes": [
+        "Verify actual latency reduction under production load vs. vendor benchmarks",
+        "Audit state persistence integrity and corruption risks during resume",
+        "Measure cold-start penalty if resume cache is evicted or invalidated"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-6a40",
+      "_ho": "HO-5",
+      "_cond": "C_lessons",
+      "missing_axis": "Confirm the firing CONDITION mechanism: is 77% a property of the mechanism, or an artifact of the experimental setup (tracking length / accumulation)? Check the construction before treating the metric as a finding.",
+      "pre_frame_of": "HO-5",
+      "axes": [
+        "Verify if the 77% statistic is an artifact of the 'one-directional' definition or binning thresholds.",
+        "Check for temporal or spatial averaging effects that mask multi-directional or oscillatory firing patterns.",
+        "Confirm the sensor calibration and noise floor to ensure 'one-directional' is not a detection limit artifact."
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": [
+          "OVER_TRIGGER"
+        ]
+      }
+    },
+    {
+      "anon_id": "R-6dd7",
+      "_ho": "HO-2",
+      "_cond": "B_skepticism",
+      "missing_axis": "Do the supplied tests cover all malformed shapes? The tested surface may be narrower than the claimed property (a fail-open on an untested shape). Attack test-set adequacy.",
+      "pre_frame_of": "HO-2",
+      "axes": [
+        "Verify coverage of edge cases and boundary conditions not included in the 7 tests",
+        "Assess performance and latency under peak load or stress testing",
+        "Audit for security vulnerabilities and input validation bypasses"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-71d6",
+      "_ho": "HO-4",
+      "_cond": "T2_MFM2artifact",
+      "missing_axis": "The co-serve impossibility is a DECLARED assertion, not measured — measure it first. And the operating-mode choice depends on an unmeasured variable (swap frequency); measure before deciding.",
+      "pre_frame_of": "HO-4",
+      "axes": [
+        "GPU Memory Fragmentation and Allocation Overlap",
+        "CUDA Context and Stream Interference",
+        "Shared Resource Contention (e.g., NVLink, PCIe Bandwidth)"
+      ],
+      "blind": {
+        "recovery": "MISS",
+        "flags": [
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon_id": "R-72b7",
+      "_ho": "HO-2",
+      "_cond": "C_lessons",
+      "missing_axis": "Do the supplied tests cover all malformed shapes? The tested surface may be narrower than the claimed property (a fail-open on an untested shape). Attack test-set adequacy.",
+      "pre_frame_of": "HO-2",
+      "axes": [
+        "Verify gate behavior under perturbed qubit initialization states (birth mode)",
+        "Audit for statistical averaging artifacts that mask localized errors",
+        "Map abstract gate failure modes to physical control signal deviations"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": [
+          "XDOMAIN"
+        ]
+      }
+    },
+    {
+      "anon_id": "R-82bc",
+      "_ho": "HO-4",
+      "_cond": "B_skepticism",
+      "missing_axis": "The co-serve impossibility is a DECLARED assertion, not measured — measure it first. And the operating-mode choice depends on an unmeasured variable (swap frequency); measure before deciding.",
+      "pre_frame_of": "HO-4",
+      "axes": [
+        "Verify actual VRAM consumption per model including activation memory and optimizer states",
+        "Measure GPU utilization and memory bandwidth saturation under concurrent load",
+        "Check for kernel launch overhead and context-switch penalties in mixed-mode execution"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-8a6f",
+      "_ho": "HO-4",
+      "_cond": "T1_MF001",
+      "missing_axis": "The co-serve impossibility is a DECLARED assertion, not measured — measure it first. And the operating-mode choice depends on an unmeasured variable (swap frequency); measure before deciding.",
+      "pre_frame_of": "HO-4",
+      "axes": [
+        "Control Source: External vs. Internal",
+        "Timing: Fixed/Interval vs. Event/Unpredictable",
+        "State Nature: Deterministic Output vs. Probabilistic Claim"
+      ],
+      "blind": {
+        "recovery": "MISS",
+        "flags": [
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon_id": "R-8a93",
+      "_ho": "HO-2",
+      "_cond": "D_retrieval",
+      "missing_axis": "Do the supplied tests cover all malformed shapes? The tested surface may be narrower than the claimed property (a fail-open on an untested shape). Attack test-set adequacy.",
+      "pre_frame_of": "HO-2",
+      "axes": [
+        "Verify label-to-structure mapping integrity against ground truth",
+        "Confirm event-driven execution replaces fixed-timing artifacts",
+        "Insert paired audit checkpoints for bit-identity verification prior to runtime"
+      ],
+      "blind": {
+        "recovery": "MISS",
+        "flags": [
+          "XDOMAIN",
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon_id": "R-ab7e",
+      "_ho": "HO-1",
+      "_cond": "A_ordinary",
+      "missing_axis": "Is each finding substantiated by a reproducing counterexample (real defect) or an over-flag? Disposition before rework; reject findings that do not reproduce.",
+      "pre_frame_of": "HO-1",
+      "axes": [
+        "Verify if findings represent critical security vulnerabilities or logic errors",
+        "Assess if findings constitute performance bottlenecks affecting throughput",
+        "Evaluate if findings are style violations or non-functional code smells"
+      ],
+      "blind": {
+        "recovery": "PARTIAL",
+        "flags": [
+          "OVER_TRIGGER"
+        ]
+      }
+    },
+    {
+      "anon_id": "R-b375",
+      "_ho": "HO-3",
+      "_cond": "T1_MF001",
+      "missing_axis": "Does the SPECIFIED capability actually work / perform in OUR local config? Docs give no local numbers; measure local behavior — it may fail locally. Specification != local applicability.",
+      "pre_frame_of": "HO-3",
+      "axes": [
+        "Control Source: Verify if resume state is managed by vendor black-box or exposed for internal validation",
+        "State Nature: Audit if resumed state preserves full probabilistic distribution or collapses to deterministic shortcuts",
+        "Timing: Measure latency variance between cold start and resume to ensure 'fast' claim holds under load"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-ca16",
+      "_ho": "HO-3",
+      "_cond": "A_ordinary",
+      "missing_axis": "Does the SPECIFIED capability actually work / perform in OUR local config? Docs give no local numbers; measure local behavior — it may fail locally. Specification != local applicability.",
+      "pre_frame_of": "HO-3",
+      "axes": [
+        "Verify actual latency reduction of model switching with fast resume enabled versus baseline",
+        "Audit memory footprint and fragmentation during rapid model load/unload cycles",
+        "Measure data consistency and state integrity after resume operations under concurrent load"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-d4fc",
+      "_ho": "HO-5",
+      "_cond": "T1_MF001",
+      "missing_axis": "Confirm the firing CONDITION mechanism: is 77% a property of the mechanism, or an artifact of the experimental setup (tracking length / accumulation)? Check the construction before treating the metric as a finding.",
+      "pre_frame_of": "HO-5",
+      "axes": [
+        "Control Source: External vs. Internal",
+        "Timing: Fixed/Interval vs. Event/Unpredictable",
+        "State Nature: Deterministic Output vs. Probabilistic Claim"
+      ],
+      "blind": {
+        "recovery": "PARTIAL",
+        "flags": [
+          "OVER_TRIGGER"
+        ]
+      }
+    },
+    {
+      "anon_id": "R-da43",
+      "_ho": "HO-4",
+      "_cond": "D_retrieval",
+      "missing_axis": "The co-serve impossibility is a DECLARED assertion, not measured — measure it first. And the operating-mode choice depends on an unmeasured variable (swap frequency); measure before deciding.",
+      "pre_frame_of": "HO-4",
+      "axes": [
+        "GPU memory footprint and peak utilization under concurrent load",
+        "Inference latency distribution and tail-percentile stability",
+        "Batching efficiency and throughput degradation when co-located"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-dd74",
+      "_ho": "HO-1",
+      "_cond": "D_retrieval",
+      "missing_axis": "Is each finding substantiated by a reproducing counterexample (real defect) or an over-flag? Disposition before rework; reject findings that do not reproduce.",
+      "pre_frame_of": "HO-1",
+      "axes": [
+        "Audit finding reproducibility under randomized input conditions",
+        "Validation of audit tool's own false-positive rate on known-good code",
+        "Impact analysis of proposed changes on existing load-bearing test suite"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-e170",
+      "_ho": "HO-2",
+      "_cond": "A_ordinary",
+      "missing_axis": "Do the supplied tests cover all malformed shapes? The tested surface may be narrower than the claimed property (a fail-open on an untested shape). Attack test-set adequacy.",
+      "pre_frame_of": "HO-2",
+      "axes": [
+        "Fuzz testing with edge-case inputs",
+        "Formal verification of security properties",
+        "Third-party security audit"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-e513",
+      "_ho": "HO-1",
+      "_cond": "C_lessons",
+      "missing_axis": "Is each finding substantiated by a reproducing counterexample (real defect) or an over-flag? Disposition before rework; reject findings that do not reproduce.",
+      "pre_frame_of": "HO-1",
+      "axes": [
+        "Verify if the reported findings are artifacts of specific test configurations or load conditions rather than intrinsic code flaws.",
+        "Assess whether the 'load-bearing tests' adequately cover edge cases and failure modes not captured by standard validation suites.",
+        "Determine if the findings represent a deviation from the intended logical specification or merely a stylistic/structural difference."
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": [
+          "OVER_TRIGGER"
+        ]
+      }
+    },
+    {
+      "anon_id": "R-ee4b",
+      "_ho": "HO-3",
+      "_cond": "D_retrieval",
+      "missing_axis": "Does the SPECIFIED capability actually work / perform in OUR local config? Docs give no local numbers; measure local behavior — it may fail locally. Specification != local applicability.",
+      "pre_frame_of": "HO-3",
+      "axes": [
+        "verify state serialization completeness against model architecture changes",
+        "measure latency overhead of resume vs cold-start across different hardware",
+        "audit data integrity and bit-identity of restored tensors after deserialization"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-f450",
+      "_ho": "HO-2",
+      "_cond": "T1_MF001",
+      "missing_axis": "Do the supplied tests cover all malformed shapes? The tested surface may be narrower than the claimed property (a fail-open on an untested shape). Attack test-set adequacy.",
+      "pre_frame_of": "HO-2",
+      "axes": [
+        "Coverage: Unobserved edge cases in the 7-test suite",
+        "Adversarial: Robustness against inputs outside test distribution",
+        "Context: Environmental or dependency changes post-audit"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-f8a4",
+      "_ho": "HO-3",
+      "_cond": "C_lessons",
+      "missing_axis": "Does the SPECIFIED capability actually work / perform in OUR local config? Docs give no local numbers; measure local behavior — it may fail locally. Specification != local applicability.",
+      "pre_frame_of": "HO-3",
+      "axes": [
+        "Verify state serialization compatibility across model version upgrades to prevent silent data corruption",
+        "Measure actual latency overhead of resume vs. cold start to confirm cost reduction claims",
+        "Audit checkpoint integrity and recovery success rates under simulated failure conditions"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-fb65",
+      "_ho": "HO-1",
+      "_cond": "T1_MF001",
+      "missing_axis": "Is each finding substantiated by a reproducing counterexample (real defect) or an over-flag? Disposition before rework; reject findings that do not reproduce.",
+      "pre_frame_of": "HO-1",
+      "axes": [
+        "Semantic Gap: Load-bearing test coverage vs. real-world adversarial inputs",
+        "Audit Validity: Source of findings (formal verification vs. heuristic fuzzing)",
+        "Risk Tolerance: Cost of false negatives vs. cost of rework"
+      ],
+      "blind": {
+        "recovery": "HIT",
+        "flags": []
+      }
+    },
+    {
+      "anon_id": "R-fbc1",
+      "_ho": "HO-5",
+      "_cond": "T2_MFM2artifact",
+      "missing_axis": "Confirm the firing CONDITION mechanism: is 77% a property of the mechanism, or an artifact of the experimental setup (tracking length / accumulation)? Check the construction before treating the metric as a finding.",
+      "pre_frame_of": "HO-5",
+      "axes": [
+        "Signal vs. Noise",
+        "Implementation Detail vs. Abstract Principle",
+        "Error State vs. Intentional State"
+      ],
+      "blind": {
+        "recovery": "MISS",
+        "flags": [
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    }
+  ],
+  "tally": {
+    "A_ordinary": {
+      "HIT": 2,
+      "PARTIAL": 2,
+      "MISS": 1,
+      "XDOMAIN": 0,
+      "OVER_TRIGGER": 1,
+      "IRRELEVANT_AXIS": 2
+    },
+    "B_skepticism": {
+      "HIT": 4,
+      "PARTIAL": 1,
+      "MISS": 0,
+      "XDOMAIN": 0,
+      "OVER_TRIGGER": 1,
+      "IRRELEVANT_AXIS": 1
+    },
+    "C_lessons": {
+      "HIT": 4,
+      "PARTIAL": 1,
+      "MISS": 0,
+      "XDOMAIN": 1,
+      "OVER_TRIGGER": 3,
+      "IRRELEVANT_AXIS": 0
+    },
+    "D_retrieval": {
+      "HIT": 4,
+      "PARTIAL": 0,
+      "MISS": 1,
+      "XDOMAIN": 1,
+      "OVER_TRIGGER": 0,
+      "IRRELEVANT_AXIS": 1
+    },
+    "T1_MF001": {
+      "HIT": 3,
+      "PARTIAL": 1,
+      "MISS": 1,
+      "XDOMAIN": 0,
+      "OVER_TRIGGER": 1,
+      "IRRELEVANT_AXIS": 1
+    },
+    "T2_MFM2artifact": {
+      "HIT": 3,
+      "PARTIAL": 0,
+      "MISS": 2,
+      "XDOMAIN": 0,
+      "OVER_TRIGGER": 0,
+      "IRRELEVANT_AXIS": 2
+    }
+  }
+}
