@@ -1,0 +1,49 @@
+{
+  "qwen_blind_tally": {
+    "ordinary": {
+      "HIT": 9,
+      "PARTIAL": 3,
+      "MISS": 3,
+      "USEFUL": 12,
+      "XDOMAIN_MISFIRE": 5,
+      "DOMAIN_LITERALIZATION": 0,
+      "OVER_TRIGGER": 1,
+      "IRRELEVANT_AXIS": 3
+    },
+    "concrete": {
+      "HIT": 8,
+      "PARTIAL": 1,
+      "MISS": 6,
+      "USEFUL": 9,
+      "XDOMAIN_MISFIRE": 10,
+      "DOMAIN_LITERALIZATION": 5,
+      "OVER_TRIGGER": 1,
+      "IRRELEVANT_AXIS": 3
+    },
+    "abstract": {
+      "HIT": 8,
+      "PARTIAL": 2,
+      "MISS": 5,
+      "USEFUL": 10,
+      "XDOMAIN_MISFIRE": 8,
+      "DOMAIN_LITERALIZATION": 4,
+      "OVER_TRIGGER": 1,
+      "IRRELEVANT_AXIS": 4
+    }
+  },
+  "qwen_caveat": "Qwen scorer は concrete の literal 移植を過小検出(concrete XDOMAIN 10 vs abstract 8 の modest gap を報告したが、実 answer 精読では concrete=catastrophic literal transplant, abstract=概ね clean の大きな gap)。",
+  "claude_external_verification": {
+    "method": "concrete/abstract/ordinary の実 answer を精読(B01/B04/B07/B11 等)",
+    "CONCRETE": "ESDE名詞(R=0/R>0/label/birth-time/purity)を marketing/software/gpu/workflow へ literal 移植。B04=完全ESDE で target 完全欠落。severe XDOMAIN + DOMAIN_LITERALIZATION(reading で確認、Qwen報告より深刻)。",
+    "ABSTRACT": "masking で大幅軽減(B07=clean GPU答)。ただし不完全: (a)構造残渣(STATE purity, core components)、(b)MASK token 漏れ(B11 で VERSION/STATE/SIZE が literal 出現=MASK_PIPELINE v1 の欠陥)。",
+    "ORDINARY": "clean + on-target。base model が common-instinct 軸(measure/disaggregate/reproduce)を既知 → retrieval は不要かつ有害。"
+  },
+  "verdict": {
+    "H1_abstraction_reduces_xdomain_vs_concrete": "SUPPORTED(reading verified、abstract<<concrete の literal 移植差は Qwen 報告より大)",
+    "H2_preserves_missing_axis_recovery": "PARTIAL(abstract HIT≈concrete=8/15、abstract は concrete より useful だが両者とも ordinary(9)未満。retrieval 自体が common-instinct には不要)",
+    "preregistered_match": "『abstract XDOMAIN<concrete かつ HIT≈concrete → abstraction safety advantage の provisional positive』に合致(かつ reading では signal 強)。追加所見: retrieval-at-all < ordinary(common-instinct 軸では)。",
+    "mask_pipeline_v1_flaw": "token 漏れ(VERSION/STATE/SIZE が answer に literal 出現)+ 構造残渣。v2 で要改善。",
+    "abstraction_level_matters": "Round1 の meta-frame(full applicability predicate, incident 無し)は XDOMAIN=0 に対し、Round B の masked-incident(構造保持+残渣)は partial。**抽象化の degree が効く: full-predicate > masked-incident**。"
+  },
+  "implication": "meta-frame の価値は『思いつく』でなく『別分野へ運ぶ時に concrete を捨てる filter』。ただし filter の degree が重要(full predicate ほど安全)。かつ common-instinct 問題では retrieval 自体が不要 → 価値は『base model が知らない subtle 軸』に限定される可能性(Round1 HO-1 reproducibility のような)。"
+}

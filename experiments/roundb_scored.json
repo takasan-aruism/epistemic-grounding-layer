@@ -1,0 +1,603 @@
+{
+  "scorer": "Qwen3.6 blind (condition非開示)",
+  "scored": [
+    {
+      "anon": "Q-0133e",
+      "_id": "B01",
+      "_cond": "concrete",
+      "domain": "data",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": [
+          "XDOMAIN_MISFIRE"
+        ]
+      }
+    },
+    {
+      "anon": "Q-0d13e",
+      "_id": "B15",
+      "_cond": "ordinary",
+      "domain": "esde",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon": "Q-19f84",
+      "_id": "B07",
+      "_cond": "ordinary",
+      "domain": "gpu",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": [
+          "XDOMAIN_MISFIRE"
+        ]
+      }
+    },
+    {
+      "anon": "Q-1ee1e",
+      "_id": "B08",
+      "_cond": "ordinary",
+      "domain": "gpu",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon": "Q-1fdc3",
+      "_id": "B08",
+      "_cond": "abstract",
+      "domain": "gpu",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon": "Q-20476",
+      "_id": "B02",
+      "_cond": "abstract",
+      "domain": "data",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-235ec",
+      "_id": "B07",
+      "_cond": "abstract",
+      "domain": "gpu",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-2c36d",
+      "_id": "B02",
+      "_cond": "concrete",
+      "domain": "data",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-335f8",
+      "_id": "B07",
+      "_cond": "concrete",
+      "domain": "gpu",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "DOMAIN_LITERALIZATION"
+        ]
+      }
+    },
+    {
+      "anon": "Q-36119",
+      "_id": "B12",
+      "_cond": "abstract",
+      "domain": "workflow",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon": "Q-382b7",
+      "_id": "B02",
+      "_cond": "ordinary",
+      "domain": "data",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-43915",
+      "_id": "B04",
+      "_cond": "abstract",
+      "domain": "software",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "DOMAIN_LITERALIZATION",
+          "OVER_TRIGGER"
+        ]
+      }
+    },
+    {
+      "anon": "Q-460b7",
+      "_id": "B06",
+      "_cond": "concrete",
+      "domain": "software",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-49ceb",
+      "_id": "B14",
+      "_cond": "concrete",
+      "domain": "esde",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "DOMAIN_LITERALIZATION"
+        ]
+      }
+    },
+    {
+      "anon": "Q-4f651",
+      "_id": "B01",
+      "_cond": "abstract",
+      "domain": "data",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "DOMAIN_LITERALIZATION"
+        ]
+      }
+    },
+    {
+      "anon": "Q-56bd2",
+      "_id": "B15",
+      "_cond": "abstract",
+      "domain": "esde",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-56d6d",
+      "_id": "B09",
+      "_cond": "concrete",
+      "domain": "gpu",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-59236",
+      "_id": "B04",
+      "_cond": "ordinary",
+      "domain": "software",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-597ed",
+      "_id": "B12",
+      "_cond": "ordinary",
+      "domain": "workflow",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon": "Q-5fa38",
+      "_id": "B01",
+      "_cond": "ordinary",
+      "domain": "data",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-66de6",
+      "_id": "B14",
+      "_cond": "abstract",
+      "domain": "esde",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-67aa3",
+      "_id": "B09",
+      "_cond": "ordinary",
+      "domain": "gpu",
+      "score": {
+        "recovery": "PARTIAL",
+        "useful_axis": true,
+        "flags": [
+          "PARTIAL_RECOVERY"
+        ]
+      }
+    },
+    {
+      "anon": "Q-6b9fa",
+      "_id": "B11",
+      "_cond": "ordinary",
+      "domain": "workflow",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-72ee8",
+      "_id": "B03",
+      "_cond": "abstract",
+      "domain": "data",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-86ede",
+      "_id": "B06",
+      "_cond": "abstract",
+      "domain": "software",
+      "score": {
+        "recovery": "PARTIAL",
+        "useful_axis": true,
+        "flags": [
+          "XDOMAIN_MISFIRE"
+        ]
+      }
+    },
+    {
+      "anon": "Q-88403",
+      "_id": "B15",
+      "_cond": "concrete",
+      "domain": "esde",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-8f01f",
+      "_id": "B10",
+      "_cond": "ordinary",
+      "domain": "workflow",
+      "score": {
+        "recovery": "PARTIAL",
+        "useful_axis": true,
+        "flags": [
+          "OVER_TRIGGER"
+        ]
+      }
+    },
+    {
+      "anon": "Q-924f6",
+      "_id": "B11",
+      "_cond": "abstract",
+      "domain": "workflow",
+      "score": {
+        "recovery": "PARTIAL",
+        "useful_axis": true,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "DOMAIN_LITERALIZATION"
+        ]
+      }
+    },
+    {
+      "anon": "Q-96d7f",
+      "_id": "B11",
+      "_cond": "concrete",
+      "domain": "workflow",
+      "score": {
+        "recovery": "PARTIAL",
+        "useful_axis": true,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "DOMAIN_LITERALIZATION"
+        ]
+      }
+    },
+    {
+      "anon": "Q-9c45b",
+      "_id": "B09",
+      "_cond": "abstract",
+      "domain": "gpu",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-9ff28",
+      "_id": "B05",
+      "_cond": "concrete",
+      "domain": "software",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon": "Q-a158d",
+      "_id": "B12",
+      "_cond": "concrete",
+      "domain": "workflow",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "DOMAIN_LITERALIZATION",
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon": "Q-aa624",
+      "_id": "B10",
+      "_cond": "concrete",
+      "domain": "workflow",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon": "Q-acb81",
+      "_id": "B13",
+      "_cond": "ordinary",
+      "domain": "esde",
+      "score": {
+        "recovery": "PARTIAL",
+        "useful_axis": true,
+        "flags": [
+          "XDOMAIN_MISFIRE"
+        ]
+      }
+    },
+    {
+      "anon": "Q-ae6b0",
+      "_id": "B06",
+      "_cond": "ordinary",
+      "domain": "software",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-af6e7",
+      "_id": "B04",
+      "_cond": "concrete",
+      "domain": "software",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "DOMAIN_LITERALIZATION",
+          "OVER_TRIGGER"
+        ]
+      }
+    },
+    {
+      "anon": "Q-b73da",
+      "_id": "B03",
+      "_cond": "ordinary",
+      "domain": "data",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-b9469",
+      "_id": "B08",
+      "_cond": "concrete",
+      "domain": "gpu",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": [
+          "XDOMAIN_MISFIRE"
+        ]
+      }
+    },
+    {
+      "anon": "Q-bbc70",
+      "_id": "B14",
+      "_cond": "ordinary",
+      "domain": "esde",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-bd6ad",
+      "_id": "B03",
+      "_cond": "concrete",
+      "domain": "data",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-c67a8",
+      "_id": "B10",
+      "_cond": "abstract",
+      "domain": "workflow",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "DOMAIN_LITERALIZATION",
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon": "Q-cf814",
+      "_id": "B05",
+      "_cond": "ordinary",
+      "domain": "software",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    },
+    {
+      "anon": "Q-e117a",
+      "_id": "B05",
+      "_cond": "abstract",
+      "domain": "software",
+      "score": {
+        "recovery": "MISS",
+        "useful_axis": false,
+        "flags": [
+          "XDOMAIN_MISFIRE",
+          "IRRELEVANT_AXIS"
+        ]
+      }
+    },
+    {
+      "anon": "Q-e80d5",
+      "_id": "B13",
+      "_cond": "concrete",
+      "domain": "esde",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": [
+          "XDOMAIN_MISFIRE"
+        ]
+      }
+    },
+    {
+      "anon": "Q-fd7a1",
+      "_id": "B13",
+      "_cond": "abstract",
+      "domain": "esde",
+      "score": {
+        "recovery": "HIT",
+        "useful_axis": true,
+        "flags": []
+      }
+    }
+  ],
+  "tally": {
+    "ordinary": {
+      "HIT": 9,
+      "PARTIAL": 3,
+      "MISS": 3,
+      "USEFUL": 12,
+      "XDOMAIN_MISFIRE": 5,
+      "DOMAIN_LITERALIZATION": 0,
+      "OVER_TRIGGER": 1,
+      "IRRELEVANT_AXIS": 3
+    },
+    "concrete": {
+      "HIT": 8,
+      "PARTIAL": 1,
+      "MISS": 6,
+      "USEFUL": 9,
+      "XDOMAIN_MISFIRE": 10,
+      "DOMAIN_LITERALIZATION": 5,
+      "OVER_TRIGGER": 1,
+      "IRRELEVANT_AXIS": 3
+    },
+    "abstract": {
+      "HIT": 8,
+      "PARTIAL": 2,
+      "MISS": 5,
+      "USEFUL": 10,
+      "XDOMAIN_MISFIRE": 8,
+      "DOMAIN_LITERALIZATION": 4,
+      "OVER_TRIGGER": 1,
+      "IRRELEVANT_AXIS": 4
+    }
+  }
+}

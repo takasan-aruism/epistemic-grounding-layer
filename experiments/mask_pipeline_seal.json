@@ -1,0 +1,6 @@
+{
+  "pipeline": "MASK_PIPELINE_v1",
+  "sha256": "70c32650aae678c3d284d645262d4f7ec7bcb5982820e2ab783b49589f2dfe84",
+  "sealed_at": "2026-07-07T14:48:53.681475+00:00",
+  "policy": "held-out 選定前に固定。incident ごとに手書き abstraction しない(決定的 procedure)。"
+}

@@ -1,0 +1,41 @@
+{
+  "round": "B",
+  "RQ": "incident representation を abstract 化すると concrete retrieval より cross-domain literal misfire を減らすか。その際 missing-axis recovery / useful-axis をどれだけ失うか。",
+  "pair_design": "同一 retrieved incident を CONCRETE(domain名詞込み)vs ABSTRACT(MASK_PIPELINE v1, 決定的)で提示。abstract は手書きしない。",
+  "N": 15,
+  "domains": [
+    "data",
+    "software",
+    "gpu",
+    "workflow",
+    "esde"
+  ],
+  "conditions": [
+    "ordinary",
+    "concrete",
+    "abstract"
+  ],
+  "primary_metrics": [
+    "XDOMAIN_MISFIRE",
+    "DOMAIN_LITERALIZATION"
+  ],
+  "cost_metrics": [
+    "HIT",
+    "PARTIAL",
+    "MISS",
+    "USEFUL_AXIS"
+  ],
+  "harm": [
+    "OVER_TRIGGER",
+    "IRRELEVANT_AXIS"
+  ],
+  "no_composite": true,
+  "preregistered_interpretation": {
+    "abstract XDOMAIN<concrete かつ HIT≈concrete": "abstraction safety advantage の provisional positive",
+    "abstract XDOMAIN<concrete だが HIT大幅低下": "safety/information-loss trade-off → abstract+bounded concrete retrieval 二層設計候補",
+    "XDOMAIN差なし": "Round1 safety signal 未再現",
+    "concrete が HIT・safety 双方で優位": "abstraction 追加価値なし"
+  },
+  "scoring": "blind(condition匿名化+shuffle, Qwen scorer)。GPT scorer artifact は可能なら生成。",
+  "mask_seal": "70c32650(MASK_PIPELINE v1, held-out選定前固定)"
+}
