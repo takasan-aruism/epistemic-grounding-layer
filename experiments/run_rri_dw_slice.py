@@ -219,14 +219,16 @@ def parse_findings(a):
         try: return json.loads(a[i:j+1]).get("findings",[]) or []
         except Exception: pass
     return []
+def _strip_fence(s):
+    return re.split(r"\n\s*```", s)[0].rstrip() if s else s   # trailing markdown fence を除去
 def extract(raw, fn):
     i,j=raw.find("{"),raw.rfind("}")
     if 0<=i<j:
         try:
             o=json.loads(raw[i:j+1])
-            if isinstance(o.get("source"),str) and f"def {fn}" in o["source"]: return o["source"]
+            if isinstance(o.get("source"),str) and f"def {fn}" in o["source"]: return _strip_fence(o["source"])
         except Exception: pass
-    m=re.search(rf"(def {fn}.*)", raw, re.S); return m.group(1) if m else None
+    m=re.search(rf"(def {fn}.*)", raw, re.S); return _strip_fence(m.group(1)) if m else None
 def run_tests(source, cfg):
     if not source: return {"status":"no_source","passed":False,"cases":0,"failures":["no source"]}
     harness=source+"\n\nimport json\n_c="+repr(cfg["cases"])+"\n_r=[]\nfor item,exp,lbl in _c:\n    try:\n        out="+cfg["call"]+"\n        ok=(isinstance(out,dict) and out.get("+repr(cfg["key"])+")==exp)\n        _r.append({'lbl':lbl,'ok':ok,'got':(out.get("+repr(cfg["key"])+") if isinstance(out,dict) else 'NOT_DICT')})\n    except Exception as e:\n        _r.append({'lbl':lbl,'ok':False,'got':'CRASH:%s'%type(e).__name__})\nprint(json.dumps(_r))\n"

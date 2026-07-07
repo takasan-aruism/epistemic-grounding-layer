@@ -1,10 +1,6 @@
   [swap #1 -> coder] OK in 166.8s
 [GENERATE] executed passed=True 7/7
-  [swap #2 -> qwen] OK in 181.8s
-[AUDIT] findings=3
-  [swap #3 -> coder] OK in 166.9s
-[REGEN #1] passed=True 7/7
-  [swap #4 -> qwen] OK in 181.8s
-[re-AUDIT] findings=0
+  [swap #2 -> qwen] OK in 181.9s
+[AUDIT] findings=0 cats=[]
 [COMPLETE]
-[DONE needval] completed=True state=READY_FOR_UPPER_REVIEW swaps=4 failures=0 avg=174.3s
+[DONE needval] completed=True state=READY_FOR_UPPER_REVIEW swaps=2 failures=0 avg=174.4s dw_task=TASK-RRI-NEEDVAL-01-1783381406

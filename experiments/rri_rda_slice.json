@@ -3,7 +3,17 @@
   "swaps": [
     {
       "to": "coder",
-      "latency_s": 167.4,
+      "latency_s": 167.7,
+      "ok": true
+    },
+    {
+      "to": "qwen",
+      "latency_s": 181.8,
+      "ok": true
+    },
+    {
+      "to": "coder",
+      "latency_s": 167.0,
       "ok": true
     },
     {
@@ -18,20 +28,25 @@
     },
     {
       "to": "qwen",
-      "latency_s": 181.8,
+      "latency_s": 181.9,
       "ok": true
     }
   ],
-  "final_state": "READY_FOR_UPPER_REVIEW",
-  "completed": true,
-  "swap_count": 4,
+  "authority": "BOOTSTRAP_REPORTED",
+  "final_state": "JUDGE_REQUIRED",
+  "completed": false,
+  "swap_count": 6,
   "swap_latencies_s": [
-    167.4,
+    167.7,
+    181.8,
+    167.0,
     181.8,
     166.8,
-    181.8
+    181.9
   ],
   "swap_failures": 0,
   "avg_swap_s": 174.5,
-  "final_source": "def research_design_audit_gate(design):\n    # D1: C-TOTALITY - ensure design is a dict\n    if not isinstance(design, dict):\n        return {\"may_proceed\": False, \"reason\": \"Design must be a dictionary.\"}\n    \n    audit_findings = design.get(\"audit_findings\", [])\n    \n    # D2: Validate MAJOR findings - must have valid disposition (not OPEN, not missing)\n    for finding in audit_findings:\n        # Check if finding is a dict\n        if not isinstance(finding, dict):\n            return {\"may_proceed\": False, \"reason\": \"All audit findings must be dictionaries.\"}\n        \n        severity = finding.get(\"severity\")\n        if severity == \"MAJOR\":\n            # Must have 'disposition' key\n            if \"disposition\" not in finding:\n                return {\"may_proceed\": False, \"reason\": \"MAJOR finding missing 'disposition' key.\"}\n            \n            disposition = finding.get(\"disposition\")\n            # Must be one of the allowed dispositions and NOT 'OPEN'\n            if disposition not in [\"RESOLVED\", \"REJECTED\", \"MOVED_TO_GAP\"]:\n                return {\"may_proceed\": False, \"reason\": \"MAJOR finding has invalid or OPEN disposition.\"}\n    \n    # D3: If any finding is RESOLVED, revision_ref must be non-empty\n    has_resolved = any(\n        isinstance(f, dict) and f.get(\"disposition\") == \"RESOLVED\"\n        for f in audit_findings\n    )\n    if has_resolved:\n        revision_ref = design.get(\"revision_ref\", \"\")\n        if not isinstance(revision_ref, str) or len(revision_ref.strip()) == 0:\n            return {\"may_proceed\": False, \"reason\": \"RESOLVED findings require a non-empty revision_ref.\"}\n    \n    # D4: rq_candidates must be a non-empty list\n    rq_candidates = design.get(\"rq_candidates\", [])\n    if not isinstance(rq_candidates, list) or len(rq_candidates) == 0:\n        return {\"may_proceed\": False, \"reason\": \"rq_candidates must be a non-empty list.\"}\n    \n    return {\"may_proceed\": True, \"reason\": \"All audit requirements satisfied.\"}\n"
+  "final_source": "def research_design_audit_gate(design):\n    # D1: C-TOTALITY - validate top-level structure\n    if not isinstance(design, dict):\n        return {\"may_proceed\": False, \"reason\": \"Design is not a dict\"}\n    \n    audit_findings = design.get('audit_findings')\n    if audit_findings is not None and not isinstance(audit_findings, list):\n        return {\"may_proceed\": False, \"reason\": \"audit_findings is not a list\"}\n    \n    rq_candidates = design.get('rq_candidates')\n    if not isinstance(rq_candidates, list):\n        return {\"may_proceed\": False, \"reason\": \"rq_candidates is not a list\"}\n    \n    # D4: rq_candidates must be non-empty\n    if len(rq_candidates) == 0:\n        return {\"may_proceed\": False, \"reason\": \"rq_candidates is empty\"}\n    \n    # D2: Check all MAJOR findings are properly dispositioned\n    if audit_findings is not None:\n        for finding in audit_findings:\n            # Skip non-dict findings (treat as invalid)\n            if not isinstance(finding, dict):\n                return {\"may_proceed\": False, \"reason\": \"Non-dict finding found\"}\n            \n            severity = finding.get('severity')\n            if severity == 'MAJOR':\n                # Must have 'disposition' key\n                if 'disposition' not in finding:\n                    return {\"may_proceed\": False, \"reason\": \"MAJOR finding missing 'disposition' key\"}\n                \n                disposition = finding.get('disposition')\n                # Must be one of the valid dispositions (NOT 'OPEN')\n                if disposition not in ('RESOLVED', 'REJECTED', 'MOVED_TO_GAP'):\n                    return {\"may_proceed\": False, \"reason\": \"MAJOR finding has invalid or 'OPEN' disposition\"}\n    \n    # D3: If any finding has disposition 'RESOLVED', revision_ref must be non-empty\n    if audit_findings is not None:\n        has_resolved = any(\n            isinstance(f, dict) and f.get('disposition') == 'RESOLVED'\n            for f in audit_findings\n        )\n        if has_resolved:\n            revision_ref = design.get('revision_ref')\n            if not isinstance(revision_ref, str) or len(revision_ref) == 0:\n                return {\"may_proceed\": False, \"reason\": \"RESOLVED finding found but revision_ref missing or empty\"}\n    \n    return {\"may_proceed\": True, \"reason\": \"All checks passed\"}",
+  "dw_task_id": "TASK-RRI-RDA-02-1783383862",
+  "authoritative_process_trace": "dw.workcell.derive_process_trace('TASK-RRI-RDA-02-1783383862') over run_sor/events.jsonl — NOT these self-reported metrics"
 }

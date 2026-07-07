@@ -1,0 +1,14 @@
+  [swap #1 -> coder] OK in 167.7s
+[GENERATE] executed passed=False 12/13
+  [swap #2 -> qwen] OK in 181.8s
+[AUDIT] findings=0 cats=[]
+  [swap #3 -> coder] OK in 167.0s
+[REGEN #1] passed=False 12/13
+  [swap #4 -> qwen] OK in 181.8s
+[re-AUDIT] findings=0
+  [swap #5 -> coder] OK in 166.8s
+[REGEN #2] passed=False 12/13
+  [swap #6 -> qwen] OK in 181.9s
+[re-AUDIT] findings=0
+[NO COMPLETE] JUDGE_REQUIRED
+[DONE rda] completed=False state=JUDGE_REQUIRED swaps=6 failures=0 avg=174.5s dw_task=TASK-RRI-RDA-02-1783383862

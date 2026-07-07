@@ -3,17 +3,7 @@
   "swaps": [
     {
       "to": "coder",
-      "latency_s": 166.8,
-      "ok": true
-    },
-    {
-      "to": "qwen",
-      "latency_s": 181.8,
-      "ok": true
-    },
-    {
-      "to": "coder",
-      "latency_s": 166.8,
+      "latency_s": 166.9,
       "ok": true
     },
     {
@@ -22,16 +12,17 @@
       "ok": true
     }
   ],
+  "authority": "BOOTSTRAP_REPORTED",
   "final_state": "READY_FOR_UPPER_REVIEW",
   "completed": true,
-  "swap_count": 4,
+  "swap_count": 2,
   "swap_latencies_s": [
-    166.8,
-    181.8,
-    166.8,
+    166.9,
     181.8
   ],
   "swap_failures": 0,
-  "avg_swap_s": 174.3,
-  "final_source": "def validate_rdec(rdec, known_decisions):\n    # C-TOTALITY: Ensure rdec is a dict and known_decisions is a list\n    if not isinstance(rdec, dict):\n        return {\"ok\": False, \"problems\": [\"rdec must be a dict\"]}\n    if not isinstance(known_decisions, list):\n        return {\"ok\": False, \"problems\": [\"known_decisions must be a list\"]}\n    \n    problems = []\n    \n    # C1: All listed fields must be present\n    required_fields = [\"rdec_id\", \"decision\", \"axis\", \"why_required\", \"expected_decision_effect\", \"omission_risk\", \"stop_condition_ref\"]\n    for field in required_fields:\n        if field not in rdec:\n            problems.append(f\"Missing required field: {field}\")\n    \n    # If missing required fields, return early\n    if problems:\n        return {\"ok\": False, \"problems\": problems}\n    \n    # C2: decision must be in known_decisions\n    decision = rdec[\"decision\"]\n    if not isinstance(decision, str):\n        problems.append(\"decision must be a string\")\n    elif decision not in known_decisions:\n        problems.append(f\"decision '{decision}' not found in known_decisions\")\n    \n    # C3: expected_decision_effect must be non-empty string\n    expected_decision_effect = rdec[\"expected_decision_effect\"]\n    if not isinstance(expected_decision_effect, str) or not expected_decision_effect.strip():\n        problems.append(\"expected_decision_effect must be a non-empty string\")\n    \n    # C4: omission_risk must be non-empty string\n    omission_risk = rdec[\"omission_risk\"]\n    if not isinstance(omission_risk, str) or not omission_risk.strip():\n        problems.append(\"omission_risk must be a non-empty string\")\n    \n    # C5: stop_condition_ref must be non-empty string\n    stop_condition_ref = rdec[\"stop_condition_ref\"]\n    if not isinstance(stop_condition_ref, str) or not stop_condition_ref.strip():\n        problems.append(\"stop_condition_ref must be a non-empty string\")\n    \n    # C6: Ensure other string fields are strings (defensive, though not explicitly required by spec)\n    # rdec_id, axis, why_required, and decision already checked for presence; now validate types\n    for field in [\"rdec_id\", \"axis\", \"why_required\"]:\n        if not isinstance(rdec[field], str):\n            problems.append(f\"{field} must be a string\")\n    \n    return {\"ok\": len(problems) == 0, \"problems\": problems}\n"
+  "avg_swap_s": 174.4,
+  "final_source": "def validate_rdec(rdec, known_decisions):\n    # C-TOTALITY: ensure rdec is a dict\n    if not isinstance(rdec, dict):\n        return {\"ok\": False, \"problems\": [\"rdec must be a dict\"]}\n    \n    # Define required fields\n    required_fields = [\"rdec_id\", \"decision\", \"axis\", \"why_required\", \"expected_decision_effect\", \"omission_risk\", \"stop_condition_ref\"]\n    \n    # C1: Check all listed fields are present\n    problems = []\n    missing_fields = [field for field in required_fields if field not in rdec]\n    if missing_fields:\n        return {\"ok\": False, \"problems\": [f\"missing required fields: {missing_fields}\"]}\n    \n    # C2: decision must be in known_decisions\n    if rdec[\"decision\"] not in known_decisions:\n        return {\"ok\": False, \"problems\": [\"decision must be in known_decisions\"]}\n    \n    # C3: expected_decision_effect must be non-empty string\n    expected_effect = rdec[\"expected_decision_effect\"]\n    if not isinstance(expected_effect, str) or expected_effect.strip() == \"\":\n        return {\"ok\": False, \"problems\": [\"expected_decision_effect must be a non-empty string\"]}\n    \n    # C4: omission_risk must be non-empty\n    omission_risk = rdec[\"omission_risk\"]\n    if not isinstance(omission_risk, str) or omission_risk.strip() == \"\":\n        return {\"ok\": False, \"problems\": [\"omission_risk must be a non-empty string\"]}\n    \n    # C5: stop_condition_ref must be non-empty\n    stop_condition_ref = rdec[\"stop_condition_ref\"]\n    if not isinstance(stop_condition_ref, str) or stop_condition_ref.strip() == \"\":\n        return {\"ok\": False, \"problems\": [\"stop_condition_ref must be a non-empty string\"]}\n    \n    # All checks passed\n    return {\"ok\": True, \"problems\": []}",
+  "dw_task_id": "TASK-RRI-RDEC-01-1783381051",
+  "authoritative_process_trace": "dw.workcell.derive_process_trace('TASK-RRI-RDEC-01-1783381051') over run_sor/events.jsonl — NOT these self-reported metrics"
 }

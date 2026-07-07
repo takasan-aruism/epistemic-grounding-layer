@@ -3,17 +3,7 @@
   "swaps": [
     {
       "to": "coder",
-      "latency_s": 166.8,
-      "ok": true
-    },
-    {
-      "to": "qwen",
-      "latency_s": 181.8,
-      "ok": true
-    },
-    {
-      "to": "coder",
-      "latency_s": 166.8,
+      "latency_s": 167.0,
       "ok": true
     },
     {
@@ -22,16 +12,17 @@
       "ok": true
     }
   ],
+  "authority": "BOOTSTRAP_REPORTED",
   "final_state": "READY_FOR_UPPER_REVIEW",
   "completed": true,
-  "swap_count": 4,
+  "swap_count": 2,
   "swap_latencies_s": [
-    166.8,
-    181.8,
-    166.8,
+    167.0,
     181.8
   ],
   "swap_failures": 0,
-  "avg_swap_s": 174.3,
-  "final_source": "def validate_rq_candidate(rqc, known_axes):\n    problems = []\n    \n    # C-TOTALITY: ensure rqc is a dict\n    if not isinstance(rqc, dict):\n        return {\"ok\": False, \"problems\": [\"rqc must be a dict\"]}\n    \n    # Q1: Check all required fields are present\n    required_fields = ['rq_candidate_id', 'question', 'derived_from_axes', 'decision_relevance', 'priority', 'rdec_refs']\n    for field in required_fields:\n        if field not in rqc:\n            problems.append(f\"Missing required field: {field}\")\n    \n    if problems:\n        return {\"ok\": False, \"problems\": problems}\n    \n    # Q2: derived_from_axes must be a non-empty list and all elements in known_axes\n    derived_from_axes = rqc['derived_from_axes']\n    if not isinstance(derived_from_axes, list):\n        problems.append(\"derived_from_axes must be a list\")\n    elif len(derived_from_axes) == 0:\n        problems.append(\"derived_from_axes must be a non-empty list\")\n    else:\n        for axis_id in derived_from_axes:\n            if not isinstance(axis_id, str):\n                problems.append(f\"derived_from_axes element {axis_id} must be a string\")\n            elif axis_id not in known_axes:\n                problems.append(f\"derived_from_axes contains unknown axis id: {axis_id}\")\n    \n    # Q3: decision_relevance must be a non-empty string\n    decision_relevance = rqc['decision_relevance']\n    if not isinstance(decision_relevance, str) or len(decision_relevance) == 0:\n        problems.append(\"decision_relevance must be a non-empty string\")\n    \n    # Q4: priority must be one of REQUIRED, OPTIONAL, DEFERRED\n    priority = rqc['priority']\n    valid_priorities = ['REQUIRED', 'OPTIONAL', 'DEFERRED']\n    if priority not in valid_priorities:\n        problems.append(f\"priority must be one of {valid_priorities}\")\n    \n    # Q5: if priority is 'REQUIRED', rdec_refs must be a non-empty list\n    if priority == 'REQUIRED':\n        rdec_refs = rqc['rdec_refs']\n        if not isinstance(rdec_refs, list):\n            problems.append(\"rdec_refs must be a list when priority is REQUIRED\")\n        elif len(rdec_refs) == 0:\n            problems.append(\"rdec_refs must be a non-empty list when priority is REQUIRED\")\n        else:\n            # Validate contents of rdec_refs are strings\n            for ref in rdec_refs:\n                if not isinstance(ref, str):\n                    problems.append(f\"rdec_refs element {ref} must be a string\")\n    \n    # Additional type validations for other fields (addressing audit concerns)\n    # Q1: rq_candidate_id must be a string\n    rq_candidate_id = rqc['rq_candidate_id']\n    if not isinstance(rq_candidate_id, str):\n        problems.append(\"rq_candidate_id must be a string\")\n    \n    # Q1: question must be a string\n    question = rqc['question']\n    if not isinstance(question, str):\n        problems.append(\"question must be a string\")\n    \n    # Q1: rdec_refs must be a list (when priority is not REQUIRED)\n    if priority != 'REQUIRED':\n        rdec_refs = rqc['rdec_refs']\n        if not isinstance(rdec_refs, list):\n            problems.append(\"rdec_refs must be a list\")\n    \n    return {\"ok\": len(problems) == 0, \"problems\": problems}\n"
+  "avg_swap_s": 174.4,
+  "final_source": "def validate_rq_candidate(rqc, known_axes):\n    problems = []\n    \n    # C-TOTALITY: ensure inputs are dicts/lists as expected\n    if not isinstance(rqc, dict):\n        return {\"ok\": False, \"problems\": [\"rqc is not a dictionary\"]}\n    if not isinstance(known_axes, list):\n        return {\"ok\": False, \"problems\": [\"known_axes is not a list\"]}\n    \n    # Q1: all listed fields present\n    required_fields = ['rq_candidate_id', 'question', 'derived_from_axes', 'decision_relevance', 'priority', 'rdec_refs']\n    for field in required_fields:\n        if field not in rqc:\n            problems.append(f\"missing required field: {field}\")\n    \n    if problems:\n        return {\"ok\": False, \"problems\": problems}\n    \n    # Q2: derived_from_axes must be a NON-EMPTY list and EVERY element must be in known_axes\n    derived_from_axes = rqc['derived_from_axes']\n    if not isinstance(derived_from_axes, list) or len(derived_from_axes) == 0:\n        problems.append(\"derived_from_axes must be a non-empty list\")\n    else:\n        for axis_id in derived_from_axes:\n            if axis_id not in known_axes:\n                problems.append(f\"derived_from_axes contains unknown axis id: {axis_id}\")\n                break  # Only report first missing axis to avoid excessive problems\n    \n    # Q3: decision_relevance must be a non-empty string\n    decision_relevance = rqc['decision_relevance']\n    if not isinstance(decision_relevance, str) or len(decision_relevance) == 0:\n        problems.append(\"decision_relevance must be a non-empty string\")\n    \n    # Q4: priority must be one of REQUIRED, OPTIONAL, DEFERRED\n    priority = rqc['priority']\n    valid_priorities = ['REQUIRED', 'OPTIONAL', 'DEFERRED']\n    if priority not in valid_priorities:\n        problems.append(f\"priority must be one of {valid_priorities}, got: {priority}\")\n    \n    # Q5: if priority is 'REQUIRED', rdec_refs must be a non-empty list\n    if priority == 'REQUIRED':\n        rdec_refs = rqc['rdec_refs']\n        if not isinstance(rdec_refs, list) or len(rdec_refs) == 0:\n            problems.append(\"priority is REQUIRED but rdec_refs is not a non-empty list\")\n    \n    return {\"ok\": len(problems) == 0, \"problems\": problems}",
+  "dw_task_id": "TASK-RRI-RQC-01-1783382829",
+  "authoritative_process_trace": "dw.workcell.derive_process_trace('TASK-RRI-RQC-01-1783382829') over run_sor/events.jsonl — NOT these self-reported metrics"
 }

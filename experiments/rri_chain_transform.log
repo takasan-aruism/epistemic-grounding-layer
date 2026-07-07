@@ -1,14 +1,11 @@
   [swap #1 -> coder] OK in 166.8s
-[GENERATE] error passed=False None/8
-  [swap #2 -> qwen] OK in 181.8s
-[AUDIT] findings=4
-  [swap #3 -> coder] OK in 166.8s
-[REGEN #1] passed=False None/8
+[GENERATE] executed passed=False 7/8
+  [swap #2 -> qwen] OK in 181.9s
+[AUDIT] findings=3 cats=['semantic_gap', 'state_transition_gap', 'malformed_shape']
+[DISPOSE] 0/3 ACCEPTED (残りは reproduce せず REJECTED)
+  [swap #3 -> coder] OK in 166.9s
+[REGEN #1] passed=True 8/8
   [swap #4 -> qwen] OK in 181.8s
-[re-AUDIT] findings=4
-  [swap #5 -> coder] OK in 167.0s
-[REGEN #2] passed=False 7/8
-  [swap #6 -> qwen] OK in 181.8s
-[re-AUDIT] findings=1
-[NO COMPLETE] JUDGE_REQUIRED
-[DONE transform] completed=False state=JUDGE_REQUIRED swaps=6 failures=0 avg=174.3s
+[re-AUDIT] findings=0
+[COMPLETE]
+[DONE transform] completed=True state=READY_FOR_UPPER_REVIEW swaps=4 failures=0 avg=174.4s dw_task=TASK-RRI-XFORM-01-1783381761

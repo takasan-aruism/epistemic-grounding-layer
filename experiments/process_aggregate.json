@@ -1,0 +1,147 @@
+{
+  "n_tasks": 6,
+  "completed": 5,
+  "total_run_seconds": 3201.2,
+  "total_switch_seconds": 3139.0,
+  "total_model_switches": 18,
+  "model_switch_overhead_ratio": 0.981,
+  "tasks_with_rework": 2,
+  "total_rework": 3,
+  "total_findings": 3,
+  "disposition_totals": {
+    "ACCEPTED": 0,
+    "PARTIAL": 0,
+    "REJECTED": 3,
+    "REMAINS": 0
+  },
+  "independence_relation": "all RRI deterministic-core validators are mutually independent (no slice consumes another's output)",
+  "executed": "serially (A-mode: one slice fully before the next)",
+  "per_task": [
+    {
+      "task_id": "TASK-RRI-RDA-02-1783379983",
+      "final_state": "JUDGE_REQUIRED",
+      "completed": false,
+      "run_seconds": 1067.4,
+      "model_switches": 6,
+      "switch_seconds": 1046.6,
+      "switch_failures": 0,
+      "audit_rounds": 3,
+      "rework_count": 2,
+      "findings_total": 0,
+      "dispositions": {
+        "ACCEPTED": 0,
+        "PARTIAL": 0,
+        "REJECTED": 0,
+        "REMAINS": 0
+      }
+    },
+    {
+      "task_id": "TASK-RRI-RDEC-01-1783381051",
+      "final_state": "COMPLETE",
+      "completed": true,
+      "run_seconds": 355.4,
+      "model_switches": 2,
+      "switch_seconds": 348.7,
+      "switch_failures": 0,
+      "audit_rounds": 1,
+      "rework_count": 0,
+      "findings_total": 0,
+      "dispositions": {
+        "ACCEPTED": 0,
+        "PARTIAL": 0,
+        "REJECTED": 0,
+        "REMAINS": 0
+      }
+    },
+    {
+      "task_id": "TASK-RRI-NEEDVAL-01-1783381406",
+      "final_state": "COMPLETE",
+      "completed": true,
+      "run_seconds": 355.4,
+      "model_switches": 2,
+      "switch_seconds": 348.7,
+      "switch_failures": 0,
+      "audit_rounds": 1,
+      "rework_count": 0,
+      "findings_total": 0,
+      "dispositions": {
+        "ACCEPTED": 0,
+        "PARTIAL": 0,
+        "REJECTED": 0,
+        "REMAINS": 0
+      }
+    },
+    {
+      "task_id": "TASK-RRI-XFORM-01-1783381761",
+      "final_state": "COMPLETE",
+      "completed": true,
+      "run_seconds": 711.6,
+      "model_switches": 4,
+      "switch_seconds": 697.4,
+      "switch_failures": 0,
+      "audit_rounds": 2,
+      "rework_count": 1,
+      "findings_total": 3,
+      "dispositions": {
+        "ACCEPTED": 0,
+        "PARTIAL": 0,
+        "REJECTED": 3,
+        "REMAINS": 0
+      }
+    },
+    {
+      "task_id": "TASK-RRI-AXIS-01-1783382473",
+      "final_state": "COMPLETE",
+      "completed": true,
+      "run_seconds": 355.4,
+      "model_switches": 2,
+      "switch_seconds": 348.8,
+      "switch_failures": 0,
+      "audit_rounds": 1,
+      "rework_count": 0,
+      "findings_total": 0,
+      "dispositions": {
+        "ACCEPTED": 0,
+        "PARTIAL": 0,
+        "REJECTED": 0,
+        "REMAINS": 0
+      }
+    },
+    {
+      "task_id": "TASK-RRI-RQC-01-1783382829",
+      "final_state": "COMPLETE",
+      "completed": true,
+      "run_seconds": 356.0,
+      "model_switches": 2,
+      "switch_seconds": 348.8,
+      "switch_failures": 0,
+      "audit_rounds": 1,
+      "rework_count": 0,
+      "findings_total": 0,
+      "dispositions": {
+        "ACCEPTED": 0,
+        "PARTIAL": 0,
+        "REJECTED": 0,
+        "REMAINS": 0
+      }
+    }
+  ],
+  "trigger_config_version": 1,
+  "triggers_fired": [
+    {
+      "id": "DOMINANT_OVERHEAD",
+      "value": 0.981,
+      "rule": "overhead_class_ratio >= 0.30"
+    },
+    {
+      "id": "REPEATED_HIGH_COST",
+      "value": 18,
+      "rule": "same overhead class recurrence >= 3"
+    },
+    {
+      "id": "SERIAL_INDEPENDENT_WORK",
+      "value": "6 independent slices serial",
+      "rule": "multiple dependency-independent Task Units executed serially"
+    }
+  ]
+}

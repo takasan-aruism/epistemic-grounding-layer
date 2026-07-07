@@ -1,0 +1,261 @@
+{
+  "aggregate": {
+    "n_tasks": 6,
+    "completed": 5,
+    "total_run_seconds": 3201.2,
+    "total_switch_seconds": 3139.0,
+    "total_model_switches": 18,
+    "model_switch_overhead_ratio": 0.981,
+    "tasks_with_rework": 2,
+    "total_rework": 3,
+    "total_findings": 3,
+    "disposition_totals": {
+      "ACCEPTED": 0,
+      "PARTIAL": 0,
+      "REJECTED": 3,
+      "REMAINS": 0
+    },
+    "independence_relation": "all RRI deterministic-core validators are mutually independent (no slice consumes another's output)",
+    "executed": "serially (A-mode: one slice fully before the next)",
+    "per_task": [
+      {
+        "task_id": "TASK-RRI-RDA-02-1783379983",
+        "final_state": "JUDGE_REQUIRED",
+        "completed": false,
+        "run_seconds": 1067.4,
+        "model_switches": 6,
+        "switch_seconds": 1046.6,
+        "switch_failures": 0,
+        "audit_rounds": 3,
+        "rework_count": 2,
+        "findings_total": 0,
+        "dispositions": {
+          "ACCEPTED": 0,
+          "PARTIAL": 0,
+          "REJECTED": 0,
+          "REMAINS": 0
+        }
+      },
+      {
+        "task_id": "TASK-RRI-RDEC-01-1783381051",
+        "final_state": "COMPLETE",
+        "completed": true,
+        "run_seconds": 355.4,
+        "model_switches": 2,
+        "switch_seconds": 348.7,
+        "switch_failures": 0,
+        "audit_rounds": 1,
+        "rework_count": 0,
+        "findings_total": 0,
+        "dispositions": {
+          "ACCEPTED": 0,
+          "PARTIAL": 0,
+          "REJECTED": 0,
+          "REMAINS": 0
+        }
+      },
+      {
+        "task_id": "TASK-RRI-NEEDVAL-01-1783381406",
+        "final_state": "COMPLETE",
+        "completed": true,
+        "run_seconds": 355.4,
+        "model_switches": 2,
+        "switch_seconds": 348.7,
+        "switch_failures": 0,
+        "audit_rounds": 1,
+        "rework_count": 0,
+        "findings_total": 0,
+        "dispositions": {
+          "ACCEPTED": 0,
+          "PARTIAL": 0,
+          "REJECTED": 0,
+          "REMAINS": 0
+        }
+      },
+      {
+        "task_id": "TASK-RRI-XFORM-01-1783381761",
+        "final_state": "COMPLETE",
+        "completed": true,
+        "run_seconds": 711.6,
+        "model_switches": 4,
+        "switch_seconds": 697.4,
+        "switch_failures": 0,
+        "audit_rounds": 2,
+        "rework_count": 1,
+        "findings_total": 3,
+        "dispositions": {
+          "ACCEPTED": 0,
+          "PARTIAL": 0,
+          "REJECTED": 3,
+          "REMAINS": 0
+        }
+      },
+      {
+        "task_id": "TASK-RRI-AXIS-01-1783382473",
+        "final_state": "COMPLETE",
+        "completed": true,
+        "run_seconds": 355.4,
+        "model_switches": 2,
+        "switch_seconds": 348.8,
+        "switch_failures": 0,
+        "audit_rounds": 1,
+        "rework_count": 0,
+        "findings_total": 0,
+        "dispositions": {
+          "ACCEPTED": 0,
+          "PARTIAL": 0,
+          "REJECTED": 0,
+          "REMAINS": 0
+        }
+      },
+      {
+        "task_id": "TASK-RRI-RQC-01-1783382829",
+        "final_state": "COMPLETE",
+        "completed": true,
+        "run_seconds": 356.0,
+        "model_switches": 2,
+        "switch_seconds": 348.8,
+        "switch_failures": 0,
+        "audit_rounds": 1,
+        "rework_count": 0,
+        "findings_total": 0,
+        "dispositions": {
+          "ACCEPTED": 0,
+          "PARTIAL": 0,
+          "REJECTED": 0,
+          "REMAINS": 0
+        }
+      }
+    ],
+    "trigger_config_version": 1,
+    "triggers_fired": [
+      {
+        "id": "DOMINANT_OVERHEAD",
+        "value": 0.981,
+        "rule": "overhead_class_ratio >= 0.30"
+      },
+      {
+        "id": "REPEATED_HIGH_COST",
+        "value": 18,
+        "rule": "same overhead class recurrence >= 3"
+      },
+      {
+        "id": "SERIAL_INDEPENDENT_WORK",
+        "value": "6 independent slices serial",
+        "rule": "multiple dependency-independent Task Units executed serially"
+      }
+    ]
+  },
+  "candidate": {
+    "dominant_cost": "model_switch_overhead",
+    "structurally_avoidable": true,
+    "dependency_required": false,
+    "proposed_change": "Parallelize execution of mutually independent deterministic-core validators to eliminate serial serialization overhead and reduce total wall-clock time.",
+    "native_capability": {
+      "component": "execution_engine",
+      "blocked_property": "concurrent_task_dispatch",
+      "coverage_status": "ESTABLISHED"
+    },
+    "research_required": false,
+    "evidence_required_before_adoption": "Verification that the 'deterministic-core validators' have no hidden side-effects or shared mutable state that would cause race conditions or non-deterministic outcomes when executed concurrently."
+  },
+  "native_capability_check": {
+    "effective_status": "NOT_ESTABLISHED",
+    "research_need": true,
+    "problems": [
+      "ESTABLISHED は valid egl_record_ref を要する → self-report は NOT_ESTABLISHED 扱い"
+    ]
+  },
+  "research_need_emitted": {
+    "packet_type": "RESEARCH_NEED",
+    "origin": "Process Optimizer",
+    "blocked_property": "concurrent_task_dispatch",
+    "component": "execution_engine",
+    "route": "RRI Need Validation -> Research Design -> EGL acquisition",
+    "note": "Optimizer stops here; does NOT research/acquire/admit."
+  },
+  "preservation_review": {
+    "property_verdicts": [
+      {
+        "property_id": "P1",
+        "verdict": "PRESERVED",
+        "argument": "The change explicitly states that validators are 'mutually independent' and 'deterministic-core'. Parallelizing independent tasks does not alter their identity or the fact that they are distinct entities. The independence check (identity check) remains valid as the logical separation of concerns is preserved, only the execution timing changes.",
+        "mechanism_ref": "DW _independent_audit_runs"
+      },
+      {
+        "property_id": "P2",
+        "verdict": "PRESERVED",
+        "argument": "The requirement for a 'mandatory independent audit before COMPLETE' is a logical gate. Parallelization of the audit execution does not remove the requirement that the audit must complete before the final state is marked COMPLETE. The completion_blockers mechanism ensures that the final state is not reached until all parallel audit threads have finished and passed.",
+        "mechanism_ref": "DW completion_blockers"
+      },
+      {
+        "property_id": "P3",
+        "verdict": "PRESERVED",
+        "argument": "The 'real load-bearing test pass' is a functional requirement of the validator logic itself. Running the validator in parallel does not change the internal logic or the pass/fail criteria of the test. As long as the deterministic core produces the same result, the pass requirement is unchanged.",
+        "mechanism_ref": "DW F3/F5"
+      },
+      {
+        "property_id": "P4",
+        "verdict": "PRESERVED",
+        "argument": "The disposition of findings is a post-processing step that occurs after validation. Parallelizing the validation phase does not bypass the DISPOSE gate. The system must still ensure that every finding is dispositioned before allowing rework or completion, regardless of how the validation was executed.",
+        "mechanism_ref": "DW DISPOSE gate (§3)"
+      },
+      {
+        "property_id": "P5",
+        "verdict": "PRESERVED",
+        "argument": "The source of truth for rework is 'accepted findings'. Parallel execution does not alter the data structure or logic that distinguishes accepted findings from raw data. The rework_items mechanism continues to be driven by the same accepted findings.",
+        "mechanism_ref": "DW rework_items (§3)"
+      },
+      {
+        "property_id": "P6",
+        "verdict": "PRESERVED",
+        "argument": "The 'upper review before COMPLETE' is a sequential gate. Parallelizing the independent validators does not remove the need for the upper review. The completion_blockers mechanism ensures that the upper review (and other blockers) are satisfied before the process can complete.",
+        "mechanism_ref": "DW completion_blockers"
+      },
+      {
+        "property_id": "P7",
+        "verdict": "PRESERVED",
+        "argument": "The requirement for 'reconstructable primitive history' relies on the determinism of the core. Since the proposed change specifies 'deterministic-core' validators, the execution order of independent tasks may vary, but the individual event logs for each validator remain deterministic and replayable. The run_sor/events.jsonl replay mechanism can reconstruct the history as long as the inputs and deterministic logic are preserved.",
+        "mechanism_ref": "run_sor/events.jsonl replay (F-1)"
+      }
+    ]
+  },
+  "preservation_gate": {
+    "auto_adoptable": true,
+    "problems": [],
+    "missing": []
+  },
+  "self_formed_axes": {
+    "raw findings cause avoidable rework": true,
+    "independent slices are serialized": true,
+    "batching": false,
+    "parallelization": false,
+    "model switching dominates": true,
+    "vLLM Sleep Mode": false,
+    "current-stack native capability was not inspected": true
+  },
+  "human_taught_available_but_not_injected": [
+    "H-OPS-01",
+    "H-OPS-02"
+  ],
+  "a_vs_virtual_b": {
+    "status": "COUNTERFACTUAL_ESTIMATE (NOT measured B performance)",
+    "dependency_graph": "all RRI deterministic-core validators are mutually independent (no slice consumes another's output)",
+    "batch_eligible_slices": 6,
+    "actual_A_swaps": 18,
+    "virtual_B_min_swaps": 4,
+    "measured_swap_latency_basis_s": 174.4,
+    "estimated_switch_time_delta_s": 2441.6,
+    "assumptions": [
+      "all slices independent (batch-eligible)",
+      "1 shared rework round approximated",
+      "swap latency ~constant (measured basis)"
+    ],
+    "non_guarantees": [
+      "B not executed",
+      "batch buffer/partial-work risk not modeled",
+      "rework distribution across items ignored",
+      "do NOT auto-adopt B from this estimate"
+    ]
+  }
+}
