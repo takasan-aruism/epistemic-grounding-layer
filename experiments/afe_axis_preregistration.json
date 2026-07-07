@@ -1,0 +1,17 @@
+{
+  "experiment": "AFE axis-level blind rescore (B vs D adjudication)",
+  "no_new_experiment": true,
+  "basis": "既存 walking outputs を axis 単位へ分解、blind axis-level scoring。理由: weighted H/P/M は各条件を1単位で見て個別 axis を採点せず、1useful+2irrelevant と 2useful+1irrelevant が同じ P になる。B vs D には axis-level precision/irrelevant accounting が必要。",
+  "metric": {
+    "axis_precision": "(TARGET_MATCH + USEFUL_NOVEL) / proposed_axis_count",
+    "historical_target_recall": "incidents with >=1 TARGET_MATCH axis (別保持)",
+    "no_composite_trust_score": true
+  },
+  "preregistered_interpretation": {
+    "skepticism_sufficient": "B recall/useful >= D AND B axis_precision ~= D AND B irrelevant/over-trigger ~= D → generic skepticism may be sufficient; AFE value vs B not demonstrated",
+    "afe_precision_advantage": "D axis_precision > B OR D irrelevant/over-trigger materially lower while useful recovery preserved → AFE has operational precision/compression advantage over single generic skepticism",
+    "afe_overconstrains": "D useful recovery < B without safety advantage → AFE overconstrains reasoning"
+  },
+  "scorer": "external-weight (Claude) load-bearing for B/D; Qwen blind secondary/primary-anonymization",
+  "fixed_before_rescore": true
+}

@@ -84,7 +84,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 20
+      "pre_orchestration_candidate_count": 20,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-02",
@@ -159,7 +161,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 28
+      "pre_orchestration_candidate_count": 28,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-03",
@@ -227,7 +231,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 28
+      "pre_orchestration_candidate_count": 28,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-04",
@@ -299,7 +305,9 @@
           "verdict": "SIGNAL"
         }
       ],
-      "D_candidate_count": 38
+      "pre_orchestration_candidate_count": 38,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-05",
@@ -387,7 +395,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 25
+      "pre_orchestration_candidate_count": 25,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-06",
@@ -459,7 +469,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 26
+      "pre_orchestration_candidate_count": 26,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-07",
@@ -535,7 +547,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 24
+      "pre_orchestration_candidate_count": 24,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-08",
@@ -607,7 +621,9 @@
           "verdict": "SIGNAL"
         }
       ],
-      "D_candidate_count": 27
+      "pre_orchestration_candidate_count": 27,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-09",
@@ -695,7 +711,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 24
+      "pre_orchestration_candidate_count": 24,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-10",
@@ -751,7 +769,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 0
+      "pre_orchestration_candidate_count": 0,
+      "final_fec_count": 0,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-11",
@@ -811,7 +831,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 13
+      "pre_orchestration_candidate_count": 13,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-12",
@@ -870,7 +892,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 29
+      "pre_orchestration_candidate_count": 29,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-13",
@@ -954,7 +978,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 10
+      "pre_orchestration_candidate_count": 10,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-14",
@@ -1006,7 +1032,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 0
+      "pre_orchestration_candidate_count": 0,
+      "final_fec_count": 0,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-15",
@@ -1080,7 +1108,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 22
+      "pre_orchestration_candidate_count": 22,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-16",
@@ -1144,7 +1174,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 17
+      "pre_orchestration_candidate_count": 17,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-17",
@@ -1219,7 +1251,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 10
+      "pre_orchestration_candidate_count": 10,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-18",
@@ -1295,7 +1329,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 11
+      "pre_orchestration_candidate_count": 11,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-19",
@@ -1369,7 +1405,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 22
+      "pre_orchestration_candidate_count": 22,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-20",
@@ -1456,7 +1494,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 20
+      "pre_orchestration_candidate_count": 20,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-21",
@@ -1540,7 +1580,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 13
+      "pre_orchestration_candidate_count": 13,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-22",
@@ -1592,7 +1634,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 0
+      "pre_orchestration_candidate_count": 0,
+      "final_fec_count": 0,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-23",
@@ -1660,7 +1704,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 13
+      "pre_orchestration_candidate_count": 13,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     },
     {
       "id": "AH-24",
@@ -1748,7 +1794,9 @@
           "verdict": "NO_SIGNAL"
         }
       ],
-      "D_candidate_count": 11
+      "pre_orchestration_candidate_count": 11,
+      "final_fec_count": 3,
+      "attribution_gap": "final FEC does NOT carry source_signal_refs/source_operator_refs — §27 unique-contribution not reconstructable from this run"
     }
   ],
   "process_cost": {
@@ -1812,5 +1860,6 @@
     "OP-HIERARCHY-001",
     "OP-AXIS-001",
     "OP-CREATION-001"
-  ]
+  ],
+  "field_correction": "D_candidate_count(pre-orchestration, observed 0-38) renamed to pre_orchestration_candidate_count; final_fec_count added (<=3). Future AFE runs must attach source_signal_refs+source_operator_refs to each FEC and preserve raw OPSIG objects."
 }

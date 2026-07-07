@@ -1,0 +1,2786 @@
+[
+  {
+    "anon": "X-032d8a",
+    "_id": "AH-22",
+    "_arm": "E",
+    "target": "A reasoning prior at low applicability distorts content-branching — injecting memory can lower expected value vs no-injection when task/frame mismatch; do not assume 'memory available' implies 'inject'.",
+    "situation": "AH-22",
+    "axis": "Symmetry: Audit for multi-perspective bias and complementary roles"
+  },
+  {
+    "anon": "X-04bab4",
+    "_id": "AH-16",
+    "_arm": "A",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "Validate summary signal consistency across different data granularities"
+  },
+  {
+    "anon": "X-052c51",
+    "_id": "AH-09",
+    "_arm": "B",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Check for direct coupling artifacts masquerading as formation events"
+  },
+  {
+    "anon": "X-0573b8",
+    "_id": "AH-04",
+    "_arm": "B",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "Check for age-related confounding variables in the dataset"
+  },
+  {
+    "anon": "X-06a760",
+    "_id": "AH-01",
+    "_arm": "E",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "Axis: Analyze the cognitive transition from binary opposition (n=2) to a higher-order unit that resolves structural stress"
+  },
+  {
+    "anon": "X-071662",
+    "_id": "AH-21",
+    "_arm": "D",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "operational_efficiency / batch_re_induction|incremental_update / Highlights the computational inefficiency of re-clustering from scratch for a small set (16), suggesting that an incremental update strategy might be a superior operational alternative."
+  },
+  {
+    "anon": "X-07771b",
+    "_id": "AH-06",
+    "_arm": "B",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "Check for systematic bias in node ID generation across both systems"
+  },
+  {
+    "anon": "X-07f629",
+    "_id": "AH-07",
+    "_arm": "A",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "Verify 95.7% alignment threshold against baseline population data"
+  },
+  {
+    "anon": "X-07fe69",
+    "_id": "AH-23",
+    "_arm": "E",
+    "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "AH-23",
+    "axis": "Assess operational flexibility for dynamic mode switching"
+  },
+  {
+    "anon": "X-08634d",
+    "_id": "AH-05",
+    "_arm": "E",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "Interdependence: Verification of structural equality and mutual indispensability in the synchronized units"
+  },
+  {
+    "anon": "X-098277",
+    "_id": "AH-15",
+    "_arm": "B",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "Verify if the M=20 reference value is statistically robust against the observed variance"
+  },
+  {
+    "anon": "X-09e4b1",
+    "_id": "AH-13",
+    "_arm": "A",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "Check for latent field overflow or saturation"
+  },
+  {
+    "anon": "X-0a4ce2",
+    "_id": "AH-13",
+    "_arm": "D",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "accumulation_rate|incorporation_level / Decouples the process variable (rate of boost accumulation) from the state variable (level of incorporation), which are currently conflated in the frame's single 'boost' effect description. / Enables independent monitoring and intervention; allows decision-makers to adjust the input rate without assuming a proportional immediate change in the outcome state, reducing latency in response strategies."
+  },
+  {
+    "anon": "X-0a5ae3",
+    "_id": "AH-02",
+    "_arm": "F",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "fixed_threshold|adaptive_threshold"
+  },
+  {
+    "anon": "X-0ad414",
+    "_id": "AH-17",
+    "_arm": "F",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "detection_accuracy_metric / measure_false_positive_rate / Provides a specific validation operation to verify that increasing the threshold does not inadvertently degrade detection reliability or increase false positives."
+  },
+  {
+    "anon": "X-0b693e",
+    "_id": "AH-06",
+    "_arm": "A",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "false_positive_rate_in_co_occurrence"
+  },
+  {
+    "anon": "X-0c78f4",
+    "_id": "AH-16",
+    "_arm": "D",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "aggregation_method"
+  },
+  {
+    "anon": "X-0e585f",
+    "_id": "AH-21",
+    "_arm": "A",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "Verify cluster stability after re-clustering 16 incidents"
+  },
+  {
+    "anon": "X-0e8089",
+    "_id": "AH-09",
+    "_arm": "E",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Axis: Structural Equivalence vs. Idealistic Equality"
+  },
+  {
+    "anon": "X-0e85fb",
+    "_id": "AH-18",
+    "_arm": "D",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "viewpoint_dependency / absolute_ttl vs viewpoint-dependent_ttl / Reveals if the 'starvation' is objective or relative to a specific observer/state, which is critical for deciding whether to adjust the system parameters or adjust the monitoring/evaluation criteria."
+  },
+  {
+    "anon": "X-0f0d8d",
+    "_id": "AH-20",
+    "_arm": "D",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "map_audit_findings_to_test_gaps / structural_alignment_operation / Replaces the generic 'rework' action with a specific diagnostic operation to map audit constraints to test gaps, ensuring that rework addresses the root cause (test insufficiency) rather than just the symptom (audit failure)."
+  },
+  {
+    "anon": "X-0f1e33",
+    "_id": "AH-08",
+    "_arm": "E",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "Cognitive Axis Shift Analysis"
+  },
+  {
+    "anon": "X-106ead",
+    "_id": "AH-08",
+    "_arm": "F",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "initialization_state / state_consistency_requirement / Requires implementing state migration or initialization checks before replacement, ensuring the new layer's internal state is valid relative to the existing system context."
+  },
+  {
+    "anon": "X-116cf4",
+    "_id": "AH-15",
+    "_arm": "C",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "Artifact-vs-Grounded (surface result as construction/observation artifact)"
+  },
+  {
+    "anon": "X-1200e1",
+    "_id": "AH-19",
+    "_arm": "A",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "vLLM sleep memory allocation failure"
+  },
+  {
+    "anon": "X-123807",
+    "_id": "AH-18",
+    "_arm": "C",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "Control Source: External vs. Internal"
+  },
+  {
+    "anon": "X-1340d7",
+    "_id": "AH-20",
+    "_arm": "C",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "Artifact-vs-Grounded: confirm the mechanism before treating the metric as a finding"
+  },
+  {
+    "anon": "X-13e145",
+    "_id": "AH-07",
+    "_arm": "C",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "vary the construction/observation choice and re-measure"
+  },
+  {
+    "anon": "X-14d081",
+    "_id": "AH-24",
+    "_arm": "D",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "temporal_duration / static_storage vs dynamic_integration / Determines whether the physical state is a fixed record or a mutable, evolving entity, which dictates the required update mechanisms and consistency checks."
+  },
+  {
+    "anon": "X-15e1a5",
+    "_id": "AH-17",
+    "_arm": "A",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "measure_n5_frequency_after_tau_100"
+  },
+  {
+    "anon": "X-185fa5",
+    "_id": "AH-24",
+    "_arm": "F",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "map_experience_to_state / The operational mechanism of individualization / Necessitates specifying the algorithm or rule set that updates the physical state E based on the CID's specific experience."
+  },
+  {
+    "anon": "X-19d076",
+    "_id": "AH-01",
+    "_arm": "D",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "structural_resilience / Transient Peak vs. Stable Attractor / Assesses whether the n=2 dominance is a robust, persistent topological feature or a transient statistical fluctuation; high resilience confirms n=2 as a fundamental system constraint, while low resilience suggests it is a temporary state."
+  },
+  {
+    "anon": "X-1aa714",
+    "_id": "AH-18",
+    "_arm": "B",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "Confirm no race conditions exist between TTL expiration and starvation logic"
+  },
+  {
+    "anon": "X-1c0faa",
+    "_id": "AH-14",
+    "_arm": "E",
+    "target": "Read the upstream material first — this reduces to a trivial re-observation of an already-established mechanism (v10.5) that no one on the team had read; check prior work before observing.",
+    "situation": "AH-14",
+    "axis": "structural_equality_vs_idealism"
+  },
+  {
+    "anon": "X-1cd5a2",
+    "_id": "AH-20",
+    "_arm": "A",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "Confirm reworked implementation passes all load-bearing tests"
+  },
+  {
+    "anon": "X-1cf5b5",
+    "_id": "AH-21",
+    "_arm": "B",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "Check if the re-clustering algorithm preserves the semantic integrity of the original 10 incidents"
+  },
+  {
+    "anon": "X-1e0eff",
+    "_id": "AH-04",
+    "_arm": "A",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "Check for data leakage or circular logic in label generation"
+  },
+  {
+    "anon": "X-1e8d8a",
+    "_id": "AH-03",
+    "_arm": "D",
+    "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+    "situation": "AH-03",
+    "axis": "physical_state_layer / growth_modeling_layer|physical_state_layer / Enforces strict separation of concerns between the abstract model and the physical substrate, preventing the logical error of treating the physical state as a passive variable rather than an active, constraint-bearing entity."
+  },
+  {
+    "anon": "X-21537c",
+    "_id": "AH-09",
+    "_arm": "B",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Validate throughput measurement against independent structural benchmarks"
+  },
+  {
+    "anon": "X-230eed",
+    "_id": "AH-18",
+    "_arm": "C",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "State Nature: Deterministic Output vs. Probabilistic Claim"
+  },
+  {
+    "anon": "X-23ac59",
+    "_id": "AH-18",
+    "_arm": "E",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "Evaluate the symmetry between fixed TTL enforcement and emergent node hierarchy stability"
+  },
+  {
+    "anon": "X-23b766",
+    "_id": "AH-02",
+    "_arm": "C",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "State Nature: Deterministic Output vs. Probabilistic Claim"
+  },
+  {
+    "anon": "X-26186a",
+    "_id": "AH-02",
+    "_arm": "B",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "Verify if the familiarity threshold of 2.0 is statistically significant compared to the noise floor of the input data"
+  },
+  {
+    "anon": "X-26988c",
+    "_id": "AH-14",
+    "_arm": "E",
+    "target": "Read the upstream material first — this reduces to a trivial re-observation of an already-established mechanism (v10.5) that no one on the team had read; check prior work before observing.",
+    "situation": "AH-14",
+    "axis": "resonance_based_creation"
+  },
+  {
+    "anon": "X-26aadd",
+    "_id": "AH-17",
+    "_arm": "F",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "noise_characterization / noise_level / Introduces the critical constraint of signal-to-noise ratio, preventing the threshold change from being arbitrary or ineffective due to unquantified background noise."
+  },
+  {
+    "anon": "X-2807bf",
+    "_id": "AH-09",
+    "_arm": "A",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Validate throughput attribution logic"
+  },
+  {
+    "anon": "X-286aec",
+    "_id": "AH-10",
+    "_arm": "C",
+    "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+    "situation": "AH-10",
+    "axis": "Artifact-vs-Grounded: separate apparent from grounded (signal vs artifact-of-setup)"
+  },
+  {
+    "anon": "X-287b63",
+    "_id": "AH-11",
+    "_arm": "A",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "loop_rate_frequency"
+  },
+  {
+    "anon": "X-297e3f",
+    "_id": "AH-16",
+    "_arm": "F",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "aggregate_match_ratio|individual_instance_tolerance"
+  },
+  {
+    "anon": "X-29f21e",
+    "_id": "AH-02",
+    "_arm": "C",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "Control Source: External vs. Internal"
+  },
+  {
+    "anon": "X-2a1bd4",
+    "_id": "AH-01",
+    "_arm": "A",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "Confirm modal structure classification accuracy"
+  },
+  {
+    "anon": "X-2a841f",
+    "_id": "AH-21",
+    "_arm": "D",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "structural_dependency / re_induction_depend_on_cluster_geometry / Identifies that the re-induction process is not independent but structurally coupled to the clustering geometry, preventing the assumption that batch re-induction is a neutral, decoupled step."
+  },
+  {
+    "anon": "X-2afd9c",
+    "_id": "AH-13",
+    "_arm": "D",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "calculate_time_to_saturation / Introduces a temporal operation that quantifies the duration until the system reaches its absorption limit, moving beyond static rate descriptions to dynamic timeline forecasting. / Provides a specific timeframe for resource allocation or mitigation, allowing for proactive management of the transition from growth to equilibrium rather than reactive handling of saturation."
+  },
+  {
+    "anon": "X-2c8f1a",
+    "_id": "AH-02",
+    "_arm": "D",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "symmetric_alternative_evaluation / explicitly model the counter-factual scenario where stability/spread thresholds are elevated to match familiarity / tests the validity of the 'familiarity' conclusion by checking if other dispositions become dominant under symmetric weighting, revealing if the current outcome is an artifact of bias"
+  },
+  {
+    "anon": "X-2cc4d4",
+    "_id": "AH-23",
+    "_arm": "D",
+    "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "AH-23",
+    "axis": "evaluate if model quantization enables co-serving / Introduces a specific operational operation to test for co-servability via model compression. / Expands the solution space beyond the binary 'pick one' choice by introducing a third option: modifying the models to fit the hardware, thereby avoiding the need to discard one model entirely."
+  },
+  {
+    "anon": "X-2e2219",
+    "_id": "AH-07",
+    "_arm": "F",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "measurement_error / observed_alignment|true_alignment / Distinguishes between a true structural invariant and a measurement artifact, preventing false confidence in the 95.7% grounding score."
+  },
+  {
+    "anon": "X-2e368c",
+    "_id": "AH-23",
+    "_arm": "A",
+    "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "AH-23",
+    "axis": "Batch_processing_throughput_per_model"
+  },
+  {
+    "anon": "X-2ee995",
+    "_id": "AH-08",
+    "_arm": "E",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "Structural Interdependence Verification"
+  },
+  {
+    "anon": "X-2ef093",
+    "_id": "AH-24",
+    "_arm": "B",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "\"message\": \"The request asks to simulate a system that individualizes and stores experiences in a physical state, which implies a capability or scenario that is not grounded in reality or standard technical specifications. As an AI, I cannot perform actions that involve physical states or subjective experience storage. Therefore, I cannot fulfill the request to propose checks for such an incident, as the premise itself is invalid.\""
+  },
+  {
+    "anon": "X-308e21",
+    "_id": "AH-09",
+    "_arm": "A",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Verify E<->V coupling isolation"
+  },
+  {
+    "anon": "X-3193d9",
+    "_id": "AH-01",
+    "_arm": "A",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "Verify core-size distribution frequency for n=2"
+  },
+  {
+    "anon": "X-31971b",
+    "_id": "AH-07",
+    "_arm": "B",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "Confirm if the sample size is statistically significant for the entire population"
+  },
+  {
+    "anon": "X-3218b0",
+    "_id": "AH-07",
+    "_arm": "E",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "hierarchy_reconfiguration_potential"
+  },
+  {
+    "anon": "X-32563e",
+    "_id": "AH-18",
+    "_arm": "C",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "Timing: Fixed/Interval vs. Event/Unpredictable"
+  },
+  {
+    "anon": "X-32714c",
+    "_id": "AH-22",
+    "_arm": "A",
+    "target": "A reasoning prior at low applicability distorts content-branching — injecting memory can lower expected value vs no-injection when task/frame mismatch; do not assume 'memory available' implies 'inject'.",
+    "situation": "AH-22",
+    "axis": "audit_user_access_permissions"
+  },
+  {
+    "anon": "X-32b92d",
+    "_id": "AH-04",
+    "_arm": "C",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "confirm the mechanism before treating the metric as a finding"
+  },
+  {
+    "anon": "X-337e23",
+    "_id": "AH-15",
+    "_arm": "F",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "calculate_minimum_detectable_effect / operation to quantify the smallest effect size detectable by the M=20 reference / Provides a concrete metric to verify if the 'floor' is sufficiently low to rule out clinically or practically significant effects, transforming an abstract assumption into a verifiable constraint."
+  },
+  {
+    "anon": "X-34371a",
+    "_id": "AH-01",
+    "_arm": "B",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "Check if the 67% statistic represents a local maximum in a multimodal distribution rather than the global mode"
+  },
+  {
+    "anon": "X-359b37",
+    "_id": "AH-13",
+    "_arm": "F",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "decay_factor / gross_accumulation vs net_incorporation / Prevents overestimation of incorporation by accounting for opposing forces like saturation or decay, which are currently ignored in the frame."
+  },
+  {
+    "anon": "X-35e55f",
+    "_id": "AH-23",
+    "_arm": "E",
+    "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "AH-23",
+    "axis": "Evaluate potential for co-servable hybrid model architectures"
+  },
+  {
+    "anon": "X-3769fb",
+    "_id": "AH-17",
+    "_arm": "B",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "Verify if the system exhibits non-monotonic scaling where higher thresholds suppress large cluster formation"
+  },
+  {
+    "anon": "X-3794c6",
+    "_id": "AH-08",
+    "_arm": "E",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "Runtime Subject Replacement Audit"
+  },
+  {
+    "anon": "X-3a35ac",
+    "_id": "AH-06",
+    "_arm": "C",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "Artifact-vs-Grounded: separate apparent from grounded (signal vs artifact-of-setup)"
+  },
+  {
+    "anon": "X-3a7052",
+    "_id": "AH-11",
+    "_arm": "B",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "Check if the grammar signal persists when the dialogue context is truncated or shuffled"
+  },
+  {
+    "anon": "X-3a93bd",
+    "_id": "AH-20",
+    "_arm": "B",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "Verify if the 'load-bearing tests' actually cover the specific edge cases identified in the auditor's findings"
+  },
+  {
+    "anon": "X-3bc484",
+    "_id": "AH-04",
+    "_arm": "D",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "temporal_granularity / global_correlation_vs_stage_specific_dynamics / Shifts analysis from a single aggregate correlation to stage-specific rates, allowing the detection if the relationship is uniform or if specific life stages drive the correlation, thereby refining the developmental hypothesis."
+  },
+  {
+    "anon": "X-3be157",
+    "_id": "AH-01",
+    "_arm": "B",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "Confirm that the S>=0.20 threshold does not artificially suppress smaller clusters that would otherwise dominate the distribution"
+  },
+  {
+    "anon": "X-3c3d57",
+    "_id": "AH-02",
+    "_arm": "F",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "structural_bias_vs_config_error"
+  },
+  {
+    "anon": "X-3c621c",
+    "_id": "AH-18",
+    "_arm": "B",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "Verify if the starvation rule actually triggers turnover under load"
+  },
+  {
+    "anon": "X-3cc62a",
+    "_id": "AH-20",
+    "_arm": "F",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "independent_verification / The discrepancy between passing tests and auditor findings suggests a potential bias in either the test suite (missing edge cases) or the auditor (overly strict or biased criteria), requiring investigation to ensure robustness. / Triggers a cross-validation step with an independent team to resolve the conflict between automated test results and manual audit findings."
+  },
+  {
+    "anon": "X-3d0701",
+    "_id": "AH-24",
+    "_arm": "C",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "separate apparent from grounded (signal vs artifact-of-setup)"
+  },
+  {
+    "anon": "X-3d4abc",
+    "_id": "AH-11",
+    "_arm": "C",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "Artifact-vs-Grounded: vary the construction/observation choice and re-measure"
+  },
+  {
+    "anon": "X-3d6a43",
+    "_id": "AH-18",
+    "_arm": "E",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "Assess the creation of new operational axes required to resolve cognitive overload from forced turnover"
+  },
+  {
+    "anon": "X-3e4415",
+    "_id": "AH-24",
+    "_arm": "B",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "error\": \"Invalid request"
+  },
+  {
+    "anon": "X-3ed018",
+    "_id": "AH-23",
+    "_arm": "A",
+    "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "AH-23",
+    "axis": "Inference_latency_percentiles_per_model"
+  },
+  {
+    "anon": "X-3ee71f",
+    "_id": "AH-06",
+    "_arm": "C",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "Artifact-vs-Grounded: confirm the mechanism before treating the metric as a finding"
+  },
+  {
+    "anon": "X-3f6c39",
+    "_id": "AH-08",
+    "_arm": "A",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "Check for data integrity or state migration errors during swap"
+  },
+  {
+    "anon": "X-3fccfa",
+    "_id": "AH-15",
+    "_arm": "A",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "Confirm preregistration of negative finding protocol"
+  },
+  {
+    "anon": "X-40292c",
+    "_id": "AH-03",
+    "_arm": "E",
+    "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+    "situation": "AH-03",
+    "axis": "Analysis of interdependent resonance in state incorporation"
+  },
+  {
+    "anon": "X-405092",
+    "_id": "AH-17",
+    "_arm": "D",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "isolated_parameter_effect_vs_systemic_interactions"
+  },
+  {
+    "anon": "X-417a3c",
+    "_id": "AH-19",
+    "_arm": "F",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "error_specificity / fatal_architectural_incompatibility vs recoverable_state_inconsistency / Prevents premature abandonment of Sleep Mode by determining if the path is truly dead or if the failure is a fixable implementation bug, thereby preserving the option for debugging rather than immediate rejection."
+  },
+  {
+    "anon": "X-41fd02",
+    "_id": "AH-13",
+    "_arm": "B",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "Check if the 'incorporation' metric is actually measuring a different variable"
+  },
+  {
+    "anon": "X-41fe5b",
+    "_id": "AH-20",
+    "_arm": "F",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "auditor_reliability / The discrepancy between passing tests and auditor findings suggests a potential bias in either the test suite (missing edge cases) or the auditor (overly strict or biased criteria), requiring investigation to ensure robustness. / Introduces the need to validate the auditor's findings against independent standards or a second opinion before committing resources to rework."
+  },
+  {
+    "anon": "X-42f86d",
+    "_id": "AH-05",
+    "_arm": "A",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "Kuramoto order parameter calculation"
+  },
+  {
+    "anon": "X-43b429",
+    "_id": "AH-15",
+    "_arm": "B",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "Check if the 'within floor' threshold was pre-specified or post-hoc adjusted to ensure no effect"
+  },
+  {
+    "anon": "X-44de44",
+    "_id": "AH-01",
+    "_arm": "F",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "temporal_stability_of_pairs / immediate_labeling|delayed_validation / Distinguishes between transient artifacts and stable structural cores, allowing the system to filter out false positives in the n=2 dominance metric caused by rapid pair formation/decay."
+  },
+  {
+    "anon": "X-44e69e",
+    "_id": "AH-23",
+    "_arm": "D",
+    "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "AH-23",
+    "axis": "gpu memory capacity (vram) / Identifies the specific resource bottleneck (VRAM) rather than treating incompatibility as a generic structural issue. / Enables the evaluation of alternative technical resolutions (e.g., quantization, swapping) that are only possible if the incompatibility is resource-based, rather than forcing an arbitrary model selection."
+  },
+  {
+    "anon": "X-45018e",
+    "_id": "AH-19",
+    "_arm": "F",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "diagnostic_action / stacktrace_analysis_for_root_cause / Shifts the immediate decision from 'conclude not viable' to 'investigate root cause', enabling the team to gather evidence on whether the tensor error is transient or fundamental before making a final viability assessment."
+  },
+  {
+    "anon": "X-467c95",
+    "_id": "AH-05",
+    "_arm": "F",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "frequency_heterogeneity / phase_synchronization|functional_integration / Identifies if rising V_unified is driven by frequency clustering (a hidden cause) rather than functional integration, necessitating analysis of the natural frequency distribution to validate the integration claim."
+  },
+  {
+    "anon": "X-478e7f",
+    "_id": "AH-12",
+    "_arm": "B",
+    "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+    "situation": "AH-12",
+    "axis": "Check for confounding variables such as shared environmental factors or phylogenetic history"
+  },
+  {
+    "anon": "X-47e85b",
+    "_id": "AH-17",
+    "_arm": "E",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "Interdependence: Co-resonance in Systemic Growth"
+  },
+  {
+    "anon": "X-47f110",
+    "_id": "AH-18",
+    "_arm": "D",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "starvation_rule_logic / starvation_rule as explicit logic vs implicit mechanism / Clarifies the causal chain between the fixed TTL and turnover, determining if the 'starvation' is a designed feature or an unintended consequence of the rule's definition, which dictates whether to refine the rule or change the TTL structure."
+  },
+  {
+    "anon": "X-485eaa",
+    "_id": "AH-24",
+    "_arm": "A",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "Audit memory persistence mechanisms for experience data"
+  },
+  {
+    "anon": "X-49efce",
+    "_id": "AH-14",
+    "_arm": "A",
+    "target": "Read the upstream material first — this reduces to a trivial re-observation of an already-established mechanism (v10.5) that no one on the team had read; check prior work before observing.",
+    "situation": "AH-14",
+    "axis": "new developmental signal emergence"
+  },
+  {
+    "anon": "X-4a702b",
+    "_id": "AH-11",
+    "_arm": "C",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "Artifact-vs-Grounded: separate apparent from grounded (signal vs artifact-of-setup)"
+  },
+  {
+    "anon": "X-4ae600",
+    "_id": "AH-05",
+    "_arm": "D",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "phase_synchronization|amplitude_coupling / Decouples the mathematical metric (Kuramoto order parameter) into its constituent physical mechanisms: phase alignment vs. amplitude coupling, recognizing that the frame conflates synchronization with integration. / Allows for the identification of 'false positive' integration signals that arise from simple phase locking without actual functional interdependence."
+  },
+  {
+    "anon": "X-4bc0ce",
+    "_id": "AH-16",
+    "_arm": "A",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "Audit edge cases for floating-point precision and rounding errors"
+  },
+  {
+    "anon": "X-4c82c4",
+    "_id": "AH-10",
+    "_arm": "E",
+    "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+    "situation": "AH-10",
+    "axis": "Interdependence and Resonance in Effect Generation"
+  },
+  {
+    "anon": "X-4d3190",
+    "_id": "AH-06",
+    "_arm": "A",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "node_id_overlap_count"
+  },
+  {
+    "anon": "X-4dadb8",
+    "_id": "AH-09",
+    "_arm": "D",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Net Accumulation vs Gross Throughput / gross_throughput|net_accumulation / Shifts the assessment of 'structure formation' from a raw production metric (27k births) to a stability metric (births minus decay), determining if the system is actually growing or merely cycling."
+  },
+  {
+    "anon": "X-4fca28",
+    "_id": "AH-19",
+    "_arm": "E",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "Evaluation of structural equality in resource allocation logic"
+  },
+  {
+    "anon": "X-5065a9",
+    "_id": "AH-21",
+    "_arm": "B",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "Confirm that batch re-induction does not overwrite or corrupt the original incident data"
+  },
+  {
+    "anon": "X-5100a9",
+    "_id": "AH-21",
+    "_arm": "A",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "Audit accuracy of new incident-to-family assignments"
+  },
+  {
+    "anon": "X-518448",
+    "_id": "AH-16",
+    "_arm": "C",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "Artifact-vs-Grounded: separate apparent from grounded (signal vs artifact-of-setup)"
+  },
+  {
+    "anon": "X-51ed84",
+    "_id": "AH-07",
+    "_arm": "C",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "confirm the mechanism before treating the metric as a finding"
+  },
+  {
+    "anon": "X-523ea0",
+    "_id": "AH-02",
+    "_arm": "A",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "assess_disposition_logic_balance"
+  },
+  {
+    "anon": "X-52be00",
+    "_id": "AH-02",
+    "_arm": "E",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "Cognitive Axis Creation: Analyze if the system fails to generate new 'axes' to resolve cognitive overload from dominant familiarity, leading to rigid binary interpretation."
+  },
+  {
+    "anon": "X-532414",
+    "_id": "AH-02",
+    "_arm": "B",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "Check if the social, stability, and spread scores were normalized correctly before the weighted sum calculation"
+  },
+  {
+    "anon": "X-532811",
+    "_id": "AH-18",
+    "_arm": "F",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "Operational Definition of Starvation"
+  },
+  {
+    "anon": "X-5415f8",
+    "_id": "AH-03",
+    "_arm": "B",
+    "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+    "situation": "AH-03",
+    "axis": "Audit for race conditions where concurrent growth updates corrupt the physical state"
+  },
+  {
+    "anon": "X-543330",
+    "_id": "AH-17",
+    "_arm": "D",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "alternative_decay_formation_mechanisms"
+  },
+  {
+    "anon": "X-56385e",
+    "_id": "AH-23",
+    "_arm": "A",
+    "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "AH-23",
+    "axis": "GPU_memory_utilization_per_model"
+  },
+  {
+    "anon": "X-56b4b1",
+    "_id": "AH-05",
+    "_arm": "F",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "phase_wrapping_artifact / phase_synchronization|functional_integration / Detects non-functional causes like phase wrapping that inflate V_unified, ensuring the evidence of integration is not an artifact of signal processing or topological constraints."
+  },
+  {
+    "anon": "X-56de14",
+    "_id": "AH-20",
+    "_arm": "D",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "test_coverage_gap / functional_robustness_vs_compliance_coverage / Shifts the rework strategy from correcting implementation errors to expanding the test suite's scope to cover the auditor's criteria, preventing futile rework on already robust code."
+  },
+  {
+    "anon": "X-5750a0",
+    "_id": "AH-12",
+    "_arm": "E",
+    "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+    "situation": "AH-12",
+    "axis": "Axis: Interdependence and Resonance in Inheritance"
+  },
+  {
+    "anon": "X-5a2e6f",
+    "_id": "AH-06",
+    "_arm": "C",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "Artifact-vs-Grounded: vary the construction/observation choice and re-measure"
+  },
+  {
+    "anon": "X-5b9b98",
+    "_id": "AH-09",
+    "_arm": "F",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "artifact_vs_signal_distinction / throughput_noise / Forces validation that the 27k births are not coupling artifacts, preventing false positive structure formation claims."
+  },
+  {
+    "anon": "X-5bb20b",
+    "_id": "AH-22",
+    "_arm": "E",
+    "target": "A reasoning prior at low applicability distorts content-branching — injecting memory can lower expected value vs no-injection when task/frame mismatch; do not assume 'memory available' implies 'inject'.",
+    "situation": "AH-22",
+    "axis": "Interdependence: Map structural co-resonance and functional necessity"
+  },
+  {
+    "anon": "X-5dc77c",
+    "_id": "AH-24",
+    "_arm": "F",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "experience_embedding / Abstract experience data vs. concrete physical state vector / Requires defining the transformation function or mapping logic between the abstract experience and the physical state representation."
+  },
+  {
+    "anon": "X-5f5697",
+    "_id": "AH-06",
+    "_arm": "B",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "Verify seed node uniqueness to prevent false positive co-occurrence from duplicate IDs"
+  },
+  {
+    "anon": "X-60ee5f",
+    "_id": "AH-08",
+    "_arm": "B",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "Check for memory leaks or dangling pointers in the old Layer A instance"
+  },
+  {
+    "anon": "X-612396",
+    "_id": "AH-24",
+    "_arm": "A",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "Check for race conditions during state updates"
+  },
+  {
+    "anon": "X-62ffee",
+    "_id": "AH-21",
+    "_arm": "F",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "cluster_stability_metric / calculate_cluster_stability / Adds a quality assurance operation to verify if the 'significant structural change' yields stable families, preventing the induction of noise or unstable clusters that the current frame ignores."
+  },
+  {
+    "anon": "X-63d629",
+    "_id": "AH-16",
+    "_arm": "B",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "Confirm that 'Match Ratio' is not skewed by the total number of records in the aggregate calculation"
+  },
+  {
+    "anon": "X-645f88",
+    "_id": "AH-19",
+    "_arm": "A",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "tensor serialization/deserialization error"
+  },
+  {
+    "anon": "X-64706a",
+    "_id": "AH-22",
+    "_arm": "B",
+    "target": "A reasoning prior at low applicability distorts content-branching — injecting memory can lower expected value vs no-injection when task/frame mismatch; do not assume 'memory available' implies 'inject'.",
+    "situation": "AH-22",
+    "axis": "Check for correlated external network events"
+  },
+  {
+    "anon": "X-657855",
+    "_id": "AH-07",
+    "_arm": "E",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "structural_invariance_audit"
+  },
+  {
+    "anon": "X-67d697",
+    "_id": "AH-08",
+    "_arm": "B",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "Confirm runtime type safety checks pass for the new mechanism's interface"
+  },
+  {
+    "anon": "X-69e353",
+    "_id": "AH-16",
+    "_arm": "C",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "Artifact-vs-Grounded: confirm the mechanism before treating the metric as a finding"
+  },
+  {
+    "anon": "X-6c2402",
+    "_id": "AH-16",
+    "_arm": "C",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "Artifact-vs-Grounded: vary the construction/observation choice and re-measure"
+  },
+  {
+    "anon": "X-6ea9c5",
+    "_id": "AH-01",
+    "_arm": "E",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "Symmetry: Audit the complementary balance between the dominant n=2 structures and the remaining distribution to identify hidden systemic equilibrium"
+  },
+  {
+    "anon": "X-6eb97d",
+    "_id": "AH-03",
+    "_arm": "A",
+    "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+    "situation": "AH-03",
+    "axis": "Check parameter synchronization latency"
+  },
+  {
+    "anon": "X-6f081d",
+    "_id": "AH-05",
+    "_arm": "C",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "separate apparent from grounded (signal vs artifact-of-setup)"
+  },
+  {
+    "anon": "X-70b222",
+    "_id": "AH-17",
+    "_arm": "A",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "validate_persistence_threshold_sensitivity"
+  },
+  {
+    "anon": "X-715978",
+    "_id": "AH-16",
+    "_arm": "E",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "Cognitive Axis Creation: Assess if the metric resolves binary oppositions by introducing a higher-order interpretive unit."
+  },
+  {
+    "anon": "X-718209",
+    "_id": "AH-09",
+    "_arm": "F",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "noise_subtraction_operation / subtract_noise_floor / Introduces a necessary data processing step to isolate true structure from background noise, correcting the raw throughput interpretation."
+  },
+  {
+    "anon": "X-71cdc6",
+    "_id": "AH-07",
+    "_arm": "F",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "statistical_uncertainty / point_estimate|confidence_interval / Introduces the operation of calculating confidence intervals to determine if the 95.7% score is statistically significant or within the margin of error, refining the robustness of the invariance claim."
+  },
+  {
+    "anon": "X-725ff8",
+    "_id": "AH-18",
+    "_arm": "A",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "Check for eviction of non-GHOST entries due to starvation rule"
+  },
+  {
+    "anon": "X-727872",
+    "_id": "AH-14",
+    "_arm": "A",
+    "target": "Read the upstream material first — this reduces to a trivial re-observation of an already-established mechanism (v10.5) that no one on the team had read; check prior work before observing.",
+    "situation": "AH-14",
+    "axis": "within-cid observation latency"
+  },
+  {
+    "anon": "X-7303af",
+    "_id": "AH-22",
+    "_arm": "A",
+    "target": "A reasoning prior at low applicability distorts content-branching — injecting memory can lower expected value vs no-injection when task/frame mismatch; do not assume 'memory available' implies 'inject'.",
+    "situation": "AH-22",
+    "axis": "verify_system_logs_for_error_patterns"
+  },
+  {
+    "anon": "X-7341b3",
+    "_id": "AH-09",
+    "_arm": "C",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Artifact-vs-Grounded: separate apparent from grounded (signal vs artifact-of-setup)"
+  },
+  {
+    "anon": "X-73f1e3",
+    "_id": "AH-01",
+    "_arm": "D",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "complete_distribution / Modal Dominance vs. Tail Variance / Evaluates the robustness of the n=2 claim by analyzing the remaining 33% of the distribution; if the tail contains significant high-n structures, the 'n=2-dominant' label may mask critical long-range connectivity or instability risks."
+  },
+  {
+    "anon": "X-759b91",
+    "_id": "AH-04",
+    "_arm": "C",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "separate apparent from grounded (signal vs artifact-of-setup)"
+  },
+  {
+    "anon": "X-75cef0",
+    "_id": "AH-12",
+    "_arm": "B",
+    "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+    "situation": "AH-12",
+    "axis": "Verify if Mantel correlation accounts for spatial autocorrelation in structural data"
+  },
+  {
+    "anon": "X-767fef",
+    "_id": "AH-11",
+    "_arm": "D",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "loop_rate"
+  },
+  {
+    "anon": "X-768909",
+    "_id": "AH-04",
+    "_arm": "A",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "Audit for confounding variables such as age or cohort effects"
+  },
+  {
+    "anon": "X-77689b",
+    "_id": "AH-16",
+    "_arm": "A",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "Verify tolerance threshold implementation (1e-6) in aggregation logic"
+  },
+  {
+    "anon": "X-784037",
+    "_id": "AH-17",
+    "_arm": "E",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "Equality: Structural Indispensability of Large Structures"
+  },
+  {
+    "anon": "X-791936",
+    "_id": "AH-02",
+    "_arm": "A",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "audit_threshold_sensitivity_analysis"
+  },
+  {
+    "anon": "X-797bf6",
+    "_id": "AH-24",
+    "_arm": "D",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "causal_mechanism / storage_method / Defines the operational interface for writing experience to the physical state, distinguishing between direct overwrites, additive updates, or immutable logging."
+  },
+  {
+    "anon": "X-7a1212",
+    "_id": "AH-10",
+    "_arm": "B",
+    "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+    "situation": "AH-10",
+    "axis": "Verify if the smoke run seed 0 is representative of the general population or an outlier"
+  },
+  {
+    "anon": "X-7e705c",
+    "_id": "AH-12",
+    "_arm": "D",
+    "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+    "situation": "AH-12",
+    "axis": "spatial_autocorrelation"
+  },
+  {
+    "anon": "X-7f34c3",
+    "_id": "AH-02",
+    "_arm": "E",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "Threshold Calibration Audit: Investigate if fixed thresholds (0.1/2.0) enforce artificial hierarchy over structural equality, preventing multi-perspective symmetry."
+  },
+  {
+    "anon": "X-8070a6",
+    "_id": "AH-12",
+    "_arm": "C",
+    "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+    "situation": "AH-12",
+    "axis": "confirm the mechanism before treating the metric as a finding"
+  },
+  {
+    "anon": "X-809171",
+    "_id": "AH-22",
+    "_arm": "B",
+    "target": "A reasoning prior at low applicability distorts content-branching — injecting memory can lower expected value vs no-injection when task/frame mismatch; do not assume 'memory available' implies 'inject'.",
+    "situation": "AH-22",
+    "axis": "Audit access logs for unauthorized post-incident changes"
+  },
+  {
+    "anon": "X-80bcd2",
+    "_id": "AH-12",
+    "_arm": "A",
+    "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+    "situation": "AH-12",
+    "axis": "Validate plb transfer protocol"
+  },
+  {
+    "anon": "X-81fbb7",
+    "_id": "AH-13",
+    "_arm": "D",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "saturation_point / Distinguishes between linear accumulation (infinite capacity assumption) and finite absorption limits, identifying the critical threshold where 'incorporation to rise' becomes a transient state rather than a sustainable trend. / Prevents overestimation of long-term system capacity by forcing the evaluation of equilibrium states, shifting the decision from simple growth projection to sustainability analysis."
+  },
+  {
+    "anon": "X-820d3b",
+    "_id": "AH-19",
+    "_arm": "A",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "wake_up state restoration logic"
+  },
+  {
+    "anon": "X-8277ec",
+    "_id": "AH-20",
+    "_arm": "E",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "Assessment of co-creative resonance and emergent phenomena in implementation interactions"
+  },
+  {
+    "anon": "X-842092",
+    "_id": "AH-13",
+    "_arm": "A",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "Monitor incorporation rate correlation"
+  },
+  {
+    "anon": "X-84d65f",
+    "_id": "AH-20",
+    "_arm": "C",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "Artifact-vs-Grounded: separate apparent from grounded (signal vs artifact-of-setup)"
+  },
+  {
+    "anon": "X-8540cb",
+    "_id": "AH-18",
+    "_arm": "D",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "dynamic_ttl_strategy / fixed_ttl_strategy vs dynamic_ttl_strategy / Tests if the starvation outcome is an inherent property of the resource management logic or a specific artifact of the rigid fixed-TTL structural choice, allowing for a pivot to soft expiration if the fixed approach is deemed a 'bug'."
+  },
+  {
+    "anon": "X-8553ee",
+    "_id": "AH-19",
+    "_arm": "D",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "viability_of_sleep_phase_vs_viability_of_cycle"
+  },
+  {
+    "anon": "X-870f72",
+    "_id": "AH-16",
+    "_arm": "B",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "Check if 'Match Ratio' aggregates correctly when the dataset contains null or missing values"
+  },
+  {
+    "anon": "X-87a38f",
+    "_id": "AH-09",
+    "_arm": "E",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Axis: Cognitive Resolution of High-Throughput Symmetry"
+  },
+  {
+    "anon": "X-87a44d",
+    "_id": "AH-05",
+    "_arm": "B",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "Confirm that the phase locking is not an artifact of signal filtering or noise injection"
+  },
+  {
+    "anon": "X-88252c",
+    "_id": "AH-21",
+    "_arm": "D",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "state_change_impact / cluster_stability_metric / Reveals that the 're-clustering from scratch' is a non-neutral structural change that alters the definition of incident families, requiring a stability check before proceeding with induction."
+  },
+  {
+    "anon": "X-8857c3",
+    "_id": "AH-22",
+    "_arm": "A",
+    "target": "A reasoning prior at low applicability distorts content-branching — injecting memory can lower expected value vs no-injection when task/frame mismatch; do not assume 'memory available' implies 'inject'.",
+    "situation": "AH-22",
+    "axis": "check_network_traffic_anomalies"
+  },
+  {
+    "anon": "X-88b5f8",
+    "_id": "AH-19",
+    "_arm": "D",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "fixability_of_wake_up"
+  },
+  {
+    "anon": "X-88d0e8",
+    "_id": "AH-10",
+    "_arm": "B",
+    "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+    "situation": "AH-10",
+    "axis": "Inspect the visual evidence for artifacts or rendering errors that mimic an effect"
+  },
+  {
+    "anon": "X-89654b",
+    "_id": "AH-19",
+    "_arm": "B",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "Check if the wake_up failure is caused by specific hardware state (e.g., GPU context) that can be reset without disabling sleep mode entirely"
+  },
+  {
+    "anon": "X-8ac78e",
+    "_id": "AH-24",
+    "_arm": "F",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "individualized_state_vector / Per-CID state isolation / Implies the need for a data structure that maintains separate state vectors for each CID, preventing state leakage or collision."
+  },
+  {
+    "anon": "X-8af37d",
+    "_id": "AH-04",
+    "_arm": "B",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "Analyze residual plots for non-linear developmental patterns"
+  },
+  {
+    "anon": "X-8b125b",
+    "_id": "AH-17",
+    "_arm": "B",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "Confirm that the persistence algorithm correctly identifies n=5 structures without merging them into larger components"
+  },
+  {
+    "anon": "X-8b4a95",
+    "_id": "AH-23",
+    "_arm": "B",
+    "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "AH-23",
+    "axis": "Validate if the 'un-co-servable' claim is based on a specific batch size or input dimension"
+  },
+  {
+    "anon": "X-8c15e8",
+    "_id": "AH-15",
+    "_arm": "F",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "floor_sensitivity_threshold / distinguish between 'within floor' (measurement limit) and 'within tolerance' (practical significance) / Clarifies whether the 'floor' represents a true absence of drift or merely a detection limit, ensuring the conclusion holds only if the floor is below the threshold of practical importance."
+  },
+  {
+    "anon": "X-8c6246",
+    "_id": "AH-20",
+    "_arm": "B",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "Check if the rework was applied to the correct version of the codebase before re-testing"
+  },
+  {
+    "anon": "X-8e23f4",
+    "_id": "AH-04",
+    "_arm": "A",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "Verify data pipeline timestamp alignment for lifespan and n_labels"
+  },
+  {
+    "anon": "X-8e4676",
+    "_id": "AH-23",
+    "_arm": "E",
+    "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "AH-23",
+    "axis": "Audit for false dichotomy in GPU resource allocation constraints"
+  },
+  {
+    "anon": "X-8e6cfa",
+    "_id": "AH-18",
+    "_arm": "E",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "Audit the structural interdependence of GHOST_TTL=10 against starvation-induced turnover metrics"
+  },
+  {
+    "anon": "X-8ea754",
+    "_id": "AH-09",
+    "_arm": "C",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Artifact-vs-Grounded: vary the construction/observation choice and re-measure"
+  },
+  {
+    "anon": "X-8f6722",
+    "_id": "AH-13",
+    "_arm": "E",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "Axis: Evaluate if the current state requires a cognitive shift to a new unit to resolve complexity stress"
+  },
+  {
+    "anon": "X-901c5f",
+    "_id": "AH-20",
+    "_arm": "E",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "Audit of structural interdependence and mutual influence between system components"
+  },
+  {
+    "anon": "X-909379",
+    "_id": "AH-02",
+    "_arm": "D",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "threshold_sensitivity_ratio / quantify the specific ratio (2.0 vs 0.1) driving the 82.7% dominance rather than treating thresholds as a monolithic set / enables precise sensitivity analysis to determine if the dominance is fragile or robust, allowing for targeted adjustment of weights rather than binary acceptance/rejection"
+  },
+  {
+    "anon": "X-917b00",
+    "_id": "AH-08",
+    "_arm": "A",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "Confirm Layer B mechanism is active and handling requests"
+  },
+  {
+    "anon": "X-940aec",
+    "_id": "AH-04",
+    "_arm": "E",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "Axis: Analyze the cognitive shift from binary opposition to a unified unit in the correlation between life and n_labels"
+  },
+  {
+    "anon": "X-9460f5",
+    "_id": "AH-24",
+    "_arm": "E",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "Analysis of interdependent resonance between CID and physical state"
+  },
+  {
+    "anon": "X-94803f",
+    "_id": "AH-11",
+    "_arm": "E",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "CREATION: Analysis of the emergent grammar as a phenomenon born from the resonance of multiple existing structures"
+  },
+  {
+    "anon": "X-94c48d",
+    "_id": "AH-14",
+    "_arm": "E",
+    "target": "Read the upstream material first — this reduces to a trivial re-observation of an already-established mechanism (v10.5) that no one on the team had read; check prior work before observing.",
+    "situation": "AH-14",
+    "axis": "axis_creation_stress_response"
+  },
+  {
+    "anon": "X-94cd2c",
+    "_id": "AH-20",
+    "_arm": "D",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "auditor_intent / validation_hierarchy_conflict / Forces a decision on whether the auditor's findings override the test results, requiring an explicit alignment of the verification hierarchy rather than treating them as parallel, independent checks."
+  },
+  {
+    "anon": "X-94ee0e",
+    "_id": "AH-21",
+    "_arm": "F",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "computational_cost_of_reclustering / batch_reinduction_cost > incremental_update_cost / Introduces a cost-benefit analysis dimension, allowing the decision to weigh the heavy structural change of full re-clustering against lighter incremental alternatives, which is currently absent in the procedural instruction."
+  },
+  {
+    "anon": "X-952f91",
+    "_id": "AH-09",
+    "_arm": "D",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Causal Directionality / e_as_source|v_as_source / Tests whether 'structure formation' is an intrinsic property of the coupling or an artifact of the chosen directional interpretation, ensuring the causal model is not biased by arbitrary source assignment."
+  },
+  {
+    "anon": "X-961f96",
+    "_id": "AH-17",
+    "_arm": "A",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "compare_large_structure_growth_rate"
+  },
+  {
+    "anon": "X-9681a6",
+    "_id": "AH-10",
+    "_arm": "A",
+    "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+    "situation": "AH-10",
+    "axis": "Verify smoke run seed 0 reproducibility"
+  },
+  {
+    "anon": "X-96d0cd",
+    "_id": "AH-21",
+    "_arm": "A",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "Validate batch re-induction success rate and data integrity"
+  },
+  {
+    "anon": "X-97b905",
+    "_id": "AH-03",
+    "_arm": "D",
+    "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+    "situation": "AH-03",
+    "axis": "bottom_up_constraint / growth_via_incorporation|growth_via_emergence / Shifts the modeling strategy from a deterministic control problem (top-down writing) to a constraint satisfaction or optimization problem (bottom-up emergence), fundamentally altering the algorithmic approach to 'growth' from imposition to adaptation."
+  },
+  {
+    "anon": "X-9805d8",
+    "_id": "AH-01",
+    "_arm": "B",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "Verify if the 'core-size' definition excludes the initial R>0 pair from the count, which would shift the mode to n=1"
+  },
+  {
+    "anon": "X-981acc",
+    "_id": "AH-10",
+    "_arm": "B",
+    "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+    "situation": "AH-10",
+    "axis": "Check for statistical significance by running additional seeds to confirm reproducibility"
+  },
+  {
+    "anon": "X-997fe9",
+    "_id": "AH-16",
+    "_arm": "E",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "Structural Equality Audit: Verify if 'Match Ratio' reflects functional indispensability rather than idealistic identity."
+  },
+  {
+    "anon": "X-9a0965",
+    "_id": "AH-15",
+    "_arm": "E",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "Axis: Cognitive Resolution of Binary Symmetry"
+  },
+  {
+    "anon": "X-9a1bbc",
+    "_id": "AH-11",
+    "_arm": "B",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "Verify if loop_rate correlates with token count or is an artifact of the reporting metric"
+  },
+  {
+    "anon": "X-9b9284",
+    "_id": "AH-06",
+    "_arm": "D",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "namespace_integrity / node_id_source|node_id_target / Ensures that the 'injection' operation correctly handles distinct namespaces, preventing collision errors or misattribution that would invalidate the co-occurrence measurement."
+  },
+  {
+    "anon": "X-9bf139",
+    "_id": "AH-09",
+    "_arm": "A",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Audit birth event causality"
+  },
+  {
+    "anon": "X-9e0a6d",
+    "_id": "AH-12",
+    "_arm": "B",
+    "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+    "situation": "AH-12",
+    "axis": "Assess statistical power and sample size to ensure the correlation is not a false positive"
+  },
+  {
+    "anon": "X-9eaadd",
+    "_id": "AH-07",
+    "_arm": "C",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "separate apparent from grounded (signal vs artifact-of-setup)"
+  },
+  {
+    "anon": "X-9ec558",
+    "_id": "AH-24",
+    "_arm": "A",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "Verify physical state serialization logic for CID instances"
+  },
+  {
+    "anon": "X-9ecdfa",
+    "_id": "AH-21",
+    "_arm": "E",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "Axis: Evaluate if the addition of 6 incidents created a cognitive overload requiring a new higher-order unit to resolve the 'dead end' of complexity."
+  },
+  {
+    "anon": "X-a02a7d",
+    "_id": "AH-06",
+    "_arm": "E",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "INTERDEPENDENCE: Audit the co-occurrence metrics to verify if the injected nodes form a state of mutual influence rather than isolated existence"
+  },
+  {
+    "anon": "X-a03faf",
+    "_id": "AH-04",
+    "_arm": "E",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "Symmetry: Investigate the complementary structural roles of 'life' and 'n_labels' as mutually indispensable elements"
+  },
+  {
+    "anon": "X-a1e35c",
+    "_id": "AH-04",
+    "_arm": "E",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "Creation: Audit the resonance process where the interaction of life and n_labels generates new phenomena or value"
+  },
+  {
+    "anon": "X-a1e63a",
+    "_id": "AH-06",
+    "_arm": "E",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "CREATION: Evaluate if the cross-system linkage results in a resonant phenomenon (new value/discovery) or merely mechanical data transfer"
+  },
+  {
+    "anon": "X-a21da9",
+    "_id": "AH-04",
+    "_arm": "D",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "confounding_variable / direct_causality_vs_age_confound / Introduces the necessity of controlling for age/maturity to distinguish if lifespan drives label count directly or if both are driven by a third factor (time/age), altering the structural model from direct to confounded."
+  },
+  {
+    "anon": "X-a263a8",
+    "_id": "AH-14",
+    "_arm": "A",
+    "target": "Read the upstream material first — this reduces to a trivial re-observation of an already-established mechanism (v10.5) that no one on the team had read; check prior work before observing.",
+    "situation": "AH-14",
+    "axis": "q_c_inherited signal drift"
+  },
+  {
+    "anon": "X-a27d1d",
+    "_id": "AH-01",
+    "_arm": "E",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "Interdependence: Investigate how the immediate labeling of R>0 pairs creates mutual influence and co-resonance within the n=2 dominant framework"
+  },
+  {
+    "anon": "X-a2a3b3",
+    "_id": "AH-10",
+    "_arm": "C",
+    "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+    "situation": "AH-10",
+    "axis": "Artifact-vs-Grounded: confirm the mechanism before treating the metric as a finding"
+  },
+  {
+    "anon": "X-a2d726",
+    "_id": "AH-03",
+    "_arm": "E",
+    "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+    "situation": "AH-03",
+    "axis": "Evaluation of new axis creation for cognitive stress resolution"
+  },
+  {
+    "anon": "X-a2dc3e",
+    "_id": "AH-21",
+    "_arm": "F",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "induction_drift_score / compare_drift_metrics / Adds a performance monitoring operation to assess the impact of the re-induction on model drift, providing a necessary feedback loop for the 'batch re-induction' step that is currently missing."
+  },
+  {
+    "anon": "X-a36581",
+    "_id": "AH-07",
+    "_arm": "D",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "statistical_convergence_vs_structural_invariance"
+  },
+  {
+    "anon": "X-a408c2",
+    "_id": "AH-24",
+    "_arm": "D",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "individual_experience / aggregate_vs_individual / Clarifies if the 'physical state' is a per-CID unique entity or a shared resource, which is critical for determining isolation boundaries and concurrency control."
+  },
+  {
+    "anon": "X-a4819b",
+    "_id": "AH-17",
+    "_arm": "B",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "Check if the dataset size is insufficient to statistically support structures of size n=5 at tau=100"
+  },
+  {
+    "anon": "X-a4d534",
+    "_id": "AH-13",
+    "_arm": "F",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "evaluate_causality / direct_causation vs_confounding_variables / Challenges the assumption that the boost field is the sole driver, prompting investigation into other variables that might inhibit or accelerate incorporation."
+  },
+  {
+    "anon": "X-a728f0",
+    "_id": "AH-05",
+    "_arm": "E",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "Symmetry: Audit of complementary functional roles within the integrated Kuramoto state"
+  },
+  {
+    "anon": "X-a73aec",
+    "_id": "AH-06",
+    "_arm": "E",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "AXIS: Analyze the cognitive load and structural necessity of the new axis created by cross-system node injection"
+  },
+  {
+    "anon": "X-a74592",
+    "_id": "AH-06",
+    "_arm": "B",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "Validate that co-occurrence rates exceed random chance baselines"
+  },
+  {
+    "anon": "X-a7783d",
+    "_id": "AH-03",
+    "_arm": "A",
+    "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+    "situation": "AH-03",
+    "axis": "Audit upper-layer write permissions"
+  },
+  {
+    "anon": "X-a7ad01",
+    "_id": "AH-08",
+    "_arm": "A",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "Verify Layer A is fully removed from runtime state"
+  },
+  {
+    "anon": "X-a8d455",
+    "_id": "AH-18",
+    "_arm": "B",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "Check if GHOST_TTL=10 causes premature eviction of valid entries"
+  },
+  {
+    "anon": "X-a915aa",
+    "_id": "AH-05",
+    "_arm": "A",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "V_unified trajectory analysis"
+  },
+  {
+    "anon": "X-a9b617",
+    "_id": "AH-12",
+    "_arm": "E",
+    "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+    "situation": "AH-12",
+    "axis": "Axis: Hierarchy Reorganization and New Axes"
+  },
+  {
+    "anon": "X-aa87db",
+    "_id": "AH-12",
+    "_arm": "C",
+    "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+    "situation": "AH-12",
+    "axis": "separate apparent from grounded (signal vs artifact-of-setup)"
+  },
+  {
+    "anon": "X-ac50ff",
+    "_id": "AH-13",
+    "_arm": "E",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "Symmetry: Analyze if the boost accumulation represents a one-sided view that ignores complementary balance"
+  },
+  {
+    "anon": "X-acf2cb",
+    "_id": "AH-11",
+    "_arm": "E",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "AXIS: Emergence of a new cognitive unit to resolve the stress of accumulated dialogue symmetry"
+  },
+  {
+    "anon": "X-ae4594",
+    "_id": "AH-02",
+    "_arm": "E",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "Interdependence Verification: Assess if the system recognizes 'structural interdependence' of roles rather than treating components as isolated, fixed-value entities."
+  },
+  {
+    "anon": "X-ae8468",
+    "_id": "AH-15",
+    "_arm": "D",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "statistical_power_and_sensitivity"
+  },
+  {
+    "anon": "X-af3eaf",
+    "_id": "AH-18",
+    "_arm": "A",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "Verify GHOST_TTL is strictly enforced at 10 seconds"
+  },
+  {
+    "anon": "X-b48372",
+    "_id": "AH-16",
+    "_arm": "E",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "Interdependence Mapping: Analyze how 'Match Ratio' aggregates mutual influence and co-resonance across components."
+  },
+  {
+    "anon": "X-b50238",
+    "_id": "AH-24",
+    "_arm": "C",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "Control Source: External vs. Internal"
+  },
+  {
+    "anon": "X-b92038",
+    "_id": "AH-23",
+    "_arm": "B",
+    "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "AH-23",
+    "axis": "Verify GPU memory utilization metrics for both models during peak load"
+  },
+  {
+    "anon": "X-ba504a",
+    "_id": "AH-23",
+    "_arm": "D",
+    "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "AH-23",
+    "axis": "hardware-constraint-driven selection|performance-oriented selection / Distinguishes between selecting a mode based on hard resource limits versus optimizing for performance metrics. / Shifts the decision framework from a forced binary choice to a trade-off analysis, allowing for solutions like quantization or swapping if performance constraints are secondary to resource constraints."
+  },
+  {
+    "anon": "X-bb3a4b",
+    "_id": "AH-08",
+    "_arm": "F",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "memory_alignment / binary_compatibility_constraint / Adds a technical gate requiring memory alignment verification, distinguishing between logically compatible and physically compatible replacements to avoid undefined behavior."
+  },
+  {
+    "anon": "X-bbb8e6",
+    "_id": "AH-05",
+    "_arm": "A",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "functional integration evidence verification"
+  },
+  {
+    "anon": "X-bc84aa",
+    "_id": "AH-21",
+    "_arm": "E",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "Symmetry: Audit whether the new incidents represent complementary functions to the existing 10, forming a balanced whole rather than a one-sided view."
+  },
+  {
+    "anon": "X-be038a",
+    "_id": "AH-23",
+    "_arm": "B",
+    "target": "The impossibility is a declared assertion, not a measurement — measure co-serve feasibility first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "AH-23",
+    "axis": "Check for driver version incompatibilities or known bugs in the inference engine"
+  },
+  {
+    "anon": "X-bfaad0",
+    "_id": "AH-12",
+    "_arm": "E",
+    "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+    "situation": "AH-12",
+    "axis": "Axis: Structural vs. Idealistic Equality"
+  },
+  {
+    "anon": "X-c0682f",
+    "_id": "AH-11",
+    "_arm": "B",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "Confirm if the 'emergent grammar' is distinguishable from random noise using a null model"
+  },
+  {
+    "anon": "X-c12ba9",
+    "_id": "AH-01",
+    "_arm": "D",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "labeling_latency / Generative Process vs. Observer Bias / Determines if the 'n=2' label is an intrinsic property of the system or an artifact of the immediate labeling rule; if labeling_latency is non-zero, the observed mode may not reflect the true structural equilibrium."
+  },
+  {
+    "anon": "X-c13bc1",
+    "_id": "AH-17",
+    "_arm": "E",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "Axis: Cognitive Shift for High-Complexity Thresholds"
+  },
+  {
+    "anon": "X-c23f5a",
+    "_id": "AH-13",
+    "_arm": "B",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "Confirm if the 'step' interval aligns with the actual processing cycle"
+  },
+  {
+    "anon": "X-c2d906",
+    "_id": "AH-05",
+    "_arm": "C",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "confirm the mechanism before treating the metric as a finding"
+  },
+  {
+    "anon": "X-c31f0b",
+    "_id": "AH-19",
+    "_arm": "F",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "failure_scope / wake_up_specific_failure vs global_sleep_mode_failure / Clarifies that the failure is isolated to the wake-up tensor operation rather than the sleep mechanism itself, allowing for targeted fixes to the wake-up logic instead of discarding the entire sleep/wake architecture."
+  },
+  {
+    "anon": "X-c4ce8e",
+    "_id": "AH-24",
+    "_arm": "E",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "Evaluation of structural equality in individualized experience storage"
+  },
+  {
+    "anon": "X-c52ac3",
+    "_id": "AH-07",
+    "_arm": "B",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "Verify if the 95.7% metric excludes outlier sub-populations"
+  },
+  {
+    "anon": "X-c587b2",
+    "_id": "AH-07",
+    "_arm": "A",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "Audit structural invariance claims across diverse demographic subsets"
+  },
+  {
+    "anon": "X-c63766",
+    "_id": "AH-13",
+    "_arm": "F",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "incorporation_rate / accumulation_magnitude vs incorporation_velocity / Clarifies whether the 6,552 boost per step translates directly to incorporation or if there is a lag/efficiency factor, refining the prediction of 'incorporation to rise'."
+  },
+  {
+    "anon": "X-c68795",
+    "_id": "AH-17",
+    "_arm": "C",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "separate apparent from grounded (signal vs artifact-of-setup)"
+  },
+  {
+    "anon": "X-c68f56",
+    "_id": "AH-05",
+    "_arm": "D",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "noise_induced_order / Distinguishes whether the rise in V_unified is a genuine functional integration or a trivial artifact of noise-induced synchronization (loss of structural distinction). / Prevents misinterpreting system noise as functional coherence, which would lead to incorrect conclusions about system health or capability."
+  },
+  {
+    "anon": "X-c7081d",
+    "_id": "AH-24",
+    "_arm": "C",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "State Nature: Deterministic Output vs. Probabilistic Claim"
+  },
+  {
+    "anon": "X-c78fc5",
+    "_id": "AH-08",
+    "_arm": "B",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "Verify Layer A is not still referenced by any active pointers or handles"
+  },
+  {
+    "anon": "X-c7c879",
+    "_id": "AH-13",
+    "_arm": "B",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "Verify if the 6,552 boost value is capped by a hidden system limit"
+  },
+  {
+    "anon": "X-c7e967",
+    "_id": "AH-15",
+    "_arm": "E",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "Axis: Structural Equivalence vs. Idealistic Equality"
+  },
+  {
+    "anon": "X-c8387c",
+    "_id": "AH-18",
+    "_arm": "A",
+    "target": "A hard fixed constant erases individual variation (uniform death) and 'starvation' isn't a property the system has — inherit residual reserve instead of a god-hand constant.",
+    "situation": "AH-18",
+    "axis": "Measure cache turnover rate under starvation conditions"
+  },
+  {
+    "anon": "X-cab3ba",
+    "_id": "AH-21",
+    "_arm": "E",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "Interdependence: Verify if the re-clustered families demonstrate structural interdependence where all 16 incidents are mutually indispensable for the system's state."
+  },
+  {
+    "anon": "X-cd5b2d",
+    "_id": "AH-04",
+    "_arm": "B",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "Verify if n_labels is a proxy for data collection duration"
+  },
+  {
+    "anon": "X-cd735e",
+    "_id": "AH-03",
+    "_arm": "E",
+    "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+    "situation": "AH-03",
+    "axis": "Audit of structural role equivalence in growth parameters"
+  },
+  {
+    "anon": "X-ce2fe3",
+    "_id": "AH-02",
+    "_arm": "D",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "config_dependence_of_dominance / distinguish between intrinsic entity properties and artifacts of fixed threshold weighting / prevents accepting the current 'familiarity' dominance as a stable truth, prompting evaluation of alternative threshold configurations to test structural robustness"
+  },
+  {
+    "anon": "X-ce9ddd",
+    "_id": "AH-13",
+    "_arm": "A",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "Verify boost accumulation rate per step"
+  },
+  {
+    "anon": "X-cfc0e4",
+    "_id": "AH-07",
+    "_arm": "B",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "Check for systematic bias in the alignment measurement tool"
+  },
+  {
+    "anon": "X-d09179",
+    "_id": "AH-03",
+    "_arm": "A",
+    "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+    "situation": "AH-03",
+    "axis": "Verify physical state mutation integrity"
+  },
+  {
+    "anon": "X-d47da9",
+    "_id": "AH-05",
+    "_arm": "B",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "Verify if the rise in V_unified correlates with a decrease in functional diversity or modularity"
+  },
+  {
+    "anon": "X-d4d319",
+    "_id": "AH-07",
+    "_arm": "E",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "symmetry_and_complementarity_analysis"
+  },
+  {
+    "anon": "X-d6de58",
+    "_id": "AH-05",
+    "_arm": "F",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "coupling_strength / phase_synchronization|functional_integration / Prevents biased attribution of system state by distinguishing between high V_unified caused by strong coupling (kinematic locking) versus genuine functional integration, requiring normalization or control for coupling strength."
+  },
+  {
+    "anon": "X-d8561b",
+    "_id": "AH-16",
+    "_arm": "B",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "Verify if 'tol 1e-6 equality' handles floating-point precision errors correctly for all data types"
+  },
+  {
+    "anon": "X-d956a4",
+    "_id": "AH-06",
+    "_arm": "A",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "cross_system_linkage_success_rate"
+  },
+  {
+    "anon": "X-d97094",
+    "_id": "AH-10",
+    "_arm": "E",
+    "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+    "situation": "AH-10",
+    "axis": "Cognitive Axis Shift for High-Complexity Event Interpretation"
+  },
+  {
+    "anon": "X-db0171",
+    "_id": "AH-03",
+    "_arm": "B",
+    "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+    "situation": "AH-03",
+    "axis": "Check if the upper layer has write permissions to the physical layer's memory space"
+  },
+  {
+    "anon": "X-db72ca",
+    "_id": "AH-01",
+    "_arm": "C",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "Artifact-vs-Grounded (surface result as construction/observation artifact)"
+  },
+  {
+    "anon": "X-dbb2f7",
+    "_id": "AH-19",
+    "_arm": "E",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "Audit of tensor state symmetry during wake-up transition"
+  },
+  {
+    "anon": "X-dbbbef",
+    "_id": "AH-15",
+    "_arm": "B",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "Inspect the raw data distribution for outliers that might be masking a significant drift"
+  },
+  {
+    "anon": "X-dbc310",
+    "_id": "AH-15",
+    "_arm": "A",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "Audit 'within floor' drift threshold logic"
+  },
+  {
+    "anon": "X-dbc739",
+    "_id": "AH-01",
+    "_arm": "A",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "Audit labeling logic for R>0 pairs under S>=0.20"
+  },
+  {
+    "anon": "X-dca9a6",
+    "_id": "AH-03",
+    "_arm": "B",
+    "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+    "situation": "AH-03",
+    "axis": "Verify if 'incorporation' modifies immutable physical constants or only dynamic state variables"
+  },
+  {
+    "anon": "X-dcda92",
+    "_id": "AH-09",
+    "_arm": "F",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "causal_mechanism_validation / validate_coupling_mechanism / Requires verifying the direct coupling mechanism itself, rather than accepting the throughput metric as proof of structure."
+  },
+  {
+    "anon": "X-df3d9f",
+    "_id": "AH-20",
+    "_arm": "A",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "Check for regression in non-load-bearing edge cases"
+  },
+  {
+    "anon": "X-df55e5",
+    "_id": "AH-05",
+    "_arm": "C",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "vary the construction/observation choice and re-measure"
+  },
+  {
+    "anon": "X-df6964",
+    "_id": "AH-19",
+    "_arm": "B",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "Verify if the tensor error is a transient state issue during the resume phase rather than a fundamental incompatibility"
+  },
+  {
+    "anon": "X-e00655",
+    "_id": "AH-11",
+    "_arm": "E",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "EQUALITY: Audit of the structural indispensability of the loop_rate within the new hierarchical order"
+  },
+  {
+    "anon": "X-e0de2a",
+    "_id": "AH-07",
+    "_arm": "F",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "population_heterogeneity / sample_population|target_population / Challenges the generalization of 'invariant across the population' by highlighting potential sampling bias, ensuring the conclusion applies to the intended target group."
+  },
+  {
+    "anon": "X-e1c802",
+    "_id": "AH-11",
+    "_arm": "C",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "Artifact-vs-Grounded: confirm the mechanism before treating the metric as a finding"
+  },
+  {
+    "anon": "X-e238c3",
+    "_id": "AH-11",
+    "_arm": "A",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "grammar_emergence_threshold"
+  },
+  {
+    "anon": "X-e24d33",
+    "_id": "AH-09",
+    "_arm": "D",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Kinetic Process vs Static Structure / structural_ordering|kinetic_throughput / Decouples the rate of entity generation from the integrity of the resulting architecture, preventing the false conclusion that high throughput equates to stable structural formation."
+  },
+  {
+    "anon": "X-e289d9",
+    "_id": "AH-14",
+    "_arm": "B",
+    "target": "Read the upstream material first — this reduces to a trivial re-observation of an already-established mechanism (v10.5) that no one on the team had read; check prior work before observing.",
+    "situation": "AH-14",
+    "axis": "check_1\": \"Verify if q_c_inherited was actually updated or reset to a default state before the observation started."
+  },
+  {
+    "anon": "X-e2f9a7",
+    "_id": "AH-13",
+    "_arm": "E",
+    "target": "There may be a spatial/timescale mismatch — the boost accumulates at nodes that are in a different position from the next window's cluster boundary, so incorporation stays 0; align the field's decay/position to the response time.",
+    "situation": "AH-13",
+    "axis": "Interdependence: Audit the mutual influence between the latent field and the incorporation metric"
+  },
+  {
+    "anon": "X-e36aa4",
+    "_id": "AH-22",
+    "_arm": "E",
+    "target": "A reasoning prior at low applicability distorts content-branching — injecting memory can lower expected value vs no-injection when task/frame mismatch; do not assume 'memory available' implies 'inject'.",
+    "situation": "AH-22",
+    "axis": "Axis: Analyze cognitive overload from binary oppositions in incident data"
+  },
+  {
+    "anon": "X-e38367",
+    "_id": "AH-20",
+    "_arm": "B",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "Confirm that the auditor's findings were interpreted correctly and not misattributed to a different module"
+  },
+  {
+    "anon": "X-e38532",
+    "_id": "AH-14",
+    "_arm": "B",
+    "target": "Read the upstream material first — this reduces to a trivial re-observation of an already-established mechanism (v10.5) that no one on the team had read; check prior work before observing.",
+    "situation": "AH-14",
+    "axis": "check_2\": \"Confirm that the observation scope strictly adhered to the within-cid boundary and did not leak external signals."
+  },
+  {
+    "anon": "X-e4034f",
+    "_id": "AH-08",
+    "_arm": "F",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "runtime_type_safety / structural_risk_vs_functional_instruction / Shifts decision from simple deployment to pre-flight validation of type compatibility and memory layout, preventing runtime crashes."
+  },
+  {
+    "anon": "X-e43fbe",
+    "_id": "AH-05",
+    "_arm": "B",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "Check if V_unified is driven by a single dominant mode rather than global synchronization"
+  },
+  {
+    "anon": "X-e51401",
+    "_id": "AH-16",
+    "_arm": "F",
+    "target": "A discrete equality test is unfit for continuous quantities and its meaning was not worked out before implementing — Match Ratio sticks at 0; define the metric's meaning operationally first.",
+    "situation": "AH-16",
+    "axis": "aggregation_scope"
+  },
+  {
+    "anon": "X-e59fd8",
+    "_id": "AH-05",
+    "_arm": "D",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "decouple kuramoto order parameter from functional integration claim / Introduces an operational distinction between the mathematical aggregate (order parameter) and the functional state (integration), challenging the frame's assumption of exclusive equivalence. / Forces a validation step to ensure that the observed metric rise is not merely a trivial locking phenomenon, thereby grounding the 'integration' claim in functional rather than just mathematical evidence."
+  },
+  {
+    "anon": "X-e5b22f",
+    "_id": "AH-15",
+    "_arm": "E",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "Axis: Interdependence and Resonance in Creation"
+  },
+  {
+    "anon": "X-e6a7a7",
+    "_id": "AH-06",
+    "_arm": "D",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "semantic_validity / node_id|semantic_meaning / Challenges the assumption that ID co-occurrence implies functional equivalence, preventing false positives where structurally similar but semantically distinct nodes are linked."
+  },
+  {
+    "anon": "X-e733c2",
+    "_id": "AH-19",
+    "_arm": "B",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "Confirm if the 28GB free memory indicates successful suspension, suggesting the failure is isolated to the restoration logic rather than the sleep mechanism itself"
+  },
+  {
+    "anon": "X-e7f5a2",
+    "_id": "AH-08",
+    "_arm": "D",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "runtime_state_consistency"
+  },
+  {
+    "anon": "X-eacd56",
+    "_id": "AH-01",
+    "_arm": "F",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "causal_latency_impact / labeling_latency -> core_size_distribution / Establishes a direct operational link between the timing of the labeling rule (S>=0.20) and the resulting distribution shape, enabling sensitivity analysis on how much delay is required to preserve the n=2 signal."
+  },
+  {
+    "anon": "X-eb118d",
+    "_id": "AH-20",
+    "_arm": "F",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "test_suite_validity / The discrepancy between passing tests and auditor findings suggests a potential bias in either the test suite (missing edge cases) or the auditor (overly strict or biased criteria), requiring investigation to ensure robustness. / Forces a root cause analysis to determine if the failure lies in the test design (coverage gap) or the auditor's criteria, preventing premature rework of the implementation."
+  },
+  {
+    "anon": "X-eb6c4d",
+    "_id": "AH-11",
+    "_arm": "D",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "static_grammar|emergent_grammar"
+  },
+  {
+    "anon": "X-ec5a2a",
+    "_id": "AH-09",
+    "_arm": "E",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Axis: Interdependent Resonance in Direct Coupling"
+  },
+  {
+    "anon": "X-ed003a",
+    "_id": "AH-05",
+    "_arm": "E",
+    "target": "Physical-layer synchronization is not the same as functional integration — these are different levels/subjects; keep V_unified as a physical baseline, not an integration claim.",
+    "situation": "AH-05",
+    "axis": "Axis: Cognitive load analysis of V_unified as a resolution mechanism for binary stress"
+  },
+  {
+    "anon": "X-f073ec",
+    "_id": "AH-01",
+    "_arm": "F",
+    "target": "The n=2 dominance may be an artifact of the birth method — check what fraction of links actually reach R>0 (nearly all stay R=0), so much of the label set is 'apparent structure'; re-measure with a persistence-based birth.",
+    "situation": "AH-01",
+    "axis": "statistical_moment_sensitivity / modal_structure|average_structure / Reveals if the n=2 dominance is driven by a heavy tail or skew rather than a true central tendency, preventing misinterpretation of the 'typical' state when the distribution is non-Gaussian."
+  },
+  {
+    "anon": "X-f08561",
+    "_id": "AH-11",
+    "_arm": "A",
+    "target": "The baseline may be self-fulfilling — the input already contains the answer being regenerated; add a shuffle control and self-fulfilling checks before claiming emergence.",
+    "situation": "AH-11",
+    "axis": "weight_accumulation_correlation"
+  },
+  {
+    "anon": "X-f19090",
+    "_id": "AH-02",
+    "_arm": "A",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "evaluate_familiarity_metric_weighting"
+  },
+  {
+    "anon": "X-f24873",
+    "_id": "AH-10",
+    "_arm": "C",
+    "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+    "situation": "AH-10",
+    "axis": "Artifact-vs-Grounded: vary the construction/observation choice and re-measure"
+  },
+  {
+    "anon": "X-f271f8",
+    "_id": "AH-19",
+    "_arm": "C",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "Artifact-vs-Grounded: separate apparent from grounded (signal vs artifact-of-setup)"
+  },
+  {
+    "anon": "X-f2a7ee",
+    "_id": "AH-15",
+    "_arm": "A",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "Verify M=20 reference value accuracy"
+  },
+  {
+    "anon": "X-f37106",
+    "_id": "AH-22",
+    "_arm": "B",
+    "target": "A reasoning prior at low applicability distorts content-branching — injecting memory can lower expected value vs no-injection when task/frame mismatch; do not assume 'memory available' implies 'inject'.",
+    "situation": "AH-22",
+    "axis": "Verify raw telemetry logs for unreported anomalies"
+  },
+  {
+    "anon": "X-f5cd57",
+    "_id": "AH-10",
+    "_arm": "E",
+    "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+    "situation": "AH-10",
+    "axis": "Symmetry and Structural Equality in Smoke Run Dynamics"
+  },
+  {
+    "anon": "X-f6d0eb",
+    "_id": "AH-04",
+    "_arm": "C",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "vary the construction/observation choice and re-measure"
+  },
+  {
+    "anon": "X-f6fb11",
+    "_id": "AH-20",
+    "_arm": "E",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "Evaluation of hierarchical reorganization and creation of new operational axes"
+  },
+  {
+    "anon": "X-f71ee6",
+    "_id": "AH-06",
+    "_arm": "D",
+    "target": "Node IDs are only meaningful within a single system's dynamics — linking different-seed systems by node ID is meaningless (異系対応); measure within-system structure instead.",
+    "situation": "AH-06",
+    "axis": "structural_asymmetry / co-occurrence as structural match|co-occurrence as statistical artifact / Forces validation that the linkage is not an artifact of degree distribution or injection direction, ensuring the 'cross-system linkage' is robust rather than a procedural bias."
+  },
+  {
+    "anon": "X-f726f1",
+    "_id": "AH-07",
+    "_arm": "A",
+    "target": "A group average can hide the truth — the 95.7% differs systematically by observation resolution and inflates under aggregation; compare against a baseline with effect sizes and stratify.",
+    "situation": "AH-07",
+    "axis": "Check for overfitting or data leakage in the grounding metric calculation"
+  },
+  {
+    "anon": "X-f76535",
+    "_id": "AH-09",
+    "_arm": "C",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Artifact-vs-Grounded: confirm the mechanism before treating the metric as a finding"
+  },
+  {
+    "anon": "X-f77ee2",
+    "_id": "AH-02",
+    "_arm": "B",
+    "target": "The dominance is imposed by the hard fixed thresholds (神の手), not emergent — replace with a dynamic (MAD-based) threshold so the four axes balance.",
+    "situation": "AH-02",
+    "axis": "Inspect the raw input vectors to see if any single high-familiarity entity disproportionately skewed the aggregate result"
+  },
+  {
+    "anon": "X-f7e80c",
+    "_id": "AH-21",
+    "_arm": "B",
+    "target": "Batch re-clustering with a hard single-cluster partition destroys existing membership (an incident can belong to multiple families) — classify new incidents against fixed existing families incrementally, allowing multi-membership; induct only on residual.",
+    "situation": "AH-21",
+    "axis": "Verify if the 6 new incidents are outliers that distort the centroid of existing families"
+  },
+  {
+    "anon": "X-f99b69",
+    "_id": "AH-04",
+    "_arm": "D",
+    "target": "The correlation may be a run-length tautology — the observation window was synchronized to the lifespan; remove the confound (fix the window) and see if it survives.",
+    "situation": "AH-04",
+    "axis": "measurement_artifact / biological_development_vs_annotation_accumulation / Forces validation of whether the correlation is driven by biological maturation or simply by the increased opportunity for labels to be recorded over time, preventing false causal claims about development."
+  },
+  {
+    "anon": "X-f9e2b2",
+    "_id": "AH-03",
+    "_arm": "D",
+    "target": "The physical layer is the floor — writing into it makes the whole system fragile and collapse; growth must be handled at the record/functional level, not the physical substrate.",
+    "situation": "AH-03",
+    "axis": "temporal_latency / incorporation|emergent_adaptation / Introduces time as a critical variable, forcing the model to account for feedback loops and stability issues that are invisible in the instantaneous 'write' frame, thereby preventing divergence in dynamic growth simulations."
+  },
+  {
+    "anon": "X-fd2690",
+    "_id": "AH-20",
+    "_arm": "A",
+    "target": "Disposition before rework — a finding is not automatically valid; accept only findings backed by a reproducing counterexample, else the audit noise drives regression.",
+    "situation": "AH-20",
+    "axis": "Verify audit findings against original implementation code"
+  },
+  {
+    "anon": "X-fd2b49",
+    "_id": "AH-10",
+    "_arm": "A",
+    "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+    "situation": "AH-10",
+    "axis": "Check seed 0 state initialization integrity"
+  },
+  {
+    "anon": "X-fd2c4e",
+    "_id": "AH-17",
+    "_arm": "C",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "vary the construction/observation choice and re-measure"
+  },
+  {
+    "anon": "X-fd3bdc",
+    "_id": "AH-17",
+    "_arm": "F",
+    "target": "The naive intuition may be reversed by the physics — 2-node closed loops satisfy persistence more easily, so n=2 rises and n=5 falls; test the prediction rather than assuming it.",
+    "situation": "AH-17",
+    "axis": "computational_resource_constraint / computational_cost / Adds an operational feasibility check, ensuring the proposed parameter change does not exceed available processing capacity or time limits."
+  },
+  {
+    "anon": "X-fd4076",
+    "_id": "AH-15",
+    "_arm": "D",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "absence_of_evidence_vs_evidence_of_absence"
+  },
+  {
+    "anon": "X-fdb1e1",
+    "_id": "AH-19",
+    "_arm": "E",
+    "target": "Distinguish mechanism-viability from current-implementation-viability — the wake failure may invalidate this restore-path/config, not the Sleep Mode mechanism; classify the exact failure before closing the whole path.",
+    "situation": "AH-19",
+    "axis": "Analysis of interdependent failure modes in sleep/wake cycles"
+  },
+  {
+    "anon": "X-fdf90b",
+    "_id": "AH-12",
+    "_arm": "A",
+    "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+    "situation": "AH-12",
+    "axis": "Assess structural-strength data integrity"
+  },
+  {
+    "anon": "X-fed341",
+    "_id": "AH-12",
+    "_arm": "A",
+    "target": "This may be a tautology — you are measuring back the very knob you installed; check whether any residual survives beyond the plb scalar (it is zero).",
+    "situation": "AH-12",
+    "axis": "Verify Mantel correlation calculation methodology"
+  },
+  {
+    "anon": "X-ff06b4",
+    "_id": "AH-08",
+    "_arm": "D",
+    "target": "Replacing an existing subject with an unverified mechanism at runtime is premature and risky — keep Layer A invariant and audit the two in parallel (paired) before any replacement.",
+    "situation": "AH-08",
+    "axis": "mechanism_replacement|state_preservation"
+  },
+  {
+    "anon": "X-ff8a9f",
+    "_id": "AH-24",
+    "_arm": "E",
+    "target": "The subject of experience is the AtomID, not the CID's physical state — the physical layer overwrites every step and scrambles the cid-specific information; hold experience on the correct subject.",
+    "situation": "AH-24",
+    "axis": "Audit of physical state storage for experience data integrity"
+  },
+  {
+    "anon": "X-ffae39",
+    "_id": "AH-15",
+    "_arm": "F",
+    "target": "Measure the instrument's power before reading null as absence — the M=20 tail-estimate noise buries the signal; a pooled 220 audit reverses it (p<=0.001).",
+    "situation": "AH-15",
+    "axis": "statistical_power / distinguish between 'no effect' (true null) and 'undetected effect' (false negative due to low power) / Prevents invalid acceptance of the null hypothesis by verifying if the M=20 reference is sensitive enough to detect meaningful effects, thereby validating the 'negative is also a finding' claim."
+  },
+  {
+    "anon": "X-fff1c7",
+    "_id": "AH-09",
+    "_arm": "B",
+    "target": "Quantity without selection is a 'washing machine' — energy flows but no structure forms (cycles are zero); a selection mechanism is required, not more throughput.",
+    "situation": "AH-09",
+    "axis": "Verify if 27k births correlate with actual structural metrics or just noise"
+  },
+  {
+    "anon": "X-fffebe",
+    "_id": "AH-10",
+    "_arm": "A",
+    "target": "A single smoke seed can be idiosyncratic — the main 24-seed run flips the sign on 4/7 metrics; do not decide from smoke, stop and re-run at scale.",
+    "situation": "AH-10",
+    "axis": "Audit atom-effect logic for false positives"
+  }
+]
