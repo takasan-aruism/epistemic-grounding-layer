@@ -1,0 +1,21 @@
+{
+  "model": "Qwen3.6-35B-A3B-NVFP4 (tp2, expert-parallel)",
+  "config": "2×RTX5090 sm_120, driver 580, vLLM nightly",
+  "sleep_level1": {
+    "works": true,
+    "latency_s": 5.5,
+    "gpu_freed_per_gpu_mib": "~27900 (30014->2120 / 30343->2448)",
+    "http": 200
+  },
+  "wake_up": {
+    "works": false,
+    "http": 500,
+    "error": "Call to wake_up failed: Worker error \"'list' object has no attribute 'zero_'\"",
+    "note": "earlier corrupted-state run showed CUDA invalid argument at cumem_allocator.cpp:169; clean run shows the list.zero_ error"
+  },
+  "wake_latency_s": "UNMEASURABLE (wake fails)",
+  "post_wake_generation": "TimeoutError (model unusable, stuck asleep)",
+  "baseline_docker_swap_s": 174.5,
+  "verdict": "Sleep Mode level-1 offload works (5.5s, frees ~28GB/GPU) but wake_up is BROKEN on this model/config -> Sleep Mode is NOT a viable swap alternative here. Local applicability of the DECLARED fast-resume capability = FALSE (measured).",
+  "scope": "Qwen3.6-35B-A3B-NVFP4 / tp2 / expert-parallel / sm_120 only (likely Qwen3-Next-family specific)"
+}

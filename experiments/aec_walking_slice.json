@@ -201,46 +201,55 @@
     {
       "packet": {
         "answer_claim_id": "AEC-AC-4",
-        "statement": "現在の TP=2 / NVFP4 構成での local wake latency と適用性は、まだ確立していません。",
-        "claim_class": "HYPOTHESIS",
-        "basis_kind": "UNRESOLVED",
-        "validation_mode": "UNRESOLVED",
+        "statement": "現在の構成(Qwen3.6-NVFP4/tp2/sm_120)では vLLM Sleep Mode の wake_up が失敗するため、swap 代替として使えません(sleep 自体は 5.5s で ~28GB/GPU を解放するが wake が壊れている)。",
+        "claim_class": "FACT",
+        "basis_kind": "LOCAL_MEASUREMENT",
+        "validation_mode": "MEASURED",
         "egl_claim_ref": null,
-        "evidence_refs": [],
-        "evidence_summary": "local 適用性は未測(概念のみ)",
+        "evidence_refs": [
+          "sleep_wake_measured.json",
+          "DE-0086"
+        ],
+        "evidence_summary": "実測: sleep L1=5.5s(GPU 30GB→2GB/GPU)、wake_up=HTTP500 \"'list' object has no attribute 'zero_'\"、post-wake 生成 timeout",
         "source_policy": "LOCAL_OPERATIONAL",
-        "source_role": null,
-        "scope": "現在の TP=2 / NVFP4 serving config",
-        "currentness": null,
+        "source_role": "LOCAL_MEASUREMENT",
+        "supports_dimension": "current-config Sleep Mode viability (measured)",
+        "unsupported_dimension": "other models / configs",
+        "scope": "現在の Qwen3.6-35B-A3B-NVFP4 / tp2 / expert-parallel / sm_120 config",
+        "currentness": "2026-07-07",
+        "local_applicability": "MEASURED",
         "claim_registration_status": "NOT_ADMITTED",
         "residuals": [
-          "local wake latency 未測",
-          "TP=2 / NVFP4 での適用性未確立",
-          "→ concurrent_task_dispatch RESEARCH_NEED(DE-0080)へ route"
+          "別 model / config では未測",
+          "wake の list.zero_ error は Qwen3-Next-family 固有の可能性",
+          "Sleep Mode は不可 → batching(AC-3)が残る viable path"
         ]
       },
-      "compact": "現在の TP=2 / NVFP4 構成での local wake latency と適用性は、まだ確立していません。\n\n[未解決]\n根拠: local 適用性は未測(概念のみ)\n不足: local wake latency 未測",
+      "compact": "現在の構成(Qwen3.6-NVFP4/tp2/sm_120)では vLLM Sleep Mode の wake_up が失敗するため、swap 代替として使えません(sleep 自体は 5.5s で ~28GB/GPU を解放するが wake が壊れている)。\n\n[実測]\n根拠: 実測: sleep L1=5.5s(GPU 30GB→2GB/GPU)、wake_up=HTTP500 \"'list' object has no attribute 'zero_'\"、post-wake 生成 timeout\n範囲: 現在の Qwen3.6-35B-A3B-NVFP4 / tp2 / expert-parallel / sm_120 config",
       "expanded": {
-        "statement": "現在の TP=2 / NVFP4 構成での local wake latency と適用性は、まだ確立していません。",
-        "claim_class": "HYPOTHESIS",
-        "basis_kind": "UNRESOLVED",
-        "validation_mode": "UNRESOLVED",
+        "statement": "現在の構成(Qwen3.6-NVFP4/tp2/sm_120)では vLLM Sleep Mode の wake_up が失敗するため、swap 代替として使えません(sleep 自体は 5.5s で ~28GB/GPU を解放するが wake が壊れている)。",
+        "claim_class": "FACT",
+        "basis_kind": "LOCAL_MEASUREMENT",
+        "validation_mode": "MEASURED",
         "source_policy": "LOCAL_OPERATIONAL",
-        "source_role": null,
-        "supports_dimension": null,
-        "unsupported_dimension": null,
-        "scope": "現在の TP=2 / NVFP4 serving config",
-        "currentness": null,
-        "evidence_refs": [],
+        "source_role": "LOCAL_MEASUREMENT",
+        "supports_dimension": "current-config Sleep Mode viability (measured)",
+        "unsupported_dimension": "other models / configs",
+        "scope": "現在の Qwen3.6-35B-A3B-NVFP4 / tp2 / expert-parallel / sm_120 config",
+        "currentness": "2026-07-07",
+        "evidence_refs": [
+          "sleep_wake_measured.json",
+          "DE-0086"
+        ],
         "egl_claim_ref": null,
         "discovered_by": null,
         "evidence_source": null,
         "claim_registration_status": "NOT_ADMITTED",
-        "local_applicability": null,
+        "local_applicability": "MEASURED",
         "residuals": [
-          "local wake latency 未測",
-          "TP=2 / NVFP4 での適用性未確立",
-          "→ concurrent_task_dispatch RESEARCH_NEED(DE-0080)へ route"
+          "別 model / config では未測",
+          "wake の list.zero_ error は Qwen3-Next-family 固有の可能性",
+          "Sleep Mode は不可 → batching(AC-3)が残る viable path"
         ],
         "component_bases": null
       },
@@ -324,15 +333,14 @@
     "answer_claim_count": 5,
     "packet_validity_rate": 1.0,
     "basis_kind_distribution": {
-      "LOCAL_MEASUREMENT": 2,
+      "LOCAL_MEASUREMENT": 3,
       "EXTERNAL_SPECIFICATION": 1,
-      "AI_INFERENCE": 1,
-      "UNRESOLVED": 1
+      "AI_INFERENCE": 1
     },
-    "claims_with_source_or_evidence_refs": 4,
-    "claims_with_measurement_refs": 2,
+    "claims_with_source_or_evidence_refs": 5,
+    "claims_with_measurement_refs": 3,
     "claims_with_residuals": 5,
-    "unresolved_claims": 1,
+    "unresolved_claims": 0,
     "strength_violations": 0,
     "not_admitted": 2,
     "note": "composite 'trust score' は作らない(§19)。dimension は raw のまま。"
