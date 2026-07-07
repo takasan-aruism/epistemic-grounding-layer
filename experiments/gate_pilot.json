@@ -1,0 +1,265 @@
+{
+  "tasks": [
+    {
+      "id": "B01",
+      "domain": "data",
+      "target": "Is the null AVERAGE hiding heterogeneous subgroups? Disaggregate / stratify before concluding no effect (averaging artifact).",
+      "base_covers": [
+        "measure-the-assertion",
+        "disaggregate-average"
+      ],
+      "base_has_target": true,
+      "concrete_xdomain_literal": 2,
+      "ground_truth_null_win": true,
+      "ground_truth_memory_helpful": false,
+      "gate_decision": "YES",
+      "gap_class": "artifact-vs-grounded-check",
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B02",
+      "domain": "data",
+      "target": "Is the 40% an artifact of the experimental setup (sample ratio mismatch, novelty/seasonality, selection)? Confirm the mechanism before treating the number as the effect.",
+      "base_covers": [
+        "measure-the-assertion",
+        "reproduce-the-finding"
+      ],
+      "base_has_target": false,
+      "concrete_xdomain_literal": 0,
+      "ground_truth_null_win": false,
+      "ground_truth_memory_helpful": true,
+      "gate_decision": "YES",
+      "gap_class": "disaggregate-average",
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B03",
+      "domain": "data",
+      "target": "Are the clusters an artifact of the algorithm/parameter choice (k, distance, seed)? Vary the construction and check stability before treating clusters as real structure.",
+      "base_covers": [
+        "measure-the-assertion",
+        "test-set-adequacy"
+      ],
+      "base_has_target": true,
+      "concrete_xdomain_literal": 0,
+      "ground_truth_null_win": true,
+      "ground_truth_memory_helpful": false,
+      "gate_decision": "YES",
+      "gap_class": "artifact-vs-grounded-check",
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B04",
+      "domain": "software",
+      "target": "Is each finding substantiated by a reproducing counterexample, or an over-flag? Disposition before rework; reject findings that don't reproduce.",
+      "base_covers": [
+        "reproduce-the-finding",
+        "test-set-adequacy"
+      ],
+      "base_has_target": false,
+      "concrete_xdomain_literal": 5,
+      "ground_truth_null_win": true,
+      "ground_truth_memory_helpful": false,
+      "gate_decision": "YES",
+      "gap_class": "artifact-vs-grounded-check",
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B05",
+      "domain": "software",
+      "target": "Do the supplied tests cover all malformed shapes? The tested surface may be narrower than the claimed property (fail-open on an untested shape).",
+      "base_covers": [
+        "test-set-adequacy"
+      ],
+      "base_has_target": false,
+      "concrete_xdomain_literal": 0,
+      "ground_truth_null_win": false,
+      "ground_truth_memory_helpful": false,
+      "gate_decision": "YES",
+      "gap_class": "measure-the-assertion",
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B06",
+      "domain": "software",
+      "target": "Is 99.9% an artifact of what the monitor counts (transport success != content/task success)? Confirm the metric definition before treating it as reliability.",
+      "base_covers": [
+        "measure-the-assertion",
+        "test-set-adequacy",
+        "disaggregate-average"
+      ],
+      "base_has_target": true,
+      "concrete_xdomain_literal": 0,
+      "ground_truth_null_win": true,
+      "ground_truth_memory_helpful": false,
+      "gate_decision": "NO",
+      "gap_class": null,
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B07",
+      "domain": "gpu",
+      "target": "Does the SPECIFIED capability actually work/perform in OUR local config? Docs give no local numbers; measure locally (spec != local applicability).",
+      "base_covers": [
+        "measure-the-assertion",
+        "test-set-adequacy"
+      ],
+      "base_has_target": true,
+      "concrete_xdomain_literal": 4,
+      "ground_truth_null_win": true,
+      "ground_truth_memory_helpful": false,
+      "gate_decision": "YES",
+      "gap_class": "disaggregate-average",
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B08",
+      "domain": "gpu",
+      "target": "The co-serve impossibility is a DECLARED assertion, not measured — measure it first; and the mode choice depends on an unmeasured variable (swap frequency).",
+      "base_covers": [
+        "measure-the-assertion",
+        "test-set-adequacy"
+      ],
+      "base_has_target": false,
+      "concrete_xdomain_literal": 3,
+      "ground_truth_null_win": true,
+      "ground_truth_memory_helpful": true,
+      "gate_decision": "YES",
+      "gap_class": "disaggregate-average",
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B09",
+      "domain": "gpu",
+      "target": "Is the 3x an artifact of the benchmark setup (warmup, batch, cache, fixed input)? Vary the setup and measure under real conditions.",
+      "base_covers": [
+        "reproduce-the-finding",
+        "test-set-adequacy"
+      ],
+      "base_has_target": false,
+      "concrete_xdomain_literal": 0,
+      "ground_truth_null_win": false,
+      "ground_truth_memory_helpful": true,
+      "gate_decision": "YES",
+      "gap_class": "artifact-vs-grounded-check",
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B10",
+      "domain": "workflow",
+      "target": "Did the reviewer/steps actually exercise the load-bearing property, or is 'passed' an artifact of a weak/self review? Check the review's independence and coverage.",
+      "base_covers": [
+        "measure-the-assertion",
+        "test-set-adequacy"
+      ],
+      "base_has_target": false,
+      "concrete_xdomain_literal": 0,
+      "ground_truth_null_win": false,
+      "ground_truth_memory_helpful": true,
+      "gate_decision": "YES",
+      "gap_class": "artifact-vs-grounded-check",
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B11",
+      "domain": "workflow",
+      "target": "Is 'zero issues' grounded, or an artifact of the audit not covering the real failure modes? Attack the audit's coverage before trusting the null.",
+      "base_covers": [
+        "test-set-adequacy",
+        "reproduce-the-finding"
+      ],
+      "base_has_target": true,
+      "concrete_xdomain_literal": 3,
+      "ground_truth_null_win": true,
+      "ground_truth_memory_helpful": false,
+      "gate_decision": "YES",
+      "gap_class": "measure-the-assertion",
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B12",
+      "domain": "workflow",
+      "target": "Is the 50% saving representative or an artifact of the one trial's conditions (rework frequency, task mix)? Measure across varied conditions before adopting.",
+      "base_covers": [
+        "measure-the-assertion",
+        "test-set-adequacy"
+      ],
+      "base_has_target": false,
+      "concrete_xdomain_literal": 3,
+      "ground_truth_null_win": true,
+      "ground_truth_memory_helpful": true,
+      "gate_decision": "YES",
+      "gap_class": "disaggregate-average",
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B13",
+      "domain": "esde",
+      "target": "Is the 73% dominance a composition/construction artifact (subset mixing, contamination)? Re-measure under a purified construction before treating it as structure.",
+      "base_covers": [
+        "artifact-vs-grounded-check",
+        "measure-the-assertion",
+        "reproduce-the-finding"
+      ],
+      "base_has_target": false,
+      "concrete_xdomain_literal": 6,
+      "ground_truth_null_win": true,
+      "ground_truth_memory_helpful": true,
+      "gate_decision": "YES",
+      "gap_class": "disaggregate-average",
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B14",
+      "domain": "esde",
+      "target": "Is the jump a property of the mechanism or an artifact of run length/accumulation? Confirm the generating condition before treating the metric as a finding.",
+      "base_covers": [
+        "measure-the-assertion",
+        "test-set-adequacy"
+      ],
+      "base_has_target": false,
+      "concrete_xdomain_literal": 3,
+      "ground_truth_null_win": true,
+      "ground_truth_memory_helpful": true,
+      "gate_decision": "YES",
+      "gap_class": "artifact-vs-grounded-check",
+      "treatment_xdomain_literal": 0
+    },
+    {
+      "id": "B15",
+      "domain": "esde",
+      "target": "Is 'self-tracking' an artifact of the fixed interval (researcher-controlled timing)? Make the readout event-driven/unpredictable before claiming genuine self-tracking.",
+      "base_covers": [
+        "measure-the-assertion",
+        "reproduce-the-finding"
+      ],
+      "base_has_target": false,
+      "concrete_xdomain_literal": 0,
+      "ground_truth_null_win": false,
+      "ground_truth_memory_helpful": true,
+      "gate_decision": "YES",
+      "gap_class": "artifact-vs-grounded-check",
+      "treatment_xdomain_literal": 0
+    }
+  ],
+  "axis_classes": [
+    "artifact-vs-grounded-check",
+    "measure-the-assertion",
+    "test-set-adequacy",
+    "reproduce-the-finding",
+    "disaggregate-average"
+  ],
+  "metrics": {
+    "n": 15,
+    "n_null_win": 10,
+    "n_memory_helpful": 8,
+    "NULL_WIN_correctly_gated_NO": 1,
+    "MEMORY_HELPFUL_correctly_gated_YES": 8,
+    "false_positive_injection": 9,
+    "false_negative_suppression": 0,
+    "UNKNOWN_rate": 0,
+    "controlB_always_concrete_xdom_literal": 29,
+    "treatment_gate_xdom_literal": 0,
+    "controlA_always_null_xdom_literal": 0
+  }
+}
