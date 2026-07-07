@@ -1,0 +1,39 @@
+{
+  "policy": "XDOMAIN_LITERAL_MEASUREMENT_v1",
+  "method": "answer axis 文字列に blocklist 語が substring 出現した件数(決定的)",
+  "esde_literal_blocklist": [
+    "R=0",
+    "R>0",
+    "birth-time",
+    "birth時",
+    "CID",
+    "cid",
+    "E3",
+    "CidSelf",
+    "n_core",
+    "phase+r",
+    "ghost",
+    "label finding",
+    "θ",
+    "B_Gen",
+    "Q_remaining",
+    "apparent structure",
+    "grounded structure"
+  ],
+  "placeholder_leak_blocklist": [
+    "VERSION",
+    "STATE",
+    "SIZE",
+    "GROUP",
+    "PARAM",
+    "RESERVE",
+    "FLAG",
+    "TRACK",
+    "COMPONENT",
+    "ACTOR",
+    "NUMBER",
+    "EVENT"
+  ],
+  "scope": "Round B の 15 held-out × これらの語のみ。他 corpus/語では未測。",
+  "note": "XDOMAIN_LITERAL=これ(決定的 primary)。XDOMAIN_SEMANTIC(Qwen flags)は semantic secondary へ降格、未確立。"
+}
