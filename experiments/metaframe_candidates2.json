@@ -45,11 +45,17 @@
       "pre_frame_fidelity": "RETROSPECTIVE_RECONSTRUCTION",
       "extraction_status": "CANDIDATE",
       "_gate": {
-        "valid": false,
+        "valid": true,
         "eligible": true,
-        "problems": [
-          "initial_interpretation=INFERRED requires inference_basis.initial_interpretation (span refs + inference statement)"
-        ]
+        "problems": []
+      },
+      "inference_basis": {
+        "initial_interpretation": {
+          "basis_spans": [
+            "v9.15 CID が自分を読む機構 / Claude 初期提案部"
+          ],
+          "inference": "Claude の初期提案文(研究者が CID 状態を定量化)を『外部観察層』としての解釈と推定"
+        }
       }
     },
     {

@@ -17,7 +17,9 @@ def jx(t, o="{", c="}"):
     try: return json.loads(t[i:j + 1]) if 0 <= i < j else None
     except Exception: return None
 
-VERIFIED = ["INC-01", "INC-02", "INC-03", "INC-05", "INC-06", "INC-07", "INC-08", "INC-10", "INC-11", "INC-12"]
+# PHASE 0: 手書き VERIFIED list 禁止。VERIFICATION_RECORD からのみ verified id を得る。
+_VR = [json.loads(l) for l in Path("/home/takasan/egl/experiments/metaframe_verification.jsonl").read_text().splitlines() if l.strip()]
+VERIFIED = sorted(MF.load_valid_verified_ids(_VR))
 MASK = {"B_Gen": "PARAM_X", "CID": "UNIT", "cid": "unit", "label": "GROUP", "S≥0.20": "THRESHOLD_T",
         "R=0": "ZERO_STATE", "R>0": "ACTIVE_STATE", "n_core": "SIZE", "Q_remaining": "RESERVE",
         "Fetch": "READ_OP", "E3": "EVENT_E", "Layer A": "TRACK_A", "Layer B": "TRACK_B",

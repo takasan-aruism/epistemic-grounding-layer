@@ -114,6 +114,46 @@ def validate_meta_frame(mf, verified_incident_ids, frame_delta_ids, existing_hum
     return {"valid": not p, "problems": p}
 
 
+# ── PHASE 0: verification trust root(手書き VERIFIED list 禁止)──────────────
+# incident candidate → deterministic gate PASS → external audit VERIFIED → VERIFICATION_RECORD。
+# inducer / validate_meta_frame は VERIFICATION_RECORD だけを信頼根にする(self-report id-list を根にしない)。
+AUDIT_DISPOSITIONS = {"VERIFIED", "PARTIAL", "REJECTED"}
+
+
+def validate_verification_record(rec):
+    """VERIFICATION_RECORD の妥当性。gate_pass=True かつ external audit=VERIFIED かつ auditor 明示。"""
+    if not isinstance(rec, dict):
+        return {"valid": False, "problems": ["record not a dict"]}
+    p = []
+    if not rec.get("incident_id"):
+        p.append("incident_id required")
+    if rec.get("gate_pass") is not True:
+        p.append("gate_pass must be True (deterministic gate PASS 必須)")
+    if rec.get("audit_disposition") not in AUDIT_DISPOSITIONS:
+        p.append("audit_disposition must be VERIFIED|PARTIAL|REJECTED")
+    if rec.get("audit_disposition") == "VERIFIED" and not rec.get("auditor"):
+        p.append("VERIFIED requires an explicit auditor (external weight)")
+    return {"valid": not p, "problems": p}
+
+
+def load_valid_verified_ids(records):
+    """current valid VERIFICATION_RECORD を持ち audit_disposition=VERIFIED な incident id 集合。
+    これが induction / validate_meta_frame の唯一の verified 根。手書き list は使わない。"""
+    ok = set()
+    for r in records:
+        v = validate_verification_record(r)
+        if v["valid"] and r.get("status", "VALID") == "VALID" and r.get("audit_disposition") == "VERIFIED":
+            ok.add(r["incident_id"])
+    return ok
+
+
+def meta_frame_verification_ok(mf, records):
+    """§ trust-root: meta-frame の全 source incident が current valid verification record を持つこと。"""
+    vids = load_valid_verified_ids(records)
+    missing = [i for i in (mf.get("derived_from_incidents") or []) if i not in vids]
+    return {"ok": not missing, "unverified_source_incidents": missing}
+
+
 # ── §20.2/§29 version lineage + currentness uniqueness ────────────────────────
 def validate_version_lineage(versions):
     """meta_frame_id ごとに CURRENT は高々1、append-only、supersedes/superseded_by 整合。§29。"""
