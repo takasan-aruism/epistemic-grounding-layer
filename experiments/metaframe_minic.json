@@ -1,0 +1,65 @@
+{
+  "classifications": {
+    "INC-11": {
+      "MF-001-observer-subject": "MATCH",
+      "MF-M2-artifact-vs-grounded": "MATCH",
+      "MF-M3-arbitrary-vs-derived": "NO_MATCH"
+    },
+    "INC-13": {
+      "MF-001-observer-subject": "NO_MATCH",
+      "MF-M2-artifact-vs-grounded": "MATCH",
+      "MF-M3-arbitrary-vs-derived": "NO_MATCH"
+    },
+    "INC-14": {
+      "MF-001-observer-subject": "NO_MATCH",
+      "MF-M2-artifact-vs-grounded": "NO_MATCH",
+      "MF-M3-arbitrary-vs-derived": "NO_MATCH"
+    },
+    "INC-15": {
+      "MF-001-observer-subject": "NO_MATCH",
+      "MF-M2-artifact-vs-grounded": "NO_MATCH",
+      "MF-M3-arbitrary-vs-derived": "NO_MATCH"
+    },
+    "INC-16": {
+      "MF-001-observer-subject": "NO_MATCH",
+      "MF-M2-artifact-vs-grounded": "MATCH",
+      "MF-M3-arbitrary-vs-derived": "NO_MATCH"
+    },
+    "INC-17": {
+      "MF-001-observer-subject": "NO_MATCH",
+      "MF-M2-artifact-vs-grounded": "MATCH",
+      "MF-M3-arbitrary-vs-derived": "NO_MATCH"
+    },
+    "INC-18": {
+      "MF-001-observer-subject": "NO_MATCH",
+      "MF-M2-artifact-vs-grounded": "NO_MATCH",
+      "MF-M3-arbitrary-vs-derived": "NO_MATCH"
+    }
+  },
+  "membership": {
+    "MF-001-observer-subject": [
+      "INC-03",
+      "INC-10",
+      "INC-11",
+      "INC-12"
+    ],
+    "MF-M2-artifact-vs-grounded": [
+      "INC-02",
+      "INC-07",
+      "INC-11",
+      "INC-13",
+      "INC-16",
+      "INC-17"
+    ],
+    "MF-M3-arbitrary-vs-derived": [
+      "INC-01",
+      "INC-08"
+    ]
+  },
+  "artifact_reaches_3": true,
+  "residual": [
+    "INC-14",
+    "INC-15",
+    "INC-18"
+  ]
+}
