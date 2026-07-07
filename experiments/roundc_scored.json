@@ -1,0 +1,62 @@
+{
+  "('A0_null', 'FALSE')": {
+    "H": 6,
+    "P": 4,
+    "M": 0,
+    "USEFUL": 10,
+    "IRREL": 0,
+    "OVER": 0,
+    "XDL": 0,
+    "n": 10
+  },
+  "('A1_abstract_v2', 'FALSE')": {
+    "H": 4,
+    "P": 1,
+    "M": 5,
+    "USEFUL": 5,
+    "IRREL": 7,
+    "OVER": 5,
+    "XDL": 0,
+    "n": 10
+  },
+  "('A0_null', 'TRUE')": {
+    "H": 5,
+    "P": 0,
+    "M": 0,
+    "USEFUL": 5,
+    "IRREL": 0,
+    "OVER": 0,
+    "XDL": 0,
+    "n": 5
+  },
+  "('A2_full_predicate', 'TRUE')": {
+    "H": 4,
+    "P": 1,
+    "M": 0,
+    "USEFUL": 5,
+    "IRREL": 0,
+    "OVER": 0,
+    "XDL": 0,
+    "n": 5
+  },
+  "('A2_full_predicate', 'FALSE')": {
+    "H": 9,
+    "P": 1,
+    "M": 0,
+    "USEFUL": 10,
+    "IRREL": 0,
+    "OVER": 0,
+    "XDL": 1,
+    "n": 10
+  },
+  "('A1_abstract_v2', 'TRUE')": {
+    "H": 3,
+    "P": 0,
+    "M": 2,
+    "USEFUL": 4,
+    "IRREL": 3,
+    "OVER": 1,
+    "XDL": 0,
+    "n": 5
+  }
+}

@@ -1,0 +1,587 @@
+[
+  {
+    "anon": "C-0184b",
+    "_id": "B10",
+    "_arm": "A0_null",
+    "domain": "workflow",
+    "target": "Did the reviewer/steps actually exercise the load-bearing property, or is 'passed' an artifact of a weak/self review? Check the review's independence and coverage.",
+    "situation": "An agent's plan passed the reviewer and all steps executed. Ship the output? What to check?",
+    "axes": [
+      "Verify output schema compliance against API contract",
+      "Check for hallucinated or fabricated data in final payload",
+      "Confirm execution logs match the approved plan steps"
+    ]
+  },
+  {
+    "anon": "C-0a307",
+    "_id": "B13",
+    "_arm": "A1_abstract_v2",
+    "domain": "esde",
+    "target": "Is the 73% dominance a composition/construction artifact (subset mixing, contamination)? Re-measure under a purified construction before treating it as structure.",
+    "situation": "A run shows axis contribution is 73% phase+r dominant. Propose what to check before treating it as the system's structure.",
+    "axes": [
+      "Measure the proportion of links that fail to reach the valid subset to detect contamination",
+      "Verify if the 73% dominance is an artifact by re-measuring with fresh initialization",
+      "Check if the apparent dominant phase is actually a size category artifact"
+    ]
+  },
+  {
+    "anon": "C-0d5c9",
+    "_id": "B10",
+    "_arm": "A1_abstract_v2",
+    "domain": "workflow",
+    "target": "Did the reviewer/steps actually exercise the load-bearing property, or is 'passed' an artifact of a weak/self review? Check the review's independence and coverage.",
+    "situation": "An agent's plan passed the reviewer and all steps executed. Ship the output? What to check?",
+    "axes": [
+      "Verify read triggers are event-driven rather than fixed-interval timers",
+      "Audit for hidden researcher-controlled state injection in the read pipeline",
+      "Confirm output generation is decoupled from the agent's internal planning loop"
+    ]
+  },
+  {
+    "anon": "C-1fc40",
+    "_id": "B06",
+    "_arm": "A0_null",
+    "domain": "software",
+    "target": "Is 99.9% an artifact of what the monitor counts (transport success != content/task success)? Confirm the metric definition before treating it as reliability.",
+    "situation": "A service shows 99.9% success in monitoring. Propose what to check before claiming it is reliable.",
+    "axes": [
+      "Verify if the 99.9% metric excludes critical user-facing errors or only technical HTTP status codes",
+      "Audit the monitoring coverage to ensure all entry points, dependencies, and edge cases are instrumented",
+      "Analyze error distribution to identify if failures are concentrated in specific regions, times, or user segments"
+    ]
+  },
+  {
+    "anon": "C-217fb",
+    "_id": "B09",
+    "_arm": "A1_abstract_v2",
+    "domain": "gpu",
+    "target": "Is the 3x an artifact of the benchmark setup (warmup, batch, cache, fixed input)? Vary the setup and measure under real conditions.",
+    "situation": "A benchmark shows our new kernel is 3x faster. Propose what to check before reporting the speedup.",
+    "axes": [
+      "Verify benchmark uses event-driven reads to prevent fixed-interval timing artifacts",
+      "Confirm state buffer synchronization is not introducing hidden latency or blocking",
+      "Check for compiler optimizations or warm-up effects skewing the 3x speedup metric"
+    ]
+  },
+  {
+    "anon": "C-25fb0",
+    "_id": "B08",
+    "_arm": "A0_null",
+    "domain": "gpu",
+    "target": "The co-serve impossibility is a DECLARED assertion, not measured — measure it first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "Two models are said to be un-co-servable on our GPUs so we must pick an operating mode. What to check before choosing?",
+    "axes": [
+      "GPU memory footprint per model",
+      "Inference latency per batch",
+      "Throughput under concurrent load"
+    ]
+  },
+  {
+    "anon": "C-2be16",
+    "_id": "B12",
+    "_arm": "A0_null",
+    "domain": "workflow",
+    "target": "Is the 50% saving representative or an artifact of the one trial's conditions (rework frequency, task mix)? Measure across varied conditions before adopting.",
+    "situation": "Batching cut our run time by half in one trial. Propose what to check before adopting batching.",
+    "axes": [
+      "Verify output correctness against non-batched baseline",
+      "Measure GPU memory utilization and peak usage",
+      "Assess latency impact of batch serialization overhead"
+    ]
+  },
+  {
+    "anon": "C-2c7c4",
+    "_id": "B11",
+    "_arm": "A0_null",
+    "domain": "workflow",
+    "target": "Is 'zero issues' grounded, or an artifact of the audit not covering the real failure modes? Attack the audit's coverage before trusting the null.",
+    "situation": "An automated audit of our pipeline found zero issues. Propose what to check before trusting it.",
+    "axes": [
+      "Verify test coverage completeness and edge case inclusion",
+      "Audit the audit tool's configuration and rule set for false negatives",
+      "Check for hardcoded credentials or secrets in the pipeline environment"
+    ]
+  },
+  {
+    "anon": "C-37cd4",
+    "_id": "B14",
+    "_arm": "A1_abstract_v2",
+    "domain": "esde",
+    "target": "Is the jump a property of the mechanism or an artifact of run length/accumulation? Confirm the generating condition before treating the metric as a finding.",
+    "situation": "A metric jumped from 25% to 77% between short and long runs. Propose what to check before treating 77% as a property.",
+    "axes": [
+      "Check if the 77% value correlates with the number of retired/stale elements accumulated over the run length",
+      "Verify if the metric stabilizes or plateaus in extended runs, indicating an accumulation effect rather than a steady-state property",
+      "Compare the metric distribution in short runs (25%) against the expected accumulation rate to confirm the construction hypothesis"
+    ]
+  },
+  {
+    "anon": "C-51366",
+    "_id": "B07",
+    "_arm": "A0_null",
+    "domain": "gpu",
+    "target": "Does the SPECIFIED capability actually work/perform in OUR local config? Docs give no local numbers; measure locally (spec != local applicability).",
+    "situation": "Vendor docs document a capability with 'fast resume'. We want it to cut model-switch cost. What to check before adopting?",
+    "axes": [
+      "Verify cold-start latency vs. warm-resume latency metrics under production load",
+      "Measure context window overhead and token consumption during state restoration",
+      "Audit data consistency and model state integrity after resume events"
+    ]
+  },
+  {
+    "anon": "C-523f6",
+    "_id": "B04",
+    "_arm": "A0_null",
+    "domain": "software",
+    "target": "Is each finding substantiated by a reproducing counterexample, or an over-flag? Disposition before rework; reject findings that don't reproduce.",
+    "situation": "A code auditor returned several findings on a validator that passed all its load-bearing tests. Rework based on them? What to check?",
+    "axes": [
+      "Verify static analysis false positives against runtime behavior",
+      "Audit edge-case handling in untested input scenarios",
+      "Review security implications of unused or dead code paths"
+    ]
+  },
+  {
+    "anon": "C-5263f",
+    "_id": "B03",
+    "_arm": "A0_null",
+    "domain": "data",
+    "target": "Are the clusters an artifact of the algorithm/parameter choice (k, distance, seed)? Vary the construction and check stability before treating clusters as real structure.",
+    "situation": "A clustering run produced 5 clean clusters. Propose what to check before treating them as real groups.",
+    "axes": [
+      "Stability under perturbation (e.g., bootstrap resampling)",
+      "Statistical significance of cluster separation (e.g., silhouette score)",
+      "Interpretability and domain validity of cluster centroids"
+    ]
+  },
+  {
+    "anon": "C-52d82",
+    "_id": "B07",
+    "_arm": "A2_full_predicate",
+    "domain": "gpu",
+    "target": "Does the SPECIFIED capability actually work/perform in OUR local config? Docs give no local numbers; measure locally (spec != local applicability).",
+    "situation": "Vendor docs document a capability with 'fast resume'. We want it to cut model-switch cost. What to check before adopting?",
+    "axes": [
+      "Measure end-to-end latency variance across different model sizes and hardware configurations",
+      "Audit the 'fast resume' implementation to distinguish between cold-start optimization and actual state-transfer overhead",
+      "Verify if the resume mechanism preserves model accuracy/precision under load compared to full initialization"
+    ]
+  },
+  {
+    "anon": "C-56a23",
+    "_id": "B04",
+    "_arm": "A1_abstract_v2",
+    "domain": "software",
+    "target": "Is each finding substantiated by a reproducing counterexample, or an over-flag? Disposition before rework; reject findings that don't reproduce.",
+    "situation": "A code auditor returned several findings on a validator that passed all its load-bearing tests. Rework based on them? What to check?",
+    "axes": [
+      "audit link reachability to valid subset",
+      "measure group contamination by invalid subsets",
+      "re-measure size category dominance with valid subset initialization"
+    ]
+  },
+  {
+    "anon": "C-57513",
+    "_id": "B02",
+    "_arm": "A2_full_predicate",
+    "domain": "data",
+    "target": "Is the 40% an artifact of the experimental setup (sample ratio mismatch, novelty/seasonality, selection)? Confirm the mechanism before treating the number as the effect.",
+    "situation": "An A/B test shows a striking 40% lift in the treatment. Propose what to check before shipping.",
+    "axes": [
+      "Verify statistical significance and confidence intervals",
+      "Check for selection bias or data leakage in the split",
+      "Confirm the effect persists across different user segments"
+    ]
+  },
+  {
+    "anon": "C-5ddc3",
+    "_id": "B08",
+    "_arm": "A1_abstract_v2",
+    "domain": "gpu",
+    "target": "The co-serve impossibility is a DECLARED assertion, not measured — measure it first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "Two models are said to be un-co-servable on our GPUs so we must pick an operating mode. What to check before choosing?",
+    "axes": [
+      "Verify if one-directional interaction metrics are artifacts of stale retired element accumulation",
+      "Check if the observed proportion difference is a construction/accumulation effect rather than a mechanism property",
+      "Audit the tracking length to identify units that have already retired but are still being counted"
+    ]
+  },
+  {
+    "anon": "C-5fb5b",
+    "_id": "B10",
+    "_arm": "A2_full_predicate",
+    "domain": "workflow",
+    "target": "Did the reviewer/steps actually exercise the load-bearing property, or is 'passed' an artifact of a weak/self review? Check the review's independence and coverage.",
+    "situation": "An agent's plan passed the reviewer and all steps executed. Ship the output? What to check?",
+    "axes": [
+      "Verify if the plan's success is due to genuine capability or overfitting to the specific reviewer's preferences",
+      "Check for hidden constraints or implicit assumptions in the execution environment that were not part of the plan",
+      "Audit the output for edge cases or failure modes that were not covered by the initial review criteria"
+    ]
+  },
+  {
+    "anon": "C-6275c",
+    "_id": "B11",
+    "_arm": "A2_full_predicate",
+    "domain": "workflow",
+    "target": "Is 'zero issues' grounded, or an artifact of the audit not covering the real failure modes? Attack the audit's coverage before trusting the null.",
+    "situation": "An automated audit of our pipeline found zero issues. Propose what to check before trusting it.",
+    "axes": [
+      "audit the test data coverage and edge cases",
+      "verify the false positive rate of the detection logic",
+      "check for bias in the sample data used for validation"
+    ]
+  },
+  {
+    "anon": "C-6b6b3",
+    "_id": "B13",
+    "_arm": "A0_null",
+    "domain": "esde",
+    "target": "Is the 73% dominance a composition/construction artifact (subset mixing, contamination)? Re-measure under a purified construction before treating it as structure.",
+    "situation": "A run shows axis contribution is 73% phase+r dominant. Propose what to check before treating it as the system's structure.",
+    "axes": [
+      "Verify signal-to-noise ratio to rule out noise dominance",
+      "Check for non-stationarity or time-varying dynamics",
+      "Assess sensitivity to hyperparameters and initialization"
+    ]
+  },
+  {
+    "anon": "C-6b6cb",
+    "_id": "B05",
+    "_arm": "A2_full_predicate",
+    "domain": "software",
+    "target": "Do the supplied tests cover all malformed shapes? The tested surface may be narrower than the claimed property (fail-open on an untested shape).",
+    "situation": "A gate passes its 7 supplied tests and the auditor found nothing. Ready to ship? What to check?",
+    "axes": [
+      "Audit the test suite coverage for edge cases and boundary conditions",
+      "Verify the test environment configuration matches production constraints",
+      "Check for missing negative test cases or failure mode simulations"
+    ]
+  },
+  {
+    "anon": "C-74af1",
+    "_id": "B12",
+    "_arm": "A1_abstract_v2",
+    "domain": "workflow",
+    "target": "Is the 50% saving representative or an artifact of the one trial's conditions (rework frequency, task mix)? Measure across varied conditions before adopting.",
+    "situation": "Batching cut our run time by half in one trial. Propose what to check before adopting batching.",
+    "axes": [
+      "Verify retirement logic consistency between batched and sequential execution modes",
+      "Audit for state accumulation or stale element retention in batched processing",
+      "Compare one-directional interaction rates in smoke tests vs main runs under batching"
+    ]
+  },
+  {
+    "anon": "C-74dac",
+    "_id": "B02",
+    "_arm": "A1_abstract_v2",
+    "domain": "data",
+    "target": "Is the 40% an artifact of the experimental setup (sample ratio mismatch, novelty/seasonality, selection)? Confirm the mechanism before treating the number as the effect.",
+    "situation": "An A/B test shows a striking 40% lift in the treatment. Propose what to check before shipping.",
+    "axes": [
+      "Check for stale or retired user segments accumulating in the treatment group",
+      "Verify if the lift is driven by new interactions or re-engagement of dormant users",
+      "Audit the tracking logic for one-directional state persistence errors"
+    ]
+  },
+  {
+    "anon": "C-77cbf",
+    "_id": "B06",
+    "_arm": "A1_abstract_v2",
+    "domain": "software",
+    "target": "Is 99.9% an artifact of what the monitor counts (transport success != content/task success)? Confirm the metric definition before treating it as reliability.",
+    "situation": "A service shows 99.9% success in monitoring. Propose what to check before claiming it is reliable.",
+    "axes": [
+      "Check for stale or retired elements accumulating in the success counter",
+      "Verify if the success metric is calculated over a fixed window or cumulative lifetime",
+      "Audit the definition of 'success' to ensure it excludes failed but unreported events"
+    ]
+  },
+  {
+    "anon": "C-84a4c",
+    "_id": "B05",
+    "_arm": "A0_null",
+    "domain": "software",
+    "target": "Do the supplied tests cover all malformed shapes? The tested surface may be narrower than the claimed property (fail-open on an untested shape).",
+    "situation": "A gate passes its 7 supplied tests and the auditor found nothing. Ready to ship? What to check?",
+    "axes": [
+      "Verify test coverage against edge cases and failure modes",
+      "Audit the test suite for false positives or hardcoded pass conditions",
+      "Review the gate's integration with the CI/CD pipeline for configuration drift"
+    ]
+  },
+  {
+    "anon": "C-8bd7c",
+    "_id": "B01",
+    "_arm": "A1_abstract_v2",
+    "domain": "data",
+    "target": "Is the null AVERAGE hiding heterogeneous subgroups? Disaggregate / stratify before concluding no effect (averaging artifact).",
+    "situation": "A dashboard reports that a marketing campaign had no average effect on signups. Should we conclude it didn't work? What to check?",
+    "axes": [
+      "Check for selection bias in the treatment group assignment",
+      "Verify if the control group is contaminated by spillover effects",
+      "Measure the purity of the valid subset against the apparent cohort"
+    ]
+  },
+  {
+    "anon": "C-8df40",
+    "_id": "B05",
+    "_arm": "A1_abstract_v2",
+    "domain": "software",
+    "target": "Do the supplied tests cover all malformed shapes? The tested surface may be narrower than the claimed property (fail-open on an untested shape).",
+    "situation": "A gate passes its 7 supplied tests and the auditor found nothing. Ready to ship? What to check?",
+    "axes": [
+      "Verify read triggers are strictly event-driven rather than fixed-interval timers",
+      "Audit for hidden state buffers that mask researcher-controlled timing",
+      "Confirm no fixed-step pulse generation exists in the read path"
+    ]
+  },
+  {
+    "anon": "C-9cbb2",
+    "_id": "B03",
+    "_arm": "A1_abstract_v2",
+    "domain": "data",
+    "target": "Are the clusters an artifact of the algorithm/parameter choice (k, distance, seed)? Vary the construction and check stability before treating clusters as real structure.",
+    "situation": "A clustering run produced 5 clean clusters. Propose what to check before treating them as real groups.",
+    "axes": [
+      "Verify cluster stability under varying hyperparameters (e.g., k, epsilon, min_samples) to detect algorithmic artifacts",
+      "Audit feature scaling and normalization to ensure distance metrics are not dominated by specific variables",
+      "Check for temporal or spatial autocorrelation in the data that could create artificial groupings"
+    ]
+  },
+  {
+    "anon": "C-9e590",
+    "_id": "B06",
+    "_arm": "A2_full_predicate",
+    "domain": "software",
+    "target": "Is 99.9% an artifact of what the monitor counts (transport success != content/task success)? Confirm the metric definition before treating it as reliability.",
+    "situation": "A service shows 99.9% success in monitoring. Propose what to check before claiming it is reliable.",
+    "axes": [
+      "Audit error budget composition by distinguishing transient network timeouts from persistent application logic failures",
+      "Verify monitoring coverage completeness by injecting synthetic failures in unmonitored edge cases or degraded states",
+      "Analyze latency distribution tails to identify if high success rate masks unacceptable p99/p95 latency degradation"
+    ]
+  },
+  {
+    "anon": "C-9e6b5",
+    "_id": "B08",
+    "_arm": "A2_full_predicate",
+    "domain": "gpu",
+    "target": "The co-serve impossibility is a DECLARED assertion, not measured — measure it first; and the mode choice depends on an unmeasured variable (swap frequency).",
+    "situation": "Two models are said to be un-co-servable on our GPUs so we must pick an operating mode. What to check before choosing?",
+    "axes": [
+      "measure actual VRAM consumption and memory fragmentation for each model individually and in combination",
+      "evaluate inference latency and throughput under the specific batch sizes and precision settings of the target workload",
+      "verify if model parallelism or quantization strategies can enable co-servability without significant performance degradation"
+    ]
+  },
+  {
+    "anon": "C-a2721",
+    "_id": "B12",
+    "_arm": "A2_full_predicate",
+    "domain": "workflow",
+    "target": "Is the 50% saving representative or an artifact of the one trial's conditions (rework frequency, task mix)? Measure across varied conditions before adopting.",
+    "situation": "Batching cut our run time by half in one trial. Propose what to check before adopting batching.",
+    "axes": [
+      "Verify correctness of outputs against non-batched baseline",
+      "Measure latency and throughput scaling across different batch sizes",
+      "Check for resource contention or memory pressure at peak batch load"
+    ]
+  },
+  {
+    "anon": "C-a6429",
+    "_id": "B01",
+    "_arm": "A0_null",
+    "domain": "data",
+    "target": "Is the null AVERAGE hiding heterogeneous subgroups? Disaggregate / stratify before concluding no effect (averaging artifact).",
+    "situation": "A dashboard reports that a marketing campaign had no average effect on signups. Should we conclude it didn't work? What to check?",
+    "axes": [
+      "Check statistical significance and confidence intervals of the lift",
+      "Analyze conversion rates within specific user segments or cohorts",
+      "Verify data integrity and attribution logic for signup events"
+    ]
+  },
+  {
+    "anon": "C-ae143",
+    "_id": "B15",
+    "_arm": "A2_full_predicate",
+    "domain": "esde",
+    "target": "Is 'self-tracking' an artifact of the fixed interval (researcher-controlled timing)? Make the readout event-driven/unpredictable before claiming genuine self-tracking.",
+    "situation": "A fixed-interval readout suggests the unit tracks its own change. Propose what to check before claiming self-tracking.",
+    "axes": [
+      "vary the readout interval to test for interval-dependent artifacts",
+      "isolate the sensor's baseline drift from the actual unit change",
+      "verify the tracking mechanism against an independent external reference"
+    ]
+  },
+  {
+    "anon": "C-b0502",
+    "_id": "B02",
+    "_arm": "A0_null",
+    "domain": "data",
+    "target": "Is the 40% an artifact of the experimental setup (sample ratio mismatch, novelty/seasonality, selection)? Confirm the mechanism before treating the number as the effect.",
+    "situation": "An A/B test shows a striking 40% lift in the treatment. Propose what to check before shipping.",
+    "axes": [
+      "Check for statistical significance and confidence intervals to rule out random noise",
+      "Audit for selection bias or traffic leakage between control and treatment groups",
+      "Verify data integrity and tracking accuracy for the specific metric used"
+    ]
+  },
+  {
+    "anon": "C-b8237",
+    "_id": "B07",
+    "_arm": "A1_abstract_v2",
+    "domain": "gpu",
+    "target": "Does the SPECIFIED capability actually work/perform in OUR local config? Docs give no local numbers; measure locally (spec != local applicability).",
+    "situation": "Vendor docs document a capability with 'fast resume'. We want it to cut model-switch cost. What to check before adopting?",
+    "axes": [
+      "measure latency overhead of state serialization/deserialization during model switches",
+      "audit data integrity of persisted state against corruption or version mismatch risks",
+      "verify cold-start fallback performance when resume state is unavailable or invalid"
+    ]
+  },
+  {
+    "anon": "C-cdac0",
+    "_id": "B01",
+    "_arm": "A2_full_predicate",
+    "domain": "data",
+    "target": "Is the null AVERAGE hiding heterogeneous subgroups? Disaggregate / stratify before concluding no effect (averaging artifact).",
+    "situation": "A dashboard reports that a marketing campaign had no average effect on signups. Should we conclude it didn't work? What to check?",
+    "axes": [
+      "vary the campaign targeting or creative to isolate specific audience segments",
+      "separate overall average effect from segment-specific lift to identify hidden winners",
+      "verify the signup attribution logic and tracking implementation for data integrity"
+    ]
+  },
+  {
+    "anon": "C-d412d",
+    "_id": "B15",
+    "_arm": "A0_null",
+    "domain": "esde",
+    "target": "Is 'self-tracking' an artifact of the fixed interval (researcher-controlled timing)? Make the readout event-driven/unpredictable before claiming genuine self-tracking.",
+    "situation": "A fixed-interval readout suggests the unit tracks its own change. Propose what to check before claiming self-tracking.",
+    "axes": [
+      "Verify external reference stability",
+      "Check for environmental drift",
+      "Analyze error correlation with known standards"
+    ]
+  },
+  {
+    "anon": "C-d42ce",
+    "_id": "B14",
+    "_arm": "A2_full_predicate",
+    "domain": "esde",
+    "target": "Is the jump a property of the mechanism or an artifact of run length/accumulation? Confirm the generating condition before treating the metric as a finding.",
+    "situation": "A metric jumped from 25% to 77% between short and long runs. Propose what to check before treating 77% as a property.",
+    "axes": [
+      "vary run duration to isolate time-dependent effects",
+      "audit data collection pipeline for state leakage or caching artifacts",
+      "verify measurement consistency across independent experimental setups"
+    ]
+  },
+  {
+    "anon": "C-d8e93",
+    "_id": "B13",
+    "_arm": "A2_full_predicate",
+    "domain": "esde",
+    "target": "Is the 73% dominance a composition/construction artifact (subset mixing, contamination)? Re-measure under a purified construction before treating it as structure.",
+    "situation": "A run shows axis contribution is 73% phase+r dominant. Propose what to check before treating it as the system's structure.",
+    "axes": [
+      "vary phase and r independently to isolate individual contributions",
+      "verify if the 73% metric persists under different boundary conditions",
+      "confirm the physical mechanism driving the phase+r dominance"
+    ]
+  },
+  {
+    "anon": "C-dda9b",
+    "_id": "B15",
+    "_arm": "A1_abstract_v2",
+    "domain": "esde",
+    "target": "Is 'self-tracking' an artifact of the fixed interval (researcher-controlled timing)? Make the readout event-driven/unpredictable before claiming genuine self-tracking.",
+    "situation": "A fixed-interval readout suggests the unit tracks its own change. Propose what to check before claiming self-tracking.",
+    "axes": [
+      "Verify if read triggers are event-driven rather than fixed-interval timers",
+      "Measure latency between state change and readout to detect buffering artifacts",
+      "Test if readout behavior persists when read frequency is randomized"
+    ]
+  },
+  {
+    "anon": "C-e4874",
+    "_id": "B03",
+    "_arm": "A2_full_predicate",
+    "domain": "data",
+    "target": "Are the clusters an artifact of the algorithm/parameter choice (k, distance, seed)? Vary the construction and check stability before treating clusters as real structure.",
+    "situation": "A clustering run produced 5 clean clusters. Propose what to check before treating them as real groups.",
+    "axes": [
+      "Vary clustering parameters (e.g., k, algorithm, distance metric) to test stability",
+      "Assess cluster robustness via resampling or bootstrapping",
+      "Validate clusters against external ground truth or domain knowledge"
+    ]
+  },
+  {
+    "anon": "C-e71ec",
+    "_id": "B11",
+    "_arm": "A1_abstract_v2",
+    "domain": "workflow",
+    "target": "Is 'zero issues' grounded, or an artifact of the audit not covering the real failure modes? Attack the audit's coverage before trusting the null.",
+    "situation": "An automated audit of our pipeline found zero issues. Propose what to check before trusting it.",
+    "axes": [
+      "Verify initialization seed sensitivity and convergence stability across multiple runs",
+      "Audit link validity rates to detect silent truncation or unreachable subsets",
+      "Measure ground-truth purity of groups against the apparent version to identify contamination artifacts"
+    ]
+  },
+  {
+    "anon": "C-e723d",
+    "_id": "B09",
+    "_arm": "A0_null",
+    "domain": "gpu",
+    "target": "Is the 3x an artifact of the benchmark setup (warmup, batch, cache, fixed input)? Vary the setup and measure under real conditions.",
+    "situation": "A benchmark shows our new kernel is 3x faster. Propose what to check before reporting the speedup.",
+    "axes": [
+      "Verify identical input datasets and preprocessing steps across baseline and new kernel",
+      "Check for compiler optimization flags and CPU frequency scaling consistency",
+      "Confirm statistical significance via multiple runs and confidence intervals"
+    ]
+  },
+  {
+    "anon": "C-ee729",
+    "_id": "B04",
+    "_arm": "A2_full_predicate",
+    "domain": "software",
+    "target": "Is each finding substantiated by a reproducing counterexample, or an over-flag? Disposition before rework; reject findings that don't reproduce.",
+    "situation": "A code auditor returned several findings on a validator that passed all its load-bearing tests. Rework based on them? What to check?",
+    "axes": [
+      "Audit the specific code paths or edge cases targeted by the findings to determine if they represent actual logical flaws or merely stylistic deviations",
+      "Verify if the 'load-bearing tests' cover the specific scenarios implied by the auditor's concerns to ensure the tests are not masking the issues",
+      "Assess whether the findings are based on static analysis heuristics (potential false positives) versus dynamic execution traces (actual bugs)"
+    ]
+  },
+  {
+    "anon": "C-f4c35",
+    "_id": "B14",
+    "_arm": "A0_null",
+    "domain": "esde",
+    "target": "Is the jump a property of the mechanism or an artifact of run length/accumulation? Confirm the generating condition before treating the metric as a finding.",
+    "situation": "A metric jumped from 25% to 77% between short and long runs. Propose what to check before treating 77% as a property.",
+    "axes": [
+      "Verify data pipeline consistency between short and long run configurations",
+      "Check for sampling bias or cohort drift in the long run dataset",
+      "Validate that the metric definition and aggregation logic remain unchanged"
+    ]
+  },
+  {
+    "anon": "C-fd12c",
+    "_id": "B09",
+    "_arm": "A2_full_predicate",
+    "domain": "gpu",
+    "target": "Is the 3x an artifact of the benchmark setup (warmup, batch, cache, fixed input)? Vary the setup and measure under real conditions.",
+    "situation": "A benchmark shows our new kernel is 3x faster. Propose what to check before reporting the speedup.",
+    "axes": [
+      "vary the input data distribution and problem size to check for overfitting to specific benchmarks",
+      "isolate the kernel implementation from the surrounding system stack to separate algorithmic speedup from infrastructure artifacts",
+      "verify the computational complexity and memory access patterns to confirm the mechanism behind the performance gain"
+    ]
+  }
+]
