@@ -1,0 +1,53 @@
+{
+  "abstract_v2_tally": {
+    "HIT": 8,
+    "PARTIAL": 1,
+    "MISS": 6,
+    "USEFUL": 9,
+    "XDOMAIN_MISFIRE": 7,
+    "DOMAIN_LITERALIZATION": 2,
+    "OVER_TRIGGER": 0,
+    "IRRELEVANT_AXIS": 6
+  },
+  "v1_tally": {
+    "ordinary": {
+      "HIT": 9,
+      "PARTIAL": 3,
+      "MISS": 3,
+      "USEFUL": 12,
+      "XDOMAIN_MISFIRE": 5,
+      "DOMAIN_LITERALIZATION": 0,
+      "OVER_TRIGGER": 1,
+      "IRRELEVANT_AXIS": 3
+    },
+    "concrete": {
+      "HIT": 8,
+      "PARTIAL": 1,
+      "MISS": 6,
+      "USEFUL": 9,
+      "XDOMAIN_MISFIRE": 10,
+      "DOMAIN_LITERALIZATION": 5,
+      "OVER_TRIGGER": 1,
+      "IRRELEVANT_AXIS": 3
+    },
+    "abstract": {
+      "HIT": 8,
+      "PARTIAL": 2,
+      "MISS": 5,
+      "USEFUL": 10,
+      "XDOMAIN_MISFIRE": 8,
+      "DOMAIN_LITERALIZATION": 4,
+      "OVER_TRIGGER": 1,
+      "IRRELEVANT_AXIS": 4
+    }
+  },
+  "leak": {
+    "token_leak_v1": 7,
+    "token_leak_v2": 0,
+    "esde_literal": {
+      "concrete": 22,
+      "abstract_v1": 4,
+      "abstract_v2": 0
+    }
+  }
+}

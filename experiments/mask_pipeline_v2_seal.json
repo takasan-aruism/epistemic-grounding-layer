@@ -1,0 +1,7 @@
+{
+  "pipeline": "MASK_PIPELINE_v2",
+  "sha256": "2bfd70f9c2c44f134ce72df7931b4a36ff08c715ba9bcd80c7d2425f7d45d948",
+  "sealed_at": "2026-07-07T15:27:05.286282+00:00",
+  "fix": "token leak fixed (domain-only masking, natural generic phrases, article-collapse)",
+  "supersedes": "MASK_PIPELINE_v1"
+}

@@ -1,0 +1,435 @@
+{
+  "mask_pipeline": "MASK_PIPELINE_v2",
+  "seal": "2bfd70f9c2c44f134ce72df7931b4a36ff08c715ba9bcd80c7d2425f7d45d948",
+  "heldout": [
+    {
+      "id": "B01",
+      "domain": "data",
+      "retr": "INC-02",
+      "missing_axis": "Is the null AVERAGE hiding heterogeneous subgroups? Disaggregate / stratify before concluding no effect (averaging artifact).",
+      "axes": {
+        "ordinary": [
+          "Check statistical significance and confidence intervals of the lift",
+          "Analyze conversion rates within specific user segments or cohorts",
+          "Verify data integrity and attribution logic for signup events"
+        ],
+        "concrete": [
+          "Check for R=0 contamination in the signup metric (e.g., bots, test accounts, or pre-existing users)",
+          "Verify if the 'no effect' conclusion is an artifact of averaging across heterogeneous user segments",
+          "Measure the purity of the treatment effect by isolating users with a positive response threshold (R>0)"
+        ],
+        "abstract_v1": [
+          "Verify if the 'no average effect' conclusion is driven by a few high-volume groups masking significant effects in smaller segments (ecological fallacy check)",
+          "Audit for 'STATE-contamination' by checking if the control and treatment groups had pre-existing differences in signup propensity (selection bias)",
+          "Measure 'grounded-structure' purity by analyzing signup conversion rates relative to the specific time of campaign exposure (birth-time STATE purity)"
+        ],
+        "abstract_v2": [
+          "Check for selection bias in the treatment group assignment",
+          "Verify if the control group is contaminated by spillover effects",
+          "Measure the purity of the valid subset against the apparent cohort"
+        ]
+      }
+    },
+    {
+      "id": "B02",
+      "domain": "data",
+      "retr": "INC-16",
+      "missing_axis": "Is the 40% an artifact of the experimental setup (sample ratio mismatch, novelty/seasonality, selection)? Confirm the mechanism before treating the number as the effect.",
+      "axes": {
+        "ordinary": [
+          "Check for statistical significance and confidence intervals to rule out random noise",
+          "Audit for selection bias or traffic leakage between control and treatment groups",
+          "Verify data integrity and tracking accuracy for the specific metric used"
+        ],
+        "concrete": [
+          "Verify cohort balance and randomization integrity",
+          "Check for data pipeline leakage or cross-contamination",
+          "Audit for confounding variables or external events"
+        ],
+        "abstract_v1": [
+          "Check for data leakage or contamination between control and treatment groups",
+          "Verify sample ratio mismatch to detect selection bias or instrumentation errors",
+          "Analyze effect heterogeneity to ensure lift is not driven by a small subset of users"
+        ],
+        "abstract_v2": [
+          "Check for stale or retired user segments accumulating in the treatment group",
+          "Verify if the lift is driven by new interactions or re-engagement of dormant users",
+          "Audit the tracking logic for one-directional state persistence errors"
+        ]
+      }
+    },
+    {
+      "id": "B03",
+      "domain": "data",
+      "retr": "INC-11",
+      "missing_axis": "Are the clusters an artifact of the algorithm/parameter choice (k, distance, seed)? Vary the construction and check stability before treating clusters as real structure.",
+      "axes": {
+        "ordinary": [
+          "Stability under perturbation (e.g., bootstrap resampling)",
+          "Statistical significance of cluster separation (e.g., silhouette score)",
+          "Interpretability and domain validity of cluster centroids"
+        ],
+        "concrete": [
+          "Verify if cluster assignments are deterministic by re-running the clustering algorithm with identical inputs to check for stability.",
+          "Audit the feature space for hidden temporal or sequential biases that could artificially group data points based on processing order rather than intrinsic properties.",
+          "Validate that the number of clusters (k=5) is statistically significant by comparing against null models or using silhouette scores to rule out random noise grouping."
+        ],
+        "abstract_v1": [
+          "Verify cluster stability under perturbation of the distance metric or algorithm parameters",
+          "Assess whether cluster assignments are driven by the fixed-interval timing artifact rather than intrinsic data structure",
+          "Check for separation between clusters using statistical significance tests (e.g., silhouette score, gap statistic)"
+        ],
+        "abstract_v2": [
+          "Verify cluster stability under varying hyperparameters (e.g., k, epsilon, min_samples) to detect algorithmic artifacts",
+          "Audit feature scaling and normalization to ensure distance metrics are not dominated by specific variables",
+          "Check for temporal or spatial autocorrelation in the data that could create artificial groupings"
+        ]
+      }
+    },
+    {
+      "id": "B04",
+      "domain": "software",
+      "retr": "INC-02",
+      "missing_axis": "Is each finding substantiated by a reproducing counterexample, or an over-flag? Disposition before rework; reject findings that don't reproduce.",
+      "axes": {
+        "ordinary": [
+          "Verify static analysis false positives against runtime behavior",
+          "Audit edge-case handling in untested input scenarios",
+          "Review security implications of unused or dead code paths"
+        ],
+        "concrete": [
+          "Audit R>0 purity of all structural labels to distinguish apparent from grounded structure",
+          "Measure the frequency of links that never reach R>0 to identify contamination",
+          "Re-evaluate modal dominance using birth-time R>0 purity metrics instead of raw counts"
+        ],
+        "abstract_v1": [
+          "Verify if high-frequency structural patterns are artifacts of validation bias rather than grounded reality",
+          "Audit the purity of state transitions to detect contamination from apparent vs. actual structures",
+          "Measure the modal distribution of core components to identify if dominant flags are statistical anomalies"
+        ],
+        "abstract_v2": [
+          "audit link reachability to valid subset",
+          "measure group contamination by invalid subsets",
+          "re-measure size category dominance with valid subset initialization"
+        ]
+      }
+    },
+    {
+      "id": "B05",
+      "domain": "software",
+      "retr": "INC-11",
+      "missing_axis": "Do the supplied tests cover all malformed shapes? The tested surface may be narrower than the claimed property (fail-open on an untested shape).",
+      "axes": {
+        "ordinary": [
+          "Verify test coverage against edge cases and failure modes",
+          "Audit the test suite for false positives or hardcoded pass conditions",
+          "Review the gate's integration with the CI/CD pipeline for configuration drift"
+        ],
+        "concrete": [
+          "Verify read trigger is strictly event-driven and not fixed-interval",
+          "Audit for hidden researcher-controlled timing variables in the gate logic",
+          "Test for self-referential feedback loops that mimic awareness"
+        ],
+        "abstract_v1": [
+          "Verify read operations are strictly event-driven rather than fixed-interval polling",
+          "Audit for hidden state leakage or self-referential logic in the buffer",
+          "Confirm input data integrity and absence of adversarial triggers during event handling"
+        ],
+        "abstract_v2": [
+          "Verify read triggers are strictly event-driven rather than fixed-interval timers",
+          "Audit for hidden state buffers that mask researcher-controlled timing",
+          "Confirm no fixed-step pulse generation exists in the read path"
+        ]
+      }
+    },
+    {
+      "id": "B06",
+      "domain": "software",
+      "retr": "INC-16",
+      "missing_axis": "Is 99.9% an artifact of what the monitor counts (transport success != content/task success)? Confirm the metric definition before treating it as reliability.",
+      "axes": {
+        "ordinary": [
+          "Verify if the 99.9% metric excludes critical user-facing errors or only technical HTTP status codes",
+          "Audit the monitoring coverage to ensure all entry points, dependencies, and edge cases are instrumented",
+          "Analyze error distribution to identify if failures are concentrated in specific regions, times, or user segments"
+        ],
+        "concrete": [
+          "Verify if success metric includes silent failures or unobserved timeouts",
+          "Audit the distribution of failure modes across different service dependencies",
+          "Check for monitoring blind spots in edge cases or specific traffic patterns"
+        ],
+        "abstract_v1": [
+          "Verify if the 99.9% success rate is calculated over the total request volume or only the 'main run' subset, excluding retired or stale units",
+          "Audit for accumulation effects where failed or timed-out requests are silently dropped or aggregated into a 'stale' bucket rather than counted as failures",
+          "Check if the monitoring system filters out known retired endpoints or invalid actors, which would artificially inflate the success percentage"
+        ],
+        "abstract_v2": [
+          "Check for stale or retired elements accumulating in the success counter",
+          "Verify if the success metric is calculated over a fixed window or cumulative lifetime",
+          "Audit the definition of 'success' to ensure it excludes failed but unreported events"
+        ]
+      }
+    },
+    {
+      "id": "B07",
+      "domain": "gpu",
+      "retr": "INC-02",
+      "missing_axis": "Does the SPECIFIED capability actually work/perform in OUR local config? Docs give no local numbers; measure locally (spec != local applicability).",
+      "axes": {
+        "ordinary": [
+          "Verify cold-start latency vs. warm-resume latency metrics under production load",
+          "Measure context window overhead and token consumption during state restoration",
+          "Audit data consistency and model state integrity after resume events"
+        ],
+        "concrete": [
+          "Verify R>0 purity of 'fast resume' state vectors to distinguish apparent structure from grounded structure",
+          "Measure transition latency overhead when switching models with and without 'fast resume' enabled",
+          "Audit state contamination rates by checking if resumed states retain R=0 artifacts from previous contexts"
+        ],
+        "abstract_v1": [
+          "Verify resume state integrity against ground-truth checkpoints",
+          "Measure latency overhead of state serialization/deserialization",
+          "Audit data consistency during interrupted transitions"
+        ],
+        "abstract_v2": [
+          "measure latency overhead of state serialization/deserialization during model switches",
+          "audit data integrity of persisted state against corruption or version mismatch risks",
+          "verify cold-start fallback performance when resume state is unavailable or invalid"
+        ]
+      }
+    },
+    {
+      "id": "B08",
+      "domain": "gpu",
+      "retr": "INC-16",
+      "missing_axis": "The co-serve impossibility is a DECLARED assertion, not measured — measure it first; and the mode choice depends on an unmeasured variable (swap frequency).",
+      "axes": {
+        "ordinary": [
+          "GPU memory footprint per model",
+          "Inference latency per batch",
+          "Throughput under concurrent load"
+        ],
+        "concrete": [
+          "Verify if the 77% one-way firing rate is an artifact of ghost accumulation from retired CIDs rather than a true model preference",
+          "Measure the actual inference latency and memory footprint of both models on the target GPU hardware to confirm un-co-servability constraints",
+          "Audit the data pipeline to ensure the 'one-way firing' metric is not skewed by historical tracking length or construction effects"
+        ],
+        "abstract_v1": [
+          "Verify if the metric asymmetry stems from stale accumulation artifacts rather than model mechanism properties",
+          "Audit the firing conditions and tracking length to identify retired units causing accumulation",
+          "Compare main run metrics against smoke run baselines to isolate construction/accumulation effects"
+        ],
+        "abstract_v2": [
+          "Verify if one-directional interaction metrics are artifacts of stale retired element accumulation",
+          "Check if the observed proportion difference is a construction/accumulation effect rather than a mechanism property",
+          "Audit the tracking length to identify units that have already retired but are still being counted"
+        ]
+      }
+    },
+    {
+      "id": "B09",
+      "domain": "gpu",
+      "retr": "INC-11",
+      "missing_axis": "Is the 3x an artifact of the benchmark setup (warmup, batch, cache, fixed input)? Vary the setup and measure under real conditions.",
+      "axes": {
+        "ordinary": [
+          "Verify identical input datasets and preprocessing steps across baseline and new kernel",
+          "Check for compiler optimization flags and CPU frequency scaling consistency",
+          "Confirm statistical significance via multiple runs and confidence intervals"
+        ],
+        "concrete": [
+          "Verify benchmark uses event-driven reads instead of fixed-interval polling",
+          "Confirm no researcher-controlled timing artifacts influence the measurement",
+          "Check if the 3x speedup holds across varying input sizes and edge cases"
+        ],
+        "abstract_v1": [
+          "Verify benchmark input size and distribution match production workloads",
+          "Check for compiler optimization flags or warm-up artifacts in the new kernel",
+          "Validate that the 3x speedup holds under concurrent load and memory contention"
+        ],
+        "abstract_v2": [
+          "Verify benchmark uses event-driven reads to prevent fixed-interval timing artifacts",
+          "Confirm state buffer synchronization is not introducing hidden latency or blocking",
+          "Check for compiler optimizations or warm-up effects skewing the 3x speedup metric"
+        ]
+      }
+    },
+    {
+      "id": "B10",
+      "domain": "workflow",
+      "retr": "INC-11",
+      "missing_axis": "Did the reviewer/steps actually exercise the load-bearing property, or is 'passed' an artifact of a weak/self review? Check the review's independence and coverage.",
+      "axes": {
+        "ordinary": [
+          "Verify output schema compliance against API contract",
+          "Check for hallucinated or fabricated data in final payload",
+          "Confirm execution logs match the approved plan steps"
+        ],
+        "concrete": [
+          "Verify execution triggers are event-driven rather than fixed-interval polling",
+          "Audit for researcher-controlled timing artifacts in output generation",
+          "Confirm output reflects autonomous state changes not pre-determined by plan structure"
+        ],
+        "abstract_v1": [
+          "Verify if the READ_OP timing is fixed by the researcher or driven by actual agent events",
+          "Audit for researcher-controlled timing artifacts mimicking self-awareness",
+          "Confirm the output is a genuine result of agent execution rather than a pre-determined interval"
+        ],
+        "abstract_v2": [
+          "Verify read triggers are event-driven rather than fixed-interval timers",
+          "Audit for hidden researcher-controlled state injection in the read pipeline",
+          "Confirm output generation is decoupled from the agent's internal planning loop"
+        ]
+      }
+    },
+    {
+      "id": "B11",
+      "domain": "workflow",
+      "retr": "INC-02",
+      "missing_axis": "Is 'zero issues' grounded, or an artifact of the audit not covering the real failure modes? Attack the audit's coverage before trusting the null.",
+      "axes": {
+        "ordinary": [
+          "Verify test coverage completeness and edge case inclusion",
+          "Audit the audit tool's configuration and rule set for false negatives",
+          "Check for hardcoded credentials or secrets in the pipeline environment"
+        ],
+        "concrete": [
+          "Verify audit scope coverage for R=0 contamination and birth-time purity",
+          "Check if the audit validates the apparent-structure vs grounded-structure distinction",
+          "Audit the label finding logic for core dominance artifacts"
+        ],
+        "abstract_v1": [
+          "Verify audit coverage against known false-positive patterns from VERSION",
+          "Check if audit logic distinguishes apparent-structure from grounded-structure",
+          "Validate birth-time STATE purity metrics for SIZE dominance artifacts"
+        ],
+        "abstract_v2": [
+          "Verify initialization seed sensitivity and convergence stability across multiple runs",
+          "Audit link validity rates to detect silent truncation or unreachable subsets",
+          "Measure ground-truth purity of groups against the apparent version to identify contamination artifacts"
+        ]
+      }
+    },
+    {
+      "id": "B12",
+      "domain": "workflow",
+      "retr": "INC-16",
+      "missing_axis": "Is the 50% saving representative or an artifact of the one trial's conditions (rework frequency, task mix)? Measure across varied conditions before adopting.",
+      "axes": {
+        "ordinary": [
+          "Verify output correctness against non-batched baseline",
+          "Measure GPU memory utilization and peak usage",
+          "Assess latency impact of batch serialization overhead"
+        ],
+        "concrete": [
+          "Verify one-way firing rates in batched runs to detect ghost accumulation artifacts",
+          "Measure total execution time and resource usage per batch size to confirm latency reduction",
+          "Audit CID lifecycle and retirement status to ensure batched processing does not obscure stale identifiers"
+        ],
+        "abstract_v1": [
+          "Verify accumulation logic for retired units",
+          "Measure latency impact of batch size changes",
+          "Audit state consistency across batch boundaries"
+        ],
+        "abstract_v2": [
+          "Verify retirement logic consistency between batched and sequential execution modes",
+          "Audit for state accumulation or stale element retention in batched processing",
+          "Compare one-directional interaction rates in smoke tests vs main runs under batching"
+        ]
+      }
+    },
+    {
+      "id": "B13",
+      "domain": "esde",
+      "retr": "INC-02",
+      "missing_axis": "Is the 73% dominance a composition/construction artifact (subset mixing, contamination)? Re-measure under a purified construction before treating it as structure.",
+      "axes": {
+        "ordinary": [
+          "Verify signal-to-noise ratio to rule out noise dominance",
+          "Check for non-stationarity or time-varying dynamics",
+          "Assess sensitivity to hyperparameters and initialization"
+        ],
+        "concrete": [
+          "Verify R>0 purity of the 73% phase+r dominant links to distinguish apparent from grounded structure",
+          "Audit birth-time R values to detect R=0 contamination artifacts in the dominant label",
+          "Re-measure modal structure using only links with confirmed R>0 purity"
+        ],
+        "abstract_v1": [
+          "Verify if 'phase+r' dominance is an artifact of the 'apparent-structure' vs 'grounded-structure' distinction",
+          "Audit the 'STATE purity' of the top 73% contributors to confirm they are not STATE-contaminated",
+          "Measure the actual SIZE distribution of the 'phase+r' group to check for modal dominance vs core dominance"
+        ],
+        "abstract_v2": [
+          "Measure the proportion of links that fail to reach the valid subset to detect contamination",
+          "Verify if the 73% dominance is an artifact by re-measuring with fresh initialization",
+          "Check if the apparent dominant phase is actually a size category artifact"
+        ]
+      }
+    },
+    {
+      "id": "B14",
+      "domain": "esde",
+      "retr": "INC-16",
+      "missing_axis": "Is the jump a property of the mechanism or an artifact of run length/accumulation? Confirm the generating condition before treating the metric as a finding.",
+      "axes": {
+        "ordinary": [
+          "Verify data pipeline consistency between short and long run configurations",
+          "Check for sampling bias or cohort drift in the long run dataset",
+          "Validate that the metric definition and aggregation logic remain unchanged"
+        ],
+        "concrete": [
+          "Verify CID lifecycle status and retirement timestamps for all tracked entities",
+          "Measure ghost accumulation density relative to the total tracking length",
+          "Compare one-way firing rates in short-duration runs to establish baseline behavior"
+        ],
+        "abstract_v1": [
+          "Verify if the metric is an accumulation artifact by comparing short vs long run durations",
+          "Check for retired or stale entities contributing to the count in long runs",
+          "Isolate the specific firing condition to confirm if the jump is due to mechanism change or tracking length"
+        ],
+        "abstract_v2": [
+          "Check if the 77% value correlates with the number of retired/stale elements accumulated over the run length",
+          "Verify if the metric stabilizes or plateaus in extended runs, indicating an accumulation effect rather than a steady-state property",
+          "Compare the metric distribution in short runs (25%) against the expected accumulation rate to confirm the construction hypothesis"
+        ]
+      }
+    },
+    {
+      "id": "B15",
+      "domain": "esde",
+      "retr": "INC-11",
+      "missing_axis": "Is 'self-tracking' an artifact of the fixed interval (researcher-controlled timing)? Make the readout event-driven/unpredictable before claiming genuine self-tracking.",
+      "axes": {
+        "ordinary": [
+          "Verify external reference stability",
+          "Check for environmental drift",
+          "Analyze error correlation with known standards"
+        ],
+        "concrete": [
+          "Verify if readout timing is event-driven rather than fixed-interval",
+          "Check for researcher-controlled timing artifacts in the readout loop",
+          "Confirm the unit responds to external stimuli rather than internal clock cycles"
+        ],
+        "abstract_v1": [
+          "Verify readout trigger is event-driven rather than fixed-interval",
+          "Measure latency between state change and readout initiation",
+          "Confirm absence of researcher-controlled timing loops in read sequence"
+        ],
+        "abstract_v2": [
+          "Verify if read triggers are event-driven rather than fixed-interval timers",
+          "Measure latency between state change and readout to detect buffering artifacts",
+          "Test if readout behavior persists when read frequency is randomized"
+        ]
+      }
+    }
+  ],
+  "leak_metrics": {
+    "token_leak_v1": 7,
+    "token_leak_v2": 0,
+    "esde_literal": {
+      "concrete": 22,
+      "abstract_v1": 4,
+      "abstract_v2": 0
+    }
+  }
+}
