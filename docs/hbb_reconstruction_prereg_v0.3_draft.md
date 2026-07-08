@@ -1,6 +1,7 @@
 # Reconstruction Experiment — Preregistration DRAFT (NBC-1 v0.3)
 
-**status: `PREREG_DRAFT — AWAITING_TAKA`. 実装・run はしない。Taka go 待ち。**
+**status: `PREREG_DRAFT — BLOCKED (load-bearing audit)`. 実装・run はしない。Taka go 待ち。**
+**⚠️ load-bearing audit(DE-0116)= BLOCKED**: [[hbb_reconstruction_prereg_v0.3_audit]]。4/5 仮説が現状 unsupportable(S1 in-experiment baseline 欠如 / S2 selector = 未凍結の overfit routing / S3 consensus≈GPT / S4 「H0-autonomous」が H1 hint 再命名 / S5 bar p-hackable / S6 R5 confound / S7 budget=best-of-N confound / S9 R4↔R5 pass 数不一致)。`⟨TC⟩` param 定義は必要だが不十分(S1-S4 は param を埋めても残る)。凍結・run 前に fix 要。
 Refs: DE-0115 (HBB CLOSED) · `hbb_hard_core_fixed.json` · `hbb_final_report.md` · NBC-1 ([[next_branch_candidates]]) ·
 `measurement_instruments_3.json` (DETECTION_RECONSTRUCTION_SPLIT) · `measurement_instruments_2.json` (MULTI_SCORER_CONSENSUS).
 Discipline: author ≠ attacker ≠ adjudicator. 自律RD 未有効。self-improvement claim なし。
