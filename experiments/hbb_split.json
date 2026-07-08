@@ -1,0 +1,45 @@
+{
+  "seed": 20260708,
+  "method": "class-stratified seeded random; public seed; reproducible",
+  "DEV": [
+    "HBB-02",
+    "HBB-09",
+    "HBB-14",
+    "HBB-16",
+    "HBB-22",
+    "HBB-23",
+    "HBB-25",
+    "HBB-26"
+  ],
+  "VALIDATION": [
+    "HBB-07",
+    "HBB-15",
+    "HBB-18",
+    "HBB-19",
+    "HBB-20",
+    "HBB-27",
+    "HBB-28",
+    "HBB-29"
+  ],
+  "SEALED": [
+    "HBB-01",
+    "HBB-03",
+    "HBB-04",
+    "HBB-05",
+    "HBB-06",
+    "HBB-08",
+    "HBB-10",
+    "HBB-11",
+    "HBB-12",
+    "HBB-13",
+    "HBB-17",
+    "HBB-24",
+    "HBB-30"
+  ],
+  "EXCLUDED": [
+    "HBB-21"
+  ],
+  "calibration": [
+    "HBB-22 (in DEV)"
+  ]
+}

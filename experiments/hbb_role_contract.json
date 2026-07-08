@@ -1,0 +1,9 @@
+{
+  "object": "BACKGROUND_ENGINE_ROLE_CONTRACT_DRAFT",
+  "coverage": "担当 incident class を明示",
+  "firing_condition": "hint depth <= H1 で有効 axis を提示",
+  "precision_floor": "irrelevant/over-trigger 上限",
+  "residency_cost_ceiling": "swap/latency 予算",
+  "judged_by": "Qwen+engine が契約を満たすか(同一モデル内差分)",
+  "deployment_significance_separate": "Qwen の絶対性能と Claude/GPT との差は別解析"
+}
