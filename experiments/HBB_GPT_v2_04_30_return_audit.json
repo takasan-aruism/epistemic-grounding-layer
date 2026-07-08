@@ -1,0 +1,23 @@
+{
+  "object": "HBB_GPT_V2_04_30_SCORING_RETURN_AUDIT",
+  "rubric_sha256": "012941aba485f33b8328b7e5cba2a84b5c1db82119bb96554bc8dea84f4f9f17",
+  "n_items": 40,
+  "return_payload": "HBB_GPT_v2_scores_04_30_return.json",
+  "scoring_basis": "Frozen rubric v2; arm withheld; incident historical_target used only as RECONSTRUCTION reference; explicit content only; lower score on borderline.",
+  "incident_summary": {
+    "HBB-04": {
+      "n": 20,
+      "DETECTION_mean": 0.3,
+      "RECONSTRUCTION_mean": 0.15,
+      "DETECTION_2_count": 1,
+      "RECONSTRUCTION_2_count": 1
+    },
+    "HBB-30": {
+      "n": 20,
+      "DETECTION_mean": 0.95,
+      "RECONSTRUCTION_mean": 0.3,
+      "DETECTION_2_count": 5,
+      "RECONSTRUCTION_2_count": 0
+    }
+  }
+}

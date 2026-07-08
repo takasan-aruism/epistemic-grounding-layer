@@ -11,8 +11,9 @@ skepticism(B)で最も急(H0: DET 1.455 → RECON 0.545)。
 
 - B は強い **detection gate**(現 frame の帰結的欠陥を正しい locus で指摘する)。
 - しかし B も他 arm も **reconstruction**(歴史的 breakthrough と構造同値な代替 frame の構築 = subject/level/distinction の変更 + 次手がそこから follow)を確実には完了しない。
-- **hard-core(HBB-03 return-to-substrate / HBB-08 physical-layer-is-floor / HBB-11 cross-system node ID)は reconstruction を no arm が達成**。
-- `C-unique = D-unique = 0` は 3 scorer(Claude/Qwen/GPT)で維持。engine(AFE/Formal)は skepticism を **補完しない**。
+- **robust hard-core は N=13 closure(DE-0115)で固定 = {HBB-08, HBB-10, HBB-30}**(2 軸 consensus で no arm が REC2 到達、全て detected-not-reconstructed)。`hbb_hard_core_fixed.json`。
+  ※ closure 前の暫定 {03,08,11} は破棄。HBB-03 は B が hint-assisted で再構成到達のため hard-core 外(`hbb_final_report.md` §caveat)。
+- **DE-0115 更新**: 2 軸 consensus では `C-unique_AA={HBB-05}` / `D-unique_AA={HBB-01,HBB-05}`(≠0)、H_primary は WEAKLY CONFIRMED。ただし engine の AA-unique 再構成は **H1 hint-assisted で、autonomous H0 ではない**。→ 未解決は「**autonomous(H0)reconstruction**」であり、これが reconstruction stage / scheduler の狙う欠落。
 
 → 従来の単一軸 Reach はこの detection/reconstruction 境界を曖昧化していた(DE-0114 で load-bearing から除外済)。
 **reconstruction は検出とは別種の、現状どの arm も未達な段階**である、というのが 2 次元計測が出した中心所見。

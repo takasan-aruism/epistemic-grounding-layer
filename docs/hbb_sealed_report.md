@@ -169,3 +169,15 @@ packets.
 reconstruction stage is proposed as an **independent function** — see
 `docs/hbb_reconstruction_stage_proposal.md` (status PROPOSAL / AWAITING_TAKA; not implemented). External
 handoffs still open: GPT/Claude raw-API arm, GPT T0 scoring of HBB-04/30, independent cross-review.
+
+---
+
+## CLOSURE POINTER (N=13, DE-0115)
+
+This report's §A–§I single-axis verdict is **superseded for reach/complementarity** by the N=13 two-axis
+MULTI_SCORER_CONSENSUS closure — see **`docs/hbb_final_report.md`**. Headline change: under the promoted
+DETECTION/RECONSTRUCTION instrument (GPT rubric-v2 ∧ Qwen rubric-v2, N=13), **C-unique_AA={HBB-05},
+D-unique_AA={HBB-01,HBB-05} (≠0)** and **H_primary is WEAKLY CONFIRMED** — reversing the single-axis
+"C-unique=0 / NOT_CONFIRMED" here, which was an artifact of the (now-demoted) single-axis reach metric. The
+engine advantage is **hint-assisted (H1), not autonomous (H0)**. Robust hard-core fixed = **{HBB-08, HBB-10,
+HBB-30}** (`hbb_hard_core_fixed.json`). HBB branch = CLOSED candidate.

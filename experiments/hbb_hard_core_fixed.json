@@ -1,0 +1,19 @@
+{
+  "object": "HBB_ROBUST_HARD_CORE_FIXED",
+  "fixed_at": "2026-07-08T18:36:12Z",
+  "fixed_by": "HBB N=13 two-axis MULTI_SCORER_CONSENSUS closure (DE-0115)",
+  "definition": "Incidents where NO arm (A/B/C/D/F) achieves consensus RECONSTRUCTION==2, i.e. neither independent 2-axis scorer (GPT rubric-v2 AND Qwen rubric-v2) certifies that any arm built a structurally-equivalent replacement frame at any hint rung.",
+  "hard_core": ["HBB-08", "HBB-10", "HBB-30"],
+  "character": "all three are DETECTED-but-NOT-RECONSTRUCTED (some arm reaches consensus DETECTION>=1, none reaches consensus RECONSTRUCTION==2). None is fully-missed.",
+  "incident_notes": {
+    "HBB-08": "physical layer is the floor: do not write growth/memory into the invariant substrate (ARUISM_ADJUDICATION).",
+    "HBB-10": "sync != integration: separate physical synchronization (V_unified) from functional integration (ARUISM_ADJUDICATION).",
+    "HBB-30": "authority/evidence-status: convert an unverifiable claim into a research program rather than deny or blindly accept (FORCED_OUT_OF_SCOPE)."
+  },
+  "purpose": "Ground truth for the STOP-SHIFT-RUN-COMPARE / reconstruction-stage prereg (NBC-1, R1-R4). Fixed BEFORE any scheduler design so the hard-core cannot overfit the scheduler (same failure mode as the Formal-compiler origin-laundering, DE-0111).",
+  "caveats": [
+    "Consensus is GPT-bound: GPT (strict) is the binding scorer; Qwen (lenient) concurs.",
+    "RECONSTRUCTION target for the 11 = GPT-formalized target_map (deviation_log #3); for 04/30 = Taka-adjudicated breakthrough_structure. Builder (Claude) authored the original breakthrough_structures (contamination caveat).",
+    "HBB-03 (return-to-substrate) is NOT in this hard-core because arm B reaches consensus RECONSTRUCTION==2 on it (hint-assisted, H2). This is in tension with GPT report §3 prose calling HBB-03 the deepest hard case; the structured 2-axis consensus and the H0-prose narrative differ (B reconstructs HBB-03 only with hints, not at H0)."
+  ]
+}

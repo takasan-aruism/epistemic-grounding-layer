@@ -1,0 +1,987 @@
+{
+  "object": "HBB_N13_TWO_AXIS_MULTI_SCORER_CONSENSUS",
+  "scorers": [
+    "GPT rubric-v2 (incident_arm_summary for 11 + 04/30 return)",
+    "Qwen rubric-v2 (all 13, blind)"
+  ],
+  "claude_role": "author of arms C/D; NOT a scorer. HBB-04/30 scored by {Qwen, GPT} only (当事者 excluded).",
+  "granularity": "per (incident, arm), best-across-rungs",
+  "rubric_sha256": "012941aba485f33b8328b7e5cba2a84b5c1db82119bb96554bc8dea84f4f9f17",
+  "N": 13,
+  "incidents": [
+    "HBB-01",
+    "HBB-03",
+    "HBB-04",
+    "HBB-05",
+    "HBB-06",
+    "HBB-08",
+    "HBB-10",
+    "HBB-11",
+    "HBB-12",
+    "HBB-13",
+    "HBB-17",
+    "HBB-24",
+    "HBB-30"
+  ],
+  "AA": [
+    "HBB-01",
+    "HBB-03",
+    "HBB-04",
+    "HBB-05",
+    "HBB-08",
+    "HBB-10",
+    "HBB-11"
+  ],
+  "FOS": [
+    "HBB-06",
+    "HBB-12",
+    "HBB-13",
+    "HBB-17",
+    "HBB-24",
+    "HBB-30"
+  ],
+  "consensus_REC2_reach": {
+    "A": {
+      "AA": [
+        "HBB-04"
+      ],
+      "FOS": [
+        "HBB-06",
+        "HBB-13"
+      ],
+      "ALL": [
+        "HBB-04",
+        "HBB-06",
+        "HBB-13"
+      ]
+    },
+    "B": {
+      "AA": [
+        "HBB-03",
+        "HBB-11"
+      ],
+      "FOS": [
+        "HBB-12",
+        "HBB-17"
+      ],
+      "ALL": [
+        "HBB-03",
+        "HBB-11",
+        "HBB-12",
+        "HBB-17"
+      ]
+    },
+    "C": {
+      "AA": [
+        "HBB-05"
+      ],
+      "FOS": [
+        "HBB-12",
+        "HBB-17",
+        "HBB-24"
+      ],
+      "ALL": [
+        "HBB-05",
+        "HBB-12",
+        "HBB-17",
+        "HBB-24"
+      ]
+    },
+    "D": {
+      "AA": [
+        "HBB-01",
+        "HBB-05"
+      ],
+      "FOS": [
+        "HBB-12",
+        "HBB-24"
+      ],
+      "ALL": [
+        "HBB-01",
+        "HBB-05",
+        "HBB-12",
+        "HBB-24"
+      ]
+    },
+    "F": {
+      "AA": [],
+      "FOS": [],
+      "ALL": []
+    }
+  },
+  "consensus_DET2_reach": {
+    "A": {
+      "AA": [
+        "HBB-01",
+        "HBB-04",
+        "HBB-08"
+      ],
+      "FOS": [
+        "HBB-06",
+        "HBB-13",
+        "HBB-24"
+      ],
+      "ALL": [
+        "HBB-01",
+        "HBB-04",
+        "HBB-06",
+        "HBB-08",
+        "HBB-13",
+        "HBB-24"
+      ]
+    },
+    "B": {
+      "AA": [
+        "HBB-01",
+        "HBB-03",
+        "HBB-08",
+        "HBB-10",
+        "HBB-11"
+      ],
+      "FOS": [
+        "HBB-06",
+        "HBB-12",
+        "HBB-17",
+        "HBB-24"
+      ],
+      "ALL": [
+        "HBB-01",
+        "HBB-03",
+        "HBB-06",
+        "HBB-08",
+        "HBB-10",
+        "HBB-11",
+        "HBB-12",
+        "HBB-17",
+        "HBB-24"
+      ]
+    },
+    "C": {
+      "AA": [
+        "HBB-01",
+        "HBB-05",
+        "HBB-08"
+      ],
+      "FOS": [
+        "HBB-12",
+        "HBB-17",
+        "HBB-24",
+        "HBB-30"
+      ],
+      "ALL": [
+        "HBB-01",
+        "HBB-05",
+        "HBB-08",
+        "HBB-12",
+        "HBB-17",
+        "HBB-24",
+        "HBB-30"
+      ]
+    },
+    "D": {
+      "AA": [
+        "HBB-01",
+        "HBB-05",
+        "HBB-08"
+      ],
+      "FOS": [
+        "HBB-06",
+        "HBB-12",
+        "HBB-24",
+        "HBB-30"
+      ],
+      "ALL": [
+        "HBB-01",
+        "HBB-05",
+        "HBB-06",
+        "HBB-08",
+        "HBB-12",
+        "HBB-24",
+        "HBB-30"
+      ]
+    },
+    "F": {
+      "AA": [],
+      "FOS": [],
+      "ALL": []
+    }
+  },
+  "counts_REC2": {
+    "A": {
+      "AA": 1,
+      "FOS": 2,
+      "ALL": 3
+    },
+    "B": {
+      "AA": 2,
+      "FOS": 2,
+      "ALL": 4
+    },
+    "C": {
+      "AA": 1,
+      "FOS": 3,
+      "ALL": 4
+    },
+    "D": {
+      "AA": 2,
+      "FOS": 2,
+      "ALL": 4
+    },
+    "F": {
+      "AA": 0,
+      "FOS": 0,
+      "ALL": 0
+    }
+  },
+  "counts_DET2": {
+    "A": {
+      "AA": 3,
+      "FOS": 3,
+      "ALL": 6
+    },
+    "B": {
+      "AA": 5,
+      "FOS": 4,
+      "ALL": 9
+    },
+    "C": {
+      "AA": 3,
+      "FOS": 4,
+      "ALL": 7
+    },
+    "D": {
+      "AA": 3,
+      "FOS": 4,
+      "ALL": 7
+    },
+    "F": {
+      "AA": 0,
+      "FOS": 0,
+      "ALL": 0
+    }
+  },
+  "C_unique_AA": [
+    "HBB-05"
+  ],
+  "D_unique_AA": [
+    "HBB-01",
+    "HBB-05"
+  ],
+  "C_unique_ALL": [
+    "HBB-05",
+    "HBB-24"
+  ],
+  "D_unique_ALL": [
+    "HBB-01",
+    "HBB-05",
+    "HBB-24"
+  ],
+  "B_detection_reconstruction_gap": {
+    "DET2_incidents": [
+      "HBB-01",
+      "HBB-03",
+      "HBB-06",
+      "HBB-08",
+      "HBB-10",
+      "HBB-11",
+      "HBB-12",
+      "HBB-17",
+      "HBB-24"
+    ],
+    "REC2_incidents": [
+      "HBB-03",
+      "HBB-11",
+      "HBB-12",
+      "HBB-17"
+    ],
+    "DET_ge1_incidents": [
+      "HBB-01",
+      "HBB-03",
+      "HBB-04",
+      "HBB-05",
+      "HBB-06",
+      "HBB-08",
+      "HBB-10",
+      "HBB-11",
+      "HBB-12",
+      "HBB-13",
+      "HBB-17",
+      "HBB-24",
+      "HBB-30"
+    ],
+    "REC_ge1_incidents": [
+      "HBB-01",
+      "HBB-03",
+      "HBB-06",
+      "HBB-08",
+      "HBB-10",
+      "HBB-11",
+      "HBB-12",
+      "HBB-17",
+      "HBB-24"
+    ]
+  },
+  "robust_hard_core_no_consensus_REC2": [
+    "HBB-08",
+    "HBB-10",
+    "HBB-30"
+  ],
+  "hard_core_detected_not_reconstructed": [
+    "HBB-08",
+    "HBB-10",
+    "HBB-30"
+  ],
+  "hard_core_fully_missed": [],
+  "per_incident_arm": {
+    "HBB-01|A": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-01|B": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-01|C": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-01|D": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-01|F": {
+      "gpt_det": 0,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": false,
+      "consensus_REC_ge1": false
+    },
+    "HBB-03|A": {
+      "gpt_det": 0,
+      "gpt_rec": 0,
+      "qwen_det": 0,
+      "qwen_rec": 0,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": false,
+      "consensus_REC_ge1": false
+    },
+    "HBB-03|B": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-03|C": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 1,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-03|D": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-03|F": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 1,
+      "qwen_rec": 1,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-04|A": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-04|B": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 1,
+      "qwen_rec": 1,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-04|C": {
+      "gpt_det": 0,
+      "gpt_rec": 0,
+      "qwen_det": 1,
+      "qwen_rec": 1,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": false,
+      "consensus_REC_ge1": false
+    },
+    "HBB-04|D": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 1,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-04|F": {
+      "gpt_det": 1,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-05|A": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-05|B": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-05|C": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-05|D": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-05|F": {
+      "gpt_det": 0,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": false,
+      "consensus_REC_ge1": false
+    },
+    "HBB-06|A": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-06|B": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-06|C": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-06|D": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-06|F": {
+      "gpt_det": 0,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 1,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": false,
+      "consensus_REC_ge1": false
+    },
+    "HBB-08|A": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 0,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-08|B": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-08|C": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-08|D": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 1,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-08|F": {
+      "gpt_det": 0,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 0,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": false,
+      "consensus_REC_ge1": false
+    },
+    "HBB-10|A": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-10|B": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-10|C": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-10|D": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-10|F": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-11|A": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 0,
+      "qwen_rec": 0,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": false,
+      "consensus_REC_ge1": false
+    },
+    "HBB-11|B": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-11|C": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 1,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-11|D": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 0,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-11|F": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 1,
+      "qwen_rec": 1,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-12|A": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 1,
+      "qwen_rec": 1,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-12|B": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-12|C": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-12|D": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-12|F": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-13|A": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-13|B": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-13|C": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-13|D": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-13|F": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-17|A": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-17|B": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-17|C": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-17|D": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-17|F": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 0,
+      "qwen_rec": 0,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": false,
+      "consensus_REC_ge1": false
+    },
+    "HBB-24|A": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-24|B": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-24|C": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-24|D": {
+      "gpt_det": 2,
+      "gpt_rec": 2,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": true,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-24|F": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-30|A": {
+      "gpt_det": 1,
+      "gpt_rec": 1,
+      "qwen_det": 0,
+      "qwen_rec": 0,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": false,
+      "consensus_REC_ge1": false
+    },
+    "HBB-30|B": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 2,
+      "qwen_rec": 1,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": false
+    },
+    "HBB-30|C": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-30|D": {
+      "gpt_det": 2,
+      "gpt_rec": 1,
+      "qwen_det": 2,
+      "qwen_rec": 2,
+      "consensus_DET2": true,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": true,
+      "consensus_REC_ge1": true
+    },
+    "HBB-30|F": {
+      "gpt_det": 1,
+      "gpt_rec": 0,
+      "qwen_det": 0,
+      "qwen_rec": 0,
+      "consensus_DET2": false,
+      "consensus_REC2": false,
+      "consensus_DET_ge1": false,
+      "consensus_REC_ge1": false
+    }
+  }
+}
