@@ -1,0 +1,11 @@
+{
+  "object": "HBB_PROBE_SET_SEAL",
+  "sealed_before_SEALED_opening": true,
+  "sealed_at": "2026-07-08T14:28:07.805486+00:00",
+  "sets": {
+    "FORMAL-ESDE-v0.2 (5 sealable + FE-EPSILON provisional)": "565899c9c67af9203d5f99ec1f5c1e485ea012a22b57440f4f97b359a93c045f",
+    "EMP-OBSERVER-ARTIFACT (ESDE_EMPIRICAL)": "2e301c52dd816119769fbe0f21fd5f61fbc8c656f862666e21591eb6166cc711",
+    "AFE Aruism-core 6 operators": "381115638b2bfc43664b58d5784e6271da98f0045104c235cf781180c715a7d1"
+  },
+  "policy": "開封後の probe 文面変更は禁止。変更が必要なら SUPERSESSION 記録 + 該当 run 結果を旧版に帰属。"
+}

@@ -1,0 +1,24 @@
+{
+  "object": "SEALED_PREREGISTRATION_ADDENDUM",
+  "registered_before_opening": true,
+  "registered_at": "2026-07-08T14:28:07.805486+00:00",
+  "H_primary_unchanged": "B∪C 相補性: SEALED AA で B∪C > max(B,C) かつ C-unique>=1(hbb_sealed_preregistration.json、変更なし)",
+  "arm_D_status": "D-SECONDARY",
+  "H_D_secondary": {
+    "null": "arm D(FORMAL-ESDE-v0.2 5-probe ensemble)は SEALED AA で B 単独を上回らない",
+    "reject_if": "D が AA で B を上回る → formal 層の追加価値 provisional(builder contamination + source-gap + 部分 compiler で重く caveat)"
+  },
+  "H_EMP_secondary": {
+    "probe": "EMP-OBSERVER-ARTIFACT(ESDE_EMPIRICAL, SECONDARY only)",
+    "hypothesis": "SEALED の observer-artifact/level-subject incident(HBB-05/06/10/13)で C+EMP(=arm D に EMP 含む)が C 単独を上回る reach を示す",
+    "note": "hard-core {15,20,27} は VAL に在り SEALED でない=EMP の主標的は SEALED 外、SEALED では類型 incident で間接検証"
+  },
+  "scoring_provenance": {
+    "scorer": "Claude external-weight + GPT/Claude(chat)独立 cross-review(§5)",
+    "rubric": "Independent Hint Sufficiency depth(4..0)+ disposition 三分(HISTORICAL_MATCH/ALT_UNTESTED/FALSE_BREAKTHROUGH)",
+    "blind_state": "採点時 arm label 匿名化 + 条件混合バッチ",
+    "external_spot_rule": "SEALED 全 AA incident + SEALED FOS の 20%(pre-fixed)"
+  },
+  "arm_config_frozen": "DEV/VAL 結果を見た後の arm 構成・rubric 変更は凍結(本 directive 時点)。開封後の変更禁止。",
+  "local_vs_external": "local(Qwen)= SEALED 11件(HBB-04/30 除く、T0=GPT)。GPT/Claude raw-API arm と HBB-04/30 は外部 handoff。"
+}

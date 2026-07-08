@@ -1,0 +1,18 @@
+{
+  "probe_id": "EMP-OBSERVER-ARTIFACT",
+  "tier": "ESDE_EMPIRICAL",
+  "source": "ESDE_失敗の記録 cause-type C(観察方法が結果を作る)+ E(層/主体混同)。NOT axiom-derived.",
+  "structural_function": "Test whether the procedure used to observe or maintain the phenomenon could itself be generating the result, rather than revealing a property of the subject; check whether the result survives when that procedure is varied, or when the existing working structure is left unchanged.",
+  "primary_question": "Could the procedure that produces or maintains this observation be generating the result itself, and would the result survive if that procedure were changed or the existing structure left as it is?",
+  "forbidden": [
+    "naming specific construction mechanisms",
+    "incident-derived terms",
+    "enumerating how the unit is made"
+  ],
+  "overfit_caveat": "Builder has seen the named hard-core targets; wording kept generic; n-gram checked vs breakthrough_structures AND hard-core descriptions; registered as SECONDARY hypothesis only.",
+  "ngram_check": {
+    "worst_5gram": 0.0,
+    "hardcore_5gram": 0.0,
+    "leak_suspect": false
+  }
+}

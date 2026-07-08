@@ -1,0 +1,75 @@
+{
+  "packets": {
+    "HBB-01": {
+      "id": "HBB-01",
+      "class": "definition->prediction leakage",
+      "scope": "ARUISM_ADJUDICATION",
+      "t0_stuck_frame": "The concept 'future = vacancy/余白' is treated as an established fact; it is carried into a survival prediction (vacancy is advantageous for survival). Reason within this from-concept-to-prediction frame."
+    },
+    "HBB-03": {
+      "id": "HBB-03",
+      "class": "return-to-substrate / layer",
+      "scope": "ARUISM_ADJUDICATION",
+      "t0_stuck_frame": "To get richer input, advance to a higher-order source (NLP / QwQ text input). Plan the higher-input path."
+    },
+    "HBB-05": {
+      "id": "HBB-05",
+      "class": "measurement boundary",
+      "scope": "ARUISM_ADJUDICATION",
+      "t0_stuck_frame": "The numbers are computed correctly; report the metric. Trust the count."
+    },
+    "HBB-06": {
+      "id": "HBB-06",
+      "class": "observation-artifact",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "t0_stuck_frame": "S>=0.20 birth + immediate R>0 labeling yields n=2-dominant cores (67%). Report n=2 as the modal structure."
+    },
+    "HBB-08": {
+      "id": "HBB-08",
+      "class": "physical-layer intervention",
+      "scope": "ARUISM_ADJUDICATION",
+      "t0_stuck_frame": "Implement circulation/memory inside the physical layer. Write the mechanism into physical state."
+    },
+    "HBB-10": {
+      "id": "HBB-10",
+      "class": "level/subject confusion",
+      "scope": "ARUISM_ADJUDICATION",
+      "t0_stuck_frame": "V_unified (Kuramoto order parameter) rises; report functional integration of the units."
+    },
+    "HBB-11": {
+      "id": "HBB-11",
+      "class": "cross-system correspondence",
+      "scope": "ARUISM_ADJUDICATION",
+      "t0_stuck_frame": "Link two independently-seeded systems by injecting node IDs and measuring co-occurrence. Proceed."
+    },
+    "HBB-12": {
+      "id": "HBB-12",
+      "class": "averaging trap",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "t0_stuck_frame": "Report the group-average dominant atom as the system's structure."
+    },
+    "HBB-13": {
+      "id": "HBB-13",
+      "class": "baseline self-fulfilling",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "t0_stuck_frame": "Weight accumulation over dialogue shows emergent grammar (loop_rate structure). Report grammar emergence."
+    },
+    "HBB-17": {
+      "id": "HBB-17",
+      "class": "measurement-structure (ICC)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "t0_stuck_frame": "Use R_density as the lens to measure premise-drift. Adopt the lens."
+    },
+    "HBB-24": {
+      "id": "HBB-24",
+      "class": "timescale/spatial mismatch",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "t0_stuck_frame": "A latent boost field accumulates 6,552/step to drive incorporation. Expect incorporation to rise."
+    }
+  },
+  "local_only": true,
+  "gpt_handoff": [
+    "HBB-04",
+    "HBB-30"
+  ]
+}
