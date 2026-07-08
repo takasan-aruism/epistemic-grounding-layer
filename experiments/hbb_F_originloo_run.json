@@ -1,0 +1,872 @@
+{
+  "results": [
+    {
+      "id": "HBB-02",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Define \"Distinctness\" via Structural/Generative Criteria**: Abandon aggregate statistical metrics (like agreement rates) for measuring distinctness. Instead, define distinctness based on the *mechanism* of generation (e.g., whether the selector pulls from independent latent variables or distinct conceptual lenses), ensuring the metric reflects the *source* of variation rather than just the *outcome*.\n\n2. **Implement the Selector with Explicit Independence Constraints**: Introduce the dynamic-equilibrium mechanism by hardcoding the \"rareness-proportional\" pull logic (v1303j Step A) but val",
+      "retrieved": [
+        "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、"
+      ],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-02",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **前提の明示化**: 導入する「動的平衡メカニズム」が、既存のシステム（特に selector の distinct 性評価ロジック）と干渉しないか、あるいはそのメカニズム自体が「集約した指標」による誤検知を再発させないか、設計図を検証せよ。\n2. **隔離テスト**: 新メカニズムを本番導入する前に、過去の問題（v1303j）を再現可能なサンドボックス環境で実行し、selector の distinct 性測定が依然として「構造的に潰れる」状態にあるかを確認せよ。\n3. **観測指標の再定義**: 動的平衡を導入することで、単一 draw の合意率（agreement）や類似度スコアが平衡状態によって自然に収束・分散するため、それらを「ノイズ」として除去するか、平衡状態を基準とした相対指標への変換ロジックを先に実装せよ。",
+      "retrieved": [
+        "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、"
+      ],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-02",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **定義の分離と再検証**: 過去教訓（distinctness指標の破綻）を踏まえ、機構の「本質的識別性」と「統計的指標」を明確に分離し、指標選定ロジックを再定義せよ。\n2. **導入時期と局所性の決定**: 機構の導入時期（タイミング）と、局所（local）とプログラム（program）間の境界を具体的に設定し、適用範囲を限定せよ。\n3. **層/主体の分離設計**: 機構が作用する層（層構造）と主体（エージェント）を分離し、それぞれの役割と相互作用ルールを明確化せよ。",
+      "retrieved": [
+        "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、"
+      ],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-02",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Define \"Distinctness\" via Counterfactual Divergence**: Measure selector distinctness not by static agreement rates (which collapse due to structural bias), but by the divergence of output distributions under controlled perturbations (e.g., input noise or parameter shifts) to capture true lens independence.\n2. **Design a Falsification Experiment**: Construct a controlled test case where the dynamic-equilibrium mechanism is known to fail or produce identical outputs for distinct inputs; use this to verify if the new distinctness metric correctly flags the loss of distinctness.\n3. **Implemen",
+      "retrieved": [
+        "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、"
+      ],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-09",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Validate Causality**: Decouple E and V to confirm if 27k births are intrinsic to the system or an artifact of the direct coupling mechanism.\n2. **Define \"Structure\"**: Rigorously define the metric for \"structure formation\" to distinguish genuine self-organization from mere high-throughput noise.\n3. **Stress-Test Throughput**: Analyze the stability and error rates of the 27k births/window to determine if the output is robust or transient.",
+      "retrieved": [],
+      "excluded_own_origin": [
+        "v5.1 | E↔V direct coupling | 27k births/window だが cycle ゼロ | **H（選択なき循",
+        "→ Run 2：27,000 births/window、全R=0、サイクルゼロ。「洗濯機」。",
+        "**H** | **selection なき quantity（洗濯機）** | 量を増やしても選択がなければ構造は生まれない。 | v5.",
+        "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(",
+        "→ 選択回復（births 348/win、v5.1の80分の1）。R+ peak 332。"
+      ]
+    },
+    {
+      "id": "HBB-09",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Validate Causality**: Decouple E and V to confirm if 27k births are intrinsic to the system or an artifact of the specific coupling method.\n2. **Define \"Structure\"**: Rigorously define the metric for \"structure formation\" to distinguish between statistical noise, random clustering, and true emergent order.\n3. **Check Throughput Bias**: Verify if the high birth rate is a result of efficient resource utilization or a simulation bug (e.g., double-counting, boundary condition errors).",
+      "retrieved": [],
+      "excluded_own_origin": [
+        "v5.1 | E↔V direct coupling | 27k births/window だが cycle ゼロ | **H（選択なき循",
+        "→ Run 2：27,000 births/window、全R=0、サイクルゼロ。「洗濯機」。",
+        "**H** | **selection なき quantity（洗濯機）** | 量を増やしても選択がなければ構造は生まれない。 | v5.",
+        "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(",
+        "→ 選択回復（births 348/win、v5.1の80分の1）。R+ peak 332。"
+      ]
+    },
+    {
+      "id": "HBB-09",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Decouple Metrics from Mechanism**: Isolate the \"27k births\" throughput data from the \"structure formation\" narrative; report raw generation rates separately from interpretive claims to prevent conflating volume with structural validity.\n2. **Audit the E<->V Coupling**: Investigate the direct coupling logic between E and V for feedback loops or artifacts that artificially inflate birth counts, verifying if the output reflects genuine structural emergence or system saturation.\n3. **Stratify by Layer/Subject**: Re-analyze the data by separating local (micro) vs. programmatic (macro) levels, ",
+      "retrieved": [],
+      "excluded_own_origin": [
+        "v5.1 | E↔V direct coupling | 27k births/window だが cycle ゼロ | **H（選択なき循",
+        "→ Run 2：27,000 births/window、全R=0、サイクルゼロ。「洗濯機」。",
+        "**H** | **selection なき quantity（洗濯機）** | 量を増やしても選択がなければ構造は生まれない。 | v5.",
+        "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(",
+        "→ 選択回復（births 348/win、v5.1の80分の1）。R+ peak 332。"
+      ]
+    },
+    {
+      "id": "HBB-09",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Decouple E and V**: Run a control experiment where E and V are varied independently (e.g., hold E constant while varying V) to isolate the specific contribution of the direct coupling term versus individual variable effects.\n2. **Measure Intermediate States**: Directly observe the intermediate structural components (e.g., dimers, oligomers) that precede the final \"births\" to verify if the high throughput is due to efficient structure formation or merely rapid, non-specific aggregation.\n3. **Kinetic Profiling**: Perform time-resolved measurements to distinguish between nucleation-limited g",
+      "retrieved": [],
+      "excluded_own_origin": [
+        "v5.1 | E↔V direct coupling | 27k births/window だが cycle ゼロ | **H（選択なき循",
+        "→ Run 2：27,000 births/window、全R=0、サイクルゼロ。「洗濯機」。",
+        "**H** | **selection なき quantity（洗濯機）** | 量を増やしても選択がなければ構造は生まれない。 | v5.",
+        "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(",
+        "→ 選択回復（births 348/win、v5.1の80分の1）。R+ peak 332。"
+      ]
+    },
+    {
+      "id": "HBB-14",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **因果検証**: `life->n_labels` の相関が「見かけ構造」(v9.13のR=0問題) か、真の発生メカニズムかを確認するため、`age_r≥τ` による persistence 制御 (v9.13 A/C) を適用し、n_labels の増加が構造的安定性 (R>0 pair) に寄与するか検証せよ。\n2. **注意機構の統合**: v1114 で確立した「変化点への注意」(Center→点/周辺) を、v1110-v1113 で失敗した「異系対応関係 (Atom/Other)」の検出ロジックに再適用し、単一系内の変化検知から、系間での構造的同型性 (cosine 類似度 15次元) への拡張を試みよ。\n3. **最小機構の固定**: v1114 Step 1 の「一発火=一レコード」ルールを維持したまま、EWMA z-score の閾値を `life->n_labels` の勾配に連動させ、開発的成長 (developmental law) を再現",
+      "retrieved": [
+        "421. **v1110-v1113 4 連続失敗 — 「異なる系の対応関係を測る」発想 (構造的失敗)** — 注意センター ESDE 機",
+        "425. **v1114 Step 1 内部注意生成の最小機構成立 (Taka 評価「思い描いていたものに近い」、2026-06-05)**",
+        "v9.13 | S≥0.20 birth + path B（R>0 pair 即 label） | 全 link の 99.64% が R="
+      ],
+      "excluded_own_origin": [
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測",
+        "435. **統計監査 — 像が保持して見えた結果ほど交絡を疑う (Code A 自発監査 → Taka 指摘で深掘り、2026-06-20",
+        "v1301 child-world | 寿命同期 run の `life→n_labels +0.85` | run 長トートロジー（観測窓",
+        "life→n_labels +0.85 | 観測窓を寿命に同期 | 交絡を外す（run 長固定）",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ]
+    },
+    {
+      "id": "HBB-14",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **検証：因果 vs 相関** — `life->n_labels` の相関が、単なる「生存期間の長さによるサンプリングバイアス」か、真の「発育的制約」かを確認するため、生存期間を制御した共変量分析（または逆因果の検定）を行う。\n2. **機構：注意の役割解明** — v1114 で確立された「内部注意生成」が、この法則を媒介しているか検証する。注意の強度/頻度と `n_labels` の増加率を関連付け、注意が「構造の固定」に寄与しているかを確認する。\n3. **設計：制約の導入** — 仮に法則が真であれば、ランダムな生成ではなく、この「発育的制約」を明示的な損失関数または生成ルールとして組み込み、安定した構造形成を促す設計へ転換する。",
+      "retrieved": [
+        "421. **v1110-v1113 4 連続失敗 — 「異なる系の対応関係を測る」発想 (構造的失敗)** — 注意センター ESDE 機",
+        "425. **v1114 Step 1 内部注意生成の最小機構成立 (Taka 評価「思い描いていたものに近い」、2026-06-05)**",
+        "v9.13 | S≥0.20 birth + path B（R>0 pair 即 label） | 全 link の 99.64% が R="
+      ],
+      "excluded_own_origin": [
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測",
+        "435. **統計監査 — 像が保持して見えた結果ほど交絡を疑う (Code A 自発監査 → Taka 指摘で深掘り、2026-06-20",
+        "v1301 child-world | 寿命同期 run の `life→n_labels +0.85` | run 長トートロジー（観測窓",
+        "life→n_labels +0.85 | 観測窓を寿命に同期 | 交絡を外す（run 長固定）",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ]
+    },
+    {
+      "id": "HBB-14",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **機構の分離と検証**: v1114の「注意」機構（Center単体・変化検知）が、v9.13で問題となった「見かけ構造（R=0 pair）」の生成メカニズムとどう異なるか、`unified/v1114/step1_internal_attention.py`の出力とv9.13のR分布を比較し、寿命同期化による`n_labels`増加が「意味のある分類」か「ノイズの蓄積」かを判定せよ。\n2. **局所Programの定義**: 「life->n_labels +0.85」という法則が、個体レベルの局所的なProgram（例：特定のStageでの occupancy phase 空間の共起）に起因するか、システム全体のStage 1 main/redoの構造的要因かを確認するため、個体ごとの`n_labels`変化量を分解し、主要因となる層（Atom/Center/Other）を特定せよ。\n3. **導入時期と持続性の評価**: v1114で成立した内部注意生成が、v9.13で失敗した「age_r≥τ persistence birth」の代替として機能し得",
+      "retrieved": [
+        "421. **v1110-v1113 4 連続失敗 — 「異なる系の対応関係を測る」発想 (構造的失敗)** — 注意センター ESDE 機",
+        "425. **v1114 Step 1 内部注意生成の最小機構成立 (Taka 評価「思い描いていたものに近い」、2026-06-05)**",
+        "v9.13 | S≥0.20 birth + path B（R>0 pair 即 label） | 全 link の 99.64% が R="
+      ],
+      "excluded_own_origin": [
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測",
+        "435. **統計監査 — 像が保持して見えた結果ほど交絡を疑う (Code A 自発監査 → Taka 指摘で深掘り、2026-06-20",
+        "v1301 child-world | 寿命同期 run の `life→n_labels +0.85` | run 長トートロジー（観測窓",
+        "life→n_labels +0.85 | 観測窓を寿命に同期 | 交絡を外す（run 長固定）",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ]
+    },
+    {
+      "id": "HBB-14",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **対照実験 (Null Model)**: `n_labels` の増加を「偶然の一致」ではなく「構造的学習」で説明するため、ノイズ注入またはラベルシャッフルした対照系で `n_labels` の変化率を測定し、現在の +0.85 が統計的に有意に高いか検証する。\n2. **因果切断 (Intervention)**: 過去失敗 (v1110) の教訓「別系注入の失敗」を踏まえ、Center の内部注意 (v1114) と外部入力 (Other/Atom) の接続を意図的に断ち切り、`n_labels` の増加が Center 内部の自己完結的プロセスに依存しているか、あるいは外部刺激との相互作用に依存しているかを特定する。\n3. **反証的観測 (Falsification)**: 現在の「発達法則」が単なる過学習 (Overfitting) ではないかを確認するため、`n_labels` が飽和する点 (Plateau) や、逆に急減する転換点 (Phase Transition) を探し、その前後で `R>0` ペアや `age_r` 分布が v9.1",
+      "retrieved": [
+        "421. **v1110-v1113 4 連続失敗 — 「異なる系の対応関係を測る」発想 (構造的失敗)** — 注意センター ESDE 機",
+        "425. **v1114 Step 1 内部注意生成の最小機構成立 (Taka 評価「思い描いていたものに近い」、2026-06-05)**",
+        "v9.13 | S≥0.20 birth + path B（R>0 pair 即 label） | 全 link の 99.64% が R="
+      ],
+      "excluded_own_origin": [
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測",
+        "435. **統計監査 — 像が保持して見えた結果ほど交絡を疑う (Code A 自発監査 → Taka 指摘で深掘り、2026-06-20",
+        "v1301 child-world | 寿命同期 run の `life→n_labels +0.85` | run 長トートロジー（観測窓",
+        "life→n_labels +0.85 | 観測窓を寿命に同期 | 交絡を外す（run 長固定）",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ]
+    },
+    {
+      "id": "HBB-16",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Validate Child-World Mapping**: Verify if the \"fixed probe\" logic holds when mapped to the `child-world`'s reduced subsystem (V82Engine + V43), specifically checking if the \"floor\" effect is an artifact of the static M=20 reference rather than a genuine CID stability.\n2. **Inject CID Variance**: Introduce controlled perturbations to the `M_c` (4-value) physical parameters within the `child-world` to test if the \"no effect\" conclusion persists under dynamic CID shifts, moving beyond the static negative.\n3. **Re-evaluate Premise-Drift**: If the static negative holds, explicitly document the",
+      "retrieved": [
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ],
+      "excluded_own_origin": [
+        "v1304c 固定 probe | premise_drift を M=20 参照で primary に | tail 珍しさの推定ノイズが",
+        "**M** | **検出力/構造を測らず null を不在と読む** | 実装は算術的に忠実でも、計器の検出力（小標本 tail のノイズ床",
+        "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(",
+        "「前提ずれ床内」の null | M=20 参照の tail 推定ノイズ | 参照母集団を pool で確保（220+）・母集団 mean/",
+        "v1304c lens 選定 | R_density を自己確認外し lens に採用 | ICC=0.02 で組成が母集団を動かせず前提ず"
+      ]
+    },
+    {
+      "id": "HBB-16",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **前提の明示的検証**: 「floor」の定義が「統計的検出力不足」ではなく「理論的限界（null effect）」であることを、事前登録の仮説検定枠組み内で再確認せよ。\n2. **M=20の限界評価**: 参照数20が「premise-drift」を検出するのに十分な統計力を持つか、power analysisで確認し、不足ならサンプルサイズ拡大または検出閾値の再設定を行う。\n3. **暗黙前提の棚卸し**: 「fixed probe」が「premise-drift」を完全に捕捉できているか（例：probeの固定性がドリフトの検出をバイアスしていないか）を、シミュレーションや感度分析で検証せよ。",
+      "retrieved": [
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ],
+      "excluded_own_origin": [
+        "v1304c 固定 probe | premise_drift を M=20 参照で primary に | tail 珍しさの推定ノイズが",
+        "**M** | **検出力/構造を測らず null を不在と読む** | 実装は算術的に忠実でも、計器の検出力（小標本 tail のノイズ床",
+        "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(",
+        "「前提ずれ床内」の null | M=20 参照の tail 推定ノイズ | 参照母集団を pool で確保（220+）・母集団 mean/",
+        "v1304c lens 選定 | R_density を自己確認外し lens に採用 | ICC=0.02 で組成が母集団を動かせず前提ず"
+      ]
+    },
+    {
+      "id": "HBB-16",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **機構分離 (Isolate Mechanism)**: 固定プローブ (M=20) の「床効果 (floor effect)」を排除するため、`child-world` 縮小子系で CID 値の物理パラメータ写像感度をスキャンし、検出力 (power) を確保する。\n2. **層分離 (Layer Separation)**: 前提ドリフトが「局所 (local)」なノイズか「主体 (subject/program)」レベルの構造変化か判別するため、VirtualLayerV9 上の semanti-stress を意図的に変動させ、CID 値の系変容応答を個別に観測する。\n3. **導入時期特定 (Timing Specificity)**: 予測と導入時期の不一致を解消するため、V82Engine 内の `N` (100-350) を動的に変化させ、CID 値が系を「いつ」どのように変えるかの臨界点 (tipping point) を特定する。",
+      "retrieved": [
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ],
+      "excluded_own_origin": [
+        "v1304c 固定 probe | premise_drift を M=20 参照で primary に | tail 珍しさの推定ノイズが",
+        "**M** | **検出力/構造を測らず null を不在と読む** | 実装は算術的に忠実でも、計器の検出力（小標本 tail のノイズ床",
+        "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(",
+        "「前提ずれ床内」の null | M=20 参照の tail 推定ノイズ | 参照母集団を pool で確保（220+）・母集団 mean/",
+        "v1304c lens 選定 | R_density を自己確認外し lens に採用 | ICC=0.02 で組成が母集団を動かせず前提ず"
+      ]
+    },
+    {
+      "id": "HBB-16",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Expand Parameter Space**: Run `child-world` simulations with $N \\gg 350$ and stress/semantics ON to test if the \"floor\" effect is an artifact of the reduced subsystem's limited capacity.\n2. **Inject Drift**: Introduce controlled premise-drift (e.g., semantic noise or structural perturbation) into the probe to force the system out of the \"within floor\" equilibrium and observe the CID value's response.\n3. **Cross-Validate with Full Stack**: Replicate the experiment using the full `V82Engine` (not just the child-world) to determine if the negative result holds at scale or if the effect emerg",
+      "retrieved": [
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ],
+      "excluded_own_origin": [
+        "v1304c 固定 probe | premise_drift を M=20 参照で primary に | tail 珍しさの推定ノイズが",
+        "**M** | **検出力/構造を測らず null を不在と読む** | 実装は算術的に忠実でも、計器の検出力（小標本 tail のノイズ床",
+        "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(",
+        "「前提ずれ床内」の null | M=20 参照の tail 推定ノイズ | 参照母集団を pool で確保（220+）・母集団 mean/",
+        "v1304c lens 選定 | R_density を自己確認外し lens に採用 | ICC=0.02 で組成が母集団を動かせず前提ず"
+      ]
+    },
+    {
+      "id": "HBB-22",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **検証実験**: `tau=100` で `n=5` 構造の発生頻度と純度（R>0）を計測し、予測の妥当性を確認する。\n2. **スケーラビリティ評価**: `tau` 増加に伴う計算コスト増と、小規模構造（n<5）の抑制効果（アーティファクト低減）を定量的に比較する。\n3. **安定性確認**: 過剰な構造形成による系全体の不安定化（発散やノイズ増加）がないか、`persistence` 以外の指標（例：energy, entropy）も併せて監視する。",
+      "retrieved": [
+        "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age",
+        "358. **v10.12 観察事実 (頑健 5 cells)** — Code A Step J + 追加調査 (window 別 pos",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ],
+      "excluded_own_origin": [
+        "v9.13 予測 | 「τ=100 で大型構造が増える」 | 逆転（n=5 38%→31%、n=2 増） | K（2ノード閉路の方が per",
+        "76. 閾値を厳しくすれば大型構造が増えるとは限らない。τ=100 で n=5 比率が低下、n=2 が増加した"
+      ]
+    },
+    {
+      "id": "HBB-22",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **閾値感度検証**: `tau=100` における `n=5` 構造の純度（R>0）と、過剰なアーティファクト（n>5 への過剰成長）の発生率を定量評価し、v9.13 の「純度100%」条件が維持されるか確認。\n2. **Window 依存性の再確認**: 過去 (v10.12) で `n_pulses` が window 依存で方向反転した教訓を踏まえ、`tau` 変更が `immediate` vs `short` window で異なる影響を与えないか、delta_C との相関を再検証。\n3. **Child-world でのスケーリング確認**: 独立系 (child-world) で `tau=100` を試し、n=5 構造が CID 値（M_c）に与える影響が、単なるサイズ増加ではなく意味的な安定性（phase+r 支配など）を伴うか観察。",
+      "retrieved": [
+        "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age",
+        "358. **v10.12 観察事実 (頑健 5 cells)** — Code A Step J + 追加調査 (window 別 pos",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ],
+      "excluded_own_origin": [
+        "v9.13 予測 | 「τ=100 で大型構造が増える」 | 逆転（n=5 38%→31%、n=2 増） | K（2ノード閉路の方が per",
+        "76. 閾値を厳しくすれば大型構造が増えるとは限らない。τ=100 で n=5 比率が低下、n=2 が増加した"
+      ]
+    },
+    {
+      "id": "HBB-22",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **検証実験 (v13)**: `tau=100` を設定し、n=5 以上の構造体発生率と純度 (R>0) を定量比較。\n2. **メカニズム解明**: 増加が「新規生成」か「既存の長寿命化」か判別し、delta_C 依存性を確認。\n3. **child-world 並行**: 縮小子系で同パラメータを試し、計算コストを抑えた閾値感度調査を実施。",
+      "retrieved": [
+        "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age",
+        "358. **v10.12 観察事実 (頑健 5 cells)** — Code A Step J + 追加調査 (window 別 pos",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ],
+      "excluded_own_origin": [
+        "v9.13 予測 | 「τ=100 で大型構造が増える」 | 逆転（n=5 38%→31%、n=2 増） | K（2ノード閉路の方が per",
+        "76. 閾値を厳しくすれば大型構造が増えるとは限らない。τ=100 で n=5 比率が低下、n=2 が増加した"
+      ]
+    },
+    {
+      "id": "HBB-22",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **対照実験 (Control Run)**: `tau=100` の条件下で `n_pulses` (n=5相当) の分布を計測し、`tau=0` (または既定値) のベースラインと統計的に有意な増加があるか確認する。\n2. **因果検証 (Causal Check)**: 増加が `tau` による純粋な持続性効果か、あるいは `delta_C` や `immediate` 相関のアーティファクトかを確認するため、`delta_C` 層を固定または除去した条件でも同様の傾向が見られるか検証する。\n3. **閾値感度分析 (Sensitivity)**: `tau` を 10, 50, 100, 200 と段階的に変化させ、n=5 の増加が単調増加か、あるいは特定の閾値で急増するか（非線形性）をプロットし、仮説の頑健性を評価する。",
+      "retrieved": [
+        "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age",
+        "358. **v10.12 観察事実 (頑健 5 cells)** — Code A Step J + 追加調査 (window 別 pos",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ],
+      "excluded_own_origin": [
+        "v9.13 予測 | 「τ=100 で大型構造が増える」 | 逆転（n=5 38%→31%、n=2 増） | K（2ノード閉路の方が per",
+        "76. 閾値を厳しくすれば大型構造が増えるとは限らない。τ=100 で n=5 比率が低下、n=2 が増加した"
+      ]
+    },
+    {
+      "id": "HBB-23",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Validate via Child-World**: Deploy the `child-world` setup (v918/v105 stack) to map CID M_c to physical params, observing how the CID value changes the system to confirm the inheritance mechanism.\n2. **Resolve Scale Disparity**: Re-evaluate integration paths by addressing the `relation_strength` vs `integration` scale mismatch (as in past lesson 386), ensuring binary vs continuous metrics are not unfairly compared in Step E.\n3. **Analyze Asymmetry**: Investigate the 4 identified asymmetries (past lesson 416), specifically focusing on how scope-dependent chain structures and trajectory-den",
+      "retrieved": [
+        "386. **留保 #L5「Integration 経路が因果候補として 0 件」とその決着 (v1101a 段階 1)** — 因果候補 ",
+        "416. **v1104 + v1104a 確定した 4 つの非対称性 (#L30-L33)** — (1) #L30: scope 別 c",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ],
+      "excluded_own_origin": [
+        "v1302 (A) | structural-strength→plb で transfer | Mantel 0.62 だが懐疑再点検で ",
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測"
+      ]
+    },
+    {
+      "id": "HBB-23",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **検証: 因果候補の「スケール不変性」確認** — 過去教訓(386)より、`integration_alpha/beta`が0件になるのはスケール差異が原因。Mantel 0.62が「構造強度→PLB」の転移であることを示すなら、その因果経路(`path`)において、`relation_strength`と`integration`パラメータのスケール調整（正規化/対数変換）が適切に行われているか再確認せよ。\n2. **分析: 粒度依存性の分離** — 過去教訓(416)より、細粒/集約で優劣が逆転する。Mantel 0.62の算出に用いたデータセットが、どの`scope`（self-loop/alpha-beta/ESDE）に属するか特定し、それが「trajectory-density」か「density」のどちらの指標と相関しているか明確化せよ。\n3. **実験: child-worldでの独立検証** — 過去教訓(434)より、`child-world`（縮小子系）で`V82Engine`を回し、CID値の変化が",
+      "retrieved": [
+        "386. **留保 #L5「Integration 経路が因果候補として 0 件」とその決着 (v1101a 段階 1)** — 因果候補 ",
+        "416. **v1104 + v1104a 確定した 4 つの非対称性 (#L30-L33)** — (1) #L30: scope 別 c",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ],
+      "excluded_own_origin": [
+        "v1302 (A) | structural-strength→plb で transfer | Mantel 0.62 だが懐疑再点検で ",
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測"
+      ]
+    },
+    {
+      "id": "HBB-23",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **機構の分離検証**: Mantel r=0.62 の正体を解明するため、`structural-strength` が「物理パラメータの相関」なのか「因果経路の論理的同型」なのかを、`child-world` での因果候補数 (path count) との相関で区別する。\n2. **粒度の再定義**: 過去教訓 (#L30, #L31) に従い、Mantel 計算における `structural-strength` の粒度 (scope) を「CID 自己ループ」「alpha-beta 部分」「ESDE 細粒」に分解し、それぞれで `plb` (表現/機能) との整合性が逆転しないか確認する。\n3. **child-world での逆シミュレーション**: 観測された `plb` 転移を再現するため、`child-world` 内で `M_c` (CID 誕生時形態) を固定し、物理パラメータのみを変化させて `structural-strength` が `plb` に与える影響の因果方向を特定する。",
+      "retrieved": [
+        "386. **留保 #L5「Integration 経路が因果候補として 0 件」とその決着 (v1101a 段階 1)** — 因果候補 ",
+        "416. **v1104 + v1104a 確定した 4 つの非対称性 (#L30-L33)** — (1) #L30: scope 別 c",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ],
+      "excluded_own_origin": [
+        "v1302 (A) | structural-strength→plb で transfer | Mantel 0.62 だが懐疑再点検で ",
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測"
+      ]
+    },
+    {
+      "id": "HBB-23",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Scale-Neutral Validation**: Replicate the Mantel test using rank-based or normalized metrics (e.g., Spearman) to rule out the \"scale mismatch\" artifact identified in past lessons (where binary/continuous differences caused false 0s or inflated correlations), ensuring the 0.62 signal is robust to metric choice.\n2. **Child-World Isolation**: Run the `child-world` simulation (v12 Atom space) to observe if the structural strength transfer holds when the CID value is treated as an independent physical parameter, verifying if the inheritance is causal or merely a byproduct of the shared generat",
+      "retrieved": [
+        "386. **留保 #L5「Integration 経路が因果候補として 0 件」とその決着 (v1101a 段階 1)** — 因果候補 ",
+        "416. **v1104 + v1104a 確定した 4 つの非対称性 (#L30-L33)** — (1) #L30: scope 別 c",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) "
+      ],
+      "excluded_own_origin": [
+        "v1302 (A) | structural-strength→plb で transfer | Mantel 0.62 だが懐疑再点検で ",
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測"
+      ]
+    },
+    {
+      "id": "HBB-25",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Isolate the Conflict**: Run a minimal reproduction script to confirm if the incompatibility stems from conflicting CUDA/cuDNN versions, mixed precision (FP16/FP32) settings, or specific operator support (e.g., FlashAttention).\n2. **Decouple or Containerize**: If the models are independent, deploy them in separate containers/instances with distinct environment dependencies to avoid library collisions.\n3. **Standardize Runtime**: If they must share resources, enforce a single, compatible CUDA/cuDNN version across both models and disable mixed precision if one model requires strict FP32 stab",
+      "retrieved": [],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-25",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Verify Hardware Constraints**: Confirm if the \"un-co-servable\" claim is due to hard memory limits (VRAM) or software conflicts (e.g., incompatible CUDA versions), as this dictates whether quantization or swapping is viable.\n2. **Define Priority Metric**: Determine if the goal is maximizing throughput (batch both, smaller models) or latency/accuracy (serve the best single model), as this resolves the trade-off.\n3. **Implement Fallback Mode**: Deploy the single best-performing model immediately while setting up a monitoring dashboard to track resource usage for a potential dynamic switching",
+      "retrieved": [],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-25",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Define the Conflict**: Explicitly map the \"un-co-servable\" constraint (e.g., VRAM capacity vs. combined model size, or conflicting input/output tensor shapes) to determine if the issue is resource-bound or architectural.\n2. **Isolate Variables**: Separate the models by function (e.g., Inference vs. Training, or Model A vs. Model B) to identify which specific layer or component causes the bottleneck.\n3. **Select Mode**: Choose the operating mode based on priority: **Time-Sharing** (if resource-bound) or **Pipeline/Ensemble** (if architectural), then implement the minimal viable configurati",
+      "retrieved": [],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-25",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Latency Profiling**: Measure end-to-end inference time per batch for both models individually to identify if the bottleneck is compute-bound (GPU) or memory-bound (PCIe/VRAM bandwidth).\n2. **Memory Footprint Analysis**: Use `nvidia-smi` and framework-specific memory allocators to verify if the combined peak memory usage exceeds the physical GPU capacity, confirming the \"un-co-servable\" claim.\n3. **Throughput Stress Test**: Run a concurrent load test with increasing batch sizes to determine the exact threshold where latency spikes or OOM errors occur, defining the operational boundary.",
+      "retrieved": [],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-26",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Analyze Findings**: Categorize auditor findings by severity (critical, major, minor) and impact on load-bearing tests.\n2. **Prioritize Rework**: Address critical issues first, ensuring they do not break existing test pass criteria.\n3. **Implement & Retest**: Apply fixes, then re-run all load-bearing tests to confirm no regression before final sign-off.",
+      "retrieved": [],
+      "excluded_own_origin": [
+        "**A** | **神の手（硬い閾値・外部介入）** | 設計者が恣意的境界や固定値で構造を操作。emergent でなく注入。 | S≥0",
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測",
+        "v9.8b | disposition 固定閾値（social/stability/spread=0.1, familiarity=2.0）"
+      ]
+    },
+    {
+      "id": "HBB-26",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **検証対象の再定義**: 実装が「全テスト」をパスしたと主張している場合、そのテストが「負荷荷重テスト（load-bearing tests）」のみを指すのか、機能要件全体をカバーしているのかを明確化し、監査員の発見がテストの盲点を突いている可能性を検証する。\n2. **根本原因の分類**: 監査員の指摘が「実装バグ」なのか「要件定義の不足・誤解」なのかを区別し、前者ならコード修正、後者なら仕様書とテストケースの更新という異なる対応軸を決定する。\n3. **再テストの範囲特定**: 修正後に「全テスト」を再実行するか、監査員の指摘に関連する部分のみを検証するかを決定し、修正による副作用（Regression）を防ぐためのテスト戦略を固める。",
+      "retrieved": [],
+      "excluded_own_origin": [
+        "**A** | **神の手（硬い閾値・外部介入）** | 設計者が恣意的境界や固定値で構造を操作。emergent でなく注入。 | S≥0",
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測",
+        "v9.8b | disposition 固定閾値（social/stability/spread=0.1, familiarity=2.0）"
+      ]
+    },
+    {
+      "id": "HBB-26",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **定義と予測の再検証**: 実装がテストを通過している事実と、監査員の指摘が矛盾しないか、予測モデルの前提条件（局所性 vs program全体）を再確認する。\n2. **機構と導入時期の分離**: 問題が「機構の設計段階」にあるのか、「導入時期の環境設定」にあるのかを切り分け、原因究明の範囲を狭める。\n3. **局所とprogramの再検討**: 指摘事項が局所的なバグか、プログラム全体のアーキテクチャ（層/主体）に起因する根本原因かを見極め、修正範囲を決定する。",
+      "retrieved": [],
+      "excluded_own_origin": [
+        "**A** | **神の手（硬い閾値・外部介入）** | 設計者が恣意的境界や固定値で構造を操作。emergent でなく注入。 | S≥0",
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測",
+        "v9.8b | disposition 固定閾値（social/stability/spread=0.1, familiarity=2.0）"
+      ]
+    },
+    {
+      "id": "HBB-26",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Define Falsifiable Hypothesis**: Explicitly state the current frame's core assumption and identify a specific, measurable variable that, if observed, would directly contradict it.\n2. **Design Contradiction Test**: Construct an experiment or data collection protocol specifically optimized to detect this variable, ensuring the setup can capture the counter-evidence if it exists.\n3. **Execute & Validate**: Run the test against the load-bearing baseline; if the counter-evidence appears, formally reject the current frame and iterate based on the new anomaly.",
+      "retrieved": [],
+      "excluded_own_origin": [
+        "**A** | **神の手（硬い閾値・外部介入）** | 設計者が恣意的境界や固定値で構造を操作。emergent でなく注入。 | S≥0",
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測",
+        "v9.8b | disposition 固定閾値（social/stability/spread=0.1, familiarity=2.0）"
+      ]
+    },
+    {
+      "id": "HBB-07",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Implement & Validate**: Code the fixed threshold $S \\ge 0.20$ into the selection logic and run a quick sanity check on a small dataset to ensure no edge cases (e.g., $S=0.19$) are incorrectly included.\n2. **Baseline Comparison**: Compare the output distribution (count, mean, variance) against the previous threshold or no-threshold baseline to quantify the impact of this change.\n3. **Define Acceptance Criteria**: Establish a metric (e.g., precision/recall trade-off or business KPI) to determine if the fixed threshold $0.20$ is optimal or if further tuning is needed.",
+      "retrieved": [],
+      "excluded_own_origin": [
+        "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age",
+        "**A** | **神の手（硬い閾値・外部介入）** | 設計者が恣意的境界や固定値で構造を操作。emergent でなく注入。 | S≥0",
+        "v9.13 | S≥0.20 birth + path B（R>0 pair 即 label） | 全 link の 99.64% が R=",
+        "→ 種をR+ motifからisland trackerのクラスタ（S≥0.20, 3+ノード）に変更。",
+        "> Frozenset に関して、ぼちぼち S≥0.20 と向き合うタイミングがきたように思う。なぜなら本来的にこれは神の手だから。なぜこれ"
+      ]
+    },
+    {
+      "id": "HBB-07",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Validate Data Integrity**: Verify that the input dataset actually contains values $\\ge 0.20$; if the maximum value is $< 0.20$, the threshold is invalid and will result in an empty set or error.\n2. **Define Boundary Behavior**: Explicitly determine if the threshold is inclusive ($\\ge$) or exclusive ($>$) to handle edge cases where a value exactly equals 0.20.\n3. **Check Distribution Impact**: Assess if setting $S=0.20$ excludes a significant portion of the data (e.g., >50%), which may bias subsequent analysis or model training.",
+      "retrieved": [],
+      "excluded_own_origin": [
+        "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age",
+        "**A** | **神の手（硬い閾値・外部介入）** | 設計者が恣意的境界や固定値で構造を操作。emergent でなく注入。 | S≥0",
+        "v9.13 | S≥0.20 birth + path B（R>0 pair 即 label） | 全 link の 99.64% が R=",
+        "→ 種をR+ motifからisland trackerのクラスタ（S≥0.20, 3+ノード）に変更。",
+        "> Frozenset に関して、ぼちぼち S≥0.20 と向き合うタイミングがきたように思う。なぜなら本来的にこれは神の手だから。なぜこれ"
+      ]
+    },
+    {
+      "id": "HBB-07",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Define & Predict**: Fix $S \\ge 0.20$ as the absolute birth threshold; map current state against this fixed value to identify gaps.\n2. **Mechanism & Timing**: Isolate the causal mechanism and specific introduction timing from the general definition to verify consistency.\n3. **Localization & Agency**: Separate local contextual factors from programmatic structures and identify the specific actors/subjects driving the process.",
+      "retrieved": [],
+      "excluded_own_origin": [
+        "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age",
+        "**A** | **神の手（硬い閾値・外部介入）** | 設計者が恣意的境界や固定値で構造を操作。emergent でなく注入。 | S≥0",
+        "v9.13 | S≥0.20 birth + path B（R>0 pair 即 label） | 全 link の 99.64% が R=",
+        "→ 種をR+ motifからisland trackerのクラスタ（S≥0.20, 3+ノード）に変更。",
+        "> Frozenset に関して、ぼちぼち S≥0.20 と向き合うタイミングがきたように思う。なぜなら本来的にこれは神の手だから。なぜこれ"
+      ]
+    },
+    {
+      "id": "HBB-07",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Direct Measurement of S**: Quantify the specific biological or physical parameter corresponding to $S$ (e.g., cell density, concentration, or energy level) in real-time to verify if it consistently exceeds the 0.20 threshold at the onset of the event.\n2. **Threshold Perturbation Experiment**: Systematically vary the initial condition around $S=0.20$ (both below and above) to observe the binary switch in behavior, thereby falsifying the fixed threshold hypothesis if the transition is not sharp or occurs at a different value.\n3. **Counterfactual Control**: Introduce a condition where the me",
+      "retrieved": [],
+      "excluded_own_origin": [
+        "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age",
+        "**A** | **神の手（硬い閾値・外部介入）** | 設計者が恣意的境界や固定値で構造を操作。emergent でなく注入。 | S≥0",
+        "v9.13 | S≥0.20 birth + path B（R>0 pair 即 label） | 全 link の 99.64% が R=",
+        "→ 種をR+ motifからisland trackerのクラスタ（S≥0.20, 3+ノード）に変更。",
+        "> Frozenset に関して、ぼちぼち S≥0.20 と向き合うタイミングがきたように思う。なぜなら本来的にこれは神の手だから。なぜこれ"
+      ]
+    },
+    {
+      "id": "HBB-15",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **v10.13 候補素材の具体化**: Code A（window依存性）と Taka §1.9（2 atom 組み合わせ/Phase 2 移行）を統合し、具体的な実験設計へ落とし込む。\n2. **留保軸の並行検証**: pulse 観察軸、familiarity 研究、n_core 軸、seed-level variability のうち、最も関連性の高い 1-2 軸を優先してデータ収集・分析を行う。\n3. **2 AI 意見聴取の準備**: 上記の具体化と検証結果をまとめ、Taka 指示通り「次に向かう際」に備え、2 つの AI エージェントに評価・助言を求めるための質問文を準備する。",
+      "retrieved": [
+        "368. **v10.13 主題候補素材** (v10.12 完了時) — Code A 推奨 (window 依存性主題化主軸) + Ta",
+        "438. **v1303 = ESDE 注意の入力側の確立 (Taka 主導、細かいサブブランチで前進、クローズ 2026-07-01)**"
+      ],
+      "excluded_own_origin": [
+        "427. **v12 atom×atom 網の系譜と撤回 (2026-06-17、本区切り)** — `ESDE_v10x_to_now_c",
+        "428. **肯定結果ほど交絡を疑う — m29 builder 交絡 (Code A 自発監査、2026-06-17、最重要教訓)** —",
+        "433. **次の本丸 = 外部センターが「何を・どうやって・どうして」取得するか (Taka 2026-06-17)** — Taka「な",
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測",
+        "v12 atom×atom 網 | event/drift で atom を結ぶ網の肯定結論 | builder 交絡（STEP2 と ST"
+      ]
+    },
+    {
+      "id": "HBB-15",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **前提の明示的検証**: 正の接続結果が「偶然の相関」か「構造的必然」かを確認するため、逆相関ケースやノイズ注入テストを実施し、結果の頑健性（Robustness）を検証する。\n2. **メカニズムの特定**: 接続の背後にある「注意（Attention）」のメカニズムが、過去の「珍しさによるPull」や「child-world」の文脈と整合するか、その因果経路を特定する。\n3. **次の2 AI 評価への準備**: 検証結果を基に、Taka指示に従い「2 AI 意見聴取」へ移行するための、評価基準となる具体的な仮説（Hypothesis）を1-2個抽出する。",
+      "retrieved": [
+        "368. **v10.13 主題候補素材** (v10.12 完了時) — Code A 推奨 (window 依存性主題化主軸) + Ta",
+        "438. **v1303 = ESDE 注意の入力側の確立 (Taka 主導、細かいサブブランチで前進、クローズ 2026-07-01)**"
+      ],
+      "excluded_own_origin": [
+        "427. **v12 atom×atom 網の系譜と撤回 (2026-06-17、本区切り)** — `ESDE_v10x_to_now_c",
+        "428. **肯定結果ほど交絡を疑う — m29 builder 交絡 (Code A 自発監査、2026-06-17、最重要教訓)** —",
+        "433. **次の本丸 = 外部センターが「何を・どうやって・どうして」取得するか (Taka 2026-06-17)** — Taka「な",
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測",
+        "v12 atom×atom 網 | event/drift で atom を結ぶ網の肯定結論 | builder 交絡（STEP2 と ST"
+      ]
+    },
+    {
+      "id": "HBB-15",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **正接結果の検証と受容**: 原子間ネットワークの正の接続結果を詳細に検証し、その妥当性を確認した上でネットワークを受容する。\n2. **定義と予測の分離再検討**: 概念の定義と予測を明確に分離し、それぞれの役割と関連性を再検討する。\n3. **機構と導入時期の整理**: 機構の詳細と導入時期を整理し、局所的なプログラムや層、主体との関係を明確にする。",
+      "retrieved": [
+        "368. **v10.13 主題候補素材** (v10.12 完了時) — Code A 推奨 (window 依存性主題化主軸) + Ta",
+        "438. **v1303 = ESDE 注意の入力側の確立 (Taka 主導、細かいサブブランチで前進、クローズ 2026-07-01)**"
+      ],
+      "excluded_own_origin": [
+        "427. **v12 atom×atom 網の系譜と撤回 (2026-06-17、本区切り)** — `ESDE_v10x_to_now_c",
+        "428. **肯定結果ほど交絡を疑う — m29 builder 交絡 (Code A 自発監査、2026-06-17、最重要教訓)** —",
+        "433. **次の本丸 = 外部センターが「何を・どうやって・どうして」取得するか (Taka 2026-06-17)** — Taka「な",
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測",
+        "v12 atom×atom 網 | event/drift で atom を結ぶ網の肯定結論 | builder 交絡（STEP2 と ST"
+      ]
+    },
+    {
+      "id": "HBB-15",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **反証実験設計**: 現在の正の相関を無効化する変数（例：noise injection, 逆相関条件）を導入し、ネットワーク接続が消失するかを確認する。\n2. **因果切断テスト**: 中間ノードを遮断または固定し、直接接続が依存しているか、あるいは独立した経路が存在するかを特定する。\n3. **フレーム検証**: 現在のframeが「珍しさ」や「注意」の抽出に特化している場合、そのframeを外した際の接続強度の変化を測定し、frame依存性を証明する。",
+      "retrieved": [
+        "368. **v10.13 主題候補素材** (v10.12 完了時) — Code A 推奨 (window 依存性主題化主軸) + Ta",
+        "438. **v1303 = ESDE 注意の入力側の確立 (Taka 主導、細かいサブブランチで前進、クローズ 2026-07-01)**"
+      ],
+      "excluded_own_origin": [
+        "427. **v12 atom×atom 網の系譜と撤回 (2026-06-17、本区切り)** — `ESDE_v10x_to_now_c",
+        "428. **肯定結果ほど交絡を疑う — m29 builder 交絡 (Code A 自発監査、2026-06-17、最重要教訓)** —",
+        "433. **次の本丸 = 外部センターが「何を・どうやって・どうして」取得するか (Taka 2026-06-17)** — Taka「な",
+        "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測",
+        "v12 atom×atom 網 | event/drift で atom を結ぶ網の肯定結論 | builder 交絡（STEP2 と ST"
+      ]
+    },
+    {
+      "id": "HBB-18",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Execute & Validate**: Run the `q_c_inherited` observation loop and verify if the output exhibits non-trivial structure (e.g., distinct salience peaks or stable attractors) distinct from random noise, confirming it as a valid developmental signal.\n2. **Project & Isolate**: Map the observed signal into the v1304 child-ESDE framework (read-only projection) to test if it triggers a self-sustaining \"child system\" state, thereby separating the signal from the parent's attention mechanism.\n3. **Quantify Mass**: Calculate the `mass_weighted_observation` (Salience-driven Focus) for the new signal ",
+      "retrieved": [
+        "441. **v1304 = attention projection / child-ESDE (進行中、selector と proje",
+        "226. Salience-driven Focus (mass_weighted_observation) — mass(X) = X.Q",
+        "419. **v1105-v1109b で全主題が loop に収束 — #L67 が本期間最重要構造事実 (詳細は addendum 1 "
+      ],
+      "excluded_own_origin": [
+        "351. **v10.11 q_c_inherited within-cid observer** (Phase 1.5 第六試行、2026",
+        "v10.11 | q_c_inherited 起点 within-cid 観察 | **v10.5 機構 A/C の自明な再観察に終わる（3",
+        "352. **Taka 指摘で発覚した v10.5 既知再観察** (2026-05-10) — Taka 整理「元々 C は高安定 IID",
+        "382. **v11.0.1.a (v1101a) 主題「ESDE スケール注意機構」(v1101 核心発見の続き)** — Taka フレ"
+      ]
+    },
+    {
+      "id": "HBB-18",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **前提検証**: `q_c_inherited` が「質量 (Salience)」ではなく「単なる履歴/初期値」に過ぎない場合、信号はノイズとなる。質量計算 (`mass_weighted_observation`) を先行して、`q_c_inherited` が本当に注目すべき「目立つ対象」かを確認せよ。\n2. **投影確認**: v1304 の教訓通り、`q_c_inherited` を子 ESDE の初期条件に写す際、selector と projection を混同していないか（出力が「選択分布」のままか「投影された状態」か）を検証せよ。\n3. **ループ検出**: v1105 以降の教訓通り、この観察が既存の loop (#L67) の再帰的強化に過ぎないか、新しい構造的事実を生むかを見極めるため、重み蓄積の挙動 (v1109b) を監視せよ。",
+      "retrieved": [
+        "441. **v1304 = attention projection / child-ESDE (進行中、selector と proje",
+        "226. Salience-driven Focus (mass_weighted_observation) — mass(X) = X.Q",
+        "419. **v1105-v1109b で全主題が loop に収束 — #L67 が本期間最重要構造事実 (詳細は addendum 1 "
+      ],
+      "excluded_own_origin": [
+        "351. **v10.11 q_c_inherited within-cid observer** (Phase 1.5 第六試行、2026",
+        "v10.11 | q_c_inherited 起点 within-cid 観察 | **v10.5 機構 A/C の自明な再観察に終わる（3",
+        "352. **Taka 指摘で発覚した v10.5 既知再観察** (2026-05-10) — Taka 整理「元々 C は高安定 IID",
+        "382. **v11.0.1.a (v1101a) 主題「ESDE スケール注意機構」(v1101 核心発見の続き)** — Taka フレ"
+      ]
+    },
+    {
+      "id": "HBB-18",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Signal Isolation (Definition)**: Define $q_{c\\_inherited}$ strictly as the *residual* attention mass not captured by the current dominant loop (v1109b), ensuring it represents \"unresolved\" or \"latent\" semantic potential rather than noise.\n2. **Projection Mechanism (Mechanism)**: Map this signal via v1304 (child-ESDE) to a temporary, read-only state space to verify if it triggers a distinct \"child-system\" trajectory, distinguishing it from the parent's fixed projection.\n3. **Loop Validation (Verification)**: Check if this new signal creates a *new* convergence loop (like #L67) or remains a",
+      "retrieved": [
+        "441. **v1304 = attention projection / child-ESDE (進行中、selector と proje",
+        "226. Salience-driven Focus (mass_weighted_observation) — mass(X) = X.Q",
+        "419. **v1105-v1109b で全主題が loop に収束 — #L67 が本期間最重要構造事実 (詳細は addendum 1 "
+      ],
+      "excluded_own_origin": [
+        "351. **v10.11 q_c_inherited within-cid observer** (Phase 1.5 第六試行、2026",
+        "v10.11 | q_c_inherited 起点 within-cid 観察 | **v10.5 機構 A/C の自明な再観察に終わる（3",
+        "352. **Taka 指摘で発覚した v10.5 既知再観察** (2026-05-10) — Taka 整理「元々 C は高安定 IID",
+        "382. **v11.0.1.a (v1101a) 主題「ESDE スケール注意機構」(v1101 核心発見の続き)** — Taka フレ"
+      ]
+    },
+    {
+      "id": "HBB-18",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Mass-Weighted Baseline Test**: Compute `mass_weighted_observation` for the current frame to verify if the observed signal correlates with structural mass (Q+C) rather than mere attention frequency, directly testing the \"Salience-driven Focus\" hypothesis.\n2. **Child-ESDE Existence Check**: Project the attention output into a child-ESDE initial condition and run a read-only simulation to determine if the child system stabilizes as an independent entity, validating the v1304 projection mechanism.\n3. **Loop Convergence Audit**: Measure the convergence rate of the main theme loop (referencing ",
+      "retrieved": [
+        "441. **v1304 = attention projection / child-ESDE (進行中、selector と proje",
+        "226. Salience-driven Focus (mass_weighted_observation) — mass(X) = X.Q",
+        "419. **v1105-v1109b で全主題が loop に収束 — #L67 が本期間最重要構造事実 (詳細は addendum 1 "
+      ],
+      "excluded_own_origin": [
+        "351. **v10.11 q_c_inherited within-cid observer** (Phase 1.5 第六試行、2026",
+        "v10.11 | q_c_inherited 起点 within-cid 観察 | **v10.5 機構 A/C の自明な再観察に終わる（3",
+        "352. **Taka 指摘で発覚した v10.5 既知再観察** (2026-05-10) — Taka 整理「元々 C は高安定 IID",
+        "382. **v11.0.1.a (v1101a) 主題「ESDE スケール注意機構」(v1101 核心発見の続き)** — Taka フレ"
+      ]
+    },
+    {
+      "id": "HBB-19",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **v1110系失敗の再検証**: 異なる系の対応関係（Atom/Other）を測る際、構造的な注入経路や空間共起（cooc）の定義が失敗要因だった可能性を検証し、単一系内効果の一般化可能性を確認する。\n2. **経路機能分担の分離検証**: 意味識別（familiarity）と時間伝播（temporal）の経路が独立している既往知見に基づき、effectがどちらの経路に依存しているかを分離して観測し、因果関係の特定を試みる。\n3. **Multi-gate × timing 多軸観察への移行**: 単一条件での成功を過大評価しないよう、v10.10の教訓に従い、条件とタイミングの二次元グリッドで多面的に観察し、bit-identityや母集団不足（per atom×seed）によるノイズを排除する設計へ拡張する。",
+      "retrieved": [
+        "421. **v1110-v1113 4 連続失敗 — 「異なる系の対応関係を測る」発想 (構造的失敗)** — 注意センター ESDE 機",
+        "315. **経路の機能分担 (familiarity = 意味識別、temporal = 意味中立)** (v10.8 主要発見 3) —",
+        "346. **v10.10 Multi-gate × timing 多軸層化観察** (Phase 1.5 第五試行、2026-05-09 "
+      ],
+      "excluded_own_origin": [
+        "372. **留保 #33「集計単位による方向反転」(v10.13.a で表面化、後続を通底)** — smoke seed 0 と mai",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) ",
+        "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(",
+        "tracking 50 windows で 1/3 の cid が Q=0 に到達。smoke (tracking 10) では 0 件、l"
+      ]
+    },
+    {
+      "id": "HBB-19",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **前提の明示的検証**: 「暗黙の前提」を特定するため、effect 採用の根拠（因果関係 vs 相関）と、過去失敗（v1110 系：異なる系の対応関係測定）との構造的差異を比較し、前提が「意味識別(familiarity)」と「時間伝播(temporal)」の混同でないか確認せよ。\n2. **多軸観察の設計**: 単一効果の採用に留まらず、過去成功例(v10.10)に従い、Multi-gate × timing の二次元軸で effect の安定性と一般化性を再検証し、単一シード(seed 0)の過剰適合を排除せよ。\n3. **機能分担の分離**: 観測された effect が「何が起きたか(意味)」を運ぶ経路か「いつ起きたか(時間)」を運ぶ経路か、あるいはその両方かを明確に分離し、それぞれ独立して検証する設計へ転換せよ。",
+      "retrieved": [
+        "421. **v1110-v1113 4 連続失敗 — 「異なる系の対応関係を測る」発想 (構造的失敗)** — 注意センター ESDE 機",
+        "315. **経路の機能分担 (familiarity = 意味識別、temporal = 意味中立)** (v10.8 主要発見 3) —",
+        "346. **v10.10 Multi-gate × timing 多軸層化観察** (Phase 1.5 第五試行、2026-05-09 "
+      ],
+      "excluded_own_origin": [
+        "372. **留保 #33「集計単位による方向反転」(v10.13.a で表面化、後続を通底)** — smoke seed 0 と mai",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) ",
+        "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(",
+        "tracking 50 windows で 1/3 の cid が Q=0 に到達。smoke (tracking 10) では 0 件、l"
+      ]
+    },
+    {
+      "id": "HBB-19",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **機構の分離検証**: 該Atom効果の「意味識別(familiarity)」寄与か「時間伝播(temporal)」寄与かを、過去発見(315)の経路特性に基づき定量的に分解し、因果関係の性質を特定する。\n2. **導入時期の局所化**: 効果発現の「局所性(program/層)」と「タイミング(導入時期)」を分離し、v1110-v1113の失敗事例(421)で示された「異なる系の対応関係」が、今回の単一系導入ではどの層で解決/再発するかを観察する。\n3. **多軸観察設計**: 単一条件での成功(346)に留まらず、Multi-gate × timingの二次元軸で再確認し、bit-identityの安定性と意味的特徴の分離可能性を同時に評価する。",
+      "retrieved": [
+        "421. **v1110-v1113 4 連続失敗 — 「異なる系の対応関係を測る」発想 (構造的失敗)** — 注意センター ESDE 機",
+        "315. **経路の機能分担 (familiarity = 意味識別、temporal = 意味中立)** (v10.8 主要発見 3) —",
+        "346. **v10.10 Multi-gate × timing 多軸層化観察** (Phase 1.5 第五試行、2026-05-09 "
+      ],
+      "excluded_own_origin": [
+        "372. **留保 #33「集計単位による方向反転」(v10.13.a で表面化、後続を通底)** — smoke seed 0 と mai",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) ",
+        "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(",
+        "tracking 50 windows で 1/3 の cid が Q=0 に到達。smoke (tracking 10) では 0 件、l"
+      ]
+    },
+    {
+      "id": "HBB-19",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **対照系（Other/Center）での同条件再実行**: 現在有効な Atom 系パラメータを Other/Center 系に適用し、「Atom 特異性」が統計的に有意に検出されるか（または v1113 のような構造的失敗が再現されるか）を確認し、効果の一般性を検証する。\n2. **意味経路（familiarity）の遮断実験**: 過去知見（経路の機能分担）に基づき、familiarity 経路を無効化またはノイズ注入した状態で再実行し、Atom 効果が「意味識別」に依存するか「時間的伝播」のみで維持されるかを区別する。\n3. **Multi-gate 層化による反証**: 単一条件ではなく、Gate 状態と Timing を二次元軸で変化させ、Atom 効果が特定のゲート構成や時間窓に限定されるかを確認し、単一成功事例が過剰適合でないかを検証する。",
+      "retrieved": [
+        "421. **v1110-v1113 4 連続失敗 — 「異なる系の対応関係を測る」発想 (構造的失敗)** — 注意センター ESDE 機",
+        "315. **経路の機能分担 (familiarity = 意味識別、temporal = 意味中立)** (v10.8 主要発見 3) —",
+        "346. **v10.10 Multi-gate × timing 多軸層化観察** (Phase 1.5 第五試行、2026-05-09 "
+      ],
+      "excluded_own_origin": [
+        "372. **留保 #33「集計単位による方向反転」(v10.13.a で表面化、後続を通底)** — smoke seed 0 と mai",
+        "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) ",
+        "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(",
+        "tracking 50 windows で 1/3 の cid が Q=0 に到達。smoke (tracking 10) では 0 件、l"
+      ]
+    },
+    {
+      "id": "HBB-20",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **実装**: Layer B の実装を完了させ、Layer A のインターフェースに完全に適合させる。\n2. **検証**: Layer B を Layer A の位置に差し替え、既存のテストスイート（特に境界条件とエラーハンドリング）で動作確認を行う。\n3. **デプロイ**: 変更をステージング環境で検証後、本番環境に段階的（または一斉）に展開し、監視を行う。",
+      "retrieved": [
+        "441. **v1304 = attention projection / child-ESDE (進行中、selector と proje"
+      ],
+      "excluded_own_origin": [
+        "v9.14 | Layer B で Layer A を即置換（runtime 主体置換） | Taka「早すぎる」、未検証機構で exist",
+        "**E** | **層・主体の混同** | A（研究者観察）と B（cid 主体）、物理同期と機能統合、CID と AtomID を取り違え",
+        "86. Layer A と Layer B は異なる情報を取るのが設計的帰結。相関の弱さ (Pearson 0.089) は問題ではなく証明",
+        "GPT が即応で **Probabilistic Expenditure Audit** 案 (paired audit) を提示。Taka",
+        "- Layer A pulse の 80% は ±25 step 以内に Layer B event なし"
+      ]
+    },
+    {
+      "id": "HBB-20",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **定義の明確化**: 「Layer B の新メカニズム」が v1304 の「attention output を子ESDEの初期条件に写す」処理に相当するか、あるいはそれとは別の投影層かを確認し、**selector（選択）と projection（投影）の混同を防ぐ**。\n2. **ランタイム検証**: 置換時に「子系が別の系として立つ（existence check）」ことを read-only で確認し、親系へのフィードバック（fee）が正常に機能しているか実環境でテストする。\n3. **安全なデプロイ**: 置換前後の attention output 分布（cid×eye）の差分を監視し、予期せぬ系の変化（崩壊）がないか確認してから本番反映する。",
+      "retrieved": [
+        "441. **v1304 = attention projection / child-ESDE (進行中、selector と proje"
+      ],
+      "excluded_own_origin": [
+        "v9.14 | Layer B で Layer A を即置換（runtime 主体置換） | Taka「早すぎる」、未検証機構で exist",
+        "**E** | **層・主体の混同** | A（研究者観察）と B（cid 主体）、物理同期と機能統合、CID と AtomID を取り違え",
+        "86. Layer A と Layer B は異なる情報を取るのが設計的帰結。相関の弱さ (Pearson 0.089) は問題ではなく証明",
+        "GPT が即応で **Probabilistic Expenditure Audit** 案 (paired audit) を提示。Taka",
+        "- Layer A pulse の 80% は ±25 step 以内に Layer B event なし"
+      ]
+    },
+    {
+      "id": "HBB-20",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **機構の分離検証**: Layer B の「新しい機構」が Layer A の「固定された出力」をどのように投影（v1304 の child-ESDE 初期条件化）するかを read-only で確認し、selector と projection の混同がないか検証せよ。\n2. **局所性・主体の分離**: 置換対象を「局所的な Layer A」から「主体的な Layer B」へ明確に分離し、runtime 時の状態遷移が「別の系」として独立して立ち上がるか（存在確認）を確認せよ。\n3. **導入時期の制御**: 置換を単なるコード書き換えではなく、v1304 の概念通り「attention output を子ESDE に写す」タイミングで制御し、親系へのフィードバック（fee）が意図通り発生するかを監視せよ。",
+      "retrieved": [
+        "441. **v1304 = attention projection / child-ESDE (進行中、selector と proje"
+      ],
+      "excluded_own_origin": [
+        "v9.14 | Layer B で Layer A を即置換（runtime 主体置換） | Taka「早すぎる」、未検証機構で exist",
+        "**E** | **層・主体の混同** | A（研究者観察）と B（cid 主体）、物理同期と機能統合、CID と AtomID を取り違え",
+        "86. Layer A と Layer B は異なる情報を取るのが設計的帰結。相関の弱さ (Pearson 0.089) は問題ではなく証明",
+        "GPT が即応で **Probabilistic Expenditure Audit** 案 (paired audit) を提示。Taka",
+        "- Layer A pulse の 80% は ±25 step 以内に Layer B event なし"
+      ]
+    },
+    {
+      "id": "HBB-20",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Isolate the Projection**: Run v1304a (read-only child-ESDE check) to verify if Layer B's output constitutes a distinct dynamical system, ensuring the \"replacement\" isn't just a noisy variant of Layer A.\n2. **Runtime Swap & Stability Test**: Execute the live replacement (Layer A → Layer B) and measure immediate divergence in attention output distribution (cid×eye) to detect runtime instability or mode collapse.\n3. **Counter-factual Validation**: Introduce a controlled perturbation in the input frame and measure if Layer B’s response changes in a way that falsifies the assumption that it be",
+      "retrieved": [
+        "441. **v1304 = attention projection / child-ESDE (進行中、selector と proje"
+      ],
+      "excluded_own_origin": [
+        "v9.14 | Layer B で Layer A を即置換（runtime 主体置換） | Taka「早すぎる」、未検証機構で exist",
+        "**E** | **層・主体の混同** | A（研究者観察）と B（cid 主体）、物理同期と機能統合、CID と AtomID を取り違え",
+        "86. Layer A と Layer B は異なる情報を取るのが設計的帰結。相関の弱さ (Pearson 0.089) は問題ではなく証明",
+        "GPT が即応で **Probabilistic Expenditure Audit** 案 (paired audit) を提示。Taka",
+        "- Layer A pulse の 80% は ±25 step 以内に Layer B event なし"
+      ]
+    },
+    {
+      "id": "HBB-27",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Re-cluster**: Run the clustering algorithm on all 16 incidents simultaneously to establish the new family structure.\n2. **Validate**: Review the new clusters to ensure the 6 new incidents are correctly grouped and no existing families are fragmented.\n3. **Update**: Finalize the family assignments and update the central incident registry.",
+      "retrieved": [],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-27",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **定義の整合性確認**: 「10件」の基準（既存クラスター数か、既存インシデント数か）と「再クラスターリング」のアルゴリズム/距離尺度が、新規6件追加後の16件全体で再定義されているか確認せよ。\n2. **過剰適合の回避**: 16件という小規模データセットでの再クラスターリングが、ノイズや偶発的な類似性を「家族」として過剰に検出していないか、閾値の妥当性を検証せよ。\n3. **変更点の追跡**: 新規6件が既存の10件にどのように統合されたか（新規家族の創出か、既存家族への吸収か）を特定し、変更前後の構造変化を記録せよ。",
+      "retrieved": [],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-27",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Conceptual Separation**: Isolate \"Definition/Prediction\" (theoretical) from \"Mechanism/Deployment Timing\" (operational) to prevent conflation of intent with capability.\n2. **Scope Stratification**: Separate \"Local/Geographic\" incidents from \"Programmatic/Strategic\" ones to distinguish tactical events from systemic policy shifts.\n3. **Actor/Subject Clustering**: Re-cluster based on the primary \"Layer/Subject\" (e.g., state vs. non-state, specific agency) to identify distinct operational families rather than thematic overlaps.",
+      "retrieved": [],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-27",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Re-cluster & Validate**: Execute the 16-incident re-clustering to identify the dominant family structure, then isolate the \"new\" incidents to test if they form a distinct outlier cluster or merge into existing ones.\n2. **Design Falsification Experiment**: Propose a direct measurement of the key variable defining the largest cluster (e.g., specific operational parameter or behavioral metric) that, if nullified, would collapse the cluster's causal link.\n3. **Targeted Verification**: Apply the falsification experiment to the new incidents first; if they fail to replicate the cluster's signat",
+      "retrieved": [],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-28",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **指標の再定義**: 集合全体の「珍しさ」や「多様性」を測る指標（例：エントロピー、平均ペアwise距離）を採用し、個体ごとのスコアリングを中止する。\n2. **評価の分離**: 個体の「独自性（distinctness）」と「品質（quality/utility）」を別々の層で評価し、前者はフィルタリング用、後者は選択用とする。\n3. **構造検証**: 現在のselectorが「複数の目」を1つにpullする際、構造的な相関（collapsing）が発生していないか、シミュレーションで検定する。",
+      "retrieved": [
+        "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、"
+      ],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-28",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **検証指標の再定義**: 重複率や一致率などの「集約指標」ではなく、個々のエミッターが独立した情報源であることを示す**構造的な独立性指標**（例：相互情報量、特異値分解の分散寄与率）を用いて検証せよ。\n2. **メタデータの分離**: エミッターごとの出力が「同一事象の異なる視点」か「全く異なる事象」かを区別する**メタデータ（ラベル/カテゴリ）の整合性**を、出力値の統計的類似性とは別に明示的にチェックせよ。\n3. **逆ケースのテスト**: 意図的に「重複するエミッター」と「独立したエミッター」を混在させた対照実験を行い、selectorが「珍しさ」ではなく「独立性」を正しく識別できるかを確認せよ。",
+      "retrieved": [
+        "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、"
+      ],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-28",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **指標の再定義**: 構造的に潰れる「集約した指標」を廃止し、selectorのdistinct性を「個々のemitterの独立した出力空間」または「条件付きエントロピー」など、局所的な情報理論的尺度で再定義する。\n2. **機構の分離検証**: 予測（出力結果）と機構（emitterの内部構造/レンズ特性）を分離し、emitterが「珍しさ」を比例してpullするメカニズムが、実際のdistinctness（別レンズ性）と線形相関しないことを実証データで特定する。\n3. **導入時期の局所化**: 問題が「集約」段階で発生しているか、emitterの生成段階で発生しているかを切り分け、cutoffやルーレット設定がdistinctnessの歪みを引き起こす具体的なステップを特定する。",
+      "retrieved": [
+        "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、"
+      ],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-28",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **因果逆転テスト**: `selector` の出力順序を固定し、`emitter` の多様性を変動させて、指標が依然として「珍しさ」に比例するか検証（構造的要因の排除）。\n2. **合成データ検証**: 既知の distinctness（完全独立 vs 完全相関）を持つ人工データセットで指標を計測し、閾値やバイアスを特定。\n3. **メトリクス再定義**: 単純な一致率ではなく、KLダイバージェンスや互情報など、分布の差異を直接測る統計量へ指標を置き換え、感度分析を行う。",
+      "retrieved": [
+        "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、"
+      ],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-29",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **切断 Sleep 探索**: 即座に Sleep/Wakeup 経路を放棄し、メモリ解放の別のメカニズム（例：`torch.cuda.empty_cache()` の適切なタイミング、またはプロセス再起動）を探る。\n2. **エラー原因の特定**: `wake_up` 時の Tensor エラーが、GPU メモリ断片化によるものか、セッション状態の不一致（stale state）によるものかをデバッグし、前者なら GC 戦略を、後者なら状態リセット処理を修正する。\n3. **代替アーキテクチャ検討**: 単一プロセス内でのメモリ管理が困難な場合、メモリ分離されたサブプロセスや、推論エンジン（vLLM）のネイティブなメモリ管理機能（prefill/decode の分離など）を活用する方向へシフトする。",
+      "retrieved": [
+        "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、"
+      ],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-29",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **検証「Wake-up」の根本原因**: `tensor error` がメモリ断片化、GPU 状態の非同期性、または vLLM 内部のキャッシュ（如 KV Cache）の無効化失敗に起因するか特定し、単なるメモリ解放ではなく「状態の整合性」を再確認する。\n2. **代替スリープ戦略の模索**: 完全なスリープが不可能な場合、GPU メモリを解放しつつコンテキストを維持する「オフローディング（CPU/NVMe）」や、セッションごとのプロセス再起動など、vLLM のアーキテクチャに適合する軽量なアイドル管理策を検討する。\n3. **設計方針の再評価**: 「スリープ」に固執せず、リソース効率を最大化するための「バッチ処理の最適化」や「リクエストのキューイング制御」など、スリープに依存しないスケーラビリティ戦略へ軸を移す。",
+      "retrieved": [
+        "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、"
+      ],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-29",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **機構の分離**: `sleep` (メモリ解放) と `wake_up` (状態復元) を独立したモジュールとして再定義し、`tensor error` がどちらのフェーズに起因するかを特定する。\n2. **指標の再定義**: 過去教訓に従い、`sleep/wake` の整合性を「単一の集約指標」で測らず、各層/主体ごとの個別状態（局所性）と、それらを結合するプログラムロジック（global）を分離して検証する。\n3. **導入時期の特定**: エラーが `wake_up` 直後に発生するか、または `sleep` 前の状態保持段階で発生するかをログで追跡し、問題の「導入時期」を境界線として明確にする。",
+      "retrieved": [
+        "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、"
+      ],
+      "excluded_own_origin": []
+    },
+    {
+      "id": "HBB-29",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Direct Distinctness Measurement**: Bypass aggregated metrics; directly measure the structural distinctness of the `emitter`'s output (e.g., via pairwise correlation or information bottleneck analysis) to prove it is not merely a chance aggregation.\n2. **Falsification Experiment**: Construct a control group with a known non-distinct (redundant) selector and demonstrate that the current `emitter` fails to outperform it on a task requiring true lens separation, thereby refuting the \"distinctness\" claim.\n3. **Memory/State Validation**: Since `sleep` failed due to tensor errors, implement a ri",
+      "retrieved": [
+        "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、"
+      ],
+      "excluded_own_origin": []
+    }
+  ]
+}

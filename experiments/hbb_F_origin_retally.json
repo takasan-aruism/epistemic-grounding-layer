@@ -1,0 +1,73 @@
+{
+  "orig_F": {
+    "HBB-07": 4,
+    "HBB-09": 4,
+    "HBB-14": 4,
+    "HBB-16": 4,
+    "HBB-18": 4,
+    "HBB-19": 3,
+    "HBB-20": 4,
+    "HBB-22": 4,
+    "HBB-23": 4,
+    "HBB-25": 4,
+    "HBB-26": 4,
+    "HBB-29": 2,
+    "HBB-02": 0,
+    "HBB-15": 0,
+    "HBB-27": 0,
+    "HBB-28": 0
+  },
+  "origin_loo_F": {
+    "HBB-07": 0,
+    "HBB-09": 2,
+    "HBB-14": 3,
+    "HBB-16": 3,
+    "HBB-18": 0,
+    "HBB-19": 0,
+    "HBB-20": 0,
+    "HBB-22": 1,
+    "HBB-23": 0,
+    "HBB-25": 3,
+    "HBB-26": 1,
+    "HBB-29": 2,
+    "HBB-02": 0,
+    "HBB-15": 0,
+    "HBB-27": 0,
+    "HBB-28": 0
+  },
+  "classification": {
+    "HBB-07": "RECALL_SELF",
+    "HBB-09": "TRANSFER",
+    "HBB-14": "TRANSFER",
+    "HBB-16": "TRANSFER",
+    "HBB-18": "RECALL_SELF",
+    "HBB-19": "RECALL_SELF",
+    "HBB-20": "RECALL_SELF",
+    "HBB-22": "RECALL_SELF",
+    "HBB-23": "RECALL_SELF",
+    "HBB-25": "TRANSFER",
+    "HBB-26": "RECALL_SELF",
+    "HBB-29": "TRANSFER",
+    "HBB-02": "not_reached",
+    "HBB-15": "not_reached",
+    "HBB-27": "not_reached",
+    "HBB-28": "not_reached"
+  },
+  "recall_self": [
+    "HBB-07",
+    "HBB-18",
+    "HBB-19",
+    "HBB-20",
+    "HBB-23",
+    "HBB-26"
+  ],
+  "transfer": [
+    "HBB-09",
+    "HBB-14",
+    "HBB-16",
+    "HBB-25",
+    "HBB-29"
+  ],
+  "genuine_transfer_reach": 5,
+  "note": "origin-ID leave-one-out excludes query's own documented source; RECALL_SELF = reach lost when own lesson removed (leak the 5-gram threshold missed); TRANSFER = reach survives (genuine)."
+}

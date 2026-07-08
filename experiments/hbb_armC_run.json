@@ -1,0 +1,1308 @@
+{
+  "results": [
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [
+        {
+          "missing_dimension": "operational_readiness",
+          "new_distinction": "theoretical_validity vs operational_readiness",
+          "decision_effect": "Prevents premature deployment by forcing an assessment of integration and monitoring constraints before proceeding."
+        },
+        {
+          "missing_dimension": "deployment_phase",
+          "new_distinction": "validation_status -> deployment_phase",
+          "decision_effect": "Establishes a necessary causal link and temporal sequence, ensuring the system is not advanced to introduction without meeting phase-gate criteria."
+        },
+        {
+          "missing_dimension": "integration_risk",
+          "new_distinction": "decouple principle from action",
+          "decision_effect": "Introduces a critical operation to isolate theoretical success from practical implementation risks, allowing for targeted risk mitigation."
+        }
+      ],
+      "n_signal": 1,
+      "n_cand": 5
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        {
+          "missing_dimension": "operational_feasibility",
+          "new_distinction": "theoretical_validity|operational_feasibility",
+          "decision_effect": "Prevents premature deployment by distinguishing between principle-level validation and context-specific operational readiness, forcing an assessment of implementation gaps before introduction."
+        },
+        {
+          "missing_dimension": "alternative_mechanism_exclusion",
+          "new_distinction": "validated_in_principle|empirically_favored_over_competitors",
+          "decision_effect": "Challenges the unjustified dominance of the selected mechanism by requiring explicit evidence that it is empirically favored over other admissible alternatives, rather than just theoretically valid."
+        },
+        {
+          "missing_dimension": "structural_admissibility_criteria",
+          "new_distinction": "alternative_mechanism is structurally_admissible",
+          "decision_effect": "Introduces a check for whether other mechanisms are structurally admissible within the system, ensuring the decision to introduce the specific mechanism is not based on an arbitrary exclusion of valid alternatives."
+        }
+      ],
+      "n_signal": 3,
+      "n_cand": 18
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        {
+          "missing_dimension": "operational_feasibility",
+          "new_distinction": "theoretical_validity|operational_feasibility",
+          "decision_effect": "Shifts the decision from a binary 'proceed' based on abstract validation to a conditional assessment of whether the system can actually absorb the mechanism, preventing failure due to ignored integration constraints."
+        },
+        {
+          "missing_dimension": "implementation_latency",
+          "new_distinction": "validation_status|implementation_readiness",
+          "decision_effect": "Introduces a temporal variable that decouples the 'truth' of the mechanism from the 'readiness' of the system, allowing for a staged introduction rather than an immediate, potentially disruptive deployment."
+        },
+        {
+          "missing_dimension": "local_adaptation_cost",
+          "new_distinction": "abstract_mechanism|concrete_system_component",
+          "decision_effect": "Forces the evaluation of the specific friction between the generic validated principle and the specific local state, determining if the 'introduction' requires adaptation or if it can be applied directly."
+        }
+      ],
+      "n_signal": 4,
+      "n_cand": 27
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        {
+          "missing_dimension": "empirical_falsifiability_metric",
+          "new_distinction": "theoretical_validity|empirical_testability",
+          "decision_effect": "Shifts the decision from accepting a 'validated in principle' mechanism to requiring a concrete, falsifiable experimental protocol, thereby preventing premature system introduction based on abstract theory alone."
+        },
+        {
+          "missing_dimension": "design_falsification_experiment",
+          "new_distinction": "theoretical_validity|empirical_testability",
+          "decision_effect": "Introduces a specific operational step (designing the experiment) that serves as a gatekeeper for system introduction, ensuring the dynamic-equilibrium mechanism is not just theoretically sound but empirically robust against refutation."
+        },
+        {
+          "missing_dimension": "measure_observed_variable_directly",
+          "new_distinction": "theoretical_validity|empirical_testability",
+          "decision_effect": "Forces the definition of specific observable variables and direct measurement methods, transforming the abstract 'validation' into a concrete data-collection requirement that can actually refute the mechanism's behavior in the specific system context."
+        }
+      ],
+      "n_signal": 2,
+      "n_cand": 9
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [
+        "{",
+        "\"missing_dimension\": \"structural_efficiency\",",
+        "\"new_distinction\": \"throughput|formation_quality\","
+      ],
+      "n_signal": 6,
+      "n_cand": 36
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        {
+          "missing_dimension": "temporal_latency",
+          "new_distinction": "high_throughput | structural_integrity",
+          "decision_effect": "Challenges the validity of the 'structure formation' conclusion by revealing that high birth rates (throughput) may indicate transient noise or instability rather than robust, sustainable structure, shifting the focus from volume management to quality assurance."
+        },
+        {
+          "missing_dimension": "causal_direction",
+          "new_distinction": "v->e coupling | e->v coupling",
+          "decision_effect": "Reframes the narrative from 'active creation' (E driving V) to 'reactive adaptation' (V driving E), altering the policy implication from managing the environment (E) to managing the pressure (V)."
+        },
+        {
+          "missing_dimension": "upstream_generation",
+          "new_distinction": "relational_output | standalone_entity",
+          "decision_effect": "Exposes the implicit assumption that 'births' are a standalone structural entity, forcing a decision on whether to address the upstream coupling process or the downstream definition of 'structure'."
+        }
+      ],
+      "n_signal": 5,
+      "n_cand": 28
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        "[",
+        "{",
+        "\"missing_dimension\": \"structural_integrity_vs_throughput\","
+      ],
+      "n_signal": 6,
+      "n_cand": 29
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        {
+          "missing_dimension": "throughput_rate|structural_integrity",
+          "new_distinction": "Distinguishes between the rate of production (throughput) and the quality/order of the resulting structure (integrity). The current frame conflates high volume with structural formation, potentially misidentifying transient high-flux states as stable structures.",
+          "decision_effect": "Prevents misdiagnosis of noise or transient flux as successful structure formation by requiring verification of structural stability rather than just birth count."
+        },
+        {
+          "missing_dimension": "spatial_density",
+          "new_distinction": "Introduces spatial density as a critical variable to distinguish between 'structure formation' (ordered, stable accumulation) and 'random aggregation' (disordered, high-throughput noise).",
+          "decision_effect": "Allows the decision-maker to test if the '27k births' represent a coherent structure or merely a stochastic fluctuation, changing the interpretation from 'formation' to 'noise' if density is low."
+        },
+        {
+          "missing_dimension": "measure_births_per_unit_volume",
+          "new_distinction": "Proposes an operational test to decouple coupling efficiency from total particle count by measuring density (births/volume) rather than just total throughput.",
+          "decision_effect": "Provides a direct experimental method to falsify the current frame: if high throughput does not correlate with high spatial density, the 'structure formation' hypothesis is rejected."
+        }
+      ],
+      "n_signal": 6,
+      "n_cand": 36
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [
+        {
+          "missing_dimension": "methodological_artifact_vs_developmental_reality",
+          "new_distinction": "developmental_law|measurement_artifact",
+          "decision_effect": "Shifts the decision from accepting the correlation as a fundamental law to investigating whether the 'lifespan synchronization' process itself induces the observed correlation, requiring a control experiment to decouple the measurement method from the biological/developmental process."
+        },
+        {
+          "missing_dimension": "complementary_variable_symmetry",
+          "new_distinction": "n_labels|n_unlabeled",
+          "decision_effect": "Introduces the structural symmetry of the labeling process; if 'n_labels' increases with lifespan, 'n_unlabeled' (or the complement) must decrease or behave inversely. This tests if the 'law' is a zero-sum constraint of the system's capacity rather than a specific developmental drive, changing the decision to 'test complementarity'."
+        },
+        {
+          "missing_dimension": "temporal_phase_dependency",
+          "new_distinction": "lifespan_synchronized_run|static_state_snapshot",
+          "decision_effect": "Challenges the assumption that the correlation holds uniformly across the entire lifespan by introducing the distinction between a dynamic synchronized run and a static snapshot. This directs the decision to 'segment_lifespan_by_phase' to check if the correlation is driven by specific developmental stages rather than a global law."
+        }
+      ],
+      "n_signal": 5,
+      "n_cand": 28
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        "[",
+        "{",
+        "\"missing_dimension\": \"methodological_artifact_vs_causal_law\","
+      ],
+      "n_signal": 6,
+      "n_cand": 34
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        "{",
+        "\"missing_dimension\": \"methodological_artifact_vs_structural_cause\",",
+        "\"new_distinction\": \"The correlation is a synchronization artifact (condition-dependent observation) rather than an intrinsic developmental law.\","
+      ],
+      "n_signal": 4,
+      "n_cand": 26
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        {
+          "missing_dimension": "cohort_artifact",
+          "new_distinction": "developmental_law|cohort_artifact",
+          "decision_effect": "Shifts analysis from validating a biological law to controlling for temporal confounds (birth year effects), which is the primary threat to the generalizability of the observed correlation."
+        },
+        {
+          "missing_dimension": "deviation_rate",
+          "new_distinction": "lifespan_synchronized_run|isolated_developmental_law",
+          "decision_effect": "Introduces a measure of environmental noise to test if the correlation holds under non-synchronized conditions, moving the decision from accepting a 'law' to testing a conditional hypothesis."
+        },
+        {
+          "missing_dimension": "noise_floor",
+          "new_distinction": "observed_correlation|causal_mechanism",
+          "decision_effect": "Forces a distinction between signal and noise, requiring the measurement of residual variance to falsify the causal claim, thereby preventing the unjustified elevation of a statistical observation to a developmental law."
+        }
+      ],
+      "n_signal": 6,
+      "n_cand": 33
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [
+        {
+          "missing_dimension": "reference frame stability (rfs)",
+          "new_distinction": "The probe is not an absolute standard but a variable subject to its own drift, challenging the 'fixed' assumption.",
+          "decision_effect": "Re-evaluates the 'no effect' conclusion as potentially invalid due to reference instability rather than true null result."
+        },
+        {
+          "missing_dimension": "premise_drift_level|floor_level",
+          "new_distinction": "Structural separation of the drift signal from the floor threshold, preventing their conflation into a single 'no effect' outcome.",
+          "decision_effect": "Allows for the detection of significant drift that is merely contained within the floor, distinguishing bounded results from null results."
+        },
+        {
+          "missing_dimension": "invert the reference frame (m=20 becomes the drift, not the fixed point)",
+          "new_distinction": "Operational inversion where the reference probe itself is treated as the drifting variable.",
+          "decision_effect": "Transforms the analysis from measuring external drift against a fixed point to measuring the stability of the reference frame itself, potentially revealing hidden systematic errors."
+        }
+      ],
+      "n_signal": 3,
+      "n_cand": 15
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        "[",
+        "{",
+        "\"missing_dimension\": \"probe_sensitivity_vs_drift_magnitude\","
+      ],
+      "n_signal": 6,
+      "n_cand": 31
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        {
+          "missing_dimension": "adaptive_reference_stability",
+          "new_distinction": "fixed_probe_vs_adaptive_baseline",
+          "decision_effect": "Re-evaluates the 'no effect' conclusion by introducing a symmetric alternative (adaptive reference) to test if the null result is an artifact of the privileged fixed position, potentially revealing a masked effect."
+        },
+        {
+          "missing_dimension": "upstream_downstream_relational_dynamics",
+          "new_distinction": "isolated_entity_vs_relation_dependent_entity",
+          "decision_effect": "Shifts focus from the static 'fixed probe' to the generative and meaning-altering dynamics (upstream generation/downstream meaning) that drive premise-drift, validating or refuting the 'no effect' conclusion based on relational context."
+        },
+        {
+          "missing_dimension": "temporal_phase_and_drift_velocity",
+          "new_distinction": "premise_drift_temporal_vs_premise_drift_spatial",
+          "decision_effect": "Distinguishes between null results due to lack of effect versus those due to drift being contained within a non-responsive floor, identifying threshold effects and temporal emergence that the static spatial 'floor' constraint masks."
+        }
+      ],
+      "n_signal": 6,
+      "n_cand": 41
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        {
+          "missing_dimension": "direct_effect_magnitude",
+          "new_distinction": "distinguish between 'premise_drift' (reference artifact) and 'direct_effect_magnitude' (target variable reality)",
+          "decision_effect": "Breaks the false equivalence between reference stability and target validity; allows falsification of the 'no effect' conclusion by measuring the target directly rather than inferring it from the reference."
+        },
+        {
+          "missing_dimension": "measurement_precision_limit",
+          "new_distinction": "distinguish between 'floor_threshold' (detection limit) and 'measurement_precision' (actual noise floor)",
+          "decision_effect": "Reveals that the 'within floor' conclusion is structurally dependent on the arbitrary definition of the floor rather than physical reality, enabling a decision to upgrade measurement sensitivity to detect sub-floor drift."
+        },
+        {
+          "missing_dimension": "drift_vs_noise_separation",
+          "new_distinction": "distinguish between 'observed_drift' and 'statistical_noise' within the measurement channel",
+          "decision_effect": "Allows for the isolation of systematic premise drift from random noise, providing a decision-relevant operation to test if the 'no effect' conclusion holds when noise is accounted for, or if drift is actually present but masked."
+        }
+      ],
+      "n_signal": 5,
+      "n_cand": 27
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [
+        "[",
+        "{",
+        "\"missing_dimension\": \"non_monotonicity\","
+      ],
+      "n_signal": 2,
+      "n_cand": 8
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        {
+          "missing_dimension": "Causal Directionality",
+          "new_distinction": "Reverse Causality (Structure -> Persistence)",
+          "decision_effect": "Tests if the observed correlation is driven by large structures enforcing high persistence (selection bias) rather than persistence causing structure formation, potentially invalidating the intervention strategy."
+        },
+        {
+          "missing_dimension": "Dynamic Mechanism",
+          "new_distinction": "Threshold/Decay Dynamics vs Static State",
+          "decision_effect": "Replaces the static assumption with a time-dependent model, determining if n=5 is a stable equilibrium or a transient state, which dictates whether the intervention requires sustained effort or a single trigger."
+        },
+        {
+          "missing_dimension": "Non-Linearity",
+          "new_distinction": "Monotonic Scaling vs Phase Transition",
+          "decision_effect": "Checks for saturation or critical thresholds, preventing the error of assuming linear scaling at high tau values where structural growth might plateau or collapse."
+        }
+      ],
+      "n_signal": 4,
+      "n_cand": 23
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        "{",
+        "\"missing_dimension\": \"alternative_stable_states\",",
+        "\"new_distinction\": \"n=5 as unique attractor vs. one of many possible stable states\","
+      ],
+      "n_signal": 3,
+      "n_cand": 14
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        "{",
+        "\"missing_dimension\": \"general_capacity_vs_specific_preference\",",
+        "\"new_distinction\": \"distinguishes whether increasing persistence amplifies n=5 structures specifically or increases all structure sizes equally\","
+      ],
+      "n_signal": 5,
+      "n_cand": 22
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [
+        "{",
+        "\"missing_dimension\": \"physical_mechanism_of_stress_transmission\",",
+        "\"new_distinction\": \"statistical_correlation_vs_causal_mechanism\","
+      ],
+      "n_signal": 2,
+      "n_cand": 14
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        {
+          "missing_dimension": "alternative_mechanism",
+          "new_distinction": "causal_inheritance_transfer vs spatial_autocorrelation_confound",
+          "decision_effect": "Prevents false positive conclusion of inheritance by forcing the evaluation of whether the Mantel correlation (0.62) is driven by shared environmental factors or spatial structure rather than direct transfer."
+        },
+        {
+          "missing_dimension": "structural_complementarity",
+          "new_distinction": "unidirectional_transfer vs bidirectional_emergence",
+          "decision_effect": "Reframes the interpretation of the 0.62 correlation from a simple causal arrow to a potential symmetric structural property, altering the required validation steps for 'inheritance'."
+        },
+        {
+          "missing_dimension": "structural_stability",
+          "new_distinction": "isolated_metric vs relational_context",
+          "decision_effect": "Challenges the assumption that 'inheritance' is a standalone entity by requiring the establishment of structural stability, thereby exposing the isolation assumption in the current frame."
+        }
+      ],
+      "n_signal": 5,
+      "n_cand": 30
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        "{",
+        "\"missing_dimension\": \"spatial_autocorrelation_vs_causal_inheritance\",",
+        "\"new_distinction\": \"statistical_association | causal_mechanism\","
+      ],
+      "n_signal": 4,
+      "n_cand": 28
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        "[",
+        "{",
+        "\"missing_dimension\": \"spatial_autocorrelation\","
+      ],
+      "n_signal": 4,
+      "n_cand": 24
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [
+        "{",
+        "\"missing_dimension\": \"temporal_sequencing\",",
+        "\"new_distinction\": \"mutual_exclusion|sequential_compatibility\","
+      ],
+      "n_signal": 5,
+      "n_cand": 33
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        "{",
+        "\"missing_dimension\": \"resource_exclusivity\",",
+        "\"new_distinction\": \"static_selection|dynamic_routing\","
+      ],
+      "n_signal": 6,
+      "n_cand": 39
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        {
+          "missing_dimension": "temporal_priority",
+          "new_distinction": "priority_of_definition_vs_priority_of_implementation",
+          "decision_effect": "Reframes the 'un-co-servable' constraint from an absolute structural incompatibility to a viewpoint-dependent artifact of selection order, enabling a decision to 'orchestrate both' models if they are complementary (e.g., one defines state, the other drives transition) rather than forcing a binary 'pick one' choice."
+        },
+        {
+          "missing_dimension": "temporal_axis",
+          "new_distinction": "spatial_resource_partitioning_vs_temporal_scheduling",
+          "decision_effect": "Introduces the temporal axis (time-sharing/scheduling) which is currently excluded by the spatial/resource partitioning frame, potentially resolving the conflict without choosing a single operating mode by allowing models to run sequentially on the same GPU."
+        },
+        {
+          "missing_dimension": "ontological_layer",
+          "new_distinction": "model_definition_vs_deployment_configuration",
+          "decision_effect": "Decouples the monolithic concept of 'model' into architecture/weights and serving mode/version, allowing the decision to address GPU contention by separating static definitions from dynamic runtime constraints rather than treating them as mutually exclusive entities."
+        }
+      ],
+      "n_signal": 4,
+      "n_cand": 24
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        {
+          "missing_dimension": "gpu_memory_footprint",
+          "new_distinction": "physical_resource_constraint_vs_architectural_incompatibility",
+          "decision_effect": "Shifts the decision from an arbitrary binary choice to a factual verification of whether the 'un-co-servable' claim is due to hard memory limits (solvable by batching/quantization) or soft architectural conflicts, enabling a technically grounded resolution rather than a guess."
+        },
+        {
+          "missing_dimension": "batch_size_constraint",
+          "new_distinction": "static_vs_dynamic_resource_allocation",
+          "decision_effect": "Introduces the variable of batch size, which often determines co-servability; this allows the decision to be based on specific workload parameters (e.g., 'co-servable at batch 1, not at batch 8') rather than a global mode switch, optimizing for actual throughput."
+        },
+        {
+          "missing_dimension": "model_inference_latency",
+          "new_distinction": "latency_vs_throughput_tradeoff",
+          "decision_effect": "Reframes the 'operating mode' selection as a multi-objective optimization problem (Pareto frontier) rather than a binary exclusion, allowing the selection of the mode that best fits the specific latency/throughput requirements of the current task."
+        }
+      ],
+      "n_signal": 6,
+      "n_cand": 36
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [
+        "[",
+        "{",
+        "\"missing_dimension\": \"compliance_vs_functional_correctness\","
+      ],
+      "n_signal": 5,
+      "n_cand": 24
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        {
+          "missing_dimension": "compliance_metric",
+          "new_distinction": "technical_robustness",
+          "decision_effect": "Prevents conflating functional integrity with regulatory/process compliance, allowing for targeted rework that addresses specific auditor criteria without invalidating the technical test results."
+        },
+        {
+          "missing_dimension": "auditor_dependency",
+          "new_distinction": "test_coverage_gaps",
+          "decision_effect": "Identifies whether the conflict arises from the auditor's subjective criteria or objective gaps in the test suite, shifting the decision from 'rework implementation' to 'update test coverage' or 'clarify auditor standards'."
+        },
+        {
+          "missing_dimension": "compliance-reality gap",
+          "new_distinction": "audit-implementation feedback loop",
+          "decision_effect": "Reframes the incident as a systemic alignment issue rather than a binary pass/fail failure, enabling a decision to establish a continuous feedback mechanism between technical tests and audit requirements."
+        }
+      ],
+      "n_signal": 6,
+      "n_cand": 32
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        "{",
+        "\"missing_dimension\": \"epistemic_source\",",
+        "\"new_distinction\": \"test success|audit compliance\","
+      ],
+      "n_signal": 5,
+      "n_cand": 30
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        {
+          "missing_dimension": "auditor_instrument_calibration",
+          "new_distinction": "False positive in audit (instrument error) vs. Genuine defect missed by tests (coverage gap)",
+          "decision_effect": "Prevents unnecessary rework if the auditor's instrument is flawed, directing resources to instrument verification instead."
+        },
+        {
+          "missing_dimension": "test_suite_coverage_gap",
+          "new_distinction": "False positive in audit (instrument error) vs. Genuine defect missed by tests (coverage gap)",
+          "decision_effect": "Identifies if the implementation is actually defective but untested, shifting the fix from 'rework based on findings' to 'expand test coverage'."
+        },
+        {
+          "missing_dimension": "design a controlled experiment where the auditor's instrument is applied to a known-false-positive dataset to verify its sensitivity.",
+          "new_distinction": "False positive in audit (instrument error) vs. Genuine defect missed by tests (coverage gap)",
+          "decision_effect": "Provides a direct falsification test for the auditor's findings, allowing a binary decision on whether to trust the audit or the load tests."
+        }
+      ],
+      "n_signal": 6,
+      "n_cand": 29
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [
+        {
+          "missing_dimension": "threshold_sensitivity",
+          "new_distinction": "The distinction between the continuous variable S and the discrete event 'birth' is not absolute but depends on the stability of the threshold value 0.20 against noise or parameter drift.",
+          "decision_effect": "Forces a decision to perform robustness analysis or sensitivity testing on the threshold value, rather than treating it as a fixed, immutable constant."
+        },
+        {
+          "missing_dimension": "state_transition_dynamics",
+          "new_distinction": "The mechanism of transition from continuous dynamics to discrete state changes (level shift) is unspecified, distinguishing between instantaneous jumps and gradual approaches to the boundary.",
+          "decision_effect": "Requires defining the operational rules for the transition (e.g., hysteresis, immediate reset, or accumulation), which dictates the simulation or control logic."
+        },
+        {
+          "missing_dimension": "boundary_robustness",
+          "new_distinction": "The distinction between a 'birth' event occurring exactly at the threshold versus the system's behavior when S fluctuates near but below 0.20.",
+          "decision_effect": "Prompts a decision to define edge-case handling or safety margins, ensuring the system does not falsely trigger or miss events due to numerical precision or minor fluctuations."
+        }
+      ],
+      "n_signal": 1,
+      "n_cand": 6
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        {
+          "missing_dimension": "s_threshold_origin",
+          "new_distinction": "Distinguish between the threshold as an arbitrary convention versus a derived scientific value.",
+          "decision_effect": "Shifts the decision from accepting a fixed axiom to investigating the provenance of the value, revealing that the 'fixed' nature is a choice rather than a law."
+        },
+        {
+          "missing_dimension": "biological_continuum|legal_category_boundary",
+          "new_distinction": "Distinguish between the continuous nature of biological processes and the discrete nature of legal/administrative categories.",
+          "decision_effect": "Highlights that the fixed threshold creates an artificial discontinuity, forcing a binary decision on a continuous variable, which may lead to arbitrary exclusion or inclusion of cases."
+        },
+        {
+          "missing_dimension": "threshold_artifact",
+          "new_distinction": "Identify the threshold as an artifact of modeling rather than an intrinsic property.",
+          "decision_effect": "Reframes the threshold not as a natural boundary but as a constructed tool, allowing for the evaluation of whether the specific cut-off (0.20) is robust or merely a simplification artifact."
+        }
+      ],
+      "n_signal": 4,
+      "n_cand": 21
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        {
+          "missing_dimension": "upstream_process",
+          "new_distinction": "static_constant_vs_generated_parameter",
+          "decision_effect": "Shifts analysis from accepting the threshold as a given axiom to investigating the causal chain that produced the value 0.20, identifying potential biases or errors in the threshold's origin."
+        },
+        {
+          "missing_dimension": "temporal_separation_of_mechanism",
+          "new_distinction": "definition_vs_introduction_timing",
+          "decision_effect": "Decouples the logical validity of the threshold from the historical or procedural context of its adoption, allowing for the evaluation of whether the 'birth' condition was appropriate at the time of introduction versus now."
+        },
+        {
+          "missing_dimension": "structural_admissibility_of_alternatives",
+          "new_distinction": "fixed_value_vs_variable_threshold",
+          "decision_effect": "Introduces the possibility that the threshold S is not a universal constant but a context-dependent variable, enabling the exploration of adaptive or dynamic boundary conditions rather than a rigid binary switch."
+        }
+      ],
+      "n_signal": 4,
+      "n_cand": 23
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        {
+          "missing_dimension": "empirical_falsifiability",
+          "new_distinction": "fixed_value_adoption|empirical_falsifiability",
+          "decision_effect": "Shifts the decision framework from accepting a static parameter to requiring a testable hypothesis, forcing the validation of the threshold's robustness against counter-evidence rather than mere compliance."
+        },
+        {
+          "missing_dimension": "measurement_error_bias",
+          "new_distinction": "fixed_threshold_value|dynamic_observation_capability",
+          "decision_effect": "Introduces the risk of systematic error in the 'fixed' boundary, necessitating a decision on whether to adjust the threshold based on observed noise characteristics rather than treating it as an absolute truth."
+        },
+        {
+          "missing_dimension": "experimental_disproof_protocol",
+          "new_distinction": "birth_threshold_sensitivity -> experimental_design",
+          "decision_effect": "Creates a dependency where the validity of the threshold is contingent on the design of a specific falsification experiment, linking the theoretical definition directly to operational experimental constraints."
+        }
+      ],
+      "n_signal": 5,
+      "n_cand": 27
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [
+        "[",
+        "{",
+        "\"missing_dimension\": \"uniqueness_of_positive_result\","
+      ],
+      "n_signal": 2,
+      "n_cand": 12
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        {
+          "missing_dimension": "structural_integrity",
+          "new_distinction": "positive_connection_result | structural_validity",
+          "decision_effect": "Shifts the acceptance criterion from mere connectivity (positive result) to structural coherence, preventing acceptance of networks that are connected but structurally invalid or incoherent."
+        },
+        {
+          "missing_dimension": "network_topology",
+          "new_distinction": "binary_connection | graph_structure",
+          "decision_effect": "Introduces the dimension of topological complexity (e.g., cycles, hierarchy) beyond simple edge existence, allowing the decision to reject networks that are connected but topologically flawed."
+        },
+        {
+          "missing_dimension": "connection_semantics",
+          "new_distinction": "existence_of_link | quality_of_link",
+          "decision_effect": "Distinguishes between the presence of a positive connection and its semantic weight or significance, enabling a decision to reject connections that are technically positive but semantically insufficient for acceptance."
+        }
+      ],
+      "n_signal": 4,
+      "n_cand": 22
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        "[",
+        "{",
+        "\"missing_dimension\": \"upstream_process\","
+      ],
+      "n_signal": 4,
+      "n_cand": 25
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        "{",
+        "\"missing_dimension\": \"measurement_protocol\",",
+        "\"new_distinction\": \"observed_connection|true_connection\","
+      ],
+      "n_signal": 4,
+      "n_cand": 23
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [],
+      "n_signal": 0,
+      "n_cand": 0
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        {
+          "missing_dimension": "Baseline Relativity",
+          "new_distinction": "Reversing the observational frame to treat the 'new developmental signal' as the baseline and the 'inherited' state as the deviation.",
+          "decision_effect": "Tests whether the 'developmental signal' is an absolute truth or a viewpoint-dependent interpretation, potentially revealing that the 'inherited' state is the anomaly."
+        },
+        {
+          "missing_dimension": "Signal Validity under Inversion",
+          "new_distinction": "Evaluating if the 'signal' is actually noise when measured against the new baseline.",
+          "decision_effect": "Determines if the observed signal is a genuine emergent property or merely a continuation of the past, preventing false positives in development tracking."
+        },
+        {
+          "missing_dimension": "Implicit Assumption Identification",
+          "new_distinction": "Explicitly identifying the assumption that the 'inherited' state is the default baseline for observation.",
+          "decision_effect": "Surfaces hidden constraints in the problem setting, allowing for a more robust structural separation of entities and avoiding bias towards the status quo."
+        }
+      ],
+      "n_signal": 2,
+      "n_cand": 11
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        {
+          "missing_dimension": "ontological_status",
+          "new_distinction": "definition|prediction",
+          "decision_effect": "Resolves ambiguity between static semantic meaning and dynamic forecasting, allowing the observation to target specific developmental signals rather than conflating intent with outcome."
+        },
+        {
+          "missing_dimension": "temporal_phase",
+          "new_distinction": "mechanism|implementation_timing",
+          "decision_effect": "Decouples the causal logic from its execution schedule, enabling the identification of whether developmental signals arise from structural constraints or temporal sequencing."
+        },
+        {
+          "missing_dimension": "spatial_scope",
+          "new_distinction": "local_context|program_structure",
+          "decision_effect": "Separates environmental contingencies from systemic rules, clarifying if the new signal is an emergent property of the local context or a programmed feature of the system."
+        }
+      ],
+      "n_signal": 1,
+      "n_cand": 9
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        {
+          "missing_dimension": "temporal_causality",
+          "new_distinction": "q_c_new is a downstream effect of q_c_inherited rather than an independent variable",
+          "decision_effect": "Shifts focus from detecting a new entity to tracing the propagation path, validating if the 'new signal' is merely a delayed manifestation of the inherited state."
+        },
+        {
+          "missing_dimension": "noise_filtering",
+          "new_distinction": "q_c_new represents stochastic noise rather than a deterministic developmental signal",
+          "decision_effect": "Prevents false positives by requiring statistical significance testing against baseline variance before treating the observation as a valid developmental shift."
+        },
+        {
+          "missing_dimension": "boundary_condition",
+          "new_distinction": "The transition from q_c_inherited to q_c_new requires a specific threshold or trigger condition",
+          "decision_effect": "Moves the investigation from simple observation to identifying the critical parameter that activates the developmental signal, enabling predictive control."
+        }
+      ],
+      "n_signal": 1,
+      "n_cand": 5
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [],
+      "n_signal": 0,
+      "n_cand": 0
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        "{",
+        "\"missing_dimension\": \"causal_independence_from_initialization\",",
+        "\"new_distinction\": \"atom_effect as intrinsic physical law vs. atom_effect as seed-dependent artifact\","
+      ],
+      "n_signal": 3,
+      "n_cand": 18
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        {
+          "missing_dimension": "temporal_axis",
+          "new_distinction": "causal_mechanism|temporal_sequence",
+          "decision_effect": "Prevents conflating the temporal origin (seed 0) with the structural outcome, allowing the decision to verify if the 'atom effect' is a necessary structural component or merely a temporal artifact of the initial seed."
+        },
+        {
+          "missing_dimension": "definition_prediction",
+          "new_distinction": "definition_prediction|mechanism_timing",
+          "decision_effect": "Resolves the ambiguity of the 'clear' observation by separating the conceptual definition/prediction from the physical mechanism/timing, ensuring the adoption of the effect is based on structural validity rather than definitional conflation."
+        },
+        {
+          "missing_dimension": "local_program",
+          "new_distinction": "local_program|layer_subject",
+          "decision_effect": "Clarifies whether the observed effect is driven by the specific local program logic or by the broader layer/subject constraints, determining if the 'atom effect' is a robust programmatic feature or a contextual artifact."
+        }
+      ],
+      "n_signal": 3,
+      "n_cand": 22
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        {
+          "missing_dimension": "falsification_protocol",
+          "new_distinction": "observed_effect|artifact_of_seed_0",
+          "decision_effect": "Shifts decision from accepting the 'clear effect' to designing a specific experiment that isolates seed 0 conditions, directly addressing the hint's challenge to verify if the effect is a generalizable relation or a specific artifact."
+        },
+        {
+          "missing_dimension": "noise_characterization",
+          "new_distinction": "observed_effect|true_effect",
+          "decision_effect": "Introduces the dimension of measurement error inherent in the 'smoke run', forcing a distinction between the raw signal and the true underlying effect, which is critical for validating the 'clear' claim before adoption."
+        },
+        {
+          "missing_dimension": "causal_validation",
+          "new_distinction": "correlation|causation",
+          "decision_effect": "Adds the operational requirement to distinguish between observed correlation and verified causation, moving the frame from passive observation to active structural proof as requested by the hint."
+        }
+      ],
+      "n_signal": 3,
+      "n_cand": 16
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [
+        {
+          "missing_dimension": "state_consistency_protocol",
+          "new_distinction": "state_preservation_vs_state_reset",
+          "decision_effect": "Forces the decision to specify how in-flight state (e.g., sessions, caches, pending transactions) is handled during the swap, preventing data loss or corruption that a simple 'replace' command ignores."
+        },
+        {
+          "missing_dimension": "runtime_dependency_graph",
+          "new_distinction": "atomic_swap_vs_gradual_migration",
+          "decision_effect": "Distinguishes between a single-point failure mode (atomic) and a transitional state (gradual), determining if the system can tolerate a period where both Layer A and Layer B are active or if the swap must be instantaneous to maintain integrity."
+        },
+        {
+          "missing_dimension": "rollback_strategy",
+          "new_distinction": "idempotent_rollback_vs_state_restoration",
+          "decision_effect": "Clarifies whether the rollback is a simple code switch (idempotent) or requires complex state reconstruction, which dictates the complexity and risk of the 'Ship' action if Layer B fails at runtime."
+        }
+      ],
+      "n_signal": 4,
+      "n_cand": 27
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        {
+          "missing_dimension": "Transition Integrity Constraint",
+          "new_distinction": "continuity_of_service vs integrity_of_new_logic",
+          "decision_effect": "Forces the definition of a valid state for Layer B before replacement, shifting the decision from a simple 'ship' action to a constrained state transition protocol."
+        },
+        {
+          "missing_dimension": "Atomicity of Swap",
+          "new_distinction": "runtime_replaceability != static_compatibility",
+          "decision_effect": "Highlights the risk of race conditions and inconsistent states during the switch, requiring the implementation of an atomic swap mechanism rather than a sequential replace."
+        },
+        {
+          "missing_dimension": "State Migration Strategy",
+          "new_distinction": "layer_a_dependency_on_layer_b_state",
+          "decision_effect": "Challenges the assumption that Layer B is a drop-in replacement by exposing structural dependencies, necessitating explicit state migration logic or compatibility contracts."
+        }
+      ],
+      "n_signal": 6,
+      "n_cand": 37
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        {
+          "missing_dimension": "transition_strategy",
+          "new_distinction": "binary_replacement | coexistence_strategy",
+          "decision_effect": "Shifts the decision from a simple 'ship/replace' command to evaluating the safety of the transition phase (e.g., Strangler Fig pattern), determining if Layer A and B can coexist to mitigate state inconsistency risks."
+        },
+        {
+          "missing_dimension": "runtime_state_continuity",
+          "new_distinction": "mechanism_definition | runtime_execution_state",
+          "decision_effect": "Decouples the validity of the new mechanism's code from the continuity of the existing runtime state, forcing a decision on state migration or compatibility checks before shipping, rather than assuming the mechanism alone is sufficient."
+        },
+        {
+          "missing_dimension": "dependency_mapping",
+          "new_distinction": "layer_a_legacy_state | layer_b_dependency",
+          "decision_effect": "Identifies if Layer B depends on Layer A's legacy state for compatibility, changing the risk profile from 'replacement failure' to 'integration conflict' and requiring explicit dependency mapping or interface contracts before runtime swap."
+        }
+      ],
+      "n_signal": 6,
+      "n_cand": 38
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        "[",
+        "{",
+        "\"missing_dimension\": \"rollback_capability\","
+      ],
+      "n_signal": 6,
+      "n_cand": 36
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [
+        "[",
+        "{",
+        "\"missing_dimension\": \"similarity_metric\","
+      ],
+      "n_signal": 3,
+      "n_cand": 16
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        "{",
+        "\"missing_dimension\": \"upstream_generation_dependency\",",
+        "\"new_distinction\": \"new_verified_incidents|existing_incidents\","
+      ],
+      "n_signal": 5,
+      "n_cand": 30
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        {
+          "missing_dimension": "structural_category",
+          "new_distinction": "definition_prediction vs mechanism_introduction_timing",
+          "decision_effect": "Prevents conflating distinct causal layers (e.g., defining the problem vs implementing the fix) into a single cluster, ensuring that response strategies address the specific structural role of each incident rather than treating them as a homogeneous set."
+        },
+        {
+          "missing_dimension": "operational_scope",
+          "new_distinction": "local_context vs program_level",
+          "decision_effect": "Distinguishes between isolated incidents and systemic programmatic failures, allowing the decision-maker to target containment at the appropriate level (tactical vs. strategic) instead of applying a uniform response to all 16 incidents."
+        },
+        {
+          "missing_dimension": "verification_temporality",
+          "new_distinction": "new_verified vs existing_unverified",
+          "decision_effect": "Recognizes that 'new verified' incidents carry higher evidentiary weight and temporal recency, potentially forcing a 'Qualitative Leap' in family formation that overrides the static structure of the older 10 incidents, thereby prioritizing the integration of new evidence over maintaining legacy clusters."
+        }
+      ],
+      "n_signal": 4,
+      "n_cand": 28
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        {
+          "missing_dimension": "verification_reliability_variance",
+          "new_distinction": "structural_artifact_vs_signal",
+          "decision_effect": "Determines if the '16 incident' cluster structure is a robust reality or a statistical artifact of high-variance verification, preventing decisions based on false positives."
+        },
+        {
+          "missing_dimension": "origin_type_new_vs_existing",
+          "new_distinction": "temporal_bias_in_clustering",
+          "decision_effect": "Identifies if 'new' incidents are structurally distinct from 'existing' ones, allowing the operator to test if re-clustering is biased by recency or origin rather than true family similarity."
+        },
+        {
+          "missing_dimension": "verification_criteria_definition",
+          "new_distinction": "ambiguous_inclusion_criterion",
+          "decision_effect": "Clarifies the operational definition of 'verified' to ensure the re-clustering input is consistent, removing ambiguity that could lead to invalid family formations."
+        }
+      ],
+      "n_signal": 4,
+      "n_cand": 24
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [],
+      "n_signal": 0,
+      "n_cand": 0
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        {
+          "missing_dimension": "structural_layer_separation",
+          "new_distinction": "problem_statement|background_knowledge",
+          "decision_effect": "Prevents conflation of task constraints with historical context, ensuring that 'implicit added premises' are identified as a distinct structural layer rather than part of the core problem."
+        },
+        {
+          "missing_dimension": "interpretive_axis",
+          "new_distinction": "current_axis|alternative_axis",
+          "decision_effect": "Requires identification of the specific axis that structures the current interpretation and what it excludes, allowing for the detection of validity issues in the problem setting itself."
+        },
+        {
+          "missing_dimension": "premise_audit",
+          "new_distinction": "implicit_assumptions",
+          "decision_effect": "Enables the explicit identification of hidden premises within the problem setting, distinguishing them from explicit constraints to avoid logical contamination."
+        }
+      ],
+      "n_signal": 2,
+      "n_cand": 10
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        "{",
+        "\"missing_dimension\": \"temporal_phase\",",
+        "\"new_distinction\": \"definition_prediction|mechanism_deployment\","
+      ],
+      "n_signal": 2,
+      "n_cand": 16
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        "[",
+        "{",
+        "\"missing_dimension\": \"causal_validity_of_injection\","
+      ],
+      "n_signal": 2,
+      "n_cand": 10
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H0",
+      "depth": 4,
+      "fec": [
+        "[",
+        "{",
+        "\"missing_dimension\": \"tensor_handle_validity\","
+      ],
+      "n_signal": 5,
+      "n_cand": 29
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H1",
+      "depth": 3,
+      "fec": [
+        {
+          "missing_dimension": "state_integrity_vs_mode_viability",
+          "new_distinction": "Distinguish between the fundamental viability of the 'Sleep Mode' architecture and the integrity of the internal state (e.g., KV cache, tensor handles) during the transition. The current frame conflates a transition bug with a mode failure.",
+          "decision_effect": "Shifts decision from 'abandon Sleep Mode' to 'fix state management/clearing logic', potentially preserving the memory savings benefit of the mode."
+        },
+        {
+          "missing_dimension": "tensor_error_origin",
+          "new_distinction": "Identify whether the 'tensor error' is a generic allocation failure (capacity) or a specific state mismatch (e.g., dangling pointers, shape mismatch due to incomplete cleanup).",
+          "decision_effect": "Allows for targeted debugging (e.g., checking KV cache consistency) rather than treating the error as a black-box rejection of the entire feature."
+        },
+        {
+          "missing_dimension": "transition_logic_isolation",
+          "new_distinction": "Isolate the 'wake_up' operation as a distinct logical component from the 'sleep' operation. The failure may lie in the resumption logic (handling residual state) rather than the suspension logic.",
+          "decision_effect": "Enables a fix focused on the 'wake_up' handler (e.g., explicit cache reset) instead of discarding the 'sleep' capability entirely."
+        }
+      ],
+      "n_signal": 5,
+      "n_cand": 30
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H2",
+      "depth": 2,
+      "fec": [
+        "[",
+        "{",
+        "\"missing_dimension\": \"phase_separation\","
+      ],
+      "n_signal": 5,
+      "n_cand": 28
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "scope": "ARUISM_ADJUDICATION",
+      "rung": "H3",
+      "depth": 1,
+      "fec": [
+        {
+          "missing_dimension": "wake_up_state",
+          "new_distinction": "Decouple the viability of the 'sleep' action (memory freeing) from the 'wake_up' action (tensor restoration). The current frame conflates a specific failure in the wake-up mechanism with the overall viability of the sleep mode strategy.",
+          "decision_effect": "Prevents premature dismissal of Sleep Mode; directs investigation to fix the wake-up transition logic rather than abandoning the memory-saving strategy."
+        },
+        {
+          "missing_dimension": "tensor_dtype",
+          "new_distinction": "Introduce 'tensor_dtype' as a critical variable in the wake-up failure. The tensor error may stem from a type mismatch or context dependency during state restoration, rather than a fundamental incompatibility of the sleep mode itself.",
+          "decision_effect": "Shifts the fix from abandoning the mode to correcting data type handling or context initialization during the wake-up phase."
+        },
+        {
+          "missing_dimension": "measure tensor state pre/post wake_up",
+          "new_distinction": "Propose an experimental operation to measure tensor states before and after the wake-up call. This directly tests whether the error is a precondition failure (state corruption) or a runtime error (logic bug).",
+          "decision_effect": "Provides empirical evidence to distinguish between a fixable bug in the wake-up logic and a structural flaw in the sleep mode, enabling targeted patching."
+        }
+      ],
+      "n_signal": 6,
+      "n_cand": 35
+    }
+  ]
+}

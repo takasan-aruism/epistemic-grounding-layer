@@ -1,0 +1,170 @@
+{
+  "matrix": {
+    "HBB-02": {
+      "A": 2,
+      "B": 0,
+      "F_apparent": 0,
+      "F_class": "not_reached",
+      "F_genuine": 0,
+      "C_AFE": 2,
+      "scope": "ARUISM_ADJUDICATION"
+    },
+    "HBB-09": {
+      "A": 0,
+      "B": 4,
+      "F_apparent": 4,
+      "F_class": "TRANSFER",
+      "F_genuine": 4,
+      "C_AFE": 0,
+      "scope": "FORCED_OUT_OF_SCOPE"
+    },
+    "HBB-14": {
+      "A": 0,
+      "B": 0,
+      "F_apparent": 4,
+      "F_class": "TRANSFER",
+      "F_genuine": 4,
+      "C_AFE": 4,
+      "scope": "FORCED_OUT_OF_SCOPE"
+    },
+    "HBB-16": {
+      "A": 2,
+      "B": 4,
+      "F_apparent": 4,
+      "F_class": "TRANSFER",
+      "F_genuine": 4,
+      "C_AFE": 0,
+      "scope": "FORCED_OUT_OF_SCOPE"
+    },
+    "HBB-22": {
+      "A": 1,
+      "B": 4,
+      "F_apparent": 4,
+      "F_class": "RECALL_SELF",
+      "F_genuine": 0,
+      "C_AFE": 2,
+      "scope": "FORCED_OUT_OF_SCOPE"
+    },
+    "HBB-23": {
+      "A": 0,
+      "B": 0,
+      "F_apparent": 4,
+      "F_class": "RECALL_SELF",
+      "F_genuine": 0,
+      "C_AFE": 0,
+      "scope": "FORCED_OUT_OF_SCOPE"
+    },
+    "HBB-25": {
+      "A": 3,
+      "B": 4,
+      "F_apparent": 4,
+      "F_class": "TRANSFER",
+      "F_genuine": 4,
+      "C_AFE": 0,
+      "scope": "FORCED_OUT_OF_SCOPE"
+    },
+    "HBB-26": {
+      "A": 3,
+      "B": 4,
+      "F_apparent": 4,
+      "F_class": "RECALL_SELF",
+      "F_genuine": 0,
+      "C_AFE": 2,
+      "scope": "FORCED_OUT_OF_SCOPE"
+    },
+    "HBB-07": {
+      "A": 0,
+      "B": 2,
+      "F_apparent": 4,
+      "F_class": "RECALL_SELF",
+      "F_genuine": 0,
+      "C_AFE": 3,
+      "scope": "ARUISM_ADJUDICATION"
+    },
+    "HBB-15": {
+      "A": 0,
+      "B": 0,
+      "F_apparent": 0,
+      "F_class": "not_reached",
+      "F_genuine": 0,
+      "C_AFE": 0,
+      "scope": "FORCED_OUT_OF_SCOPE"
+    },
+    "HBB-18": {
+      "A": 0,
+      "B": 0,
+      "F_apparent": 4,
+      "F_class": "RECALL_SELF",
+      "F_genuine": 0,
+      "C_AFE": 0,
+      "scope": "FORCED_OUT_OF_SCOPE"
+    },
+    "HBB-19": {
+      "A": 4,
+      "B": 3,
+      "F_apparent": 3,
+      "F_class": "RECALL_SELF",
+      "F_genuine": 0,
+      "C_AFE": 3,
+      "scope": "FORCED_OUT_OF_SCOPE"
+    },
+    "HBB-20": {
+      "A": 0,
+      "B": 0,
+      "F_apparent": 4,
+      "F_class": "RECALL_SELF",
+      "F_genuine": 0,
+      "C_AFE": 0,
+      "scope": "ARUISM_ADJUDICATION"
+    },
+    "HBB-27": {
+      "A": 0,
+      "B": 0,
+      "F_apparent": 0,
+      "F_class": "not_reached",
+      "F_genuine": 0,
+      "C_AFE": 0,
+      "scope": "ARUISM_ADJUDICATION"
+    },
+    "HBB-28": {
+      "A": 0,
+      "B": 4,
+      "F_apparent": 0,
+      "F_class": "not_reached",
+      "F_genuine": 0,
+      "C_AFE": 0,
+      "scope": "ARUISM_ADJUDICATION"
+    },
+    "HBB-29": {
+      "A": 0,
+      "B": 4,
+      "F_apparent": 2,
+      "F_class": "TRANSFER",
+      "F_genuine": 2,
+      "C_AFE": 3,
+      "scope": "ARUISM_ADJUDICATION"
+    }
+  },
+  "reach": {
+    "A": 5,
+    "B": 8,
+    "F_apparent": 11,
+    "F_genuine": 5,
+    "C": 6
+  },
+  "AA_reach": {
+    "A": 1,
+    "B": 3,
+    "F_genuine": 1,
+    "C": 3
+  },
+  "external_spot_targets_AA": [
+    "HBB-02",
+    "HBB-07",
+    "HBB-20",
+    "HBB-27",
+    "HBB-28",
+    "HBB-29"
+  ],
+  "scorer": "Claude external-weight; provenance recorded; external spot-check assumed (AA load-bearing)"
+}
