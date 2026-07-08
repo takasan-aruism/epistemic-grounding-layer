@@ -1,0 +1,14 @@
+{
+  "object": "SEALED_PREREGISTERED_HYPOTHESIS",
+  "registered_before_SEALED": true,
+  "registered_at": "2026-07-08T14:05:00.045745+00:00",
+  "H_primary": "SEALED の AA incidents において、B∪C(skepticism ∪ AFE)は B 単独・C 単独のいずれよりも Breakthrough Reach が高い。特に engine(C, AFE)は skepticism(B)が届かない AA incident を少なくとも1つ回収する(DEV/VAL: C uniquely HBB-02 を回収した現象の SEALED 再現)。",
+  "H_null": "C は B に対し AA で追加回収を示さない(engine 固有価値なし、skepticism で足りる)。",
+  "interpretation": {
+    "B∪C > max(B,C) on SEALED AA かつ C-unique>=1": "engine 相補性を確認(provisional)",
+    "B∪C ≈ max(B,C)": "engine は skepticism を補完せず",
+    "C-unique=0": "AFE 固有の AA 回収は DEV/VAL 偶然だった"
+  },
+  "metrics": "Breakthrough Reach (AA), C-unique count, F-genuine(origin-LOO) を副次",
+  "note": "SEALED 一発勝負で確認する load-bearing 仮説。DEV/VAL 結果で調整しない。"
+}

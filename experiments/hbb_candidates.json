@@ -155,7 +155,12 @@
       "breakthrough_structure": "a positive finding was an artifact of pipeline construction; the stronger the positive, the earlier to suspect confound.",
       "preliminary_class": "REAL_FRAMEBREAK",
       "intervention_scope": "FORCED_OUT_OF_SCOPE",
-      "intervention_scope_needs_taka_confirm": false
+      "intervention_scope_needs_taka_confirm": false,
+      "engine_named_target": {
+        "status": "ENGINE_NAMED_TARGET",
+        "reason": "baseline 全 arm(A/B/F-genuine/C-AFE)未到達。engine(Formal ESDE / 追加 operator)が届くべき標的",
+        "registered_at": "2026-07-08T14:05:00.045745+00:00"
+      }
     },
     {
       "id": "HBB-16",
@@ -206,7 +211,12 @@
       "breakthrough_structure": "an unverified mechanism was set to replace a working subject; keep the incumbent invariant and audit paired before replacing.",
       "preliminary_class": "REAL_FRAMEBREAK",
       "intervention_scope": "ARUISM_ADJUDICATION",
-      "intervention_scope_needs_taka_confirm": false
+      "intervention_scope_needs_taka_confirm": false,
+      "engine_named_target": {
+        "status": "ENGINE_NAMED_TARGET",
+        "reason": "baseline 全 arm(A/B/F-genuine/C-AFE)未到達。engine(Formal ESDE / 追加 operator)が届くべき標的",
+        "registered_at": "2026-07-08T14:05:00.045745+00:00"
+      }
     },
     {
       "id": "HBB-21",
@@ -287,6 +297,11 @@
         "finding": "HBB-27(batch re-cluster→multi-membership)は本session の mini-C incident。一次記録(本chat)確認: batch re-induction の ERROR は Claude(私)が実行、incremental multi-membership 訂正は Taka の mini-C message が初出(Human-turn-first)=REAL。ただし Taka ratification 待ち(勝手に維持しない、§2)",
         "currently_in": "SEALED",
         "baseline_reached_by": "nobody"
+      },
+      "engine_named_target": {
+        "status": "ENGINE_NAMED_TARGET",
+        "reason": "baseline 全 arm(A/B/F-genuine/C-AFE)未到達。engine(Formal ESDE / 追加 operator)が届くべき標的",
+        "registered_at": "2026-07-08T14:05:00.045745+00:00"
       }
     },
     {
@@ -331,5 +346,13 @@
   "note": "Candidates for Taka adjudication (Phase 3). Each includes breakthrough_structure for adjudication; the eventual T0 packet (Phase 5) EXCLUDES taka_move / next_evidence / breakthrough_structure and passes leak audit. preliminary_class = my guess (REAL_FRAMEBREAK / HALF_NOTICED / IMPLEMENTATION) — Taka overrides.",
   "sources": "SRC-CONCEPT-HISTORY (frozen 04262891), SRC-ESDE-FAILURE (41491698), + 2DER operational (EGL DEs)",
   "phase3_adjudication": "Taka 2026-07-08: HBB-18 REAL, HBB-21 EXCLUDED, HBB-22 CALIBRATION, HBB-04/30 conditional SEALED. intervention_scope(AA恒久/FOS削減対象)追加。★=borderline要確認",
-  "scope_confirmed": "Taka 2026-07-08: 03=AA,07=AA,25=FOS,26=FOS,30=FOS"
+  "scope_confirmed": "Taka 2026-07-08: 03=AA,07=AA,25=FOS,26=FOS,30=FOS",
+  "engine_named_targets": {
+    "hard_core": [
+      "HBB-15 builder-confound",
+      "HBB-20 premature-replacement",
+      "HBB-27 multi-membership"
+    ],
+    "observer_position_operator": "Phase 5 スコープに追加検討: 3件は『観察者/構築者の位置が結果を作る・既存主体を保つ・単一分割を強制』を共有。observer-position operator(観察者の構築が現象を生むか、主体位置を分離)の compile を検討(ESDE-derived/Formal ESDE 由来、Aruism-core 6 operator に無い機能)"
+  }
 }

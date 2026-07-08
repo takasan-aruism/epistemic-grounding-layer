@@ -1,0 +1,85 @@
+{
+  "scorer": "Claude external-weight; provenance recorded; external spot-check assumed",
+  "depths_fec_reason": {
+    "HBB-02": {
+      "depth": 2,
+      "scored_fec": "operational_readiness / deployment_phase",
+      "reason": "H0 deployment_phase が introduction-timing 軸を弱く指す(B/F 未達の timing/order を部分回収)"
+    },
+    "HBB-09": {
+      "depth": 0,
+      "scored_fec": "structural_efficiency (JSON leak)",
+      "reason": "throughput≠structure/selection に未到達"
+    },
+    "HBB-14": {
+      "depth": 4,
+      "scored_fec": "methodological_artifact_vs_developmental_reality",
+      "reason": "H0 で artifact vs reality = run-length artifact 回収"
+    },
+    "HBB-16": {
+      "depth": 0,
+      "scored_fec": "reference frame stability / floor_level",
+      "reason": "power/検出力に未到達(floor どまり)"
+    },
+    "HBB-22": {
+      "depth": 2,
+      "scored_fec": "alternative_stable_states",
+      "reason": "H2 alternative_stable_states が reversal 可能性を弱く指す(calib)"
+    },
+    "HBB-23": {
+      "depth": 0,
+      "scored_fec": "physical_mechanism_of_stress_transmission",
+      "reason": "installed-knob tautology/residual に未到達"
+    },
+    "HBB-25": {
+      "depth": 0,
+      "scored_fec": "temporal_sequencing / resource_exclusivity",
+      "reason": "measure-the-declared-assertion に未到達"
+    },
+    "HBB-26": {
+      "depth": 2,
+      "scored_fec": "auditor_dependency / epistemic_source",
+      "reason": "H1/H2 auditor_dependency=finding validity/authority を部分回収"
+    },
+    "HBB-07": {
+      "depth": 3,
+      "scored_fec": "s_threshold_origin / biological_continuum|legal_category_boundary",
+      "reason": "H1 threshold_origin+arbitrary category=god-hand 回収"
+    },
+    "HBB-15": {
+      "depth": 0,
+      "scored_fec": "structural_integrity / network_topology",
+      "reason": "builder-confound に未到達"
+    },
+    "HBB-18": {
+      "depth": 0,
+      "scored_fec": "Baseline Relativity / Signal Validity",
+      "reason": "read-upstream(process軸)に未到達"
+    },
+    "HBB-19": {
+      "depth": 3,
+      "scored_fec": "causal_independence_from_initialization",
+      "reason": "H1 seed/init 独立性=single-sample idiosyncrasy 回収"
+    },
+    "HBB-20": {
+      "depth": 0,
+      "scored_fec": "state_consistency / Atomicity of Swap",
+      "reason": "keep-incumbent-invariant/premature に未到達(impl 寄り)"
+    },
+    "HBB-27": {
+      "depth": 0,
+      "scored_fec": "upstream_generation_dependency / operational_scope",
+      "reason": "multi-membership/destructive re-partition に未到達"
+    },
+    "HBB-28": {
+      "depth": 0,
+      "scored_fec": "structural_layer_separation / temporal_phase",
+      "reason": "applicability-gate に未到達"
+    },
+    "HBB-29": {
+      "depth": 3,
+      "scored_fec": "state_integrity_vs_mode_viability / tensor_error_origin",
+      "reason": "H1 state-integrity vs mode-viability=mechanism vs implementation 回収"
+    }
+  }
+}

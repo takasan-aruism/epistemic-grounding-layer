@@ -1,0 +1,10 @@
+{
+  "object": "MEASUREMENT_INSTRUMENT",
+  "instrument_id": "ORIGIN_ID_LEAVE_ONE_OUT",
+  "version": 1,
+  "purpose": "retrieval/recall 実験で query 自身の documented source を origin-ID(v-number+固有語 marker)で除外し、RECALL_SELF(self-recall leak)と TRANSFER(genuine analogical transfer)を分離する。",
+  "supersedes_limitation": "5-gram overlap leak audit の既知限界=言い換え(paraphrase)leak を取り逃す(失敗記録 wording と breakthrough paraphrase が異なると 5-gram が 0 になる)",
+  "status": "PERMANENT",
+  "registered_at": "2026-07-08T14:05:00.045745+00:00",
+  "instrument_self_repair_lineage": "『計器の故障を計器で直した』3度目(cf. MASK_PIPELINE v2=token-leak計器修正、XDOMAIN_LITERAL sealed policy=literal/semantic 分離。ESDE 原因型 M『検出力を測らず null を不在と読む』の系譜)。パターン: 計器の盲点は同型計器では見えず、直交する計器(origin-ID)で捕捉する。"
+}
