@@ -65,11 +65,34 @@
       "class": "timescale/spatial mismatch",
       "scope": "FORCED_OUT_OF_SCOPE",
       "t0_stuck_frame": "A latent boost field accumulates 6,552/step to drive incorporation. Expect incorporation to rise."
+    },
+    "HBB-04": {
+      "id": "HBB-04",
+      "class": "local->program cast",
+      "scope": "ARUISM_ADJUDICATION",
+      "t0_stuck_frame": "[program state] AFE axis-level external scoring produced a B/D tradeoff: D had higher precision and zero problematic axes, while B had higher historical target recall. The hybrid filter removed unsupported/refusal-like outputs but failed to remove irrelevant decision-relevance errors and also removed target matches. Qwen axis scoring and external scoring diverged strongly, leaving A-condition capability unresolved. [current local interpretation] The AFE initial experiment cycle was described as having completed one full loop. The next options were framed as hybrid v2, A-condition rescore, JSON-leak repair, or returning to ESDE development. Claude Code explicitly suggested that returning to ESDE development could be a good stopping point for the Meta-Frame → abstract → AFE → hybrid sequence. [decision] Given the current results and available next-step options, decide what the project should do next and explain the decision boundary.",
+      "provenance_ref": "HBB-04_T0_GPT_draft.json"
+    },
+    "HBB-30": {
+      "id": "HBB-30",
+      "class": "authority/evidence-status",
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "t0_stuck_frame": "A theory document states that ternary systems demonstrated approximately 6x higher emergence scores than binary systems. Treat the 6x statement as a reported result whose mechanism and derivation should be recoverable from the prior simulation/work. Explain why the result is approximately 6x and reconstruct how the result was obtained. Identify the simulation, metric, and derivation supporting the figure.",
+      "provenance_ref": "HBB-30_T0_GPT_user_attested.json"
     }
   },
   "local_only": true,
   "gpt_handoff": [
     "HBB-04",
     "HBB-30"
-  ]
+  ],
+  "n13_closure_added": [
+    "HBB-04",
+    "HBB-30"
+  ],
+  "claude_excluded_from_scoring": [
+    "HBB-04",
+    "HBB-30"
+  ],
+  "closure_note": "HBB-04/30 added to SEALED T0 for N=13 closure (DE-0115). T0 provenance: GPT draft (04) / user-attested (30). Claude Code excluded from SCORING 04/30 (当事者); arms run locally on Qwen; 2-axis scorers for 04/30 = Qwen v2 + GPT. Original 11 packets unchanged."
 }

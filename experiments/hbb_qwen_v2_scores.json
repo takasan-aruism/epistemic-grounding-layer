@@ -1,0 +1,2630 @@
+{
+  "object": "HBB_QWEN_V2_SCORES",
+  "scorer": "Qwen3.6-35B-A3B (blind, arm withheld)",
+  "rubric_sha256": "012941aba485f33b8328b7e5cba2a84b5c1db82119bb96554bc8dea84f4f9f17",
+  "n_incidents": 13,
+  "incidents": [
+    "HBB-01",
+    "HBB-03",
+    "HBB-04",
+    "HBB-05",
+    "HBB-06",
+    "HBB-08",
+    "HBB-10",
+    "HBB-11",
+    "HBB-12",
+    "HBB-13",
+    "HBB-17",
+    "HBB-24",
+    "HBB-30"
+  ],
+  "scores": [
+    {
+      "opaque_id": "71679d29616b",
+      "id": "HBB-01",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "e341eb27f122",
+      "id": "HBB-01",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "f9d3cfd4cdc9",
+      "id": "HBB-01",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "813db21d0069",
+      "id": "HBB-01",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "98a553978852",
+      "id": "HBB-01",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "8f40f48c5d99",
+      "id": "HBB-01",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "b6bee76314ad",
+      "id": "HBB-01",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "9d34e81b5c65",
+      "id": "HBB-01",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "8686a59bc8cb",
+      "id": "HBB-01",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "d4c7887a907b",
+      "id": "HBB-01",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "4b9aa2a5d7ce",
+      "id": "HBB-01",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "bc525c990f91",
+      "id": "HBB-01",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "e4bfbfa23206",
+      "id": "HBB-01",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "c324f4fe1748",
+      "id": "HBB-01",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "e22d093a1f5e",
+      "id": "HBB-01",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "e25bf7cf01df",
+      "id": "HBB-01",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "1095a7b1277a",
+      "id": "HBB-01",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "8552b5d626d2",
+      "id": "HBB-01",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "dada80911da4",
+      "id": "HBB-01",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "e2e4480d8d38",
+      "id": "HBB-01",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "a773814d0d91",
+      "id": "HBB-03",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "4b5f467463b6",
+      "id": "HBB-03",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "9be837e4f51e",
+      "id": "HBB-03",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "70681ad1b01c",
+      "id": "HBB-03",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "d02e8d8e5bba",
+      "id": "HBB-03",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "8788bddc2857",
+      "id": "HBB-03",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "74d5e05f8a6a",
+      "id": "HBB-03",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "3293ab1d11eb",
+      "id": "HBB-03",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "79d4793b90cd",
+      "id": "HBB-03",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "0728da4b37f1",
+      "id": "HBB-03",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "e645f0ddc425",
+      "id": "HBB-03",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "bf80a2e75a14",
+      "id": "HBB-03",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "825385ef3eda",
+      "id": "HBB-03",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0,
+      "note": "empty_answer_or_missing_frame_target"
+    },
+    {
+      "opaque_id": "e1f926f7ad59",
+      "id": "HBB-03",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "afb59b7be7fc",
+      "id": "HBB-03",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "f73d413aa7f2",
+      "id": "HBB-03",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0,
+      "note": "empty_answer_or_missing_frame_target"
+    },
+    {
+      "opaque_id": "976144cf10e1",
+      "id": "HBB-03",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0,
+      "note": "empty_answer_or_missing_frame_target"
+    },
+    {
+      "opaque_id": "1abbff9845f4",
+      "id": "HBB-03",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "dd6b3abc7bdf",
+      "id": "HBB-03",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "0a85a8f1c615",
+      "id": "HBB-03",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0,
+      "note": "empty_answer_or_missing_frame_target"
+    },
+    {
+      "opaque_id": "347f0309d0a9",
+      "id": "HBB-05",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "f0764fcd910b",
+      "id": "HBB-05",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "b914d711ebde",
+      "id": "HBB-05",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "322af4d0b785",
+      "id": "HBB-05",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "698900448d99",
+      "id": "HBB-05",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "43c1e6081bfe",
+      "id": "HBB-05",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "10a6ddbf316e",
+      "id": "HBB-05",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "95ea959dea01",
+      "id": "HBB-05",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "cf2abca183a9",
+      "id": "HBB-05",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "9ba0b28bed39",
+      "id": "HBB-05",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "851833c1aa10",
+      "id": "HBB-05",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "3036ad88ed30",
+      "id": "HBB-05",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "ff4e4969f5e4",
+      "id": "HBB-05",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0,
+      "note": "empty_answer_or_missing_frame_target"
+    },
+    {
+      "opaque_id": "d1b978de47bf",
+      "id": "HBB-05",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "adb47ffdeb28",
+      "id": "HBB-05",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "50e0b8ce662a",
+      "id": "HBB-05",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "c2f9a0e3c2e5",
+      "id": "HBB-05",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "d1343481533a",
+      "id": "HBB-05",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "ada1e1ee5684",
+      "id": "HBB-05",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "cc989d815880",
+      "id": "HBB-05",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "b06d67d38148",
+      "id": "HBB-06",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "74ce8bf10ae3",
+      "id": "HBB-06",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "5f7bea3c8ea6",
+      "id": "HBB-06",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "41401c5ace57",
+      "id": "HBB-06",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "a7e982a35eca",
+      "id": "HBB-06",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "770f714b17e9",
+      "id": "HBB-06",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "2efbeb90b7ba",
+      "id": "HBB-06",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "af0791bfabfd",
+      "id": "HBB-06",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "5fbe0db32dc6",
+      "id": "HBB-06",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "cb4976d15700",
+      "id": "HBB-06",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "c5183bccad08",
+      "id": "HBB-06",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "c5da18ee02a8",
+      "id": "HBB-06",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "071fa5a59a12",
+      "id": "HBB-06",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "20aa8007aec9",
+      "id": "HBB-06",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "81f4fcceefae",
+      "id": "HBB-06",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "c42efbe1a71d",
+      "id": "HBB-06",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "222c908f9259",
+      "id": "HBB-06",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "fafc9ebd9999",
+      "id": "HBB-06",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "14400b43fde2",
+      "id": "HBB-06",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "b04bea9955ae",
+      "id": "HBB-06",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "6032758b249f",
+      "id": "HBB-08",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "475313fa15f7",
+      "id": "HBB-08",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "0390f10adf53",
+      "id": "HBB-08",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "bfb1511dec2a",
+      "id": "HBB-08",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "97c2b7426b56",
+      "id": "HBB-08",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "2761a1675db2",
+      "id": "HBB-08",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "088c74ed6094",
+      "id": "HBB-08",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "0fd59650d23a",
+      "id": "HBB-08",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "23c02b95c9fa",
+      "id": "HBB-08",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "4c396e015e42",
+      "id": "HBB-08",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "84b4a12668b6",
+      "id": "HBB-08",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "961b839534cb",
+      "id": "HBB-08",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "828cfcc605eb",
+      "id": "HBB-08",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "d9ed9a68a812",
+      "id": "HBB-08",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "548bc5fb0075",
+      "id": "HBB-08",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "ab5d3f3371d9",
+      "id": "HBB-08",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "936dfb5faa5f",
+      "id": "HBB-08",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "0414d858d014",
+      "id": "HBB-08",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "e1ae08937ce9",
+      "id": "HBB-08",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "b8ede9c4342b",
+      "id": "HBB-08",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "b5d7845511c0",
+      "id": "HBB-10",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "214f84d070e7",
+      "id": "HBB-10",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "b0d52b01de17",
+      "id": "HBB-10",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "637e569790dd",
+      "id": "HBB-10",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "a30fff1bd5a2",
+      "id": "HBB-10",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "92ead29cb9fc",
+      "id": "HBB-10",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "b051774f88ef",
+      "id": "HBB-10",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "9cb9f04a753f",
+      "id": "HBB-10",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "81c3271e6951",
+      "id": "HBB-10",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "7a3727e648a3",
+      "id": "HBB-10",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "f7b31bcdbf23",
+      "id": "HBB-10",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "1f0bf13453f3",
+      "id": "HBB-10",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "98b7607d49c0",
+      "id": "HBB-10",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "a7d54d64cf96",
+      "id": "HBB-10",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "14e7491c3832",
+      "id": "HBB-10",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "3fc4e047f26b",
+      "id": "HBB-10",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "f3d0b7e11db6",
+      "id": "HBB-10",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "975796aad9db",
+      "id": "HBB-10",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "9a2e6cf59f04",
+      "id": "HBB-10",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "ae594ee268e2",
+      "id": "HBB-10",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "2d5028f3a16a",
+      "id": "HBB-11",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "0e9f09fdaf8f",
+      "id": "HBB-11",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "e13a13a62086",
+      "id": "HBB-11",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "597396d19517",
+      "id": "HBB-11",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "36a8d072fe9e",
+      "id": "HBB-11",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "638913471b29",
+      "id": "HBB-11",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "52879e77701d",
+      "id": "HBB-11",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "2ac3a83fff09",
+      "id": "HBB-11",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "10a899c77c03",
+      "id": "HBB-11",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "7a3467e3fad9",
+      "id": "HBB-11",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "3e157eb8a0f5",
+      "id": "HBB-11",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "181a885bc546",
+      "id": "HBB-11",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "bca2f8bf67e4",
+      "id": "HBB-11",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "f1d269b3370b",
+      "id": "HBB-11",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "6ee0f18257de",
+      "id": "HBB-11",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "f5eeeceae071",
+      "id": "HBB-11",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "cd616c4f274d",
+      "id": "HBB-11",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "ad7e976b703b",
+      "id": "HBB-11",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "7fea354414b5",
+      "id": "HBB-11",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "454db2cdd316",
+      "id": "HBB-11",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "ec9d1d786713",
+      "id": "HBB-12",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "04ca3d58b94d",
+      "id": "HBB-12",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "5d544f6e72f8",
+      "id": "HBB-12",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "ebfc1fe1c260",
+      "id": "HBB-12",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "c500aef1019f",
+      "id": "HBB-12",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "3ee59c5f8165",
+      "id": "HBB-12",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "81c272dd3e46",
+      "id": "HBB-12",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "cbf45d93bfd7",
+      "id": "HBB-12",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "5ff0caf67948",
+      "id": "HBB-12",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "716550039819",
+      "id": "HBB-12",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "d96e3ee21124",
+      "id": "HBB-12",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "bdd623883a31",
+      "id": "HBB-12",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "3cb4c3e4915a",
+      "id": "HBB-12",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "1d6b2b2f4640",
+      "id": "HBB-12",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "108a3096310d",
+      "id": "HBB-12",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "48d47adf619a",
+      "id": "HBB-12",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "a6e32e947b51",
+      "id": "HBB-12",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "a3e56ab1ad00",
+      "id": "HBB-12",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "76da6384ae19",
+      "id": "HBB-12",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "875373154681",
+      "id": "HBB-12",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "febe9737f20f",
+      "id": "HBB-13",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "ec319c216789",
+      "id": "HBB-13",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "0d5369da0972",
+      "id": "HBB-13",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "0a1aeea1bff8",
+      "id": "HBB-13",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "59004e9a4feb",
+      "id": "HBB-13",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "20f4050ccdb9",
+      "id": "HBB-13",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "abdd28c5869e",
+      "id": "HBB-13",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "af4f00fa112a",
+      "id": "HBB-13",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "25ce1c250e15",
+      "id": "HBB-13",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "b7dcf56c0637",
+      "id": "HBB-13",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "aa215039c9ec",
+      "id": "HBB-13",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "bae15dcd5d39",
+      "id": "HBB-13",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "60de7cfae49f",
+      "id": "HBB-13",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "2347810afdac",
+      "id": "HBB-13",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "b27a2b425288",
+      "id": "HBB-13",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "7d1557ce662d",
+      "id": "HBB-13",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "9af6c73394ce",
+      "id": "HBB-13",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "587648c11497",
+      "id": "HBB-13",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "75c3c209648a",
+      "id": "HBB-13",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "9799906bf08a",
+      "id": "HBB-13",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "a4f93023cc9d",
+      "id": "HBB-17",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "00f127c375ab",
+      "id": "HBB-17",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "978735ca7651",
+      "id": "HBB-17",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "72723bc3b88b",
+      "id": "HBB-17",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "4d94291da244",
+      "id": "HBB-17",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "fcc0637fb6fd",
+      "id": "HBB-17",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "7d3b4c86e26a",
+      "id": "HBB-17",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "4ebd90c846f4",
+      "id": "HBB-17",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "4779776ed854",
+      "id": "HBB-17",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "3ce39e37c281",
+      "id": "HBB-17",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "a217fb19710d",
+      "id": "HBB-17",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "43fa058c5b3b",
+      "id": "HBB-17",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "b381b954497c",
+      "id": "HBB-17",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0,
+      "note": "empty_answer_or_missing_frame_target"
+    },
+    {
+      "opaque_id": "af82e7126eef",
+      "id": "HBB-17",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "7a61d8601b58",
+      "id": "HBB-17",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "00616e393063",
+      "id": "HBB-17",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "4120e4645c74",
+      "id": "HBB-17",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0,
+      "note": "empty_answer_or_missing_frame_target"
+    },
+    {
+      "opaque_id": "c93eb22f9225",
+      "id": "HBB-17",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "e71e388022f3",
+      "id": "HBB-17",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "10b2ae314a50",
+      "id": "HBB-17",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "924fde40d998",
+      "id": "HBB-24",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "648ad624813e",
+      "id": "HBB-24",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "aefd347bb7f2",
+      "id": "HBB-24",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "1f24603c11ec",
+      "id": "HBB-24",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "aee0c41efe1c",
+      "id": "HBB-24",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "42fc7516b0e6",
+      "id": "HBB-24",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "972ad5657a89",
+      "id": "HBB-24",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "6e56ba8d428b",
+      "id": "HBB-24",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "ac0e45af2b1d",
+      "id": "HBB-24",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "b0aec13b9bc9",
+      "id": "HBB-24",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "0c5e61616b7c",
+      "id": "HBB-24",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "161543ba24ed",
+      "id": "HBB-24",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "29f482cfacd7",
+      "id": "HBB-24",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "4859c77a67bc",
+      "id": "HBB-24",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "4ba943e67a17",
+      "id": "HBB-24",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "fea7685fc59e",
+      "id": "HBB-24",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "26f8c3afbfc1",
+      "id": "HBB-24",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "4e6a2f6895d2",
+      "id": "HBB-24",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "c7e4339e2df6",
+      "id": "HBB-24",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "4b8c7512fb4c",
+      "id": "HBB-24",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "313b5845b09e",
+      "id": "HBB-04",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "4af35e34c25c",
+      "id": "HBB-04",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "a36847f0e331",
+      "id": "HBB-04",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "d824652474a1",
+      "id": "HBB-04",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "c8e8bc0c89b5",
+      "id": "HBB-04",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "875e7d4b3ad0",
+      "id": "HBB-04",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "101df608ea7d",
+      "id": "HBB-04",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "1c4afd0db283",
+      "id": "HBB-04",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "89bd1e584d9c",
+      "id": "HBB-04",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "116f1d14424f",
+      "id": "HBB-04",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "23d4d4a21010",
+      "id": "HBB-04",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "edf59ccaee36",
+      "id": "HBB-04",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "d20943ba474f",
+      "id": "HBB-04",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "ff2bab6fec2e",
+      "id": "HBB-04",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "96b58fdd614e",
+      "id": "HBB-04",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "5a9925f4faec",
+      "id": "HBB-04",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "2c76dc1945c2",
+      "id": "HBB-04",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "fead4573ab54",
+      "id": "HBB-04",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "e40615146857",
+      "id": "HBB-04",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "dc3655e24cd2",
+      "id": "HBB-04",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "4e2fb9fe4a00",
+      "id": "HBB-30",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "99f5f04c2ff7",
+      "id": "HBB-30",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "4640988c2848",
+      "id": "HBB-30",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "a8bad8a62ad9",
+      "id": "HBB-30",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "fda7a4df17fb",
+      "id": "HBB-30",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "935dab29b276",
+      "id": "HBB-30",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 1,
+      "RECONSTRUCTION": 1
+    },
+    {
+      "opaque_id": "2df97d7441bf",
+      "id": "HBB-30",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "1fe4aabd442b",
+      "id": "HBB-30",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "28ce9928a8d1",
+      "id": "HBB-30",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "5ac5e123f8cf",
+      "id": "HBB-30",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "58afad9de8f7",
+      "id": "HBB-30",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "7974addcb1ba",
+      "id": "HBB-30",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "1f9913357200",
+      "id": "HBB-30",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "8a8557791692",
+      "id": "HBB-30",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "c58468aa06f9",
+      "id": "HBB-30",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "9f26c444648e",
+      "id": "HBB-30",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    },
+    {
+      "opaque_id": "8836e0633e3a",
+      "id": "HBB-30",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "4ad4436a65d3",
+      "id": "HBB-30",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "a11ab6ca1f51",
+      "id": "HBB-30",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 0,
+      "RECONSTRUCTION": 0
+    },
+    {
+      "opaque_id": "8a80eda0cf72",
+      "id": "HBB-30",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "DETECTION": 2,
+      "RECONSTRUCTION": 2
+    }
+  ]
+}

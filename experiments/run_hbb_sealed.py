@@ -47,7 +47,9 @@ ORIGIN = {"HBB-01": ["vacancy", "余白", "future=vacancy"], "HBB-03": ["genesis
  "HBB-08": ["v6", "物理層", "床", "circulation", "取り込み", "reformation"], "HBB-10": ["v9.18", "v_unified", "kuramoto", "統合", "物理同期"],
  "HBB-11": ["v1110", "v1113", "異系", "node id", "番号コピー"], "HBB-12": ["v10.2", "v1101", "集団平均", "dominant atom", "方向反転", "#33"],
  "HBB-13": ["v1109", "self-fulfilling", "loop", "shuffle", "順序構造"], "HBB-17": ["v1304c", "r_density", "icc", "lens"],
- "HBB-24": ["v4.5", "v4.7", "latent boost", "spatial mismatch", "incorporation"]}
+ "HBB-24": ["v4.5", "v4.7", "latent boost", "spatial mismatch", "incorporation"],
+ "HBB-04": ["afe", "hybrid filter", "meta-frame", "metaframe", "a-condition", "json-leak", "b/d tradeoff", "axis-level", "local->program", "local_completion", "program_completion"],
+ "HBB-30": ["6x", "6倍", "約6", "ternary", "binary", "三値", "二値", "emergence", "創発", "v3.3.1"]}
 def retrieve(qid, k=3):
     qt = set(toks(T0[qid]["t0_stuck_frame"])); bw = toks(CAND[qid]["breakthrough_structure"]); B5 = ng(bw, 5)
     markers = [m.lower() for m in ORIGIN.get(qid, [])]

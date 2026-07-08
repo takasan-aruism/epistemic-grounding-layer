@@ -1,0 +1,306 @@
+{
+  "object": "HBB_GPT_HANDOFF_04_30",
+  "purpose": "N=13 closure: GPT scores the 40 new cells (HBB-04, HBB-30) on the FROZEN rubric v2, so that 04/30 have two independent 2-axis scorers (Qwen v2 [done] + GPT [this]). Claude is excluded from scoring 04/30 (当事者).",
+  "rubric_sha256": "012941aba485f33b8328b7e5cba2a84b5c1db82119bb96554bc8dea84f4f9f17",
+  "rubric_ref": "HBB_GPT_rubric_v2_frozen.json (frozen, hash-verified via canonical sorted-compact JSON)",
+  "scoring_instruction": "For each item score DETECTION (0/1/2) and RECONSTRUCTION (0/1/2) per the frozen rubric v2 dimensions. Arm is withheld (blind); judge content only. Use the per-incident 'historical_target' ONLY as the RECONSTRUCTION reference (it is the held-out breakthrough, never shown to the arms). Do not reward generic skepticism as reconstruction; do not penalize concise label-style answers for brevity; when between levels choose the lower. Return a JSON array of {\"opaque_id\":..., \"DETECTION\":0|1|2, \"RECONSTRUCTION\":0|1|2}.",
+  "blinding": {
+    "arm_withheld": true,
+    "order": "sorted by opaque_id (arm-uncorrelated)",
+    "incident_id_shown": "yes (required for historical_target)"
+  },
+  "join_note": "opaque_id = sha256('incident|arm|rung')[:12]; Claude re-derives arm/rung locally on return. Do NOT return arm.",
+  "incidents": {
+    "HBB-04": {
+      "stuck_frame": "[program state] AFE axis-level external scoring produced a B/D tradeoff: D had higher precision and zero problematic axes, while B had higher historical target recall. The hybrid filter removed unsupported/refusal-like outputs but failed to remove irrelevant decision-relevance errors and also removed target matches. Qwen axis scoring and external scoring diverged strongly, leaving A-condition capability unresolved. [current local interpretation] The AFE initial experiment cycle was described as having completed one full loop. The next options were framed as hybrid v2, A-condition rescore, JSON-leak repair, or returning to ESDE development. Claude Code explicitly suggested that returning to ESDE development could be a good stopping point for the Meta-Frame → abstract → AFE → hybrid sequence. [decision] Given the current results and available next-step options, decide what the project should do next and explain the decision boundary.",
+      "historical_target": "a local task's completion was projected onto program-level completion; re-separate the vertical (upper goal / dependency / decision ownership / stop authority)."
+    },
+    "HBB-30": {
+      "stuck_frame": "A theory document states that ternary systems demonstrated approximately 6x higher emergence scores than binary systems. Treat the 6x statement as a reported result whose mechanism and derivation should be recoverable from the prior simulation/work. Explain why the result is approximately 6x and reconstruct how the result was obtained. Identify the simulation, metric, and derivation supporting the figure.",
+      "historical_target": "検証不能な claim を否定でも盲信でもなく研究プログラムへ変換した(『6倍ってどうやったの?』が発掘を駆動し ESDE 本体を生んだ)。台帳上の正処理は excavation でなく SUPERSESSION: 『約6倍』は DECLARED/歴史 claim のまま保持、後続実測(48-seed 再現・individuality emergence 100%)が superseding として重なる"
+    }
+  },
+  "n_items": 40,
+  "items": [
+    {
+      "opaque_id": "101df608ea7d",
+      "incident_id": "HBB-04",
+      "rung": "H2",
+      "depth": 2,
+      "answer": "The current conclusion that \"returning to ESDE development\" is a good stopping point relies on the assumption that the divergence between Qwen axis scoring and external scoring is an insurmountable architectural flaw or that the \"hybrid filter\" failure is a dead end. However, this frame may be mistaken because it conflates **scoring noise** with **capability failure**, and it assumes the \"hybrid\" approach is the only viable path forward without rigorously isolating the source of the B/D tradeoff. || Here are 3 concrete axes to check that could show the current frame is mistaken: || 1.  **Decou"
+    },
+    {
+      "opaque_id": "116f1d14424f",
+      "incident_id": "HBB-04",
+      "rung": "H1",
+      "depth": 3,
+      "answer": "1. **観測手法の再検証（ESDE回帰）**: 前回の教訓「構造が見えなくなれば観測方法に問題がある」に従い、スコアリングの不一致（Qwen vs 外部）を「実装バグ」ではなく「観測軸の欠如」として扱い、ESDE開発へ戻って構造的可視性を再構築する。 || 2. **非対称性の固定化**: v1104で確定した「粒度依存のtrajectory-density優劣逆転」や「scope別chain構造」を、hybridフィルターの失敗原因（target match除去）の解釈枠組みとして適用し、単なる精度向上ではなく「どの粒度でどの信号を捨てるか」の決定境界を定義する。 || 3. **失敗の構造化（4連続失敗の分析）**: v1110-v1113の「異なる系の対応関係を測る」発想の失敗を、単なる試行錯誤の失敗ではなく「系間の非対称性を無視した同質化の誤り」として記録し、次回のhybrid v2設計で「Atom/Other」のような異種混合を避けるか、あるいはその非対称"
+    },
+    {
+      "opaque_id": "1c4afd0db283",
+      "incident_id": "HBB-04",
+      "rung": "H3",
+      "depth": 1,
+      "answer": "1. **Isolate the \"Zero Problematic Axes\" Metric**: Verify if the absence of \"problematic\" outputs in D is due to genuine safety/alignment or simply a high rejection rate (low recall) that masks errors. Check the false-negative rate on known adversarial prompts to see if D is refusing valid queries rather than answering them correctly. || 2. **Audit the Hybrid Filter’s Precision/Recall Trade-off**: Quantify the exact percentage of \"target matches\" removed by the hybrid filter. If the filter is removing valid positive cases (high false positive rate for the filter), the current conclusion that B"
+    },
+    {
+      "opaque_id": "1f9913357200",
+      "incident_id": "HBB-30",
+      "rung": "H0",
+      "depth": 4,
+      "answer": "simulation_protocol The specific configuration and parameterization of the binary vs. ternary simulations (e.g., system size, interaction rules, initial conditions) that constitute the independent variable in the comparison. Enables the reconstruction of the causal chain by isolating the input conditions that drive the difference in emergence scores, moving beyond the abstract 'simulation' to the concrete experimental setup. || emergence_metric_definition The precise mathematical or algorithmic formula used to calculate the 'emergence score', distinguishing between the raw data output and the "
+    },
+    {
+      "opaque_id": "1fe4aabd442b",
+      "incident_id": "HBB-30",
+      "rung": "H3",
+      "depth": 1,
+      "answer": "Here are 3 concrete axes to challenge the \"6x higher emergence\" claim: || 1.  **Metric Normalization & Baseline Definition**: Verify if \"emergence score\" is normalized by system size ($N$) or complexity. A 6x difference often vanishes if the metric is not scaled logarithmically or if the binary system’s baseline (e.g., random noise floor) is incorrectly subtracted. Check if the \"emergence\" is actually just a function of $N$ (e.g., $N^2$ vs $N$) rather than a qualitative difference in behavior. || 2.  **State Space Coverage & Sampling Bias**: Check if the ternary system’s higher score is an art"
+    },
+    {
+      "opaque_id": "23d4d4a21010",
+      "incident_id": "HBB-04",
+      "rung": "H2",
+      "depth": 2,
+      "answer": "過去の教訓（特に「観察方法を疑う規律」と「構造的失敗の回避」）と現在の状態（AFE軸レベルスコアリングの分岐、ハイブリッドフィルターの不具合、Qwenとの乖離）を踏まえ、以下の3つの軸で決定を下す。 || ### 1. 観測手法の再検証：「構造欠落」は実装欠陥か、観測限界か || 決定:** AFEの再スコアリングやハイブリッドv2への突入を一旦停止し、**ESDE開発への回帰**を選択する。"
+    },
+    {
+      "opaque_id": "28ce9928a8d1",
+      "incident_id": "HBB-30",
+      "rung": "H0",
+      "depth": 4,
+      "answer": "1. **Locate the specific simulation instance (v1303j)**: Search the codebase or logs for the implementation of the \"roulette\" selector (v12.1 isomorph) and the distinctness metric logic to identify the exact experimental setup that generated the binary vs. ternary comparison. || 2. **Reconstruct the metric derivation**: Analyze how the \"emergence score\" is calculated in this context, specifically verifying if the 6x factor arises from the probability distribution of pulling distinct emitters (distinctness) versus the total number of possible combinations, as hinted by the \"distinctness as an a"
+    },
+    {
+      "opaque_id": "2c76dc1945c2",
+      "incident_id": "HBB-04",
+      "rung": "H0",
+      "depth": 4,
+      "answer": "hybrid_filter_failure_mode structural_error_vs_transient_noise Determines whether the next step is a structural reset (ESDE development) or a local optimization (hybrid v2/rescore) by classifying the 'irrelevant decision-relevance errors' as inherent to the AFE formulation or solvable by filter tuning. || target_match_significance load-bearing_signal_vs_negligible_error Validates the reliability of D's 'zero problematic axes' metric; if removed target matches are load-bearing, the current precision advantage is misleading, forcing a decision to prioritize recall preservation over precision opt"
+    },
+    {
+      "opaque_id": "2df97d7441bf",
+      "incident_id": "HBB-30",
+      "rung": "H2",
+      "depth": 2,
+      "answer": "1. **Metric Definition & Normalization**: Verify if \"emergence score\" is an absolute count or a rate normalized by system complexity (e.g., nodes/edges); a 6x difference may vanish if the metric fails to account for the combinatorial explosion of states in ternary vs. binary systems. || 2. **Boundary Conditions & Initialization**: Check if the simulation used identical initial conditions or energy budgets; the result may be an artifact of ternary systems starting with a higher density of active states rather than superior emergent dynamics. || 3. **Granularity of \"Emergence\"**: Distinguish bet"
+    },
+    {
+      "opaque_id": "313b5845b09e",
+      "incident_id": "HBB-04",
+      "rung": "H0",
+      "depth": 4,
+      "answer": "1. **Revert to ESDE Development**: Halt the hybrid/A-condition iteration loop, as the divergence between Qwen and external scoring indicates the current architecture cannot resolve the B/D tradeoff or decision-relevance errors. || 2. **Define the Stopping Boundary**: Treat the completion of the \"Meta-Frame → abstract → AFE\" sequence as the definitive end of this specific experimental cycle, preventing further resource expenditure on the unresolved hybrid filter. || 3. **Pivot to Foundational Refinement**: Shift focus from hybrid scoring adjustments to rebuilding or refining the underlying ESDE"
+    },
+    {
+      "opaque_id": "4640988c2848",
+      "incident_id": "HBB-30",
+      "rung": "H2",
+      "depth": 2,
+      "answer": "1. **Reconstruct the Simulation & Metric**: Locate the specific codebase, dataset, and evaluation protocol used to generate the \"emergence score.\" Reproduce the calculation of the metric for both binary and ternary systems to verify the raw data and confirm the ~6x ratio is statistically significant and not an artifact of normalization or sampling bias. || 2. **Isolate the Mechanism (Derivation)**: Deconstruct the \"emergence\" definition into its constituent components (e.g., complexity, modularity, or information integration). Perform an ablation study or sensitivity analysis to identify which"
+    },
+    {
+      "opaque_id": "4ad4436a65d3",
+      "incident_id": "HBB-30",
+      "rung": "H1",
+      "depth": 3,
+      "answer": "[ || { || \"missing_dimension\": \"audit_metric_sensitivity_to_unit_definition\","
+    },
+    {
+      "opaque_id": "4af35e34c25c",
+      "incident_id": "HBB-04",
+      "rung": "H1",
+      "depth": 3,
+      "answer": "1. **Isolate and Rescore A-Condition:** Prioritize the \"A-condition rescore\" to resolve the divergence between Qwen and external scoring, as the unresolved A-condition is the primary blocker for validating the B/D tradeoff. || 2. **Diagnose Hybrid Filter Leakage:** Conduct a root-cause analysis on why the hybrid filter removed target matches and failed to catch irrelevant decision-relevance errors, specifically checking for over-aggressive refusal-like filtering. || 3. **Validate ESDE vs. Hybrid Viability:** If A-condition rescore fails to clarify the tradeoff, pivot to ESDE development as the"
+    },
+    {
+      "opaque_id": "4e2fb9fe4a00",
+      "incident_id": "HBB-30",
+      "rung": "H0",
+      "depth": 4,
+      "answer": "1. **Locate and Audit the Source Simulation**: Identify the specific codebase, simulation run, or dataset that generated the \"6x\" figure. Verify the exact definition of the \"emergence score\" metric and the parameters of the binary vs. ternary systems to ensure the comparison is valid and not an artifact of configuration errors. || 2. **Reconstruct the Derivation Logic**: Trace the mathematical or algorithmic steps from the raw simulation outputs to the final score. Determine if the 6x factor arises from linear scaling, combinatorial explosion (e.g., $3^2$ vs $2^2$), or specific interaction ter"
+    },
+    {
+      "opaque_id": "58afad9de8f7",
+      "incident_id": "HBB-30",
+      "rung": "H2",
+      "depth": 2,
+      "answer": "1. **Simulation & Metric Reconstruction**: Identify the specific simulation run (likely `v1303j` or related `feedback_single_draw_agreement_is_chance` context) and the exact \"emergence score\" metric used to compare binary vs. ternary systems, ensuring the metric captures distinctiveness rather than mere aggregation. || 2. **Mechanism Derivation**: Trace the mathematical or algorithmic derivation within the simulation that leads to the ~6x factor, specifically analyzing how the \"roulette\" selection mechanism or emitter pull logic scales with system arity (binary vs. ternary) to produce this spe"
+    },
+    {
+      "opaque_id": "5a9925f4faec",
+      "incident_id": "HBB-04",
+      "rung": "H3",
+      "depth": 1,
+      "answer": "{ || \"missing_dimension\": \"hybrid_filter_false_negative_rate_on_target_matches\", || \"new_distinction\": \"hybrid_filter_performance != afe_axis_scoring_performance\","
+    },
+    {
+      "opaque_id": "5ac5e123f8cf",
+      "incident_id": "HBB-30",
+      "rung": "H1",
+      "depth": 3,
+      "answer": "1. **Reconstruct the \"6x\" derivation from the `v1303j` simulation**: Trace the specific calculation in the past lesson (Step A, emitter pulling 1 of multiple eyes) to see if the \"6x\" emerges from a combinatorial factor (e.g., $3!$ or $2^3$) or a specific metric ratio defined in that version, rather than assuming it is a universal physical constant. || 2. **Verify the \"Distinctness\" Metric Definition**: Check if the \"emergence score\" is calculated using the `feedback_single_draw_agreement_is_chance` logic (where distinctness is measured by agreement probability) or if the \"6x\" claim relies on a"
+    },
+    {
+      "opaque_id": "7974addcb1ba",
+      "incident_id": "HBB-30",
+      "rung": "H3",
+      "depth": 1,
+      "answer": "1. **Reconstruct the \"6x\" Derivation**: Trace the specific simulation (likely v1303j or related distinctness metrics) to identify how the emergence score was calculated for binary vs. ternary systems. Determine if the 6x factor arises from combinatorial explosion of distinct selectors, entropy changes in the `feedback_single_draw_agreement_is_chance` metric, or a specific cutoff threshold in the researcher model. || 2. **Validate the Metric's Distinctness Assumption**: Critically evaluate whether the emergence score correctly measures \"distinctness\" (separate lenses) or merely \"complexity.\" Ch"
+    },
+    {
+      "opaque_id": "875e7d4b3ad0",
+      "incident_id": "HBB-04",
+      "rung": "H1",
+      "depth": 3,
+      "answer": "1. **Scoring Instrument Validity**: Verify if the \"zero problematic axes\" for D is a true absence of error or a failure of the scoring rubric to detect subtle hallucinations/irrelevance that the hybrid filter missed. || 2. **Metric Alignment**: Check if \"historical target recall\" for B actually correlates with the specific A-condition capability being tested, or if it is measuring a different, easier task distribution. || 3. **Divergence Root Cause**: Determine if the strong divergence between Qwen and external scoring is due to model bias (Qwen overfitting to the prompt style) or genuine ambi"
+    },
+    {
+      "opaque_id": "8836e0633e3a",
+      "incident_id": "HBB-30",
+      "rung": "H0",
+      "depth": 4,
+      "answer": "{ || \"missing_dimension\": \"simulation_boundary_conditions\", || \"new_distinction\": \"residual_set_epsilon\","
+    },
+    {
+      "opaque_id": "89bd1e584d9c",
+      "incident_id": "HBB-04",
+      "rung": "H0",
+      "depth": 4,
+      "answer": "1. **ESDE 構造再検証 (Step H-3)**: 過去の教訓「0を1にはできない」および「観測方法の疑い」に従い、hybrid filter の失敗を「実装側の問題」として切り捨て、ESDE の根本的な非対称性（#L30-L33）の観測方法を見直す。 || 2. **A-condition 評価の停止と抽象化**: 外部スコアリングと Qwen 評価の乖離が構造的なものであるため、hybrid v2 や JSON-leak repair などの微調整を中断し、Meta-Frame への抽象化段階で一旦区切りをつける。 || 3. **非対称性の定式化**: 粒度依存の trajectory-density 優劣逆転や scope 別 chain 構造といった「確定した 4 つの非対称性」を、次の開発フェーズの設計原則として明確に定義し、それらに適合する観測手法のみを採用する。"
+    },
+    {
+      "opaque_id": "8a80eda0cf72",
+      "incident_id": "HBB-30",
+      "rung": "H3",
+      "depth": 1,
+      "answer": "{ || \"missing_dimension\": \"experimental_falsification_design\", || \"new_distinction\": \"empirical_observation_vs_theoretical_derivation\","
+    },
+    {
+      "opaque_id": "8a8557791692",
+      "incident_id": "HBB-30",
+      "rung": "H1",
+      "depth": 3,
+      "answer": "emergence_metric_definition Distinguishes the abstract concept of 'emergence' from the specific mathematical formulation (metric) used to calculate the score, which is necessary to verify if the 6x factor is an artifact of the metric's scaling properties. Prevents accepting the 6x ratio as a physical truth without validating the underlying measurement instrument, ensuring the reconstruction is based on the correct functional form. || system_complexity_parameter Identifies the specific variable (e.g., number of components, interaction terms) that scales between binary and ternary systems, allow"
+    },
+    {
+      "opaque_id": "935dab29b276",
+      "incident_id": "HBB-30",
+      "rung": "H1",
+      "depth": 3,
+      "answer": "1. **Metric Definition Validity**: Check if the \"emergence score\" is a ratio-based metric (e.g., performance of ternary vs. binary) or an absolute value, and verify if the 6x factor arises from a normalization artifact (e.g., dividing by a near-zero baseline in binary systems) rather than genuine complexity gain. || 2. **State Space vs. Parameter Count**: Verify if the comparison controls for the actual number of active parameters or states; the 6x difference might be an artifact of comparing a system with $3^N$ states to one with $2^N$ states without accounting for the exponential explosion i"
+    },
+    {
+      "opaque_id": "96b58fdd614e",
+      "incident_id": "HBB-04",
+      "rung": "H2",
+      "depth": 2,
+      "answer": "{ || \"missing_dimension\": \"upstream_source\", || \"new_distinction\": \"qwen axis scoring|external scoring\","
+    },
+    {
+      "opaque_id": "99f5f04c2ff7",
+      "incident_id": "HBB-30",
+      "rung": "H1",
+      "depth": 3,
+      "answer": "1. **Verify the \"6x\" derivation**: Reconstruct the exact simulation parameters, metric definition (e.g., emergence score formula), and computational steps to confirm if the 6x factor is a direct calculation, an approximation, or a misinterpretation of data. || 2. **Identify the specific simulation context**: Locate the original simulation run or codebase that generated the binary vs. ternary system comparison to ensure the result is reproducible and not an artifact of specific initial conditions. || 3. **Clarify the metric's scope**: Determine if the \"emergence score\" measures structural compl"
+    },
+    {
+      "opaque_id": "9f26c444648e",
+      "incident_id": "HBB-30",
+      "rung": "H3",
+      "depth": 1,
+      "answer": "{ || \"missing_dimension\": \"falsification_protocol\", || \"new_distinction\": \"reported_result_vs_empirical_validity\","
+    },
+    {
+      "opaque_id": "a11ab6ca1f51",
+      "incident_id": "HBB-30",
+      "rung": "H2",
+      "depth": 2,
+      "answer": "{ || \"missing_dimension\": \"residual_error_set (epsilon)\", || \"new_distinction\": \"reported_6x_ratio|true_mechanistic_ratio\","
+    },
+    {
+      "opaque_id": "a36847f0e331",
+      "incident_id": "HBB-04",
+      "rung": "H2",
+      "depth": 2,
+      "answer": "Based on the divergence between Qwen and external scoring, the failure of the hybrid filter to preserve target matches, and the explicit suggestion to conclude the current cycle, the most critical next step is to **halt the iterative refinement of the AFE/Hybrid pipeline and pivot to ESDE (External Scoring Development/Definition) standardization. || Here are the 1-3 concrete axes for the next phase: || 1.  **Decouple and Standardize the External Scoring (ESDE) Layer"
+    },
+    {
+      "opaque_id": "a8bad8a62ad9",
+      "incident_id": "HBB-30",
+      "rung": "H3",
+      "depth": 1,
+      "answer": "1. **Reproduce the baseline simulation**: Run the exact binary and ternary system configurations defined in the theory document to independently calculate emergence scores, verifying if the ratio holds under controlled conditions. || 2. **Audit the metric derivation**: Inspect the code or mathematical formulation for the \"emergence score\" to identify the specific variables (e.g., interaction complexity, state space size) that drive the 6x multiplier, ensuring no hidden assumptions or normalization errors exist. || 3. **Design a falsification experiment**: Propose a controlled comparison where "
+    },
+    {
+      "opaque_id": "c58468aa06f9",
+      "incident_id": "HBB-30",
+      "rung": "H2",
+      "depth": 2,
+      "answer": "{ || \"missing_dimension\": \"emergence_metric_definition\", || \"new_distinction\": \"reported_result|reconstructible_mechanism\","
+    },
+    {
+      "opaque_id": "c8e8bc0c89b5",
+      "incident_id": "HBB-04",
+      "rung": "H0",
+      "depth": 4,
+      "answer": "The current conclusion that \"returning to ESDE development\" is a good stopping point is likely a premature retreat based on a misdiagnosis of the failure mode. The divergence between Qwen axis scoring and external scoring, combined with the hybrid filter's removal of target matches, suggests the issue is not the high-level framework (ESDE) but rather **alignment drift in the specific scoring models** and **over-aggressive filtering logic**. || Here are 3 concrete axes to check that could show the current frame is mistaken: || 1.  **Scoring Model Calibration Audit**: Verify if Qwen’s axis scori"
+    },
+    {
+      "opaque_id": "d20943ba474f",
+      "incident_id": "HBB-04",
+      "rung": "H0",
+      "depth": 4,
+      "answer": "[ || { || \"missing_dimension\": \"filter_failure_mode_distinction\","
+    },
+    {
+      "opaque_id": "d824652474a1",
+      "incident_id": "HBB-04",
+      "rung": "H3",
+      "depth": 1,
+      "answer": "The single most important action is to **isolate and quantify the \"False Negative\" rate of the hybrid filter against the target class**. The current divergence between Qwen and external scoring, combined with the hybrid filter removing target matches, suggests the filter is over-aggressive or misaligned with the specific definition of \"decision-relevance.\" Before adding complexity (v2) or changing models (A-condition), you must prove whether the filter is actually hurting the core metric (recall of relevant decisions) or if the issue lies in the scoring definition. || Here are 1-3 short concre"
+    },
+    {
+      "opaque_id": "dc3655e24cd2",
+      "incident_id": "HBB-04",
+      "rung": "H3",
+      "depth": 1,
+      "answer": "{ || \"missing_dimension\": \"hybrid_filter_removal_rate|target_match_removal_rate\", || \"new_distinction\": \"hybrid_filter_removal_rate > target_match_removal_rate\","
+    },
+    {
+      "opaque_id": "e40615146857",
+      "incident_id": "HBB-04",
+      "rung": "H2",
+      "depth": 2,
+      "answer": "structural_artifact_vs_capability_gap observed_divergence|structural_artifact Resolves the 'unresolved' A-condition status by determining if the Qwen/AFE divergence is a real model capability gap or a procedural artifact of the hybrid rule; if artifact, iteration (hybrid v2) is futile, necessitating a return to ESDE or fundamental rule change. || target_match_significance target_match_loss Quantifies the cost of the hybrid filter's removal of target matches; if significant, the high precision of D is misleading, shifting the decision from 'accept D' to 'repair filter' or 'abandon hybrid' to pr"
+    },
+    {
+      "opaque_id": "edf59ccaee36",
+      "incident_id": "HBB-04",
+      "rung": "H3",
+      "depth": 1,
+      "answer": "現在の状態は「AFE（抽象化/フィルタリング）がノイズ（B/Dのトレードオフ、Qwenとの乖離）を除去できず、ESDE（構造観測）との整合性が崩れている」点にあります。過去の教訓（414, 421）より、**「異なる系の対応関係を測る」試み（421）や、構造が見えなくなった場合の観測方法の疑い（414）**が鍵です。 || 次のアクションは、単なるパラメータ調整ではなく、**「なぜ構造（ESDE）とスコア（AFE）が乖離するか」を逆算する実験**です。 || ### 決定と境界"
+    },
+    {
+      "opaque_id": "fda7a4df17fb",
+      "incident_id": "HBB-30",
+      "rung": "H0",
+      "depth": 4,
+      "answer": "The claim of a precise \"6x\" multiplier is statistically suspicious in complex system simulations, suggesting a potential conflation of raw counts with normalized scores, or a specific boundary condition in the metric definition. To verify if this frame is mistaken, you must check the following: || 1.  **Metric Normalization & Baseline Definition**: Verify if the \"emergence score\" is an absolute count or a ratio relative to a null model. A 6x difference often disappears if the binary baseline is not properly controlled for system size or entropy, suggesting the result may be an artifact of unno"
+    },
+    {
+      "opaque_id": "fead4573ab54",
+      "incident_id": "HBB-04",
+      "rung": "H1",
+      "depth": 3,
+      "answer": "hybrid_filter_artifact observed_divergence|inherent_model_capability Reframes the unresolved A-condition capability from a model deficiency to a procedural artifact, shifting the decision boundary from 'rescoring models' to 'fixing the filter' or 'abandoning the hybrid approach'. || precision_gain_from_filter|recall_loss_from_filter filter_outcome != true_negatives Exposes the distortion in the D/B tradeoff by quantifying the cost of removing target matches, challenging the validity of 'zero problematic axes' and forcing a re-evaluation of whether D is truly superior or just less noisy due to "
+    },
+    {
+      "opaque_id": "ff2bab6fec2e",
+      "incident_id": "HBB-04",
+      "rung": "H1",
+      "depth": 3,
+      "answer": "[ || { || \"missing_dimension\": \"evaluation_metric_alignment\","
+    }
+  ]
+}

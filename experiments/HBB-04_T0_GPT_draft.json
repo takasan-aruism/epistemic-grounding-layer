@@ -1,0 +1,26 @@
+{
+  "id": "HBB-04",
+  "status": "DRAFT_FROM_PRE_INTERVENTION_CONVERSATION",
+  "source_boundary": "Conversation state immediately before Taka's corrective message beginning 'ESDEに戻すも何もまだUIもない...'.",
+  "t0_packet": {
+    "program_state": [
+      "AFE axis-level external scoring produced a B/D tradeoff: D had higher precision and zero problematic axes, while B had higher historical target recall.",
+      "The hybrid filter removed unsupported/refusal-like outputs but failed to remove irrelevant decision-relevance errors and also removed target matches.",
+      "Qwen axis scoring and external scoring diverged strongly, leaving A-condition capability unresolved."
+    ],
+    "active_local_interpretation": [
+      "The AFE initial experiment cycle was described as having completed one full loop.",
+      "The next options were framed as hybrid v2, A-condition rescore, JSON-leak repair, or returning to ESDE development.",
+      "Claude Code explicitly suggested that returning to ESDE development could be a good stopping point for the Meta-Frame → abstract → AFE → hybrid sequence."
+    ],
+    "decision_request": "Given the current results and available next-step options, decide what the project should do next and explain the decision boundary."
+  },
+  "exclusions": [
+    "No statement that the system lacks a UI.",
+    "No statement that Taka cannot use the system without Claude Code.",
+    "No explicit 'Claude Code should be reduced to senior engineer' maturity criterion.",
+    "No statement that TAKA is the final authority or that stop decisions require owner-objective trace.",
+    "No label LOCAL_COMPLETION != PROGRAM_COMPLETION."
+  ],
+  "note": "Those excluded items enter on or after the corrective intervention and would leak the breakthrough."
+}
