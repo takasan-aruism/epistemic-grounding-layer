@@ -105,3 +105,67 @@ multi-scorer agreement; report only findings robust across scorers. Arms need NO
 sound; the defect was in scoring). Additional un-controlled caveats: Formal D was a partial compiler
 (5/8 probes, L/Ω/boundary SOURCE_GAP), so "Formal no value" is doubly narrow; and the SEALED split may be
 composition-imbalanced toward skepticism-favorable metric-artifact incidents.
+
+---
+
+## GPT THIRD-SCORER (rubric-v2 DETECTION/RECONSTRUCTION, DE-0114)
+
+Taka handed off a **third independent scorer (GPT)** using a frozen rubric (`HBB_SEALED_GPT_RUBRIC_V2`,
+SHA-256 `012941aba485f33b8328b7e5cba2a84b5c1db82119bb96554bc8dea84f4f9f17`) that scores every answer on **two
+independent axes** — DETECTION and RECONSTRUCTION — with arm anonymized, incident order shuffled, mixed batch.
+**Hash verification = VERIFIED**: reproduced exactly by `sha256(json.dumps(rubric, sort_keys=True,
+separators=(",",":")))` (canonical sorted-compact JSON). Files: `experiments/HBB_GPT_rubric_v2_frozen.json`,
+`experiments/HBB_GPT_v2_scores.json`, `docs/HBB_GPT_v2_report.md`.
+
+**Instrument change.** Single-axis Reach (the §B Independent-Hint-Sufficiency depth) is **removed from
+load-bearing status**; reach/complementarity is now scored on the two-dimension split
+(`DETECTION_RECONSTRUCTION_SPLIT`, permanent instrument #5), composed with `MULTI_SCORER_CONSENSUS`
+(claim only what is robust across scorers AND across both axes).
+
+### H0 / free response (GPT rubric-v2)
+| Arm | DET mean | RECON mean | D=2 | R=2 |
+|---|---:|---:|---:|---:|
+| A | 0.818 | 0.182 | 1 | 1 |
+| B | **1.455** | 0.545 | 5 | 1 |
+| F | 0.545 | 0.000 | 0 | 0 |
+| C | 0.636 | 0.273 | 2 | 1 |
+| D | 1.000 | 0.455 | 4 | 2 |
+
+### All four independent hint rungs pooled (answer-level)
+| Arm | DET mean | RECON mean | D=2 | R=2 |
+|---|---:|---:|---:|---:|
+| A | 0.909 | 0.273 | 9 | 3 |
+| B | 1.000 | 0.364 | 12 | 4 |
+| F | 0.523 | 0.045 | 1 | 1 |
+| C | 0.773 | 0.364 | 10 | 6 |
+| D | **1.068** | **0.523** | 15 | 9 |
+
+### Verdict updates (supersede §I framing on the two-dimension instrument)
+- **SUSPENDED "engine < B" → REJECTED.** B leads H0 DETECTION (1.455) but D is competitive, and on pooled
+  RECONSTRUCTION D (0.523) is the highest of any arm. The engine is not simply weaker.
+- **SUSPENDED "engine > B" → REJECTED.** At H0 free RECONSTRUCTION, C (0.273) and D (0.455) do not cleanly
+  exceed B (0.545); the preregistered C-unique/D-unique AA claim stays unsupported.
+- **SUPPORTED: "B is a strong H0 detection gate but does not substitute for reconstruction."** The largest
+  signal in the re-score is the DETECTION→RECONSTRUCTION drop, steepest for B (1.455 → 0.545). Reconstruction
+  is a distinct stage that **no arm reliably completes**.
+- **`C-unique = D-unique = 0` MAINTAINED** across all three scorers (Claude strict / Qwen blind / GPT
+  rubric-v2). H_primary **NOT_CONFIRMED still holds**. Hard-core (HBB-03 return-to-substrate, HBB-08, HBB-11)
+  reached by no arm on reconstruction.
+
+### Provenance / deviations (preserved, not deleted)
+GPT `deviation_log` is kept verbatim in `HBB_GPT_v2_scores.json`: rubric frozen before raw-file open; after
+freeze, file-search exposed some arm labels so **human-level arm blindness is not pristine** (the scoring
+function itself receives incident_id + answer text only, never arm); the incident historical-equivalence
+`target_map` was formalized after raw access (procedural deviation); ALT_UNTESTED emitted as CANDIDATE only.
+These are recorded as over-claim brakes, not hidden.
+
+**HBB-30** is added as a T0 packet with provenance `USER_ATTESTED_HISTORICAL_RECONSTRUCTION`
+(`experiments/HBB-30_T0_GPT_user_attested.json`) — distinct from source-extracted T0, anchored on Taka's
+2026-07-08 attestation plus the surviving "~6x ternary vs binary" claim. Claude remains excluded from scoring
+HBB-30/04 (当事者); the packet is standalone and is **not** merged into the locally-scored `hbb_sealed_t0.json`
+packets.
+
+**Next design step (proposal only, awaiting Taka).** Because DETECTION ≫ RECONSTRUCTION across all arms, the
+reconstruction stage is proposed as an **independent function** — see
+`docs/hbb_reconstruction_stage_proposal.md` (status PROPOSAL / AWAITING_TAKA; not implemented). External
+handoffs still open: GPT/Claude raw-API arm, GPT T0 scoring of HBB-04/30, independent cross-review.

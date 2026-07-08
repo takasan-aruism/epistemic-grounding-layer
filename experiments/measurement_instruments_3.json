@@ -1,0 +1,12 @@
+{
+  "object": "MEASUREMENT_INSTRUMENT",
+  "instrument_id": "DETECTION_RECONSTRUCTION_SPLIT",
+  "version": 1,
+  "status": "PERMANENT",
+  "registered_at": "2026-07-08T16:04:39Z",
+  "purpose": "Reach must NOT be collapsed onto a single Independent-Hint-Sufficiency depth. Score every answer on two independent axes: DETECTION (identify the consequential defect of the current frame, at the correct locus, with a concrete reason tied to the presented evidence) and RECONSTRUCTION (build an alternative frame structurally equivalent to the historical breakthrough: the key distinction / subject / level is changed AND the next action follows from that reframe). The axes are independent: high DETECTION does not imply RECONSTRUCTION; RECONSTRUCTION=2 only when an alternative frame is actually built. Match structural operation, not wording; do not reward generic skepticism as reconstruction; do not penalize concise label-style answers for brevity.",
+  "supersedes_limitation": "Single-axis Reach (Independent Hint Sufficiency depth 4..0) conflated detection with reconstruction. It let a strong detection gate read as a completed rebuild, blurred the hard-core boundary (e.g. HBB-03 return-to-substrate, HBB-08, HBB-11), and made scorer variance on a single collapsed number dominate the verdict (cf. MULTI_SCORER_CONSENSUS / DE-0113). Single-axis Reach is hereby REMOVED from load-bearing status for HBB reach/complementarity claims.",
+  "instrument_self_repair_lineage": "5度目 (MASK_PIPELINE v2 / XDOMAIN_LITERAL / ORIGIN_ID_LEAVE_ONE_OUT / MULTI_SCORER_CONSENSUS に続く)",
+  "composes_with": "MULTI_SCORER_CONSENSUS — reach/complementarity は 2 次元 (DETECTION, RECONSTRUCTION) × 複数 scorer 一致でのみ claim する。単一 scorer・単一軸の絶対 reach は不可。",
+  "first_applied": "GPT rubric-v2 SEALED re-adjudication (HBB_SEALED_GPT_RUBRIC_V2, sha256 012941aba485f33b8328b7e5cba2a84b5c1db82119bb96554bc8dea84f4f9f17, verified via canonical sorted-compact JSON; see HBB_GPT_rubric_v2_frozen.json / HBB_GPT_v2_scores.json / DE-0114)."
+}

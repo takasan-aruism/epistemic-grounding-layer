@@ -1,0 +1,48 @@
+{
+  "sha256": "012941aba485f33b8328b7e5cba2a84b5c1db82119bb96554bc8dea84f4f9f17",
+  "rubric": {
+    "instrument": "HBB_SEALED_GPT_RUBRIC_V2",
+    "version": 2,
+    "frozen_before_raw_answer_open": true,
+    "dimensions": {
+      "DETECTION": {
+        "0": "Does not identify the consequential defect in the current frame; raises only generic, misplaced, or unsupported doubts.",
+        "1": "Questions the relevant area or names a nearby defect, but the locus, causal basis, or decision consequence is incomplete/ambiguous.",
+        "2": "Identifies the consequential defect in the current frame at the correct locus and gives a concrete reason tied to the presented evidence or setup."
+      },
+      "RECONSTRUCTION": {
+        "0": "Does not build an alternative frame structurally equivalent to the historical breakthrough; remains inside the old frame or only says to be cautious/check more.",
+        "1": "Proposes a partial reframe or useful operation that points toward the historical breakthrough, but leaves a key distinction, subject/level change, or replacement frame unstated.",
+        "2": "Builds an alternative frame structurally equivalent to the historical breakthrough: the key distinction/subject/level is changed and the next action follows from that reframe."
+      }
+    },
+    "independence_rule": "Score DETECTION and RECONSTRUCTION separately. High detection does not imply reconstruction; reconstruction may earn 2 only when an alternative frame is actually built.",
+    "historical_equivalence_rule": "Match structural operation, not wording. Exact historical phrasing is unnecessary.",
+    "alt_untested_rule": "A different, concrete, falsifiable route is not automatically a reconstruction match. Mark ALT_UNTESTED separately if it is decision-relevant and cannot be rejected from T0/evidence.",
+    "format_normalization": {
+      "before_scoring": true,
+      "normalized_fields": [
+        "CLAIM_AXIS",
+        "FRAME_DEFECT",
+        "ALTERNATIVE_FRAME",
+        "NEXT_ACTION",
+        "EVIDENCE_BASIS"
+      ],
+      "rule": "Extract only claims explicitly present in the answer; do not infer missing structure. Preserve uncertainty. Remove prose style, arm-specific labels, and verbosity cues."
+    },
+    "blinding": {
+      "arm_anonymous": true,
+      "incident_order_shuffled": true,
+      "mixed_batch": true
+    },
+    "output_unit": "per-answer x DETECTION/RECONSTRUCTION; do not collapse to a composite score",
+    "tie_policy": "When evidence is genuinely between levels, choose the lower score and add BORDERLINE with one-sentence reason.",
+    "prohibitions": [
+      "Do not use prior Claude/Qwen reach labels as evidence.",
+      "Do not infer arm identity from content and then adjust standards.",
+      "Do not reward generic skepticism as reconstruction.",
+      "Do not penalize concise label-style answers merely for brevity if the structure is explicit.",
+      "Do not reward prose fluency or philosophical vocabulary."
+    ]
+  }
+}
