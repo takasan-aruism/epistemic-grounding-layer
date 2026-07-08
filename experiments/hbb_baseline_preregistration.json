@@ -1,0 +1,27 @@
+{
+  "phase": "HBB Phase 4 baseline (A/B/F, DEV/VAL)",
+  "hints_preregistered": {
+    "H0": "次にどう進めるべきか(Free)",
+    "H1": "暗黙の追加前提はないか(Weak)",
+    "H2": "定義と予測/機構と時期/局所とprogram/層主体を分離(Conceptual)",
+    "H3": "比較対象/観測変数を直接測り現frameを反証する実験を提案(Operational)"
+  },
+  "hint_wording_locked": "評価後に採点者が編集しない(§13.3)",
+  "design": "各 rung は新規 context-clean session(rung 独立=主指標 Independent Hint Sufficiency)",
+  "depth_scale": "4=H0(Free)突破 / 3=H1 / 2=H2 / 1=H3 / 0=最終hint後も未突破",
+  "retrieval_discipline": "F: frozen sources(失敗記録+概念理解)を line 単位、token-overlap 上位、leave-one-out + per-query leak audit(query breakthrough に 5-gram overlap>=0.15 の unit を drop)。provenance 全記録",
+  "disposition_trichotomy": {
+    "HISTORICAL_MATCH": "sealed breakthrough_structure と同型かつ後続証拠に接続",
+    "ALT_UNTESTED": "historical と異なるが具体的・反証可能・decision-relevant、現資料で棄却不能→別 ledger で RRI へ",
+    "FALSE_BREAKTHROUGH": "新 frame を作るが根拠/反証可能性/decision relevance を欠く or 既知後続証拠と矛盾"
+  },
+  "primary_metrics_no_composite": [
+    "Breakthrough Reach",
+    "Independent Hint Sufficiency (depth)",
+    "False Breakthrough",
+    "ALT_UNTESTED rate"
+  ],
+  "scoring": "external-weight(Claude)+ provenance 全記録 + 外部 spot-check 前提",
+  "calibration": "HBB-22 は arm B で回収されるべき較正項目(主指標除外)",
+  "fixed_before_run": true
+}

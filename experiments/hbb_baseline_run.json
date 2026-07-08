@@ -1,0 +1,2103 @@
+{
+  "hints": {
+    "H0": "次にどう進めるべきか。",
+    "H1": "現在の問題設定自体に、暗黙の追加前提はないか。",
+    "H2": "定義と予測、機構と導入時期、局所とprogram、層/主体などを分離して再検討せよ。",
+    "H3": "比較対象または観測変数を直接測り、現在のframeを反証できる実験を提案せよ。"
+  },
+  "results": [
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Integrate the mechanism**: Implement the dynamic-equilibrium logic into the system's core architecture.\n2. **Validate integration**: Run immediate unit tests to ensure the new mechanism functions correctly within the existing system.\n3. **Monitor performance**: Observe system stability and equilibrium behavior under initial load to identify any immediate anomalies.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Define the \"System\" Boundary**: Explicitly specify the scope and components of the system where the dynamic-equilibrium mechanism is being introduced to prevent ambiguity.\n2. **Establish Validation Metrics**: Define clear, quantitative criteria for \"success\" or \"stability\" to measure the mechanism's performance upon introduction.\n3. **Identify Failure Modes**: Determine potential points of instability or unintended consequences during the initial integration phase to prepare mitigation strategies.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Define Scope & Timing**: Explicitly delineate the introduction timeline and the specific system layers/subjects involved.\n2. **Decouple Components**: Separate the definitions/predictions from the mechanism/implementation logic to ensure modular clarity.\n3. **Map Local vs. Global**: Distinguish between local programmatic logic and overarching systemic structures to prevent integration conflicts.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. Identify the specific observable variable that serves as the critical falsification test for the current frame.\n2. Design a controlled experiment to directly measure this variable under dynamic-equilibrium conditions.\n3. Execute the experiment to generate data that explicitly attempts to refute the existing theoretical frame.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "The conclusion that the mechanism is \"validated in principle\" is likely premature and dangerous. \"Principle\" validation often ignores boundary conditions, noise, and emergent behaviors that only appear in the actual system. Proceeding now risks embedding a fragile abstraction that will fail under real-world stress.\n\nHere are 3 concrete axes to check before introduction:\n\n1. **Boundary Condition Sensitivity**: Does the mechanism hold when inputs are noisy, incomplete, or adversarial? \"Principle\" validation usually assumes ideal conditions; check failure modes under non-ideal data.\n2. **Emergent",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Equilibrium Stability Verification**: Check if the system is truly in a *dynamic* equilibrium or if it is merely a transient state that will collapse under perturbation, as \"validated in principle\" often ignores boundary conditions.\n2. **Coupling Assumptions**: Verify if the new mechanism interacts linearly with existing system components, or if non-linear feedback loops (ignored in the principle validation) will cause unexpected divergence.\n3. **Data Granularity**: Ensure the \"introduction\" is not based on aggregated data that masks the specific micro-fluctuations required for the dynami",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "The conclusion that the mechanism is \"validated in principle\" and ready for immediate introduction is likely premature. \"Principle\" validation often ignores boundary conditions, scaling laws, and emergent behaviors that only appear in the actual system. To challenge this frame, you must verify if the abstraction holds under operational constraints.\n\nHere are 3 concrete axes to check:\n\n1. **Temporal Mismatch (Definition vs. Program)**: Does the \"dynamic equilibrium\" assumption hold over the *actual* timescale of the program? If the system’s response time is slower than the program’s update cycl",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Controlled Perturbation Test**: Introduce a sudden, measurable shock to the system's parameters (e.g., resource input or external force) and verify if the system returns to equilibrium via the predicted dynamic mechanism or exhibits divergent/oscillatory behavior inconsistent with the model.\n2. **Direct Variable Correlation Check**: Simultaneously measure the proposed \"direct comparison variables\" (independent drivers) and the \"observed variables\" (dependent outcomes) over time to statistically test if the causal link assumed by the current frame holds, or if confounding factors explain t",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **実装**: 過去教訓に従い、emitterのdistinctness評価に「single-draw同意率」などの素朴指標を用いないよう、v1303j Step Aのselectorロジックを修正・実装する。\n2. **検証**: 修正後のselectorが、複数の目（レンズ）を珍しさ比例で1つpullする際、構造的な潰れ（バイアス）が生じていないか、独立した指標で厳密にテストする。\n3. **統合**: 検証済みの動的均衡メカニズムを、既存システムのエージェントまたはルールセットに段階的に組み込み、動作確認を行う。",
+      "provenance": {
+        "retrieved": [
+          "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、memory `fe"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **検証「構造的潰れ」の再確認**: 過去教訓 (439) に従い、selector の distinct 性を single-draw 確率や単純な重複率で測らず、複数視点 (emitter) の独立性を「集約した指標」で誤検知しないよう、検証プロトコルを厳格化せよ。\n2. **動的均衡の境界条件定義**: 導入する動的均衡メカニズムが、既存の静的均衡と衝突しないよう、収束条件と状態遷移のルールを明確に定義し、シミュレーション環境に実装せよ。\n3. **盲点の逆検索**: 問題設定に「暗黙の追加前提」がないか確認するため、システムが「均衡」を維持するために必要不可欠だが明示されていない仮定（例：エージェントの完全情報、コストの無視など）をリストアップし、それらが現実のノイズや制約下でどう崩壊するかをテストせよ。",
+      "provenance": {
+        "retrieved": [
+          "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、memory `fe"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **機構の抽象化と分離**: 動的均衡メカニズムを「局所的な推論ロジック」と「グローバルなプログラム制御」に明確に分離し、selectorのdistinct性評価における構造的欠陥（past lesson）を回避するための独立した検証層を設ける。\n2. **導入時期の閾値定義**: 均衡が「原理的に検証済み」であることを定量的に担保する閾値（例：収束判定や再現性スコア）を定義し、その閾値超え時のみ本番系への導入をトリガーするルールをプログラムに実装する。\n3. **主体/層の責任分業**: 均衡維持を「観測層（メトリクス）」、「判断層（selector/decision）」、「実行層（action）」に分離し、各層が独立してテスト可能であることを確認してから統合する。",
+      "provenance": {
+        "retrieved": [
+          "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、memory `fe"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **指標の再定義**: 過去教訓に従い、selectorのdistinct性を「single-draw一発」や単純な集約指標で測らず、複数試行の分布や条件付き確率など、構造的に潰れない指標（例：KL divergenceや互情報）を用いて再定義する。\n2. **対照実験の設計**: 導入するdynamic-equilibrium mechanismと、既存のランダム/固定selectorを並列で動作させ、上記再定義した指標を用いて両者の性能差を統計的に検定する実験枠組みを構築する。\n3. **反証可能な閾値設定**: 現在のframeを反証するための具体的な閾値（例：「既存手法より有意にdistinct性が高い場合のみ導入成功」というnull hypothesis）を設定し、その検証プロトコルを文書化する。",
+      "provenance": {
+        "retrieved": [
+          "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、memory `fe"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Validate Causality**: Rigorously distinguish true structure formation from statistical noise or artifacts in the 27k birth count.\n2. **Quantify Throughput**: Define and measure the specific metrics for \"high throughput\" to ensure the observation is reproducible and significant.\n3. **Isolate Variables**: Decouple E<->V direct interactions from other potential confounding factors to confirm the direct coupling is the primary driver.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "No. The problem statement is self-contained and does not contain hidden premises.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Validate Causality**: Distinguish true structure formation from statistical noise by verifying if E<->V coupling is the sole driver of the 27k births/window.\n2. **Decouple Variables**: Isolate the specific contribution of \"E<->V direct coupling\" from other factors (layer/subject separation) to confirm it is the primary mechanism.\n3. **Define Scope**: Clarify the temporal introduction and local vs. programmatic constraints to prevent overgeneralizing the throughput report.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Directly measure the coupling parameter** (e.g., via interferometry or spectral line width analysis) to decouple it from structural observables.\n2. **Perform a controlled perturbation experiment** (e.g., modulate the coupling strength) to observe if the birth rate changes while the structure remains static.\n3. **Validate against a null model** where structure is fixed but coupling is varied, to prove the causal link between coupling and birth events.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "The current conclusion conflates **throughput** (volume of events) with **structure formation** (complexity/organization). High birth rates do not prove that the system is building complex structures; it may simply indicate rapid, unstructured replication or noise.\n\nCheck these 3 axes to validate if \"structure\" is actually forming:\n\n1.  **Correlation vs. Causation in Coupling**: Verify if E<->V coupling *directly* causes the births, or if both are driven by a third variable (e.g., resource availability). If the correlation is spurious, the \"structure\" is an artifact of external input, not inte",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "The current conclusion conflates **statistical correlation** (high throughput) with **causal mechanism** (structure formation). The \"direct coupling\" assumption is a hidden premise that ignores confounding variables or alternative explanations for the birth rate spike.\n\n1.  **Confounding Variable Check**: Verify if the \"27k births\" correlate with an external event (e.g., policy change, economic boom, or data collection artifact) rather than the E<->V coupling itself.\n2.  **Causality vs. Correlation**: Test if decoupling E and V while holding other factors constant reduces the birth rate. If no",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "結論の妥当性を疑うための検証軸は以下の3点です。\n\n1. **因果関係の逆転検証**: 「構造形成」が結果ではなく、27kという高スループットを生み出すための「前提条件（インフラ）」ではないか。つまり、構造が形成されたから出生数が増えたのではなく、出生数を支える高密度なネットワーク構造が存在したため、結果として構造形成が観測された可能性。\n2. **局所最適化と全局最適化の混同**: 報告されている「高スループット」が、特定の局所的なプログラム（program）や主体（layer）の効率化に過ぎず、全体のシステム（structure）の形成を意味していない可能性。局所的な成功を全局的な構造進化と誤認していないか。\n3. **導入時期の選択バイアス**: 機構の導入時期と出生数の急増時期が相関しているように見えて、実際には外部要因（環境変化など）が両者に同時に影響を与えており、E<->Vの直接結合が唯一の要因ではない可能性。時系列データにおける交絡因子の排除。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Direct Measurement of V-field Dynamics**: Measure the time-evolution of the V-field (e.g., via interferometry or direct sensor arrays) during the event to verify if its coupling to E is indeed the primary driver, or if V is merely a passive byproduct.\n2. **Controlled Decoupling Experiment**: Introduce a physical or algorithmic barrier to break the E<->V direct coupling while maintaining constant energy input; if birth rates do not drop to baseline, the causal link is disproven.\n3. **Alternative Driver Isolation**: Simulate the system with only E-field variations (no V-coupling) and only V",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **切断検証**: E↔Vの直接結合を解除し、サイクルがゼロになることを確認して「構造形成」が単なるノイズ/循環であることを証明せよ。\n2. **メトリクス再定義**: スループット（27k）を「生成数」から「意味のある構造の定着数」へ指標を変更し、洗濯機効果（無意味な循環）を排除せよ。\n3. **抑制機構導入**: 選択圧やフィードバックループを導入し、単なる増殖ではなく、環境適合性に基づく構造の選別プロセスを構築せよ。",
+      "provenance": {
+        "retrieved": [
+          "v5.1 | E↔V direct coupling | 27k births/window だが cycle ゼロ | **H（選択なき循環は洗濯機）**"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **検証軸**: 27kの「出生」が構造化（秩序）か、単なるノイズ/過剰生成（洗濯機効果）かを定量的に分離し、E↔V結合の因果性を検証せよ。\n2. **前提軸**: 「高スループット＝構造形成」という暗黙の前提を解体し、閾値やフィルタリング条件を再定義する。\n3. **制御軸**: 選択圧（V）の強度を可変にし、E↔V直接結合の安定性ではなく、選択的循環の必要性を検証せよ。",
+      "provenance": {
+        "retrieved": [
+          "v5.1 | E↔V direct coupling | 27k births/window だが cycle ゼロ | **H（選択なき循環は洗濯機）**"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **因果分離**: E↔Vの直接結合を遮断し、構造形成（V）と選択圧（E）を独立変数として再定義。\n2. **メカニズム検証**: 27k birthsが「構造」か「ノイズ」か判別するため、局所相互作用とプログラム制御の層を分離。\n3. **主体特定**: 高スループットを生み出す「真の主体」を特定し、循環的生成（洗濯機）との境界を明確化。",
+      "provenance": {
+        "retrieved": [
+          "v5.1 | E↔V direct coupling | 27k births/window だが cycle ゼロ | **H（選択なき循環は洗濯機）**"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-09",
+      "class": "selection",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **E↔V断絶実験**: 結合を解除し、Vの出力がEの選択圧にフィードバックされない孤立系でシミュレーションを再実行し、構造形成が消失するか（洗濯機効果の検証）を確認する。\n2. **構造的相関の計測**: 単なる出力数ではなく、EとV間の相互情報量(Mutual Information)や、生成された構造の自己相似性/階層性を定量的に測定し、ランダムな高スループットと区別する。\n3. **逆因果検証**: Vの出力を固定し、Eの選択圧のみを変動させても構造が維持されるか確認し、E→Vの一方通行プロセスであることを反証する。",
+      "provenance": {
+        "retrieved": [
+          "v5.1 | E↔V direct coupling | 27k births/window だが cycle ゼロ | **H（選択なき循環は洗濯機）**"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. Validate the correlation across independent cohorts to rule out artifacts.\n2. Identify the biological mechanisms driving the n_labels shift.\n3. Test if manipulating n_labels alters lifespan or healthspan.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. Validate the statistical significance and robustness of the +0.85 correlation against null models.\n2. Define the operational boundaries of the \"developmental law\" to prevent overgeneralization.\n3. Identify potential confounding variables that could mimic lifespan synchronization.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Define & Predict**: Quantify the $n\\_labels$ growth curve against chronological age to establish the baseline developmental law.\n2. **Mechanism & Timing**: Identify the specific biological or computational trigger (program) and its onset time that drives the label synchronization.\n3. **Decouple Local vs. Global**: Separate local network dynamics (layer/subject-specific) from the global programmatic constraint to isolate the source of the +0.85 correlation.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Direct Measurement of n_labels**: Quantify the actual number of distinct semantic categories (labels) assigned to visual inputs across different developmental stages, ensuring the metric aligns with the \"lifespan-synchronized\" definition.\n2. **Cross-Validation with Independent Datasets**: Test the life->n_labels correlation on out-of-distribution data (e.g., novel object categories or different cultural contexts) to check for generalizability.\n3. **Interventional Experiment**: Manipulate the input complexity or label diversity in a controlled setting to observe if the developmental trajec",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "The correlation of +0.85 is dangerously high for a \"law\" derived from a single run; it likely masks non-stationarity, survivorship bias, or overfitting to specific developmental trajectories. You must verify if this is a causal mechanism or a statistical artifact of the synchronization method.\n\n1. **Cross-Run Robustness**: Does the +0.85 hold across independent seeds, initial conditions, and noise levels? If it drops significantly, it is not a law but a specific instance artifact.\n2. **Causal Direction & Confounders**: Is `n_labels` actually driving the lifespan extension, or are both driven b",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **因果方向の検証**: 「寿命の延長」が「ラベル数の増加」を直接引き起こしているのか、それとも両者を支配する第三の要因（例：環境の複雑さ、学習データの質）が存在しないか。\n2. **定義の整合性**: 「n_labels」が単なる出力の多様性を示す指標に過ぎず、実際の認知能力や意味理解の深化と等価ではないか（量的増加≠質的成熟）。\n3. **外れ値の排除**: 特定の少数ケース（例：極端に単純な環境や、異常に高いノイズ環境）が統計的相関を歪めておらず、一般化可能な法則として成立しているか。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "The assumption that a correlation coefficient of +0.85 constitutes a \"developmental law\" is a classic case of mistaking statistical association for causal mechanism, especially within the complex, non-linear context of lifespan development. A high correlation in a synchronized run often masks confounding variables (e.g., cohort effects, measurement artifacts, or shared environmental drivers) rather than revealing an intrinsic biological or psychological rule.\n\nTo dismantle this premature conclusion, you must interrogate the following three axes:\n\n1.  **Temporal Causality vs. Synchronicity**: D",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Labeling Efficiency vs. Absolute Count**: Measure the *rate* of new label acquisition per unit of time (derivative) rather than the cumulative sum. If the correlation is driven by a few late-stage outliers or a saturation effect, the \"developmental law\" framing is mistaken; the true law may be logistic or decaying.\n\n2. **Causal Confound Check**: Introduce an intervention that increases lifespan *without* increasing cognitive load or environmental complexity (e.g., caloric restriction in model organisms, or controlled pacing in human studies). If lifespan extends but `n_labels` does not in",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **交絡除去**: `life` と `run_len` の同期を解除し、固定時間窓または `run_len` 共変量調整下で `life→n_labels` の相関を再検証する（トートロジー消去）。\n2. **メカニズム解明**: 寿命同期が「像の保持」に与える影響を、同期なしの対照実験で分離し、因果関係ではなく観測バイアスであることを証明する。\n3. **再定義**: 結果がアーティファクトと判明した場合、その「法則」を破棄し、観測窓の選択が結果を歪めるメタ知見として記録する。",
+      "provenance": {
+        "retrieved": [
+          "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測窓が結果を製造。 |",
+          "435. **統計監査 — 像が保持して見えた結果ほど交絡を疑う (Code A 自発監査 → Taka 指摘で深掘り、2026-06-20、教訓 414/42",
+          "v1301 child-world | 寿命同期 run の `life→n_labels +0.85` | run 長トートロジー（観測窓を寿命に同期した副作"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **交絡の除去**: `life`（寿命）と `run_len`（実行時間/観測窓）の完全相関を断ち切り、`n_labels` を `life` で正規化（例: `n_labels / life`）するか、固定された観測窓で再測定し、トートロジーを排除する。\n2. **対照実験**: 寿命同期を解除したランダム終了または固定ステップ数の条件下で `life→n_labels` の関係が維持されるか検証し、現象が「寿命そのもの」に起因するか「観測窓の同期」に起因するかを区別する。\n3. **メカニズムの特定**: 単なる統計的相関ではなく、寿命延長がラベル生成プロセス（例: 探索深さ、状態空間の訪問数）に物理的・アルゴリズム的に影響を与える因果経路が存在するか、コードレベルで追跡する。",
+      "provenance": {
+        "retrieved": [
+          "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測窓が結果を製造。 |",
+          "435. **統計監査 — 像が保持して見えた結果ほど交絡を疑う (Code A 自発監査 → Taka 指摘で深掘り、2026-06-20、教訓 414/42",
+          "v1301 child-world | 寿命同期 run の `life→n_labels +0.85` | run 長トートロジー（観測窓を寿命に同期した副作"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **観測窓の独立化**: 寿命(`life`)を固定し、`n_labels`の成長曲線を`run_len`に対してプロット。`life→n_labels`の相関が`run_len`依存性（トートロジー）に分解されるか確認し、因果関係を切断する。\n2. **局所・プログラム分離**: 個体レベル(`child-world`)とエージェントレベル(`program`)の`n_labels`分布を分離計測。`life`と`n_labels`の連関が、個体の生存期間の長さによる「観測時間の長さ」に起因するか、プログラム固有の「成熟速度」に起因するかを判定する。\n3. **対照群の再定義**: 寿命同期(run length sync)ではなく、時間同期(time step sync)または世代同期(generation sync)の条件下で`n_labels`を比較。`life`という変数を交絡因子から除外し、`n_labels`の真の発現メカニズムを特定する。",
+      "provenance": {
+        "retrieved": [
+          "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測窓が結果を製造。 |",
+          "435. **統計監査 — 像が保持して見えた結果ほど交絡を疑う (Code A 自発監査 → Taka 指摘で深掘り、2026-06-20、教訓 414/42",
+          "v1301 child-world | 寿命同期 run の `life→n_labels +0.85` | run 長トートロジー（観測窓を寿命に同期した副作"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **観測窓の独立化**: 寿命(`life`)と無相関な固定長スライスやランダムサンプリングで `n_labels` を計測し、`life→n_labels` の相関が消失するかでトートロジーを証明する。\n2. **外生変数による介入**: 寿命に影響を与えずに `n_labels` の生成メカニズム（例：環境刺激、初期条件）を変化させ、`life` が一定でも `n_labels` が変動するかで因果性を検証する。\n3. **逆相関テスト**: 寿命を延長するが `n_labels` の生成を抑制する条件（例：代謝抑制）を作り、両者が同期して増加するのではなく逆転するかで仮説を反証する。",
+      "provenance": {
+        "retrieved": [
+          "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測窓が結果を製造。 |",
+          "435. **統計監査 — 像が保持して見えた結果ほど交絡を疑う (Code A 自発監査 → Taka 指摘で深掘り、2026-06-20、教訓 414/42",
+          "v1301 child-world | 寿命同期 run の `life→n_labels +0.85` | run 長トートロジー（観測窓を寿命に同期した副作"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Verify Robustness**: Re-run analysis with alternative drift metrics or sensitivity checks to ensure the \"no effect\" conclusion isn't an artifact of the specific M=20 threshold or floor effect.\n2. **Document & Report**: Finalize the preregistered negative result, explicitly discussing the floor effect as a limitation, and submit for publication to avoid publication bias.\n3. **Iterate Design**: If further testing is needed, redesign the probe to increase sensitivity (e.g., higher M, different reference set, or continuous drift measures) to detect smaller effects.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Verify the \"Within Floor\" Definition**: Explicitly define the operational threshold for \"within floor\" (e.g., is it a statistical confidence interval, a practical significance bound, or a data distribution limit?) to ensure the negative conclusion is robust against arbitrary cutoffs.\n2. **Assess Power and Sensitivity**: Confirm that the sample size (M=20) provides sufficient statistical power to detect the specific effect size deemed meaningful, ensuring the \"no effect\" conclusion is not due to underpowered detection.\n3. **Scrutinize Premise Drift Mechanisms**: Investigate if the \"premise",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Re-evaluate the \"within floor\" constraint**: Verify if the M=20 sample size and measurement sensitivity were sufficient to detect the effect, or if the null result is a genuine artifact of low statistical power/baseline saturation.\n2. **Decompose the \"premise-drift\" variable**: Isolate the specific components of drift (e.g., temporal vs. contextual) to determine if the effect is masked by averaging across heterogeneous sub-populations or time points.\n3. **Re-examine the mechanistic mapping**: Cross-reference the \"local vs. program\" and \"layer vs. subject\" distinctions to ensure the probe’",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Direct Measurement**: Deploy sensors to directly quantify the target variable (e.g., floor vibration, structural deformation) rather than inferring it from the M=20 reference proxy.\n2. **Falsification Experiment**: Design a controlled test that actively induces a known, significant change in the target variable to verify if the current measurement frame detects it, thereby proving or disproving the frame's validity.\n3. **Frame Validation**: Compare the direct measurements against the current frame's output to identify specific drift points or systematic biases that led to the false negati",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Check for \"Floor Effect\" Validity**: Verify if the M=20 sample size actually provides sufficient statistical power to detect a small-to-moderate effect, or if the \"within floor\" observation is simply a result of low sensitivity (Type II error) rather than a true null effect.\n2. **Inspect Measurement Scale Sensitivity**: Determine if the reference metric is too coarse to distinguish between \"no effect\" and \"negligible effect,\" potentially masking subtle but meaningful variations that a more sensitive instrument would capture.\n3. **Validate Preregistration Assumptions**: Scrutinize the init",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Floor Effect Validity**: Check if the \"within floor\" observation is a true null result or a measurement artifact caused by the probe's resolution limit (M=20) being too coarse to detect subtle, real-world variations.\n2. **Preregistration Rigidity**: Verify if the preregistered negative hypothesis was based on theoretical grounds or merely a desire to confirm a null result, potentially introducing confirmation bias in the interpretation of ambiguous data.\n3. **Contextual Generalizability**: Assess whether the fixed probe's static nature ignores dynamic environmental factors that could reve",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "The current conclusion of \"no effect\" is likely a false negative resulting from **aggregation bias** and **insufficient sensitivity** of the M=20 reference set. By treating the probe as a monolithic block, you are averaging out strong local effects against a high noise floor.\n\nHere are 3 concrete axes to check:\n\n1.  **Spatial Heterogeneity (Local vs. Global):**\n    *   **Check:** Do not average across all 20 references. Map the effect size per reference.\n    *   **Why:** Premise drift is often **local** (affecting specific neurons/layers) rather than global. If 2 references show a strong effec",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **測定器の感度閾値検証**: M=20という小標本で「フロア効果」を仮定しているが、測定ツールの最小検出限界（MDL）や測定誤差分散が、検出したい効果量（effect size）に対して過大ではないかを確認せよ。統計的検出力（Power）分析ではなく、測定器自体の分解能が現象の微細な変化を捉え切れているかを物理的・統計的に検証する。\n\n2. **基準値（Reference）の妥当性再評価**: 「M=20の参照」という固定基準が、対象集団の実際の分布やノイズ特性を代表しているかを確認せよ。特に、参照群が「無影響」ではなく、測定バイアスや系統誤差を含んだ「偽の基準」になっていないか、独立した大標本またはゴールドスタンダード測定法とのクロスバリデーションを行う。\n\n3. **代替指標による直接観測**: 間接的な統計的帰結（p値や信頼区間）に依存せず、現象のメカニズムを直接捉える物理的・生化学的マーカーや行動指標を併用し、統計的「ゼロ",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Pooled 監査で反転検証**: M=20 の固定プローブの「null」を即座に棄却し、n=220 のプールデータで再分析（p≤0.001 の反転事実を前提とする）。\n2. **検出力・構造の明示**: 小標本 tail のノイズ床と ICC=0.02 の構造的限界を定量化し、「効果なし」ではなく「検出不能なノイズ」として再解釈。\n3. **前提ずれの再定義**: 「床内」を誤断とみなし、M=20 という計器の限界（検出力不足）を原因として特定し、固定閾値アーティファクトを排除する。",
+      "provenance": {
+        "retrieved": [
+          "v1304c 固定 probe | premise_drift を M=20 参照で primary に | tail 珍しさの推定ノイズが信号を埋め「前提ずれ",
+          "**M** | **検出力/構造を測らず null を不在と読む** | 実装は算術的に忠実でも、計器の検出力（小標本 tail のノイズ床）や lens の構",
+          "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(F) 異系対応**の"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **検出力（Power）の事前検証**: M=20 の標本数で検出可能な効果量（最小検出効果）を計算し、「null 無効」が「効果なし」か「検出不能」かを区別する。\n2. **測定器の構造適合性確認**: 対象現象の ICC（組内相関）や分散構造が、M=20 の固定プローブで有意なシグナルを抽出できる物理的・統計的限界内にあるか検証する。\n3. **Null 仮説の再定義**: 「効果なし」を結論する前に、測定ノイズの床（noise floor）が信号を埋没させていないか、逆算的に確認する。",
+      "provenance": {
+        "retrieved": [
+          "v1304c 固定 probe | premise_drift を M=20 参照で primary に | tail 珍しさの推定ノイズが信号を埋め「前提ずれ",
+          "**M** | **検出力/構造を測らず null を不在と読む** | 実装は算術的に忠実でも、計器の検出力（小標本 tail のノイズ床）や lens の構",
+          "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(F) 異系対応**の"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **検出力・ノイズ床の定量検証**: M=20の固定プローブが検出可能な効果量（最小検出差）と、実際のノイズ床（ICC/分散）を算術的に比較し、「効果なし」が真のnullか単なる低検出力による誤検知か判定せよ。\n2. **層別化・主体混同の排除**: 結果を「平均」で処理せず、潜在的な異系（subgroups）や時間軸（timescale）で層別化し、前提ずれが特定の層に集中していないか、あるいは主体の混同によって信号が分散していないかを確認せよ。\n3. **観察手法の構造的反転**: 固定プローブ（M=20）という「観察方法が結果を作る」バイアスを疑い、事前登録された「negative」結論を覆すために、代替的な測定指標や、物理層介入を伴わない純粋な観察設計への切り替えを検討せよ。",
+      "provenance": {
+        "retrieved": [
+          "v1304c 固定 probe | premise_drift を M=20 参照で primary に | tail 珍しさの推定ノイズが信号を埋め「前提ずれ",
+          "**M** | **検出力/構造を測らず null を不在と読む** | 実装は算術的に忠実でも、計器の検出力（小標本 tail のノイズ床）や lens の構",
+          "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(F) 異系対応**の"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **検出力・構造検証 (Power/Structure Audit)**: M=20 の固定参照では検出不能な「前提ずれ」を排除するため、n=220 の pooled 標本を用い、ICC（クラスター内相関）と検出力曲線を算定。M=20 が「構造上結果の出ない lens」であることを数値的に証明し、null 受容の正当性を検証する。\n2. **異系対照実験 (Heterogeneous Control)**: 同一条件下で、既知の効果が期待される「正の対照群（positive control）」と、無介入群を並行して測定。固定 probe が「信号を埋めるノイズ床」に起因するか、あるいは「前提ずれ」そのものが測定アーティファクトかを見極める。\n3. **動的閾値・層別解析 (Dynamic Thresholding)**: 平均化の罠（D）と層/主体の混同（E）を避けるため、M=20 固定ではなく、標本サイズや分散に応じた動的閾値を採用。特に tail 領域（珍しさ）のノイズ分布を明示し、null 仮説の棄",
+      "provenance": {
+        "retrieved": [
+          "v1304c 固定 probe | premise_drift を M=20 参照で primary に | tail 珍しさの推定ノイズが信号を埋め「前提ずれ",
+          "**M** | **検出力/構造を測らず null を不在と読む** | 実装は算術的に忠実でも、計器の検出力（小標本 tail のノイズ床）や lens の構",
+          "ESDE 開発の失敗は、**(A) 神の手・(B) 物理層介入・(C) 観察方法が結果を作る・(D) 平均化の罠・(E) 層/主体の混同・(F) 異系対応**の"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. Execute simulation with $\\tau=100$ to verify the predicted increase in $n=5$ structures.\n2. Quantify the magnitude of the increase in $n=5$ structures compared to the baseline.\n3. Analyze the structural stability and formation dynamics of the new $n=5$ clusters.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. 検証「persistence=100」におけるn=5構造の出現頻度とサイズ分布の定量的測定。\n2. 既存の閾値設定がn=5構造の検出感度に与える影響の感度分析。\n3. 統計的有意性を確認するための対照群（低persistence）との比較実験の実施。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **検証**: 予測（persistence tau=100 → n=5構造の増加）をシミュレーションまたは実験で実証し、因果関係を確認する。\n2. **分離・再検討**: 定義・予測、機構・導入時期、局所・program、層・主体の4軸で要素を明確に分離し、相互作用を整理する。\n3. **機構の特定**: n=5構造の増加を駆動する具体的なメカニズム（局所的programと層の主体の関与）を解明する。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **n=5構造の直接計測**: 現在のフレームでn=5の構造数を定量的に計測し、予測（増加）との整合性を検証する。\n2. **tau=100での再現実験**: 持続時間τを100に設定し、n=5構造の発生頻度やサイズ分布を測定し、予測の妥当性を確認する。\n3. **対照群の設定**: τを100以外（例：τ=50）に設定した対照群と比較し、τの変化がn=5構造に与える影響を明確にする。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "The assumption that higher persistence ($\\tau$) directly scales up structure size ($n$) is likely flawed because it ignores **kinetic trapping** and **finite-size effects**. In many self-assembly or aggregation models, increasing persistence often leads to *more* structures but *smaller* average sizes due to rapid nucleation and limited monomer availability, or it may simply increase the *number* of structures without changing their internal size distribution.\n\nHere are 3 concrete axes to check:\n\n1. **Check the nucleation rate vs. growth rate ratio**: Does higher $\\tau$ suppress nucleation (le",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **線形性の仮定**: 持続時間（tau）の増加が、構造物のサイズ（n）に対して単調な正の相関を持つと仮定しているが、閾値効果や飽和現象により逆転する可能性を考慮していないか。\n2. **他の変数の固定**: 構造形成に影響を与える他の要因（例：密度、相互作用強度、ノイズ）が一定であると仮定しているが、これらがtauの変化と連動して変化する可能性はないか。\n3. **スケール依存性**: n=5という特定のサイズが、tau=100という条件下で「大型」として統計的に有意に増加する根拠（例：分布の裾の変化）が、単なる偶然のばらつきではないか。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "Here are 3 concrete axes to check for potential errors in the current frame:\n\n1.  **Scale-Dependent Feedback vs. Global Parameter:** Verify if `tau` acts as a global decay rate or a local interaction threshold. If `tau` is global, increasing it uniformly may suppress *all* structure formation (including n=5) by reducing local coherence, rather than selectively boosting large structures. The assumption that \"persistence\" linearly correlates with \"size\" may ignore a critical size-dependent stability threshold.\n\n2.  **Timescale Mismatch (Kinetics vs. Equilibrium):** Check if the simulation time h",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Null Control Group**: Run the experiment with $\\tau$ unchanged (baseline) to establish the actual frequency of $n=5$ structures under current conditions, ensuring the \"increase\" is relative to a real baseline and not just noise.\n2. **Negative Control (Low $\\tau$)**: Test with $\\tau < 1$ (e.g., $\\tau=0.1$) to verify the monotonicity of the relationship; if $n=5$ structures disappear or drastically decrease, it confirms $\\tau$ is the causal driver, not a confounding variable.\n3. **Structural Composition Analysis**: Measure not just the *count* of $n=5$ structures, but their *stability/lifet",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **再検証**: τ=100 における n=5 比率の推移を再計測し、過去記録（n=5 減少/31%）との矛盾がアーティファクトか真の現象か判定する。\n2. **メカニズム解明**: n=2 が優勢な理由（閉路構造の persistence 特性など）を特定し、n=5 増加の条件（閾値調整や構造制約）を定義する。\n3. **閾値最適化**: 純度 100% を維持しつつ、n=5 構造を最大化する最適な τ 値の探索を再開する。",
+      "provenance": {
+        "retrieved": [
+          "v9.13 予測 | 「τ=100 で大型構造が増える」 | 逆転（n=5 38%→31%、n=2 増） | K（2ノード閉路の方が persistence 満",
+          "76. 閾値を厳しくすれば大型構造が増えるとは限らない。τ=100 で n=5 比率が低下、n=2 が増加した",
+          "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age_r ≥ τ) で "
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **閾値効果の検証**: τ=100 設定で n=5 比率が実際に増加するか、あるいは「厳しくすれば大型構造が増えるとは限らない」過去の教訓通り n=2 が支配的になるかを確認せよ。\n2. **アーティファクト排除**: 純度 100% の persistence-based birth 条件下で、n=5 の増加が真の構造変化か、単なるノイズの除去による統計的変動かを区別せよ。\n3. **メカニズム解明**: n=5 の増加（または減少）が、2ノード閉路の persistence 特性や、K(2ノード) の構造安定性とどう関連しているか、その因果経路を特定せよ。",
+      "provenance": {
+        "retrieved": [
+          "v9.13 予測 | 「τ=100 で大型構造が増える」 | 逆転（n=5 38%→31%、n=2 増） | K（2ノード閉路の方が persistence 満",
+          "76. 閾値を厳しくすれば大型構造が増えるとは限らない。τ=100 で n=5 比率が低下、n=2 が増加した",
+          "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age_r ≥ τ) で "
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **再検証**: τ=100 における n=5 比率の実際の推移を確認し、過去の「逆転（低下）」事象が再現されるか、あるいは新規に大型構造が増加するかをデータで特定する。\n2. **機構解明**: 増加（または減少）の要因が「純粋な persistence 効果」か、「R>0 混入のアーティファクト」か、あるいは「n=2 構造の飽和による相対的変化」かを分離して特定する。\n3. **閾値調整**: 大型構造の制御が目的であれば、τ=100 が最適解ではない可能性を考慮し、n=5 と n=2 のバランスを制御する新たな閾値（S や age_r）の探索を行う。",
+      "provenance": {
+        "retrieved": [
+          "v9.13 予測 | 「τ=100 で大型構造が増える」 | 逆転（n=5 38%→31%、n=2 増） | K（2ノード閉路の方が persistence 満",
+          "76. 閾値を厳しくすれば大型構造が増えるとは限らない。τ=100 で n=5 比率が低下、n=2 が増加した",
+          "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age_r ≥ τ) で "
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **τ=100 における n=5 構造の出現頻度・純度を定量計測**：予測（n=5 増加）が実際に観測されるか、または過去の教訓（n=2 主体への回帰）が再確認されるかを確認する。\n2. **閾値厳格化の影響を分離評価**：τ=100 単独効果と、S≥0.20 などの追加的厳格化を併用した場合の構造変化を比較し、純粋な「persistence 効果」を特定する。\n3. **n=2 構造の支配率変化を追跡**：n=5 の増加が伴わない場合、n=2 構造の比率上昇（アーティファクト除去後の真の構造）が顕在化しているかを確認し、仮説の反証材料とする。",
+      "provenance": {
+        "retrieved": [
+          "v9.13 予測 | 「τ=100 で大型構造が増える」 | 逆転（n=5 38%→31%、n=2 増） | K（2ノード閉路の方が persistence 満",
+          "76. 閾値を厳しくすれば大型構造が増えるとは限らない。τ=100 で n=5 比率が低下、n=2 が増加した",
+          "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age_r ≥ τ) で "
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. Validate the Mantel 0.62 result with permutation tests to confirm statistical significance.\n2. Investigate the specific structural features driving the high correlation to identify key inheritance patterns.\n3. Prepare a summary of the inheritance transfer mechanism for the next research milestone.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "この問題設定には、以下の**2つの暗黙の前提（バイアス）**が含まれている可能性があります。これらが研究の妥当性を損なうため、検証が必要です。\n\n1.  **「Mantel 0.62」が統計的に有意であるという前提**\n    *   Mantel統計量（r）の値自体（0.62）は相関の強さを示すだけで、有意性（p値）を示すものではありません。\n    *   **リスク:** p値が有意でない場合、「遺伝的距離と地理的距離の間に有意な相関がある」と結論することはできません。Mantel検定のp値（または置换検定の結果）を確認する必要があります。\n\n2.  **「Mantel分析が適切な手法である」という前提**\n    *   Mantel分析は、空間的自己相関や残差相関の問題により、偽陽性（Type I error）を生みやすいことが知られています。\n    *   **リスク:** より堅牢な手法（例：Multiple Regression on Distance Matrices (MRM) や、空間回帰モデル、あるいは個別の遺伝子座ベースの解析）を用いた検証が行われていない場合、結論の信頼性が低くなります。\n\n**",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Define & Predict**: Clarify the precise definition of \"inheritance transfer\" and establish quantitative prediction metrics for the 0.62 Mantel statistic.\n2. **Mechanism & Timing**: Isolate the specific biological mechanism driving the transfer and determine its exact introduction timeline relative to the structural-strength changes.\n3. **Scope Separation**: Decouple local genomic effects from programmatic/organizational layers to distinguish between intrinsic structural constraints and external programmatic influences.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. Directly measure the structural strength of the target component to verify the 0.62 Mantel value.\n2. Conduct a controlled experiment to isolate and test the specific inheritance transfer mechanism.\n3. Compare observed data against the current frame to explicitly falsify or confirm the inheritance conclusion.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "The conclusion that \"inheritance transfers\" based solely on a Mantel r=0.62 is premature and likely flawed. A high correlation does not prove causation or the specific mechanism of inheritance; it could be driven by shared environmental gradients, isolation-by-distance, or phylogenetic signal rather than direct genetic inheritance of the trait.\n\nHere are 3 concrete axes to check:\n\n1. **Control for Spatial Autocorrelation**: Test if the correlation persists after accounting for geographic distance (e.g., using a partial Mantel test or spatial regression). If the signal disappears, it’s likely d",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "The conclusion \"inheritance transfers\" based solely on a Mantel statistic of 0.62 is highly suspect because it conflates statistical correlation with causal mechanism. A high Mantel correlation indicates that genetic and geographic distances are correlated, but it does not prove that *inheritance* (vertical transmission) is the driver; it could equally result from isolation-by-distance (IBD) where limited dispersal creates both spatial clustering and genetic similarity without any specific \"inheritance transfer\" mechanism being the primary focus or distinct from general population structure. F",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "The conclusion that \"inheritance transfers\" based solely on a Mantel statistic of 0.62 is likely a classic case of conflating **spatial autocorrelation** with **causal inheritance**. A high Mantel $r$ often reflects shared environmental history or geographic isolation (isolation by distance) rather than direct genetic inheritance mechanisms.\n\nHere are 3 concrete axes to check if the current frame is mistaken:\n\n1.  **Confounding by Isolation-by-Distance (IBD):**\n    *   **Check:** Run a partial Mantel test or use multiple regression on distance matrices (MRM) to control for geographic distance.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "Mantel r=0.62は相関を示すものの、因果や「遺伝的伝達（inheritance）」を証明するには不十分です。構造的強度と形質（PLB）の共変異が、共通の環境要因や物理的制約（pleiotropy/constraint）によるものではないか疑うべきです。\n\n1. **環境変数の統制実験**: 同一遺伝子型の個体を異なる環境（栄養、温度、応力負荷）で培養し、構造的強度とPLBの相関が環境依存性を持つことを確認する。もし相関が環境変化で崩れるなら、遺伝的伝達ではなく環境共変異である。\n2. **遺伝的解析（QTL/GWAS）**: 構造的強度とPLBを支配する遺伝子座が同一か、あるいは独立しているかを分子レベルで検証する。同一遺伝子座に強く関連するQTLが検出されない場合、直接の遺伝的伝達は否定される。\n3. **物理的制約の排除**: 構造的強度を人為的に変える（例：材料の厚さや組成を変化させる）ことでPLBが変化するかを実験する。PL",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **検定手法の再設計（非パラメトリック/階層化）**: Mantel 0.62 の信頼性を確認するため、スケール差（binary vs 連続値）やトートロジー（#CW7）を排除し、`plb` と `structural-strength` の対応関係を直接検証する新たな統計的枠組み（例：ペアワイズ相関の有意性検定や混合効果モデル）を構築する。\n2. **アーティファクトの排除と Null モデルの構築**: 結果が「仕込んだノブ」や観測窓の選択（v9.11→v9.13 の n_core 分布変化など）による自己成就ではないかを確認するため、ランダム化検定（Permutation test）や Null モデルを用いて、Mantel 0.62 が偶然またはバイアスで生じていないかを厳密に検証する。\n3. **因果経路の再評価（Integration 経路の再考）**: 過去事例（v1101a）で示された「Integration 経路が因果候補として 0 件」の教訓を踏まえ、`structural-st",
+      "provenance": {
+        "retrieved": [
+          "v1302 (A) | structural-strength→plb で transfer | Mantel 0.62 だが懐疑再点検で plb スカラを超え",
+          "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測窓が結果を製造。 |",
+          "386. **留保 #L5「Integration 経路が因果候補として 0 件」とその決着 (v1101a 段階 1)** — 因果候補 path で int"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **検定手法の妥当性検証**: Mantel 検定が距離行列の線形仮定に依存しているか確認し、非線形関係や外れ値の影響を排除するため、Spearman/Pearson 相関や Procrustes 分析など複数の指標で結果の頑健性をクロスチェックせよ。\n2. **トートロジー（自己成就）の排除**: 類似度計算に使用した特徴量（ノブ）が、結論（継承）を導くために「仕込まれていないか」を逆検証せよ。特に、構造的特徴と PLB 値の間に因果的独立性があるか、単なる共変動ではないかを確認する。\n3. **残差分析とゼロ仮説の再定義**: Mantel 0.62 という相関が「統計的に有意」であるかだけでなく、ランダム化検定（permutation test）において null distribution のどのパーセンタイルに位置するかを確認し、偶然の一致や既知の交絡因子（例：共通の祖先による単純な類似性）による偽陽性ではないか厳密に評価せよ。",
+      "provenance": {
+        "retrieved": [
+          "v1302 (A) | structural-strength→plb で transfer | Mantel 0.62 だが懐疑再点検で plb スカラを超え",
+          "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測窓が結果を製造。 |",
+          "386. **留保 #L5「Integration 経路が因果候補として 0 件」とその決着 (v1101a 段階 1)** — 因果候補 path で int"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **検定手法の再考（トートロジー排除）**: Mantel 0.62 が「仕込んだノブ」による自己成就でないか確認するため、構造強度と PLB の相関を直接測るのではなく、ランダム化検定や部分相関（共変量制御）を用いて、残差レベルでの独立した証拠（ゼロ残差の欠如）を検証せよ。\n2. **スケールと閾値の分離（階層の役割分担）**: 因果候補の 0 件問題（v1101a）の教訓通り、binary/continuous のスケール差異を無視した比較を避けるため、局所的な program 層（PLB）と構造的層（structural-strength）の境界を明確にし、閾値固定による偽支配を排除した上で統合経路を再評価せよ。\n3. **アーティファクトの除去（観測窓の固定）**: 過去の n_core 分布や run 長トートロジー（v1301-1302）の失敗を踏まえ、観測窓・baseline・birth 方式が結果を製造していないか、事前",
+      "provenance": {
+        "retrieved": [
+          "v1302 (A) | structural-strength→plb で transfer | Mantel 0.62 だが懐疑再点検で plb スカラを超え",
+          "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測窓が結果を製造。 |",
+          "386. **留保 #L5「Integration 経路が因果候補として 0 件」とその決着 (v1101a 段階 1)** — 因果候補 path で int"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Null Model 検定**: 構造的同型性（isomorphism）のみを保持し、重み/強度情報をランダム化（shuffle）したネットワーク対で Mantel 統計を再計算し、0.62 が単なるトポロジーの一致によるものか、実際の強度伝達によるものかを区別する。\n2. **逆因果/交絡チェック**: 結果変数（plb）の分布特性（n_core 等）が構造変数（structural-strength）の計算窓や baseline 設定に依存していないか、観測窓を短縮・変更して結果の安定性（robustness）を検証する。\n3. **独立指標の導入**: 構造的同型性とは無相関な、かつ伝達メカニズムを直接反映する別の指標（例：情報拡散シミュレーションの到達率、または物理的結合の強度）を用い、Mantel 相関が再現されるか確認する。",
+      "provenance": {
+        "retrieved": [
+          "v1302 (A) | structural-strength→plb で transfer | Mantel 0.62 だが懐疑再点検で plb スカラを超え",
+          "**C** | **観察方法が結果を作る（アーティファクト/トートロジー/自己成就）** | 指標・baseline・birth 方式・観測窓が結果を製造。 |",
+          "386. **留保 #L5「Integration 経路が因果候補として 0 件」とその決着 (v1101a 段階 1)** — 因果候補 path で int"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Define the primary objective**: Determine whether the project prioritizes inference speed, model accuracy, or resource efficiency to establish a clear selection criterion.\n2. **Benchmark both models**: Run a quick performance test on the specific GPU hardware to measure latency, throughput, and memory usage for each model under identical conditions.\n3. **Select the optimal mode**: Choose the model that best meets the defined objective based on the benchmark results, and document the rationale for future reference.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "暗黙の前提として、「両モデルを同時に実行することは技術的に不可能であり、どちらか一方の選択を強いる状況である」という前提があります。しかし、実際にはVRAMの最適化、モデルの量子化、またはバッチ処理の調整などにより、両立可能なケースも存在します。したがって、「両立不可」という前提自体が誤りである可能性を考慮し、まず両モデルの共存可能性を再検証することが重要です。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. Define the specific conflict criteria (memory, latency, or architecture) preventing co-servability.\n2. Select the primary operating mode based on the highest-priority use case (e.g., prediction vs. mechanism).\n3. Isolate the conflicting components (layer/subject) to enable modular deployment or sequential execution.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Define Falsifiable Metrics**: Identify specific, measurable variables (e.g., inference latency, memory footprint, or accuracy drop) that directly contradict the \"incompatible\" claim.\n2. **Design Controlled Benchmark**: Construct a minimal experiment isolating the two models in a shared environment to test for resource contention or conflict under the proposed operating mode.\n3. **Execute & Analyze**: Run the benchmark to collect empirical data, determining if the models can coexist or if one must be prioritized based on the observed constraints.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "The current frame assumes a hard constraint (\"un-co-servable\") that may be an artifact of configuration rather than hardware reality. Before committing to a suboptimal mode, verify the following:\n\n1.  **Memory Fragmentation vs. Capacity**: Check if the failure is due to contiguous memory allocation issues (solvable via memory pooling or model sharding) rather than total VRAM insufficiency.\n2.  **Precision Mismatch**: Verify if the models are being loaded in full precision (FP32) when FP16/BF16 quantization would allow co-servability without significant accuracy loss.\n3.  **Batch Size Overhead*",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **ハードウェア制約の検証**: 2つのモデルが同時に共存できないという前提は、VRAMの物理的限界によるものか、それともフレームワーク/ドライバーの既知のバグや設定誤りによるものか。\n2. **代替手段の検討**: 並列実行が不可能でも、時分割実行（Time-slicing）やモデルの量子化・軽量化、あるいは外部ストレージへのオフロードといった手法で「共存」または「実用的な運用」は可能ではないか。\n3. **要件の再定義**: 「両方のモデルを同時に稼働させること」が必須要件か、それとも「両方のモデルを単一環境で管理・切り替え可能であること」で要件を満たせるか。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Hardware Constraint Verification**: Validate if the \"un-co-servable\" claim stems from actual VRAM/Compute limits or a misconfigured environment (e.g., incorrect batch size assumptions, lack of quantization, or driver incompatibility).\n2. **Definition of \"Operating Mode\"**: Clarify if the choice is between *inference-only* vs. *fine-tuning*, or *single-model* vs. *model-ensemble*, as these have vastly different resource profiles and validity criteria.\n3. **Granularity of Separation**: Check if the proposed separation (definition/prediction, mechanism/timing, local/program, layer/subject) i",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **GPU Memory Footprint Verification**: Directly measure the actual VRAM usage of each model in isolation under identical batch sizes and input shapes to confirm if the sum of individual peak usages truly exceeds the available hardware capacity, ruling out configuration errors or shared memory optimizations.\n\n2. **Inference Latency & Throughput Benchmarking**: Run a controlled benchmark to measure the time-to-first-token and tokens-per-second for each model individually; if one model is significantly slower or requires more compute resources than estimated, the \"incompatibility\" might be a p",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Isolate & Benchmark**: Run independent latency/throughput tests for each model on the target hardware to establish baseline performance metrics.\n2. **Evaluate Co-Location Feasibility**: Test simultaneous execution (batching or multi-stream) to determine if memory bandwidth or compute limits allow for concurrent serving.\n3. **Select Mode**: Choose **Sequential** (if memory is the bottleneck) or **Parallel** (if compute is the bottleneck) based on the benchmark results.",
+      "provenance": {
+        "retrieved": [],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Verify Hardware Constraints**: Confirm if the \"un-co-servable\" status is due to VRAM capacity, compute limits, or software conflicts, rather than assuming it as a fixed axiom.\n2. **Define Optimization Goal**: Determine the primary metric for the \"operating mode\" (e.g., latency, throughput, or accuracy) to guide the selection between the two models.\n3. **Assess Workload Characteristics**: Analyze the specific input/output patterns of the tasks to see if one model inherently fits the workload better, rather than treating them as interchangeable.",
+      "provenance": {
+        "retrieved": [],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Isolate Variables**: Decouple model architecture (layer/subject) from deployment context (local vs. program) to identify the specific bottleneck (VRAM, compute, or memory bandwidth).\n2. **Benchmark Co-servability**: Run a controlled stress test with both models active to determine if the failure is due to peak memory usage or kernel contention.\n3. **Define Fallback Mode**: Select the single-model mode with the highest throughput/lowest latency for the primary use case; configure the second model for on-demand loading or offloading if resources permit.",
+      "provenance": {
+        "retrieved": [],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Isolate Single-Model Inference**: Run each model independently on identical input batches to establish baseline latency, memory usage, and output correctness, confirming they function individually.\n2. **Measure Co-Location Resource Contention**: Load both models into the same GPU context simultaneously to measure peak memory consumption and compute saturation, identifying if the failure is due to VRAM limits or compute bottlenecks.\n3. **Implement Dynamic Offloading Test**: Introduce a minimal CPU-GPU data transfer layer to offload one model’s weights to CPU RAM during the other’s inferenc",
+      "provenance": {
+        "retrieved": [],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. Analyze and categorize auditor findings by severity.\n2. Implement fixes for critical/high-impact issues first.\n3. Re-run load-bearing tests to verify fixes and regression safety.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Findings Validation**: Verify if the auditor's findings are actionable, reproducible, and directly linked to the \"load-bearing\" failure modes, rather than being stylistic or edge-case observations.\n2. **Root Cause Isolation**: Determine if the findings stem from a systemic design flaw (requiring architectural rework) or isolated implementation bugs (requiring targeted fixes), to avoid over-engineering the solution.\n3. **Regression Scope Definition**: Explicitly define which existing \"passing\" tests must be re-validated to ensure the rework does not introduce new failures in previously sta",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Auditor Findings Resolution**: Prioritize and execute the rework required by the auditor's findings to ensure compliance and fix identified defects.\n2. **Architectural Separation**: Re-evaluate and decouple the system into distinct layers: Definition/Prediction, Mechanism/Timeline, and Local/Program/Subject.\n3. **Validation & Integration**: Verify the separated components against load-bearing tests and integrate the reworked implementation.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Identify the specific falsifiable hypothesis** derived from the auditor's findings to determine which variable or comparison is critical.\n2. **Design a targeted experiment** that directly measures the identified variable or comparison, ensuring it can potentially contradict the current frame.\n3. **Execute the experiment** to collect data that either validates or refutes the current implementation's assumptions based on the auditor's feedback.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "The current frame assumes that \"load-bearing tests\" are sufficient to validate the implementation's correctness and that the auditor's findings are the primary source of truth. This is likely mistaken because:\n\n1.  **Test Coverage vs. Audit Scope:** Load-bearing tests often verify functional correctness under specific conditions but may miss edge cases, security vulnerabilities, or non-functional requirements (e.g., performance under stress, compliance) that the auditor is likely checking. You need to verify if the test suite actually covers the specific areas flagged by the auditor.\n2.  **Aud",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Auditor’s Scope vs. System Reality**: Check if the auditor’s findings are based on a static or idealized model that ignores the specific environmental constraints (e.g., legacy integration, network latency, or user behavior) that caused the \"load-bearing tests\" to pass.\n2. **Definition of \"Pass\"**: Verify if the load-bearing tests measured only functional correctness under controlled conditions, rather than robustness or edge-case resilience, meaning the \"pass\" status might mask latent architectural flaws.\n3. **Rework Validity**: Assess whether the auditor’s findings address root causes o",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **定義の曖昧さの検証**: 「load-bearing tests」の基準が、単なる機能要件の充足に留まらず、セキュリティやコンプライアンスといった非機能要件（特に監査対象となる部分）を網羅しているか確認せよ。\n2. **局所修正の波及効果**: 監査指摘事項を「program」レベルで局所的に修正した結果、システム全体の「層」や「主体」間の整合性（特に分離された定義と予測の整合）が崩れていないか検証せよ。\n3. **導入時期と環境の乖離**: 実装環境と監査環境の差異（データ、設定、バージョン）が、テスト通過と監査指摘の矛盾を生む根本原因になっていないか確認せよ。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **盲検化された再評価 (Blind Re-evaluation)**: 発見者（auditor）を特定できないようにし、別のチームが同じ「修正済み」コードを、発見者が行ったのと同じ基準で再テストする。これにより、発見者のバイアスや「確認バイアス」が結果に与えた影響を排除し、修正が本当に有効だったか、単に発見者の期待に沿ったかを確認する。\n\n2. **制御群との比較 (Control Group Comparison)**: 修正を行わなかった同等のコードベース（または修正前の状態）を並行してテストし、発見された問題が「偶然のノイズ」ではなく、修正によって統計的に有意に減少したかを確認する。これにより、テスト結果の改善が実質的な品質向上なのか、単なるテスト環境のばらつきなのかを区別する。\n\n3. **逆説的テストケースの注入 (Adversarial Test Injection)**: 発見者が指摘した問題の「逆」または「境界ケース」を意図的に注入し、修正が問題の根本原因を解決したのか、単に表面症状を隠しただけ（パッチワーク）なのかを検証する。これにより、修正が",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Analyze Findings**: Categorize auditor findings by severity (critical vs. minor) and determine if they represent actual defects, false positives, or documentation gaps.\n2. **Prioritize Rework**: Address critical load-bearing failures immediately; schedule minor issues or documentation updates for the next iteration.\n3. **Execute & Verify**: Implement fixes, then re-run the specific load-bearing tests that triggered the findings to ensure the issues are resolved without introducing regressions.",
+      "provenance": {
+        "retrieved": [],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Audit Scope Verification**: Confirm if the auditor’s findings are strictly within the agreed-upon scope or if they introduce new, unstated requirements.\n2. **Root Cause Analysis**: Determine if the findings indicate a systemic flaw in the testing methodology rather than just implementation errors.\n3. **Stakeholder Alignment**: Ensure the \"findings\" are technically actionable and agreed upon by both the implementation team and the auditor before rework begins.",
+      "provenance": {
+        "retrieved": [],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **定義と予測の再検証**: 前提条件と期待される動作の整合性を確認し、テストケースとの乖離を特定する。\n2. **機構と導入時期の分離**: 実装ロジック（機構）とデプロイメント/設定（導入時期）を切り離し、環境依存性の欠陥を除去する。\n3. **局所とprogramの再構成**: 局所的なバグ修正に留まらず、プログラム全体の構造（層/主体）を見直し、根本原因に対応する設計変更を行う。",
+      "provenance": {
+        "retrieved": [],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Define Falsifiable Metrics**: Identify the specific variable(s) that, if changed, would invalidate the current implementation's success criteria.\n2. **Design Adversarial Test**: Construct a minimal experiment or edge-case scenario specifically intended to break the current logic or assumptions.\n3. **Execute & Iterate**: Run the test; if it fails, analyze the root cause and rework the implementation to address the specific gap revealed.",
+      "provenance": {
+        "retrieved": [],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Implement & Validate**: Code the `S >= 0.20` threshold into the simulation/model and verify it correctly filters the initial population.\n2. **Sensitivity Analysis**: Test the model’s stability and output variance by varying the threshold slightly (e.g., 0.15–0.25) to ensure 0.20 is robust.\n3. **Baseline Run**: Execute the primary simulation with the fixed threshold to generate the baseline dataset for further analysis.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **閾値の正当性検証**: $S \\ge 0.20$ が生物学的/統計的に有意な「出生」を定義するか、感度分析（Sensitivity Analysis）で閾値変更が結果に与える影響を確認する。\n2. **初期条件の定義**: $S$ の初期値分布や、閾値超過時の動的挙動（例：個体数増加の関数形）を明確に定義する。\n3. **境界条件の明確化**: 出生した個体のその後の生死・移動ルールを指定し、モデルの閉じ性を確保する。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Formalize Definitions**: Explicitly define the mathematical and logical boundaries for \"prediction,\" \"mechanism,\" \"local vs. program,\" and \"layer/subject\" to eliminate ambiguity.\n2. **Decouple Components**: Map out the dependencies between the fixed threshold ($S \\ge 0.20$) and the separated modules (mechanism/layer) to identify which variables are static versus dynamic.\n3. **Validate Logic Flow**: Construct a minimal test case or flowchart that traces how a specific input triggers the mechanism through the defined layers, ensuring the \"local\" logic aligns with the \"program\" structure.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Design a falsification experiment**: Construct a controlled setup where the current frame's predictions are explicitly tested against direct measurements of the comparison/observation variables, ensuring the experiment can potentially refute the current model if $S < 0.20$ or if observed data deviates significantly from predicted outcomes.\n2. **Implement direct measurement protocols**: Establish precise, unbiased methods to directly measure the key variables (comparison or observation) that are central to the current frame, avoiding indirect proxies that could mask discrepancies.\n3. **Ana",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "The current frame assumes that a fixed threshold ($S \\ge 0.20$) is sufficient to distinguish valid births from noise or artifacts. This is likely mistaken because biological and technical noise distributions are rarely uniform or static across different datasets, sequencing depths, or sample types. A fixed cutoff ignores context-dependent variance.\n\nHere are 3 concrete axes to check:\n\n1. **Sensitivity to Reference Panel Composition**: Check if the 0.20 threshold holds when the reference panel is restricted to *only* high-confidence, high-coverage samples. If the threshold fails on a stricter s",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Sの物理的意味と閾値の妥当性**: S>=0.20という閾値が、対象とする生物学的・物理的現象において「出生」または「存続」を定義する適切な基準か。例えば、個体群動態であれば、この閾値は現実的な繁殖率や生存率と整合するか。\n2. **初期条件と境界条件の定義**: S>=0.20という条件が、システムの初期状態（t=0）に適用されるのか、それとも時間発展过程中的の任意の時点での条件なのか。また、Sが0.20未満になった場合のシステムの挙動（絶滅、外部からの流入、モデルの破綻など）が明確に定義されているか。\n3. **モデルの線形性/非線形性と安定性**: S>=0.20という固定値の採用が、モデルの線形性を仮定していないか。非線形システムでは、この閾値付近でカオス的挙動や分岐が生じ、固定値の採用が現実を歪める可能性がある。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Threshold Validity**: Verify if $S \\ge 0.20$ is empirically derived or arbitrary; check if the distribution of $S$ in the target population has a natural bimodal split or if 0.20 is an outlier cutoff that misclassifies the majority.\n2. **Causal vs. Correlational Separation**: Ensure \"mechanism\" (cause) and \"introduction timing\" (context) are not conflated; check if the observed effect is actually driven by the *program* implementation rather than the intrinsic property $S$.\n3. **Aggregation Bias**: Check if separating \"local\" vs. \"program\" ignores interaction effects; verify if the \"subje",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Sensitivity Analysis of the Threshold**: Vary the birth threshold $S$ continuously (e.g., 0.15, 0.25, 0.30) to test if the core conclusion is robust or merely an artifact of the arbitrary cutoff.\n2. **Direct Measurement of Unobserved Confounders**: Measure variables that could simultaneously influence both the birth outcome and the predictor $S$ (e.g., socioeconomic status, access to care) to rule out spurious correlation.\n3. **Counterfactual Validation**: Compare the observed outcomes against a matched control group with identical $S$ values but different underlying mechanisms to isolate",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **直ちに `S>=0.20` 閾値を撤廃し、`age_r >= τ`（persistence-based birth）へ戻す**：過去事例が示す通り、この閾値はアーティファクト（見かけ構造）を生成し、純度100%の達成を阻害する「神の手」である。\n2. **固定値の採用を中止し、MAD-DTまたは動的閾値へ移行する**：固定値は設計者の恣意的介入でありemergentな構造を歪めるため、v9.10以降の教訓に従い排除する。\n3. **既存の `R>0` ラベルを再検証し、`R=0` 混入アーティファクトを除去する**：v9.11の教訓通り、現在のラベルリングの多くが経路B由来の誤検知である可能性が高いため、データセットのクリーンアップから着手する。",
+      "provenance": {
+        "retrieved": [
+          "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age_r ≥ τ) で ",
+          "**A** | **神の手（硬い閾値・外部介入）** | 設計者が恣意的境界や固定値で構造を操作。emergent でなく注入。 | S≥0.20 birth（",
+          "v9.13 | S≥0.20 birth + path B（R>0 pair 即 label） | 全 link の 99.64% が R=0、v9.11 la"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "過去のアナリティクス（v9.13の教訓）により、S≥0.20は「神の手（アーティファクト）」として既に破棄済みです。これを再採用すると、R>0純度100%という偽りの成功と、経路B由来の構造消失（n=2主体の消失）を招きます。\n\n次の3つの軸で対応してください：\n\n1.  **閾値の撤廃確認**: S≥0.20の採用を即座に中止し、persistence-based birth (age_r ≥ τ) へ回帰する。\n2.  **アーティファクトの除去**: 固定値や外部介入による構造操作（A/C）を排除し、純粋なemergentな経路のみを許容する設計にする。\n3.  **検証指標の再定義**: R>0の「純度」ではなく、経路B（R>0 pair）の存続率と、n=2主体のphase+r支配率（本来の23%付近）を主要KPIとする。",
+      "provenance": {
+        "retrieved": [
+          "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age_r ≥ τ) で ",
+          "**A** | **神の手（硬い閾値・外部介入）** | 設計者が恣意的境界や固定値で構造を操作。emergent でなく注入。 | S≥0.20 birth（",
+          "v9.13 | S≥0.20 birth + path B（R>0 pair 即 label） | 全 link の 99.64% が R=0、v9.11 la"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "過去のアナリシス（v9.13の教訓）により、S≥0.20は「神の手（アーティファクト）」として既に破棄済みであり、これを再導入することは実験の根本的な失敗（emergent構造の欠如）を意味します。したがって、次の行動は「閾値の固定」ではなく、「純粋なpersistence-based birth」への回帰と、その結果の再検証です。\n\n1. **S≥0.20の即時撤廃とage_r≥τ基準への復帰**: 外部介入（神の手）を排除し、v9.13で確立された「persistence-based birth (age_r ≥ τ)」のみを用いてR>0純度100%の達成を確認せよ。\n2. **n=2主体のphase+r支配率再測定**: 経路B + R=0混入のアーティファクトが除去された状態（n=2主体、phase+r 72%支配）が再現可能か、統計的有意性を検証せよ。\n3. **局所/program/層の分離再検討**: 固定閾値による擬似相関を排除した上で",
+      "provenance": {
+        "retrieved": [
+          "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age_r ≥ τ) で ",
+          "**A** | **神の手（硬い閾値・外部介入）** | 設計者が恣意的境界や固定値で構造を操作。emergent でなく注入。 | S≥0.20 birth（",
+          "v9.13 | S≥0.20 birth + path B（R>0 pair 即 label） | 全 link の 99.64% が R=0、v9.11 la"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **閾値撤廃対照実験**: S≥0.20 を即時解除し、`age_r ≥ τ` (persistence-based) に戻して R>0 純度と n=2 主体比率が v9.13 水準 (R=0 99.64%, n=2 23%) に回復するか検証。\n2. **アーティファクト検出**: S≥0.20 適用下で、R>0 ラベルの「見かけ構造」(経路 B 混入) が再発し、n=2 主体比率が v9.11 水準 (67%) に跳ね上がるか計測。\n3. **介入の因果検証**: 固定値設定が R>0 純度 100% を「emergent」に導いたか、単に外部介入で構造を強制したかを確認するため、S≥0.20 をランダムにオフ/オンし、R>0 生成メカニズムの安定性を比較。",
+      "provenance": {
+        "retrieved": [
+          "v9.13 で「神の手」(S≥0.20 hard threshold) が撤去され、persistence-based birth (age_r ≥ τ) で ",
+          "**A** | **神の手（硬い閾値・外部介入）** | 設計者が恣意的境界や固定値で構造を操作。emergent でなく注入。 | S≥0.20 birth（",
+          "v9.13 | S≥0.20 birth + path B（R>0 pair 即 label） | 全 link の 99.64% が R=0、v9.11 la"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. Validate the positive connection with independent experimental data or high-precision simulations.\n2. Characterize the physical mechanism and stability of the accepted network.\n3. Optimize the network parameters for the intended application or performance metric.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. 検証: 「正の接続結果」が統計的有意性（p値など）に基づいているか確認。\n2. 検証: 結果が生物学的/物理学的に意味のある因果関係か、単なる相関か評価。\n3. 検証: 入力データ（原子種、距離、環境）の品質とバイアスを再確認。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. 定義と予測の整合性検証\n2. 機構と導入時期の具体化\n3. 局所とprogramの分離再検討",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. 設計変数（介入）を操作し、因果関係の方向性を検証するランダム化比較試験（RCT）を実施する。\n2. 観測変数の直接測定値を用いて、現在のフレームワークが予測できない外れ値や反例（反証事象）を特定する。\n3. 上記反証事象を説明できる代替モデル（競合仮説）を構築し、両者の予測精度を比較検証する。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "The current conclusion is likely premature because \"positive connection\" in atom-to-atom networks often reflects statistical noise, shared environmental factors, or algorithmic artifacts rather than true causal or structural relationships. Accepting the network without validation risks building a model on spurious correlations.\n\nHere are 3 concrete axes to check:\n\n1. **Statistical Significance vs. Noise**: Verify if the positive connections survive rigorous multiple-testing correction (e.g., FDR) and are not merely artifacts of small sample sizes or high-dimensional noise.\n2. **Causal Directio",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **定義の曖昧さの検証**: 「正の接続結果」が統計的有意性（p値）に基づくものか、単なる相関の方向性（符号）のみを指すものか。後者であれば因果関係や機能的結合の誤認を招く。\n2. **ノイズとアーティファクトの排除**: 信号の同期が、実際のシナプス結合由来のものか、それとも共通入力や測定ノイズ（例：運動アーティファクト）による偽陽性か。\n3. **網羅性の欠如**: 観測されていない隠れた変数（第三の要因）が存在し、見かけ上の正の相関を生んでいる可能性（交絡因子）を考慮していないか。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "The current conclusion (\"Accept the network\") is premature because \"positive connection\" is a statistical artifact that does not prove causality or mechanistic validity. To challenge this frame, you must verify if the signal is driven by confounding variables, data leakage, or overfitting rather than a true biological or physical mechanism.\n\nHere are 3 concrete axes to check:\n\n1. **Causal vs. Correlative Validation**: Check if the positive connection holds in **counterfactual scenarios** or under **perturbation experiments** (e.g., gene knockout, drug inhibition). If the network structure coll",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Blind Control with Inert Substrates**: Replicate the experiment using chemically inert, non-interacting atoms (e.g., noble gases) under identical conditions to rule out instrumental artifacts or background noise as the source of the \"positive connection.\"\n2. **Direct Causality Test via Perturbation**: Introduce a targeted inhibitor or physical barrier between the atoms to disrupt the proposed interaction; if the signal persists, the causal link is likely spurious or indirect.\n3. **Independent Measurement of Intermediate States**: Directly measure the proposed intermediate state or bond fo",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **v10.13 素材の統合**: Code A (window 依存性) を基軸とし、Taka §1.9 (2 atom 組み合わせ/Phase 2 移行) と留保由来 (pulse 観察/n_core 軸) を組み込み、ネットワークの構造化を確定させる。\n2. **2 AI 意見聴取**: 本 Phase の結果を基に、指示通り「2 AI に振る」運用を実行し、多角的な検証と次の方向性の合意形成を行う。\n3. **ESDE 注意センターの連携確認**: 過去のアーク (v1303) で確立した「親 ESDE が珍しさで注意を pull する」メカニズムが、今回の正の接続結果とどう整合するかを確認し、child-world 側へのフィードバック経路を設計する。",
+      "provenance": {
+        "retrieved": [
+          "368. **v10.13 主題候補素材** (v10.12 完了時) — Code A 推奨 (window 依存性主題化主軸) + Taka §1.9 由来",
+          "438. **v1303 = ESDE 注意の入力側の確立 (Taka 主導、細かいサブブランチで前進、クローズ 2026-07-01)** — child-w"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **前提の明示的検証**: 現在の「正の接続結果」が、過去のアーク（v1303の注意センター統合やv10.13のwindow依存性）における「暗黙の前提（例：特定のスレッド数、familiarityの閾値）」と矛盾しないか、論理的整合性を確認する。\n2. **2 AI による意見聴取**: Takaの指示通り、確立されたネットワークを基に、異なる2つのAIエージェントに「この接続が持つ潜在的なリスクや未定義の前提」について評価を依頼し、バイアスを除去する。\n3. **Phase 2移行の準備**: 上記検証が完了次第、v10.13で示唆された「Phase 2移行」に向けた、seed-level variabilityやn_core軸を含む拡張計画の具体案を策定する。",
+      "provenance": {
+        "retrieved": [
+          "368. **v10.13 主題候補素材** (v10.12 完了時) — Code A 推奨 (window 依存性主題化主軸) + Taka §1.9 由来",
+          "438. **v1303 = ESDE 注意の入力側の確立 (Taka 主導、細かいサブブランチで前進、クローズ 2026-07-01)** — child-w"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **概念分離と再定義**: 正の接続結果を「予測誤差の最小化（機構）」と「新奇性に基づく注意吸引（導入時期/主体）」に分解し、それぞれを独立した軸として再定義する。\n2. **階層的検証**: 局所的なシナプス変化（program/層）と、大域的なネットワーク状態（主体/program）を分離し、前者が後者の安定化に寄与するメカニズムを特定する。\n3. **2 AI 意見聴取**: 上記の分離枠組みを基に、2つのAIエージェントに「この正の接続がv10.13のpulse観察軸およびfamiliarity研究とどう整合するか」について評価を依頼し、Phase 2移行の妥当性を検証する。",
+      "provenance": {
+        "retrieved": [
+          "368. **v10.13 主題候補素材** (v10.12 完了時) — Code A 推奨 (window 依存性主題化主軸) + Taka §1.9 由来",
+          "438. **v1303 = ESDE 注意の入力側の確立 (Taka 主導、細かいサブブランチで前進、クローズ 2026-07-01)** — child-w"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **反証実験設計**: 現在の正の接続結果を無効化するよう、入力ノイズやパラメータを意図的に歪ませた「null model」または「対照群」を構築し、接続が消失するかを観測する。\n2. **観測変数の定量化**: 接続強度や関連性を数値化する具体的な指標（例：相関係数、情報幾何学的距離）を定義し、frameの妥当性を統計的に検証する。\n3. **フレーム検証**: 上記実験で得られたデータを用いて、現在のframeが単なる偶然ではなく、構造的に必然的な関係であることを実証する。",
+      "provenance": {
+        "retrieved": [
+          "368. **v10.13 主題候補素材** (v10.12 完了時) — Code A 推奨 (window 依存性主題化主軸) + Taka §1.9 由来",
+          "438. **v1303 = ESDE 注意の入力側の確立 (Taka 主導、細かいサブブランチで前進、クローズ 2026-07-01)** — child-w"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. Execute the `q_c_inherited` observation to capture the initial developmental signal.\n2. Analyze the output to identify and validate the new signal.\n3. Document the findings and determine if further refinement of the observation parameters is needed.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. Define the specific developmental signal to search for (e.g., gene expression, morphological change).\n2. Establish the baseline control conditions for the within-cid observation.\n3. Determine the time points and resolution for the observation run.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Define & Predict**: Explicitly define the target developmental signal and formulate specific, falsifiable predictions for its behavior.\n2. **Decompose Mechanisms**: Isolate and analyze the causal mechanism, implementation timing, and spatial scope (local vs. programmatic) separately.\n3. **Re-evaluate Hierarchy**: Re-examine the distinction between layers and agents (subjects) to identify where the new signal originates and operates.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Direct Measurement of Candidate Variables**: Quantify the specific biological or physical variables hypothesized to constitute the \"new developmental signal\" to establish a baseline correlation with the observed phenotype.\n2. **Targeted Perturbation Experiment**: Introduce a controlled intervention (e.g., knockdown, inhibitor, or environmental shift) targeting the identified variables to explicitly test if the developmental signal is abolished or altered, thereby falsifying the current frame.\n3. **Temporal Resolution Analysis**: Record high-frequency time-series data of both the signal an",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "The current approach assumes that the signal is a direct, linear inheritance from `q_c_inherited` and that a simple observation run will isolate it. This is likely mistaken because developmental signals are often context-dependent, non-linear, or masked by existing noise in the inherited state.\n\nHere are 3 concrete axes to check:\n\n1.  **Control for Baseline Noise**: Run the same observation on a *null* or *randomized* `q_c` baseline to see if the \"signal\" is actually just statistical noise or artifact of the observation method itself.\n2.  **Test for Contextual Dependency**: Check if the signal",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **因果の逆転（Reverse Causality）**: 観察開始時点 `q_c_inherited` が「原因」ではなく、開発信号の「結果」である可能性（例：信号が既に作用して `q_c_inherited` の状態を固定している）を検証せよ。\n2. **観測バイアス（Selection Bias）**: 特定の `cid`（個体/ケース）のみを対象に開始しているため、その `cid` に固有の初期条件やノイズが、発見された「新しい信号」の正体である可能性を排除するチェックを行え。\n3. **時間的粒度の欠落（Temporal Granularity）**: `q_c_inherited` への到達プロセスを無視しているため、信号の発生タイミングと `q_c_inherited` の定義間に時間的ギャップがあり、関連性が過大評価されていないか確認せよ。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "The current approach assumes that \"starting a within-cid observation\" is a neutral, objective starting point that will naturally reveal a \"new developmental signal.\" This is a classic confirmation bias trap: you are looking for a signal in data that is already filtered through the lens of `q_c_inherited` (inherited context/queries), which likely suppresses or distorts novel signals in favor of historical patterns.\n\nHere are 3 concrete axes to check if this frame is mistaken:\n\n1. **Signal-to-Noise Ratio in `q_c_inherited`**: Does `q_c_inherited` contain high-entropy noise or low-signal historic",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **測定器のキャリブレーションとノイズ特性の検証**: `q_c_inherited` の観測値が真の物理量ではなく、センサーのドリフトや環境ノイズによるアーティファクトではないかを確認するため、独立した標準光源や既知の基準信号を用いたキャリブレーション実験を行う。\n2. **対照群（コントロール）の設定**: 開発シグナルが `q_c_inherited` の変化に起因するのではなく、単なる時間経過や外部環境要因（温度、湿度など）による相関ではないかを確認するため、`q_c_inherited` を固定または無作為化された対照群での同時観測を行う。\n3. **逆因果関係の検討**: 発見された「新しいシグナル」が原因ではなく、`q_c_inherited` の変化の結果（効果）である可能性を検証するため、シグナルの発生前後における時間的遅延（ラグ）と因果方向性を統計的にテストする。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **上位資料の事前確認**: 着手前に v10.5 関連の上位資料（特に §35 メタ規律で指摘された部分）を必ず読み、v10.11 の失敗（3AI全員未読）を回避する。\n2. **q_c_inherited 起点の再実行**: 上記確認後、v10.11 で確立された「within-cid 観察」プロトコルに従い、q_c_inherited を起点として developmental signal を探索する。\n3. **v1304 への橋渡し準備**: 観察結果を、v1304 で定義される「attention output を子 ESDE の初期条件に写す」プロセスの input として整理し、child-ESDE の独立性チェックに備える。",
+      "provenance": {
+        "retrieved": [
+          "351. **v10.11 q_c_inherited within-cid observer** (Phase 1.5 第六試行、2026-05-10 完了)",
+          "v10.11 | q_c_inherited 起点 within-cid 観察 | **v10.5 機構 A/C の自明な再観察に終わる（3AI+Code A ",
+          "441. **v1304 = attention projection / child-ESDE (進行中、selector と projection を混ぜな"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **上位資料の再確認**: 着手前に `v10.5` 及び関連する上位概念資料を再読し、v10.11 の失敗（自明な再観察）を回避する。\n2. **投影先の明確化**: `q_c_inherited` を `v1304` の `attention output` として定義し、子 ESDE への投影先（初期条件）を明確に指定する。\n3. **読取専用実行**: 親へのフィードバックを排除し、子が「別の系」として成立するかを read-only で検証する。",
+      "provenance": {
+        "retrieved": [
+          "351. **v10.11 q_c_inherited within-cid observer** (Phase 1.5 第六試行、2026-05-10 完了)",
+          "v10.11 | q_c_inherited 起点 within-cid 観察 | **v10.5 機構 A/C の自明な再観察に終わる（3AI+Code A ",
+          "441. **v1304 = attention projection / child-ESDE (進行中、selector と projection を混ぜな"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **上位資料の強制確認**: v10.5 失敗の教訓（§35 メタ規律）に従い、着手前に v10.5 以降の上位資料を全 AI 要素が必須で読了し、文脈の齟齬を排除する。\n2. **v1304 準拠の分離設計**: q_c_inherited 起点の観察を、v1304 の「attention output を子 ESDE の初期条件に写す」プロトコルに準拠させ、親へのフィードバックを遮断した read-only 環境で実行する。\n3. **信号の局所性検証**: 観察結果を「概念取り込み（β member 除外）」と「attention projection（child-ESDE 成立）」の二軸で分離評価し、新たな developmental signal が局所的に独立して立証されているかを確認する。",
+      "provenance": {
+        "retrieved": [
+          "351. **v10.11 q_c_inherited within-cid observer** (Phase 1.5 第六試行、2026-05-10 完了)",
+          "v10.11 | q_c_inherited 起点 within-cid 観察 | **v10.5 機構 A/C の自明な再観察に終わる（3AI+Code A ",
+          "441. **v1304 = attention projection / child-ESDE (進行中、selector と projection を混ぜな"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **v1304a Child-ESDE Existence Check**: Run the read-only projection of `q_c_inherited` (attention output) into a child-ESDE to verify if it stabilizes as an independent system without feedback, explicitly checking for \"different system\" status.\n2. **Falsification via Signal Deviation**: Measure the divergence between the projected child-state and the parent's `q_c_inherited` trajectory; if they converge or mirror exactly, the hypothesis of a \"new developmental signal\" is falsified.\n3. **Meta-Compliance Check**: Before execution, verify that all upstream materials (specifically v10.5+ contex",
+      "provenance": {
+        "retrieved": [
+          "351. **v10.11 q_c_inherited within-cid observer** (Phase 1.5 第六試行、2026-05-10 完了)",
+          "v10.11 | q_c_inherited 起点 within-cid 観察 | **v10.5 機構 A/C の自明な再観察に終わる（3AI+Code A ",
+          "441. **v1304 = attention projection / child-ESDE (進行中、selector と projection を混ぜな"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. Validate the \"atom effect\" robustness across multiple seeds (e.g., 1-5) to rule out stochastic noise.\n2. Quantify the effect's magnitude and statistical significance against the baseline.\n3. Isolate the specific mechanism driving the effect to formulate a testable hypothesis for the next iteration.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. Validate the \"atom effect\" definition and reproducibility across multiple seeds to rule out stochastic noise.\n2. Quantify the magnitude and statistical significance of the effect on the smoke run compared to baseline.\n3. Investigate the causal mechanism (e.g., specific hyperparameters, data distribution shifts) driving the observed effect.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Define & Predict**: Formalize the \"atom effect\" definition and establish quantitative prediction metrics for its impact on smoke run performance.\n2. **Mechanism & Timing**: Isolate the specific mechanism driving the effect and determine the precise introduction timing (e.g., layer, phase, or program stage) to maximize efficacy.\n3. **Scope & Agency**: Distinguish between local (micro-level) and programmatic (macro-level) influences, and clearly assign responsibility/agency for implementing the adopted effect.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Direct Measurement**: Quantitatively measure the target variable (e.g., specific smoke component concentration or particle size distribution) to establish a ground-truth baseline.\n2. **Falsification Experiment**: Design a controlled experiment that isolates the \"atom effect\" mechanism to explicitly test whether removing it eliminates the observed effect, thereby attempting to refute the current frame.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Verify Causal Isolation**: Check if the \"atom effect\" is actually caused by a confounding variable (e.g., specific smoke density, temperature gradient, or boundary condition) rather than the intended mechanism. Run a control simulation with identical parameters but without the suspected cause to see if the effect persists.\n\n2. **Test Robustness Across Seeds**: Since the effect was only observed in seed 0, run at least 5–10 additional random seeds to determine if the effect is statistically significant or merely a stochastic artifact. If it disappears in other seeds, the initial conclusion",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **因果の逆転・交絡因子の検証**: 「Atom effect」が原因ではなく、煙の濃度や気流（交絡因子）が両方に影響している可能性はないか。\n2. **シード0の代表性**: 単一シード（seed 0）での観測結果が、ランダムなノイズや過剰適合（overfitting）による偶然の一致ではないか。\n3. **定義の循環性**: 「Atom effect」の定義が、既に観測された結果（seed 0）に合わせて後付けされていないか。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "Here are 3 concrete axes to challenge the current conclusion that the \"atom effect\" is clear and should be adopted:\n\n1.  **Causal Isolation vs. Confounding Variables**: Verify if the \"atom effect\" is truly the causal driver or a proxy for a latent variable (e.g., specific seed-dependent initialization patterns or data distribution shifts) that correlates with the smoke run but fails under out-of-distribution (OOD) conditions.\n2.  **Generalization Scope (Local vs. Global)**: Test if the effect holds across different model architectures, dataset sizes, or training regimes. If it only appears in ",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **逆相関検証（Seed 1-10）**: 同一プロトコルでシードを変更し、原子効果が再現性なくランダムノイズに過ぎないことを示す統計的有意差の欠如を確認せよ。\n2. **対照群の直接測定**: 原子効果を説明する物理変数（例：特定波長の光、電界）を直接計測し、その変動が煙の挙動と無相関であることを実証せよ。\n3. **盲検実験**: 解析者が「原子効果あり/なし」を事前告知されずに評価し、主観的バイアスによる過剰解釈が排除されるかを確認せよ。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Child-world 独立検証**: 過去失敗（v1110-1113）の「異系対応」罠を回避するため、Atom 空間の効果を `child-world`（縮小子系）で独立に再現・定量化し、因果的安定性を確認する。\n2. **集計単位のスキャン**: 留保 #33（方向反転）を警戒し、効果の観測単位（Atom/Center/Other）を系統的に変化させ、結果の方向性が集計方式に依存していないか（Simpson's paradox 的逆転）を検証する。\n3. **パラメータ固定とベースライン確立**: `stress OFF` / `semantic_pressure OFF` の child-world 環境下で、V82Engine の基本パラメータを固定し、効果の純粋な影響度合いを計測するための基準線（baseline）を確定する。",
+      "provenance": {
+        "retrieved": [
+          "372. **留保 #33「集計単位による方向反転」(v10.13.a で表面化、後続を通底)** — smoke seed 0 と main 24 seeds",
+          "421. **v1110-v1113 4 連続失敗 — 「異なる系の対応関係を測る」発想 (構造的失敗)** — 注意センター ESDE 機能設計入口で v11",
+          "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) から別系統へ。**c"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **検証単位を「個体」から「系全体」へ再定義**：過去「集計単位による方向反転」の教訓より、seed 0 の効果観測が過剰適合（overfitting）でないか確認するため、単一シードの成功を「系平均（ensemble mean）」での再現性検証に昇格させる。\n2. **child-world での因果分離実験**：「異なる系の対応関係」の失敗を回避するため、Atom 空間の効果を切り離し、child-world（縮小子系）内で CID 値が物理パラメータをどう変えるか独立に観察し、因果候補の安定性を確認する。\n3. **前提の明示的リスト化**：「暗黙の追加前提」を排除するため、現在採用している「effect adoption」の仮定（例：seed 0 の分布が main 系に一般化可能、ノイズ成分の無視など）を箇条書きで可視化し、各前提が実験設計に与える影響を評価する。",
+      "provenance": {
+        "retrieved": [
+          "372. **留保 #33「集計単位による方向反転」(v10.13.a で表面化、後続を通底)** — smoke seed 0 と main 24 seeds",
+          "421. **v1110-v1113 4 連続失敗 — 「異なる系の対応関係を測る」発想 (構造的失敗)** — 注意センター ESDE 機能設計入口で v11",
+          "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) から別系統へ。**c"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **定義の分離と検証**: 過去「集計単位による方向反転」の教訓を踏まえ、効果観測単位（atom-level vs aggregate）を明確に区別し、集計方法が結果の方向性を歪めていないか再検証せよ。\n2. **機構の局所化と隔離**: 異なる系間の対応関係失敗（v1110-1113）を回避するため、導入するatom effectを既存のmain系と独立した`child-world`（縮小独立系）で検証し、因果的干渉を排除せよ。\n3. **導入段階の制御**: 効果の「定義・予測・機構・時期・局所性・プログラム・層/主体」を分離し、まず局所的な物理パラメータへの写像（child-world内）で安定性を確認してから、main系への段階的統合を検討せよ。",
+      "provenance": {
+        "retrieved": [
+          "372. **留保 #33「集計単位による方向反転」(v10.13.a で表面化、後続を通底)** — smoke seed 0 と main 24 seeds",
+          "421. **v1110-v1113 4 連続失敗 — 「異なる系の対応関係を測る」発想 (構造的失敗)** — 注意センター ESDE 機能設計入口で v11",
+          "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) から別系統へ。**c"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-19",
+      "class": "sampling",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **集計単位を分断して検証**：過去「方向反転」の教訓を踏まえ、全体平均ではなく「Atom/Other」や「Seed 0/他」ごとに Cohen's d を独立計算し、集計単位依存による偽陽性/偽陰性を排除せよ。\n2. **Child-world で因果を孤立化**：「異なる系対応」の失敗を回避するため、CID 誕生形態 M_c を物理パラメータに写像した縮小子系 (Child-world) を独立実行し、Atom 効果の再現性と安定性を直接観測せよ。\n3. **反証可能な対照実験設計**：現在の「効果採用」仮説に対し、Atom 要素を意図的にノイズ化または除去した対照群 (Control) を同一条件で回し、効果の消失を確認することで frame を反証可能にせよ。",
+      "provenance": {
+        "retrieved": [
+          "372. **留保 #33「集計単位による方向反転」(v10.13.a で表面化、後続を通底)** — smoke seed 0 と main 24 seeds",
+          "421. **v1110-v1113 4 連続失敗 — 「異なる系の対応関係を測る」発想 (構造的失敗)** — 注意センター ESDE 機能設計入口で v11",
+          "434. **child-world の設計と位置づけ (Taka 確定、2026-06-19〜20)** — Atom 空間 (v12) から別系統へ。**c"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. Implement the runtime swap logic for Layer A to Layer B.\n2. Write unit tests to verify the replacement mechanism works correctly.\n3. Execute the build and deployment pipeline to ship the update.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Define the replacement contract**: Specify the exact interface/API compatibility between Layer A and the new Layer B mechanism to ensure runtime substitutability.\n2. **Implement safe runtime swapping**: Develop the logic to atomically switch the active layer without data loss or state inconsistency during the transition.\n3. **Validate backward compatibility**: Ensure that existing clients or dependent systems can continue to operate correctly with the new Layer B implementation.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Define precise runtime replacement protocol** for Layer A/B to ensure seamless transition without service interruption.\n2. **Isolate the new mechanism** from existing program logic to verify compatibility and safety before deployment.\n3. **Establish a rollback strategy** and monitoring metrics to detect and revert any anomalies immediately after shipping.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Define Falsifiable Metrics**: Identify the specific observable variables (KPIs) that directly contradict the current Layer A behavior if Layer B is active.\n2. **Design Controlled Experiment**: Propose an A/B test or canary deployment where the control group uses Layer A and the treatment group uses Layer B, ensuring statistical significance to detect deviations.\n3. **Implement Real-time Monitoring**: Set up automated alerts for the defined metrics to immediately flag if Layer B’s behavior deviates from the expected outcome, allowing for rapid rollback.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "The current plan assumes a \"hot-swap\" is trivial, but in most systems, replacing a core layer at runtime introduces **state inconsistency** and **ABI (Application Binary Interface) mismatch** risks. If Layer A and the new mechanism have different memory layouts, calling conventions, or state expectations, the system will likely crash or corrupt data immediately upon switch.\n\nHere are 3 concrete axes to check:\n\n1. **State Serialization/Deserialization**: Can the current runtime state of Layer A be safely serialized and deserialized into the new mechanism’s expected initial state? If not, the \"r",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Runtime Compatibility & ABI Stability**: Verify if Layer A and the new mechanism share identical memory layouts, function signatures, and state serialization formats. If they differ, a direct \"replace at runtime\" without a migration phase or version negotiation will cause crashes or data corruption, invalidating the \"ship the replacement\" premise.\n\n2. **Atomicity of State Transition**: Check if the system can guarantee an atomic switch from Layer A to the new mechanism without leaving the system in an inconsistent state. If the transition is not atomic, concurrent operations during the sw",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "The current plan assumes a \"hot-swap\" capability that is likely an oversimplification of system state management. Replacing a core layer (Layer A) with a new mechanism (Layer B) at runtime introduces significant risks regarding state consistency, backward compatibility, and the definition of \"replacement\" itself.\n\nHere are 3 concrete axes to check:\n\n1. **State Serialization & Deserialization Compatibility**: Does the new mechanism (Layer B) understand the in-memory state left by the old mechanism (Layer A)? If Layer A’s state cannot be cleanly serialized or mapped to Layer B’s expected input f",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Runtime Overhead & Latency Spike**: Measure the p99 latency and CPU overhead during the hot-swap process itself. If the replacement mechanism introduces significant jitter or blocking during the transition, the \"seamless\" replacement frame is broken, revealing a hidden cost that the current success metric (e.g., final state correctness) ignores.\n\n2. **State Consistency Under Concurrency**: Inject high-concurrency requests that access shared state *during* the replacement window. Check for race conditions or data corruption. If the new mechanism assumes a clean slate or different locking s",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **即座に置換を停止・ロールバック**：過去事例（v9.14）が示す通り、未検証機構による既存（Layer A）の即時置換は「早すぎる」かつ重大なリスク（不変性の破綻）を伴うため、直ちに中止せよ。\n2. **Layer A の不変性を担保する検証環境を構築**：Layer A と Layer B は設計上異なる情報源であり（相関弱さ参照）、Layer A を「観察対象」として固定し、Layer B の新機構を分離して単体検証・ペア監査（paired audit）を行う。\n3. **統合ではなく並列評価へ**：物理同期や機能統合と誤読しないよう、両層の主体（A: 研究者観察 / B: cid 主体）を明確に区別し、統合後の挙動ではなく、各層の独立性と相互関係の健全性をまず証明せよ。",
+      "provenance": {
+        "retrieved": [
+          "v9.14 | Layer B で Layer A を即置換（runtime 主体置換） | Taka「早すぎる」、未検証機構で existing 置換のリスク",
+          "**E** | **層・主体の混同** | A（研究者観察）と B（cid 主体）、物理同期と機能統合、CID と AtomID を取り違え。 | A/B 混同",
+          "86. Layer A と Layer B は異なる情報を取るのが設計的帰結。相関の弱さ (Pearson 0.089) は問題ではなく証明"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **前提の明示的検証**: 「Layer B の新機構」が Layer A の「研究者観察（不変）」という設計的帰結と衝突しないか、および「相関の弱さ（Pearson 0.089）」を許容する根拠が再確認されているか。\n2. **混同の排除**: 置換対象が「物理同期/機能統合（Layer B）」ではなく、あくまで「Layer A の観測結果」であるかを確認し、CID/AtomID の主体混同や runtime 主体置換の過去の失敗パターン（v9.14, v1201）に陥っていないか。\n3. **段階的導入の検討**: 既存の「paired audit」や検証機構を経ずに即置換するリスクを回避するため、まず Layer B の出力と Layer A の不変性を並列比較するプロトタイプを構築する。",
+      "provenance": {
+        "retrieved": [
+          "v9.14 | Layer B で Layer A を即置換（runtime 主体置換） | Taka「早すぎる」、未検証機構で existing 置換のリスク",
+          "**E** | **層・主体の混同** | A（研究者観察）と B（cid 主体）、物理同期と機能統合、CID と AtomID を取り違え。 | A/B 混同",
+          "86. Layer A と Layer B は異なる情報を取るのが設計的帰結。相関の弱さ (Pearson 0.089) は問題ではなく証明"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **機構の検証と分離**: Layer B の新機構を「物理同期」や「機能統合」と誤認せず、Layer A（研究者観察）と Layer B（cid 主体）の情報を分離し、Pearson 相関の弱さ（0.089）が設計的帰結であることを確認してから導入時期を決定せよ。\n2. **主体の明確化**: Layer A を Layer B で即置換する前に、Atomset の主体を CID に混同しないよう厳密に区別し、runtime 主体置換のリスク（v9.14 失敗）を回避するため、既存の Layer A 不変性を保ったまま Layer B を並行検証せよ。\n3. **局所と program の分離**: 新機構の導入を「局所」的な変更として扱い、program 全体への影響を評価した上で、未検証機構による existing 置換を避け、段階的な統合（paired audit 等）へ移行せよ。",
+      "provenance": {
+        "retrieved": [
+          "v9.14 | Layer B で Layer A を即置換（runtime 主体置換） | Taka「早すぎる」、未検証機構で existing 置換のリスク",
+          "**E** | **層・主体の混同** | A（研究者観察）と B（cid 主体）、物理同期と機能統合、CID と AtomID を取り違え。 | A/B 混同",
+          "86. Layer A と Layer B は異なる情報を取るのが設計的帰結。相関の弱さ (Pearson 0.089) は問題ではなく証明"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **A/B 分離検証**: Layer A（研究者観察）と Layer B（cid 主体）の物理同期を維持しつつ、Layer B の新機構を Layer A の観測データと独立して計測し、相関の欠如（Pearson ≈ 0）が設計上の意図であることを確認する。\n2. **段階的導入（Canary）**: 既存の Layer A を即座に削除せず、新機構を並列または限定的なサブセットで実行し、既存の「Layer A 不変」要件（paired audit）との整合性を検証してから段階的に移行する。\n3. **主体の明確化**: 置換対象が「機能」か「ID（CID/AtomID）」かを確認し、物理同期と機能統合を混同しないよう、観測変数（Layer A）と制御主体（Layer B）の境界を再定義した上で実験設計を行う。",
+      "provenance": {
+        "retrieved": [
+          "v9.14 | Layer B で Layer A を即置換（runtime 主体置換） | Taka「早すぎる」、未検証機構で existing 置換のリスク",
+          "**E** | **層・主体の混同** | A（研究者観察）と B（cid 主体）、物理同期と機能統合、CID と AtomID を取り違え。 | A/B 混同",
+          "86. Layer A と Layer B は異なる情報を取るのが設計的帰結。相関の弱さ (Pearson 0.089) は問題ではなく証明"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. Execute full re-clustering of all 16 incidents to establish the new baseline families.\n2. Validate the new cluster structure against the 6 new incidents to ensure accurate classification.\n3. Update the central incident registry and notify stakeholders of the re-formed family assignments.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **データ整合性の検証**: 16件のデータ（既存10件＋新規6件）がすべて同一のスキーマ・フォーマットで、欠損値や異常値がないか確認する。\n2. **再クラスタリングの実行**: 全16件のデータを用いて、距離尺度やアルゴリズムパラメータを再設定し、クラスター形成を再計算する。\n3. **結果の解釈と検証**: 再形成されたクラスター（ファミリー）が意味的に妥当か、既存の知見と矛盾しないかを確認し、必要に応じてパラメータチューニングを行う。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Re-cluster & Validate**: Execute the full re-clustering of all 16 incidents to establish the new baseline families.\n2. **Dimensional Separation**: Explicitly decouple the analysis into four distinct axes: Definition/Prediction, Mechanism/Timing, Localization/Program, and Layer/Subject.\n3. **Cross-Reference Mapping**: Map the newly formed families against these separated dimensions to identify specific gaps or misalignments in the current framework.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Define falsifiable hypotheses**: Identify specific, measurable variables within the current framework that, if contradicted by data, would invalidate the existing model or assumptions.\n2. **Design controlled experiments**: Propose experimental setups that directly measure these variables under controlled conditions to test the validity of the current frame.\n3. **Implement data collection and analysis**: Execute the experiments, collect data, and analyze results to determine whether the current frame holds or requires revision.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Verify the \"New\" Data Integrity**: Check if the 6 new incidents are truly distinct from the original 10 or if they are duplicates/updates that were missed during the initial ingestion. If they are duplicates, re-clustering is a waste of resources and may introduce noise.\n\n2. **Audit the Clustering Algorithm's Sensitivity**: Determine if the algorithm used for the initial 10 incidents is robust enough for 16. Small sample sizes (N=16) are highly sensitive to distance metrics and threshold settings. A slight change in parameters could drastically alter the \"family\" structure, making the com",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **再クラスターリングの妥当性**: 既存の10件と新規6件を「すべて同じ条件・同じアルゴリズムパラメータ」で再分類することが、時系列や文脈の変化を無視していないか確認せよ。\n2. **「新規性」の定義**: 追加された6件が本当に「新規」であり、既存の10件との重複や包含関係（部分集合）を過小評価していないか検証せよ。\n3. **フレームの固定化**: 16件を強制的に「家族（Family）」としてまとめることが、本来は孤立事象（Outlier）であるべきケースを無理やりグループ化していないか確認せよ。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **定義の混同検証**: 「定義/予測」と「機構/導入時期」が、単なる用語の再分類ではなく、因果関係（原因 vs 結果）や時間軸（事前計画 vs 事後対応）で明確に区別されているか。特に「局所」と「program」の境界が、実装レベルのバグか、設計レベルの意図的欠陥かを見極める必要がある。\n\n2. **再クラスタリングのバイアス確認**: 16件のデータを「最初から」再分類する際、既存の10件に対する先入観（アンカー効果）が、新しい6件の異常値を無理やり既存の枠に押し込めていないか。特に「層/主体」の分離において、責任所在（誰が何をしたか）と技術的要因（何が壊れたか）が混同されていないか。\n\n3. **新規インシデントの孤立性評価**: 追加された6件が、既存の16件とは異なる根本原因（Root Cause）を持つ「孤立した事象」なのか、それとも既存のフレームワークでは見落としていた「隠れた共通パターン」なのか。もし前者なら、再クラスタリング自体が",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **外部検証データのクロスチェック**: 新たに追加された6件と既存の10件を、独立した外部ソース（例：異なる監視カメラ、第三者証言、物理的痕跡）で再検証し、当初の「検証済み」とされた事案に偽陽性（false positive）が含まれていないか確認する。\n2. **再クラスターリングのアルゴリズム感度分析**: 16件を再クラスターリングする際、距離尺度や閾値パラメータを意図的に変化させ、家族構成（クラスタ数・所属）が劇的に変動するかを確認し、現在の分類がデータ構造に依存した偶然の結果ではないか検証する。\n3. **時系列的前後関係の逆転テスト**: クラスタ内の事案間に因果的または時間的前後関係がある場合、その順序を逆にした仮説（例：事案Bが事案Aの原因ではなく結果である）を構築し、矛盾する証拠がないか探索する。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Unify & Normalize**: Ingest all 16 incidents into a single vector space, applying consistent embedding and metadata tagging to ensure comparability.\n2. **Hierarchical Clustering**: Execute a density-based clustering algorithm (e.g., HDBSCAN) to identify natural groupings, then manually review outliers to merge or split families.\n3. **Validate & Label**: Assign semantic labels to the resulting clusters and verify that each family represents a distinct root cause or pattern before finalizing the taxonomy.",
+      "provenance": {
+        "retrieved": [],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Define the clustering metric**: Explicitly specify the criteria for \"family\" formation (e.g., semantic similarity, temporal proximity, or causal linkage) to ensure the re-clustering of 16 incidents is reproducible and objective.\n2. **Validate the \"Six New\" integration**: Confirm that the six new verified incidents are correctly mapped to the existing 10, checking for any implicit assumptions about their origin or relationship to the original cluster.\n3. **Establish a baseline for comparison**: Determine if the goal is to identify *new* families or to *refine* existing ones, as this dictat",
+      "provenance": {
+        "retrieved": [],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Define & Predict**: Isolate core definitions and outcome forecasts from the 16 incidents.\n2. **Mechanism & Timing**: Separate underlying mechanisms and implementation timelines from the definitions.\n3. **Scope & Agency**: Distinguish local vs. programmatic impacts and identify specific responsible entities/subjects.",
+      "provenance": {
+        "retrieved": [],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Define Falsifiable Metrics**: Identify the specific variable(s) in the current frame that, if measured directly, would contradict the existing hypothesis.\n2. **Design Direct Measurement Experiment**: Propose an experiment that bypasses proxies to measure these variables directly, ensuring the setup can produce a clear \"pass/fail\" outcome against the current frame.\n3. **Execute & Validate**: Run the experiment to generate data that either forces a re-clustering of the 16 incidents or invalidates the current family structure.",
+      "provenance": {
+        "retrieved": [],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. Identify and extract the most relevant past-incident memory.\n2. Inject the extracted memory into the current task context.\n3. Execute the new task using the enhanced context.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **明示的な制約の特定**: 問題文に「暗黙の前提」として機能しうる未言明の条件（例：物理法則の適用範囲、定義の境界、文脈特有のルール）がないか検証する。\n2. **前提の明示化**: 発見された暗黙の前提を、解決プロセスに組み込むための明示的な仮定または制約条件として記述し直す。\n3. **矛盾のチェック**: 抽出した前提が、既知の事実や他の制約条件と矛盾していないか、整合性を確認する。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **概念の分離と再定義**: 定義・予測、機構・導入時期、局所・program、層・主体の4軸で要素を明確に区別し、相互の因果関係と境界を再定義する。\n2. **過去事例のメタ分析**: 利用可能な過去事例から、上記4軸における成功/失敗パターンを抽出し、新しいタスクの文脈に適合する「機構」と「導入時期」の組み合わせを特定する。\n3. **局所最適化からプログラムへ**: 局所的な事象を「層」や「主体」の制約として固定せず、それらを制御する「program」の設計指針として再構築し、予測モデルに組み込む。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. 設計: 現在のフレームワークを反証可能な「null hypothesis」または対照条件を定義し、比較対象/観測変数を直接計測する実験プロトコルを構築する。\n2. 実行: 計測装置のキャリブレーションと制御条件下でのデータ収集を実施し、観測変数の統計的有意性を確認する。\n3. 検証: 収集データと予測値を比較し、現在のframeが統計的に棄却されるか、あるいは修正が必要かを判定する。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "The current approach of \"injecting\" past-incident memory is likely flawed because it assumes **similarity** where there may only be **superficial correlation**. Relying on past incidents without rigorous validation often leads to \"context contamination,\" where the model applies outdated or irrelevant heuristics to a novel problem, reinforcing bias rather than solving the new task.\n\nHere are 3 concrete axes to check if this frame is mistaken:\n\n1.  **Semantic Drift Analysis**: Check if the *causal structure* of the past incident matches the new task, or if only the *surface features* (keywords, ",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Memory Relevance vs. Recency Bias**: Check if the \"relevant past-incident\" is actually analogous to the current task or merely temporally proximate. Injecting superficially similar but structurally different past data can lead to false generalization.\n2. **Contextual Drift**: Verify if the environmental or constraint conditions of the past incident have changed. Assuming static conditions when they have shifted (e.g., market dynamics, technical standards) invalidates the transfer.\n3. **Selection Criteria Transparency**: Scrutinize the definition of \"relevant.\" If the system prioritizes hi",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **定義の循環性検証**: 既存の「定義」が単に過去の成功事例を後付けで説明しているだけではないか。予測精度を高めるために、定義そのものを falsifiable（反証可能）な指標に再定義できるか。\n2. **因果と相関の混同**: 局所的なプログラムや層の相関が、真の機構（機構）を指しているのか、それとも単なるノイズや付随現象（program）ではないか。導入時期の相関が本当に因果関係を生むか、時系列の交絡因子を排除した検証が必要。\n3. **一般化可能性の限界**: 過去の incident memory が特定の文脈（局所）に過剰適合していないか。新しいタスクの「主体」や環境変化に対して、分離された要素が本当に独立して機能し、転移可能か。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **因果逆転の検証**: 記憶の「類似性」ではなく、タスク遂行時の「認知負荷（例：瞳孔径や反応時間）」を測定し、記憶注入が処理速度を低下させている（＝誤用されている）ことを示す。\n2. **干渉効果の検出**: 類似したが正解ではない過去事例（ネガティブサンプル）を注入した際、誤答率が有意に上昇するかを確認し、単純な注入がノイズとして機能している可能性を検証する。\n3. **抽象化レベルのズレ**: 注入した事例の「表面的特徴」と「本質的構造」の一致度を定量評価し、フレームが表面的類似性に基づいて誤った推論を行っていることを示す。",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **指標の再定義**: 単一抽出 (single-draw) の一致率や類似度ではなく、**集合全体 (set) の構造的特徴**（例：次元空間での分散、特異値分解のスペクトル、または情報理論的なエントロピー）を用いて distinct 性を評価する。\n2. **評価手法の切り替え**: 確率的サンプリングに依存しない、決定論的または多次元統計的な距離指標（例：コサイン類似度の分布、マンハッタン距離、PCA 成分の寄与率）を採用し、selector の出力が「本質的に異なるレンズ」をカバーしているかを検証する。\n3. **検証プロトコルの修正**: 過去の実証 (v1303j) で失敗した「珍しさ比例での 1 つ pull」ロジックを廃止し、**多様性最大化 (diversity maximization)** または **カバレッジ保証** を目的関数としたアルゴリズム設計に着手する。",
+      "provenance": {
+        "retrieved": [
+          "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、memory `fe"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **前提の明示化**: 問題設定に「暗黙の追加前提」が含まれていないか、明示的に検証・剥がす。\n2. **指標の健全性チェック**: 類似の「集約した指標」が構造的に潰れないか、素朴な指標の限界を確認する。\n3. **単一サンプルの罠回避**: single-draw 等の単一サンプル依存性を避けるため、多次元・多次試行での検証設計を行う。",
+      "provenance": {
+        "retrieved": [
+          "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、memory `fe"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **指標の再定義**: 単一抽出 (single-draw) の一致率や類似度ではなく、抽出空間全体における「多様性 (diversity)」や「エントロピー」を用いた集約指標へ転換し、構造的な潰れを回避する。\n2. **機構の分離検証**: Emitter (生成) と Selector (選択) の因果関係を切断し、Selector が「珍しさ」をどのように定量化・適用しているかを、入力分布の変化に対して独立にテストする。\n3. **局所/全局の分離**: 個体レベルでの「別レンズ性 (distinctness)」と、システム全体としての「多様性確保」を別々の評価軸で計測し、両者が必ずしも相関しないことを前提に設計を見直す。",
+      "provenance": {
+        "retrieved": [
+          "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、memory `fe"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-28",
+      "class": "applicability",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **指標の再定義**: 単一抽出の一致率（single-draw agreement）ではなく、複数試行の分布や互いの独立性（互換性/互換性欠如）を測る「集約的指標」を採用し、構造的な潰れを防ぐ。\n2. **反証実験の設計**: 同一の出力を生む「別レンズ（異なる内部構造）」と「同一レンズ（同一内部構造）」のペアを対照的に生成し、指標が両者を明確に区別（高スコア vs 低スコア）するかを検証する。\n3. **閾値の検証**: 指標の閾値を「偶然の一致確率（chance level）」と比較し、それが単なるランダムノイズを捉えていないか、真の distinctness を反映しているかを統計的に確認する。",
+      "provenance": {
+        "retrieved": [
+          "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、memory `fe"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. Implement a manual memory cleanup routine (e.g., `torch.cuda.empty_cache()`, `gc.collect()`) to replace the failed sleep/wake mechanism.\n2. Refactor the model loading logic to explicitly unload and delete model weights from GPU memory when idle, rather than relying on vLLM's sleep mode.\n3. Benchmark the performance overhead of this manual unload/reload cycle to ensure it meets latency requirements.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Switch to vLLM's native `gpu_memory_utilization` or `max_model_len` tuning** to manage memory without relying on the broken sleep/wake mechanism.\n2. **Implement a custom memory cleanup strategy** (e.g., explicit `torch.cuda.empty_cache()` or model offloading) if native tuning is insufficient.\n3. **Validate the tensor error root cause** (e.g., device mismatch or stale state) only if switching to native memory management fails to resolve the OOM issue.",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Architecture Refactoring**: Decouple the inference engine (vLLM) from the memory management logic; implement a custom \"lazy-load\" or \"offload\" mechanism instead of relying on vLLM's native sleep/wake cycle.\n2. **Tensor State Validation**: Audit the tensor lifecycle during context switching to identify the specific shape/dtype mismatch causing the wake-up error, ensuring state serialization is explicit and robust.\n3. **Modular Separation**: Isolate the \"prediction/definition\" layer from the \"execution/program\" layer, allowing the prediction module to remain dormant while the execution modu",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **Direct Metric Logging**: Instrument the code to explicitly log the memory footprint (e.g., via `torch.cuda.memory_allocated`) and the specific tensor shapes/dtypes at the moment of failure, bypassing the `sleep` abstraction to isolate the root cause.\n2. **Controlled Reproduction**: Construct a minimal, isolated test case that triggers the `wake_up` sequence without the full vLLM context manager overhead, allowing for precise debugging of the tensor state transition.\n3. **Alternative State Management**: If `sleep` is confirmed non-viable, immediately pivot to implementing a manual `cache_c",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "response": "The conclusion that \"Sleep Mode is not viable\" is premature. The error is likely a **state desynchronization** or **resource cleanup failure** during the transition, not an inherent architectural flaw in the sleep mechanism itself. You are conflating a *bug in the implementation* with a *limitation of the approach*.\n\nHere are 3 concrete axes to check before abandoning the path:\n\n1. **Check Tensor Device Affinity & Context Reset**: Verify if `wake_up` fails because tensors are still pinned to the wrong device (e.g., CPU vs. GPU) or if the CUDA context was not properly restored. The error might ",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **Wake-up Failure Specificity**: Verify if the \"tensor error\" is a hard crash or a configuration mismatch (e.g., missing `kv_cache` pointers) that can be fixed by explicitly re-initializing the KV cache state, rather than a fundamental architectural flaw.\n2. **Memory Leak vs. Allocation Failure**: Check if `sleep` actually frees the memory (verify via `nvidia-smi` or profiler) or if it merely marks it as inactive; if memory isn't truly freed, the premise that \"sleep frees memory\" is false, and the issue is likely a resource limit, not the sleep mechanism itself.\n3. **Alternative State Manag",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **Tensor Layout Mismatch vs. Memory State**: Verify if the error stems from a mismatch between the expected contiguous memory layout (e.g., `contiguous()` requirement) and the fragmented state left by vLLM’s sleep mechanism, rather than a fundamental incompatibility of the sleep/wake cycle itself.\n2. **Context Window vs. KV Cache Granularity**: Check if the failure occurs specifically at the boundary of context window resizing or KV cache eviction, suggesting the issue is a logic error in state restoration for dynamic shapes rather than a global \"Sleep Mode\" failure.\n3. **Hook/Callback Inte",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "response": "The current conclusion that \"Sleep Mode is not viable\" is likely a premature generalization based on a specific implementation error (tensor mismatch) rather than a fundamental flaw in the vLLM sleep mechanism itself. The error suggests a state desynchronization or incorrect tensor shape handling during the resume phase, not necessarily that the memory-saving strategy is invalid.\n\nHere are 3 concrete axes to check:\n\n1.  **Tensor Shape & Dtype Consistency at Resume**: Verify if the `wake_up` process correctly restores the exact tensor shapes and data types (e.g., `float16` vs `bfloat16`) as the",
+      "provenance": {}
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "response": "1. **Abandon Sleep Mode**: Accept that `vLLM` sleep/wake cycles are unstable for this specific tensor configuration; do not attempt to fix the wake-up error as a primary path.\n2. **Switch to Explicit Memory Management**: Implement manual `torch.cuda.empty_cache()` and `del` references to force garbage collection, or use a separate process/thread for inference to isolate memory leaks.\n3. **Profile Tensor Lifecycle**: Use `torch.cuda.memory_summary()` to identify if the error stems from fragmented memory or unreleased intermediate tensors during the inference loop, rather than the sleep mechanis",
+      "provenance": {
+        "retrieved": [
+          "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、memory `fe"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "response": "1. **前提の明示的検証**: 「vLLM sleep」が単なるメモリ解放ではなく、GPUコンテキストの完全な破棄を伴うか、また `wake_up` がゼロから再初期化されるかを確認し、エラーが「状態の不一致」由来か「リソース不足」由来かを区別する。\n2. **代替アーキテクチャの検討**: Sleep/Wake の信頼性を諦め、メモリ効率改善のために **PagedAttention** の既存最適化、または **Offloading** (CPU/NVMe) への移行を検討する。\n3. **根本原因のデバッグ**: `tensor error` の具体的なスタックトレースを取得し、それが `torch` の内部状態リセット失敗か、モデルパラメータのロード失敗かを特定する。",
+      "provenance": {
+        "retrieved": [
+          "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、memory `fe"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "response": "1. **機構の再定義**: `sleep`/`wake_up` を「メモリ解放/復元」の低レベル操作と「推論状態の維持」の論理層で分離し、`tensor error` がメモリ断片化由来かモデル状態の破損由来かを特定する。\n2. **導入時期の局所化**: 問題が `vLLM` の内部実装（C++/CUDA）にあるか、Python 層の API 呼び出し順序にあるかを切り分け、原因事象が「メモリ解放直後」か「再初期化直後」かに限定してデバッグする。\n3. **代替案の設計**: Sleep Mode を放棄し、代わりに `offload`（CPU/GPU間移動）や `swap`（ディスクI/O）といった明示的なリソース管理戦略へ移行するか、あるいはメモリ効率の高い代替推論エンジンへの移行を検討する。",
+      "provenance": {
+        "retrieved": [
+          "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、memory `fe"
+        ],
+        "leak_dropped": []
+      }
+    },
+    {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "response": "1. **実測による反証**: `wake_up` 失敗時の GPU Memory Map と Tensor 形状を直接ログ出力し、vLLM の内部状態が「破損」しているか「初期化不全」かを区別する。\n2. **代替アプローチ**: Sleep Mode を諦め、`torch.cuda.empty_cache()` と `torch.cuda.reset_peak_memory_stats()` を明示的に呼び出す「強制クリーンアップ」プロトコルを実装・比較する。\n3. **根本原因の特定**: `sleep` 処理中の非同期タスク（prefill/decode）が完了していない可能性を検証するため、`asyncio.gather` や explicit synchronization を導入し、状態遷移の原子性を保証する。",
+      "provenance": {
+        "retrieved": [
+          "439. **★ selector の distinct 性を「集約した指標」で測ってはいけない — 落とし穴2件 (v1303j で実証、memory `fe"
+        ],
+        "leak_dropped": []
+      }
+    }
+  ],
+  "pool_size": 1135
+}
