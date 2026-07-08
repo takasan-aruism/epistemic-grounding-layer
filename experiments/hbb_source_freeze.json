@@ -1,0 +1,24 @@
+{
+  "object": "HBB_SOURCE_FREEZE",
+  "frozen_at": "2026-07-08T10:56:55.172109+00:00",
+  "sources": {
+    "SRC-CONCEPT-HISTORY": {
+      "path": "/home/takasan/esde/ESDE-Research/docs/概念理解.md",
+      "desc": "historical development trajectory (breakthrough mining corpus)",
+      "sha256": "04262891f930ae660f73501031d0eaf66efa949f237b023986f3ce14d18912d1",
+      "lines": 3363
+    },
+    "SRC-ESDE-FAILURE": {
+      "path": "/home/takasan/esde/ESDE-Research/docs/ESDE_失敗の記録.md",
+      "desc": "distilled failure/frame-break index (13 cause types)",
+      "sha256": "41491698e8aa0b7b73b32c32941fc236660a8c8ef953b53fd17a72ced5c98442",
+      "lines": 163
+    },
+    "SRC-ESDE-AXIOMS-FORMAL": {
+      "path": "/home/takasan/esde/ESDE-Research/docs/esde_axioms_unified.md",
+      "desc": "Formal ESDE source: 8 axioms + dynamics (v3.2/3.3/3.3.1 unified) — input to Formal compiler v0",
+      "sha256": "ea9fe6d35370be61c3c9a3f8f29b633e156fe3b2c96ab7e0fe27353c0bfb165d",
+      "lines": 113
+    }
+  }
+}
