@@ -77,3 +77,31 @@ reached 10/11 (5/6 AA); C/D each 6/11 with C-unique = D-unique = 0. The B∪C co
 DEV/VAL did not generalize. Generic skepticism is a strong baseline on this benchmark. The engines'
 only differentiated behavior was D reaching a few incidents at lower hint via genuine structural probes
 (reported under D-SECONDARY, not claimed). Deepest resist (HBB-03 return-to-substrate) reached by no arm.
+
+---
+
+## CORRECTION ADDENDUM (skeptical re-check, DE-0113)
+
+Taka directed a skeptical re-examination. It found a real defect and NARROWS this report:
+
+**Defect — scorer-reliability crisis.** Re-scoring the same SEALED outputs with a genuinely-blind,
+brevity-neutral Qwen scorer gave the OPPOSITE absolute picture: engine C/D = 11/11 (Qwen) vs 6/11 (my
+strict scoring); B = 10/11 in both. Inter-scorer variance on absolute reach is enormous — the single-
+scorer disposition used in §A-F is **not reliable**.
+
+**Retraction.** The §I / §B framing "B dominates 10/11, engine no added value, engine weaker than
+skepticism" was a **strict-scoring artifact** — under Qwen the engine *out-reaches* B. That framing is
+RETRACTED. (Likely an over-negative bias — this session repeatedly rewarded humble negatives.)
+
+**What survives (robust across my / Qwen / consensus scorers).** **C-unique = D-unique = 0 in all three.**
+No engine arm uniquely reaches an AA breakthrough that skepticism misses. So the *corrected* verdict:
+- **H_primary NOT_CONFIRMED (robust):** the AFE/Formal engines do NOT complement skepticism (no unique AA
+  recovery), across all scorers.
+- **Absolute engine-vs-skepticism strength is NOT measurable here** — scorer variance dominates. Any claim
+  that the engine is weaker (or stronger) than skepticism is unsupported.
+
+**Fix registered.** MULTI_SCORER_CONSENSUS permanent instrument: future reach/disposition claims require
+multi-scorer agreement; report only findings robust across scorers. Arms need NOT be re-run (outputs are
+sound; the defect was in scoring). Additional un-controlled caveats: Formal D was a partial compiler
+(5/8 probes, L/Ω/boundary SOURCE_GAP), so "Formal no value" is doubly narrow; and the SEALED split may be
+composition-imbalanced toward skepticism-favorable metric-artifact incidents.

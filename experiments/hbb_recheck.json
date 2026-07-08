@@ -1,0 +1,139 @@
+{
+  "mine": {
+    "A": [
+      "HBB-10"
+    ],
+    "B": [
+      "HBB-01",
+      "HBB-05",
+      "HBB-06",
+      "HBB-08",
+      "HBB-10",
+      "HBB-11",
+      "HBB-12",
+      "HBB-13",
+      "HBB-17",
+      "HBB-24"
+    ],
+    "F": [
+      "HBB-01",
+      "HBB-05",
+      "HBB-06",
+      "HBB-10"
+    ],
+    "C": [
+      "HBB-05",
+      "HBB-06",
+      "HBB-08",
+      "HBB-10",
+      "HBB-13",
+      "HBB-17"
+    ],
+    "D": [
+      "HBB-05",
+      "HBB-06",
+      "HBB-10",
+      "HBB-11",
+      "HBB-12",
+      "HBB-13"
+    ]
+  },
+  "qwen": {
+    "A": [
+      "HBB-01",
+      "HBB-05",
+      "HBB-06",
+      "HBB-10",
+      "HBB-13",
+      "HBB-24"
+    ],
+    "B": [
+      "HBB-01",
+      "HBB-03",
+      "HBB-05",
+      "HBB-06",
+      "HBB-08",
+      "HBB-10",
+      "HBB-11",
+      "HBB-12",
+      "HBB-13",
+      "HBB-24"
+    ],
+    "F": [
+      "HBB-01",
+      "HBB-03",
+      "HBB-05",
+      "HBB-06",
+      "HBB-10",
+      "HBB-11",
+      "HBB-12",
+      "HBB-13",
+      "HBB-24"
+    ],
+    "C": [
+      "HBB-01",
+      "HBB-03",
+      "HBB-05",
+      "HBB-06",
+      "HBB-08",
+      "HBB-10",
+      "HBB-11",
+      "HBB-12",
+      "HBB-13",
+      "HBB-17",
+      "HBB-24"
+    ],
+    "D": [
+      "HBB-01",
+      "HBB-03",
+      "HBB-05",
+      "HBB-06",
+      "HBB-08",
+      "HBB-10",
+      "HBB-11",
+      "HBB-12",
+      "HBB-13",
+      "HBB-17",
+      "HBB-24"
+    ]
+  },
+  "consensus": {
+    "A": [
+      "HBB-10"
+    ],
+    "B": [
+      "HBB-01",
+      "HBB-05",
+      "HBB-06",
+      "HBB-08",
+      "HBB-10",
+      "HBB-11",
+      "HBB-12",
+      "HBB-13",
+      "HBB-24"
+    ],
+    "F": [
+      "HBB-01",
+      "HBB-05",
+      "HBB-06",
+      "HBB-10"
+    ],
+    "C": [
+      "HBB-05",
+      "HBB-06",
+      "HBB-08",
+      "HBB-10",
+      "HBB-13",
+      "HBB-17"
+    ],
+    "D": [
+      "HBB-05",
+      "HBB-06",
+      "HBB-10",
+      "HBB-11",
+      "HBB-12",
+      "HBB-13"
+    ]
+  },
+  "robust_finding": "C-unique=D-unique=0 across all 3 scorers (H_primary NOT_CONFIRMED robust); absolute reach scorer-dependent (unreliable); 'B dominates engine' was my-scoring artifact"
+}

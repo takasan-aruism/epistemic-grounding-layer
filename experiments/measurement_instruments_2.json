@@ -1,0 +1,9 @@
+{
+  "object": "MEASUREMENT_INSTRUMENT",
+  "instrument_id": "MULTI_SCORER_CONSENSUS",
+  "version": 1,
+  "registered_at": "2026-07-08T15:01:32.637687+00:00",
+  "purpose": "reach/disposition 採点の単一 scorer 不信頼を、複数 scorer(Claude strict + Qwen lenient)の一致(consensus)+ 不一致 flag で統制。絶対値でなく consensus・range・robust-across-scorers を報告する。",
+  "trigger": "HBB SEALED で私の scoring(engine 6/11)と Qwen blind(engine 11/11)が真逆に食い違い、絶対 reach が信頼不能と判明。",
+  "instrument_self_repair_lineage": "4度目(MASK v2 / XDOMAIN_LITERAL / ORIGIN_ID_LEAVE_ONE_OUT に続く)。今回は『採点計器そのものの分散を複数計器の一致で捕捉』。robust finding=全 scorer で一致する claim のみ採用。"
+}

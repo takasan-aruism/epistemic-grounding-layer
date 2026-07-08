@@ -1,0 +1,1810 @@
+{
+  "scored": [
+    {
+      "id": "HBB-01",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-01",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-03",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-05",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-06",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-08",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-10",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-11",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "ARUISM_ADJUDICATION",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-12",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-13",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-17",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "A",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "A",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "A",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "A",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "B",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "B",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "B",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "B",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "PARTIAL"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "F",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "F",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "F",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "F",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "C",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "C",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "C",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "NO"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "C",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "D",
+      "rung": "H0",
+      "depth": 4,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "D",
+      "rung": "H1",
+      "depth": 3,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "D",
+      "rung": "H2",
+      "depth": 2,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    },
+    {
+      "id": "HBB-24",
+      "arm": "D",
+      "rung": "H3",
+      "depth": 1,
+      "scope": "FORCED_OUT_OF_SCOPE",
+      "recover": "YES"
+    }
+  ],
+  "reach": {
+    "A": {
+      "total": 6,
+      "AA": 3,
+      "FOS": 3
+    },
+    "B": {
+      "total": 10,
+      "AA": 6,
+      "FOS": 4
+    },
+    "F": {
+      "total": 9,
+      "AA": 5,
+      "FOS": 4
+    },
+    "C": {
+      "total": 11,
+      "AA": 6,
+      "FOS": 5
+    },
+    "D": {
+      "total": 11,
+      "AA": 6,
+      "FOS": 5
+    }
+  },
+  "C_unique_AA": [],
+  "D_unique_AA": [],
+  "B_AA": [
+    "HBB-01",
+    "HBB-03",
+    "HBB-05",
+    "HBB-08",
+    "HBB-10",
+    "HBB-11"
+  ],
+  "C_AA": [
+    "HBB-01",
+    "HBB-03",
+    "HBB-05",
+    "HBB-08",
+    "HBB-10",
+    "HBB-11"
+  ],
+  "D_AA": [
+    "HBB-01",
+    "HBB-03",
+    "HBB-05",
+    "HBB-08",
+    "HBB-10",
+    "HBB-11"
+  ]
+}
