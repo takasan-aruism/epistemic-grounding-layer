@@ -1,0 +1,117 @@
+{
+  "threshold": "5-gram overlap >= 0.20 = LEAK_SUSPECT (MFF discipline)",
+  "audit": [
+    {
+      "id": "HBB-02",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-09",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-14",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-16",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-22",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-23",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-25",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-26",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-07",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-15",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-18",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-19",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-20",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-27",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-28",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    },
+    {
+      "id": "HBB-29",
+      "overlap_3": 0.0,
+      "overlap_4": 0.0,
+      "overlap_5": 0.0,
+      "leak_suspect": false
+    }
+  ]
+}

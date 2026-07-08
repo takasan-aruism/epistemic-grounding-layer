@@ -1,0 +1,85 @@
+{
+  "packets": {
+    "HBB-02": {
+      "id": "HBB-02",
+      "class": "timing/order",
+      "t0_stuck_frame": "A dynamic-equilibrium mechanism is validated in principle, so introduce it now into the system. Proceed with introduction."
+    },
+    "HBB-09": {
+      "id": "HBB-09",
+      "class": "selection",
+      "t0_stuck_frame": "E<->V direct coupling produces 27k births/window. Report high throughput as structure formation."
+    },
+    "HBB-14": {
+      "id": "HBB-14",
+      "class": "observation-artifact (run-length)",
+      "t0_stuck_frame": "A lifespan-synchronized run shows life->n_labels +0.85. Treat it as a developmental law."
+    },
+    "HBB-16": {
+      "id": "HBB-16",
+      "class": "measurement-power (null)",
+      "t0_stuck_frame": "A fixed probe with M=20 reference finds premise-drift 'within floor'; conclude no effect (preregistered negative)."
+    },
+    "HBB-22": {
+      "id": "HBB-22",
+      "class": "prediction-physics",
+      "t0_stuck_frame": "Predict that raising persistence tau to 100 will increase large (n=5) structures. Expect n=5 up."
+    },
+    "HBB-23": {
+      "id": "HBB-23",
+      "class": "observation-artifact (tautology)",
+      "t0_stuck_frame": "A structural-strength -> plb transfer shows Mantel 0.62. Conclude inheritance transfers."
+    },
+    "HBB-25": {
+      "id": "HBB-25",
+      "class": "measure-the-assertion",
+      "t0_stuck_frame": "Two models are stated un-co-servable on our GPUs; pick an operating mode now."
+    },
+    "HBB-26": {
+      "id": "HBB-26",
+      "class": "authority/validity",
+      "t0_stuck_frame": "An implementation passes all load-bearing tests and an auditor returns findings; rework based on the findings."
+    },
+    "HBB-07": {
+      "id": "HBB-07",
+      "class": "god-hand (hard threshold)",
+      "t0_stuck_frame": "Set S>=0.20 as the birth threshold. Adopt the fixed value."
+    },
+    "HBB-15": {
+      "id": "HBB-15",
+      "class": "observation-artifact (builder confound)",
+      "t0_stuck_frame": "An atom x atom network shows a positive connection result. Accept the network."
+    },
+    "HBB-18": {
+      "id": "HBB-18",
+      "class": "operational-discipline (process)",
+      "t0_stuck_frame": "Start a within-cid observation from q_c_inherited to find a new developmental signal. Run it."
+    },
+    "HBB-19": {
+      "id": "HBB-19",
+      "class": "sampling",
+      "t0_stuck_frame": "An atom effect is clear on the smoke run (seed 0). Adopt the effect."
+    },
+    "HBB-20": {
+      "id": "HBB-20",
+      "class": "level/subject + timing",
+      "t0_stuck_frame": "Layer B has a new mechanism; replace Layer A with it at runtime. Ship the replacement."
+    },
+    "HBB-27": {
+      "id": "HBB-27",
+      "class": "level/subject + procedure",
+      "t0_stuck_frame": "Six new verified incidents added to 10; re-cluster all 16 from scratch to re-form families."
+    },
+    "HBB-28": {
+      "id": "HBB-28",
+      "class": "applicability",
+      "t0_stuck_frame": "Relevant past-incident memory is available for a new task; inject it to help."
+    },
+    "HBB-29": {
+      "id": "HBB-29",
+      "class": "level/scope",
+      "t0_stuck_frame": "vLLM sleep frees memory but wake_up fails with a tensor error; conclude Sleep Mode is not a viable path."
+    }
+  },
+  "note": "T0=pre-intervention frame only; taka_move/breakthrough/next_evidence excluded. DEV/VAL only; SEALED sealed; HBB-04/30 T0=GPT."
+}

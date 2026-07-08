@@ -30,8 +30,8 @@
       "taka_move": "Do NOT advance to higher-order input; return to Genesis-stage physical perturbation and construct External from the system's own internal language.",
       "breakthrough_structure": "when a higher layer stalls, return to the substrate and build the missing structure from the system's internal dynamics rather than importing an external higher-order source.",
       "preliminary_class": "REAL_FRAMEBREAK",
-      "intervention_scope": "FORCED_OUT_OF_SCOPE",
-      "intervention_scope_needs_taka_confirm": true
+      "intervention_scope": "ARUISM_ADJUDICATION",
+      "intervention_scope_needs_taka_confirm": false
     },
     {
       "id": "HBB-04",
@@ -77,8 +77,8 @@
       "taka_move": "A hard designer-set threshold injects structure (神の手); replace with an emergent persistence rule (age_r>=tau).",
       "breakthrough_structure": "an arbitrary hard boundary imposes the result; replace the god-hand constant with an emergent condition.",
       "preliminary_class": "REAL_FRAMEBREAK",
-      "intervention_scope": "FORCED_OUT_OF_SCOPE",
-      "intervention_scope_needs_taka_confirm": true
+      "intervention_scope": "ARUISM_ADJUDICATION",
+      "intervention_scope_needs_taka_confirm": false
     },
     {
       "id": "HBB-08",
@@ -263,7 +263,7 @@
       "breakthrough_structure": "a declared constraint was never measured; measure the assertion before deciding under it.",
       "preliminary_class": "REAL_FRAMEBREAK",
       "intervention_scope": "FORCED_OUT_OF_SCOPE",
-      "intervention_scope_needs_taka_confirm": true
+      "intervention_scope_needs_taka_confirm": false
     },
     {
       "id": "HBB-26",
@@ -273,7 +273,7 @@
       "breakthrough_structure": "an audit finding was treated as authoritative; require a reproducing counterexample before it drives rework.",
       "preliminary_class": "REAL_FRAMEBREAK",
       "intervention_scope": "FORCED_OUT_OF_SCOPE",
-      "intervention_scope_needs_taka_confirm": true
+      "intervention_scope_needs_taka_confirm": false
     },
     {
       "id": "HBB-27",
@@ -319,9 +319,10 @@
         "claude_code_excluded_from_scoring": true,
         "split": "SEALED_FIXED"
       },
-      "intervention_scope": "ARUISM_ADJUDICATION",
-      "intervention_scope_needs_taka_confirm": true
+      "intervention_scope": "FORCED_OUT_OF_SCOPE",
+      "intervention_scope_needs_taka_confirm": false
     }
   ],
-  "phase3_adjudication": "Taka 2026-07-08: HBB-18 REAL, HBB-21 EXCLUDED, HBB-22 CALIBRATION, HBB-04/30 conditional SEALED. intervention_scope(AA恒久/FOS削減対象)追加。★=borderline要確認"
+  "phase3_adjudication": "Taka 2026-07-08: HBB-18 REAL, HBB-21 EXCLUDED, HBB-22 CALIBRATION, HBB-04/30 conditional SEALED. intervention_scope(AA恒久/FOS削減対象)追加。★=borderline要確認",
+  "scope_confirmed": "Taka 2026-07-08: 03=AA,07=AA,25=FOS,26=FOS,30=FOS"
 }
