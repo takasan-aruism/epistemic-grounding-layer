@@ -1,0 +1,23 @@
+{
+  "object": "CENTER_SHIFT_PREREG_SEAL",
+  "prereg": "docs/center_shift_prereg_v0.1.md",
+  "sha256": "7bceee2ee4daae9827726629e2f9a1aae1a144aa929eda0479305f694de687dc",
+  "bytes": 4203,
+  "spec": "docs/center_shift_prototype_spec_v0.1.md",
+  "binding": "experiments/center_shift_construct_binding_v0.1.json",
+  "incident": "HBB-30",
+  "source": "hbb_sealed_t0.json t0_stuck_frame (408 chars)",
+  "regions": "4 mechanical sentence spans (regex (?<=\\.)\\s+)",
+  "conditions": [
+    "CONTROL",
+    "ATTENTION-SWEEP(4)",
+    "ATTENTION-RANDOM(4)"
+  ],
+  "primary_outcome": "NEW_DISCRIMINATING_OBSERVATION (0/1/2), scorer-only rubric, condition-blind, Claude excluded",
+  "decision": "SWEEP p_disc > CONTROL (binomial a=0.05) AND SWEEP >= RANDOM",
+  "claim_ceiling": "observation-center shift can alter produced discriminating observations under a preserved reasoning system",
+  "frozen_at": "2026-07-10",
+  "run_status": "HELD \u2014 implementation + run are a later gated step; construct audit only this round",
+  "center_line_template": "OBSERVATION CENTER (verbatim, already in the source above): <span>. Keep the same task and the same rules.",
+  "n1_fix": "suffix excludes the word evidence; R0 interpretive pre-commitment + RANDOM overlap pre-check added"
+}

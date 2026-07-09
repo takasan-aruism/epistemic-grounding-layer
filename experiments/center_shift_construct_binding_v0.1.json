@@ -1,0 +1,24 @@
+{
+  "object": "CENTER_SHIFT_CONSTRUCT_TO_DESIGN_BINDING",
+  "version": "v0.1",
+  "companion_to": "docs/center_shift_prototype_spec_v0.1.md",
+  "note": "Design/prompt binding (no code yet — implementation is a later, gated step). Each construct maps 1:1 to a spec/prereg site with a PRESENT criterion an independent auditor can check now, and a code site later.",
+  "constructs": [
+    {"id": "I1", "name": "same model", "site": "one MODEL constant (Qwen3.6-35B-A3B :8005) for all conditions", "present_criterion": "no condition uses a different model/endpoint", "invalid_if": "any condition changes model"},
+    {"id": "I2", "name": "same system prompt", "site": "one frozen SYSTEM string shared by CONTROL/SWEEP/RANDOM", "present_criterion": "system prompt byte-identical across conditions", "invalid_if": "condition alters the system prompt"},
+    {"id": "I3", "name": "same task", "site": "the task = the frame's own current-task; identical user framing across conditions", "present_criterion": "task text identical; no condition adds/removes task", "invalid_if": "task differs by condition"},
+    {"id": "I4", "name": "same source", "site": "full HBB-30 t0_stuck_frame present in every condition", "present_criterion": "the complete source appears in all conditions; regions are subsets, not replacements", "invalid_if": "a condition truncates/augments the source with new text"},
+    {"id": "I5", "name": "same evidence + authority policy", "site": "no evidence/authority rule injected by any condition", "present_criterion": "no condition adds an evidence/provenance/authority instruction", "invalid_if": "a condition injects an evidence/authority rule"},
+    {"id": "I6", "name": "same decoding + context budget", "site": "one temp/seed-scheme/max_tokens; center line adds only a few tokens present in BOTH SWEEP and RANDOM", "present_criterion": "decoding params identical; the only token delta is the center line, matched between SWEEP and RANDOM", "invalid_if": "decoding differs, or the token delta differs between SWEEP and RANDOM"},
+    {"id": "C1", "name": "the ONLY variable = observation center", "site": "appended center line", "present_criterion": "CONTROL has no line; SWEEP/RANDOM append exactly one line of the SAME template differing only in the span text", "invalid_if": "any other text differs across conditions"},
+    {"id": "R1", "name": "mechanical region formation", "site": "regex sentence split of t0_stuck_frame; regions verbatim; SWEEP over ALL regions", "present_criterion": "regions come from a mechanical split with no field labels, no answer, no human pick; every region is swept", "invalid_if": "a region is hand-selected or answer-derived, or SWEEP omits a region"},
+    {"id": "N1", "name": "no answer / semantic injection in the center line", "site": "center-line template = '<span>. Keep the same task and the same rules.'", "present_criterion": "the line contains ONLY a verbatim source span + the fixed neutral suffix; NO rubric-family token (evidence/evidence-status/DECLARED/UNVERIFIED/SUPERSESSION/provenance), NO 'question/reframe/challenge/premise/audit', NO HBB-30 answer vocabulary; violates none of the packet's own `exclusions`. Suffix excludes the word 'evidence' (N1 fix).", "invalid_if": "any forbidden/rubric-family term or instruction appears"},
+    {"id": "N2", "name": "random control matched", "site": "RANDOM spans = contiguous substrings matched to R0..R3 lengths, seed-fixed offsets, same center-line format", "present_criterion": "same count and lengths as SWEEP regions; only the span offset differs; deterministic", "invalid_if": "lengths/count unmatched or offsets non-deterministic"},
+    {"id": "O1", "name": "outcome scorer-only, condition-blind, non-author", "site": "rubric goes only to the scorer; generator blind; Claude excluded; scorer blind to condition", "present_criterion": "no rubric term reaches the generator; scorer sees outputs without condition labels; Claude does not score", "invalid_if": "generator sees the rubric, or scorer sees condition labels, or Claude scores"},
+    {"id": "K1", "name": "confound separation", "site": "3 conditions", "present_criterion": "CONTROL isolates line-presence; RANDOM isolates repetition/emphasis; SWEEP-vs-RANDOM isolates center-coherence", "invalid_if": "the design cannot separate center-shift from repetition"}
+  ],
+  "target_blindness": "no known-answer, no rubric term, no human-picked region reaches the generator; regions are a mechanical sweep of ALL sentences; RANDOM is seed-fixed.",
+  "claim_ceiling": "observation-center shift can alter produced discriminating observations under a preserved reasoning system; nothing more.",
+  "acceptance_gate": "independent construct audit confirms I1-I6, C1, R1, N1-N2, O1, K1 hold in the spec/prereg (and later in code) BEFORE any run.",
+  "status": "DESIGN BINDING DRAFTED — awaiting independent construct audit; implementation + run held."
+}
