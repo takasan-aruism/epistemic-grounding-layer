@@ -1,0 +1,16 @@
+[1/4] generate 17:24:05
+conditions=['R0', 'RS', 'RS_pool', 'RS_flat'] incidents=['HBB-08', 'HBB-10', 'HBB-30'] N=6 M=10 V=3 workers=16 | 720 candidate jobs
+-> /home/takasan/egl/experiments/scheduler_exhibit_candidates.json | records=120 | calls=3978 wall=653.5s req/s=6.09
+[2/4] qwen score 17:34:59
+scoring 720 candidates (Qwen, blind to condition)
+-> experiments/scheduler_qwen_scores.json
+[3/4] gpt handoff 17:35:57
+-> experiments/scheduler_gpt_handoff.json | 226 candidates for GPT (Qwen-REC2 subset) over 3 incidents
+[4/4] provisional Qwen-alone consensus 17:35:57
+[QWEN-ALONE (provisional)] H_sched_exhibit PRIMARY confirmed: False
+  HBB-08: RS 10/10 (rr=1.00) vs R0 1.00 | p=1 | exhibit=False
+  HBB-10: RS 10/10 (rr=1.00) vs R0 0.90 | p=0.3487 | exhibit=False
+  HBB-30: RS 1/10 (rr=0.10) vs R0 0.00 | p=0 | exhibit=False
+H_independence (RS>RS_pool): False | H_compare_rebuild (RS>RS_flat): False
+-> scheduler_exhibit_consensus.json
+PIPELINE_DONE 17:35:57

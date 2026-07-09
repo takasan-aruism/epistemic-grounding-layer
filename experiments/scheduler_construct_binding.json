@@ -1,0 +1,27 @@
+{
+  "object": "SCHEDULER_CONSTRUCT_TO_CODE_BINDING",
+  "version": "v0.1",
+  "companion_to": "docs/scheduler_faithful_instrument_spec_v0.1.md",
+  "code": "experiments/run_scheduler_exhibit.py",
+  "principle": "1:1 — every intended construct maps to exactly one code site with a PRESENT criterion an independent auditor can check. No construct may be ABSENT; RS must contain NO cumulative pooling of views.",
+  "constructs": [
+    {"id": 1, "name": "STOP / short interrupted run", "code_site": "view_call(): max_tokens<=70 hard cap + prompt 'first rough PARTIAL read, then stop; do not resolve'", "present_criterion": "view generation is token-capped AND prompt forbids resolution/completion", "inverts_if": "views run to completion / no cap"},
+    {"id": 2, "name": "interpretation abandonment", "code_site": "rs_run(): a view is used ONLY to produce its signature, then discarded; view text is never appended to any later view or to rebuild", "present_criterion": "no variable carries view TEXT forward into other views or into rebuild in RS", "inverts_if": "views retained/pooled (that is RS_pool, the control)"},
+    {"id": 3, "name": "viewpoint SHIFT (sampled)", "code_site": "sample_lenses(seed,attempt): draw V distinct lenses from LENS_POOL via seed-seeded RNG; SHIFT-AGAIN draws fresh lenses", "present_criterion": "each view uses a different lens; lens set varies by seed AND by attempt", "inverts_if": "same fixed lens set every seed/attempt"},
+    {"id": 4, "name": "independent reread of same source", "code_site": "RS view_call reads T0 ONLY (fr) + lens; never any other view", "present_criterion": "in RS, the user content to view_call contains T0 and lens but NO other view output", "inverts_if": "view reads accumulated prior views (=RS_pool)"},
+    {"id": 5, "name": "partial independence", "code_site": "rs_run(): the V views for one candidate are produced without shared context (each call is issued with prior=None in RS; views run sequentially but independently — parallelism is at candidate level in main())", "present_criterion": "no view sees another view's output within a candidate in RS", "inverts_if": "context-sharing among views (that is RS_pool)"},
+    {"id": 6, "name": "structural signature extraction", "code_site": "signature_call(view): separate call -> 'SUBJECT/LEVEL/KEY-DISTINCTION', reads the view only", "present_criterion": "a distinct call per view yields a structural signature from the view text alone", "inverts_if": "no signature step / signature reads T0 or other views"},
+    {"id": 7, "name": "COMPARE across views", "code_site": "compare_call(signatures): reads the V signatures ONLY, names structural DIFFERENCES, picks no winner", "present_criterion": "a distinct call consumes only signatures and outputs deltas; no view text; no selection", "inverts_if": "pooling text instead of comparing signatures / picking a best view"},
+    {"id": 8, "name": "REBUILD from differences + bounded convergence", "code_site": "rebuild_call(deltas, T0): synthesizes ONE replacement frame from deltas (+T0 anchor), not from any view; check_call() grades structural change vs T0; HOLD -> one SHIFT-AGAIN (cap 2)", "present_criterion": "rebuild reads deltas (+T0) but NOT views; a versioned convergence rule (SELECT/HOLD-2/SHIFT-AGAIN) is present with attempt cap", "inverts_if": "rebuild restates a single view / no convergence rule / unbounded"}
+  ],
+  "no_pooling_invariant": "In RS and RS_flat, no code path concatenates prior VIEW outputs into a subsequent view's or the rebuild's input. Cumulative pooling appears ONLY in RS_pool (intentional inversion control).",
+  "conditions": {
+    "R0": "base control (frozen P_BASE/P_SKEPTIC split)",
+    "RS": "constructs 1-8 all PRESENT",
+    "RS_pool": "as RS but construct 4/5 INVERTED (views pooled) — isolation control for independence",
+    "RS_flat": "constructs 1-5 PRESENT; 6-8 ABSENT (views scored directly) — isolation control for compare+rebuild"
+  },
+  "target_blindness": "breakthrough_structure NEVER enters generation (scorer-only). LENS_POOL is generic structural reframes with no historical-target content. cognition-agnostic (no v0.1 material).",
+  "acceptance_gate": "independent auditor must grade constructs 1-8 PRESENT on run_scheduler_exhibit.py AND confirm no_pooling_invariant holds in RS/RS_flat, before RS runs.",
+  "status": "BINDING DRAFTED — awaiting independent code audit against implementation."
+}

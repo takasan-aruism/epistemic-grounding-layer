@@ -1,0 +1,196 @@
+{
+  "object": "SCHEDULER_EXHIBIT_CONSENSUS",
+  "M": 10,
+  "alpha": 0.05,
+  "bonferroni_alpha": 0.016666666666666666,
+  "consensus_rule": "QWEN-ALONE (GPT return not yet integrated)",
+  "gpt_integrated": false,
+  "per_condition_incident": {
+    "R0|HBB-08": {
+      "seeds_reached": 10,
+      "seeds_qwen": 10,
+      "reach_rate": 1.0,
+      "incident_reached": true
+    },
+    "R0|HBB-10": {
+      "seeds_reached": 9,
+      "seeds_qwen": 9,
+      "reach_rate": 0.9,
+      "incident_reached": true
+    },
+    "R0|HBB-30": {
+      "seeds_reached": 0,
+      "seeds_qwen": 0,
+      "reach_rate": 0.0,
+      "incident_reached": false
+    },
+    "RS|HBB-08": {
+      "seeds_reached": 10,
+      "seeds_qwen": 10,
+      "reach_rate": 1.0,
+      "incident_reached": true
+    },
+    "RS|HBB-10": {
+      "seeds_reached": 10,
+      "seeds_qwen": 10,
+      "reach_rate": 1.0,
+      "incident_reached": true
+    },
+    "RS|HBB-30": {
+      "seeds_reached": 1,
+      "seeds_qwen": 1,
+      "reach_rate": 0.1,
+      "incident_reached": false
+    },
+    "RS_flat|HBB-08": {
+      "seeds_reached": 9,
+      "seeds_qwen": 9,
+      "reach_rate": 0.9,
+      "incident_reached": true
+    },
+    "RS_flat|HBB-10": {
+      "seeds_reached": 10,
+      "seeds_qwen": 10,
+      "reach_rate": 1.0,
+      "incident_reached": true
+    },
+    "RS_flat|HBB-30": {
+      "seeds_reached": 0,
+      "seeds_qwen": 0,
+      "reach_rate": 0.0,
+      "incident_reached": false
+    },
+    "RS_pool|HBB-08": {
+      "seeds_reached": 10,
+      "seeds_qwen": 10,
+      "reach_rate": 1.0,
+      "incident_reached": true
+    },
+    "RS_pool|HBB-10": {
+      "seeds_reached": 10,
+      "seeds_qwen": 10,
+      "reach_rate": 1.0,
+      "incident_reached": true
+    },
+    "RS_pool|HBB-30": {
+      "seeds_reached": 0,
+      "seeds_qwen": 0,
+      "reach_rate": 0.0,
+      "incident_reached": false
+    }
+  },
+  "H_sched_exhibit_PRIMARY": {
+    "rows": [
+      {
+        "incident": "HBB-08",
+        "RS_seeds": 10,
+        "RS_reach": 1.0,
+        "R0_reach": 1.0,
+        "binom_p": 1.0,
+        "sig": false,
+        "incident_reached": true,
+        "hyp_incident": false
+      },
+      {
+        "incident": "HBB-10",
+        "RS_seeds": 10,
+        "RS_reach": 1.0,
+        "R0_reach": 0.9,
+        "binom_p": 0.3486784401000001,
+        "sig": false,
+        "incident_reached": true,
+        "hyp_incident": false
+      },
+      {
+        "incident": "HBB-30",
+        "RS_seeds": 1,
+        "RS_reach": 0.1,
+        "R0_reach": 0.0,
+        "binom_p": 0.0,
+        "sig": true,
+        "incident_reached": false,
+        "hyp_incident": false
+      }
+    ],
+    "confirmed": false,
+    "claim": "capability exhibit: a faithful STOP-SHIFT-RUN-COMPARE scheduler (RS) produces consensus-REC2 reconstructions of a hard-core incident above base R0. NOT generalization/autonomy/cognition."
+  },
+  "H_independence_SECONDARY": {
+    "rows": [
+      {
+        "incident": "HBB-08",
+        "RS_seeds": 10,
+        "RS_reach": 1.0,
+        "RS_pool_reach": 1.0,
+        "binom_p": 1.0,
+        "sig": false,
+        "incident_reached": true,
+        "hyp_incident": false
+      },
+      {
+        "incident": "HBB-10",
+        "RS_seeds": 10,
+        "RS_reach": 1.0,
+        "RS_pool_reach": 1.0,
+        "binom_p": 1.0,
+        "sig": false,
+        "incident_reached": true,
+        "hyp_incident": false
+      },
+      {
+        "incident": "HBB-30",
+        "RS_seeds": 1,
+        "RS_reach": 0.1,
+        "RS_pool_reach": 0.0,
+        "binom_p": 0.0,
+        "sig": true,
+        "incident_reached": false,
+        "hyp_incident": false
+      }
+    ],
+    "confirmed": false,
+    "reads": "RS > RS_pool => independence / non-accumulation is an active ingredient"
+  },
+  "H_compare_rebuild_SECONDARY": {
+    "rows": [
+      {
+        "incident": "HBB-08",
+        "RS_seeds": 10,
+        "RS_reach": 1.0,
+        "RS_flat_reach": 0.9,
+        "binom_p": 0.3486784401000001,
+        "sig": false,
+        "incident_reached": true,
+        "hyp_incident": false
+      },
+      {
+        "incident": "HBB-10",
+        "RS_seeds": 10,
+        "RS_reach": 1.0,
+        "RS_flat_reach": 1.0,
+        "binom_p": 1.0,
+        "sig": false,
+        "incident_reached": true,
+        "hyp_incident": false
+      },
+      {
+        "incident": "HBB-30",
+        "RS_seeds": 1,
+        "RS_reach": 0.1,
+        "RS_flat_reach": 0.0,
+        "binom_p": 0.0,
+        "sig": true,
+        "incident_reached": false,
+        "hyp_incident": false
+      }
+    ],
+    "confirmed": false,
+    "reads": "RS > RS_flat => compare + rebuild-from-differences is an active ingredient"
+  },
+  "caveats": [
+    "consensus GPT-bound when integrated (Qwen-alone reported as GPT-drop reference)",
+    "reach-rates are at N per cell; absolute values N-dependent",
+    "capability-exhibit only; cognition claim quarantined (v0.1); transfer/autonomy FUTURE-SEALED",
+    "DE-0127 exhibit untouched; this is a distinct instrument"
+  ]
+}

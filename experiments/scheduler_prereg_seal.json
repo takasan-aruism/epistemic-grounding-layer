@@ -1,0 +1,13 @@
+{
+  "object": "SCHEDULER_PREREG_SEAL",
+  "prereg": "docs/scheduler_prereg_v0.1.md",
+  "sha256": "64c08b63cef65ac012541761363934d64023dee15c9c5fd927b5cf693194ea1b",
+  "bytes": 2384,
+  "spec": "docs/scheduler_faithful_instrument_spec_v0.1.md",
+  "binding": "experiments/scheduler_construct_binding.json",
+  "primary_claim": "capability-exhibit: faithful STOP-SHIFT-RUN-COMPARE scheduler RS -> consensus-REC2 above R0 on >=1 hard-core incident",
+  "quarantine": "docs/next_branch/taka_breakthrough_hypothesis_v0.1_QUARANTINE.md",
+  "generalization_deferred_to": "FUTURE-SEALED",
+  "frozen_at": "2026-07-09",
+  "does_not_revise": "DE-0127"
+}
