@@ -163,3 +163,35 @@ Concrete terminators (v0.4.3 adopted B+autonomy-downgrade, which sits *between* 
 
 Also fix regardless of the choice: §9↔§11 contradiction; §3 over-claim sentence; R0-as-null caveat; N-vs-M
 label nit (§5/§8/§11).
+
+---
+
+## Round 6 — re-audit of v0.4.4 (capability-exhibit) → VALIDITY-CLEAN
+
+Independent auditor + author-side verification (all findings checked against v0.4.4 text; all hold).
+**Verdict: VALIDITY-CLEAN. The rounds-2→5 DOF-hopping signature is TERMINATED.**
+
+- **R5-A residual non-load-bearing (sound + implemented)**: an existence demonstration cannot be invalidated by
+  the author knowing the answers — target-aware authorship is folded into the artifact as a *lower bound* (§1
+  "target-aware 設計込みの下限"), and it only bites a held-out/generalization claim, none of which survive.
+  Consistently declared in §1/§3/§10; no surviving load-bearing dependence on the mechanism being un-steered.
+- **No smuggled generalization**: §2/§7/§8/§12 are scoped to the 3 *known* targets or within-experiment
+  comparisons; every hypothesis says "generalization は主張しない." **R2>R0 does not smuggle**: the hard-core is
+  *defined* as "no arm achieves consensus REC2," so R0 (the base A/B arms that failed) ≈ 0 by construction ⇒
+  R2>R0 collapses to **R2>0 = existence-above-base**. R0 is the correct null (round-5's R0-wrong-null was
+  specific to *transfer*, now disclaimed).
+- **Non-vacuous, not oversold**: positive is real (independent 2-scorer consensus, Claude excluded from scoring,
+  no author-selection ⇒ the author can steer *generation* but cannot force certification where all prior arms
+  failed); negative is the stronger result. §1 caps the positive as a lower bound; §3 states the honest residual.
+  GPT-bound scoring is a real but honestly-carried caveat (§6); since hard-core/R0/R2 share the same criterion,
+  R2>R0 is an internally fair comparison and, with no generalization claimed, the round-4 GPT-amplification
+  concern no longer bites.
+- **round-5 "fix regardless" all discharged**: §9↔§11 contradiction resolved; §3 over-claim removed; R0-null
+  resolved; M de-conflated.
+- **One non-blocking doc nit (fixed)**: §8 used "N=3(hard-core)" overloading N (candidate-pool count elsewhere).
+  Corrected to "3 incident" with a symbol note.
+
+**Convergence**: terminated not by removing the target-aware knob (Claude still authors target-aware) but by
+removing every claim the knob could contaminate — a DOF cannot hop into a claim that no longer exists.
+Generalization (transfer + autonomy) is quarantined to the un-run FUTURE-SEALED track (§12). **No further validity
+round required.** Remaining gate = ⟨TC⟩ parameter confirmation + Taka freeze/hash.

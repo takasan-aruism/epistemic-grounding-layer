@@ -1,6 +1,7 @@
 # Reconstruction Experiment — Preregistration v0.4.4 (NBC-1) — CAPABILITY-EXHIBIT
 
-**status: `PREREG_v0.4.4 — capability-exhibit adopted (generalization → FUTURE-SEALED); PENDING round-6 audit + ⟨TC⟩ params + Taka freeze`. 実装・run・freeze/hash はしない。**
+**status: `PREREG_v0.4.4 — round-6: VALIDITY-CLEAN. FREEZE-READY pending ⟨TC⟩ params + Taka approval`. 実装・run・freeze/hash はしない。**
+**round-6(DE-0123)**: [[hbb_reconstruction_prereg_v0.4_audit]] = **VALIDITY-CLEAN**（独立 auditor + author 検証）。capability-exhibit downgrade が rounds 2→5 の DOF-hopping を **終端**（held-out claim を消したので target-aware knob が非 load-bearing）。R2>R0 は hard-core が no-arm-REC2 定義ゆえ R0≈0 で **R2>0=存在デモ**に collapse。smuggled generalization なし・§12 は真の deferral・§9↔§11/R0-null/N-M すべて discharged。残る gate = **⟨TC⟩ params + Taka freeze/hash 承認のみ**（追加 validity round 不要）。§8 の N-symbol nit は修正済。
 Sequence gate: **v0.4.4 → round-6 独立 audit → clean なら ⟨TC⟩ params → freeze/hash(要 Taka)→ 実装 go(要 Taka)**。
 Lineage: audit rounds 2–5([[hbb_reconstruction_prereg_v0.4_audit]], DE-0116..0121)。root cause=**target-aware authorship**（Claude が {08,10,30} を知って機構を著す）が routing→selection→generation→criterion と hop。**診断収束**。Taka 決定(DE-0122)= **capability-exhibit へ downgrade、generalization(transfer + autonomy)を FUTURE-SEALED へ**。
 Discipline: author ≠ attacker ≠ adjudicator. 自律RD 未有効。self-improvement claim なし。`⟨TC⟩`=NEEDS-TAKA-CONFIRM(parameter)。
@@ -50,7 +51,7 @@ DE-0115: hard-core {08,10,30} は no arm consensus REC2。
 - 全て consensus + GPT-drop + N-parity + 等 budget を満たして claim。margin・seed 分散・scorer 依存を併記。**generalization は一切主張しない。**
 
 ## 8. metric / power
-primary: R2 の「R0 超過 incident 数」(binomial α=0.05, 多重補正)。incident 到達 = **≥⌈M/2⌉ seed**（M=seed 数、`⟨TC⟩` 候補 10）。N=3(hard-core)=targeted exhibit（benchmark でない、generalization 主張なし）。副次: scheduler/lossy/assisted/token・N 消費。
+primary: R2 の「R0 超過 incident 数」(binomial α=0.05, 多重補正)。incident 到達 = **≥⌈M/2⌉ seed**（M=seed 数、`⟨TC⟩` 候補 10）。hard-core=**3 incident**（multiplicity 補正の対象数;`N` 記号は §5/§11 の候補プール数専用、こちらは incident 数）=targeted exhibit（benchmark でない、generalization 主張なし）。副次: scheduler/lossy/assisted/token・候補プール(N)消費。
 
 ## 9. freeze list（run 前に凍結・変更禁止;逸脱は記録）
 条件 R0–R5/R_bon 定義 · §3 DEV/VAL mechanical derivation(operator set rule/θ・R2 template、SEALED 不使用；**criterion は Claude 著＝target-aware と明記、exhibit に対し non-load-bearing**) · N-parity 共通 N · no-author-selection/candidate-pooling/cross-pass pool/partial-pass 禁止 · pure exhaustive completion + budget sizing · detector spec(R1/R3 同一・R4 不使用) · convergence rule + pass cap · lossy ladder 各 level + manipulation check · scorer 集合 + GPT-drop robust rule · token+pass+N 一致 · M(seed) + α + 多重補正 · 仮説(H_exhibit 他) + 解釈マップ + attribution(R2>R0)。
