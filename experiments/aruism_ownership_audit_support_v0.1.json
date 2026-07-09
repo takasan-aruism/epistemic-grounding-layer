@@ -1,0 +1,68 @@
+{
+  "object": "ARUISM_EXISTING_OWNERSHIP_REVERSE_AUDIT_SUPPORT",
+  "version": "v0.1",
+  "kind": "READ_ONLY_REVERSE_AUDIT",
+  "final_judgment_in": "docs/aruism_existing_ownership_reverse_audit_v0.1.md",
+  "read_scope": ["DESIGN_EVIDENCE_LEDGER.jsonl (DE-0001..0130)", "git log (123 commits)", "docs/*", "experiments/* mechanism files by data-flow"],
+  "aruism5_to_afe_operator_map": {
+    "note": "The 5 Aruism viewpoints map near-1:1 onto the AFE ADMITTED operators (already compiled + sealed + scored). This is the central ALREADY-OWNED finding.",
+    "存在の階層性 (hierarchy / scale-unit boundary)": "OP-HIERARCHY-001 (+ FE-L-LIMITATION unit/boundary, scheduler LENS 'level')",
+    "存在の連動性 (coupling)": "OP-INTERDEPENDENCE-001 (+ FE-LINK E×E, FE-TERNARY, scheduler LENS 'inversion/temporal')",
+    "存在の対称性 (symmetry / structural inversion)": "OP-SYMMETRY-001 (+ afe B-arm skeptic, scheduler LENS 'inversion', P_SKEPTIC)",
+    "存在の対等性 (parity / common representation)": "OP-EQUALITY-001 (+ aggregate.norm() equivalence grouping, mask_v2, signature_call)",
+    "軸 (axis / latent background structure)": "OP-AXIS-001 (+ FE-AXIS-VARIABLE, DETECTION_RECONSTRUCTION_SPLIT)",
+    "存在の創造 (creation, adjacent)": "OP-CREATION-001 (scale-transfer explicitly forbidden)",
+    "存在の了解 (understanding)": "OP-UNDERSTANDING-000 REJECTED (duplicates AXIS)"
+  },
+  "incident_catalogue": [
+    {"de": "DE-0004", "incident": "4-layer design, 0 operational evidence", "taka_move": "design overtakes implementation; drive by operational evidence", "surviving": "Amendment Moratorium MOR-1..4", "aux_label": "none (operational-evidence discipline)"},
+    {"de": "DE-0011", "incident": "verify id-from-log using tests that write the log (circular)", "taka_move": "test isolation must precede SoR changes", "surviving": "EGL_DATA_DIR isolation ordering", "aux_label": "coupling (test<->SoR contamination) + none(ordering discipline)"},
+    {"de": "DE-0018/DE-0029(R5->R7)", "incident": "ABSENCE->SPECIFIED; mode derived from claim polarity", "taka_move": "adopt orthogonalization: epistemic-kind orthogonal to polarity; ABSENCE!=SPECIFIED withdrawn", "surviving": "validation_mode orthogonal axis + negative_basis axis", "aux_label": "axis (separate two conflated axes) + none(author!=adjudicator)"},
+    {"de": "DE-0032", "incident": "planned source-kind mints COMPLETED official leg on fetch", "taka_move": "planned!=acquired!=observed!=searched; look at the primitive that happened, not upstream summary", "surviving": "ACQ-3b/4b/4c required-vs-observed splits", "aux_label": "hierarchy (levels of a claim) + none(derive-from-primitive)"},
+    {"de": "DE-0048", "incident": "validator fired on real ESDE inline-corrections", "taka_move": "not a format bug: which is right, the validator's premise or the world?", "surviving": "supersession types RECORD/INLINE (world-model widened)", "aux_label": "composite (axis-question-the-frame + hierarchy-boundary)"},
+    {"de": "DE-0049/DE-0050", "incident": "contract_ok=0/10 masked grounding=1.00", "taka_move": "split one metric into M1 grounding / M2 placement / M3 format (orthogonal axes)", "surviving": "3-axis metric split", "aux_label": "axis (latent axes behind one number)"},
+    {"de": "DE-0072/DE-0073", "incident": "Claude recommended its own preference for GPU co-serve", "taka_move": "route the decision through the system; seal Claude preference; 'impossible' was declared-not-measured", "surviving": "system-formed decision packet; blockage=measurement", "aux_label": "composite (symmetry-invert-assumption + axis-measurement) + none(author!=adjudicator)"},
+    {"de": "DE-0090", "incident": "cluster instability read as intrinsic to meta-frames", "taka_move": "mini-C: it is a procedural error (batch hard single-cluster), not intrinsic; use incremental multi-membership", "surviving": "DD-ARCH-7 incremental multi-membership classification", "aux_label": "composite (parity-multi-membership + coupling)"},
+    {"de": "DE-0104", "incident": "B-vs-D recorded as unresolved tie", "taka_move": "scorer-granularity fix: whole-condition scoring hid axis-level difference", "surviving": "axis-level blind rescore -> precision-recall tradeoff", "aux_label": "axis (score the latent axis) + none(instrument repair)"},
+    {"de": "DE-0107", "incident": "program success = capability metric improvement", "taka_move": "redefine success = FORCED_OUT_OF_SCOPE intervention frequency -> 0 (free the Aruism-owner)", "surviving": "DD-ARCH-8 + AA/FOS intervention-scope split", "aux_label": "axis (reframe the objective) + objective-anchor"},
+    {"de": "DE-0113", "incident": "SEALED 'engine no added value' over-negative", "taka_move": "skeptically re-check; strict single-scorer artifact", "surviving": "MULTI_SCORER_CONSENSUS permanent instrument", "aux_label": "symmetry (opposite scorer -> opposite result) + none(instrument repair)"},
+    {"de": "DE-0115", "incident": "single-axis reach verdict", "taka_move": "hard-core BEFORE scheduler (overfit guard, origin-laundering isomorphism)", "surviving": "hard-core {08,10,30} fixed; single-axis verdict reversed under 2-axis", "aux_label": "coupling (isomorphism to prior accident) + axis"},
+    {"de": "DE-0119..0122", "incident": "audit rounds 2-5 same defect DOF hops routing->selection->generation->criterion", "taka_move": "terminator: downgrade to capability-exhibit; generalization -> FUTURE-SEALED (drop the claim, not patch the knob)", "surviving": "capability-exhibit vs FUTURE-SEALED split; escalate-not-patch honored", "aux_label": "composite (coupling-same-signature-across-rounds + hierarchy)"},
+    {"de": "DE-0126", "incident": "serial generation, GPU 96% read as throughput", "taka_move": "changed observation frame validity->throughput; asked effective batch size", "surviving": "PROCESS_OBSERVATION proposal; TASK_VALIDITY != PROCESS_EFFICIENCY monitoring", "aux_label": "axis (introduce missing observation axis) + none(missing live channel)"},
+    {"de": "DE-0128/DE-0130", "incident": "'R4=0' read as scheduling-hypothesis negative", "taka_move": "audit whether R4 is a valid instrument (it was never even run; default-fill)", "surviving": "faithful scheduler instrument; compare->rebuild isolated", "aux_label": "composite (construct-validity + symmetry)"}
+  ],
+  "ownership_checklist": {
+    "legend": "OWNED=implemented(function cited); OWNED(exhibit)=implemented in capability-exhibit experiment (generalization FUTURE-SEALED); SPEC-ONLY; EXPERIMENTED-ONLY; PARTIAL; ABSENT",
+    "scale_shift": "ABSENT (scale-transfer explicitly forbidden in OP-CREATION-001)",
+    "unit_boundary_change": "OWNED(exhibit) FE-L-LIMITATION, scheduler LENS boundary/kind",
+    "cross_level_comparison": "OWNED(exhibit) OP-HIERARCHY-001, scheduler LENS level",
+    "latent_coupling_detection": "OWNED(exhibit) FE-LINK/FE-TERNARY/OP-INTERDEPENDENCE-001",
+    "cross_incident_linkage": "OWNED run_hbb_F_originloo.retrieve_originloo (token-overlap retrieval, real wiring); ISOMORPHISM flavor ABSENT",
+    "inversion_counter_hypothesis": "OWNED(exhibit) afe B-arm / scheduler inversion lens / P_SKEPTIC",
+    "opposite_model": "OWNED(exhibit) OP-SYMMETRY-001",
+    "common_representation_normalization": "OWNED aggregate.norm(), metaframe_mask.mask_v2(), signature_call()",
+    "equivalence_grouping": "OWNED(exhibit) run_afe_walking.aggregate() group-by-normalized-structure",
+    "latent_structure_axis": "OWNED(exhibit) OP-AXIS-001/FE-AXIS-VARIABLE/DETECTION_RECONSTRUCTION_SPLIT",
+    "compare_to_rebuild": "OWNED(exhibit) scheduler compare_call->rebuild_call (TRANSFORMED from multi-view; branch CLOSED NEGATIVE at bar)",
+    "scheduler_routing": "OWNED(process) process_aggregate+run_process_optimizer trigger-gated; OWNED(exhibit) scheduler rs_run convergence",
+    "multi_view": "OWNED(exhibit) scheduler sample_lenses/view_call; afe D-arm; MULTI_SCORER_CONSENSUS",
+    "failure_weighted_search": "ABSENT (originloo ranks by token-overlap, not failure weight)",
+    "attention_mobility": "OWNED(exhibit) scheduler sample_lenses varies by seed AND attempt; HOLD->SHIFT-AGAIN",
+    "return_downscale": "OWNED(exhibit) run_recon_exhibit.lossy L1/L2/L3 ladder; scheduler substrate lens",
+    "objective_anchor": "OWNED(exhibit) FE-CREATIVITY-ORTHOGONAL, rebuild T0-anchor, orchestrate decision_relevance",
+    "residual_regime_detection": "PARTIAL: residual=FE-EPSILON-RESIDUAL (PROVISIONAL/NARROW); regime=process_aggregate model_switch_overhead_ratio DOMINANT_OVERHEAD trigger; no general regime/residual detector"
+  },
+  "transformations": {
+    "T1_multiview_to_compare_rebuild": "CONFIRMED (flag: scheduler branch CLOSED NEGATIVE at bar; compare->rebuild survived only as strongest directional/necessary-looking component)",
+    "T2_axis_injection_to_detection_reconstruction_split": "CONFIRMED as pivot / PARTIAL as mechanism (axis-operators as capability downgraded; what survived = 2-axis measurement + precision-recall complementarity)",
+    "T3_generalization_to_capability_exhibit_FUTURE_SEALED": "CONFIRMED (6-round downgrade; DOF cannot hop into a claim that no longer exists)",
+    "T4_failure_lessons_to_instrument_self_repair": "CONFIRMED (measurement discipline lineage, NOT a data detector)",
+    "T5_understanding_operator_rejected": "CONFIRMED (duplicates AXIS)",
+    "H3_failure_lesson_to_regime_residual_detection": "DENIED (no regime detector; no residual detector; 'regime'/'residual' are domain data or bookkeeping fields)"
+  },
+  "abc": {
+    "A_already_owned": ["hierarchy/OP-HIERARCHY-001", "coupling/OP-INTERDEPENDENCE-001+FE-LINK", "symmetry/OP-SYMMETRY-001", "parity/OP-EQUALITY-001+norm+mask_v2", "axis/OP-AXIS-001+DETECTION_RECONSTRUCTION_SPLIT", "inversion/afe-B", "return-downscale/R5-lossy", "objective-anchor/FE-CREATIVITY-ORTHOGONAL", "multi-view/scheduler", "attention-mobility/sample_lenses", "cross-incident retrieval/originloo", "scheduler-routing/process-optimizer-triggers"],
+    "B_transformed": ["multi-view -> compare->rebuild", "axis-injection capability -> DETECTION/RECONSTRUCTION split + precision-recall complementarity", "generalization -> capability-exhibit -> FUTURE-SEALED", "failure-lessons -> instrument-self-repair discipline", "UNDERSTANDING operator -> REJECTED(dup AXIS)"],
+    "C_unowned_candidate": ["meta-instrument doubt (when an instrument/metric fires, question the instrument's premise vs the world) DE-0048/0113/0126", "structural-isomorphism linkage to prior failures (not token retrieval) DE-0115/0122/0126", "live cross-cutting PROCESS_OBSERVATION / expectation-residual channel DE-0126 (proposal only)", "loop/regress terminator (escalate-not-patch when a defect signature hops) DE-0122 (discipline only, no detector)"]
+  }
+}
