@@ -24,7 +24,8 @@
     "sealed_evidence_class_stream_sha256": "82051d270e8b5dafac0a582462011e5e12904bdc7babc723af7cecf1dad4c7ad",
     "self_entry_classes_excluded": [
       "PROTOTYPE_RESULT",
-      "LEDGER_SALIENCE_REPRODUCIBILITY_DEFECT"
+      "LEDGER_SALIENCE_REPRODUCIBILITY_DEFECT",
+      "SUBSTRATE_ROLE_VERDICT"
     ],
     "added": "DE-0132 reproducibility fix \u2014 input selection pinned; detector/metric/null/threshold/window unchanged"
   }

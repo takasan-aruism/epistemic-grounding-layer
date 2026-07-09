@@ -312,7 +312,7 @@
     }
   },
   "process": {
-    "wall_seconds": 0.66,
+    "wall_seconds": 0.67,
     "n_null": 2000,
     "primitive_calls": {
       "runs": 72036,

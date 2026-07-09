@@ -26,7 +26,7 @@ PRIMARY_METRICS = ["max_run", "n_runs_ge3", "uppertail_run_mass", "max_causal_en
 #     no detector/normalization/primitive/threshold/window/null/metric is changed. ---
 N_SEALED = 130     # ledger length at prereg freeze (270196d4)
 STREAM_SHA256 = "82051d270e8b5dafac0a582462011e5e12904bdc7babc723af7cecf1dad4c7ad"  # sha256 of sealed evidence_class stream
-SELF_ENTRY_CLASSES = {"PROTOTYPE_RESULT", "LEDGER_SALIENCE_REPRODUCIBILITY_DEFECT"}  # this prototype's own appends
+SELF_ENTRY_CLASSES = {"PROTOTYPE_RESULT", "LEDGER_SALIENCE_REPRODUCIBILITY_DEFECT", "SUBSTRATE_ROLE_VERDICT"}  # this prototype's own appends
 
 _prim_calls = Counter()
 
