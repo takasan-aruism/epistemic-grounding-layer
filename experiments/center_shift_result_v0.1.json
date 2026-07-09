@@ -1,0 +1,57 @@
+{
+  "object": "CENTER_SHIFT_RESULT",
+  "seal": "7bceee2e",
+  "incident": "HBB-30",
+  "alpha": 0.05,
+  "p_disc": {
+    "CONTROL": 0.5,
+    "SWEEP": 0.5,
+    "RANDOM": 0.4
+  },
+  "p_dec": {
+    "CONTROL": 0.5,
+    "SWEEP": 0.425,
+    "RANDOM": 0.3
+  },
+  "n": {
+    "CONTROL": 10,
+    "SWEEP": 40,
+    "RANDOM": 40
+  },
+  "H_center_shift": {
+    "sweep_gt_control_binom_p": 0.56269,
+    "sweep_gt_control": false,
+    "sweep_ge_random": true,
+    "confirmed": false,
+    "claim_if_positive": "observation-center shift can alter produced discriminating observations under a preserved reasoning system"
+  },
+  "per_region_sweep_p_disc": {
+    "R0": 0.8,
+    "R1": 0.5,
+    "R2": 0.3,
+    "R3": 0.4
+  },
+  "R0_interpretive_note": "if the effect is driven by R0 alone (R1-R3 not > RANDOM), read as 'attention to the pre-existing attribution sentence', NOT center-coherence, NOT salience-selection",
+  "random_overlap_precheck": [
+    {
+      "k": 0,
+      "overlaps_R0": false,
+      "contains_6x": true
+    },
+    {
+      "k": 1,
+      "overlaps_R0": false,
+      "contains_6x": true
+    },
+    {
+      "k": 2,
+      "overlaps_R0": false,
+      "contains_6x": false
+    },
+    {
+      "k": 3,
+      "overlaps_R0": false,
+      "contains_6x": false
+    }
+  ]
+}

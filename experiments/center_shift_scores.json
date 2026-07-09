@@ -1,0 +1,370 @@
+{
+  "object": "CENTER_SHIFT_SCORES",
+  "scorer": "Qwen blind, condition-withheld, Claude excluded",
+  "process": {
+    "wall_seconds": 5.9,
+    "score_calls": 90
+  },
+  "scores": [
+    {
+      "opaque_id": "af17d5dcc1f997",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "559d1b3902505c",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "33d3f277925df4",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "84992cea93ece7",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "f00dbf2ee72e64",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "8a6139126bd1cc",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "98f209514312fc",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "b3512fc4282658",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "4305e3ea2a6412",
+      "NDO": 1
+    },
+    {
+      "opaque_id": "53554fb3ed7837",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "db16aaa87bbbae",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "326d3889ebc72b",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "82603b69c04a81",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "59853bdba494bb",
+      "NDO": 1
+    },
+    {
+      "opaque_id": "576fb9d927d4e6",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "86c0dec3566fa6",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "b07ef981db15a6",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "a78ff3dfb01aed",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "dbac5b07653e91",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "cf4a14a122609a",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "c7a4ce2e4d3752",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "5f18a1f2bdcba5",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "c805699ae32a38",
+      "NDO": 1
+    },
+    {
+      "opaque_id": "f88af45b5d640d",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "47fe19e0b92029",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "85ad6f1c69c375",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "49f80c876f0e09",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "2b90155a2eb38f",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "2c02551d5e6432",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "4d43f676328cc8",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "16b8c9815cb680",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "27e1b63427dccf",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "2d79bd12b90f25",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "b81d92c733cf9f",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "ef669cc8d57bc5",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "327d61a49dd878",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "3e9f0e2c3d3b70",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "8c59e2b7afacb3",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "99fb884689e02b",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "8a5ae0f7e2b9d7",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "8db0641e3dc16a",
+      "NDO": 1
+    },
+    {
+      "opaque_id": "ccbcb3fc22f203",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "9ad23dbea5d21c",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "4ab59105462437",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "dc565e985275b2",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "71b7cc4e73eed7",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "426138b99bfdc3",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "2976970e696b71",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "bdff963a84f3fa",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "3452c164e62946",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "f5c9c1770e23f6",
+      "NDO": 1
+    },
+    {
+      "opaque_id": "81810ef1cea638",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "dd21d045957780",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "83d61c4895510d",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "c50042c0953783",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "5c973632ef6d07",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "7184c05bef4cb0",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "670620c8f4f1be",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "eb6e2b7ad6a0f6",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "94fdf4c78d1b9a",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "f0bc7ec2ed162f",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "dac652075f4265",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "33427c399fe351",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "afd37e0c3b3530",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "4977acf996b1d4",
+      "NDO": 1
+    },
+    {
+      "opaque_id": "6b6d45a083841d",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "44cffb26bea522",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "97a8ba7938d442",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "3c528fe159dadf",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "122247a8895e8e",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "aca3705cf3e6ae",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "9b8540c0e372e7",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "e0b7e1c4d1553e",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "324be632f72740",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "ba97affff031de",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "82f204320a92ed",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "80407cc9a95f1f",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "2784f599559aab",
+      "NDO": 1
+    },
+    {
+      "opaque_id": "b980e0ac08a539",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "07424a790e6d03",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "e5590df33b8cdc",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "f5edad24aa5f63",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "f6576840249656",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "cc1301d2b305c8",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "0f14993005aeab",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "aacd6edf8ae39b",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "c9f878e58e09f1",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "07078bedb36202",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "f7b739b482977b",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "6cdec080b43901",
+      "NDO": 0
+    }
+  ]
+}
