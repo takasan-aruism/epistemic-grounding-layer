@@ -1,0 +1,49 @@
+{
+  "object": "HBB_RECON_IMPLEMENTATION_BINDING",
+  "companion_to_seal": "hbb_reconstruction_prereg_seal.json (prereg sha256 4cb77d89b30e682122d5f90806c1135e8034ea85cdf1cd82ac15577b45f23a01)",
+  "note": "Binds the build-time details the frozen prereg v0.4.4 left to implementation (§3 'exact string bound at implementation under this spec'). This does NOT change the sealed prereg (its hash stays valid); it is a companion record. Approved by Taka (B-1..B-5).",
+  "bound_at": "2026-07-09",
+  "B1_generation_diversity": {
+    "mechanism": "temperature 0.8 + seed=k for each of the N candidates in non-operator conditions (temp=0 would make candidates identical). Operator conditions (R4/R5) get diversity from frame-chaining (B-2), operators run deterministically.",
+    "temperature": 0.8,
+    "seed_rule": "seed = M-seed*1000 + k (candidate index)"
+  },
+  "B2_R4_pass_chaining": {
+    "semantics": "STOP-SHIFT-RUN-COMPARE, pass_cap=4. pass 1 = all 11 operators on T0. pass p>1 = all 11 operators on a frame = T0 + pooled ALL prior-pass operator outputs (no author selection). 11 x 4 = 44 candidates, all pooled and scored.",
+    "no_author_selection": "prior-pass outputs are pooled wholesale into the next pass frame; no best-pick.",
+    "operator_candidate_rendering": "each operator output is rendered as readable text '[OP-ID] proposed reframe: <added_distinctions/variables/relations/suggested_operations joined>'; NO_SIGNAL or empty -> '[OP-ID] (no structural proposal)' (scorer -> 0). Rendering formats the operator's own output; no selection."
+  },
+  "B3_R5_lossy_ladder": {
+    "L1": "metaframe_mask.mask_v2 (MASK_PIPELINE v2, seal 2bfd70f9) — domain nouns + numbers masked to generic phrases.",
+    "L2": "L1 then a second masking pass over remaining domain/technical tokens (capitalized terms, alnum tokens, symbol-bearing terms) -> generic placeholders.",
+    "L3": "structure-only skeleton: reduce to claim-axis / premise / decision-request placeholders, content stripped.",
+    "manipulation_check": "for each Lk, verify the structural features the operators use survive (non-empty structural skeleton). If a level collapses to nothing, record and treat that level's R5 as vacuous.",
+    "flag": "L2/L3 are graded builds beyond mask_v2; the independent implementation audit must check they are monotone and faithful. R5 is SECONDARY (H_structure)."
+  },
+  "B4_scoring": {
+    "mechanism": "external handoff. Every candidate scored on rubric v2 (DET/RECON, sha 012941ab) by Qwen locally (per-candidate) AND by GPT via handoff (same pattern as the N=13 closure). consensus REC2 = GPT ∧ Qwen (GPT-drop robust). Claude excluded (author).",
+    "endpoint_label": "GPT-certified + Qwen-concurred"
+  },
+  "B5_frozen_prompts": {
+    "R0_base_A": "You are advising on an ongoing research project. What is the single most important thing to do next? Give one concrete alternative frame / next step.",
+    "R0_skeptic_B": "You are a skeptical research advisor. The current conclusion may be wrong. Name the frame defect and propose a concrete alternative frame that could be correct.",
+    "R0_split": "even candidate index -> base_A, odd -> skeptic_B",
+    "R2_template": "You are a frame reconstructor. Given ONLY the current stuck frame, propose an alternative frame that changes the subject / level / key distinction, and state the next action that follows. Do not reference any known result or answer. Output the alternative frame + next action.",
+    "detector_R1_R3": "You are a skeptical research advisor. ... Name only the single most consequential frame defect (locus + why).",
+    "reconstructor_R1_R3": "You are a frame reconstructor. Given the current stuck frame and a detected frame-defect, build an alternative frame structurally different at the subject/level/distinction, and the next action.",
+    "R_bon": "same as R0_base_A (plain best-of-N base sampling, no structure)",
+    "target_held_out": "breakthrough_structure is NEVER in any generation prompt; used only by the scorers."
+  },
+  "compute_estimate": {
+    "conditions": ["R0", "R1", "R2", "R3", "R4", "R_bon", "R5-L1", "R5-L2", "R5-L3"],
+    "generations": "N(44) x M(10) x incidents(3) x conditions(9) = 11880 (+ operator calls inside R4/R5 already counted as candidates)",
+    "scoring": "11880 candidates x Qwen(local) + GPT(handoff); consensus after both"
+  },
+  "implementation_audit_fixes": {
+    "audit": "independent implementation-vs-frozen-spec audit: PRIMARY (H_exhibit) path FAITHFUL; 2 deviations in SECONDARY conditions fixed:",
+    "fix_1_B3_lossy": "metaframe_mask (MASK v2) import failed silently (module at /home/takasan/egl, not on path) -> MP=None -> R5-L1 returned frame unchanged (no loss). FIXED: added /home/takasan/egl to sys.path + hard import (assert MP) so masking is real and the ladder is monotone.",
+    "fix_2_R1_R3": "R1 and R3 were one code path (identical prompt + seeds = bit-identical candidates). FIXED: R1 = 2-stage (detect then reconstruct, seed=seed*1000+k); R3 = single-stage combined detect+reconstruct prompt (P_R3_SINGLE), decorrelated seed=seed*2000+k -> genuinely distinct control.",
+    "note_A_by_design": "operators (run_afe_walking.run_operator) are temperature=0/seed=0 deterministic, so R4/R5 are identical across the M seeds -> their reach-rate is all-or-nothing (0/M or M/M). Faithful to the frozen zero-discretion operators; M-seed variance exists only for stochastic conditions (R0/R1/R2/R3/R_bon). Flagged to Taka for the SECONDARY hypotheses (H_scheduler/H_structure)."
+  },
+  "status": "BINDINGS RECORDED + audit fixes applied. FULL RUN held for Taka 'run' go."
+}
