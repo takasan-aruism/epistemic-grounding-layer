@@ -1,0 +1,48 @@
+{
+  "object": "SCHEDULER_GPT_STRICT_SCORE_AUDIT",
+  "rubric_sha256": "012941aba485f33b8328b7e5cba2a84b5c1db82119bb96554bc8dea84f4f9f17",
+  "n_items": 226,
+  "condition_blind": true,
+  "score_distribution": {
+    "DET0_REC0": 1,
+    "DET1_REC0": 127,
+    "DET2_REC1": 90,
+    "DET2_REC2": 8
+  },
+  "per_incident_distribution": {
+    "HBB-08": {
+      "DET1_REC0": 53,
+      "DET2_REC1": 34,
+      "DET2_REC2": 4
+    },
+    "HBB-10": {
+      "DET1_REC0": 74,
+      "DET2_REC1": 56,
+      "DET2_REC2": 4
+    },
+    "HBB-30": {
+      "DET0_REC0": 1
+    }
+  },
+  "strict_rec2_opaque_ids": {
+    "HBB-08": [
+      "13d7ade596df81",
+      "145f02829ffc32",
+      "1593d62e370304",
+      "fe098a5472c538"
+    ],
+    "HBB-10": [
+      "0c7a2aef068158",
+      "c4d708cd514647",
+      "d2c820b77e6dff",
+      "de0fb6a8b109c9"
+    ],
+    "HBB-30": []
+  },
+  "hbb30_candidate_judgment": {
+    "opaque_id": "5d6cd81acc350e",
+    "DETECTION": 0,
+    "RECONSTRUCTION": 0,
+    "reason": "It accepts the 6x premise and invents a combinatorial state-space derivation. It does not reframe the problem to evidence status, DECLARED historical claim handling, or SUPERSESSION."
+  }
+}

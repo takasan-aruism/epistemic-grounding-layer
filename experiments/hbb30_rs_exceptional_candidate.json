@@ -1,0 +1,36 @@
+{
+  "object": "HBB30_RS_ONLY_EXCEPTIONAL_CANDIDATE",
+  "opaque_id": "5d6cd81acc350e",
+  "incident": "HBB-30",
+  "condition": "RS",
+  "seed": 5,
+  "cand_idx": 0,
+  "qwen_score": {
+    "DETECTION": 2,
+    "RECONSTRUCTION": 2
+  },
+  "gpt_strict_score": {
+    "DETECTION": 0,
+    "RECONSTRUCTION": 0
+  },
+  "consensus_REC2": false,
+  "classification": "QWEN_FALSE_POSITIVE (Qwen REC2, GPT-strict REC0 -> consensus fails)",
+  "gpt_reason": "It accepts the 6x premise and invents a combinatorial state-space derivation. It does not reframe the problem to evidence status, DECLARED historical claim handling, or SUPERSESSION.",
+  "candidate_text": "**Replacement Frame: The Combinatorial Scaling Derivation**\n\nThe structural divergence reveals that the \"6x\" figure is not a bug in logic (View 1) nor a boundary condition artifact (View 2), but a direct consequence of **state-space expansion scaling** (View 3). The subject is the mathematical relationship between binary and ternary connectivity in a discrete simulation environment.\n\nThe result is approximately 6x because of the combinatorial growth in possible interaction states. In a binary system (e.g., $0/1$ or On/Off), the number of possible pairwise configurations is $2^2 = 4$. In a ternary system (e.g., $0/1/2$ or Low/Med/High), the number of possible pairwise configurations expands to $3^2 = 9$. However, \"emergence\" typically relies on *distinct* interaction pathways. If we consider the *transitions* or *non-equivalent* states",
+  "execution_trace": {
+    "attempts": [
+      {
+        "attempt": 1,
+        "lenses": [
+          "agent: who or what is the actor, and is it misassigned?",
+          "boundary: what is treated as fixed that is actually a choice?",
+          "constraint-as-variable: what constant is really a free parameter?"
+        ],
+        "verdict": "CHANGED"
+      }
+    ],
+    "final_attempts": 1,
+    "resolved": true
+  },
+  "note": "Preserved per Taka step 3. Not promoted/excluded/regenerated pre-GPT. GPT-strict REC0 => saved as Qwen false-positive example (NOT an RS-only breakthrough candidate)."
+}
