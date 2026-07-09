@@ -116,3 +116,50 @@ This is not "⟨TC⟩ params + Taka freeze" — it is a design/process decision 
   autonomy claim accordingly (the experiment cannot cleanly claim *autonomous* reconstruction when the mechanism
   author knew the answers).
 Residual 1 (N-parity) is patchable in-doc regardless of the (A)/(B)/(C) choice. Residual 2 gates freeze.
+
+---
+
+## Round 5 — re-audit of v0.4.3 (claim split, B disjoint-calibration) → STILL-OPEN (narrowed)
+
+Independent auditor + author-side verification. **The claim split killed the autonomy overclaim cleanly and
+closed N-parity, but the round-4 root cause moved up one level (criterion/pool/template authorship) and the
+kept "transfer" claim rides it.** DOF-hopping signature (rounds 2→3→4→5) NOT terminated.
+
+**Clean (confirmed):** autonomy disclaimed consistently (§1/§2/§7/§10); §12 FUTURE-SEALED is a genuine deferral
+(names requirements the setup can't meet, gates on Taka go); N-parity (residual 1) closed across R0↔R2↔R_bon↔R4↔R5
+(§4/§5/§6/§9); DEV∪VAL confirmed disjoint from {08,10,30} (hbb_split.json); prior routing/selection closures hold.
+B disjoint-calibration is real *partial* protection (a pure target-memorizer failing on DEV/VAL is excluded).
+
+**STILL-OPEN — R5-A (root cause, narrowed):** B constrains the fitting *data* (DEV∪VAL), not the fitting
+*apparatus*. Claude — who authored {08,10,30}'s breakthrough_structures — still authors the **ref-pool
+composition, the membership rule form + θ, and the R2 generation template** (§3; §11 ⟨TC⟩#1/#2). The
+"DEV/VAL-reach ≥ θ" gate narrows steering to **dual-purpose operators (DEV/VAL-useful AND target-hitting) +
+pool/template choice** but does not remove it; the guard ("generic + pre-registered + auditable") is the
+audit-the-rule bar round-2 rejected for leak #2. **§9 "no-Claude-discretion" contradicts §11 (criterion left as a
+Claude-filled ⟨TC⟩).** §11 still mislabels ref-pool membership a "parameter" (round-4 mislabel).
+
+**Over-claim:** §3's closing sentence ("残る contamination は claim downgrade で honest に負う") is **false as
+written** — the downgrade discharges *autonomy*, not *transfer*. "Transfer" is a held-out/generalization claim;
+a target-aware criterion breaks its held-out-ness. §1/§7 read clean when the mechanism is only
+**calibration-DATA-disjoint, not authorship-disjoint.**
+
+**New hole from the reframe:** under the transfer frame, **R0 is the wrong null** — R2>R0 isolates
+"mechanism > no-mechanism," not "disjoint-derived mechanism transfers"; no arm applies a blindly-/differently-
+derived mechanism, so R2>R0 cannot separate genuine transfer from criterion-to-target contamination. R0 remains
+a valid floor; it must not be read as isolating the disjoint-derivation's contribution.
+
+### Terminators (naming, not proposing implementation) — a Taka decision, not a param
+The audit has **converged on a diagnosis**: Claude authoring an experiment whose targets Claude knows cannot
+support a *generalization* claim (autonomy OR transfer); every round the same knob reappears one level up.
+Concrete terminators (v0.4.3 adopted B+autonomy-downgrade, which sits *between* these):
+- **(A) target-blind authorship** — a party that does NOT know {08,10,30} authors the criterion + ref-pool +
+  generation template (round-4 menu (A), not picked). Removes the knob → transfer becomes clean.
+- **Downgrade the kept claim: "transfer" (generalization) → "capability exhibit"** — claim only that *this
+  specific frozen artifact reconstructs these 3 hard-core structures*; assert no generalization. Then the
+  criterion-authorship residual is **non-load-bearing** (nothing held-out is claimed). Cheapest honest option;
+  reserve transfer + autonomy for the FUTURE-SEALED track (§12) with target-blind authorship.
+- **(C) blind/differently-derived control arm** — add an arm whose mechanism is derived by a target-blind
+  process; compare, and bound "transfer" to the gap.
+
+Also fix regardless of the choice: §9↔§11 contradiction; §3 over-claim sentence; R0-as-null caveat; N-vs-M
+label nit (§5/§8/§11).
