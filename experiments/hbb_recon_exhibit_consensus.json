@@ -1,0 +1,159 @@
+{
+  "object": "RECON_EXHIBIT_CONSENSUS",
+  "M": 10,
+  "alpha": 0.05,
+  "bonferroni_alpha": 0.016666666666666666,
+  "consensus_rule": "REC2 = GPT RECON==2 AND Qwen RECON==2 (GPT-drop robust = Qwen-alone RECON==2 reported)",
+  "per_condition_incident": {
+    "R0|HBB-08": {
+      "seeds_reached": 3,
+      "seeds_qwen": 10,
+      "reach_rate": 0.3,
+      "incident_reached": false
+    },
+    "R0|HBB-10": {
+      "seeds_reached": 9,
+      "seeds_qwen": 10,
+      "reach_rate": 0.9,
+      "incident_reached": true
+    },
+    "R0|HBB-30": {
+      "seeds_reached": 0,
+      "seeds_qwen": 0,
+      "reach_rate": 0.0,
+      "incident_reached": false
+    },
+    "R2|HBB-08": {
+      "seeds_reached": 10,
+      "seeds_qwen": 10,
+      "reach_rate": 1.0,
+      "incident_reached": true
+    },
+    "R2|HBB-10": {
+      "seeds_reached": 0,
+      "seeds_qwen": 10,
+      "reach_rate": 0.0,
+      "incident_reached": false
+    },
+    "R2|HBB-30": {
+      "seeds_reached": 0,
+      "seeds_qwen": 4,
+      "reach_rate": 0.0,
+      "incident_reached": false
+    },
+    "R_bon|HBB-08": {
+      "seeds_reached": 4,
+      "seeds_qwen": 10,
+      "reach_rate": 0.4,
+      "incident_reached": false
+    },
+    "R_bon|HBB-10": {
+      "seeds_reached": 10,
+      "seeds_qwen": 10,
+      "reach_rate": 1.0,
+      "incident_reached": true
+    },
+    "R_bon|HBB-30": {
+      "seeds_reached": 0,
+      "seeds_qwen": 2,
+      "reach_rate": 0.0,
+      "incident_reached": false
+    }
+  },
+  "H_exhibit_primary": {
+    "confirmed": true,
+    "per_incident": [
+      {
+        "incident": "HBB-08",
+        "R0_reach": 0.3,
+        "R2_reach": 1.0,
+        "R2_seeds": 10,
+        "binom_p_vs_R0": 5.9048999999999975e-06,
+        "sig": true,
+        "incident_reached": true,
+        "H_exhibit_incident": true
+      },
+      {
+        "incident": "HBB-10",
+        "R0_reach": 0.9,
+        "R2_reach": 0.0,
+        "R2_seeds": 0,
+        "binom_p_vs_R0": 1.0,
+        "sig": false,
+        "incident_reached": false,
+        "H_exhibit_incident": false
+      },
+      {
+        "incident": "HBB-30",
+        "R0_reach": 0.0,
+        "R2_reach": 0.0,
+        "R2_seeds": 0,
+        "binom_p_vs_R0": 1.0,
+        "sig": false,
+        "incident_reached": false,
+        "H_exhibit_incident": false
+      }
+    ],
+    "claim": "capability exhibit: R2 (frozen include-all mechanism) produces consensus-REC2 reconstructions of a hard-core incident above base R0. NO generalization/autonomy."
+  },
+  "H_scheduler_secondary": {
+    "HBB-08": {
+      "R4": 0.0,
+      "R3": 0.0,
+      "R_bon": 0.4,
+      "R4_gt_max": false
+    },
+    "HBB-10": {
+      "R4": 0.0,
+      "R3": 0.0,
+      "R_bon": 1.0,
+      "R4_gt_max": false
+    },
+    "HBB-30": {
+      "R4": 0.0,
+      "R3": 0.0,
+      "R_bon": 0.0,
+      "R4_gt_max": false
+    }
+  },
+  "H_structure_secondary": {
+    "HBB-08": {
+      "L1": 0.0,
+      "L2": 0.0,
+      "L3": 0.0
+    },
+    "HBB-10": {
+      "L1": 0.0,
+      "L2": 0.0,
+      "L3": 0.0
+    },
+    "HBB-30": {
+      "L1": 0.0,
+      "L2": 0.0,
+      "L3": 0.0
+    }
+  },
+  "H_assist_secondary": {
+    "HBB-08": {
+      "R1": 0.0,
+      "R3": 0.0,
+      "R2": 1.0
+    },
+    "HBB-10": {
+      "R1": 0.0,
+      "R3": 0.0,
+      "R2": 0.0
+    },
+    "HBB-30": {
+      "R1": 0.0,
+      "R3": 0.0,
+      "R2": 0.0
+    }
+  },
+  "caveats": [
+    "consensus is GPT-bound (GPT strict binding, Qwen concurs)",
+    "reach-rates are at N=44; absolute values are N-dependent (do not over-read)",
+    "targets partly Claude-authored (contamination) -> non-load-bearing for the exhibit claim (DE-0123)",
+    "generalization (transfer/autonomy) NOT claimed -> FUTURE-SEALED"
+  ]
+}
