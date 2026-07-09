@@ -1,0 +1,38 @@
+{
+  "object": "HBB_RECONSTRUCTION_PREREG_SEAL",
+  "prereg_file": "docs/hbb_reconstruction_prereg_v0.4.md",
+  "prereg_version": "v0.4.4 (capability-exhibit)",
+  "sha256": "4cb77d89b30e682122d5f90806c1135e8034ea85cdf1cd82ac15577b45f23a01",
+  "bytes": 13981,
+  "frozen_at": "2026-07-09T01:56:40Z",
+  "frozen_by": "params confirmed by Taka (DE-0124); audit VALIDITY-CLEAN (rounds 2-6, DE-0116..0123)",
+  "params_confirmed": {
+    "operator_set": "include-all, 11 operators = AFE 6 (sha 38111563) + Formal clean 5 (formal_esde_operators.json sealable_axiom_grounded); no DEV/VAL theta-gating",
+    "R2_generation_template": "frozen target-blind T0-only generic reframe prompt; exact string bound at implementation under this spec",
+    "lossy_ladder": "L1=nouns+numbers / L2=+domain verbs+terms / L3=structure-only; MASK_PIPELINE v2 sha 2bfd70f9; manipulation check per level",
+    "N_candidate_pool": 44,
+    "N_derivation": "11 operators x pass-cap 4",
+    "pass_cap": 4,
+    "convergence_early_stop": false,
+    "M_seeds": 10,
+    "incident_reached_threshold": "ceil(M/2) = 5 seeds",
+    "third_scorer": "none; endpoint = 'GPT-certified + Qwen-concurred'; GPT-drop robustness (Qwen-alone REC2) reported",
+    "scorers": [
+      "GPT rubric-v2 (strict)",
+      "Qwen rubric-v2 (lenient)"
+    ],
+    "rubric_sha256": "012941aba485f33b8328b7e5cba2a84b5c1db82119bb96554bc8dea84f4f9f17",
+    "token_budget": "matched total; absolute lower bound = guarantee exhaustive completion of all 44 candidates per (condition,incident,seed); never truncate",
+    "alpha": 0.05,
+    "multiplicity": "corrected over 3 hard-core incidents",
+    "hard_core": [
+      "HBB-08",
+      "HBB-10",
+      "HBB-30"
+    ]
+  },
+  "primary_claim": "CAPABILITY EXHIBIT (existence): does the frozen include-all no-author-selection mechanism produce independent-2-scorer consensus-REC2-certified reconstructions of {08,10,30} above base R0? No generalization / no autonomy asserted.",
+  "generalization_deferred_to": "FUTURE-SEALED track (transfer + autonomous reconstruction), target-blind authorship required; not run here.",
+  "status": "FROZEN — AWAITING_TAKA_GO for implement/run. No run/implementation performed.",
+  "verify": "sha256(bytes of docs/hbb_reconstruction_prereg_v0.4.md) == this sha256"
+}
