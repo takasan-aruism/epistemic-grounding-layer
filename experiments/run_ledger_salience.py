@@ -21,12 +21,24 @@ ENT_BASE = 2      # entropy base
 ALPHA = 0.05
 PRIMARY_STREAM = "evidence_class"
 PRIMARY_METRICS = ["max_run", "n_runs_ge3", "uppertail_run_mass", "max_causal_entropy_z"]
+# --- INPUT PIN (reproducibility fix, DE-0132): pin to the sealed snapshot; the prototype's own result
+#     entries must never enter their own input (self-reference). Only input selection is pinned here;
+#     no detector/normalization/primitive/threshold/window/null/metric is changed. ---
+N_SEALED = 130     # ledger length at prereg freeze (270196d4)
+STREAM_SHA256 = "82051d270e8b5dafac0a582462011e5e12904bdc7babc723af7cecf1dad4c7ad"  # sha256 of sealed evidence_class stream
+SELF_ENTRY_CLASSES = {"PROTOTYPE_RESULT", "LEDGER_SALIENCE_REPRODUCIBILITY_DEFECT"}  # this prototype's own appends
 
 _prim_calls = Counter()
 
 # --- data extraction / normalization contract (mechanical only) ---
 def load_stream(field):
     rows = [json.loads(l) for l in open(LEDGER, encoding="utf-8") if l.strip()]
+    # input pin: every entry BEYOND the sealed snapshot must be one of THIS prototype's own appends
+    # (self-reference guard); a real research entry appended later trips this and forces a pin review.
+    for r in rows[N_SEALED:]:
+        ec = (r.get("evidence_class") or "").strip().upper()
+        assert ec in SELF_ENTRY_CLASSES, f"non-self entry beyond sealed snapshot: {r.get('design_evidence_id')} [{ec}] — pin needs review"
+    rows = rows[:N_SEALED]
     out = []
     for r in rows:
         if field == "evidence_class":
@@ -38,6 +50,9 @@ def load_stream(field):
         else:
             raise ValueError(field)
         out.append(str(sym).strip().upper())   # verbatim -> strip -> upper. NO semantic merge.
+    if field == "evidence_class":              # verify pinned stream matches the sealed hash
+        h = hashlib.sha256("\n".join(out).encode()).hexdigest()
+        assert h == STREAM_SHA256, f"sealed stream hash mismatch: {h}"
     return out
 
 # --- representations (structural on symbols; never a value on a category) ---
