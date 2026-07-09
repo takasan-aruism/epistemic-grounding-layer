@@ -77,3 +77,42 @@ frozen, target-blind, T0-only, seed-varied. The **target-held-out independent sc
 target-blind scorer; the author never picks. Cross-pass outputs pooled (no best-pass author pick); budget
 guarantees full passes (no partial final pass). All conditions get this uniformly at matched budget, so the
 any-of-N inflation is controlled by the R0 floor (H_recon = R2 > R0). §2 (R2/R_bon), §5.3, §10 reconciled.
+
+---
+
+## Round 4 — re-audit of the no-author-selection fix (v0.4.2) → STILL-OPEN (structural)
+
+Independent auditor + author-side verification. **Verdict: the *selection* surface is genuinely closed; two
+residuals remain — one patchable, one structural (root cause).**
+
+- **Selection closed (real, param-independent)**: §2's no-author-selection principle removes the author's
+  selection knob across R2/R4/R_bon/cross-pass; the endpoint is decided by the target-held-out scorers, not the
+  author. Round-3's leak #2 *as scoped to selection* is closed. This is a genuine general closure, not a local patch.
+- **Residual 1 — any-of-N floor fairness (PATCHABLE)**: the endpoint is now best-of-N ("≥1 of N certified"),
+  monotonic in N. §6 matches **total token** but **never pins N (candidate count)** between R0 and R2 (R0="単段").
+  If R2's per-candidate generation is cheaper, R2 draws more candidates → higher reach from N alone, not
+  reconstruction. Compounds S3 (best-of-N over a GPT-bound consensus amplifies GPT idiosyncrasy). Fix = freeze
+  **N-parity** (match candidate count, not just token) between R0 and R2 in §9, or an explicit N-invariance argument.
+- **Residual 2 — target-aware GENERATION authorship (STRUCTURAL, root cause)**: with routing (round-2/3) and
+  selection (round-3/4) removed, the only author-controlled surface left is **generation** — Claude authors the
+  ref-operator **set** (§5.2) and R2's generation prompt **while knowing {08,10,30}** (Claude authored their
+  breakthrough_structures, DE-0115 caveat). §2 guards these only with "frozen + non-referencing + T0-only +
+  seed-varied" = **the weak bar round-2 explicitly rejected for leak #2** (which required *target-blind authorship*
+  OR a *disjoint calibration set*). Pure-exhaustive stops covert *promotion*, but *including* a target-hitting
+  operator in the frozen set still steers R2 toward the target = overfit by **set composition**. §11 ⟨TC⟩#2
+  mislabels "ref set membership" as a benign param when *who authors it and whether authorship is target-blind* is
+  a **validity** question. §10's "author=機構のみ" is in tension with Claude authoring this content knowing the targets.
+
+### Convergence judgment (escalate, do NOT patch)
+Rounds 2→3→4 are the **same signature**: the overfit DOF hops routing → selection → generation while the guard
+stays "frozen/non-referencing." Per-knob patching will keep surfacing the next knob. The structural terminator is
+the round-2-prescribed fix never adopted for CONTENT authorship: **decouple authorship from target knowledge**.
+This is not "⟨TC⟩ params + Taka freeze" — it is a design/process decision for Taka:
+- **(A) target-blind authoring party**: a party that does NOT know {08,10,30}'s targets authors the ref-operator
+  set + generation prompts (Claude is 当事者 → excluded).
+- **(B) disjoint calibration set**: freeze/validate the operator set + prompts on incidents disjoint from
+  {08,10,30} (e.g. HBB DEV/VAL), so they can't be tuned to the hard-core targets.
+- **(C) accept & downgrade**: acknowledge H_recon is contingent on target-aware authoring and downgrade the
+  autonomy claim accordingly (the experiment cannot cleanly claim *autonomous* reconstruction when the mechanism
+  author knew the answers).
+Residual 1 (N-parity) is patchable in-doc regardless of the (A)/(B)/(C) choice. Residual 2 gates freeze.

@@ -1,7 +1,7 @@
 # Reconstruction Experiment — Preregistration v0.4 (NBC-1)
 
-**status: `PREREG_v0.4.2 — S2 leaks closed (B1-(i) + no-author-selection); PENDING round-4 re-audit + ⟨TC⟩ params + Taka freeze`. 実装・run・freeze/hash はしない。**
-**audit(DE-0117, rounds 2–3)**: [[hbb_reconstruction_prereg_v0.4_audit]]。9/11 clean。**S2**: round-2 で Taka が **B1-(i) pure exhaustive** を選択→ R4 演算子の routing DOF を除去(§5.2)。round-3 で **leak#2 が primary R2 の frame 選択に残存**を検出→ **no-author-selection 原則(§2)で全 condition の選択を target-blind scorer へ移し param 非依存に除去**。**B2 修正済**。次: **round-4 独立再監査 → clean なら ⟨TC⟩ params 確定 → Taka 承認で freeze/hash**。
+**status: `PREREG_v0.4.2 — round-4: STILL-OPEN (structural). ESCALATED to Taka`. 実装・run・freeze/hash はしない。**
+**audit(DE-0117/0118/0119, rounds 2–4)**: [[hbb_reconstruction_prereg_v0.4_audit]]。**selection surface は closed**(B1-(i) pure exhaustive + no-author-selection、param 非依存)。**残 2**: (1) **any-of-N floor の N-parity**（§6 は total token のみ一致、R0↔R2 の候補数 N 未固定 → patchable）、(2) **target-aware GENERATION authorship = root cause（structural）** — Claude が {08,10,30} を知りつつ ref-operator set(§5.2)と R2 生成 prompt を著すため、pure-exhaustive でも set composition で target へ steer。guard は round-2 が却下した弱い『frozen/non-referencing』のまま。**rounds 2→3→4 は同一 signature（overfit DOF が routing→selection→generation と hop）**。構造的終端 = **authorship を target 知識から decouple**（A target-blind author / B disjoint calibration set / C accept & downgrade）。**Taka 判断待ち。freeze/hash しない。**
 Sequence gate: **v0.4 → 独立 audit → 問題なければ freeze/hash → その後に初めて実装 go(Taka)**。
 Supersedes v0.3 (`docs/hbb_reconstruction_prereg_v0.3_draft.md`, BLOCKED). Incorporates the DE-0116 audit fixes
 (S1–S11) as design decisions. Refs: DE-0115 (hard-core) · DE-0116 (audit) · `hbb_hard_core_fixed.json` ·
