@@ -1,0 +1,574 @@
+{
+  "object": "LEDGER_SALIENCE_POWER_AUDIT",
+  "version": "v0.1",
+  "params": {
+    "W": 10,
+    "WARMUP": 10,
+    "L0": 3
+  },
+  "primary": {
+    "field": "evidence_class",
+    "total_length": 130,
+    "vocab": 36,
+    "singletons": 22,
+    "rare_le2_cats": 29,
+    "rare_le2_share_of_stream": 0.277,
+    "cats_with_power_ge3": 7,
+    "cats_ge3": [
+      "OPERATIONAL",
+      "COUNTEREXAMPLE",
+      "ARCHITECTURE_DECISION",
+      "CORRECTION",
+      "AUDIT",
+      "DESIGN_DECISION",
+      "REGISTRATION"
+    ],
+    "dominant_share": 0.408,
+    "missing": 0,
+    "window_series_len": 121,
+    "early_sequence_censoring": "causal EWMA-z silent for first 10 window-points (z=0)",
+    "recurrence_right_censoring": "final occurrence of each category has no closing interval (dropped)",
+    "signal0_vs_nopower_rule": {
+      "run/persistence": "count<2 => NO POWER (not 'normal'); count>=3 required for persistence_ge3",
+      "recurrence": "count<2 => NO POWER; right-censored last interval excluded",
+      "self_history_z": "first WARMUP points => NO POWER (z=0 by construction)"
+    },
+    "effective_history_per_category": {
+      "OPERATIONAL": {
+        "count": 53,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "COUNTEREXAMPLE": {
+        "count": 16,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "ARCHITECTURE_DECISION": {
+        "count": 6,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "CORRECTION": {
+        "count": 6,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "AUDIT": {
+        "count": 6,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "DESIGN_DECISION": {
+        "count": 4,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "REGISTRATION": {
+        "count": 3,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "IMPLEMENTATION_BLOCKER": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "METHODOLOGY": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "ADJUDICATION": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "OPEN_GAP": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "MEASURED": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "DESIGN_NEED": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "DECISION": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "IMPLEMENTATION_DERIVED": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "DESIGN_CLARIFICATION": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "DESIGN_GAP": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "DESIGN_DEFECT": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "PHASE_DECISION": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "DESIGN_REFINEMENT_PRE_IMPL": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "DERIVED_FAILURE_PATTERN": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "GOVERNANCE_SELF_REPORT": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "CURRENT_SYSTEM_STATE": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "REVIEW_FINDING": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "SCOPE_CORRECTION": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "PLAN": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "PROJECT_ROADMAP": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "THIRD_SCORER_INGEST": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "CLOSURE": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "FREEZE": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "IMPLEMENTATION_AUDIT": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "PROCESS_INCIDENT": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "PRIMARY_EXHIBIT_RESULT": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "CONSTRUCT_VALIDITY_AUDIT": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "INSTRUMENT_BUILD_AND_PROVISIONAL_RUN": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "SCHEDULER_EXHIBIT_RESULT_CLOSURE": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      }
+    }
+  },
+  "secondary": {
+    "field": "decision_head",
+    "total_length": 130,
+    "vocab": 48,
+    "singletons": 32,
+    "rare_le2_cats": 40,
+    "rare_le2_share_of_stream": 0.369,
+    "cats_with_power_ge3": 8,
+    "cats_ge3": [
+      "ADOPT",
+      "AMEND",
+      "REGISTER",
+      "CLOSE",
+      "DEFER",
+      "RECORD",
+      "ESCALATE",
+      "RETURN"
+    ],
+    "dominant_share": 0.277,
+    "missing": 0,
+    "window_series_len": 121,
+    "early_sequence_censoring": "causal EWMA-z silent for first 10 window-points (z=0)",
+    "recurrence_right_censoring": "final occurrence of each category has no closing interval (dropped)",
+    "signal0_vs_nopower_rule": {
+      "run/persistence": "count<2 => NO POWER (not 'normal'); count>=3 required for persistence_ge3",
+      "recurrence": "count<2 => NO POWER; right-censored last interval excluded",
+      "self_history_z": "first WARMUP points => NO POWER (z=0 by construction)"
+    },
+    "effective_history_per_category": {
+      "ADOPT": {
+        "count": 36,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "AMEND": {
+        "count": 24,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "REGISTER": {
+        "count": 6,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "CLOSE": {
+        "count": 4,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "DEFER": {
+        "count": 3,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "RECORD": {
+        "count": 3,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "ESCALATE": {
+        "count": 3,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "RETURN": {
+        "count": 3,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": true
+      },
+      "PROVISIONAL": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "CONFIRM": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "OPEN": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "NARROW": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "PLAN": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "ENGINE": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "RETRACT": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "PREREG": {
+        "count": 2,
+        "run_computable": true,
+        "recurrence_computable": true,
+        "persistence_ge3_possible": false
+      },
+      "SUPERSEDE": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "BRANCH": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "CONTINUE": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "REWORK": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "AWAITING": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "HONEST": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "SLEEP": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "ABSTRACTION": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "H1": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "REPRESENTATION": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "ADD": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "FULL": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "6": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "READY": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "AFE": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "PRECISION": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "HYBRID": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "EXECUTE": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "REFRAME": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "AA": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "HALT": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "DEMOTE": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "HBB": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "S2": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "NO": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "B": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "TERMINATOR": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "DOWNGRADE": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "FREEZE": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "RUN": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "R4": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      },
+      "HANDOFF": {
+        "count": 1,
+        "run_computable": false,
+        "recurrence_computable": false,
+        "persistence_ge3_possible": false
+      }
+    }
+  }
+}

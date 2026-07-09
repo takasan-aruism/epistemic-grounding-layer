@@ -1,0 +1,28 @@
+{
+  "object": "LEDGER_SALIENCE_CONSTRUCT_TO_CODE_BINDING",
+  "version": "v0.1",
+  "code": "experiments/run_ledger_salience.py",
+  "principle": "Each representation and primitive maps 1:1 to a code site with a PRESENT criterion and a no-leakage / no-semantics invariant an independent auditor can check.",
+  "representations": [
+    {"id": "R1", "name": "run-length", "code_site": "runs_of()/all_runs()", "present_criterion": "consecutive-run lengths of a symbol over the ordered sequence; symbol identity only", "inverts_if": "a value is assigned to the symbol"},
+    {"id": "R2", "name": "recurrence-interval", "code_site": "recurrence_intervals()", "present_criterion": "ordinal gaps between successive occurrences of a symbol; last occurrence right-censored (no closing interval)", "inverts_if": "future index used before it occurs"},
+    {"id": "R3", "name": "window-distribution", "code_site": "window_entropy_series(W=10)", "present_criterion": "Shannon entropy (base 2) of the category distribution in a fixed sliding window; metric fixed pre-hoc (entropy only)", "inverts_if": "an entropy variant is added after seeing results"}
+  ],
+  "primitives": [
+    {"id": "A", "name": "self-history deviation (causal EWMA-z)", "code_site": "causal_ewma_z()", "present_criterion": "z at index t uses ONLY indices < t (past-only); z computed BEFORE updating EWMA with x_t; warmup WARMUP points return z=0", "inverts_if": "x_t enters its own mean/var before z_t is emitted (future leakage)"},
+    {"id": "B", "name": "two-sided rarity", "code_site": "two_sided_rarity()", "present_criterion": "-log10(clip(2*min(pct,1-pct),1/2n)); BOTH tails retained (high and low)", "inverts_if": "only one tail kept"},
+    {"id": "C", "name": "persistence-run", "code_site": "compute_metrics(): n_runs_ge3 / uppertail_run_mass / max_run", "present_criterion": "counts/masses over run-length rep; L0=3 threshold frozen", "inverts_if": "threshold tuned to results"},
+    {"id": "D", "name": "distribution reporting", "code_site": "compute_metrics returns full metrics; result stores per-metric real+null; power_audit stores per-category table", "present_criterion": "no argmax-to-one; full distribution/per-metric retained", "inverts_if": "a single 'shakiest point' is reported as the result"}
+  ],
+  "invariants": {
+    "no_category_value": "no symbol is ever mapped to a numeric meaning-value; all math is on run/interval/entropy structure of symbols",
+    "causal_no_future_leak": "causal_ewma_z is past-only; recurrence uses only realized indices",
+    "null_count_preserving": "null = random.shuffle of the SAME multiset (counts preserved, only ordinal order destroyed); N_NULL=2000, SEED=20260710 frozen",
+    "target_blind": "no known-incident position, no DE id, no HBB/PROCESS-01/scheduler label is passed to load_stream/metrics/null",
+    "metrics_pre_fixed": "PRIMARY_METRICS = [max_run, n_runs_ge3, uppertail_run_mass, max_causal_entropy_z]; no metric added after results",
+    "primary_stream_fixed": "decision on evidence_class only; decision_head reported-only",
+    "no_result_tuning": "no threshold/param changed after seeing salience (PROCESS-01 log records n_null/primitive_calls)"
+  },
+  "acceptance_gate": "independent auditor confirms all representation/primitive PRESENT + all invariants hold on run_ledger_salience.py BEFORE the real+null run.",
+  "status": "BINDING DRAFTED — awaiting independent construct audit; RUN held."
+}

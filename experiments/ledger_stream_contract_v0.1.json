@@ -1,0 +1,33 @@
+{
+  "object": "LEDGER_STREAM_EXTRACTION_NORMALIZATION_CONTRACT",
+  "version": "v0.1",
+  "source": "DESIGN_EVIDENCE_LEDGER.jsonl (append order PRESERVED = the ordinal time axis; there is no ts field)",
+  "principle": "MECHANICAL normalize rules only. No post-hoc semantic classification, no merging of near-terms, no category->value encoding.",
+  "streams": {
+    "PRIMARY": {
+      "field": "evidence_class",
+      "rule": "verbatim field value -> str -> strip() -> upper(). Missing field -> 'MISSING'. NO merge of distinct verbatim values (e.g. AUDIT and CONSTRUCT_VALIDITY_AUDIT stay separate).",
+      "observed": {"N": 130, "vocab": 36, "spelling_variant_collisions": 0, "missing": 0}
+    },
+    "SECONDARY": {
+      "field": "decision",
+      "rule": "first underscore-delimited token of 'decision' -> strip() -> upper(). Missing -> 'MISSING'. First-token split is a purely mechanical tokenization, not a semantic grouping.",
+      "observed": {"N": 130, "vocab": 48, "spelling_variant_collisions": 0, "missing": 0},
+      "status": "REPORTED-ONLY (noisier tokens e.g. '6','H1','R4','B'); NOT in the primary decision"
+    }
+  },
+  "frozen_normalize_rules": [
+    "1. read rows in file append order; index i = ordinal position (0..N-1).",
+    "2. symbol = verbatim field (PRIMARY) or first '_' token (SECONDARY).",
+    "3. transform = str().strip().upper() ONLY.",
+    "4. missing/None -> literal 'MISSING' (a distinct symbol, not dropped).",
+    "5. NO semantic merge, NO alias table, NO value assigned to any symbol.",
+    "6. spelling-variant check ran (canon = lower+alnum): 0 collisions -> no merge needed and none applied."
+  ],
+  "forbidden": [
+    "category->value scalar (e.g. AUDIT=1, CLOSURE=0)",
+    "semantic grouping (AUDIT + CONSTRUCT_VALIDITY_AUDIT -> 'audit-like')",
+    "known-incident position passed to any generator/detector",
+    "any post-hoc addition of a normalization rule after seeing salience results"
+  ]
+}

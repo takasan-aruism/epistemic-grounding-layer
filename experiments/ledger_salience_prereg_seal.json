@@ -1,0 +1,22 @@
+{
+  "object": "LEDGER_SALIENCE_PREREG_SEAL",
+  "prereg": "docs/ledger_salience_prereg_v0.1.md",
+  "sha256": "270196d41f95c1c351f38eb0d942f8d4fccc812e67454ea9227524320c3e6fe2",
+  "bytes": 3428,
+  "spec": "docs/ledger_salience_prototype_spec_v0.1.md",
+  "contract": "experiments/ledger_stream_contract_v0.1.json",
+  "binding": "experiments/ledger_salience_construct_binding_v0.1.json",
+  "impl": "experiments/run_ledger_salience.py",
+  "power_audit": "experiments/ledger_salience_power_audit_v0.1.json",
+  "primary_metrics": [
+    "max_run",
+    "n_runs_ge3",
+    "uppertail_run_mass",
+    "max_causal_entropy_z"
+  ],
+  "null": "count-preserving order-shuffle N=2000 seed=20260710",
+  "bonferroni_alpha": 0.0125,
+  "claim_ceiling": "non-random temporal salience structure detectable by reused ESDE primitives (positive) / not detected (negative)",
+  "frozen_at": "2026-07-10",
+  "run_status": "HELD pending independent construct audit"
+}
