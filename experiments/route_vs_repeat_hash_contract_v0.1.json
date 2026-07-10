@@ -1,0 +1,25 @@
+{
+  "object": "ROUTE_VS_REPEAT_CONTEXT_SIGNATURE_HASH_CONTRACT",
+  "version": "v0.1",
+  "companion_to": "docs/route_vs_repeat_prereg_v0.1.md",
+  "purpose": "Make the same-context / same-system / route-before-rebuild invariants MECHANICALLY auditable via hashes, so structural routing cannot be faked and REPEAT-vs-ROUTE is a fair comparison.",
+  "hashes": {
+    "signature_pool_hash": {"def": "sha256('\\n'.join(sorted(signature_pool)))", "must": "IDENTICAL across CONTROL, REPEAT, ROUTE and across all centers (context multiset invariant, req 3)"},
+    "source_frame_hash": {"def": "sha256(t0_stuck_frame HBB-30)", "must": "IDENTICAL across all conditions (no source change)"},
+    "system_config_hash": {"def": "sha256(model|endpoint|SYS_SIG|SYS_REB|temp_compare=0|temp_rebuild|max_tokens|seed_scheme)", "must": "IDENTICAL across all conditions (same-system, req 4)"},
+    "control_delta_hash": {"def": "sha256(compare_call(sigs) output text)", "role": "baseline delta-set"},
+    "repeat_delta_hash": {"def": "sha256(deltas used by REPEAT rebuild)", "must": "== control_delta_hash (req 1; REPEAT reuses deltas_ctrl)"},
+    "route_delta_hash_i": {"def": "sha256(compare_call(sigs, center_ref=i) output text)", "must": "!= control_delta_hash for eligible nontrivial centers (req 2)"},
+    "center_ref_provenance": {"def": "center = index i into signature_pool; record sigs[i]", "must": "center is an existing pool member; no external text injected; no answer-aware pick"}
+  },
+  "eligibility": "a center i is 'eligible/nontrivial' if sigs[i] is distinct from >=1 other signature (degenerate/duplicate signatures excluded from the req-2 tally, reported separately).",
+  "audit_procedure": [
+    "1. assert signature_pool_hash equal in every condition record.",
+    "2. assert source_frame_hash + system_config_hash equal in every condition record.",
+    "3. assert repeat_delta_hash == control_delta_hash (req 1).",
+    "4. tally route_delta_hash_i != control_delta_hash over eligible centers (req 2).",
+    "5. assert ROUTE records show center entered compare (center_ref set) and rebuild got NO repeat_text; REPEAT records show compare center_ref=None and rebuild got repeat_text (req 5).",
+    "6. scan ROUTE/REPEAT prompts for forbidden tokens (focus/central/reframe/premise/provenance/challenge/question + HBB-30 answer vocab)."
+  ],
+  "verdict_inputs": "req 1,3,4,5 must hold (else INVALID); req 2 pass/fail decides STRUCTURAL vs TEXT-EMPHASIS-ONLY; secondary output-distinguishability decides VALID vs AMBIGUOUS."
+}

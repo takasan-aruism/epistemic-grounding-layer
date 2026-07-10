@@ -1,0 +1,34 @@
+{
+  "object": "ROUTE_VS_REPEAT_CONSTRUCT_TO_CODE_BINDING",
+  "version": "v0.1",
+  "companion_to": "docs/route_vs_repeat_spec_v0.1.md",
+  "note": "Design binding (implementation is a later, gated step). Reuses the scheduler reconstruction pipeline. The ONLY code change is (a) a center_ref param on compare_call (re-rooting), (b) a repeat_text param on rebuild_call (matched repetition). Everything else unchanged.",
+  "reused_current_code": {
+    "signature_call": "run_scheduler_exhibit.signature_call(view) -> 'SUBJECT=|LEVEL=|KEY-DISTINCTION=' (UNCHANGED)",
+    "compare_call_current": "compare_call(sigs): qgen(SYS_CMP, 'SIGNATURES:\\n'+body) all-pairs (baseline for CONTROL/REPEAT)",
+    "rebuild_call_current": "rebuild_call(deltas, fr): qgen(SYS_REB, 'SOURCE (anchor only):\\n{fr}\\n\\nSTRUCTURAL DIFFERENCES...:\\n{deltas}...') (baseline for CONTROL)"
+  },
+  "constructs": [
+    {"id": "F1", "name": "fixed signature pool", "site": "generate V views+signatures ONCE (frozen lenses+seed) on HBB-30 t0_stuck_frame; persist; all conditions reuse", "present_criterion": "one signature list, hashed, reused by CONTROL/REPEAT/ROUTE; no regeneration per condition", "invalid_if": "signatures differ across conditions"},
+    {"id": "C-CTRL", "name": "CONTROL", "site": "compare_call(sigs) [center_ref=None, all-pairs, temp=0, seed s0] -> deltas_ctrl -> rebuild_call(deltas_ctrl, fr)", "present_criterion": "current pipeline unchanged", "invalid_if": "any modification"},
+    {"id": "C-REP", "name": "REPEAT", "site": "REUSE deltas_ctrl verbatim; rebuild_call(deltas_ctrl, fr, repeat_text=sigs[i]) — center text appended at REBUILD input only", "present_criterion": "compare NOT re-run/altered; REPEAT deltas object IS deltas_ctrl; center text enters only the rebuild prompt", "invalid_if": "compare changed, or deltas recomputed, or center enters before rebuild"},
+    {"id": "C-ROUTE", "name": "ROUTE", "site": "compare_call(sigs, center_ref=i) [SYS_CMP_ROOTED: deltas relative to reference sigs[i], temp=0, seed s0] -> deltas_route_i -> rebuild_call(deltas_route_i, fr)", "present_criterion": "center enters at compare via center_ref (a reference INDEX into sigs), reshaping deltas BEFORE rebuild; rebuild takes the reshaped deltas with NO extra text", "invalid_if": "center enters at rebuild, or as free text not a reference index, or rebuild also gets repeat_text"},
+    {"id": "SWEEP", "name": "all-signature sweep", "site": "center_ref = i for every i in range(len(sigs)); no selection", "present_criterion": "every signature is center once; CONTROL/REPEAT attempt-count and seed-scheme matched to ROUTE", "invalid_if": "a center is hand-picked / answer-aware / a winning signature selected"},
+    {"id": "P1", "name": "compare-rooting prompt (no forbidden tokens)", "site": "SYS_CMP_ROOTED = a topology change (all-pairs -> star-from-reference); marks one signature as REFERENCE; 'differences relative to the reference'", "present_criterion": "contains NO 'focus/central/reframe/premise/provenance/challenge/question' and NO HBB-30 answer vocabulary; only a comparison-topology change", "invalid_if": "any forbidden/semantic-loaded token or a 'consider X central' instruction"},
+    {"id": "D1", "name": "deterministic delta hashing", "site": "compare at temp=0, fixed seed s0 -> delta text -> sha256", "present_criterion": "compare_call deterministic; delta-set hash reproducible", "invalid_if": "compare stochastic so hashes are unstable"}
+  ],
+  "invariants": {
+    "repeat_delta_eq_control": "REPEAT uses the SAME deltas object as CONTROL (requirement 1) -> hashes equal by construction",
+    "route_delta_ne_control": "ROUTE recomputes deltas with center_ref -> hash differs for eligible centers (requirement 2)",
+    "context_multiset_identical": "sha256(sorted signature pool) identical across all conditions (requirement 3)",
+    "same_system": "model/source/task/evidence-policy/authority-policy/decoding identical; only the compare center_ref (ROUTE) or rebuild repeat_text (REPEAT) differs (requirement 4)",
+    "route_before_rebuild": "ROUTE change is at compare, before rebuild prompt assembly (requirement 5)",
+    "repeat_cannot_reproduce": "REPEAT (center at rebuild) leaves deltas == CONTROL, so cannot reproduce ROUTE delta structure (requirement 6)",
+    "center_from_pool": "center is an index into the existing signature pool; no external object injected; no answer-aware pick"
+  },
+  "anti_fake_center_invalidators": ["center label only in prompt", "center text moved to front", "center text re-quoted", "only rebuild prompt changed (that is REPEAT, not ROUTE)", "task/evidence policy changed", "ROUTE deltas == CONTROL deltas", "ROUTE effect reproduced by REPEAT"],
+  "primary_outcome": "DELTA_SET_STRUCTURAL_DIVERGENCE (mechanical: hash comparisons, requirements 1-6)",
+  "secondary_outcome": "ROUTE reconstruction output distinguishable from REPEAT (exploratory; HBB-30 NDO/REC NOT primary)",
+  "acceptance_gate": "independent construct audit confirms F1/C-*/SWEEP/P1/D1 + all invariants + anti-fake list BEFORE implementation.",
+  "status": "DESIGN BINDING DRAFTED — awaiting independent construct audit; implementation + run held."
+}

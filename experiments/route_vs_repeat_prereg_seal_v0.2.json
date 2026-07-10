@@ -1,0 +1,18 @@
+{
+  "object": "ROUTE_VS_REPEAT_PREREG_SEAL",
+  "version": "v0.2",
+  "supersedes": "v0.1 (seal 33e0af0e..., construct-audit REJECTED)",
+  "seal_method": "sha256 of exact file bytes (repo plain-bytes seal pattern, cf. hbb_probe_seal.json)",
+  "sealed_prereg": {
+    "path": "docs/route_vs_repeat_prereg_v0.2.md",
+    "sha256": "a292aa328c0531f158dcb54e7f198009f72133826965072c2acb754c2ac79ccb",
+    "bytes": 5930
+  },
+  "companion_hashes": {
+    "docs/route_vs_repeat_spec_v0.2.md": "bddde5365262ba51254db6e20e5d23c0f72b75b5e27807eea90bbe49d02989d3",
+    "experiments/route_vs_repeat_construct_binding_v0.2.json": "e580624999ab5a02d615ae8c8c8cb49fec3f797bbc93c247af0f3dbc6db35a84",
+    "experiments/route_vs_repeat_hash_contract_v0.2.json": "cd7fb24677f2d9ad2a5739ed19fe63763806f363c562c2343a257201f0e4696f"
+  },
+  "status": "FROZEN pending independent construct audit; implementation/run/commit NOT performed this round.",
+  "run_gate": "audit PASS (gate_pass=true) + explicit user go required before any implementation or run."
+}

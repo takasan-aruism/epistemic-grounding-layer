@@ -1,0 +1,27 @@
+{
+  "object": "ROUTE_VS_REPEAT_PREREG_SEAL",
+  "prereg": "docs/route_vs_repeat_prereg_v0.1.md",
+  "sha256": "33e0af0e2cbbb7acd3c4bcb54104d9e2878d488def13e459af8cdf0b51259e01",
+  "bytes": 3818,
+  "spec": "docs/route_vs_repeat_spec_v0.1.md",
+  "binding": "experiments/route_vs_repeat_construct_binding_v0.1.json",
+  "hash_contract": "experiments/route_vs_repeat_hash_contract_v0.1.json",
+  "construct_question": "does compare-stage re-rooting produce a structured delta-set change not reproducible by matched text repetition?",
+  "conditions": [
+    "CONTROL (all-pairs)",
+    "REPEAT (center text at rebuild, deltas==CONTROL)",
+    "ROUTE (center_ref at compare, deltas re-rooted)"
+  ],
+  "center_selection": "ALL-SIGNATURE SWEEP over existing pool; no answer-aware / human pick",
+  "primary_outcome": "DELTA_SET_STRUCTURAL_DIVERGENCE (mechanical hashes, req 1-6)",
+  "verdict_space": [
+    "STRUCTURAL ROUTING CONSTRUCT VALID",
+    "TEXT EMPHASIS ONLY",
+    "AMBIGUOUS",
+    "INVALID"
+  ],
+  "claim_ceiling": "compare-stage re-rooting produces a structured intermediate change not reproducible by matched text repetition",
+  "out_of_scope": "arbitrary external detected-object injection; solving HBB-30",
+  "frozen_at": "2026-07-10",
+  "run_status": "HELD \u2014 deliverables 1-5 only this round; implementation+run separately gated"
+}

@@ -1,0 +1,39 @@
+{
+  "object": "ROUTE_VS_REPEAT_CONSTRUCT_TO_CODE_BINDING",
+  "version": "v0.2",
+  "supersedes": "v0.1 (construct-audit REJECTED: primary near-tautological, secondary un-preregistered, no compare-emphasis control, determinism unmitigated)",
+  "companion_to": "docs/route_vs_repeat_spec_v0.2.md",
+  "note": "Design binding (implementation is a later, gated step). Reuses the scheduler reconstruction pipeline. Code changes: (a) center_ref param on compare_call (ROUTE re-rooting, SYS_CMP_ROOTED), (b) emphasis_text param on compare_call input (EMPHASIS-COMPARE repetition, SYS_CMP unchanged), (c) repeat_text param on rebuild_call (REPEAT-REBUILD repetition). Nothing else changes.",
+  "reused_current_code": {
+    "signature_call": "run_scheduler_exhibit.signature_call(view) -> 'SUBJECT=|LEVEL=|KEY-DISTINCTION=' (UNCHANGED)",
+    "compare_call_current": "compare_call(sigs): qgen(SYS_CMP,'SIGNATURES:\\n'+body) all-pairs (baseline for CONTROL)",
+    "rebuild_call_current": "rebuild_call(deltas,fr): qgen(SYS_REB,'SOURCE (anchor only):\\n{fr}\\n\\nSTRUCTURAL DIFFERENCES...:\\n{deltas}...') (baseline)"
+  },
+  "constructs": [
+    {"id": "F1", "name": "fixed signature pool", "site": "generate V=6 views+signatures ONCE (frozen lenses+seed) on HBB-30 t0_stuck_frame; persist; all 4 arms reuse", "present_criterion": "one signature list, hashed, reused by all arms; no per-arm regeneration", "invalid_if": "signatures differ across arms"},
+    {"id": "C-CTRL", "name": "CONTROL", "site": "compare_call(sigs) [center_ref=None, emphasis_text=None, all-pairs, temp=0, seed s0] -> deltas_ctrl -> rebuild_call(deltas_ctrl, fr) [repeat_text=None]", "present_criterion": "current pipeline unchanged", "invalid_if": "any modification"},
+    {"id": "C-REP", "name": "REPEAT-REBUILD", "site": "REUSE deltas_ctrl verbatim; rebuild_call(deltas_ctrl, fr, repeat_text=sigs[i]) -- center text appended at REBUILD input only", "present_criterion": "compare NOT re-run/altered; deltas object IS deltas_ctrl (hash-equal); center text enters ONLY the rebuild prompt", "invalid_if": "compare changed, deltas recomputed, or center enters before rebuild"},
+    {"id": "C-EMPH", "name": "EMPHASIS-COMPARE (NEW in v0.2)", "site": "compare_call(sigs, emphasis_text=sigs[i]) [SYS_CMP UNCHANGED all-pairs, sigs[i] repeated/prepended in the compare INPUT body, temp=0, seed s0] -> deltas_emph_i -> rebuild_call(deltas_emph_i, fr) [repeat_text=None]", "present_criterion": "compare TOPOLOGY unchanged (still SYS_CMP all-pairs, 'differences AMONG'); the ONLY change is sigs[i] text repeated in the compare input (matched repetition at compare, mirror of C-REP's repetition at rebuild)", "invalid_if": "SYS_CMP replaced, topology re-rooted, or a 'focus/central/reference' instruction added (that would be ROUTE, not emphasis)"},
+    {"id": "C-ROUTE", "name": "ROUTE", "site": "compare_call(sigs, center_ref=i) [SYS_CMP_ROOTED: topology all-pairs -> star-from-reference sigs[i], temp=0, seed s0] -> deltas_route_i -> rebuild_call(deltas_route_i, fr) [repeat_text=None]", "present_criterion": "center enters at compare via center_ref (an INDEX into sigs), re-rooting the delta topology BEFORE rebuild; rebuild takes reshaped deltas with NO extra text", "invalid_if": "center enters at rebuild, or as free text not a reference index, or rebuild also gets repeat_text, or SYS_CMP_ROOTED merely repeats text without changing topology (= C-EMPH)"},
+    {"id": "SWEEP", "name": "all-signature sweep", "site": "i for every i in range(len(sigs)); no selection; REPEAT/EMPHASIS/ROUTE all sweep the SAME i set; CONTROL attempt-count + seed-scheme matched", "present_criterion": "every signature is center once across REP/EMPH/ROUTE; opportunity (attempts, seeds) matched across all 4 arms", "invalid_if": "a center is hand-picked / answer-aware / a winning signature selected / arms have unequal attempts or seeds"},
+    {"id": "P1", "name": "rooted-compare + emphasis prompts (no forbidden tokens)", "site": "SYS_CMP_ROOTED literal instantiated + hashed; C-EMPH input format instantiated + hashed; both scanned", "present_criterion": "SYS_CMP_ROOTED = topology change only (star-from-reference), marks one signature REFERENCE; C-EMPH repeats sigs[i] in input under UNCHANGED SYS_CMP; NEITHER contains focus/central/reframe/premise/provenance/challenge/question NOR HBB-30 answer vocabulary", "invalid_if": "any forbidden/semantic-loaded token, or SYS_CMP_ROOTED smuggles a 'consider X central/important' instruction, or C-EMPH alters the instruction rather than just the input body"},
+    {"id": "PB", "name": "PRIMARY-B output metric (co-primary, preregistered)", "site": "for each (center i, rebuild seed m): d_route=jaccard_dist(content_words(ROUTE_i_m), content_words(EMPH_i_m)); d_emph=jaccard_dist(content_words(EMPH_i_m), content_words(CONTROL_m)); paired one-sided sign test d_route>d_emph over all (i,m), alpha=0.05", "present_criterion": "metric+threshold+test+seed count FROZEN before run; mechanical (no LLM judgment); blind Qwen 0/1/2 judge only as non-decisive confirmation (Claude excluded)", "invalid_if": "metric/threshold chosen post-hoc, LLM judgment load-bearing, or Claude scores"},
+    {"id": "D1", "name": "deterministic delta hashing + self-check", "site": "compare temp=0, concurrency=1, greedy, seed s0; PRE-RUN: CONTROL compare x2 and one ROUTE center x2 -> assert identical hashes", "present_criterion": "compare deterministic AND empirically verified reproducible before the measured run", "invalid_if": "compare temp>0, concurrent batching left on, or the x2 self-check hashes differ (=> abort INVALID)"}
+  ],
+  "invariants": {
+    "repeat_delta_eq_control": "REPEAT-REBUILD uses the SAME deltas object as CONTROL (req 1) -> hashes equal by construction",
+    "route_delta_ne_control": "ROUTE recomputes deltas with center_ref re-rooting -> hash differs for eligible centers (req 2, a GATE not the verdict)",
+    "emph_delta_may_differ": "EMPHASIS-COMPARE deltas MAY differ from CONTROL (input has sigs[i] repeated) -- this is expected; C-EMPH is the control that absorbs 'compare-stage repetition' so ROUTE-vs-EMPH isolates RE-ROOTING",
+    "context_multiset_identical": "sha256(sorted signature pool) identical across all 4 arms (req 3)",
+    "same_system": "model/source/task/evidence-policy/authority-policy/decoding identical; only compare center_ref (ROUTE) / compare emphasis_text (EMPH) / rebuild repeat_text (REP) differs (req 4)",
+    "route_before_rebuild": "ROUTE re-rooting is at compare, before rebuild prompt assembly (req 5)",
+    "repeat_cannot_reproduce": "REPEAT-REBUILD leaves deltas == CONTROL, so cannot reproduce ROUTE delta structure (req 6)",
+    "decisive_test_is_PB": "the VERDICT (VALID vs TEXT-EMPHASIS-ONLY) is decided by PRIMARY-B (ROUTE output beyond compare-emphasis), NOT by the delta hash alone",
+    "center_from_pool": "center is an index into the existing signature pool; no external object; no answer-aware pick"
+  },
+  "anti_fake_center_invalidators": ["center label only in prompt", "center text moved to front only", "center text re-quoted only", "only rebuild prompt changed (= REPEAT, not ROUTE)", "task/evidence policy changed", "ROUTE deltas == CONTROL deltas", "ROUTE effect reproduced by REPEAT-REBUILD", "ROUTE output reproduced by EMPHASIS-COMPARE (re-rooting adds nothing beyond compare-stage repetition)"],
+  "primary_A_outcome": "DELTA_SET_DIVERGENCE (mechanical GATE, req 1-6; necessary not sufficient; renamed from 'STRUCTURAL')",
+  "primary_B_outcome": "ROUTE_OUTPUT_BEYOND_COMPARE_EMPHASIS (decisive, preregistered mechanical Jaccard sign test; blind judge confirmation)",
+  "acceptance_gate": "independent construct audit confirms F1/C-CTRL/C-REP/C-EMPH/C-ROUTE/SWEEP/P1/PB/D1 + invariants + anti-fake + determinism-self-check + PRIMARY-B preregistration BEFORE implementation.",
+  "status": "DESIGN BINDING v0.2 DRAFTED -- awaiting independent construct audit; implementation + run held."
+}

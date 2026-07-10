@@ -1,0 +1,42 @@
+{
+  "object": "ROUTE_VS_REPEAT_CONTEXT_SIGNATURE_HASH_CONTRACT",
+  "version": "v0.2",
+  "supersedes": "v0.1",
+  "companion_to": "docs/route_vs_repeat_prereg_v0.2.md",
+  "purpose": "Make same-context / same-system / route-before-rebuild / determinism / prompt-manipulation invariants MECHANICALLY auditable via hashes, so structural routing cannot be faked, all 4 arms are a fair comparison, and PRIMARY-B rests on a reproducible compare stage.",
+  "hashes": {
+    "signature_pool_hash": {"def": "sha256('\\n'.join(sorted(signature_pool)))", "must": "IDENTICAL across CONTROL, REPEAT, EMPHASIS-COMPARE, ROUTE and across all centers (context multiset invariant, req 3)"},
+    "source_frame_hash": {"def": "sha256(t0_stuck_frame HBB-30)", "must": "IDENTICAL across all arms"},
+    "system_config_hash": {"def": "sha256(model|endpoint|SYS_SIG|SYS_CMP|SYS_REB|temp_compare=0|concurrency_compare=1|temp_rebuild=0.8|max_tokens|seed_scheme)", "must": "IDENTICAL across all arms (same-system, req 4)"},
+    "sys_cmp_hash": {"def": "sha256(SYS_CMP literal, all-pairs)", "role": "CONTROL/EMPHASIS-COMPARE compare instruction (topology UNCHANGED)"},
+    "sys_cmp_rooted_hash": {"def": "sha256(SYS_CMP_ROOTED literal, star-from-reference)", "must": "!= sys_cmp_hash; ROUTE-only topology change; pins the manipulation"},
+    "route_compare_prompt_hash_i": {"def": "sha256(full ROUTE compare prompt for center i)", "must": "differs from CONTROL compare prompt ONLY by SYS_CMP_ROOTED + reference marker on sigs[i] (no smuggled instruction)"},
+    "emph_compare_prompt_hash_i": {"def": "sha256(full EMPHASIS-COMPARE compare prompt for center i)", "must": "uses SYS_CMP (== sys_cmp_hash instruction) and differs from CONTROL ONLY by sigs[i] repeated in the INPUT body (no instruction change, no re-root)"},
+    "control_delta_hash": {"def": "sha256(compare_call(sigs) output text)", "role": "baseline delta-set"},
+    "control_delta_hash_recheck": {"def": "sha256(compare_call(sigs) output text, 2nd run)", "must": "== control_delta_hash (DETERMINISM SELF-CHECK; mismatch => abort INVALID)"},
+    "repeat_delta_hash": {"def": "sha256(deltas used by REPEAT-REBUILD)", "must": "== control_delta_hash (req 1)"},
+    "emph_delta_hash_i": {"def": "sha256(compare_call(sigs, emphasis_text=sigs[i]) output text)", "role": "compare-repetition control delta; MAY differ from control_delta_hash (expected, not a violation)"},
+    "route_delta_hash_i": {"def": "sha256(compare_call(sigs, center_ref=i) output text)", "must": "!= control_delta_hash for eligible nontrivial centers (req 2, a GATE)"},
+    "route_delta_hash_i_recheck": {"def": "sha256(compare_call(sigs, center_ref=i) output text, 2nd run, one i)", "must": "== route_delta_hash_i (DETERMINISM SELF-CHECK)"},
+    "center_ref_provenance": {"def": "center = index i into signature_pool; record sigs[i]", "must": "existing pool member; no external text; no answer-aware pick"}
+  },
+  "primary_B_inputs": {
+    "cw": "content-word set = lowercased alphanumeric tokens minus frozen stoplist (committed with impl)",
+    "d_route_im": "jaccard_dist(cw(ROUTE_i_m), cw(EMPH_i_m))",
+    "d_emph_im": "jaccard_dist(cw(EMPH_i_m), cw(CONTROL_m))",
+    "test": "paired one-sided sign test d_route > d_emph over all (i in [0,V), m in [0,M)), alpha=0.05",
+    "blind_judge": "Qwen 0/1/2 structural-subject difference, condition-withheld, Claude EXCLUDED, non-decisive"
+  },
+  "eligibility": "center i is 'eligible/nontrivial' if sigs[i] is distinct from >=1 other signature (degenerate/duplicate signatures excluded from the req-2 tally + PRIMARY-B, reported).",
+  "audit_procedure": [
+    "1. assert signature_pool_hash + source_frame_hash + system_config_hash equal in every arm record.",
+    "2. assert sys_cmp_rooted_hash != sys_cmp_hash; scan SYS_CMP_ROOTED + EMPHASIS input format for forbidden tokens (focus/central/reframe/premise/provenance/challenge/question + HBB-30 answer vocab).",
+    "3. assert emph_compare_prompt uses the SYS_CMP instruction (topology unchanged) and route_compare_prompt uses SYS_CMP_ROOTED (topology changed).",
+    "4. DETERMINISM: assert control_delta_hash_recheck == control_delta_hash AND route_delta_hash_i_recheck == route_delta_hash_i (else abort INVALID).",
+    "5. assert repeat_delta_hash == control_delta_hash (req 1).",
+    "6. tally route_delta_hash_i != control_delta_hash over eligible centers (req 2, GATE).",
+    "7. assert ROUTE records show center at compare (center_ref set) + rebuild repeat_text absent; REPEAT records show compare center_ref=None + rebuild repeat_text present; EMPHASIS records show compare emphasis_text set + SYS_CMP unchanged (req 5).",
+    "8. compute PRIMARY-B: paired sign test d_route > d_emph; report statistic, power, verdict."
+  ],
+  "verdict_inputs": "gates req 1,3,4,5,6 + determinism must hold (else INVALID); PRIMARY-B pass/fail decides STRUCTURAL-ROUTING-VALID vs TEXT-EMPHASIS-ONLY; underpowered/mixed PRIMARY-B => AMBIGUOUS."
+}
