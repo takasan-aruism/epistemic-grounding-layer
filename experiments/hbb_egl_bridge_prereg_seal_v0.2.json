@@ -1,0 +1,22 @@
+{
+  "object": "HBB_EGL_BRIDGE_PREREG_SEAL",
+  "version": "v0.2",
+  "supersedes": "v0.1 (seal 33cbf039..., AUDIT REQUIRED)",
+  "seal_method": "sha256 of exact file bytes (repo plain-bytes seal pattern, cf. hbb_probe_seal.json)",
+  "sealed_prereg": {"path": "docs/hbb_egl_bridge_prereg_v0.2.md", "sha256": "c9fedde054898acfc3fcaa55653e5545523bcf36bfee8f23db507a029d50a72d"},
+  "companion_hashes": {
+    "docs/hbb_egl_bridge_spec_v0.2.md": "21a33e53d27821c77a7f2e9fd5ea57225c67a8ac430ce220d755cfc84713540c",
+    "experiments/hbb_egl_bridge_binding_v0.2.json": "57f63ae879ec41a653a844ec615501a9db85f838df1ac80dbe83c5bcd3ad217a",
+    "experiments/hbb_egl_bridge_offline_replay_contract_v0.2.json": "296d29c1100fbdef927935f43d60c74ca2ae10685658a06b7448553049b1adc9",
+    "docs/hbb_egl_bridge_test_plan_v0.2.md": "8e8d070663b6f4473a2256a0c55b21f1dc88e5ced5ffed0651390ed0c501eee4"
+  },
+  "pinned_offline_inputs": {
+    "scheduler_exhibit_candidates.json": "b7c98296a3249ec86a73d9341a1975e863dfa800ec735b5d8672d4a4d032c74b",
+    "hbb30_subset_canonical": "9e1ca25b1f060109b9b340b008056e99f87822cc6015a1334487737b9a4f49d2",
+    "t0_stuck_frame": "bc09d36ddfbcdb99fdc38adfa61477e33a7a489b88d64c3c4dc5c5f466db7ea0"
+  },
+  "fixes_applied": ["FIX-1 force_include+coverage assert (no silent drop)", "FIX-2 records non-empty (no load_corpus self-ref)", "FIX-3 open_gaps grounding overclaim withdrawn", "FIX-4 superseded={} passed", "FIX-5 call-sizing stated + logged batching fallback"],
+  "status": "FROZEN pending independent re-audit; implementation/run/commit NOT performed this round.",
+  "run_gate": "re-audit gate_pass=true + explicit user go required before any implementation or offline replay.",
+  "unowned_held": ["Attention Center", "same-object tension binding", "Aruism local analysis", "structural re-centering"]
+}

@@ -1,0 +1,40 @@
+{
+  "object": "HBB_EGL_BRIDGE_CONSTRUCT_TO_CODE_BINDING",
+  "version": "v0.2",
+  "supersedes": "v0.1 (AUDIT REQUIRED: retrieve() silent-drop, open_gaps-grounding overclaim, load_corpus self-ref default, unpassed superseded=, unassessed 48K call)",
+  "companion_to": "docs/hbb_egl_bridge_spec_v0.2.md",
+  "note": "Standalone adapter + one call to the EXISTING answer contract. Creates NO Claim, touches NO admission gate, adds NO always-on observer. Format + provenance-preserving wiring only. v0.2 hardens the 5 audit findings.",
+  "reused_current_code": {
+    "answer_question": "egl/self_grounding.py:254 answer_question(question, records=None, superseded=None, system=None, k=8, record_char_limit=1400, max_tokens=1200, force_include=None) -> (answer_dict, retrieved_ids, raw).",
+    "force_include": "egl/self_grounding.py:262-267 appends by_id[rid] for rid in force_include not already in hits -> defeats retrieve() score>0 filter.",
+    "retrieved_ids": "egl/self_grounding.py:274 returns [r['record_id'] for r in hits] -> usable for a coverage assertion.",
+    "validate_answer": "egl/self_grounding.py:296 (M1 grounds answer_claims/source_trace via record_ids; only COUNTS open_gaps).",
+    "records_block": "egl/self_grounding.py:242 _records_block reads r['record_id'], r['source_class'], r['ordinal'], r['text'].",
+    "source_boundary": "experiments/scheduler_exhibit_candidates.json records[].candidates (run_scheduler_exhibit.py:167)."
+  },
+  "constructs": [
+    {"id": "B-SRC", "name": "frozen source boundary", "site": "read pinned scheduler_exhibit_candidates.json records where incident=='HBB-30'; iterate candidates with cand_idx", "present_criterion": "reads only the pinned artifact; no regeneration; no scorer/rubric read", "invalid_if": "re-runs exhibit, reads scorer/rubric/target, or reads a live-growing ledger"},
+    {"id": "B-ID", "name": "provenance identity", "site": "material_id=sha256(f'{incident}|{condition}|{seed}|{cand_idx}')[:14]; run_ref=artifact sha256; parent_ref OMITTED", "present_criterion": "mirrors exhibit opaque_id; no fabricated run_id/parent_ref", "invalid_if": "invents a field absent in the source"},
+    {"id": "B-ADAPT", "name": "format-only adapter", "site": "candidate str -> {record_id, source_class='HBB_EXHIBIT_INTERMEDIATE', ordinal, text=candidate byte-identical, provenance=source_ref}", "present_criterion": "text byte-identical; NO verdict field", "invalid_if": "emits any judgement field, mutates text, or attaches a rubric label"},
+    {"id": "B-TGT", "name": "existing answer contract + FIX-1 coverage", "site": "answer_question(question=t0_stuck_frame, records=adapted, system=NEUTRAL, k=len(records), force_include=[all record_ids], superseded={}) -> (answer, retrieved_ids, raw); assert set(retrieved_ids)==set(all_ids) else log+FAIL; validate_answer(answer,{ids})", "present_criterion": "answer_question unchanged; force_include guarantees all records fed; coverage asserted+logged; superseded={} passed; validate_answer run", "invalid_if": "answer_question modified, open_gaps hand-written, coverage unasserted, or validate_answer skipped"},
+    {"id": "B-GUARD", "name": "FIX-2 no self-reference default", "site": "assert isinstance(records, list) and len(records)>0 before the call; never pass records=None", "present_criterion": "records is a non-empty list; load_corpus() default never triggered (no EGL ledger self-reference, DE-0132)", "invalid_if": "records=None reachable, or EGL ledgers enter the corpus"},
+    {"id": "B-SYS", "name": "neutral system prompt (no rubric)", "site": "system = 'given generated intermediate RECORDS, return answer_claims + open_gaps; ONLY provided records; cite record_ids in source_trace; JSON with ANSWER_KEYS'", "present_criterion": "NO DETECTION/RECONSTRUCTION/6x-correct/REC2/rubric vocabulary; NO correctness-scoring; forbids outside knowledge", "invalid_if": "any rubric token, correctness/answer-key instruction, or 'is this right' framing"},
+    {"id": "B-FLOW", "name": "honest reach (FIX-3)", "site": "outputs answer_claims + open_gaps only; open_gaps documented as answerer-produced NOT mechanically grounded", "present_criterion": "does NOT claim open_gaps is validate_answer-grounded; does NOT populate status/validation_mode/non_guarantees; does NOT call apply_outcome/gates.decide", "invalid_if": "reasserts open_gaps grounding, or forges a Claim/status/validation_mode/non_guarantees"},
+    {"id": "B-ISO", "name": "normal-path isolation", "site": "adapter invoked explicitly from HBB/exhibit side; ordinary EGL question flow untouched", "present_criterion": "no classifier/heuristic/always-on observer on normal path; normal path byte-unchanged (T8)", "invalid_if": "an always-on hook, query classifier, or auto-surface added to ordinary questions"},
+    {"id": "B-PIN", "name": "snapshot pin + FIX-5 sizing", "site": "assert sha256(scheduler_exhibit_candidates.json)==b7c98296...; corpus = ONLY exhibit material; 1 call if ctx>=~64K else per-condition batching (<=4 calls, logged)", "present_criterion": "input pinned; no EGL-ledger self-reference; call sizing stated with logged fallback", "invalid_if": "input read live/unpinned, EGL ledgers fed, or a >context-window call issued without the logged batching fallback"}
+  ],
+  "authority_invariants": {
+    "generated_ne_validated": "no Claim created (apply_outcome never called)",
+    "retained_ne_evidence": "records are answer-layer inputs, not admitted evidence",
+    "open_gap_ne_false_premise": "open_gaps non-authoritative; no premise marked false",
+    "unresolved_ne_rejection": "answer_claims + open_gaps coexist (verified: no exclusivity)",
+    "reported_declared_unchanged": "admission/status derivation untouched",
+    "supersession_unchanged": "superseded={} passed; detect_supersession/historical_claims untouched",
+    "answer_authority_unchanged": "answer_question has no SoR write (no append_event in self_grounding.py)",
+    "user_final_authority": "gates.py:2-3 LLM no DB write; user 裁定"
+  },
+  "primary_outcome": "answer_claims + open_gaps produced from HBB-30 intermediate material via the existing answer contract, answer_claims source-trace grounded, all records provably fed (coverage assert), all 8 authority invariants held.",
+  "explicit_non_targets": ["status", "validation_mode", "non_guarantees", "open_gaps mechanical grounding", "Attention Center", "same-object tension binding", "Aruism local analysis", "structural re-centering", "HBB-30 solved", "REC2"],
+  "acceptance_gate": "independent re-audit confirms B-SRC/B-ID/B-ADAPT/B-TGT/B-GUARD/B-SYS/B-FLOW/B-ISO/B-PIN + invariants + no-bypass + no-rubric + FIX-1..5 BEFORE implementation.",
+  "status": "DESIGN BINDING v0.2 DRAFTED — awaiting independent re-audit; implementation/run/commit held."
+}

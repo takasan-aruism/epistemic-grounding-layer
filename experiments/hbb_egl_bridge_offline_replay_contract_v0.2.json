@@ -1,0 +1,21 @@
+{
+  "object": "HBB_EGL_BRIDGE_OFFLINE_REPLAY_CONTRACT",
+  "version": "v0.2",
+  "supersedes": "v0.1",
+  "companion_to": "docs/hbb_egl_bridge_spec_v0.2.md",
+  "purpose": "Pin the offline replay fixture so the bridge feasibility check is reproducible, self-reference-free (DE-0132), rubric-free, and provably full-coverage. Wiring feasibility only — NOT an HBB-30 correctness/REC2 result.",
+  "pinned_inputs": {
+    "source_artifact": {"path": "experiments/scheduler_exhibit_candidates.json", "sha256": "b7c98296a3249ec86a73d9341a1975e863dfa800ec735b5d8672d4a4d032c74b"},
+    "hbb30_subset_canonical": {"sha256": "9e1ca25b1f060109b9b340b008056e99f87822cc6015a1334487737b9a4f49d2", "n_records": 40, "n_candidates": 240, "conditions": ["R0","RS","RS_flat","RS_pool"], "seeds": [0,1,2,3,4,5,6,7,8,9]},
+    "question_context": {"source": "experiments/hbb_sealed_t0.json packets.HBB-30.t0_stuck_frame", "sha256": "bc09d36ddfbcdb99fdc38adfa61477e33a7a489b88d64c3c4dc5c5f466db7ea0", "chars": 408, "note": "neutral stuck-frame; NOT answer-aware; no rubric"}
+  },
+  "corpus_rule": "corpus = EXCLUSIVELY the adapted HBB-30 intermediate records. EGL ledgers (DESIGN_EVIDENCE_LEDGER, REVIEW_LEDGER, audit_backlog) NOT fed (no self-reference, DE-0132). records MUST be a non-empty list; records=None is forbidden (would default to load_corpus()).",
+  "coverage_rule_FIX1": "call answer_question with force_include=[every fed record_id] and k=len(records); after the call assert set(retrieved_ids)==set(all record_ids). Any shortfall is LOGGED and FAILS the run (PROCESS-01: no silent cap). Coverage does NOT rely on token-overlap/stopword coincidence.",
+  "supersession_rule_FIX4": "pass superseded={} explicitly so detect_supersession does not scan/inject tags over the HBB candidate text.",
+  "call_sizing_FIX5": {"full_input_chars": 191942, "approx_input_tokens": 48000, "nominal_calls": 1, "condition_context_min_tokens": 64000, "fallback": "if model context < ~64K, batch per condition (R0/RS/RS_pool/RS_flat = 60 candidates ~12K tokens each, <=4 calls), each with its own force_include + coverage assert; batching MUST be logged (not silent)", "verify_at_impl": "confirm Qwen3.6-35B-A3B served context window before choosing 1-call vs batched"},
+  "decoding": {"answerer": "answer_question defaults (temp=0, enable_thinking=False, Qwen3.6-35B-A3B @ :8005)", "determinism_note": "records raw output; feasibility does not assert bitwise determinism"},
+  "forbidden_in_replay": ["rubric vocabulary (DETECTION/RECONSTRUCTION/6x-correct/REC2)", "scorer invocation", "target/breakthrough_structure as input", "HBB-30 correct-object selection", "answer-aware question phrasing", "feeding EGL ledgers into the corpus", "records=None"],
+  "expected_form": "answer_dict with ANSWER_KEYS; answer_claims non-empty; open_gaps non-empty; validate_answer M1 source_trace completeness > 0 for answer_claims (open_gaps is NOT mechanically grounded).",
+  "success_definition": "WIRING feasibility = (a) adapter produced records, (b) all fed records provably retrieved (coverage assert passed), (c) answer_question returned a valid ANSWER_KEYS object, (d) answer_claims and open_gaps both populated and coexisting, (e) validate_answer passed M1/M3 for answer_claims. NOT a claim the answer is correct or HBB-30 solved.",
+  "claim_ceiling": "mechanism-feasibility only. No HBB-30 solved. No REC2. No Attention-Center. No structural re-centering. open_gaps grounding is out of scope. C != H."
+}

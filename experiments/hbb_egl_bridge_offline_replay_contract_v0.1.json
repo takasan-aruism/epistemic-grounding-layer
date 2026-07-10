@@ -1,0 +1,18 @@
+{
+  "object": "HBB_EGL_BRIDGE_OFFLINE_REPLAY_CONTRACT",
+  "version": "v0.1",
+  "companion_to": "docs/hbb_egl_bridge_spec_v0.1.md",
+  "purpose": "Pin the offline replay fixture so the bridge feasibility check is reproducible, self-reference-free (DE-0132), and rubric-free. Feasibility of wiring only — NOT an HBB-30 correctness/REC2 result.",
+  "pinned_inputs": {
+    "source_artifact": {"path": "experiments/scheduler_exhibit_candidates.json", "sha256": "b7c98296a3249ec86a73d9341a1975e863dfa800ec735b5d8672d4a4d032c74b"},
+    "hbb30_subset_canonical": {"def": "json.dumps([r for r in records if r.incident=='HBB-30'], sort_keys=True, ensure_ascii=False, separators=(',',':'))", "sha256": "9e1ca25b1f060109b9b340b008056e99f87822cc6015a1334487737b9a4f49d2", "n_records": 40, "n_candidates": 240, "conditions": ["R0","RS","RS_flat","RS_pool"], "seeds": [0,1,2,3,4,5,6,7,8,9]},
+    "question_context": {"source": "experiments/hbb_sealed_t0.json packets.HBB-30.t0_stuck_frame", "sha256": "bc09d36ddfbcdb99fdc38adfa61477e33a7a489b88d64c3c4dc5c5f466db7ea0", "chars": 408, "note": "neutral stuck-frame; NOT answer-aware; no rubric"}
+  },
+  "corpus_rule": "the answer_question corpus for this replay is EXCLUSIVELY the adapted HBB-30 intermediate records. EGL's own ledgers (DESIGN_EVIDENCE_LEDGER, REVIEW_LEDGER, audit_backlog) are NOT fed (no self-reference, DE-0132).",
+  "retrieval_rule": "k = number of fed records (>= n_candidates) so no candidate is silently dropped; if any truncation occurs it MUST be logged (PROCESS-01: no silent caps).",
+  "decoding": {"answerer": "existing answer_question defaults (temp=0, enable_thinking=False, Qwen3.6-35B-A3B @ :8005)", "determinism_note": "answer_question is temp=0 but the run records raw output; feasibility does not assert bitwise determinism"},
+  "forbidden_in_replay": ["rubric vocabulary (DETECTION/RECONSTRUCTION/6x-correct/REC2)", "scorer invocation", "target/breakthrough_structure as input", "HBB-30 correct-object selection", "answer-aware question phrasing", "feeding EGL ledgers into the corpus"],
+  "expected_form": "answer_dict with ANSWER_KEYS; answer_claims non-empty (the material supports a candidate) AND open_gaps non-empty (unresolved considerations present in the material); validate_answer M1 source_trace completeness > 0.",
+  "success_definition": "WIRING feasibility = (a) adapter produced grounded records, (b) answer_question returned a valid ANSWER_KEYS object, (c) answer_claims and open_gaps both populated and coexisting, (d) validate_answer passed M1/M3. NOT a claim that the answer is correct or that HBB-30 is solved.",
+  "claim_ceiling": "mechanism-feasibility only. No HBB-30 solved. No REC2. No Attention-Center. No structural re-centering. C != H."
+}

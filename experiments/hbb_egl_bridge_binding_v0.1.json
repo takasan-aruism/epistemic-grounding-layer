@@ -1,0 +1,37 @@
+{
+  "object": "HBB_EGL_BRIDGE_CONSTRUCT_TO_CODE_BINDING",
+  "version": "v0.1",
+  "companion_to": "docs/hbb_egl_bridge_spec_v0.1.md",
+  "note": "Design binding (implementation is a later, gated step). The bridge is a standalone adapter + a call to the EXISTING answer contract. It creates NO Claim, touches NO admission gate, adds NO always-on observer. Format + provenance-preserving wiring only.",
+  "reused_current_code": {
+    "answer_question": "egl/self_grounding.py:254 answer_question(question, records=..., system=...) -> (answer_dict, retrieved_ids, raw). Accepts external records + system override ('ESDE 等 別 workload 用', :257).",
+    "validate_answer": "egl/self_grounding.py:296 validate_answer(ans, corpus_ids) -> M1 GROUNDING_INTEGRITY / M2 SEMANTIC_PLACEMENT / M3 FORMAT (deterministic, hermetic).",
+    "records_block": "egl/self_grounding.py:242 _records_block reads r['record_id'], r['source_class'], r['ordinal'], r['text'].",
+    "ANSWER_KEYS": "egl/self_grounding.py:197 = [answer_claims, historical_claims, open_gaps, source_trace].",
+    "source_boundary": "experiments/scheduler_exhibit_candidates.json records[].candidates (persisted rebuild text, run_scheduler_exhibit.py:167)."
+  },
+  "constructs": [
+    {"id": "B-SRC", "name": "frozen source boundary", "site": "read scheduler_exhibit_candidates.json records where incident=='HBB-30'; iterate candidates with cand_idx", "present_criterion": "reads only the pinned artifact; no regeneration; no rubric/scorer read", "invalid_if": "re-runs the exhibit, reads a scorer/rubric file, or reads a live-growing ledger"},
+    {"id": "B-ID", "name": "provenance identity", "site": "material_id = sha256(f'{incident}|{condition}|{seed}|{cand_idx}')[:14]; source_ref={artifact,incident,condition,seed,cand_idx}; run_ref=artifact sha256", "present_criterion": "identity mirrors the exhibit opaque_id scheme; run_ref is the artifact hash (no fabricated run_id); parent_ref OMITTED (deltas ephemeral)", "invalid_if": "a field absent in the source is invented (esp. parent_ref / a fake run_id)"},
+    {"id": "B-ADAPT", "name": "format-only adapter", "site": "candidate str -> {record_id, source_class='HBB_EXHIBIT_INTERMEDIATE', ordinal, text=candidate (byte-identical), provenance=source_ref}", "present_criterion": "text preserved byte-for-byte; NO semantic verdict field (no correctness/tension/suspicious/premise/validity/relevance/rubric)", "invalid_if": "adapter emits any judgement field, mutates text, or attaches a rubric label"},
+    {"id": "B-TGT", "name": "existing answer contract", "site": "answer_question(question=t0_stuck_frame, records=adapted, system=NEUTRAL, k=len(records)) -> answer_dict; then validate_answer(answer_dict, {r['record_id']})", "present_criterion": "uses answer_question unchanged; k>=len(records) so nothing silently dropped; validate_answer run to enforce grounding", "invalid_if": "answer_question modified, open_gaps hand-written, or validate_answer skipped"},
+    {"id": "B-SYS", "name": "neutral system prompt (no rubric)", "site": "system = 'given generated intermediate RECORDS, return answer_claims (answer the material supports) + open_gaps (unresolved considerations present); ONLY provided records; cite record_ids in source_trace; JSON with ANSWER_KEYS'", "present_criterion": "contains NO DETECTION/RECONSTRUCTION/6x-correct/REC2/rubric vocabulary and NO correctness-scoring instruction; forbids outside knowledge", "invalid_if": "any rubric token, correctness/answer-key instruction, or 'is this the right answer' framing"},
+    {"id": "B-FLOW", "name": "honest reach", "site": "outputs answer_claims + open_gaps only", "present_criterion": "does NOT claim to populate status / validation_mode / non_guarantees (curation/DW paths, out of scope); does NOT call apply_outcome/gates.decide", "invalid_if": "the bridge forges a Claim, a status, a validation_mode, or a non_guarantees list"},
+    {"id": "B-ISO", "name": "normal-path isolation", "site": "adapter invoked explicitly from the HBB/exhibit side; no change to ordinary EGL question flow", "present_criterion": "no classifier/heuristic/always-on observer added to the normal path; normal path byte-unchanged", "invalid_if": "an always-on hook, a query classifier, or an auto-surface of retained material is added to ordinary questions"},
+    {"id": "B-PIN", "name": "snapshot pin (DE-0132)", "site": "assert sha256(scheduler_exhibit_candidates.json)==b7c98296...; corpus = ONLY exhibit material, never EGL ledgers", "present_criterion": "input pinned by hash; no self-reference to DESIGN_EVIDENCE_LEDGER/REVIEW_LEDGER; reproducible", "invalid_if": "input read live/unpinned, or EGL's own ledgers fed into the corpus (self-reference)"}
+  ],
+  "authority_invariants": {
+    "generated_ne_validated": "bridge creates no Claim (never calls apply_outcome)",
+    "retained_ne_evidence": "records fed to answer_question are answer-layer inputs, not admitted evidence",
+    "open_gap_ne_false_premise": "open_gaps is a non-authoritative list; no premise marked false",
+    "unresolved_ne_rejection": "answer_claims and open_gaps coexist (no exclusivity; verified render layer)",
+    "reported_declared_unchanged": "admission/status derivation untouched",
+    "supersession_unchanged": "detect_supersession/historical_claims untouched",
+    "answer_authority_unchanged": "answer_question has no write authority",
+    "user_final_authority": "gates.py:2-3 LLM no DB write; user 裁定"
+  },
+  "primary_outcome": "answer_claims + open_gaps produced from HBB-30 intermediate material via the existing answer contract, source-trace grounded, with all 8 authority invariants held.",
+  "explicit_non_targets": ["status", "validation_mode", "non_guarantees", "Attention Center", "same-object tension binding", "Aruism local analysis", "structural re-centering", "HBB-30 solved", "REC2 as primary"],
+  "acceptance_gate": "independent construct audit confirms B-SRC/B-ID/B-ADAPT/B-TGT/B-SYS/B-FLOW/B-ISO/B-PIN + authority invariants + no-bypass + no-rubric BEFORE implementation.",
+  "status": "DESIGN BINDING v0.1 DRAFTED — awaiting independent construct audit; implementation/run/commit held."
+}

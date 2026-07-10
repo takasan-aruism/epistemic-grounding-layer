@@ -1,0 +1,20 @@
+{
+  "object": "HBB_EGL_BRIDGE_PREREG_SEAL",
+  "version": "v0.1",
+  "seal_method": "sha256 of exact file bytes (repo plain-bytes seal pattern, cf. hbb_probe_seal.json)",
+  "sealed_prereg": {"path": "docs/hbb_egl_bridge_prereg_v0.1.md", "sha256": "33cbf03914d49306c19f827ab4dd1988fd733cdad5cc479b5f18841e0f5179d3"},
+  "companion_hashes": {
+    "docs/hbb_egl_bridge_spec_v0.1.md": "b691f5c770db1a2ba266279a344be32b949a0a9552e3c5dadd833cfbf145ba19",
+    "experiments/hbb_egl_bridge_binding_v0.1.json": "7cbe13081d8183a8b8069d20cee246630912cf48ba996fa98181d734868d9496",
+    "experiments/hbb_egl_bridge_offline_replay_contract_v0.1.json": "fce2fdc672fd29a2bbe8d7ee7c0037fb0ef1c867728d1e32098835b2b624c77b",
+    "docs/hbb_egl_bridge_test_plan_v0.1.md": "86b89ea5de3e3a7f8193e42f0aa7a1b88ff3679d1eef6b46703d42e617ee9ad6"
+  },
+  "pinned_offline_inputs": {
+    "scheduler_exhibit_candidates.json": "b7c98296a3249ec86a73d9341a1975e863dfa800ec735b5d8672d4a4d032c74b",
+    "hbb30_subset_canonical": "9e1ca25b1f060109b9b340b008056e99f87822cc6015a1334487737b9a4f49d2",
+    "t0_stuck_frame": "bc09d36ddfbcdb99fdc38adfa61477e33a7a489b88d64c3c4dc5c5f466db7ea0"
+  },
+  "status": "FROZEN pending independent construct audit; implementation/run/commit NOT performed this round.",
+  "run_gate": "audit gate_pass=true + explicit user go required before any implementation or offline replay.",
+  "unowned_held": ["Attention Center", "same-object tension binding", "Aruism local analysis", "structural re-centering"]
+}
