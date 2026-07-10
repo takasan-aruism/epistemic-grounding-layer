@@ -130,7 +130,7 @@ blind scoring · rubric 先行 seal(v2 sha256 `012941ab…`)· opaque_id `sha256
 | 4 use-case capability surface (QUESTION/RESULT_LOG/TASK/CORRECTION) | **OPERATIONAL_TEST_VERIFIED, SLICE VALID (live HTTP)** | DE-0142 |
 | SLICE-8 general problem-ingest (TAKA→2DER→CLAUDE) | **OPERATIONAL_TEST_VERIFIED (3/3), SLICE VALID; dogfood MIXED** | DE-0144 |
 | Qwen swap root cause (vLLM #39078 fp8-kv sleep bug) | ROOT_CAUSE_IDENTIFIED, workaround UNTESTED | DE-0143 |
-| **2DER intelligent middle** (triage/detection/reconstruction for general input) | **MISSING / EXHIBIT-ONLY** | DE-0130/0144 |
+| **2DER intelligent middle** (detection/reconstruction) | **EXHIBIT-ONLY + CLOSED-NEGATIVE-at-bar — RUNS, NOT MISSING** (DE-0144 MIXED verdict SUSPENDED, instrument-invalid) | DE-0145 |
 | autonomous loop SLICE-2 · headless senior executor | DESIGN-ONLY / MISSING WIRING | plan §11 |
 
 ---
@@ -192,5 +192,6 @@ blind scoring · rubric 先行 seal(v2 sha256 `012941ab…`)· opaque_id `sha256
   - v1.3 (2026-07-10) — SLICE-6 client-usable surface via git LIVE(dev≠client)。observe=committed `docs/STATE.md`、correct=pure-shell `autonomy/amend.sh`→git、`docs/CLIENT_USAGE.md`。independent audit が control-char JSON 破損 + mawk octal id の 2 defect を捕捉→修正→VALID。DE-0139。
   - v1.4 (2026-07-10) — SLICE-7 thin Web UI LIVE(`autonomy/webui.py`, stdlib)。Taka が git 不要でブラウザ(Mac/iPhone LAN/Tailscale)から state 閲覧・card ボタン訂正・自由入力(honest capability tier)。write=AUTONOMY_LEDGER only、即時反映。independent audit(実HTTP)=SLICE VALID。DE-0140。git-CLI surface(SLICE-6)は dev/sync 用に保持。
   - v1.5 (2026-07-11) — SLICE-3/4 autonomous action layer LIVE(router 決定選択 + Qwen worker first-pass investigation + UI「▶2DERに次の仕事をさせる」+ steer)。origin=WORKER-UNVERIFIED、APPROVE≠auto-execute、dedup 済。independent audit が 2 honesty defect を捕捉→修正→VALID。DE-0141。
+  - v1.8 (2026-07-11) — **instrument-validity 訂正(DE-0145)**: 先の dogfood は self_grounding のみ = NOT_2DER。full-path(AFE detection + scheduler reconstruction)を実行すると RUN して detection+reconstruction を出す = CLOSED-NEGATIVE≠MISSING。DE-0144 の MIXED 結論を SUSPEND。実力判定は Taka authority 待ち。
   - v1.7 (2026-07-11) — SLICE-8 general problem-ingest LIVE(`autonomy/ingest.py`, TAKA→2DER→CLAUDE)。Qwen swap を dogfood=MIXED。監査所見: 2DER の **intelligent middle(reconstruction 等)は未所有**、context→Claude spine のみ LIVE。Qwen swap 根因 = vLLM #39078(DE-0143, workaround 未テスト)。DE-0143/0144。
   - v1.6 (2026-07-11) — 4 use-case capability surface LIVE(current capability から逆算)。UI「2DERに渡す」を QUESTION/RESULT_LOG/TASK/CORRECTION で route(`/api/ask` grounded 回答, `/api/inspect` repo artifact 一次診断, TASK=record-only, CORRECTION=amend)。live HTTP + independent audit(traversal/read-only/XSS)=VALID。DE-0142。

@@ -1,0 +1,111 @@
+{
+  "object": "DOGFOOD_FULLPATH_TRACE",
+  "problem": "INCIDENT: 本番 LLM serving で、2 つの大型モデル(Qwen3.6-35B と Qwen3-Coder-Next-80B)がそれぞれ両方の GPU を占有するため、両者を切り替えるたびにコンテナ再起動のコールドロードで実測 約174.5秒/回(rework 時は複数回で数分〜十数分)かかる。現状の枠組みは「動いているモデルをより速くスワップする」。目的は切替を実用速度にすること。この状況の詰まりの本質を特定し、必要なら別の実現の枠組みを再構成せよ。",
+  "as_of": "2026-07-11T06:34:41",
+  "stages": [
+    {
+      "stage": "HISTORY(self_grounding)",
+      "input": "problem frame",
+      "output": {
+        "record_ids": [
+          "DE-0143",
+          "DE-0074",
+          "DE-0075",
+          "DE-0086",
+          "DE-0027",
+          "DE-0037",
+          "DE-0068",
+          "DE-0070"
+        ],
+        "claims": [
+          "本番環境における Qwen3.6-35B と Qwen3-Coder-Next-80B の切り替え遅延（約174.5秒/回）の本質は、vLLM の Sleep Mode が現構成（NVFP4 + Blackwell）で機能しないため、Docker コンテナの完全再起動（コールドロード）に強制されていることにある。",
+          "vLLM の Sleep Mode による高速スワップは、wake_up 処理時に 'list object has no attribute zero_' エラー（または CUDA invalid argument）を引き起こし、モデルがアスリープ状態のまま固着するため、実用的なスワップ手段として成立しない。",
+          "現状の枠組みでは、Sleep Mode の修復が困難なため、実質的に 'コールドロード' が唯一の動作可能なスワップ手段となっており、これがボトルネックの根源である。",
+          "解決策の候補として、Sleep Mode を無効化し、KV Cache を FP8 から FP16/BF16 に変更してメモリ使用量を増やし、両モデルを同時に GPU に載せる（Co-serve）ことでスワップそのものを排除するアプローチが検討されているが、NVFP4 構成では VRAM 不足により Co-serve は不可である。",
+          "Sleep Mode を除外した場合、代替案としてバッチ処理（AC-3）が viable path として残っているが、これはスワップ速度の改善というよりは、rework 駆動のオーバーヘッドを amortize する方向性の提案である。"
+        ],
+        "open_gaps": [
+          "Sleep Mode の根本原因（Triton .odt エラーや cumem_allocator の不具合）を修正し、Sleep Mode を復活させる場合の具体的なパッチまたは vLLM バージョンアップのスケジュールは未定義。",
+          "KV Cache のデータ型変更（FP8 -> FP16/BF16）による VRAM 増加が、現在両モデルで占有している 2 GPU の物理的制約内で Co-serve を可能にする余地があるか（DE-0143 では 'co-serve 不可(VRAM)' とされているが、モデル圧縮や offloading 等の別手段の有無は未検証）。",
+          "Docker コンテナの再起動時間を短縮するための技術的アプローチ（例: containerd snapshot の最適化、pre-warming 等）に関する記録は存在しない。",
+          "バッチ処理（AC-3）への移行が、単一モデルのスワップ遅延問題に直接寄与するか、それともワークフロー全体の効率化に留まるかの詳細なシミュレーション結果は未提出。"
+        ]
+      },
+      "survived": [
+        "DE-0143",
+        "DE-0074",
+        "DE-0075",
+        "DE-0086",
+        "DE-0027",
+        "DE-0037",
+        "DE-0068",
+        "DE-0070"
+      ],
+      "dropped": null,
+      "why_next": "feed grounded reality into detection"
+    },
+    {
+      "stage": "DETECTION(AFE+skepticism)",
+      "input": "6 operators on frame",
+      "output": {
+        "detected_missing_dimensions": [
+          {
+            "missing_dimension": "model_coexistence_mode",
+            "new_distinction": "exclusive_gpu_ownership vs shared_resource_pooling",
+            "decision_effect": "Shifts the optimization target from reducing container restart latency to enabling in-place model swapping or concurrent memory sharing, thereby eliminating the cold-start penalty entirely."
+          },
+          {
+            "missing_dimension": "context_preservation_state",
+            "new_distinction": "container_lifecycle_bound vs model_layer_bound",
+            "decision_effect": "Decouples the model loading process from the container lifecycle, allowing for rapid context switching without full process restart, directly addressing the 174s latency bottleneck."
+          },
+          {
+            "missing_dimension": "swap_granularity",
+            "new_distinction": "binary_state_switch vs continuous_state_transition",
+            "decision_effect": "Reframes the problem from a discrete 'on/off' switch to a continuous resource management problem, enabling strategies like asynchronous preloading or shared memory pools that bypass the cold load cost."
+          }
+        ],
+        "skeptic_checks": [
+          "Verify if the 174.5s latency is caused by model weight loading or by the container orchestration overhead (e.g., Docker pull, image build, or network transfer).",
+          "Check if the GPU memory fragmentation or VRAM allocation strategy prevents hot-swapping without full container restart.",
+          "Confirm if the 'cold load' time includes network latency for downloading model artifacts from remote storage rather than just local disk I/O."
+        ],
+        "n_candidates": 22
+      },
+      "survived": [
+        "model_coexistence_strategy",
+        "swap_granularity",
+        "single_model_exclusive_access|shared_resource_pooling",
+        "swap_cost is inversely proportional to model_footprint_overlap",
+        "evaluate if models can share gpu memory via tensor parallelism or pipeline parallelism to eliminate cold start",
+        "consider if a smaller 'router' model can handle requests while large models warm up in background",
+        "model_coexistence_mode",
+        "context_transfer_overhead"
+      ],
+      "dropped": "3 operators returned NO_SIGNAL",
+      "why_next": "hand detected defects/missing axes to reconstruction"
+    },
+    {
+      "stage": "RECONSTRUCTION(scheduler rebuild)",
+      "input": "problem frame + detected differences",
+      "output": {
+        "rebuild_alternative_frame": "### Replacement Frame: The Temporal-Continuity Gap\n\nThe deadlock is not merely a hardware or software constraint, but a **misalignment of timescales** between the *inference state* (milliseconds/seconds) and the *serving state* (minutes). The current framework treats model swapping as a **discrete, binary event** (Swap A $\\rightarrow$ Stop $\\rightarrow$ Start $\\rightarrow$ Swap B), ignoring the **continuous variable** of *context retention* and *memory residency*.\n\nThe structural difference reveals that the cost is not in the *loading* of the model weights per se, but in the **explosion of state entropy** when moving between isolated containers. We must shift from a **Container-Centric Swap Model** to a **Kernel-Centric Continuity Model**.\n\n**Key-Distinction Shift:**\n*   **From:** \"Optimizing the restart sequence of independent containers.\"\n*   **To:** \"Maintaining a single, long",
+        "attempts": [
+          {
+            "attempt": 1,
+            "lenses": [
+              "substrate: what is the thing actually made of, or carried by?",
+              "level: are you reasoning at the wrong level of description (object vs system vs protocol)?",
+              "constraint-as-variable: what constant is really a free parameter?"
+            ],
+            "verdict": "CHANGED"
+          }
+        ],
+        "resolved": true
+      },
+      "survived": "1 rebuild frame",
+      "dropped": null,
+      "why_next": "compare against reality / propose next operation"
+    }
+  ]
+}
