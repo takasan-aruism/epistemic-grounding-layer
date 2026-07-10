@@ -16,6 +16,7 @@ REPO = Path(__file__).resolve().parent.parent
 LEDGER = REPO / "DESIGN_EVIDENCE_LEDGER.jsonl"
 SPEC = REPO / "docs" / "2DER_TECHNICAL_SPECIFICATION.md"
 AUTONOMY_LEDGER = REPO / "AUTONOMY_LEDGER.jsonl"
+INVESTIGATIONS = REPO / "INVESTIGATIONS.jsonl"
 
 # closed/negative-branch heuristic keywords (CLAUDE-DERIVED, interpretive — NOT a clean enum in the ledger)
 _CLOSURE_KW = ("CLOSE", "NEGATIVE", "DEMOTE", "NOT_CONFIRMED", "REJECT", "ODF_CLOSED",
@@ -58,6 +59,23 @@ def load_taka_events():
                     obj = json.loads(line)
                     if isinstance(obj, dict):
                         out.append(obj)
+                except Exception:
+                    pass
+    except Exception:
+        pass
+    return out
+
+
+def _load_investigations():
+    out = []
+    try:
+        for line in INVESTIGATIONS.read_text().splitlines():
+            line = line.strip()
+            if line:
+                try:
+                    o = json.loads(line)
+                    if isinstance(o, dict):
+                        out.append(o)
                 except Exception:
                     pass
     except Exception:
@@ -266,4 +284,19 @@ def build_current_state():
         "spec_staleness": "MECHANICAL", "authority_pending": "TAKA-OWNED",
         "candidate_executable_work": "MECHANICAL",
     }
-    return _apply_taka_overlay(state, load_taka_events())
+    events = load_taka_events()
+    state = _apply_taka_overlay(state, events)
+    # SLICE-3/4: surface first-pass investigations (worker) + Taka steer + deterministic router pick
+    invs = _load_investigations()
+    for iv in invs:
+        iv["taka_steer"] = next(({"action": e.get("action"), "content": e.get("content"),
+                                  "event_id": e.get("event_id")}
+                                 for e in reversed(events) if e.get("target_object") == iv.get("inv_id")), None)
+    state["investigations"] = invs
+    # finding = local-Qwen first-pass, NOT Claude/senior reasoning and NOT verified -> its own honest origin
+    state["field_origins"]["investigations"] = "WORKER-UNVERIFIED"
+    from autonomy.router import select_next_work
+    pick, rationale = select_next_work(state)
+    state["next_work"] = {"pick": pick, "rationale": rationale}
+    state["field_origins"]["next_work"] = "MECHANICAL"
+    return state

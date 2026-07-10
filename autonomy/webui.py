@@ -74,6 +74,11 @@ padding:9px 16px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;tra
 <button class="send" onclick="send()">送信</button>
 </div>
 
+<div class="card"><button class="send" id="runbtn" onclick="runLoop()">▶ 2DER に次の仕事をさせる</button>
+<div class="muted" id="nextwork" style="margin-top:8px"></div></div>
+
+<h2>Investigations — first-pass(worker)。steer せよ</h2><div id="invs"></div>
+
 <h2>Taka decision queue</h2><div id="queue"></div>
 <h2>Candidate work — ここで訂正</h2><div id="work"></div>
 <h2>Applied corrections</h2><div id="eff"></div>
@@ -92,6 +97,24 @@ function renderTypes(){var h=document.getElementById('types');h.innerHTML='';TYP
   b.onclick=()=>{curType=t;renderTypes();var c=CAP[t],e=document.getElementById('cap');
     e.className='cap '+(c==='CAN_PROCESS_NOW'?'now':c==='CAN_RECORD_ONLY'?'rec':'no');
     e.textContent=t+' → '+c.replace(/_/g,' ')+'  ·  '+CAPNOTE};h.appendChild(b)})}
+function runLoop(){var b=document.getElementById('runbtn');b.disabled=true;var o=b.textContent;
+  b.textContent='…2DER調査中(Qwen, 数秒〜)';
+  api('/api/investigate',{}).then(st=>{render(st);toast('investigation done')}).catch(()=>toast('worker応答なし'))
+  .finally(()=>{b.disabled=false;b.textContent=o})}
+function invCard(iv){var f=iv.finding||{},s=iv.taka_steer,id=esc(iv.inv_id);
+  return '<div class="card"><span class="tag">'+id+'</span>'+
+  '<span class="tag" style="color:var(--accent)">'+esc(f.classification)+'</span>'+
+  '<span class="tag">conf '+esc(f.confidence)+'</span>'+
+  (s?'<span class="tag" style="color:var(--taka)">'+esc(s.action)+' '+esc(s.content)+'</span>':'<span class="tag" style="color:var(--warn)">PROPOSED</span>')+
+  '<div style="margin:5px 0">'+esc(f.findings)+'</div>'+
+  '<div class="muted">提案: '+esc(f.proposed_next_action)+' · reversible '+esc(f.reversible)+'</div>'+
+  '<div class="muted" style="font-size:11px">first-pass by '+esc(iv.investigator)+' · senior未検証(あなたの判断が要る)</div>'+
+  '<div class="btns">'+
+  '<button class="act pri" onclick="amend(\\'TAKA_CORRECTION\\',\\''+id+'\\',\\'APPROVED\\')">APPROVE</button>'+
+  '<button class="act" onclick="ask(\\'TAKA_REDIRECT\\',\\''+id+'\\',\\'代わりに何をするか\\')">REDIRECT</button>'+
+  '<button class="act" onclick="ask(\\'TAKA_CORRECTION\\',\\''+id+'\\',\\'訂正(分類が違う 等)\\')">WRONG</button>'+
+  '<button class="act" onclick="amend(\\'TAKA_HOLD\\',\\''+id+'\\',\\'hold\\')">HOLD</button>'+
+  '</div></div>'}
 function send(){var txt=document.getElementById('inp').value.trim();if(!txt)return toast('空です');
   if(!curType)return toast('type を選んで');
   api('/api/inbox',{type:curType,text:txt}).then(r=>{render(r.state);document.getElementById('inp').value='';
@@ -116,6 +139,9 @@ function render(st){S=st;
     '<span class="chip">pending <b>'+(st.authority_pending||[]).length+'</b></span>'+
     '<span class="chip">seals <b>'+ok+'/'+seals.length+'</b></span>'+
     '<span class="chip">val-fail <b>'+(st.validation_failures||[]).length+'</b></span>';
+  var nw=st.next_work||{};document.getElementById('nextwork').textContent='router: '+esc(nw.rationale||'');
+  var iv=st.investigations||[];document.getElementById('invs').innerHTML=iv.length?iv.map(invCard).join(''):
+    '<div class="muted">まだ調査なし。「▶ 2DERに次の仕事をさせる」を押す。</div>';
   var q=st.authority_pending||[];document.getElementById('queue').innerHTML=q.length?q.map(a=>
     '<div class="card pend"><span class="tag" style="color:var(--taka)">'+esc(a.action)+'</span><b>'+esc(a.target_object)+'</b>'+
     '<div class="muted">'+esc(a.content)+(a.reason?' · '+esc(a.reason):'')+' · '+esc(a.event_id)+'</div></div>').join(''):
@@ -167,6 +193,10 @@ class Handler(BaseHTTPRequestHandler):
                     return self._send(400, json.dumps({"error": f"bad action {action}"}))
                 amend.append_taka_event(action, str(body.get("target", "")),
                                         str(body.get("content", "")), body.get("reason"))
+                return self._send(200, json.dumps(cs.build_current_state(), ensure_ascii=False))
+            if self.path == "/api/investigate":
+                from autonomy.investigate import run_one_cycle
+                inv, rationale = run_one_cycle(cs.build_current_state())
                 return self._send(200, json.dumps(cs.build_current_state(), ensure_ascii=False))
             if self.path == "/api/inbox":
                 typ = str(body.get("type", "UNKNOWN"))

@@ -4,7 +4,7 @@ import sys, os, json, hashlib, copy
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from autonomy.current_state import build_current_state, REPO, load_de_ledger, verify_seals
 
-VALID_ORIGINS = {"MECHANICAL", "CLAUDE-DERIVED", "TAKA-OWNED"}
+VALID_ORIGINS = {"MECHANICAL", "CLAUDE-DERIVED", "TAKA-OWNED", "WORKER-UNVERIFIED"}
 
 
 def _sha(p):
