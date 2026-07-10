@@ -1,0 +1,85 @@
+{
+  "object": "SCHEDULER_EXHIBIT_TRACE",
+  "traces": [
+    {
+      "opaque_id": "6def7c68f5e6d0",
+      "incident": "HBB-08",
+      "condition": "RS",
+      "seed": 0,
+      "cand_idx": 0,
+      "trace": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "lenses": [
+              "substrate: what is the thing actually made of, or carried by?",
+              "constraint-as-variable: what constant is really a free parameter?"
+            ],
+            "verdict": "CHANGED"
+          }
+        ],
+        "final_attempts": 1
+      }
+    },
+    {
+      "opaque_id": "cdb1d2cad2bc23",
+      "incident": "HBB-08",
+      "condition": "RS",
+      "seed": 0,
+      "cand_idx": 1,
+      "trace": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "lenses": [
+              "kind: is the quantity or claim mis-typed (a category/unit error)?",
+              "substrate: what is the thing actually made of, or carried by?"
+            ],
+            "verdict": "CHANGED"
+          }
+        ],
+        "final_attempts": 1
+      }
+    },
+    {
+      "opaque_id": "f3d8435d13cdb4",
+      "incident": "HBB-08",
+      "condition": "RS_pool",
+      "seed": 0,
+      "cand_idx": 0,
+      "trace": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "lenses": [
+              "inversion: what if the assumed dependency runs the other way?",
+              "temporal: is a static frame hiding a process or ordering?"
+            ],
+            "verdict": "CHANGED"
+          }
+        ],
+        "final_attempts": 1
+      }
+    },
+    {
+      "opaque_id": "fd33afb96353c4",
+      "incident": "HBB-08",
+      "condition": "RS_pool",
+      "seed": 0,
+      "cand_idx": 1,
+      "trace": {
+        "attempts": [
+          {
+            "attempt": 1,
+            "lenses": [
+              "temporal: is a static frame hiding a process or ordering?",
+              "kind: is the quantity or claim mis-typed (a category/unit error)?"
+            ],
+            "verdict": "CHANGED"
+          }
+        ],
+        "final_attempts": 1
+      }
+    }
+  ]
+}

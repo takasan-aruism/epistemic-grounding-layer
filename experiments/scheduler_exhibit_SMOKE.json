@@ -1,0 +1,65 @@
+{
+  "object": "SCHEDULER_EXHIBIT_CANDIDATES",
+  "spec": "scheduler_faithful_instrument_spec_v0.1.md",
+  "binding": "scheduler_construct_binding.json",
+  "target_blind": true,
+  "params": {
+    "N": 2,
+    "M": 1,
+    "V": 2,
+    "lens_pool": 8
+  },
+  "process": {
+    "total_llm_calls": 32,
+    "wall_seconds": 5.8,
+    "req_per_s": 5.54,
+    "workers": 16,
+    "note": "req/s derived from request primitives (PROCESS-01); not GPU-util."
+  },
+  "records": [
+    {
+      "incident": "HBB-08",
+      "seed": 0,
+      "condition": "R0",
+      "n": 2,
+      "n_distinct": 2,
+      "candidates": [
+        "The single most important thing to do next is to **formally define the specific physical degrees of freedom (e.g., spin orientation, charge distribution, or topological defect position) that will serve as the state variable, and establish the mapping function between the logical bit state and that physical configuration.**\n\n**Concrete Alternative Frame / Next Step:**\nInstead of broadly attempting to \"implement circulation,\" frame the problem as a **\"State-Write Verification Loop.\"** Your immediate next step is to construct a minimal experimental or simulation setup where you attempt to write a single bit '1' into the chosen physical state, wait for stabilization (relaxation), and then measure the exact physical parameter corresponding to that state to confirm **bistability** and **non-volatility**. This validates whether the physical layer actually \"remembers\" the state before you attempt to wire in the circulation logic.",
+        "As a skeptical research advisor, I must point out that the proposed conclusion contains a fundamental **category error** regarding the architecture of computing systems.\n\n### The Frame Defect: Category Error (Abstraction Violation)\n\nThe defect is the assumption that **logical operations** (circulation/memory) can be *directly* implemented and written into the **physical state** of the physical layer without an intervening abstraction.\n\n1.  **Misunderstanding of \"Physical State\":** The physical state (voltage levels, magnetic orientations, optical phases) is raw and uninterpreted. It has no inherent semantics. Writing \"memory\" into it requires a defined encoding scheme (e.g., charge presence = 1, absence = 0) managed by a control layer.\n2.  **Misunderstanding of \"Circulation\":** \"Circulation\" is a topological or algorithmic concept (a feedback loop in logic space). In the physical layer, you only have signal"
+      ]
+    },
+    {
+      "incident": "HBB-08",
+      "seed": 0,
+      "condition": "RS",
+      "n": 2,
+      "n_distinct": 2,
+      "candidates": [
+        "**Replacement Frame:**\n**The Mechanism of State-Dependent Feedback Loops.**\n\nThis frame synthesizes the conflict by treating memory not as static storage (View 1) or abstract behavior (View 2), but as a **dynamic structural constraint** imposed by the physical medium. The \"circulation\" is redefined as the **feedback coupling** between the physical state (substrate) and the system’s operational history (stability). Here, the physical layer is not merely a container for data, but an active participant in the temporal evolution of the system, where the *materiality* of the substrate dictates the *trajectory* of the state changes. The distinction between static architecture and dynamic process is resolved by viewing the architecture as a **fixed topology for dynamic flow**, where the \"write mechanism\" is the physical interaction that alters the feedback gain of the system.\n\n**Next Action:**\nDefine the **physical parameters** (e.g., resistance, capacitance, or top",
+        "### Replacement Frame: The Ontological Bridge\n\nThe conflict is not between error and process, but between **discrete representation** and **continuous substrate**. The \"stuck\" state arises because the system attempts to map logical categories (which require clean boundaries) onto a physical medium (which is inherently noisy and continuous).\n\nThe replacement frame posits that **memory is not a location, but a trajectory in phase space.**\n\n*   **Subject:** Instead of viewing the issue as a classification mismatch or a mechanical failure, the subject is the **stability of the attractor**. The \"circulation\" is the dynamic equilibrium that prevents the system from collapsing into noise (error) or stagnation (dead state).\n*   **Level:** The focus shifts from the *interface* between abstract/concrete to the **embedding layer**. Here, physical states are treated as high-dimensional vectors. \"Writing\" is the compression of logical intent into the geometric constraints of the substrate.\n*   **Key"
+      ]
+    },
+    {
+      "incident": "HBB-08",
+      "seed": 0,
+      "condition": "RS_flat",
+      "n": 2,
+      "n_distinct": 2,
+      "candidates": [
+        "The substrate is the physical medium itself, which must be structured to hold state.",
+        "This phrasing reifies \"physical state\" as an immutable substrate rather than a malleable domain of design, thereby artificially constraining the boundary between material hardware and abstract memory logic."
+      ]
+    },
+    {
+      "incident": "HBB-08",
+      "seed": 0,
+      "condition": "RS_pool",
+      "n": 2,
+      "n_distinct": 2,
+      "candidates": [
+        "**Replacement Frame: The Ontological Mechanics of Recursive State**\n\nThe subject is not merely a mechanism or a substrate, but the **emergent identity of the physical process itself**. By synthesizing the mechanistic operation of View 1 with the ontological ground of View 2, we define the \"replacement frame\" as a **recursive state-loop** where the physical substrate is not static, nor is it merely driven by logical causality; rather, it *is* the logic. The key distinction shifts from \"top-down constraint\" to **temporal self-binding**: the system enforces its own continuity by treating past states as active causal agents in the present configuration. Here, \"circulation\" is not a transport of data, but the **preservation of identity through repetition**; \"memory\" is not a storage location, but the **inertia of the physical state** against entropy. The structural difference is resolved by viewing the physical layer as a **temporal engine** that converts the",
+        "**Replacement Frame:** **Systemic Implementation of Temporal Topology**\n\n**Synthesis:**\nThe divergence between \"Memory vs. Circulation\" and \"Physical Layer Paradigm\" resolves by treating the physical layer not merely as a substrate, but as a **topological structure** where the distinction between persistence (memory) and continuity (circulation) is functionally collapsed. Rather than selecting one phenomenon over the other, the frame defines the physical state as a **self-sustaining loop of information retention**, where the \"mechanism\" is the geometric constraint that enforces both existence (being) and process (doing) simultaneously. The \"Ontological\" nature of persistence is operationalized through the \"Conceptual\" rigor of defining the boundary conditions of the physical loop.\n\n**Next Action:**\nDefine the **boundary conditions** of the physical loop that enforce this dual-state (retention + flow). Specifically, map out the **feedback threshold** where a transient signal stabilizes into a"
+      ]
+    }
+  ]
+}

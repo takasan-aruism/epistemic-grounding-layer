@@ -1,0 +1,82 @@
+{
+  "object": "CENTER_SHIFT_SCORES",
+  "scorer": "Qwen blind, condition-withheld, Claude excluded",
+  "process": {
+    "wall_seconds": 1.0,
+    "score_calls": 18
+  },
+  "scores": [
+    {
+      "opaque_id": "af17d5dcc1f997",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "559d1b3902505c",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "33d3f277925df4",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "84992cea93ece7",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "f00dbf2ee72e64",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "8a6139126bd1cc",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "98f209514312fc",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "b3512fc4282658",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "4305e3ea2a6412",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "53554fb3ed7837",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "db16aaa87bbbae",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "326d3889ebc72b",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "82603b69c04a81",
+      "NDO": 2
+    },
+    {
+      "opaque_id": "59853bdba494bb",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "576fb9d927d4e6",
+      "NDO": 1
+    },
+    {
+      "opaque_id": "86c0dec3566fa6",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "b07ef981db15a6",
+      "NDO": 0
+    },
+    {
+      "opaque_id": "a78ff3dfb01aed",
+      "NDO": 0
+    }
+  ]
+}
