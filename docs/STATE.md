@@ -1,15 +1,15 @@
 # 2DER autonomous loop — STATE (client-readable)
 
-_as_of 2026-07-11T06:38:08 · schema v0.1 · owner=Taka · correction/adjudication surface (not a product)_
+_as_of 2026-07-11T07:00:01 · schema v0.1 · owner=Taka · correction/adjudication surface (not a product)_
 
 > Observe here (`git pull` then read). To correct, run `autonomy/amend.sh` then `git commit && git push` (see `docs/CLIENT_USAGE.md`). Corrections are append-only machine events, not text edits.
 
 ## A · System state
 
-- latest DE: **DE-0145** (145 entries)
-- components: 94 · seals OK: 3/19
-- closed branches: 15 (heuristic) · validation failures: 2 · candidate work: 2
-- spec: synced (spec@DE-0145 / ledger@DE-0145)
+- latest DE: **DE-0146** (146 entries)
+- components: 96 · seals OK: 3/19
+- closed branches: 16 (heuristic) · validation failures: 2 · candidate work: 2
+- spec: synced (spec@DE-0146 / ledger@DE-0146)
 - UNOWNED: Attention Center, same-object tension binding, structural re-centering, local Aruism operational regime, end-to-end self-operation
 
 ## C · Taka decision queue
@@ -35,7 +35,7 @@ _as_of 2026-07-11T06:38:08 · schema v0.1 · owner=Taka · correction/adjudicati
 - experiments/hbb_egl_bridge_replay_result.json — m1_grounding_fail batch=RS_flat src_trace=0.8
 </details>
 
-<details><summary>closed branches (15, CLAUDE-DERIVED heuristic)</summary>
+<details><summary>closed branches (16, CLAUDE-DERIVED heuristic)</summary>
 
 - DE-0031 — CLOSE_PHASE_1A / OPEN_PHASE_1B
 - DE-0064 — ADOPT
@@ -52,6 +52,7 @@ _as_of 2026-07-11T06:38:08 · schema v0.1 · owner=Taka · correction/adjudicati
 - DE-0133 — DEMOTE_AS_SHAKE_DETECTOR_RETAIN_AS_ATTENTION_TARGET_SELECTOR
 - DE-0134 — RECORD_CENTER_SHIFT_NEGATIVE_AGGREGATE
 - DE-0135 — DOWNGRADE_R0_LIFT_NOT_A_SIGNAL
+- DE-0146 — ADOPT_2DER_CONTINUOUS_ACTOR_CLAUDE_STATELESS_INVESTIGATOR
 </details>
 
 ## D · Correction actions (append-only machine events)

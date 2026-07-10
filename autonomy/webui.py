@@ -74,7 +74,8 @@ padding:9px 16px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;tra
 <textarea id="inp" placeholder="2DERに渡す"></textarea>
 <div class="types" id="types"></div>
 <div class="cap" id="cap">type を選ぶと、今のcapabilityで何ができるか表示します。</div>
-<button class="send" onclick="send()">送信</button>
+<button class="send" onclick="runFull()">▶ 2DER に渡す(既定・full-path: 履歴→検出→再構成, ~1-2分)</button>
+<button class="send" onclick="send()" style="background:var(--card);color:var(--mut);margin-top:6px">送信(manual/debug: 単機能 route)</button>
 <div id="result"></div>
 </div>
 
@@ -120,6 +121,17 @@ function invCard(iv){var f=iv.finding||{},s=iv.taka_steer,id=esc(iv.inv_id);
   '<button class="act" onclick="amend(\\'TAKA_HOLD\\',\\''+id+'\\',\\'hold\\')">HOLD</button>'+
   '</div></div>'}
 function setResult(h){document.getElementById('result').innerHTML=h}
+function runFull(){var t=document.getElementById('inp').value.trim();if(!t)return toast('空です');
+  setResult('<div class="muted">…2DER full-path 実行中(history→detection→reconstruction, 1-2分)</div>');
+  api('/api/run_problem',{input:t}).then(renderTask).catch(()=>setResult('<div class="muted">worker応答なし/timeout</div>'))}
+function renderTask(task){if(task&&task.error){setResult('<div class="muted">'+esc(task.error)+'</div>');return}
+  var md=((task.detection_outputs||{}).missing_dimensions)||[];
+  setResult('<div class="card"><b>INVESTIGATOR_TASK '+esc(task.task_id)+'</b> <span class="tag">2DER→Claude</span>'+
+   '<div class="muted">objective: '+esc(task.objective)+'</div>'+
+   '<div style="margin:5px 0"><b>detection (missing dims)</b>: '+esc(JSON.stringify(md).slice(0,240))+'</div>'+
+   '<div style="margin:5px 0"><b>reconstruction</b> <span class="tag" style="color:var(--warn)">未検証</span>: '+esc((((task.reconstruction_outputs||{}).alternative_frame)||'').slice(0,320))+'</div>'+
+   '<div class="muted">next-op(2DER が選択): '+esc((task.selected_next_operation||'').slice(0,130))+'</div>'+
+   '<div class="muted" style="font-size:11px">Claude はこの task から開始する(raw prompt でない)。reconstruction の正しさは未検証。</div></div>')}
 function send(){var txt=document.getElementById('inp').value.trim();if(!txt)return toast('空です');
   if(!curType)return toast('type を選んで');
   if(curType==='QUESTION'){setResult('<div class="muted">…Qwen回答中(数秒)</div>');
@@ -214,6 +226,13 @@ class Handler(BaseHTTPRequestHandler):
                 amend.append_taka_event(action, str(body.get("target", "")),
                                         str(body.get("content", "")), body.get("reason"))
                 return self._send(200, json.dumps(cs.build_current_state(), ensure_ascii=False))
+            if self.path == "/api/run_problem":
+                from autonomy.problem import run_problem
+                inp = str(body.get("input", "")).strip()
+                if not inp:
+                    return self._send(400, json.dumps({"error": "empty input"}))
+                task = run_problem(inp, body.get("objective"))   # full 2DER path (slow ~1-2min)
+                return self._send(200, json.dumps(task, ensure_ascii=False))
             if self.path == "/api/ask":
                 from egl.self_grounding import answer_question, validate_answer
                 q = str(body.get("question", "")).strip()

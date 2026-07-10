@@ -23,7 +23,7 @@
 |---|---|---|---|
 | WORKER | solve / generate / detect / reconstruct | Qwen3.6-35B-A3B @ localhost:8005 (vLLM, ctx=32768) | LIVE |
 | SUPERVISOR | retain / validate / track / open_gaps / authority 分離 | EGL SoR (`egl/*.py`) + answer contract (`egl/self_grounding.py`) | LIVE |
-| SENIOR INVESTIGATOR | 集約 unresolved issue を起点に現物 (artifact/code/runtime) を read-only 監査し next action を絞る | Claude Code (この session の運用そのもの) | 運用 LIVE / MACHINE routing = DESIGN-ONLY (§7) |
+| SENIOR INVESTIGATOR | **2DER 発行の INVESTIGATOR_TASK を受け**、現物を read-only 調査し machine-readable RESULT を返す **stateless / weak-memory** layer(program 主体ではない; session memory を program memory に使わない) | Claude Code | LIVE(DE-0146, `autonomy/problem.py`) |
 | AUTHORITY | objective / acceptable-risk / program scope / final disposition | Taka | LIVE |
 
 **不変則:** WORKER の生成物は SUPERVISOR で validated evidence にならない。SENIOR INVESTIGATOR は read-only 監査・提案・spec 準備はできるが objective 変更・branch 閉鎖・evidence 昇格はできない。AUTHORITY のみが不可逆 program 判断を持つ。
@@ -130,7 +130,8 @@ blind scoring · rubric 先行 seal(v2 sha256 `012941ab…`)· opaque_id `sha256
 | 4 use-case capability surface (QUESTION/RESULT_LOG/TASK/CORRECTION) | **OPERATIONAL_TEST_VERIFIED, SLICE VALID (live HTTP)** | DE-0142 |
 | SLICE-8 general problem-ingest (TAKA→2DER→CLAUDE) | **OPERATIONAL_TEST_VERIFIED (3/3), SLICE VALID; dogfood MIXED** | DE-0144 |
 | Qwen swap root cause (vLLM #39078 fp8-kv sleep bug) | ROOT_CAUSE_IDENTIFIED, workaround UNTESTED | DE-0143 |
-| **2DER intelligent middle** (detection/reconstruction) | **EXHIBIT-ONLY + CLOSED-NEGATIVE-at-bar — RUNS, NOT MISSING** (DE-0144 MIXED verdict SUSPENDED, instrument-invalid) | DE-0145 |
+| **2DER intelligent middle** (detection/reconstruction) | **EXHIBIT-ONLY + CLOSED-NEGATIVE-at-bar — RUNS, NOT MISSING**; output UNVALIDATED | DE-0145 |
+| **2DER continuous-actor loop** (TAKA→2DER full-path→INVESTIGATOR_TASK→Claude→RESULT→2DER→next-op, resumable) | **OPERATIONAL_LOOP_CLOSED (5/5, PHASE-7 10/10), SLICE VALID** | DE-0146 |
 | autonomous loop SLICE-2 · headless senior executor | DESIGN-ONLY / MISSING WIRING | plan §11 |
 
 ---
@@ -192,6 +193,7 @@ blind scoring · rubric 先行 seal(v2 sha256 `012941ab…`)· opaque_id `sha256
   - v1.3 (2026-07-10) — SLICE-6 client-usable surface via git LIVE(dev≠client)。observe=committed `docs/STATE.md`、correct=pure-shell `autonomy/amend.sh`→git、`docs/CLIENT_USAGE.md`。independent audit が control-char JSON 破損 + mawk octal id の 2 defect を捕捉→修正→VALID。DE-0139。
   - v1.4 (2026-07-10) — SLICE-7 thin Web UI LIVE(`autonomy/webui.py`, stdlib)。Taka が git 不要でブラウザ(Mac/iPhone LAN/Tailscale)から state 閲覧・card ボタン訂正・自由入力(honest capability tier)。write=AUTONOMY_LEDGER only、即時反映。independent audit(実HTTP)=SLICE VALID。DE-0140。git-CLI surface(SLICE-6)は dev/sync 用に保持。
   - v1.5 (2026-07-11) — SLICE-3/4 autonomous action layer LIVE(router 決定選択 + Qwen worker first-pass investigation + UI「▶2DERに次の仕事をさせる」+ steer)。origin=WORKER-UNVERIFIED、APPROVE≠auto-execute、dedup 済。independent audit が 2 honesty defect を捕捉→修正→VALID。DE-0141。
+  - v1.9 (2026-07-11) — **2DER = continuous program actor(DE-0146)**: `autonomy/problem.py` = TAKA→2DER full-path(history+detection+reconstruction, 各 stage を PROBLEM_LOG へ永続)→INVESTIGATOR_TASK→Claude(stateless, task から開始)→RESULT→2DER が next-op 保持。Claude session memory なしで resume 可。complete loop を Qwen swap で実走(→ STOP_FOR_TAKA)。Web Home 既定 = full-path。Claude = program 主体でない。
   - v1.8 (2026-07-11) — **instrument-validity 訂正(DE-0145)**: 先の dogfood は self_grounding のみ = NOT_2DER。full-path(AFE detection + scheduler reconstruction)を実行すると RUN して detection+reconstruction を出す = CLOSED-NEGATIVE≠MISSING。DE-0144 の MIXED 結論を SUSPEND。実力判定は Taka authority 待ち。
   - v1.7 (2026-07-11) — SLICE-8 general problem-ingest LIVE(`autonomy/ingest.py`, TAKA→2DER→CLAUDE)。Qwen swap を dogfood=MIXED。監査所見: 2DER の **intelligent middle(reconstruction 等)は未所有**、context→Claude spine のみ LIVE。Qwen swap 根因 = vLLM #39078(DE-0143, workaround 未テスト)。DE-0143/0144。
   - v1.6 (2026-07-11) — 4 use-case capability surface LIVE(current capability から逆算)。UI「2DERに渡す」を QUESTION/RESULT_LOG/TASK/CORRECTION で route(`/api/ask` grounded 回答, `/api/inspect` repo artifact 一次診断, TASK=record-only, CORRECTION=amend)。live HTTP + independent audit(traversal/read-only/XSS)=VALID。DE-0142。
