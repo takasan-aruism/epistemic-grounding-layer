@@ -1,15 +1,15 @@
 # 2DER autonomous loop — STATE (client-readable)
 
-_as_of 2026-07-11T05:42:51 · schema v0.1 · owner=Taka · correction/adjudication surface (not a product)_
+_as_of 2026-07-11T06:19:22 · schema v0.1 · owner=Taka · correction/adjudication surface (not a product)_
 
 > Observe here (`git pull` then read). To correct, run `autonomy/amend.sh` then `git commit && git push` (see `docs/CLIENT_USAGE.md`). Corrections are append-only machine events, not text edits.
 
 ## A · System state
 
-- latest DE: **DE-0142** (142 entries)
-- components: 91 · seals OK: 3/19
+- latest DE: **DE-0144** (144 entries)
+- components: 93 · seals OK: 3/19
 - closed branches: 15 (heuristic) · validation failures: 2 · candidate work: 2
-- spec: synced (spec@DE-0142 / ledger@DE-0142)
+- spec: synced (spec@DE-0144 / ledger@DE-0144)
 - UNOWNED: Attention Center, same-object tension binding, structural re-centering, local Aruism operational regime, end-to-end self-operation
 
 ## C · Taka decision queue

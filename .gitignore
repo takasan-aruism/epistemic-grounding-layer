@@ -10,3 +10,5 @@ data_gate4/
 CURRENT_STATE.json
 autonomy_dashboard.html
 INVESTIGATIONS.jsonl
+PROBLEMS.jsonl
+HANDOFFS.jsonl
