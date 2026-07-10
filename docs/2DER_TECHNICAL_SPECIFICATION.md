@@ -1,7 +1,8 @@
 # 2DER — 詳細技術仕様書 (living document)
 
-- **version:** 1.0
+- **version:** 1.1
 - **as-of:** 2026-07-10
+- **program main theme (2026-07-10, Taka v0-direction authority):** 2DER AUTONOMOUS RESEARCH LOOP v0(既存資産を機械接続し manual relay を減らす; **self-improvement claim ではない**)。boundary audit+plan = `docs/autonomous_loop_v0_audit_and_plan.md`。Attention Center は引き続き重要な research branch だが **main theme ではない**。
 - **basis line:** 2026-07-08 現状整理 + (scheduler closure / Attention Center 探索 / HBB-30 trace / HBB→EGL bridge)
 - **status:** DESCRIPTIVE SPEC of the current system. NOT a roadmap commitment.
 - **epistemic discipline (binding on this document):** author≠auditor · C≠H(新規説明を過去原因へ後付けしない) · 自律RD 未有効 · self-improvement claim を書かない · 生成中間物 ≠ validated evidence · open_gap ≠ false premise · Taka = final authority。
@@ -72,6 +73,11 @@
 - **local Aruism operational regime** — 揺れた局所だけに短時間 Aruism を掛け通常系へ戻す trigger/duration/return。未所有。
 - **end-to-end self-operation** — incident 投入→次実験提案を 2DER 自身で回す MVP、GPT↔Claude 手動 relay 除去。未完成。
 
+### 2.9 Autonomous research loop v0 — SLICE-1 LIVE / SLICE-2..5 DESIGN-ONLY
+- `autonomy/current_state.py` + `build_state.py` + `test_autonomy_state.py`(8/8）= **SLICE-1 mechanical CURRENT_STATE builder(LIVE, AUTO-NOW)**。DE ledger/seals(sha256 recompute)/component files/result artifacts → 状態 projection、各 field に origin(MECHANICAL/CLAUDE-DERIVED/TAKA-OWNED)。side-effect-free(CLI のみ `CURRENT_STATE.json` を生成=再生成可、gitignore)。independent audit=SLICE VALID(DE-0137)。
+- **DESIGN-ONLY(未実装、plan §11):** SLICE-2 spec §5/§9/§12 機械再生成 / SLICE-3 autonomy router(deterministic §6 1–5)/ SLICE-4 Claude investigator runner / SLICE-5 minimum UI(static HTML correction surface)+ CLI amender + `AUTONOMY_LEDGER.jsonl`(Taka correction events, append-only, `core.append_event` 形の reuse)。
+- **authority:** experiment disposition = AUTO/SMALL-ADAPTER; **program disposition / value・UX / 新 premise = TAKA-GATED**(auto-continue gate = plan §8)。
+
 ---
 
 ## 3. Data contracts (機械可読な既存 schema)
@@ -110,6 +116,8 @@ blind scoring · rubric 先行 seal(v2 sha256 `012941ab…`)· opaque_id `sha256
 | route-vs-repeat construct | v0.1 REJECTED / v0.2 hardened but **audited-and-rejected design of record**(未 commit) | 本 session |
 | Attention Center / same-object binding / structural re-centering / Aruism regime | **UNOWNED** | — |
 | HBB-30 solved / REC2 | **NOT CLAIMED** | — |
+| autonomous loop SLICE-1 (CURRENT_STATE builder) | **OPERATIONAL_TEST_VERIFIED (8/8), SLICE VALID** | DE-0137 |
+| autonomous loop SLICE-2..5 | DESIGN-ONLY | plan §11 |
 
 ---
 
@@ -130,7 +138,8 @@ blind scoring · rubric 先行 seal(v2 sha256 `012941ab…`)· opaque_id `sha256
 
 ---
 
-## 8. 優先順位 (2026-07-10)
+## 8. 優先順位 (2026-07-10, main theme = autonomous loop v0)
+- **P0:** autonomous loop の wiring 接続(SLICE-1 済 → SLICE-2 spec-regen / SLICE-3 router / SLICE-5 UI+Taka-event)。human bottleneck は capability でなく wiring。
 - **P0:** unresolved material の authority-safe 集約 + 表示(presentation inflation 対策; §3 anti-inflation)。
 - **P0:** 2DER→Claude Code routing の最小成立(§7)。
 - **P1:** validator/renderer 残差(bridge の M1 fail RS/RS_flat、M2 placement、count-as-evidence 描画リスク)。
@@ -164,3 +173,4 @@ blind scoring · rubric 先行 seal(v2 sha256 `012941ab…`)· opaque_id `sha256
 - **この doc を読むべき時:** 新 branch 着手前 / 能力主張前 / routing・Attention Center 設計前。
 - changelog:
   - v1.0 (2026-07-10) — 初版。scheduler closure(DE-0130)、center-shift NEGATIVE(DE-0134/0135)、ledger salience DEMOTE(DE-0131/0133)、HBB→EGL bridge feasibility(DE-0136)、routing layer DESIGN-ONLY を反映。
+  - v1.1 (2026-07-10) — program main theme = 2DER AUTONOMOUS RESEARCH LOOP v0(Taka v0-direction authority)。§2.9 追加(SLICE-1 CURRENT_STATE builder LIVE / SLICE-2..5 DESIGN-ONLY)、§5 に SLICE-1 行、§8 P0 更新。DE-0137。boundary audit+plan = docs/autonomous_loop_v0_audit_and_plan.md。

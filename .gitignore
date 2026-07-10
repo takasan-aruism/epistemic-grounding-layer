@@ -7,3 +7,4 @@ __pycache__/
 *.sqlite
 data_acq_task/
 data_gate4/
+CURRENT_STATE.json
