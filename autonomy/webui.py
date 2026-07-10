@@ -14,17 +14,20 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import autonomy.current_state as cs
 import autonomy.amend as amend
 
-# honest capability mapping for the Home free-text input (NO fake classifier: user picks type)
-INPUT_TYPES = ["CORRECTION", "NOTE", "CONTEXT", "INCIDENT", "RESULT", "LOG", "QUESTION", "UNKNOWN"]
+# 4 use-case families, reverse-engineered from current live capability (NO fake classifier: user picks type)
+INPUT_TYPES = ["QUESTION", "RESULT_LOG", "TASK", "CORRECTION"]
 CAPABILITY = {
-    "CORRECTION": "CAN_PROCESS_NOW",   # -> Taka correction event; HOLD/REJECT/PRIORITY have real overlay effect
-    "NOTE": "CAN_RECORD_ONLY", "CONTEXT": "CAN_RECORD_ONLY",
-    "INCIDENT": "CAN_RECORD_ONLY", "RESULT": "CAN_RECORD_ONLY", "LOG": "CAN_RECORD_ONLY",
-    "QUESTION": "CAN_RECORD_ONLY",     # honest: no live autonomous answerer wired to the loop UI in v0
-    "UNKNOWN": "CAN_RECORD_ONLY",
+    "QUESTION": "CAN_PROCESS_NOW",     # -> answer_question over the project ledger corpus (Qwen, grounded+validated)
+    "RESULT_LOG": "CAN_PROCESS_NOW",   # -> investigate a named artifact (Qwen first-pass, WORKER-UNVERIFIED)
+    "TASK": "CAN_RECORD_ONLY",         # -> recorded for the senior (Claude Code) dev session; NOT auto-executed
+    "CORRECTION": "CAN_PROCESS_NOW",   # -> append-only Taka event; state overlay reflects it
 }
-CAP_NOTE = ("autonomous processing of questions/incidents = NOT YET SUPPORTED "
-            "(router/investigator SLICE-3/4 未実装). 今できるのは: 訂正の即時反映 と 入力の記録。")
+CAP_DESC = {
+    "QUESTION": "プロジェクト記録(DE/REVIEW台帳)に根拠付きで答える。Qwen回答+出典+未解決点。プロジェクト史/状態の範囲のみ。",
+    "RESULT_LOG": "指定成果物(例 experiments/..._result.json)をQwenが開いて一次診断。未検証の暫定(senior/あなたが判断)。",
+    "TASK": "記録のみ。設計/実装/実験の実行は senior(Claude Code)のdevセッションが要る=ここでは自動実行しない。",
+    "CORRECTION": "訂正を append-only の machine event として記録・反映。",
+}
 
 HTML = """<!doctype html><html lang="ja"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -72,6 +75,7 @@ padding:9px 16px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;tra
 <div class="types" id="types"></div>
 <div class="cap" id="cap">type を選ぶと、今のcapabilityで何ができるか表示します。</div>
 <button class="send" onclick="send()">送信</button>
+<div id="result"></div>
 </div>
 
 <div class="card"><button class="send" id="runbtn" onclick="runLoop()">▶ 2DER に次の仕事をさせる</button>
@@ -85,7 +89,7 @@ padding:9px 16px;border-radius:20px;font-size:13px;font-weight:600;opacity:0;tra
 <details><summary>raw state (expand)</summary><pre id="raw"></pre></details>
 </div><div id="toast"></div>
 <script>
-var TYPES=%TYPES%, CAP=%CAP%, CAPNOTE=%CAPNOTE%, curType=null, S=null;
+var TYPES=%TYPES%, CAP=%CAP%, CAPDESC=%CAPDESC%, curType=null, S=null;
 function esc(s){return (s==null?'':''+s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function toast(t){var e=document.getElementById('toast');e.textContent=t;e.className='show';setTimeout(()=>e.className='',1400)}
 function api(path,body){return fetch(path,{method:body?'POST':'GET',headers:{'Content-Type':'application/json'},
@@ -96,7 +100,7 @@ function renderTypes(){var h=document.getElementById('types');h.innerHTML='';TYP
   var b=document.createElement('button');b.textContent=t;b.className=(t===curType?'on':'');
   b.onclick=()=>{curType=t;renderTypes();var c=CAP[t],e=document.getElementById('cap');
     e.className='cap '+(c==='CAN_PROCESS_NOW'?'now':c==='CAN_RECORD_ONLY'?'rec':'no');
-    e.textContent=t+' → '+c.replace(/_/g,' ')+'  ·  '+CAPNOTE};h.appendChild(b)})}
+    e.textContent=t+' → '+c.replace(/_/g,' ')+'  ·  '+CAPDESC[t]};h.appendChild(b)})}
 function runLoop(){var b=document.getElementById('runbtn');b.disabled=true;var o=b.textContent;
   b.textContent='…2DER調査中(Qwen, 数秒〜)';
   api('/api/investigate',{}).then(st=>{render(st);toast('investigation done')}).catch(()=>toast('worker応答なし'))
@@ -115,10 +119,26 @@ function invCard(iv){var f=iv.finding||{},s=iv.taka_steer,id=esc(iv.inv_id);
   '<button class="act" onclick="ask(\\'TAKA_CORRECTION\\',\\''+id+'\\',\\'訂正(分類が違う 等)\\')">WRONG</button>'+
   '<button class="act" onclick="amend(\\'TAKA_HOLD\\',\\''+id+'\\',\\'hold\\')">HOLD</button>'+
   '</div></div>'}
+function setResult(h){document.getElementById('result').innerHTML=h}
 function send(){var txt=document.getElementById('inp').value.trim();if(!txt)return toast('空です');
   if(!curType)return toast('type を選んで');
-  api('/api/inbox',{type:curType,text:txt}).then(r=>{render(r.state);document.getElementById('inp').value='';
-    toast(curType+': '+r.capability.replace(/_/g,' '))})}
+  if(curType==='QUESTION'){setResult('<div class="muted">…Qwen回答中(数秒)</div>');
+    api('/api/ask',{question:txt}).then(renderAnswer).catch(()=>setResult('<div class="muted">worker応答なし</div>'));return}
+  if(curType==='RESULT_LOG'){setResult('<div class="muted">…Qwen診断中(数秒)</div>');
+    api('/api/inspect',{ref:txt}).then(renderFinding).catch(()=>setResult('<div class="muted">worker応答なし</div>'));return}
+  api('/api/inbox',{type:curType,text:txt}).then(r=>{render(r.state);
+    var msg=curType==='TASK'?'記録した(senior devセッション待ち・自動実行しない)':'訂正を記録した';
+    setResult('<div class="card"><b>'+esc(curType)+'</b> <span class="tag">'+esc(r.capability.replace(/_/g,' '))+'</span><div class="muted">'+msg+'</div></div>');
+    toast('recorded')})}
+function renderAnswer(r){if(r&&r.error){setResult('<div class="muted">'+esc(r.error)+'</div>');return}
+  var a=(r&&r.answer)||{},m=((r&&r.validate)||{}).metrics||{},ac=a.answer_claims||[],og=a.open_gaps||[];
+  var h='<div class="card"><b>回答(根拠付き)</b> <span class="tag">M1 '+(m.m1_grounding_integrity_pass?'grounded':'FAIL')+'</span><span class="tag">出典率 '+esc(m.source_trace_completeness)+'</span>';
+  h+=ac.length?ac.map(function(c){return '<div style="margin:6px 0">・'+esc(c.text)+' <span class="muted" style="font-size:11px">['+esc((c.record_ids||[]).join(', '))+']</span></div>'}).join(''):'<div class="muted">回答claimなし</div>';
+  h+='</div><div class="card"><b>未解決 / 注意</b>'+(og.length?og.map(function(g){return '<div class="eff" style="color:var(--warn)">△ '+esc(g)+'</div>'}).join(''):'<div class="muted">なし</div>')+'</div>';
+  setResult(h)}
+function renderFinding(r){if(r&&r.error){setResult('<div class="muted">'+esc(r.error)+'</div>');return}
+  var f=(r&&r.finding)||r||{};
+  setResult('<div class="card"><b>一次診断</b> <span class="tag" style="color:var(--accent)">'+esc(f.classification)+'</span><span class="tag">conf '+esc(f.confidence)+'</span><span class="tag" style="color:var(--warn)">WORKER-UNVERIFIED</span><div style="margin:6px 0">'+esc(f.findings)+'</div><div class="muted">提案: '+esc(f.proposed_next_action)+'</div><div class="muted" style="font-size:11px">Qwen一次診断・未検証(あなた/senior が判断)</div></div>')}
 function workCard(w){var t=esc(w.kind),held=w.held_by?'<span class="tag" style="color:var(--taka)">HELD '+esc(w.held_by)+'</span>':'';
   return '<div class="card '+(w.held_by?'hold':'')+'"><span class="tag">P'+esc(w.priority)+'</span><span class="tag">'+t+'</span>'+held+
   '<div class="mono">ref: '+esc(JSON.stringify(w.ref))+'</div><div class="btns">'+
@@ -158,7 +178,7 @@ renderTypes();api('/api/state').then(render);
 def html_page():
     return (HTML.replace("%TYPES%", json.dumps(INPUT_TYPES))
                 .replace("%CAP%", json.dumps(CAPABILITY))
-                .replace("%CAPNOTE%", json.dumps(CAP_NOTE)))
+                .replace("%CAPDESC%", json.dumps(CAP_DESC, ensure_ascii=False)))
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -194,6 +214,29 @@ class Handler(BaseHTTPRequestHandler):
                 amend.append_taka_event(action, str(body.get("target", "")),
                                         str(body.get("content", "")), body.get("reason"))
                 return self._send(200, json.dumps(cs.build_current_state(), ensure_ascii=False))
+            if self.path == "/api/ask":
+                from egl.self_grounding import answer_question, validate_answer
+                q = str(body.get("question", "")).strip()
+                if not q:
+                    return self._send(400, json.dumps({"error": "empty question"}))
+                ans, rids, raw = answer_question(q)
+                if not isinstance(ans, dict):
+                    return self._send(200, json.dumps({"error": "worker returned no structured answer",
+                                                       "raw": (raw or "")[:300]}, ensure_ascii=False))
+                return self._send(200, json.dumps({"answer": ans, "validate": validate_answer(ans, set(rids)),
+                                                   "n_retrieved": len(rids)}, ensure_ascii=False))
+            if self.path == "/api/inspect":
+                from autonomy.investigate import run_investigation
+                ref = str(body.get("ref", "")).strip()
+                p = (cs.REPO / ref).resolve()
+                # only a real file UNDER the repo (no traversal / no arbitrary read)
+                if not ref or not (p == cs.REPO or cs.REPO in p.parents) or not p.is_file():
+                    return self._send(400, json.dumps(
+                        {"error": f"repo 内のファイルパスを指定 (例 experiments/hbb_egl_bridge_replay_result.json)。受領: {ref}"},
+                        ensure_ascii=False))
+                finding = run_investigation({"kind": "inspection", "ref": {"artifact": ref}})
+                out = {"finding": finding} if not finding.get("error") else finding
+                return self._send(200, json.dumps(out, ensure_ascii=False))
             if self.path == "/api/investigate":
                 from autonomy.investigate import run_one_cycle
                 inv, rationale = run_one_cycle(cs.build_current_state())

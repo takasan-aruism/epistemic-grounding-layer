@@ -52,30 +52,34 @@ def _extract_json(text):
 
 
 def gather_evidence(work):
-    """Load the real artifact behind a work item (read-only). Returns a compact evidence dict."""
+    """Load the real artifact behind a work item (read-only). Handles JSON or plain text. Compact."""
     ref = work.get("ref")
     ev = {"work": work}
     art = ref.get("artifact") if isinstance(ref, dict) else None
-    if art:
-        try:
-            d = json.loads((REPO / art).read_text())
-            if work.get("kind") == "validation_failure":
-                # pull the failing batches' M1 problems + metrics (the concrete evidence)
-                fails = []
-                for b in (d.get("batches") or []):
-                    v = b.get("validate") or {}
-                    if (v.get("metrics") or {}).get("m1_grounding_integrity_pass") is False:
-                        fails.append({"batch": b.get("tag"),
-                                      "m1_problems": (v.get("axes") or {}).get("M1_grounding_integrity"),
-                                      "src_trace_completeness": (v.get("metrics") or {}).get("source_trace_completeness")})
-                ev["artifact"] = art
-                ev["failing_batches"] = fails
-                ev["object"] = d.get("object")
-            else:
-                ev["artifact"] = art
-                ev["excerpt"] = json.dumps(d)[:1500]
-        except Exception as e:
-            ev["evidence_error"] = f"{type(e).__name__}: {e}"
+    if not art:
+        return ev
+    try:
+        text = (REPO / art).read_text(errors="replace")
+    except Exception as e:
+        ev["evidence_error"] = f"{type(e).__name__}: {e}"
+        return ev
+    ev["artifact"] = art
+    try:
+        d = json.loads(text)
+    except Exception:
+        d = None
+    if d is not None and work.get("kind") == "validation_failure":
+        fails = []
+        for b in (d.get("batches") or []):
+            v = b.get("validate") or {}
+            if (v.get("metrics") or {}).get("m1_grounding_integrity_pass") is False:
+                fails.append({"batch": b.get("tag"),
+                              "m1_problems": (v.get("axes") or {}).get("M1_grounding_integrity"),
+                              "src_trace_completeness": (v.get("metrics") or {}).get("source_trace_completeness")})
+        ev["failing_batches"] = fails
+        ev["object"] = d.get("object")
+    else:
+        ev["excerpt"] = (json.dumps(d, ensure_ascii=False) if d is not None else text)[:1800]
     return ev
 
 

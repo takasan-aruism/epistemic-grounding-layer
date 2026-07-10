@@ -79,7 +79,8 @@
 - `autonomy/amend.sh`(pure shell)+ `state_report.py` + `docs/STATE.md` + `docs/CLIENT_USAGE.md` + tracked `AUTONOMY_LEDGER.jsonl` + `test_autonomy_client.py`(8/8)= **SLICE-6 client-usable surface via git(LIVE)**: dev≠client。client(git CLI, python/browser 不要)は `git pull`+`cat docs/STATE.md` で観測、`amend.sh`→`git push` で append-only 訂正イベント投入; dev が pull→overlay→STATE.md 再生成。shell↔python event 互換を検証。independent audit 2 周(round-1 が **2 件の gate-blocking defect**〈control-char で JSON 破損→client 訂正 silent 消失 / mawk octal id bug〉を捕捉→修正→round-2 SLICE VALID)。DE-0139。
 - `autonomy/webui.py`(stdlib http.server, 依存追加なし)+ `test_autonomy_webui.py`(3/3, HTTP-level)= **SLICE-7 thin Web UI(LIVE)**: Taka が **git 不要**でブラウザ(Mac/iPhone, LAN/Tailscale, bind 0.0.0.0, v0 no-auth)から操作。CURRENT_STATE + candidate work + decision queue 表示、card ボタン(HOLD/REJECT/PRIORITY/REDIRECT/CORRECT/THIS-REQUIRES-TAKA/DO-NOT-ASK)→ 既存7 actions、Home 自由入力('2DERに渡す')は user-selected type + **honest capability(CAN_PROCESS_NOW / CAN_RECORD_ONLY / NOT-YET-SUPPORTED、fake classifier なし)**。write は AUTONOMY_LEDGER only(SoR/DE 不可)、書込後 state 再build して即時反映。independent audit=SLICE VALID(write-scope/owner-unforgeable/XSS/robustness を実HTTPで検証)。DE-0140。起動 `python3 autonomy/webui.py`。
 - `autonomy/router.py` + `investigate.py`(+ webui `/api/investigate` と「▶ 2DERに次の仕事をさせる」button)+ `test_autonomy_investigate.py`(5/5)= **SLICE-3/4 autonomous action layer(LIVE)**: router が §6 順で次 work を deterministic 選択(新score無し・held skip)、**Qwen worker が first-pass investigation**(実 artifact を開き finding+A–G分類+最小可逆next action)を append-only 記録(`INVESTIGATIONS.jsonl`, gitignored, `senior_verified=false`/`taka_status=PROPOSED`)。UI で APPROVE/REDIRECT/WRONG/HOLD で steer。**origin=WORKER-UNVERIFIED**(Claude/senior でも evidence でもない)。**APPROVE は event 記録のみ=自動実行しない**。dedup 済(steer 前は再調査しない)。independent audit=2 honesty defect(origin 過大・churn)捕捉→修正→VALID。DE-0141。
-- **DESIGN-ONLY(未実装、plan §11):** SLICE-2 spec §5/§9/§12 機械再生成。**次の本命**: investigator を senior(Claude)verify 段へ、および router→investigate→steer を実運用で回す。
+- **4 use-case capability surface(LIVE, DE-0142)**: UI「2DERに渡す」を type 選択で current live path へ route。**QUESTION**→`answer_question`(project 台帳 corpus, Qwen, grounded+validate)=CAN_PROCESS_NOW / **RESULT_LOG**→`investigate`(repo artifact, Qwen first-pass WORKER-UNVERIFIED)=CAN_PROCESS_NOW / **TASK**→record only(senior Claude Code dev-session 要、自動実行しない)=CAN_RECORD_ONLY / **CORRECTION**→amend/overlay=CAN_PROCESS_NOW。`/api/inspect` は repo 内 file のみ(traversal 全 400)、read-only、esc() XSS 安全。Claude Code は senior LAYER であり input 先の個人ではない。
+- **DESIGN-ONLY(未実装、plan §11):** SLICE-2 spec §5/§9/§12 機械再生成。**MISSING WIRING**: RESEARCH/DEV TASK の headless senior(Claude)executor(今は dev-session 要)。investigator の senior-verify 段。
 - **authority:** experiment disposition = AUTO/SMALL-ADAPTER; **program disposition / value・UX / 新 premise = TAKA-GATED**(auto-continue gate = plan §8)。
 
 ---
@@ -125,7 +126,8 @@ blind scoring · rubric 先行 seal(v2 sha256 `012941ab…`)· opaque_id `sha256
 | autonomous loop SLICE-6 (client-usable surface via git) | **OPERATIONAL_TEST_VERIFIED (8/8), SLICE VALID (2 defects caught+fixed)** | DE-0139 |
 | autonomous loop SLICE-7 (thin Web UI, browser, no git) | **OPERATIONAL_TEST_VERIFIED (3/3 HTTP), SLICE VALID** | DE-0140 |
 | autonomous loop SLICE-3/4 (router + Qwen investigator, UI) | **OPERATIONAL_TEST_VERIFIED (5/5), SLICE VALID (2 honesty defects fixed)** | DE-0141 |
-| autonomous loop SLICE-2 | DESIGN-ONLY | plan §11 |
+| 4 use-case capability surface (QUESTION/RESULT_LOG/TASK/CORRECTION) | **OPERATIONAL_TEST_VERIFIED, SLICE VALID (live HTTP)** | DE-0142 |
+| autonomous loop SLICE-2 · headless senior executor | DESIGN-ONLY / MISSING WIRING | plan §11 |
 
 ---
 
@@ -186,3 +188,4 @@ blind scoring · rubric 先行 seal(v2 sha256 `012941ab…`)· opaque_id `sha256
   - v1.3 (2026-07-10) — SLICE-6 client-usable surface via git LIVE(dev≠client)。observe=committed `docs/STATE.md`、correct=pure-shell `autonomy/amend.sh`→git、`docs/CLIENT_USAGE.md`。independent audit が control-char JSON 破損 + mawk octal id の 2 defect を捕捉→修正→VALID。DE-0139。
   - v1.4 (2026-07-10) — SLICE-7 thin Web UI LIVE(`autonomy/webui.py`, stdlib)。Taka が git 不要でブラウザ(Mac/iPhone LAN/Tailscale)から state 閲覧・card ボタン訂正・自由入力(honest capability tier)。write=AUTONOMY_LEDGER only、即時反映。independent audit(実HTTP)=SLICE VALID。DE-0140。git-CLI surface(SLICE-6)は dev/sync 用に保持。
   - v1.5 (2026-07-11) — SLICE-3/4 autonomous action layer LIVE(router 決定選択 + Qwen worker first-pass investigation + UI「▶2DERに次の仕事をさせる」+ steer)。origin=WORKER-UNVERIFIED、APPROVE≠auto-execute、dedup 済。independent audit が 2 honesty defect を捕捉→修正→VALID。DE-0141。
+  - v1.6 (2026-07-11) — 4 use-case capability surface LIVE(current capability から逆算)。UI「2DERに渡す」を QUESTION/RESULT_LOG/TASK/CORRECTION で route(`/api/ask` grounded 回答, `/api/inspect` repo artifact 一次診断, TASK=record-only, CORRECTION=amend)。live HTTP + independent audit(traversal/read-only/XSS)=VALID。DE-0142。

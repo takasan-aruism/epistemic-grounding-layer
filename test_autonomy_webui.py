@@ -67,11 +67,16 @@ def test_http_flow():
             "HOLD produced no overlay effect"
         assert st2["field_origins"]["taka_events"] == "TAKA-OWNED"
 
-        # inbox record -> honest capability
-        code, r = _post(base, "/api/inbox", {"type": "QUESTION", "text": "what is X?"})
-        assert code == 200 and r["capability"] == "CAN_RECORD_ONLY", "QUESTION should be record-only in v0"
+        # inbox record -> honest capability (TASK=record-only, CORRECTION=process-now)
+        code, r = _post(base, "/api/inbox", {"type": "TASK", "text": "build X"})
+        assert code == 200 and r["capability"] == "CAN_RECORD_ONLY", "TASK should be record-only"
         code, r2 = _post(base, "/api/inbox", {"type": "CORRECTION", "text": "fix this"})
         assert r2["capability"] == "CAN_PROCESS_NOW", "CORRECTION should be process-now"
+
+        # QUESTION/RESULT_LOG endpoint guards (no live worker needed)
+        assert _post(base, "/api/ask", {"question": ""})[0] == 400, "empty question must 400"
+        assert _post(base, "/api/inspect", {"ref": "../../etc/passwd"})[0] == 400, "path traversal must 400"
+        assert _post(base, "/api/inspect", {"ref": "nope/x.json"})[0] == 400, "nonexistent file must 400"
 
         # ledger got the events (append-only)
         lines = [l for l in TMP.read_text().splitlines() if l.strip()]
