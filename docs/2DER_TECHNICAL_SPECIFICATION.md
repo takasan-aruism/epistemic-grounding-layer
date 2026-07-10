@@ -75,7 +75,8 @@
 
 ### 2.9 Autonomous research loop v0 — SLICE-1 LIVE / SLICE-2..5 DESIGN-ONLY
 - `autonomy/current_state.py` + `build_state.py` + `test_autonomy_state.py`(8/8）= **SLICE-1 mechanical CURRENT_STATE builder(LIVE, AUTO-NOW)**。DE ledger/seals(sha256 recompute)/component files/result artifacts → 状態 projection、各 field に origin(MECHANICAL/CLAUDE-DERIVED/TAKA-OWNED)。side-effect-free(CLI のみ `CURRENT_STATE.json` を生成=再生成可、gitignore)。independent audit=SLICE VALID(DE-0137)。
-- **DESIGN-ONLY(未実装、plan §11):** SLICE-2 spec §5/§9/§12 機械再生成 / SLICE-3 autonomy router(deterministic §6 1–5)/ SLICE-4 Claude investigator runner / SLICE-5 minimum UI(static HTML correction surface)+ CLI amender + `AUTONOMY_LEDGER.jsonl`(Taka correction events, append-only, `core.append_event` 形の reuse)。
+- `autonomy/amend.py` + `dashboard.py` + overlay in `current_state.py` + `test_autonomy_amend.py`(7/7)= **SLICE-5 Taka correction surface(LIVE)**: Taka corrections = append-only machine events(`AUTONOMY_LEDGER.jsonl`, owner=Taka, 7 actions, latest-per-target supersession, 知識 SoR と分離)。overlay が HOLD/REJECT/PRIORITY を candidate_work へ realize(visible `taka_overlay_effects`+`authority_pending`); REDIRECT/RECLASS=surfaced-only; CORRECTION/CONTEXT=recorded-only(honest)。self-contained static HTML dashboard(CDN/server なし)。independent audit=SLICE VALID(over-claim を pre-commit で honesty 修正; DE-0138)。
+- **DESIGN-ONLY(未実装、plan §11):** SLICE-2 spec §5/§9/§12 機械再生成 / SLICE-3 autonomy router(deterministic §6 1–5)/ SLICE-4 Claude investigator runner。
 - **authority:** experiment disposition = AUTO/SMALL-ADAPTER; **program disposition / value・UX / 新 premise = TAKA-GATED**(auto-continue gate = plan §8)。
 
 ---
@@ -117,7 +118,8 @@ blind scoring · rubric 先行 seal(v2 sha256 `012941ab…`)· opaque_id `sha256
 | Attention Center / same-object binding / structural re-centering / Aruism regime | **UNOWNED** | — |
 | HBB-30 solved / REC2 | **NOT CLAIMED** | — |
 | autonomous loop SLICE-1 (CURRENT_STATE builder) | **OPERATIONAL_TEST_VERIFIED (8/8), SLICE VALID** | DE-0137 |
-| autonomous loop SLICE-2..5 | DESIGN-ONLY | plan §11 |
+| autonomous loop SLICE-5 (Taka correction surface + UI) | **OPERATIONAL_TEST_VERIFIED (7/7), SLICE VALID** | DE-0138 |
+| autonomous loop SLICE-2/3/4 | DESIGN-ONLY | plan §11 |
 
 ---
 
@@ -174,3 +176,4 @@ blind scoring · rubric 先行 seal(v2 sha256 `012941ab…`)· opaque_id `sha256
 - changelog:
   - v1.0 (2026-07-10) — 初版。scheduler closure(DE-0130)、center-shift NEGATIVE(DE-0134/0135)、ledger salience DEMOTE(DE-0131/0133)、HBB→EGL bridge feasibility(DE-0136)、routing layer DESIGN-ONLY を反映。
   - v1.1 (2026-07-10) — program main theme = 2DER AUTONOMOUS RESEARCH LOOP v0(Taka v0-direction authority)。§2.9 追加(SLICE-1 CURRENT_STATE builder LIVE / SLICE-2..5 DESIGN-ONLY)、§5 に SLICE-1 行、§8 P0 更新。DE-0137。boundary audit+plan = docs/autonomous_loop_v0_audit_and_plan.md。
+  - v1.2 (2026-07-10) — SLICE-5 Taka correction surface + minimum UI LIVE(§2.9 更新、§5 に SLICE-5 行)。append-only AUTONOMY_LEDGER + state overlay + self-contained dashboard。DE-0138。

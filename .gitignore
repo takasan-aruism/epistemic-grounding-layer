@@ -8,3 +8,4 @@ __pycache__/
 data_acq_task/
 data_gate4/
 CURRENT_STATE.json
+autonomy_dashboard.html

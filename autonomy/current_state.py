@@ -15,6 +15,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parent.parent
 LEDGER = REPO / "DESIGN_EVIDENCE_LEDGER.jsonl"
 SPEC = REPO / "docs" / "2DER_TECHNICAL_SPECIFICATION.md"
+AUTONOMY_LEDGER = REPO / "AUTONOMY_LEDGER.jsonl"
 
 # closed/negative-branch heuristic keywords (CLAUDE-DERIVED, interpretive — NOT a clean enum in the ledger)
 _CLOSURE_KW = ("CLOSE", "NEGATIVE", "DEMOTE", "NOT_CONFIRMED", "REJECT", "ODF_CLOSED",
@@ -44,6 +45,65 @@ def load_de_ledger():
     except Exception:
         pass
     return out
+
+
+def load_taka_events():
+    """Read append-only AUTONOMY_LEDGER.jsonl (Taka correction events). dict-only, guarded."""
+    out = []
+    try:
+        for line in AUTONOMY_LEDGER.read_text().splitlines():
+            line = line.strip()
+            if line:
+                try:
+                    obj = json.loads(line)
+                    if isinstance(obj, dict):
+                        out.append(obj)
+                except Exception:
+                    pass
+    except Exception:
+        pass
+    return out
+
+
+def _apply_taka_overlay(state, events):
+    """Apply Taka correction events to the mechanical state, with VISIBLE downstream effects.
+    Append-only supersession: the LAST event per target_object wins (reversible). v0 realizes
+    HOLD/REJECT/PRIORITY_OVERRIDE on candidate_work; REDIRECT/RECLASSIFICATION are surfaced in
+    authority_pending only (not auto-applied); CORRECTION/CONTEXT_ADDITION are recorded only."""
+    effects = []
+    # active = latest event per target_object (append order = ts order)
+    active = {}
+    for ev in events:
+        active[ev.get("target_object")] = ev
+    pending = []
+    for tgt, ev in active.items():
+        act = ev.get("action")
+        eid = ev.get("event_id")
+        if act in ("TAKA_HOLD", "TAKA_REJECT", "TAKA_REDIRECT", "TAKA_AUTHORITY_RECLASSIFICATION"):
+            pending.append({"event_id": eid, "action": act, "target_object": tgt,
+                            "content": ev.get("content"), "reason": ev.get("reason")})
+        for w in state["candidate_executable_work"]:
+            if tgt and (tgt == w.get("kind") or tgt == str(w.get("ref"))):   # exact match only (no loose substring)
+                if act == "TAKA_HOLD":
+                    w["held_by"] = eid; effects.append(f"{eid}: HOLD {tgt} -> work item held (router skips)")
+                elif act == "TAKA_REJECT":
+                    w["rejected_by"] = eid; effects.append(f"{eid}: REJECT {tgt} -> work item dropped")
+                elif act == "TAKA_PRIORITY_OVERRIDE":
+                    try:
+                        w["priority"] = int(ev.get("content"))
+                        effects.append(f"{eid}: PRIORITY_OVERRIDE {tgt} -> priority={w['priority']}")
+                    except Exception:
+                        pass
+    # drop rejected, keep held (flagged), resort
+    state["candidate_executable_work"] = sorted(
+        [w for w in state["candidate_executable_work"] if "rejected_by" not in w],
+        key=lambda w: (w.get("held_by") is not None, w.get("priority", 99)))
+    state["authority_pending"] = pending
+    state["taka_events"] = events
+    state["taka_overlay_effects"] = effects
+    state["field_origins"]["taka_events"] = "TAKA-OWNED"
+    state["field_origins"]["taka_overlay_effects"] = "TAKA-OWNED"
+    return state
 
 
 def _walk_seal_refs(obj):
@@ -195,7 +255,7 @@ def build_current_state():
         "unowned_constructs": _UNOWNED,
         "validation_failures": vfails,
         "spec_staleness": stale,
-        "authority_pending": [],   # TAKA-OWNED: populated only by explicit Taka events (AUTONOMY_LEDGER, later slice)
+        "authority_pending": [],   # TAKA-OWNED: populated by the Taka overlay below
         "candidate_executable_work": work,
     }
     state["field_origins"] = {
@@ -206,4 +266,4 @@ def build_current_state():
         "spec_staleness": "MECHANICAL", "authority_pending": "TAKA-OWNED",
         "candidate_executable_work": "MECHANICAL",
     }
-    return state
+    return _apply_taka_overlay(state, load_taka_events())
