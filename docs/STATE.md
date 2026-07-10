@@ -1,15 +1,15 @@
 # 2DER autonomous loop — STATE (client-readable)
 
-_as_of 2026-07-11T07:00:01 · schema v0.1 · owner=Taka · correction/adjudication surface (not a product)_
+_as_of 2026-07-11T07:25:09 · schema v0.1 · owner=Taka · correction/adjudication surface (not a product)_
 
 > Observe here (`git pull` then read). To correct, run `autonomy/amend.sh` then `git commit && git push` (see `docs/CLIENT_USAGE.md`). Corrections are append-only machine events, not text edits.
 
 ## A · System state
 
-- latest DE: **DE-0146** (146 entries)
+- latest DE: **DE-0147** (147 entries)
 - components: 96 · seals OK: 3/19
-- closed branches: 16 (heuristic) · validation failures: 2 · candidate work: 2
-- spec: synced (spec@DE-0146 / ledger@DE-0146)
+- closed branches: 16 (heuristic) · validation failures: 2 · candidate work: 3
+- spec: STALE (spec@DE-0146 / ledger@DE-0147)
 - UNOWNED: Attention Center, same-object tension binding, structural re-centering, local Aruism operational regime, end-to-end self-operation
 
 ## C · Taka decision queue
@@ -22,6 +22,8 @@ _as_of 2026-07-11T07:00:01 · schema v0.1 · owner=Taka · correction/adjudicati
   - correct: `autonomy/amend.sh TAKA_HOLD validation_failure "reason"` · `... TAKA_REDIRECT validation_failure "do this instead"` · `... TAKA_PRIORITY_OVERRIDE validation_failure 9`
 - P3 `validation_failure` — ref: `{'artifact': 'experiments/hbb_egl_bridge_replay_result.json', 'kind': 'm1_grounding_fail', 'detail': 'batch=RS_flat src_trace=0.8'}`
   - correct: `autonomy/amend.sh TAKA_HOLD validation_failure "reason"` · `... TAKA_REDIRECT validation_failure "do this instead"` · `... TAKA_PRIORITY_OVERRIDE validation_failure 9`
+- P5 `spec_stale` — ref: `spec@DE-0146 < ledger@DE-0147`
+  - correct: `autonomy/amend.sh TAKA_HOLD spec_stale "reason"` · `... TAKA_REDIRECT spec_stale "do this instead"` · `... TAKA_PRIORITY_OVERRIDE spec_stale 9`
 
 ## Applied Taka corrections (downstream effects)
 
