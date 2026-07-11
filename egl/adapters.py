@@ -122,10 +122,42 @@ def _res(transport, content, http_status, content_type, raw, prov):
             "adapter_provenance": prov}
 
 
+# ---------- ACQ_GITHUB_SEARCH(GitHub issue/PR search API; real fetch of the result set)----------
+def fetch_github_search(leg):
+    """Real GitHub issue-search acquisition. leg.target_locator = an api.github.com/search/issues URL.
+    Returns ONE adapter_result whose provenance carries the parsed result items (html_url/title/body/owner
+    /number/state). transport/content status set by the adapter (AB-2). No injected content."""
+    url = leg["target_locator"]
+    if urlparse(url).scheme not in ("http", "https"):
+        return _res("UNSUPPORTED_CONTENT", None, None, None, None, {"reason": "non-http scheme"})
+    r = _http_get(url, {"Accept": "application/vnd.github+json"})
+    ts = _transport_from(r)
+    if r["status"] == 403 and b"rate limit" in r["body"].lower():
+        ts = "RATE_LIMITED"
+    items, cs = [], None
+    if ts == "SUCCESS":
+        try:
+            j = json.loads(r["body"])
+            for it in (j.get("items") or []):
+                repo_url = it.get("repository_url") or ""
+                owner = repo_url.rsplit("/", 2)[-2] if "/" in repo_url else ""
+                items.append({"html_url": it.get("html_url"), "title": it.get("title") or "",
+                              "body": (it.get("body") or "")[:4000], "owner": owner,
+                              "number": it.get("number"), "state": it.get("state")})
+            cs = "OBSERVED" if items else "EMPTY"
+        except Exception:
+            cs = "UNEXPECTED_CONTENT"
+    q = " ".join(leg.get("query") or [])
+    return _res(ts, cs, r["status"], "application/vnd.github+json", r["body"] if ts == "SUCCESS" else None,
+                {"query": q, "result_count": len(items), "items": items, "search_url": url})
+
+
 def fetch(leg):
     ac = leg["adapter_class"]
     if ac == "ACQ_HTTP_STATIC":
         return fetch_http_static(leg)
     if ac == "ACQ_GITHUB":
         return fetch_github(leg)
+    if ac == "ACQ_GITHUB_SEARCH":
+        return fetch_github_search(leg)
     raise ValueError(f"no live adapter for {ac} (ACQ_MANUAL は injected content を使う)")

@@ -22,7 +22,7 @@ CONTENT_STATUSES = {"OBSERVED", "CHALLENGE_PAGE", "AUTH_WALL", "PLACEHOLDER", "E
 
 # §6 first slice adapters(実 fetch は adapter 実装が担う。runner は adapter_result を受ける形にして
 # テストを hermetic に保つ = adapter が status を付す事実は変えず、ネットワーク非決定性をテストから排除)。
-ADAPTERS = {"ACQ_GITHUB", "ACQ_HTTP_STATIC", "ACQ_MANUAL"}
+ADAPTERS = {"ACQ_GITHUB", "ACQ_GITHUB_SEARCH", "ACQ_HTTP_STATIC", "ACQ_MANUAL"}
 
 
 def content_hash(raw_bytes):
