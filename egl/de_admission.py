@@ -77,6 +77,11 @@ def admit_design_evidence(candidate, ts, ledger_path=None, reverify=None):
         return {"admitted": False, "admission_status": "REJECTED", "design_evidence_id": candidate.get("design_evidence_id"),
                 "reasons": [f"schema: missing {', '.join(missing)}"]}
 
+    # anti-amnesia (DE-0181): an implementation/LIVE claim must cite the 2DER artifact ids it changed
+    if (candidate.get("claimed_status") or "").upper() in ("IMPLEMENTED", "LIVE") and not candidate.get("affected_artifact_ids"):
+        return {"admitted": False, "admission_status": "REJECTED", "design_evidence_id": candidate.get("design_evidence_id"),
+                "reasons": ["implementation/LIVE claim requires affected_artifact_ids (2DER ARTIFACT ids), not file paths/prose"]}
+
     ids, maxn = _load(ledger)
 
     # (2) duplicate id
@@ -111,20 +116,42 @@ def admit_design_evidence(candidate, ts, ledger_path=None, reverify=None):
                               "(record exists != behaviour established)")
 
     record_class = _record_class(candidate)
+    admission_id = "ADM-" + did.split("-", 1)[1]     # one admission per DE; resolvable via resolve_admission
 
     # (4) build + append (ONLY writer)
     entry = dict(candidate)
     entry["design_evidence_id"] = did
     entry["egl_admission"] = {
+        "admission_id": admission_id,
         "admission_status": admission_status, "validation_target": validation_target,
         "record_class": record_class, "admitted_at": ts, "admitted_by": "egl.de_admission",
-        "evidence_refs": candidate.get("evidence_refs"), "downgrades": downgrades,
+        "evidence_refs": candidate.get("evidence_refs"), "cited_2der_ids": candidate.get("cited_2der_ids") or [],
+        "affected_artifact_ids": candidate.get("affected_artifact_ids") or [], "change_id": candidate.get("change_id"),
+        "downgrades": downgrades,
         "basis": "record-occurrence of a development event; content/behaviour not auto-established",
     }
     with ledger.open("a") as fh:
         fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
     return {"admitted": True, "admission_status": admission_status, "design_evidence_id": did,
-            "validation_target": validation_target, "record_class": record_class,
+            "admission_id": admission_id, "validation_target": validation_target, "record_class": record_class,
             "reasons": reasons or ["record-occurrence admitted"], "downgrades": downgrades,
             "ledger": str(ledger)}
+
+
+def resolve_admission(admission_id, ledger_path=None):
+    """Resolve an ADM- id to its ledger entry (the admission record)."""
+    ledger = Path(ledger_path) if ledger_path else LEDGER
+    if not ledger.exists():
+        return None
+    for line in ledger.read_text().splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            e = json.loads(line)
+        except Exception:
+            continue
+        if e.get("egl_admission", {}).get("admission_id") == admission_id:
+            return e
+    return None
