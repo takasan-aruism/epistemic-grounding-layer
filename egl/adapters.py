@@ -152,6 +152,33 @@ def fetch_github_search(leg):
                 {"query": q, "result_count": len(items), "items": items, "search_url": url})
 
 
+# ---------- ACQ_GITHUB_ISSUE(ITEM-2DER-EVO-0005: dedicated per-issue/PR fetch — real fetch of ONE issue)----------
+def fetch_github_issue(leg):
+    """Real fetch of a single GitHub issue/PR body (closes the DE-0182 injected-bytes boundary). leg.target_
+    locator = a github.com/owner/repo/issues/N (or /pull/N) URL. Returns the issue title+body as raw content."""
+    parts = urlparse(leg["target_locator"]).path.strip("/").split("/")
+    if len(parts) < 4 or parts[2] not in ("issues", "pull"):
+        return _res("UNSUPPORTED_CONTENT", None, None, None, None, {"reason": "not a github issue/pr url"})
+    owner, repo, num = parts[0], parts[1], parts[3]
+    api = f"https://api.github.com/repos/{owner}/{repo}/issues/{num}"
+    r = _http_get(api, {"Accept": "application/vnd.github+json"})
+    ts = _transport_from(r)
+    if r["status"] == 403 and b"rate limit" in r["body"].lower():
+        ts = "RATE_LIMITED"
+    prov = {"owner": owner, "repo": repo, "number": num, "issue_url": leg["target_locator"]}
+    cs, raw = None, None
+    if ts == "SUCCESS":
+        try:
+            j = json.loads(r["body"])
+            title, body = j.get("title") or "", (j.get("body") or "")[:8000]
+            raw = (title + "\n\n" + body).encode("utf-8")
+            prov.update({"state": j.get("state"), "title": title[:120]})
+            cs = "OBSERVED" if body.strip() else "EMPTY"
+        except Exception:
+            raw, cs = r["body"], "UNEXPECTED_CONTENT"
+    return _res(ts, cs, r["status"], "application/vnd.github+json", raw if ts == "SUCCESS" else None, prov)
+
+
 def fetch(leg):
     ac = leg["adapter_class"]
     if ac == "ACQ_HTTP_STATIC":
@@ -160,4 +187,6 @@ def fetch(leg):
         return fetch_github(leg)
     if ac == "ACQ_GITHUB_SEARCH":
         return fetch_github_search(leg)
+    if ac == "ACQ_GITHUB_ISSUE":
+        return fetch_github_issue(leg)
     raise ValueError(f"no live adapter for {ac} (ACQ_MANUAL は injected content を使う)")
