@@ -179,6 +179,51 @@ def fetch_github_issue(leg):
     return _res(ts, cs, r["status"], "application/vnd.github+json", raw if ts == "SUCCESS" else None, prov)
 
 
+# ---------- ACQ_GITHUB_PROV(ITEM-2DER-EVO-0006: PR/commit/release provenance — owner/repo/sha/author/date)----------
+def fetch_github_prov(leg):
+    """Fetch GitHub PR / commit / release PROVENANCE. leg.target_locator = a github.com URL of the form
+    .../commit(s)/SHA, .../pull/N, or .../releases/tag/TAG. Returns a provenance summary + structured provenance."""
+    parts = urlparse(leg["target_locator"]).path.strip("/").split("/")
+    if len(parts) < 4:
+        return _res("UNSUPPORTED_CONTENT", None, None, None, None, {"reason": "not a github provenance url"})
+    owner, repo, kind = parts[0], parts[1], parts[2]
+    if kind in ("commit", "commits"):
+        api, ptype = f"https://api.github.com/repos/{owner}/{repo}/commits/{parts[3]}", "commit"
+    elif kind == "pull":
+        api, ptype = f"https://api.github.com/repos/{owner}/{repo}/pulls/{parts[3]}", "pull"
+    elif kind == "releases" and len(parts) >= 5 and parts[3] in ("tag", "tags"):
+        api, ptype = f"https://api.github.com/repos/{owner}/{repo}/releases/tags/{parts[4]}", "release"
+    else:
+        return _res("UNSUPPORTED_CONTENT", None, None, None, None, {"reason": "unsupported provenance url"})
+    r = _http_get(api, {"Accept": "application/vnd.github+json"})
+    ts = _transport_from(r)
+    if r["status"] == 403 and b"rate limit" in r["body"].lower():
+        ts = "RATE_LIMITED"
+    prov = {"kind": ptype, "owner": owner, "repo": repo, "url": leg["target_locator"]}
+    cs, raw = None, None
+    if ts == "SUCCESS":
+        try:
+            j = json.loads(r["body"])
+            if ptype == "commit":
+                au = (j.get("commit") or {}).get("author") or {}
+                prov.update({"sha": j.get("sha"), "author": au.get("name"), "date": au.get("date"),
+                             "message": ((j.get("commit") or {}).get("message") or "")[:200]})
+                summary = f"commit {prov['sha']} by {prov['author']} @ {prov['date']}: {prov['message']}"
+            elif ptype == "pull":
+                prov.update({"number": j.get("number"), "author": (j.get("user") or {}).get("login"),
+                             "merged_at": j.get("merged_at"), "sha": j.get("merge_commit_sha"),
+                             "title": (j.get("title") or "")[:120], "state": j.get("state")})
+                summary = f"PR #{prov['number']} '{prov['title']}' by {prov['author']} state={prov['state']} merged={prov['merged_at']} sha={prov['sha']}"
+            else:
+                prov.update({"tag": j.get("tag_name"), "name": j.get("name"), "date": j.get("published_at"),
+                             "author": (j.get("author") or {}).get("login")})
+                summary = f"release {prov['tag']} '{prov['name']}' by {prov['author']} @ {prov['date']}"
+            raw, cs = summary.encode("utf-8"), "OBSERVED"
+        except Exception:
+            raw, cs = r["body"], "UNEXPECTED_CONTENT"
+    return _res(ts, cs, r["status"], "application/vnd.github+json", raw if ts == "SUCCESS" else None, prov)
+
+
 def fetch(leg):
     ac = leg["adapter_class"]
     if ac == "ACQ_HTTP_STATIC":
@@ -189,4 +234,6 @@ def fetch(leg):
         return fetch_github_search(leg)
     if ac == "ACQ_GITHUB_ISSUE":
         return fetch_github_issue(leg)
+    if ac == "ACQ_GITHUB_PROV":
+        return fetch_github_prov(leg)
     raise ValueError(f"no live adapter for {ac} (ACQ_MANUAL は injected content を使う)")
