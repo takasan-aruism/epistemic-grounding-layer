@@ -63,3 +63,42 @@ def ingest_result_packet(packet, reverify=None):
     ]
     return {"task": task, "admitted": admitted, "rejected": rejected, "gaps": gaps,
             "non_guarantees": non_guarantees}
+
+
+def admit_forward_claims(claims, source_trace=None, reverify=None):
+    """ITEM-2DER-EVO-0001 (DE-0190): FORWARD-path admission. Qualify the EGL grounding claims that seed a
+    DW KNOWLEDGE_PACKET with a validation-target verdict BEFORE the DW task is created — so DW is seeded with
+    admitted knowledge, not raw answer_question output. Deterministic (no :8005), same discipline as the
+    return-path ingest: source-backed statement -> RECORD_OCCURRENCE ADMITTED; behavioural assertion without
+    EGL reverify -> REPORTED; over-claim -> REJECTED.
+    """
+    import json
+    from egl import de_admission as DEA
+    has_source = bool(source_trace)
+    qualified, admitted, reported, rejections = [], [], [], []
+    for c in (claims or []):
+        text = (c if isinstance(c, str) else json.dumps(c, ensure_ascii=False)).lower()
+        hard = [t for t in DEA.HARD_REJECT if t in text]
+        if hard:
+            rejections.append({"claim": c, "reason": "over-claim (ceiling): " + ", ".join(hard)})
+            qualified.append({"claim": c, "admission_status": "REJECTED", "validation_target": None})
+            continue
+        beh = [t for t in DEA.BEHAVIORAL_MARKERS if t in text]
+        if beh:
+            rv = reverify() if reverify else None
+            status = "VERIFIED" if (rv and rv[0]) else "REPORTED"
+            (admitted if status == "VERIFIED" else reported).append(c)
+            qualified.append({"claim": c, "admission_status": status, "validation_target": "BEHAVIORAL_PROPERTY"})
+            continue
+        if has_source and VT.target_problem("RECORD_OCCURRENCE", {"RECORD"}) is None:
+            admitted.append(c)
+            qualified.append({"claim": c, "admission_status": "ADMITTED", "validation_target": "RECORD_OCCURRENCE"})
+        else:
+            reported.append(c)
+            qualified.append({"claim": c, "admission_status": "REPORTED", "validation_target": "RECORD_OCCURRENCE",
+                              "note": "no source_trace -> record occurrence not established"})
+    return {"qualified_claims": qualified, "admitted": admitted, "reported": reported,
+            "rejected": [r["claim"] for r in rejections], "rejections": rejections,
+            "summary": {"admitted": len(admitted), "reported": len(reported), "rejected": len(rejections)},
+            "non_guarantee": "forward admission = validation-target qualification of grounding claims; "
+                             "not independent reverification (BEHAVIORAL stays REPORTED)"}
