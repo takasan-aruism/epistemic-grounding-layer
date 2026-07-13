@@ -1,0 +1,148 @@
+{
+ "approval_id": "APPROVAL-level1-rerun",
+ "round_trips": [
+  {
+   "rt": 1,
+   "qwen_gen": {
+    "latency_s": 22.16,
+    "tokens": 239,
+    "tok_per_s": 10.8,
+    "output_ok": true,
+    "preview": "```python def merge_intervals(intervals):     if not intervals:       "
+   },
+   "vram_qwen_awake": [
+    28993,
+    29320
+   ],
+   "qwen_sleep_s": 0.48,
+   "vram_after_qwen_sleep": [
+    2949,
+    3280
+   ],
+   "coder_wake_s": 0.63,
+   "coder_gen": {
+    "latency_s": 24.93,
+    "tokens": 314,
+    "tok_per_s": 12.6,
+    "output_ok": true,
+    "preview": "```python def merge_intervals(intervals):     if not intervals:       "
+   },
+   "vram_coder_awake": [
+    28953,
+    29284
+   ],
+   "coder_sleep_s": 0.61,
+   "vram_after_coder_sleep": [
+    2949,
+    3280
+   ],
+   "qwen_wake_s": 0.5,
+   "qwen_resume": {
+    "latency_s": 0.08,
+    "tokens": 2,
+    "tok_per_s": 25.4,
+    "output_ok": false,
+    "preview": "OK"
+   },
+   "round_trip_total_s": 49.51,
+   "success": false
+  },
+  {
+   "rt": 2,
+   "qwen_gen": {
+    "latency_s": 1.58,
+    "tokens": 344,
+    "tok_per_s": 217.9,
+    "output_ok": true,
+    "preview": "```python def merge_intervals(intervals):     \"\"\"     Merge overlappin"
+   },
+   "vram_qwen_awake": [
+    28987,
+    29318
+   ],
+   "qwen_sleep_s": 0.48,
+   "vram_after_qwen_sleep": [
+    2949,
+    3280
+   ],
+   "coder_wake_s": 0.63,
+   "coder_gen": {
+    "latency_s": 3.99,
+    "tokens": 314,
+    "tok_per_s": 78.8,
+    "output_ok": true,
+    "preview": "```python def merge_intervals(intervals):     if not intervals:       "
+   },
+   "vram_coder_awake": [
+    28953,
+    29284
+   ],
+   "coder_sleep_s": 0.61,
+   "vram_after_coder_sleep": [
+    2949,
+    3280
+   ],
+   "qwen_wake_s": 0.5,
+   "qwen_resume": {
+    "latency_s": 0.08,
+    "tokens": 2,
+    "tok_per_s": 26.0,
+    "output_ok": false,
+    "preview": "OK"
+   },
+   "round_trip_total_s": 7.98,
+   "success": false
+  },
+  {
+   "rt": 3,
+   "qwen_gen": {
+    "latency_s": 1.75,
+    "tokens": 383,
+    "tok_per_s": 218.9,
+    "output_ok": true,
+    "preview": "```python def merge_intervals(intervals):     \"\"\"     Merge overlappin"
+   },
+   "vram_qwen_awake": [
+    28987,
+    29318
+   ],
+   "qwen_sleep_s": 0.48,
+   "vram_after_qwen_sleep": [
+    2949,
+    3280
+   ],
+   "coder_wake_s": 0.63,
+   "coder_gen": {
+    "latency_s": 3.99,
+    "tokens": 314,
+    "tok_per_s": 78.7,
+    "output_ok": true,
+    "preview": "```python def merge_intervals(intervals):     if not intervals:       "
+   },
+   "vram_coder_awake": [
+    28953,
+    29284
+   ],
+   "coder_sleep_s": 0.61,
+   "vram_after_coder_sleep": [
+    2949,
+    3280
+   ],
+   "qwen_wake_s": 0.5,
+   "qwen_resume": {
+    "latency_s": 0.08,
+    "tokens": 2,
+    "tok_per_s": 26.5,
+    "output_ok": false,
+    "preview": "OK"
+   },
+   "round_trip_total_s": 8.14,
+   "success": false
+  }
+ ],
+ "errors": [],
+ "setup_coder_sleep_s": 9.67,
+ "setup_qwen_wake_s": 0.5,
+ "all_success": false,
+ "n_success": 0
+}

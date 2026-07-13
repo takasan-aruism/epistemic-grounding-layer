@@ -1,0 +1,17 @@
+# ITEM-0015-ab runtime environment (captured 2026-07-13, read-only)
+## nvidia-smi
+index, name, driver_version, memory.total [MiB]
+0, NVIDIA GeForce RTX 5090, 580.173.02, 32607 MiB
+1, NVIDIA GeForce RTX 5090, 580.173.02, 32607 MiB
+## docker image
+vllm/vllm-openai:nightly 7f8d3dda010c 8 days ago
+## vllm version (from prior logs)
+v0.23.1rc1.dev771+gf329ce405
+## model paths
+/storage/models/Qwen3.6-27B-FP8
+/storage/models/Qwen3.6-35B-A3B-NVFP4-RedHatAI
+## CPU RAM
+               total        used        free      shared  buff/cache   available
+Mem:             503          19         332           0         155         483
+## kernel
+6.14.0-37-generic

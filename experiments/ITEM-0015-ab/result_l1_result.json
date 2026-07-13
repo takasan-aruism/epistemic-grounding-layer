@@ -1,0 +1,1 @@
+{"l1_baseline": "```python\ndef is_even(n):\n    return n % 2 == 0\n```", "l1_after": "```python\ndef is_even(n):\n    return n % 2 == 0\n```", "l1_garbage_after": false, "l1_match": true}
