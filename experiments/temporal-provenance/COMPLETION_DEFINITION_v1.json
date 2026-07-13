@@ -1,0 +1,16 @@
+{
+  "completion_definition_id": "CDEF-2DER-v1",
+  "version": 1,
+  "approved_by": "Taka",
+  "created_at_note": "canonical clock = git commit timestamp of this artifact's registration (no self-typed wall time)",
+  "rule": "A flag is SET only when its bound acceptance artifact exists AND (for CLASS-N/H) a JREV verdict references it. Flag removal/relaxation/addition requires CHG + DE + JREV (spec §7). The required_flag_ids set is version-hashed; an implicit deletion/relaxation is detectable via hash mismatch (AC-FLAG-02/03).",
+  "required_flag_ids": [
+    {"flag_id": "FLAG-PHASE10-AUDIT-ENVELOPE", "binds_to": "Tier-0 11 audit-envelope gates DONE + parity sweep artifact", "evidence": "DE-0251..DE-0261"},
+    {"flag_id": "FLAG-PHASE10-TIER1-CORE", "binds_to": "Tier-1 deterministic items DONE", "evidence": "DE-0262..DE-0273"},
+    {"flag_id": "FLAG-TEMPORAL-FOUNDATION", "binds_to": "temporal child units DONE + AC-TIME/EST/FLAG/FORECAST pass", "evidence": "pending"},
+    {"flag_id": "FLAG-ECONOMY-OPERATOR", "binds_to": "ECONOMY-OPERATOR DONE (after temporal)", "evidence": "pending"},
+    {"flag_id": "FLAG-LIVE-BENCHMARK", "binds_to": "VLLM-RUNTIME-PROFILER + benchmarks run, raw-artifact-backed MEASURED", "evidence": "pending (GPU, REQUIRES_APPROVAL)"},
+    {"flag_id": "FLAG-MODEL-ROUTING-READY", "binds_to": "MODEL_ROUTING_READY chain holds on real provenance (not asserted)", "evidence": "pending"},
+    {"flag_id": "FLAG-E2E-ACCEPTANCE", "binds_to": "END-TO-END-ACCEPTANCE-HARNESS green (AC-01..14 + AC-BENCH/FAIL/KP/WEIGHT/ECON/HUMAN)", "evidence": "pending"}
+  ]
+}
