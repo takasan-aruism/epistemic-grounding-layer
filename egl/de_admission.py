@@ -82,6 +82,31 @@ def admit_design_evidence(candidate, ts, ledger_path=None, reverify=None):
         return {"admitted": False, "admission_status": "REJECTED", "design_evidence_id": candidate.get("design_evidence_id"),
                 "reasons": ["implementation/LIVE claim requires affected_artifact_ids (2DER ARTIFACT ids), not file paths/prose"]}
 
+    # (FI-MIN-4) claim–principal binding — ENFORCED only when generated_by_principal is disclosed (backward-compatible:
+    # legacy DEs without it are admitted as bootstrap legacy with UNKNOWN_PRINCIPAL recorded). Canonical vocab lives in
+    # twoder.principal_attribution; the rule is inlined here to avoid an egl->twoder import. A 2DER self-operation claim
+    # backed by a CLAUDE_CODE (or UNKNOWN) artifact without disclosed MANUAL_SUBSTITUTION+lowered ceiling -> REJECT.
+    _PRINCIPALS = ("QWEN", "DW", "DETERMINISTIC_COMPONENT", "CLAUDE_CODE", "TAKA", "MANUAL_RELAY", "UNKNOWN_PRINCIPAL")
+    _2DER_SELF = {"QWEN", "DW", "DETERMINISTIC_COMPONENT"}
+    gp = candidate.get("generated_by_principal")
+    if gp is not None:
+        gm = candidate.get("generation_mode", "DIRECT")
+        claiming = candidate.get("claiming_principal") or gp
+        lowered = bool(candidate.get("claim_ceiling_lowered"))
+        if gp not in _PRINCIPALS or claiming not in _PRINCIPALS:
+            return {"admitted": False, "admission_status": "REJECTED", "design_evidence_id": candidate.get("design_evidence_id"),
+                    "reasons": ["FI-MIN-4: principal not in controlled vocabulary %s" % (_PRINCIPALS,)]}
+        _bind_ok = (claiming == gp) or (gm == "MANUAL_SUBSTITUTION" and lowered)
+        if gp == "UNKNOWN_PRINCIPAL":
+            _bind_ok = False
+        if candidate.get("self_operation_claim") and claiming in _2DER_SELF and gp not in _2DER_SELF \
+                and not (gm == "MANUAL_SUBSTITUTION" and lowered):
+            _bind_ok = False
+        if not _bind_ok:
+            return {"admitted": False, "admission_status": "REJECTED", "design_evidence_id": candidate.get("design_evidence_id"),
+                    "reasons": ["FI-MIN-4 claim-principal binding failed: claiming=%s artifact=%s mode=%s lowered=%s "
+                                "(fail-closed)" % (claiming, gp, gm, lowered)]}
+
     ids, maxn = _load(ledger)
 
     # (2) duplicate id
@@ -121,6 +146,15 @@ def admit_design_evidence(candidate, ts, ledger_path=None, reverify=None):
     # (4) build + append (ONLY writer)
     entry = dict(candidate)
     entry["design_evidence_id"] = did
+    # (FI-MIN-1) record the content-generating principal on the DE artifact. Legacy candidates (no principal disclosed)
+    # are kept as bootstrap legacy: recorded UNKNOWN_PRINCIPAL + a non-blocking finding, NEVER retro-rewritten.
+    if candidate.get("generated_by_principal") is None:
+        entry["generated_by_principal"] = "UNKNOWN_PRINCIPAL"
+        entry["generation_mode"] = "TRANSPORT_ONLY"
+        entry["fi_min_finding"] = "PRINCIPAL_NOT_RECORDED_LEGACY"
+    else:
+        entry["generated_by_principal"] = candidate["generated_by_principal"]
+        entry["generation_mode"] = candidate.get("generation_mode", "DIRECT")
     entry["egl_admission"] = {
         "admission_id": admission_id,
         "admission_status": admission_status, "validation_target": validation_target,
