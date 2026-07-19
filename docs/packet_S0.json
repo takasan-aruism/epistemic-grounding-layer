@@ -1,0 +1,13 @@
+{
+  "task_id": "S0-status-views",
+  "spec_file": "/srv/workcell/specs/S0.md",
+  "implementation_files": ["status_views.py"],
+  "immutable_test_files": {
+    "test_status_views.py": "/srv/workcell/specs/S0_tests/test_status_views.py"
+  },
+  "test_cmd": ["python3", "-m", "pytest", "-x", "-q", "test_status_views.py"],
+  "max_iterations": 6,
+  "test_timeout_s": 300,
+  "model": "Qwen3.6-35B-A3B",
+  "endpoint": "http://127.0.0.1:8005/v1/chat/completions"
+}
