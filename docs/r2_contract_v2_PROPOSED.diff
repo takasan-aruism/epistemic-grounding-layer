@@ -1,0 +1,55 @@
+--- test_runner.py (contract v1, sha 4a6d01f5)
++++ test_runner.py (contract v2 PROPOSED, sha 504debe9)
+@@ -90,7 +90,7 @@
+     r = run(tmp_path, make(tmp_path, max_it=1),
+             lambda m: BAD_IMPL + "\n全テスト合格しました。")
+     assert r["status"] == "BUDGET_EXHAUSTED"
+-    log = Path(r["run_log"]).read_text()
++    log = (_events_dir(r) / "seg-000001.jsonl").read_text()
+     assert "FORMAT_VIOLATION" in log and "prose outside" in log
+     assert "TEST_RUN" not in log  # 書込みもテストも起きていない
+ 
+@@ -98,14 +98,14 @@
+ def test_duplicate_block_rejected(tmp_path):
+     dup = GOOD_IMPL + "\n" + GOOD_IMPL
+     r = run(tmp_path, make(tmp_path, max_it=1), lambda m: dup)
+-    assert "duplicate" in Path(r["run_log"]).read_text()
++    assert "duplicate" in (_events_dir(r) / "seg-000001.jsonl").read_text()
+ 
+ 
+ def test_missing_required_file_feedback(tmp_path):
+     pkt = make(tmp_path, max_it=1)
+     pkt["implementation_files"] = ["mod.py", "util.py"]
+     r = run(tmp_path, pkt, lambda m: GOOD_IMPL)  # util.py 未提出
+-    assert "INCOMPLETE_SUBMISSION" in Path(r["run_log"]).read_text()
++    assert "INCOMPLETE_SUBMISSION" in (_events_dir(r) / "seg-000001.jsonl").read_text()
+ 
+ 
+ # --- S-7: fail-closed terminal ---
+@@ -115,7 +115,7 @@
+         raise TimeoutError("vllm dead")
+     r = run(tmp_path, make(tmp_path), boom)
+     assert r["status"] == "MODEL_TIMEOUT"
+-    assert (Path(r["run_log"]).parent / "RESULT_PACKET.json").exists()
++    assert (_events_dir(r).parent / "RESULT_PACKET.json").exists()
+ 
+ 
+ def test_malformed_model_response_terminal(tmp_path):
+@@ -176,7 +176,7 @@
+     r = run(tmp_path, make(tmp_path, max_it=3), fn)
+     assert r["status"] == "PASSED"
+     assert r["iterations_used"] == 2
+-    log = Path(r["run_log"]).read_text()
++    log = (_events_dir(r) / "seg-000001.jsonl").read_text()
+     assert "EMPTY_RESPONSE" in log and "length" in log
+ 
+ 
+@@ -188,7 +188,7 @@
+ 
+     r = run(tmp_path, make(tmp_path, max_it=2), fn)
+     assert r["status"] == "BUDGET_EXHAUSTED" and r["needs_human"] is True
+-    assert (Path(r["run_log"]).parent / "RESULT_PACKET.json").exists()
++    assert (_events_dir(r).parent / "RESULT_PACKET.json").exists()
+ 
+ 
+ def test_non_string_reply_is_protocol_error(tmp_path):
