@@ -1,0 +1,36 @@
+--- runner.py (v0.2.1, sha 222aef18)
++++ runner.py (v0.2.2 PROPOSED, sha b7d2cf6c)
+@@ -206,10 +206,19 @@
+ 
+ 
+ def call_vllm(endpoint: str, model: str, messages: list[dict],
+-              timeout: int = 600, max_tokens: int = 16384) -> tuple[str, str]:
+-    """戻り: (content, reasoning)。v0.2.1 で reasoning を捨てなくなった(DE-0461)。"""
+-    body = json.dumps({"model": model, "messages": messages,
+-                       "temperature": 0.2, "max_tokens": max_tokens}).encode()
++              timeout: int = 600, max_tokens: int = 16384,
++              enable_thinking: bool | None = None) -> tuple[str, str]:
++    """戻り: (content, reasoning)。v0.2.1 で reasoning を捨てなくなった(DE-0461)。
++
++    v0.2.2(DE-0464): enable_thinking=False で思考を停止させる。暴走時の思考は
++    与えた予算をちょうど使い切る(思考字数÷予算が予算に依らず 3.2〜3.9 で一定)ため、
++    予算側では制御できない。None のときは何も渡さず serving 既定に従う。
++    """
++    payload = {"model": model, "messages": messages,
++               "temperature": 0.2, "max_tokens": max_tokens}
++    if enable_thinking is not None:
++        payload["chat_template_kwargs"] = {"enable_thinking": bool(enable_thinking)}
++    body = json.dumps(payload).encode()
+     req = urllib.request.Request(endpoint, data=body,
+                                  headers={"Content-Type": "application/json"})
+     with urllib.request.urlopen(req, timeout=timeout) as resp:
+@@ -356,7 +365,8 @@
+             try:
+                 reply = (model_fn(messages) if model_fn is not None else
+                          call_vllm(packet["endpoint"], packet["model"], messages,
+-                                   max_tokens=int(packet.get("max_tokens", 16384))))
++                                   max_tokens=int(packet.get("max_tokens", 16384)),
++                                   enable_thinking=packet.get("enable_thinking")))
+                 if isinstance(reply, tuple):        # call_vllm 経路(content, reasoning)
+                     reply, reasoning = reply
+             except EmptyModelResponse as e:
