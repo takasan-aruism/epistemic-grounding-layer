@@ -1,0 +1,82 @@
+--- runner.py (v0.2.2, sha b7d2cf6c)
++++ runner.py (v0.2.3 PROPOSED, sha 074ef2c5)
+@@ -348,6 +348,11 @@
+         files: dict[str, str] = {}
+         last_test: str | None = None
+         test_timeout = int(packet.get("test_timeout_s", 300))
++        # v0.2.3(DE-0467): 同一フィードバック → 同一 reply の不動点を、既往記録の
++        # 注入で解く。照合は直前だけでなく **当該 run の全既往反復** に対して行う
++        # (周期2以上の不動点も捕まえるため)。reply_sha256 -> {iteration, outcome}。
++        seen_replies: dict[str, dict] = {}
++        dup_record: str | None = None
+ 
+         for it in range(1, int(packet["max_iterations"]) + 1):
+             result["iterations_used"] = it
+@@ -358,6 +363,8 @@
+                     f'<file path="{p}">\n{c}\n</file>' for p, c in files.items()))
+             if last_test is not None:
+                 parts.append(f"# 直前のフィードバック(修正せよ)\n{last_test}")
++            if dup_record is not None:      # v0.2.3: 訓戒でなく記録のみを注入する
++                parts.append(f"# 既往記録(事実)\n{dup_record}")
+             user = "\n\n".join(parts)
+             messages = [{"role": "system", "content": SYSTEM_PROMPT},
+                         {"role": "user", "content": user}]
+@@ -398,13 +405,25 @@
+             if not isinstance(reply, str):   # model_fn 注入経路の防御
+                 log.append("MODEL_ERROR", iteration=it, detail="non-str reply")
+                 return finish("MODEL_PROTOCOL_ERROR", detail="non-str reply")
++            reply_sha = sha256b(reply.encode())
++            prior = seen_replies.get(reply_sha)      # v0.2.3: 全既往反復との照合
+             log.append("MODEL_REPLY", iteration=it,
+                        prompt_sha256=sha256b(user.encode()),
+-                       reply_sha256=sha256b(reply.encode()), reply=reply,
++                       reply_sha256=reply_sha, reply=reply,
+                        # v0.2.1(DE-0461): 思考は本文でなく長さと sha で残す
+                        # (SUMMARIZABLE。予算配分を後から検算できれば足りる)。
+                        reasoning_chars=len(reasoning),
+-                       reasoning_sha256=sha256b(reasoning.encode()))
++                       reasoning_sha256=sha256b(reasoning.encode()),
++                       # v0.2.3: 新 kind を作らず payload で表す(registry 不変)。
++                       duplicate_of_iteration=(prior["iteration"] if prior else None))
++            if prior is not None:
++                dup_record = (f"この応答(reply sha256={reply_sha})は iteration "
++                              f"{prior['iteration']} で提出済みであり、{prior['outcome']}。")
++            else:
++                dup_record = None
++            # 重複反復も iteration を消費する(採点スキップの最適化は入れない)。
++            entry = seen_replies.setdefault(
++                reply_sha, {"iteration": it, "outcome": "結果は記録されていない"})
+ 
+             try:
+                 new_files = parse_strict(reply, set(impl_files))
+@@ -414,6 +433,7 @@
+             except ValueError as e:
+                 log.append("FORMAT_VIOLATION", iteration=it, detail=str(e))
+                 last_test = f"(形式違反: {e}。<file>ブロックのみで再出力せよ)"
++                entry["outcome"] = f"形式違反 {e} で失敗した"
+                 continue
+ 
+             files.update(new_files)
+@@ -427,6 +447,7 @@
+             if absent:
+                 log.append("INCOMPLETE_SUBMISSION", iteration=it, missing=absent)
+                 last_test = f"(未提出の必須ファイル: {absent}。全て出力せよ)"
++                entry["outcome"] = f"必須ファイル {absent} 未提出で失敗した"
+                 continue
+ 
+             # 採点表を毎回、部屋の外の原本から敷き直す
+@@ -479,6 +500,14 @@
+                           "model_reply_sha256": sha256b(files[p].encode())}
+                          for p in sorted(impl_files)]
+                 return finish("PASSED", files=final)
++            # v0.2.3: 既往記録に残す事実。pytest の FAILED 行があればそれを、
++            # 無ければ終了コードを記録する(散文の訓戒は入れない)。
++            # 色つき出力(環境依存)でも拾えるよう ANSI を落としてから照合する。
++            plain = re.sub(r"\x1b\[[0-9;]*m", "", tail)
++            failed = [ln.strip() for ln in plain.splitlines()
++                      if ln.lstrip().startswith("FAILED ")]
++            entry["outcome"] = (f"テストが {failed[-1].strip()} で失敗した" if failed
++                                else f"テストが exit={proc.returncode} で失敗した")
+             last_test = tail
+ 
+         return finish("BUDGET_EXHAUSTED")
