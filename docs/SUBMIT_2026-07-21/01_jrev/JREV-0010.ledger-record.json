@@ -1,0 +1,26 @@
+{
+  "review_id": "JREV-0010",
+  "date": "2026-07-19",
+  "scope": "§2 reconciler (bridge_reconciler) + real-repo minter (bridge_minter) + §2 bridge wiring (patch_bridge)",
+  "reviewer": "local-agent attacker (separate principal, throwaway probe process) — adjudicator: GPT (Taka relay, PENDING)",
+  "method": "re-battle (DE-0426 first application): NOVEL attacks re-using newly-introduced concepts (reconciler, pull-type balance-proof, ENERGIZATION_ADJUDICATION, freshness, single-use, per-patch binding) — adversarial re-interpretation of the change diff, NOT regression tests",
+  "bundle_verdict": "PASS_AFTER_IN_SCOPE_REMEDIATION (2 real defects found + fixed; 0 BREACH post-fix) — GPT adjudication PENDING Taka relay",
+  "pre_remediation": "A1 (attribution blocklist let an unattributed Taka-claiming adjudication mint) BREACH; A2 (minter trusted a logged RECONCILIATION_BALANCED over an actually-imbalanced tree) BREACH",
+  "remediation": "A1 -> attribution fail-closed ALLOWLIST (present + ==TAKA); A2 -> minter independently RE-DERIVES rc.reconcile and refuses if imbalanced ('distrust the instrument')",
+  "post_remediation": "6 novel attacks 0 BREACH (A1..A6 all BLOCKED); §4 energization gate 11 injections 0 SLIPPED; §4 write-path gate 10 injections 0 SLIPPED",
+  "rationale": "re-battle re-uses the diff's own concepts to attack it; found 2 real in-scope defects -> 4th consecutive real-defect round (DE-0412/JREV-0008/JREV-0009/JREV-0010), empirically reinforcing DE-0426. OS-level Taka impersonation and adjudication-event writer restriction remain OUT OF SCOPE (documented residual, design doc (b)); real-repo apply/energization OUT OF SCOPE.",
+  "scope_verdicts": {
+    "A1_unattributed_taka_claim": "BLOCKED (post-fix)",
+    "A2_forged_balanced_proof": "BLOCKED (post-fix)",
+    "A3_wrong_patch_under_token": "BLOCKED",
+    "A4_reconciler_cannot_write": "BLOCKED",
+    "A5_revoked_still_mints": "BLOCKED",
+    "A6_stale_proof_replay": "BLOCKED"
+  },
+  "permanent_mechanisms_required": [
+    "gate_s4_energization (energization-layer counterfactual gate, 11 injections) at terminal",
+    "gate_reconciler_readonly (AST read-only proof of the reconciler) at integration",
+    "minter re-derivation of reconcile at mint time (distrust-the-instrument)"
+  ],
+  "note": "author=Claude (disclosed); attacker weight separated (probe touches only public surface); adjudicator=GPT via Taka relay (PENDING). Real-repo apply/energization/SAFE_REPO_WRITE promotion are post-report Taka adjudications."
+}

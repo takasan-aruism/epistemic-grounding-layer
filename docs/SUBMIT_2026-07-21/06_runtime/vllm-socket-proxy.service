@@ -1,0 +1,27 @@
+[Unit]
+Description=2DER vLLM unix-socket proxy (host: /run/vllm/qwen.sock <- tcp 127.0.0.1:8005)
+After=network.target
+
+[Service]
+Type=simple
+# root uid + egid=workcell, so the created socket is group-workcell WITHOUT a chown
+# (measured finding: with an empty CapabilityBoundingSet there is no CAP_CHOWN, so socat's
+#  'group=' option failed with EPERM and the proxy crash-looped). RuntimeDirectory is created
+#  root:workcell 0750, and the socket inherits egid=workcell at mode 0660 -> the
+#  sandboxed workcell process can traverse + connect; no capability grant needed.
+Group=workcell
+RuntimeDirectory=vllm
+RuntimeDirectoryMode=0750
+ExecStart=/usr/bin/socat UNIX-LISTEN:/run/vllm/qwen.sock,fork,mode=0660 TCP:127.0.0.1:8005
+Restart=on-failure
+RestartSec=2
+# hardening (proxy itself)
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+RestrictAddressFamilies=AF_UNIX AF_INET
+CapabilityBoundingSet=
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,37 @@
+[Unit]
+Description=2DER workcell runner (one packet, sandboxed)
+After=vllm-socket-proxy.service
+Requires=vllm-socket-proxy.service
+
+[Service]
+Type=oneshot
+User=workcell
+Environment=WORKCELL_SANDBOXED=1
+Environment=PATH=/usr/bin:/bin
+WorkingDirectory=/srv/workcell
+# %i = instance NAME (e.g. M1), NOT a path (R-5: kills sudoers wildcard arg-injection).
+# The launcher validates the name (^[A-Za-z0-9_-]+$), maps it to /srv/workcell/packets/<name>.json,
+# stands up the in-namespace loopback bridge (stage-2 socat 127.0.0.1:8005 -> /run/vllm/qwen.sock),
+# then runs the immutable runner on that packet.
+ExecStart=/srv/workcell/bin/run-with-proxy.sh %i
+# --- containment ---
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=tmpfs
+ReadWritePaths=/srv/workcell/runs
+PrivateTmp=yes
+PrivateNetwork=yes
+BindReadOnlyPaths=/run/vllm/qwen.sock
+CapabilityBoundingSet=
+RestrictSUIDSGID=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+RestrictAddressFamilies=AF_UNIX AF_INET
+SystemCallFilter=@system-service
+SystemCallErrorNumber=EPERM
+CPUQuota=200%
+MemoryMax=4G
+RuntimeMaxSec=1800

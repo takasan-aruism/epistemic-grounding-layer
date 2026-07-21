@@ -1,0 +1,49 @@
+{
+  "design_evidence_id": "DE-0475",
+  "claimed_status": "OBSERVED",
+  "decision_owner": "TAKA",
+  "generated_by_principal": "CLAUDE_CODE",
+  "generation_mode": "INSPECTION_ONLY",
+  "claiming_principal": "CLAUDE_CODE",
+  "claim_ceiling_lowered": true,
+  "self_operation_claim": false,
+  "evidence_class": "OBSERVED_FINDING_LEDGER",
+  "batch": "claude_code_watcher_v021_audit_2026-07-21",
+  "replication_status": "TAKA_DECISION_REQUIRED",
+  "affected_artifact_ids": [],
+  "finding_id": "WATCHER-V021-WA7-BLOCKED-AND-CONSISTENCY-AUDIT",
+  "finding_category": "Watcher Amendment v0.2.1: WA-7 verbatim reconciliation BLOCKED (v0.2 original absent) + measured consistency findings (WA-2/WA-4/WA-5)",
+  "title": "Watcher v0.2.1 監査: WA-7 逐語照合はブロック(v0.2 原文が repo 不在)。実測整合監査: WA-5 control lane 整合 / WA-2 writer registry 未実装(現 registry は kinds-only→DE-0474束縛1 未機械強制)/ WA-4 GA-8 被覆に gap(PROTECTED_KEYS が actor_instance/prompt_version を封印せず)",
+  "observation": "Taka 中継の Watcher Amendment v0.2.1(DRAFT, Claude-web 起草, 構築ゼロ)+ GPT 監査便(便-1/2/3, GPT宛)+ 捺印package(DRAFT, 『いま押すものではない』)を受領。私(Claude Code)の CC-2 職責内タスク=WA-7 の v0.2 原文照合。実測: watcher-layer-design-v0.2.md(v0.2 原文)も v0.2.1 amendment も egl/twoder/rri/ds/dev-workcell・home のどこにも不在(Claude-web 設計文脈のみ)→ WA-7 逐語照合はブロック(原文が要る)。私が一次アクセスできる範囲(DE-0474 境界表 + emit_api 6bf41034 + registry 5c50e435)で整合監査を実施: (WA-5) emit_api VALID_LANES={real,null_n,null_b,control}→control lane 実在, 整合。(WA-2) 現 registry workcell_events.json は {registry_version,owner,note,kinds}=kinds 10種のみで **writer registry 不在**→ WA-2 が提案する writer_id/許可kind/許可lane 登録簿は未実装の拡張。帰結: DE-0474 束縛1『非runner writer は外部登録・無登録 writer=構造欠陥』は現状 **機械強制されておらず governance-only**(WA-2 構築まで)。(WA-4) emit_api PROTECTED_KEYS(11キー: kind/lane/retention_class/segment_id/sequence_in_segment/previous_event_hash/previous_segment_root/schema_version/producer_version/ts/record_hash)は **actor_instance / prompt_version を含まない**→ GA-8 がこの2フィールドのコード封印を要求するなら WA-4『PROTECTED_KEYS が GA-8 を完全被覆』は現状 gap(PROTECTED_KEYS 拡張が要る)。GA-8 原文が repo 不在のため被覆要否は確定不能=要 v0.2 原文。(WA-1) wake/orphan/snapshot の『実行観測事実』帰属は DE-0474 C 境界と整合的だが真の裁定点(GPT 便-3(a))=私は事前判断しない。",
+  "decision": "WA-7 は v0.2 原文(watcher-layer-design-v0.2.md, および GA-8 定義)を repo へ commit/中継しない限り逐語照合不能=ブロック(fail-closed 報告、原文供給待ち)。整合監査の指摘: (i) WA-2 writer registry は未実装で DE-0474 束縛1 が現状 governance-only=W1a 構築時に writer 登録簿を registry pin 方式で外部化する必要(WA-2 の通り)。(ii) WA-4/GA-8 被覆 gap: 現 PROTECTED_KEYS は actor_instance/prompt_version を封印しない→GA-8 要求次第で PROTECTED_KEYS 拡張が必要(この拡張は emit_api=C 層のコード改変=Qwen 実装 + 契約/registry seal 手順)。これらは GPT 便-3(b)(c)の観点と一致するので、GPT 監査と本実測を突き合わせて確定を。構築ゼロ・捺印ゼロ(package は事前開示)。私は amendment/契約/runner を執筆せず(CC-0/D-2)、監査・実測・記帳のみ。",
+  "basis": "Taka 2026-07-21 relay of Watcher v0.2.1 (DRAFT) + GPT cover memo + seal package; measured emit_api 6bf41034 / registry 5c50e435 / DE-0474",
+  "evidence_refs": [
+    "WA-7 BLOCKED: watcher-layer-design-v0.2.md (+GA-8 text) absent from all repos/home",
+    "WA-5 OK: emit_api VALID_LANES includes control",
+    "WA-2 gap: registry workcell_events.json = kinds-only (no writer registry) -> DE-0474 binding-1 not mechanically enforced yet",
+    "WA-4/GA-8 gap: PROTECTED_KEYS (11 keys) lacks actor_instance/prompt_version -> coverage contingent on GA-8 text",
+    "WA-1 attribution = GPT 便-3(a) adjudication point (not pre-decided)",
+    "zero construction / zero seal (package is advance disclosure); Claude Code audit only (CC-0/D-2)"
+  ],
+  "egl_admission": {
+    "admission_id": "ADM-0475",
+    "admission_status": "ADMITTED",
+    "validation_target": "RECORD_OCCURRENCE",
+    "record_class": "OBSERVED",
+    "admitted_at": "2026-07-21T17:00:00+09:00",
+    "admitted_by": "egl.de_admission",
+    "evidence_refs": [
+      "WA-7 BLOCKED: watcher-layer-design-v0.2.md (+GA-8 text) absent from all repos/home",
+      "WA-5 OK: emit_api VALID_LANES includes control",
+      "WA-2 gap: registry workcell_events.json = kinds-only (no writer registry) -> DE-0474 binding-1 not mechanically enforced yet",
+      "WA-4/GA-8 gap: PROTECTED_KEYS (11 keys) lacks actor_instance/prompt_version -> coverage contingent on GA-8 text",
+      "WA-1 attribution = GPT 便-3(a) adjudication point (not pre-decided)",
+      "zero construction / zero seal (package is advance disclosure); Claude Code audit only (CC-0/D-2)"
+    ],
+    "cited_2der_ids": [],
+    "affected_artifact_ids": [],
+    "change_id": null,
+    "downgrades": [],
+    "basis": "record-occurrence of a development event; content/behaviour not auto-established"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "registry_version": "1",
+  "owner": "workcell",
+  "note": "retention_class は本ファイルのみが決定する(LG-R1/R2)。emit 呼び出し側が指定してはならない。変更は policy 裁定を経ること(LG-R3)。",
+  "kinds": {
+    "WORKCELL_PACKET_START":      { "retention_class": "PERMANENT" },
+    "WORKCELL_SANDBOX_CHECK":     { "retention_class": "PERMANENT" },
+    "WORKCELL_MODEL_REPLY":       { "retention_class": "SUMMARIZABLE" },
+    "WORKCELL_EMPTY_RESPONSE":    { "retention_class": "CLOSEABLE" },
+    "WORKCELL_FILE_WRITTEN":      { "retention_class": "CLOSEABLE" },
+    "WORKCELL_PRE_TEST_SNAPSHOT": { "retention_class": "CLOSEABLE" },
+    "WORKCELL_TEST_RUN":          { "retention_class": "CLOSEABLE" },
+    "WORKCELL_VIOLATION":         { "retention_class": "PERMANENT" },
+    "WORKCELL_MODEL_ERROR":       { "retention_class": "PERMANENT" },
+    "WORKCELL_RESULT_PACKET":     { "retention_class": "PERMANENT" }
+  }
+}

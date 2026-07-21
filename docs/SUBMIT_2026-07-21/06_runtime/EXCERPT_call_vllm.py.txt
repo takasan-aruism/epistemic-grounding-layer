@@ -1,0 +1,41 @@
+    誤断定した実害があるため、ここで一元化する。"""
+    for k in ("reasoning", "reasoning_content"):
+        v = message.get(k)
+        if isinstance(v, str) and v:
+            return v
+    return ""
+
+
+def call_vllm(endpoint: str, model: str, messages: list[dict],
+              timeout: int = 600, max_tokens: int = 16384,
+              enable_thinking: bool | None = None) -> tuple[str, str]:
+    """戻り: (content, reasoning)。v0.2.1 で reasoning を捨てなくなった(DE-0461)。
+
+    v0.2.2(DE-0464): enable_thinking=False で思考を停止させる。暴走時の思考は
+    与えた予算をちょうど使い切る(思考字数÷予算が予算に依らず 3.2〜3.9 で一定)ため、
+    予算側では制御できない。None のときは何も渡さず serving 既定に従う。
+    """
+    payload = {"model": model, "messages": messages,
+               "temperature": 0.2, "max_tokens": max_tokens}
+    if enable_thinking is not None:
+        payload["chat_template_kwargs"] = {"enable_thinking": bool(enable_thinking)}
+    body = json.dumps(payload).encode()
+    req = urllib.request.Request(endpoint, data=body,
+                                 headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        data = json.loads(resp.read())
+    choice = data["choices"][0]          # 形が違えば例外 → MODEL_PROTOCOL_ERROR
+    reasoning = _reasoning_of(choice["message"])
+    content = choice["message"].get("content")
+    if not isinstance(content, str) or not content.strip():
+        note = ""
+        if reasoning:
+            note = ("(reasoning present: budget likely exhausted before output; "
+                    f"reasoning_chars={len(reasoning)})")
+        raise EmptyModelResponse(str(choice.get("finish_reason")), note,
+                                 reasoning=reasoning)
+    return content, reasoning
+
+
+def parse_strict(text: str, impl_allowed: set[str]) -> dict[str, str]:
+    """厳格 parse。戻り: files。例外:

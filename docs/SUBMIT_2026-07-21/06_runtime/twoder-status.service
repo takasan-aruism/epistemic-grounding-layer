@@ -1,0 +1,7 @@
+[Unit]
+Description=2DER status regeneration (one shot)
+
+[Service]
+Type=oneshot
+User=takasan
+ExecStart=/srv/workcell/status/run-status.sh

@@ -1,0 +1,64 @@
+{
+  "review_id": "JREV-0009",
+  "date": "2026-07-18",
+  "scope": "RE-BATTLE of bridge_apply_connector + dual-token write primitives after the DE-0418/0419 core surgery (twoder 0d914e4, module sha ea57f1e6). Taka 2026-07-18 §1-3.",
+  "reviewer": "local-agent attacker (separate principal, real probes, throwaway) + GPT independent adjudication PENDING (Taka relay)",
+  "method": "re-attack the FIXED module, same config as JREV-0008. Raw attacker output: scratchpad jrev0009/ (probes). AST enumeration + real exploits.",
+  "bundle_verdict": "PASS (inverse of JREV-0008) for DE-0418/0419 + one NEW defect found and fixed IN-SCOPE (DE-0421 traversal).",
+  "pre_remediation": {
+    "verdict": "the two JREV-0008 defects are now BLOCKED; one NEW defect found",
+    "de0418_closed": "YES — apply_patch_bounded/apply_patch/_apply_to_working/_restore_preimage with a valid content/plan token but NO _EnergizedApply all raise at _require_energize before any write; AST: both (and only) writers gate on it; only minter is test-only _mint_test_energize (throwaway), zero real-repo minter.",
+    "de0419_closed": "YES — tampered/mismatched-fingerprint refused; raw CRLF diff -> canonical written (no \\r), sha256(on-disk)==attested fingerprint; canonicalization collisions are idempotent (same bytes).",
+    "dir_binding": "BLOCKED — cross-dir token reuse refused; grant uses realpath (symlink-safe). Forged _EnergizedApply(grant=realpath) conducts = deliberate construction = by-design energization (same as _ValidatedPatch convention).",
+    "minter_attack_g": "BLOCKED — real repo direct / via /tmp symlink / .. / trailing-slash all resolve outside temp root and are refused.",
+    "new_defect": "DE-0421 path-traversal: a token bound to /tmp/ws_X wrote /tmp/victim via filename '../victim' when that path was authorized in BOTH allowed_files and provenance.allowed_files. NOT an allowed_files bypass; pre-existing (un-normalized os.path.join predates the surgery); makes the new dir-binding's 'cannot write another dir' guarantee overstated."
+  },
+  "remediation": {
+    "in_scope_applied": "DE-0421 fixed IN-SCOPE as completion of the dir-binding this surgery introduced: _confined_path() realpath-contains every write target within realpath(workspace_dir), in both writers. §4 injection (h) path-traversal added -> BLOCKED measured (victim unchanged).",
+    "de": [
+      "DE-0420 (DE-0418/0419 fixes)",
+      "DE-0421 (traversal confinement)"
+    ]
+  },
+  "post_remediation": {
+    "verdict": "PASSED — §4 gate 10/10 ALL-BLOCKED (a..h) on the fixed bytes; DE-0349 dual-token gate PASS; 13 oracles + e2e PASS. Adjudicator=GPT PENDING Taka relay."
+  },
+  "rationale": "Inverse of JREV-0008: the two defects that made the connector's non-conduction non-structural are now structural (energization at the write primitive) and the fingerprint attestation is byte-exact. The re-battle additionally surfaced a pre-existing spatial-confinement gap, fixed in-scope. Only deliberate token construction conducts; module is still an island (no live caller, no real-repo minter).",
+  "scope_verdicts": [
+    {
+      "component": "_apply_to_working/_restore_preimage",
+      "property": "energization_structural",
+      "verdict": "BLOCKED (dual token at the writer; zero real-repo minter)",
+      "evidence_basis": "JREV-0009 area 1 + AST"
+    },
+    {
+      "component": "_apply_to_working",
+      "property": "canonical_byte_attestation",
+      "verdict": "BLOCKED (canonical-only + sha256==fingerprint)",
+      "evidence_basis": "JREV-0009 area 2"
+    },
+    {
+      "component": "_confined_path",
+      "property": "write_target_confinement",
+      "verdict": "BLOCKED after DE-0421 fix",
+      "evidence_basis": "JREV-0009 area 5 + §4 (h)"
+    },
+    {
+      "component": "_mint_test_energize",
+      "property": "throwaway_only",
+      "verdict": "BLOCKED (realpath under temp root; attack g)",
+      "evidence_basis": "JREV-0009 area 4"
+    }
+  ],
+  "permanent_mechanisms_required": [
+    {
+      "property": "write_target_confinement",
+      "impl": "_confined_path in both writers + §4 injection (h) as standing regression"
+    },
+    {
+      "property": "energization_minter",
+      "impl": "real-repo minter remains UNBUILT; §3 design + Taka gate (ENERGIZATION_ADJUDICATION event)"
+    }
+  ],
+  "note": "Two-stage preserved. Raw attacker output in scratchpad jrev0009/. Adjudicator=GPT PENDING Taka. Residual (not exploited, out of threat model): tempfile.gettempdir() honors TMPDIR env; an attacker controlling process env pre-first-tempfile could redirect the temp root, but such an attacker can construct _EnergizedApply directly (no added capability). claim ceiling BOUNDED_PATCH_BRIDGE; non-conducting."
+}
