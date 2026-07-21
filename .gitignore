@@ -1,5 +1,6 @@
 # 生成物(driver で再生成可能。SoR の実体は run.py/run2.py が作る)
-data/
+data/*.sqlite
+.idlock
 data_jrev0003/
 data_acq_live/
 __pycache__/

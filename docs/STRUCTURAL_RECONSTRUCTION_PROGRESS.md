@@ -1016,3 +1016,41 @@ Taka の見立て「このシステムの根幹的重要性を持つのは台帳
 
 **過剰主張しないこと:** 書き手検出は静的解析であり `~`（参照+書込みありパス未確認）は確定でない。
 動的パス構築は取りこぼす。ORPHAN 7 の「畳む/保存」は判断材料であって判断ではない（Taka 裁定）。
+
+---
+
+### §3.11 — 2026-07-22 棲み分けアーク着手（Taka 4点フィードバック / 順序①②③④）
+
+Taka の方針: 台帳起点の棲み分けは存在論と一致（全 actor は ephemeral、永続は台帳のみ）。
+コード 1,313 辺は捌けないが台帳 47 本は一晩で捌ける。順序=①保全→②機械処分→③フロー図→④IDLE裁定。
+
+**① 追跡外 LIVE 一次台帳の保全（DE-0490、Taka 裁定「git 追跡に入れる」）— 完了**
+実測で全て append-only（`.open("a")`、既存行の書換え経路なし）を確認。DE-0186 を
+append-only event log に限り SUPERSEDE。各 repo の .gitignore から event-log 規則を外科除去、
+sqlite/lock（rebuildable/binary）は除外維持。追跡開始した実行史 **5,966 行**:
+ds_events 1008 / rri_records 680 / dev-workcell/events 674 / pending_actor 334 /
+run_sor/events 160 / egl/data/events 2001 / failure_recurrence 109。各 repo commit 済み。
+
+**③ 台帳フロー図（s11_ledger_flow.py → 2DER_LEDGER_FLOW.md）— 完了**
+canonical 12 本を「本線 1 本」として台帳語で描いた。正直な設計: データは台帳間を直接流れず、
+orchestrator（submit.py 前向き / return_loop.py 戻り）が各 sole writer を順に呼ぶ。辺 = 1 往復の
+write シーケンス。全ステップを実 行番号で裏づけ、`--check` が腐敗検知（現在 **0 stale**）。
+**欠損辺①→②を台帳語で再定義:** 「ROADMAP_REGISTRY を読んで dev-workcell/events に CREATE を書く
+書き手が存在しない」。select_next は ROADMAP を読むが READ-ONLY（:7 "never dispatches"）、
+submit.py:408 の create_task は raw_input 起点。**棲み分けと本線接続は同じ図の上の作業になった。**
+
+**点2の弱点補正（role 列）— 完了**
+s10 に `role`（CANONICAL 12 / INSTANCE_STORE 7 / GOVERNANCE_LIVE 2 / IDLE 8 / EXPERIMENT_RESIDUE 7 /
+REPLICA 9 / SHIPMENT 2）を追加。LIVE が「reader 到達性」と「instance の現用」を混ぜる弱点を分離。
+
+**点4の原則昇格（DE-0491）— 完了**
+`canonical 台帳は sole production writer 必須` を規律化し s10 `--check` に恒久実装（本番複数→違反 /
+ゼロ→腐敗）。canonical 12 本は全て本番書き手ちょうど 1 つ（0 mismatch）。REVIEW_LEDGER の本番
+書き手がテストファイルという実測が、この規律の必要性の証拠。既存違反是正は Taka 裁定。
+
+**残（Taka 裁定/実行待ち）:**
+- ② 機械処分（REPLICA 9 + SHIPMENT 2 + EXPERIMENT_RESIDUE 7 = 18 本）を disposition 列 or 実アーカイブへ。
+  既定処分は決まっている（canonical 宣言で畳む / 実験残渣はアーカイブ）。Qwen 実行可。
+- ④ IDLE 8 本の裁定（`AUTONOMY_LEDGER`=自律ループの台帳が飢えている / `PROBLEM_LOG`・`PROBLEMS`・
+  `INVESTIGATIONS`=追跡外・genesis 不明でガバナンス上の匂い最悪）。
+- ①→② producer 実装（DE-0347 severance class により Taka 裁定必須）。台帳フロー図の欠損 1 辺として定義済み。

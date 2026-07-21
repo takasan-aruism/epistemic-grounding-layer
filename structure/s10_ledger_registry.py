@@ -205,6 +205,28 @@ def docfirst(k):
 # EGL の 4 層 bootstrap で各 repo に配られる台帳（canonical writer は egl 側のみ）
 BOOTSTRAP_REPLICAS = {"DESIGN_EVIDENCE_LEDGER.jsonl", "REVIEW_LEDGER.jsonl", "audit_backlog.jsonl"}
 
+# canonical 運用台帳（本線を成す台帳。instance store と区別する — 点2の弱点補正）。
+# LIVE 分類が「reader コードの到達性」と「そのインスタンスの現用」を混ぜないよう明示列挙。
+CANONICAL_LEDGERS = {
+    "ds/ds_events.jsonl", "rri/rri_records.jsonl", "egl/data/events.jsonl", "dev-workcell/events.jsonl",
+    "egl/DESIGN_EVIDENCE_LEDGER.jsonl", "twoder/audit/ROADMAP_REGISTRY.jsonl", "twoder/audit/CHANGE_LOG.jsonl",
+    "twoder/audit/ARTIFACT_REGISTRY.jsonl", "dev-workcell/data/pending_actor.jsonl",
+    "twoder/failure_memory.jsonl", "twoder/failure_recurrence.jsonl",
+    "twoder/audit/COMPLETION_DEFINITION_REGISTRY.jsonl",
+}
+
+
+def ledger_role(ledger_id, base, liveness):
+    """台帳の役割。canonical 運用台帳 / instance store / governance を分ける（点2）。"""
+    if ledger_id in CANONICAL_LEDGERS:
+        return "CANONICAL"
+    if liveness == "LIVE" and base == "events.jsonl":
+        return "INSTANCE_STORE"     # egl/data_*/events, run_sor/events 等: 同一書き手の scenario 実体
+    if liveness == "LIVE":
+        return "GOVERNANCE_LIVE"    # REVIEW_LEDGER / audit_backlog 等の小規模 live 台帳
+    return {"IDLE_HAS_WRITER": "IDLE", "ORPHAN": "EXPERIMENT_RESIDUE",
+            "REPLICA_SHADOW": "REPLICA", "SHIPMENT_COPY": "SHIPMENT"}.get(liveness, "OTHER")
+
 
 def classify_writer(repo, base, ow, all_owner_index):
     """書き手ゼロの台帳を、欠陥（真の orphan）と正常（複製/パラメタ化）に分ける。"""
@@ -279,6 +301,9 @@ def build():
             "trust_tier": "T3_DERIVED", "regenerable": True,
             "derived_from": "git genesis + AST path-owner + REACHABILITY(wired) + basename readers",
         })
+    # role は liveness 確定後に付与
+    for r in rows:
+        r["role"] = ledger_role(r["ledger_id"], r["basename"], r["liveness"])
     return rows
 
 
@@ -293,6 +318,13 @@ def main():
             # live で読まれるのに真の書き手が居ない（複製/パラメタ化は除外）→ 供給不能
             if r["live_referenced"] and r["writer_resolution"] == "NONE_ORPHAN":
                 bad.append((r["ledger_id"], "live-read-but-genuinely-no-writer", []))
+            # canonical 運用台帳は sole writer 必須（§4 実測を規律に昇格。DE-0491）:
+            #   本番書き手が複数 → 規律違反 / 本番書き手ゼロ → 手埋め前提の腐敗リスク
+            if r.get("role") == "CANONICAL":
+                if r["production_writer_count"] > 1:
+                    bad.append((r["ledger_id"], "CANONICAL-must-have-sole-writer-but-multiple", r["writer_production"]))
+                elif r["production_writer_count"] == 0:
+                    bad.append((r["ledger_id"], "CANONICAL-has-no-production-writer", r["writer_nonproduction"]))
         for lid, why, extra in bad:
             print(f"MISMATCH {lid}: {why} {extra}")
         print(f"\n{len(bad)} mismatch(es) over {len(rows)} ledgers")
