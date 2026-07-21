@@ -1,6 +1,7 @@
 # 2DER STRUCTURAL RECONSTRUCTION — 実装仕様 v0.1
 
-- **status: SPEC / PRE-IMPLEMENTATION**
+- **status: SUPERSEDED by `STRUCTURAL_RECONSTRUCTION_SPEC_v0.2.md`（2026-07-22）**
+- **status(旧): SPEC / PRE-IMPLEMENTATION**
 - **authored_by: CLAUDE_CODE** — 2026-07-22
 - **origin:** Taka 指示（開発史の再接続）+ GPT 提案（6段パイプライン）を精緻化したもの
 - **claim ceiling:** 本書は設計を定義する。本書自体は 2DER の能力を主張しない。
