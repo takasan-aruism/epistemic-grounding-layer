@@ -1,0 +1,28 @@
+--- /mnt/user-data/outputs/bundle-a-remediation-spec-v1.1.md	2026-07-21 10:23:52.633477000 +0000
++++ /mnt/user-data/outputs/bundle-a-remediation-spec-v1.2.md	2026-07-21 12:49:11.026350000 +0000
+@@ -1,8 +1,8 @@
+-# 束A 修復仕様 — bridge/minter(JREV-0010r 対応)v1.1
++# 束A 修復仕様 — bridge/minter(JREV-0010r 対応)v1.2
+ 
+-status: 仕様確定案(FIX-LIFT-JREV0010 の Taka 捺印後に packet 化して Qwen へ)。
++status: FIX-LIFT-JREV0010 開始済み(SEAL-2026-07-21 §4 / DE-0482)。
++v1.1 → v1.2: R1-5 の原 event 識別方式を確定(DE-0483 実測所見への裁定)。
+ v1.0 → v1.1: GPT 補強 A(CORRECTION 権限根)・B(apply 原子性 + T-8)を反映。
+-GPT 判定: READY_FOR_TAKA_FIX_LIFT_DECISION / NOT_AUTHORIZED_FOR_EXECUTION。
+ date: 2026-07-21 / 起草: Claude Web
+ 対象: twoder patch_bridge.py(5ca50050)/ bridge_reconciler.py(41c404ca)/
+       bridge_minter.py(d77c5530)
+@@ -28,6 +28,13 @@
+ R1-5  既存 event(DE-0438 の PA 3件)への遡及: 原 event は改変しない。
+       repo identity を付す CORRECTION 型の後続 event で補完し、DE-0479 の
+       代理指標(base_commit ancestry / fingerprint 一致)を根拠として引く。
++R1-5a 原 event の識別方式(DE-0483 裁定): ENERGIZATION_OBSERVATIONS.jsonl の
++      record には record_hash 場が存在しない(実測)。よって CORRECTION の
++      correction_target は {store 名, line_index, line_sha256} の三つ組と
++      する。line_sha256 = 当該行の生バイト(改行除く)の sha256。append-only
++      store の行は不変なので、この三つ組は原 event を一意かつ改竄検出可能に
++      指す。Claude Code は搬入済み LINE_INDEX_AND_RECORD_HASH_NOTE.md の
++      行位置と突き合わせて3件分を実測算出すること。
+ R1-6  CORRECTION の権限根(GPT 補強A): CORRECTION event は
+       correction 対象 record_hash / correction authority / evidence refs /
+       repo_identity / repo_realpath を sealed field として持つ。
