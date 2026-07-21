@@ -11,6 +11,7 @@
 | `amendment-v0.2.1.md` | Amendment(AM-1..) codegen-audit 実験由来 | ⛔ **PENDING**(Taka 提供) |
 | `amendment-v0.2.2.md` | Amendment(AM-10..20)。GPT監査由来。RR-4' 凍結等 | ⛔ **PENDING**(Taka 提供 or 依頼で再構成) |
 | `kickoff-decision-record.md` | Walking Skeleton (Phase 1a) 着手決定 | ✅ 収録済み |
+| `PROJECT_GOAL.md` | 本線(2DER AUTONOMOUS RESEARCH LOOP v0)・ループ現在地・目的ドリフト記録。**一次資料からの再構成であり親文書の代替ではない** | 🟡 RECONSTRUCTED (Taka 未裁定) |
 
 有効文書セット: v0.1 + v0.2 + v0.2.1 + v0.2.2 + Kickoff
 (v0.2.1 RR-4'(a) 自動縮小は v0.2.2 SN-4 で凍結)
