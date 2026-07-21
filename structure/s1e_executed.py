@@ -45,8 +45,12 @@ for src, paths in SOURCES.items():
                 n_rec += 1
                 if not isinstance(d, dict):
                     continue
+                # NOTE: `phase`/`role` were missing in v1 and made all 674 dev-workcell
+                # events invisible (found by TR-5 failing). Key lists are themselves an
+                # instrument — an unmatched schema reads identically to "no activity".
                 for k in ("kind", "event_kind", "type", "record_type", "event", "op",
-                          "operation", "stage", "actor", "actor_role"):
+                          "operation", "stage", "actor", "actor_role",
+                          "phase", "role", "status", "action", "event_type"):
                     v = d.get(k)
                     if isinstance(v, str) and v:
                         note(f"{src}::{k}={v}", src, Path(p).name)
