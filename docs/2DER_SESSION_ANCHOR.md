@@ -5,7 +5,7 @@
 - **保存場所:** `egl/docs/2DER_SESSION_ANCHOR.md`（durable 化。Claude Code が毎セッション末に更新）。
 - **更新規律:** セッション終了時に更新して保存(更新は依頼された側が行い、Taka は保存のみ)。
 - **矛盾時の優先順位: 台帳(DE) > 本書 > 会話中の誰の記憶よりも。** DE 番号があれば記憶より DE を引く。
-- last_updated: 2026-07-23 (★3(A) cw LIVE + ★3(B) ts 実ISO化完了。DE-0505。既存5本緑維持)
+- last_updated: 2026-07-23 (契約passthrough 棚卸し(DE-0506)。断点=PLAN が契約キー継承せず。test_live_coder_backend 反転 8/8)
 
 ---
 
