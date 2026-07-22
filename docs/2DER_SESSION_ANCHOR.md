@@ -5,7 +5,7 @@
 - **保存場所:** `egl/docs/2DER_SESSION_ANCHOR.md`（durable 化。Claude Code が毎セッション末に更新）。
 - **更新規律:** セッション終了時に更新して保存(更新は依頼された側が行い、Taka は保存のみ)。
 - **矛盾時の優先順位: 台帳(DE) > 本書 > 会話中の誰の記憶よりも。** DE 番号があれば記憶より DE を引く。
-- last_updated: 2026-07-23 (★3(A): cw 再配線 LIVE・webui 再起動済。immutable 14/14。§6 DONE は iv+契約PLAN 待ち。DE-0503)
+- last_updated: 2026-07-23 (★3(A) cw LIVE + ★3(B) ts 実ISO化完了。DE-0505。既存5本緑維持)
 
 ---
 
@@ -26,7 +26,7 @@
 | 1 | producer を runner 方式で完成 | ✅ **完了・commit 済み(twoder 85af03c / DE-0497)** | — |
 | 2 | walking skeleton 受入(仕様 §4) | ✅ **完了(DE-0498)。TASK-2DER-AUTO-68518E15 が実台帳に。claim=AUTONOMOUS_SELECTION_DEMONSTRATED_ONCE_UNDER_APPROVAL** | — |
 | ★3(A) | **恒久連結: GENERATE 段 = runner** | cw 再配線 **LIVE**(webui PID2984769 再起動済, DE-0503)。seam 無条件・fallback 無・immutable 14/14。§1/§2 達成 | 残(§6 DONE): (c) run_runner 本番構築(iv, 契約付task無く未発火) + PLAN が skeleton+immutable\_tests 契約packetを産む機構(DE-0499 point5 未存在)。CLAUDE\_WEB: test\_live\_coder\_backend(§2禁止挙動を検証)の retire |
-| ★3(B) | provenance・ts・token=authority 統合 | 未 | ★2 の3残件(create_task アダプタ ts=実TS化 / DS/RRI provenance / 方式統合)。★3(A) 非目標として分離済み |
+| ★3(B) | provenance・ts・token=authority 統合 | **ts 完了(DE-0505)**: CREATE ts=実ISO8601(clock=failure_memory._now)。13/13。残: DS/RRI provenance(dispatchability) / token=authority 方式統合 | 3重複 _now 統合は家事。次の ★3(B) 項は provenance か token 統合 |
 | 4 | SPR(解決済み問題の棚卸し)抽出 | 仕様済み・**保留** | Taka の起動指示があれば raw_input 投入(:8005 承認込み) |
 | 5 | 台帳の家事: 機械処分18本 / IDLE 8本裁定 / DISPOSE 16内訳 | 未・裁定不要(決定論) | いつでも並行可。急がない |
 | 6 | 橋(FIX 系譜)・JREV-0010r | **凍結** | 触らない |
