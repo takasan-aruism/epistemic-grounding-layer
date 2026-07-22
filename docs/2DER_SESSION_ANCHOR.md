@@ -5,7 +5,7 @@
 - **保存場所:** `egl/docs/2DER_SESSION_ANCHOR.md`（durable 化。Claude Code が毎セッション末に更新）。
 - **更新規律:** セッション終了時に更新して保存(更新は依頼された側が行い、Taka は保存のみ)。
 - **矛盾時の優先順位: 台帳(DE) > 本書 > 会話中の誰の記憶よりも。** DE 番号があれば記憶より DE を引く。
-- last_updated: 2026-07-23 (provenance 受け渡し完了 DE-0515: CLAUDE_WEB が v0.2 で確定[J1 kp 内ネスト / J2 fail-closed 撤回=seam は導管]→ seam を導管化。新 immutable 5/5・封印58・regression 全緑。死因#3 機械閉塞。残=実 PROBE 再走で DONE)
+- last_updated: 2026-07-23 (DE-0515 provenance 導管化完了[新 immutable 5/5・封印58緑]。**再走準備で P1 済/P3 halt**: P1=webui 再起動済(PID 215805, lstart 08:07:33 > DE-0515 commit → live は新コード)、P4=封印58緑基準線。**P3 halt=判定表 P3 が live 不変条件と衝突**: 同一 raw_input は同一 task_id に写像するが create_task が既存タスクへ再CREATE拒否(WorkflowViolation→submit が握り潰し)で状態リセットされず、TASK-2DER-6E2C9F16 は前回の JUDGE_REQUIRED/BLOCKED のまま。attempt-4 は JUDGE 扉を越えねば起きない。**再走設計の裁定待ち**(i:同一タスクを JUDGE 扉で越える / ii:新 raw_input で別 task_id))
 
 ---
 
@@ -27,7 +27,7 @@
 |---|---|---|---|
 | 1 | producer を runner 方式で完成 | ✅ **完了・commit 済み(twoder 85af03c / DE-0497)** | — |
 | 2 | walking skeleton 受入(仕様 §4) | ✅ **完了(DE-0498)。TASK-2DER-AUTO-68518E15 が実台帳に。claim=AUTONOMOUS_SELECTION_DEMONSTRATED_ONCE_UNDER_APPROVAL** | — |
-| ★3(A) | **恒久連結: GENERATE 段 = runner** | cw 再配線 LIVE。機構完備(passthrough A+B+iv+**provenance**)。**§6 DONE 構造達成**(DE-0513)。**provenance 受け渡し完了(DE-0515)**: seam=導管。CREATE.knowledge_packet.provenance を run_runner→run_minimal_slice(provenance=) へ verbatim。runner の門判定(REJECTED_BYPASS 等)を素通し。新 immutable 5/5・封印58・regression 全緑 | **残=実 PROBE 再走**(死因#3 は機械閉塞済。live 経路で REJECTED_BYPASS が解け runner が実 PASS/次の死因に到達するかを確認 → 到達で DONE、現状 BUILT) |
+| ★3(A) | **恒久連結: GENERATE 段 = runner** | 機構完備(passthrough A+B+iv+**provenance** DE-0515)。**§6 DONE 構造達成**(DE-0513)。seam=導管: CREATE.knowledge_packet.provenance を run_runner→run_minimal_slice(provenance=) へ verbatim・門判定素通し。新 immutable 5/5・封印58緑。**P1 済(webui PID 215805 lstart 08:07:33=新コード稼働) / P4 済(封印58緑基準線)** | **残=実 PROBE 再走(halt 中)。ブロッカー=判定表 P3 と live 不変条件の衝突**: 再submit は create_task ガード(既存タスク再CREATE拒否, workcell.py:319-321 / submit.py:410-411 が握り潰し)で状態リセットせず、TASK-2DER-6E2C9F16 は JUDGE_REQUIRED/BLOCKED のまま→attempt-4 不能。**CLAUDE_WEB 差し戻し裁定待ち**(i:同一タスクを正規 JUDGE 扉で越える=人間扉 / ii:新 raw_input で別 task_id=P3 再現性ラベルを外す)。※要 DE 化(create_task ガードは再走設計の恒久制約) |
 | ★3(B) | provenance・ts・token=authority 統合 | **ts 完了(DE-0505)**。**provenance 受け渡し完了(DE-0515)**。残: token=authority 方式統合 | 3重複 _now 統合は家事。provenance は A/B と同型欠陥(段間で作り直す)を導管化で解消=SPR 行候補(3例目) |
 | 4 | SPR(解決済み問題の棚卸し)抽出 | 仕様済み・**保留** | Taka の起動指示があれば raw_input 投入(:8005 承認込み) |
 | 5 | 台帳の家事: 機械処分18本 / IDLE 8本裁定 / DISPOSE 16内訳 | 未・裁定不要(決定論) | いつでも並行可。急がない |
