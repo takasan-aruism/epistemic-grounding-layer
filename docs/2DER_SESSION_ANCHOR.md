@@ -5,7 +5,7 @@
 - **保存場所:** `egl/docs/2DER_SESSION_ANCHOR.md`（durable 化。Claude Code が毎セッション末に更新）。
 - **更新規律:** セッション終了時に更新して保存(更新は依頼された側が行い、Taka は保存のみ)。
 - **矛盾時の優先順位: 台帳(DE) > 本書 > 会話中の誰の記憶よりも。** DE 番号があれば記憶より DE を引く。
-- last_updated: 2026-07-22 (★1 完了・commit 済み。次=★2 walking skeleton)
+- last_updated: 2026-07-22 (★1・★2 完了。初の自律 CREATE が実台帳に。次=★3 恒久連結)
 
 ---
 
@@ -24,8 +24,8 @@
 | # | 作業 | 状態 | 次の一手 |
 |---|---|---|---|
 | 1 | producer を runner 方式で完成 | ✅ **完了・commit 済み(twoder 85af03c / DE-0497)** | — |
-| ★2 | **walking skeleton 受入**(仕様 §4) | 未(今ここ) | Taka がトークン1枚発行 → ITEM 1件 → 封印つき CREATE が実台帳に出る → claim: AUTONOMOUS_SELECTION_DEMONSTRATED_ONCE_UNDER_APPROVAL。ここで create_task アダプタの provenance を実 CREATE で詰める |
-| 3 | **恒久連結: ファネル GENERATE 段 = runner** | 未(本丸) | 仕様を Claude Web が書き canonical 投入。実タスク1件の GENERATE 痕跡に runner が出て初めて DONE。**先に webui.TS 固定トークンバグ(U13 死因#2)を解消要** |
+| 2 | walking skeleton 受入(仕様 §4) | ✅ **完了(DE-0498)。TASK-2DER-AUTO-68518E15 が実台帳に。claim=AUTONOMOUS_SELECTION_DEMONSTRATED_ONCE_UNDER_APPROVAL** | — |
+| ★3 | **恒久連結: ファネル GENERATE 段 = runner** | 未(本丸・今ここ) | 仕様を Claude Web が書き canonical 投入。実タスク1件の GENERATE 痕跡に runner が出て初めて DONE。**この段で ★2 の3残件を詰める: (a)webui.TS 固定トークンバグ(U13死因#2) (b)create_task アダプタの ts=実タイムスタンプ化+DS/RRI provenance (c)token=authority 方式統合** |
 | 4 | SPR(解決済み問題の棚卸し)抽出 | 仕様済み・**保留** | Taka の起動指示があれば raw_input 投入(:8005 承認込み) |
 | 5 | 台帳の家事: 機械処分18本 / IDLE 8本裁定 / DISPOSE 16内訳 | 未・裁定不要(決定論) | いつでも並行可。急がない |
 | 6 | 橋(FIX 系譜)・JREV-0010r | **凍結** | 触らない |
@@ -40,7 +40,8 @@
 | DE-0494 | JUDGE-0001: defect=TEST_DEFECT(worker 自作テストが壊れ・無関係) |
 | DE-0495 | seam defect 知見 DE 化+不変テスト設置。SPR 仕様は受領・保留 |
 | DE-0496 | 不変テスト 5/5(spy 環境)。ceiling: 実配線未検証(stub)。TS 固定トークンバグ発見(U13 死因#2) |
-| DE-0497 | ★1 完了。runner 方式(実配線骨格+Qwen body)で 5/5。stub 逃げ閉塞。本番 fail-closed 実測。commit 承認待ち |
+| DE-0497 | ★1 完了。runner 方式(実配線骨格+Qwen body)で 5/5。stub 逃げ閉塞。commit 済み(twoder 85af03c) |
+| DE-0498 | ★2 完了。**初の自律①→② CREATE が実台帳に**(TASK-2DER-AUTO-68518E15)。封印6件記録・selection_reason は verbatim。admission=staleness に訂正(権限=token)。ceiling: ts/provenance/方式統合は★3 |
 
 **U13(ファネル歩留まり)の死因、実測2件:** ①worker 自作テストの品質(→runner 方式で解決 DE-0497) ②初回 GENERATE 失敗でトークン永久消費(webui.TS 固定)。
 ※②は恒久連結(§2-3)の前に個別修正が要る(§2-3 の前提)。
