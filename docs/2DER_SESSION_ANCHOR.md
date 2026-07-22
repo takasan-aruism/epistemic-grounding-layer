@@ -5,7 +5,7 @@
 - **保存場所:** `egl/docs/2DER_SESSION_ANCHOR.md`（durable 化。Claude Code が毎セッション末に更新）。
 - **更新規律:** セッション終了時に更新して保存(更新は依頼された側が行い、Taka は保存のみ)。
 - **矛盾時の優先順位: 台帳(DE) > 本書 > 会話中の誰の記憶よりも。** DE 番号があれば記憶より DE を引く。
-- last_updated: 2026-07-23 (契約passthrough A+B 完了 DE-0509/0510。残ブロッカー=run_runner(iv)本番構築のみ)
+- last_updated: 2026-07-23 (iv 棚卸し DE-0511: run_minimal_slice 実呼出=make_dw_coding_actor パターン。gap=worker が skeleton-fill せず全生成)
 
 ---
 
