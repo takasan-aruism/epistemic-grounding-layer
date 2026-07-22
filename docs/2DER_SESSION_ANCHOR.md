@@ -5,7 +5,7 @@
 - **保存場所:** `egl/docs/2DER_SESSION_ANCHOR.md`（durable 化。Claude Code が毎セッション末に更新）。
 - **更新規律:** セッション終了時に更新して保存(更新は依頼された側が行い、Taka は保存のみ)。
 - **矛盾時の優先順位: 台帳(DE) > 本書 > 会話中の誰の記憶よりも。** DE 番号があれば記憶より DE を引く。
-- last_updated: 2026-07-22 (★1 runner 方式で 5/5 完了、commit 承認待ち)
+- last_updated: 2026-07-22 (★1 完了・commit 済み。次=★2 walking skeleton)
 
 ---
 
@@ -23,8 +23,8 @@
 
 | # | 作業 | 状態 | 次の一手 |
 |---|---|---|---|
-| 1 | producer を runner 方式で完成 | ✅ **5/5(実配線)。commit 承認待ち(DE-0497)** | Taka 承認 → `twoder/select_and_create.py` を commit |
-| ★2 | **walking skeleton 受入**(仕様 §4) | 未 | Taka がトークン1枚発行 → ITEM 1件 → 封印つき CREATE が実台帳に出る → claim: AUTONOMOUS_SELECTION_DEMONSTRATED_ONCE_UNDER_APPROVAL |
+| 1 | producer を runner 方式で完成 | ✅ **完了・commit 済み(twoder 85af03c / DE-0497)** | — |
+| ★2 | **walking skeleton 受入**(仕様 §4) | 未(今ここ) | Taka がトークン1枚発行 → ITEM 1件 → 封印つき CREATE が実台帳に出る → claim: AUTONOMOUS_SELECTION_DEMONSTRATED_ONCE_UNDER_APPROVAL。ここで create_task アダプタの provenance を実 CREATE で詰める |
 | 3 | **恒久連結: ファネル GENERATE 段 = runner** | 未(本丸) | 仕様を Claude Web が書き canonical 投入。実タスク1件の GENERATE 痕跡に runner が出て初めて DONE。**先に webui.TS 固定トークンバグ(U13 死因#2)を解消要** |
 | 4 | SPR(解決済み問題の棚卸し)抽出 | 仕様済み・**保留** | Taka の起動指示があれば raw_input 投入(:8005 承認込み) |
 | 5 | 台帳の家事: 機械処分18本 / IDLE 8本裁定 / DISPOSE 16内訳 | 未・裁定不要(決定論) | いつでも並行可。急がない |
