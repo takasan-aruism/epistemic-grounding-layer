@@ -5,7 +5,7 @@
 - **保存場所:** `egl/docs/2DER_SESSION_ANCHOR.md`（durable 化。Claude Code が毎セッション末に更新）。
 - **更新規律:** セッション終了時に更新して保存(更新は依頼された側が行い、Taka は保存のみ)。
 - **矛盾時の優先順位: 台帳(DE) > 本書 > 会話中の誰の記憶よりも。** DE 番号があれば記憶より DE を引く。
-- last_updated: 2026-07-23 (iv 完成 DE-0512 = passthrough A+B+iv で機構完備。53本green。残=§6 DONE の live 走行1歩)
+- last_updated: 2026-07-23 (PROBE-PIPE-01 走行 DE-0513: §6 DONE 構造達成=実 GENERATE に runner run_id。死因=run_runner が provenance 未渡し)
 
 ---
 
