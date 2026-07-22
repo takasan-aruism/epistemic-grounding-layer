@@ -5,7 +5,7 @@
 - **保存場所:** `egl/docs/2DER_SESSION_ANCHOR.md`（durable 化。Claude Code が毎セッション末に更新）。
 - **更新規律:** セッション終了時に更新して保存(更新は依頼された側が行い、Taka は保存のみ)。
 - **矛盾時の優先順位: 台帳(DE) > 本書 > 会話中の誰の記憶よりも。** DE 番号があれば記憶より DE を引く。
-- last_updated: 2026-07-23 (PROBE-PIPE-01 走行 DE-0513: §6 DONE 構造達成=実 GENERATE に runner run_id。死因=run_runner が provenance 未渡し)
+- last_updated: 2026-07-23 (provenance 受け渡しで halt DE-0514: (1)実 provenance は kp 内ネスト (2)fail-closed 要求が B8 回帰と矛盾。CLAUDE_WEB 確定待ち)
 
 ---
 
@@ -27,8 +27,8 @@
 |---|---|---|---|
 | 1 | producer を runner 方式で完成 | ✅ **完了・commit 済み(twoder 85af03c / DE-0497)** | — |
 | 2 | walking skeleton 受入(仕様 §4) | ✅ **完了(DE-0498)。TASK-2DER-AUTO-68518E15 が実台帳に。claim=AUTONOMOUS_SELECTION_DEMONSTRATED_ONCE_UNDER_APPROVAL** | — |
-| ★3(A) | **恒久連結: GENERATE 段 = runner** | cw 再配線 **LIVE**(webui PID2984769 再起動済, DE-0503)。seam 無条件・fallback 無・immutable 14/14。§1/§2 達成 | ✅ 機構完備(passthrough A+B+iv, DE-0509/0510/0512, 53本green)。**残=§6 DONE の live 走行のみ**(restart+contract task+:8005 で実 GENERATE 痕跡に runner run_id)。run_minimal_slice 本番/QwenWorker 出力は spied test 外=live 確認要 |
-| ★3(B) | provenance・ts・token=authority 統合 | **ts 完了(DE-0505)**: CREATE ts=実ISO8601(clock=failure_memory._now)。13/13。残: DS/RRI provenance(dispatchability) / token=authority 方式統合 | 3重複 _now 統合は家事。次の ★3(B) 項は provenance か token 統合 |
+| ★3(A) | **恒久連結: GENERATE 段 = runner** | cw 再配線 LIVE(webui 再起動済)。機構完備(passthrough A+B+iv)。**§6 DONE 構造達成**(DE-0513: 契約タスクが submit→CREATE(A)→PLAN→GENERATE(runner) 通過、実台帳に runner run_id=SLICE-TASK-2DER-6E2C9F16) | **残=runner 走行の実 PASS**。PROBE 死因=run_runner が provenance 未渡し(DE-0513)。→ provenance 受け渡しを iv に足す途中で **halt(DE-0514)**: (1)実 provenance は kp 内ネスト (2)fail-closed 要求が B8 と矛盾。CLAUDE_WEB reconcile 待ち(問題1: create_task が top-level surface / 問題2: B v2 に provenance) |
+| ★3(B) | provenance・ts・token=authority 統合 | **ts 完了(DE-0505)**。provenance 受け渡し=**halt 中(DE-0514)**。残: token=authority 方式統合 | 3重複 _now 統合は家事。provenance は A/B と同型欠陥(段間で作り直す)=SPR 行候補 |
 | 4 | SPR(解決済み問題の棚卸し)抽出 | 仕様済み・**保留** | Taka の起動指示があれば raw_input 投入(:8005 承認込み) |
 | 5 | 台帳の家事: 機械処分18本 / IDLE 8本裁定 / DISPOSE 16内訳 | 未・裁定不要(決定論) | いつでも並行可。急がない |
 | 6 | 橋(FIX 系譜)・JREV-0010r | **凍結** | 触らない |
@@ -49,7 +49,18 @@
 | DE-0500 | ★3(A) §4 不変テスト BINDING 挿入(QwenCoder/make_dw_coding_actor)+seam 所見。run_runner/mint_token は既存署名と不一致→seam モジュールに実アダプタ要。flag2件(LEGACY_BETA==RUNNER_ENTRY / test10 vacuous) |
 | DE-0501 | ★3(A) seam generate_via_runner 構築。tests1-11 真通過(実束縛/委譲/fail-closed/token一意)。**cw 未再配線・tests12-13 vacuous**(DE-0500 flag2 未閉塞)。run_runner本番構築=iv ceiling |
 | DE-0502 | ★3(A) cw 再配線 checkpoint。cw() 4分岐中 fallback は1つ(sandbox→beta/alpha)、残り3つ正当(DE-0324 実行リトライ/packet選択/記録先)。G2 no-branch は強すぎ→CLAUDE_WEB へ v0.4(has_no_branch 削除/狭め、has_no_legacy_symbols で担保)。Taka halt-report 指示に忠実に停止 |
-| DE-0503 | ★3(A) cw 再配線 **LIVE**。GENERATE backend=generate\_via\_runner seam(無条件・fallback 無)。webui 再起動(PID2984769)。immutable 14/14・保持挙動無傷。契約無しtaskは fail-closed(§5)。§6 DONE=iv+契約PLAN 待ち。test\_live\_coder\_backend は §2 禁止挙動を検証→CLAUDE\_WEB retire |
+| DE-0503 | ★3(A) cw 再配線 **LIVE**。GENERATE backend=generate\_via\_runner seam(無条件・fallback 無)。webui 再起動。immutable 14/14・保持挙動無傷。契約無しtaskは fail-closed(§5)。test\_live\_coder\_backend は §2 禁止挙動を検証→反転済(DE-0506) |
+| DE-0504 | iv 前段 read-only(削除可・DE-0511 に統合) |
+| DE-0505 | ★3(B) ts 実ISO化。CREATE ts=fingerprint→実ISO8601(clock=failure\_memory.\_now, 最軽量選択)。recompute basis\_fingerprint 自キー化+body で emitted\_ts 封印。**既存5本緑+ts8本=13/13** |
+| DE-0506 | 契約passthrough 棚卸し3点(断点=PLAN が契約キー継承せず)。test\_live\_coder\_backend **反転** 8/8(live backend=seam 検証)。submit.py:88 裏付けDE無し |
+| DE-0507 | 契約passthrough(a) 棚卸し: CREATE kp に契約キー無=断点上流 / seam は task\_id 未受領 |
+| DE-0508 | 契約passthrough A 棚卸し: kp=決定論dict(claims の一部のみ:8005)→契約キーは LLM非経由で封印可 / cw が task\_id 受領 |
+| DE-0509 | 契約passthrough **A 完了**。contract\_seal(決定論マーカー抽出/壊れは ValueError/LLM非経由)→ submit 1行 → create\_task(contract=) → CREATE payload[contract]。8/8 |
+| DE-0510 | 契約passthrough **B 完了**。seam が CREATE payload[contract] を dw.workcell.\_read\_events で読み sha 検証/contract\_source 記録/fail-closed。cw が task\_id 注入。44 green |
+| DE-0511 | iv 棚卸し4点(run\_minimal\_slice 署名/戻り・実呼出=make\_dw\_coding\_actor パターン・sandbox・oracle)。gap: worker は skeleton-fill せず全生成 |
+| DE-0512 | **iv 完成**。run\_runner が task\_packet+sandbox+token+QwenWorker で run\_minimal\_slice 呼出。verify\_skeleton\_preserved(全文生成のまま骨格固定区間の順序bytes一致検査→SKELETON\_VIOLATION)。53本green |
+| DE-0513 | PROBE-PIPE-01 live。**§6 DONE 構造達成**(実 GENERATE に runner run\_id=SLICE-TASK-2DER-6E2C9F16)。claim=CONTRACT\_TASK\_TRAVERSED\_FUNNEL\_ONCE。死因=run\_runner が provenance 未渡し→run\_minimal\_slice REJECTED\_BYPASS(DE-0301) |
+| DE-0514 | provenance 受け渡しテストで **halt**(回避せず)。矛盾2件: (1)実 provenance は payload.knowledge\_packet.provenance(ネスト)で test の flat payload[key] と不一致 (2)fail-closed 要求が B の test\_contract\_is\_read\_from\_ledger(provenance 無で ok=True)と矛盾→B8 緑維持不能。reconcile 待ち |
 
 **U13(ファネル歩留まり)の死因、実測2件:** ①worker 自作テストの品質(→runner 方式で解決 DE-0497) ②初回 GENERATE 失敗でトークン永久消費(webui.TS 固定)。
 ※②は恒久連結(§2-3)の前に個別修正が要る(§2-3 の前提)。
