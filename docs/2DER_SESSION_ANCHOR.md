@@ -5,7 +5,7 @@
 - **保存場所:** `egl/docs/2DER_SESSION_ANCHOR.md`（durable 化。Claude Code が毎セッション末に更新）。
 - **更新規律:** セッション終了時に更新して保存(更新は依頼された側が行い、Taka は保存のみ)。
 - **矛盾時の優先順位: 台帳(DE) > 本書 > 会話中の誰の記憶よりも。** DE 番号があれば記憶より DE を引く。
-- last_updated: 2026-07-23 (契約passthrough A 棚卸し DE-0508: kp は決定論dict→契約キーは LLM非経由で封印可 / task_id は cw が受領)
+- last_updated: 2026-07-23 (契約passthrough A 完了 DE-0509: contract_seal→CREATE payload[contract] 封印(LLM非経由)8/8。次=B seam が読む)
 
 ---
 
