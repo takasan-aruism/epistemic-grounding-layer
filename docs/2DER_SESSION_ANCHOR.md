@@ -5,7 +5,7 @@
 - **保存場所:** `egl/docs/2DER_SESSION_ANCHOR.md`（durable 化。Claude Code が毎セッション末に更新）。
 - **更新規律:** セッション終了時に更新して保存(更新は依頼された側が行い、Taka は保存のみ)。
 - **矛盾時の優先順位: 台帳(DE) > 本書 > 会話中の誰の記憶よりも。** DE 番号があれば記憶より DE を引く。
-- last_updated: 2026-07-23 (契約passthrough 棚卸し(DE-0506)。断点=PLAN が契約キー継承せず。test_live_coder_backend 反転 8/8)
+- last_updated: 2026-07-23 (契約passthrough(a) 棚卸し DE-0507: CREATE に契約キー無=断点上流 / seam は task_id 未受領。submit ts 規約は §4 へ)
 
 ---
 
@@ -57,6 +57,7 @@
 - principal 統制語彙に CLAUDE_WEB を足すか、設計主体は provenance 側表現と明文化するか(現状 content_provenance で回避中)
 - Claude Code による authority.POLICY 追加(CHG-0128)の事後承認 / 次回からゲート追加も Qwen 経由か
 - create_task アダプタの完全 dispatchability 化(DS/RRI provenance)を ★2 で詰めるか ★3 に回すか
+- **submit.py:88 の決定論 ts 規約(`ts="2026-07-11T08:00:00" # no Date.now`)に裏付け DE は無い**(DE-0505/0506/0507 で計3回確認)。規約を DE 化して棚に載せるか、コード規約のまま放置するか。→ **もう調べ直さない(この行を典拠とする)**
 
 ## §5. セッションの回し方(チェックリスト)
 
