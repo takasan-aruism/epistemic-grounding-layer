@@ -1,91 +1,77 @@
-# 2DER SESSION ANCHOR — 毎セッション冒頭に添付する
+# 2DER SESSION ANCHOR v2 — 毎セッション冒頭に貼る
 
-- **これは何か:** 現在進行中の作業・手順・決定事項の1枚。セッション開始時に Claude Web / Claude Code に貼る。
-  **目的は痴呆対策の応急処置。** システム連結が進めばこの文書ごと不要になる(それが成功条件)。
-- **保存場所:** `egl/docs/2DER_SESSION_ANCHOR.md`（durable 化。Claude Code が毎セッション末に更新）。
-- **更新規律:** セッション終了時に更新して保存(更新は依頼された側が行い、Taka は保存のみ)。
-- **矛盾時の優先順位: 台帳(DE) > 本書 > 会話中の誰の記憶よりも。** DE 番号があれば記憶より DE を引く。
-- last_updated: 2026-07-23 (**TOKEN-GATE-01 完遂 v5 を pre-submit で halt(手戻り0・repo clean 8c57eeb)**。経過: DE-0515 で死因#3(provenance)閉塞→PROBE-PIPE-02 で **death#4=token 型不一致(str/dict)** 露呈→Taka 裁定『修正は authority 側(id+台帳照合)』=TOKEN-GATE-01 起草→v4 で **death#5=token 3フィールド不整合** を CC が pre-flight 検出→v5 で修正版。**CC 実行結果**: 封印58緑・**E1(death#5)補正を検証(mint_token を runner 照合値に揃え attempt 一意性を ts へ。v5 の approved_by 版は id 衝突するため ts 版へ補正)・未commit**。**🚨death#6 発見=funnel 受入oracle と artifact の分離**(worker は sandbox impl.py に書くが immutable_tests は twoder.approval_registry を import→in-sandbox 7/7 到達不能→Phase2 誤 halt)。**次=Web が v6**: death#5 は ts版 mint_token 採用、death#6 は (i)artifact を module パスへ書き PYTHONPATH で sandbox import 可 or (ii)Phase2 は CONSUMED+artifact で ACCEPT・7/7 は配置後検証。★3(A) DONE は approval_registry 構築+E3 張替後に到達可(門機構は E1 補正で整った)。詳細§2 ★3(A)/★3(B))
+- **これは何か:** 現在地の1枚。**履歴は書かない**（履歴は DE 台帳）。
+- **サイズ上限: この文書は 1 画面。** §2 の各セルは「状態1行＋次の一手1行＋DE番号」まで。
+  それ以上書きたくなったら DE を切って番号だけ置く。**v1 は 21KB まで肥大して読めなくなった。同じ轍を踏まない。**
+- **序列: 台帳(DE) > 実測4部作 > MANAGER_ANCHOR > 本書 > 誰の記憶よりも。**
+- **保存:** `egl/docs/2DER_SESSION_ANCHOR.md` / 更新はセッション末に依頼された側が行い Taka は保存のみ。
+- last_updated: 2026-07-23 / 前版(21KB)を SUPERSEDE / CC 監査反映（death#5=HEAD反映済・#2=OPEN継続・骨格A1逆）
 
 ---
 
-## §1. 不変の前提(変更には Taka 裁定が要る)
+## §1. 不変の前提（変更は Taka 裁定のみ。再議論しない）
 
-- [ ] **恒久裁定:** Claude Code = 監査のみ。実装は Qwen(2DER 経由)のみ。例外議論は再開しない。
-- [ ] **投入経路:** 開発依頼は仕様文書を raw_input として submit へ(canonical 経路)。手作りタスク禁止(DE-0301 が弾く)。
-- [ ] **人間の扉は2枚:** 判定(JUDGE)と実 repo 書込み(トークン)。ここは自動化しない。
-- [ ] **runner 方式が標準:** 骨格(実 import 込み)+マーカーはこちらが組む。**worker は全文生成する
-      (マーカー穴埋め worker は存在しない=DE-0511 実測。★1/FIX-01c も全文生成だった)**。生成後、骨格の固定区間
-      (import 等の接続)が bytes 一致で保存されているかを**決定論検査**する(verify_skeleton_preserved, DE-0512)。
-      採点は仕様同梱の不変テストのみ。worker のテスト自作は違反。**(★1 DE-0497 / 実態訂正 DE-0511・0512)**
-- [ ] **DONE の定義:** live 経路からの実行痕跡があって DONE。無ければ BUILT。(30件降格は実施済み)
-- [ ] **FIX-01c / 橋工事は凍結中。再開しない。** 橋 = ループ出口の自動化。必要になった日に Taka が再開判断。
+1. **Claude Code = 監査のみ。** 実装は Qwen（2DER 経由）のみ。例外議論は再開しない。
+2. **投入経路:** 開発依頼は仕様文書を raw_input として submit へ。手作りタスク禁止（DE-0301 が弾く）。
+3. **人間の扉は2枚:** 判定(JUDGE) と 実 repo 書込み(トークン)。自動化しない。
+4. **runner 方式が標準:** 骨格＋不変テストは発注側が固定。**worker は全文生成する**（穴埋め worker は存在しない=DE-0511）。
+   生成後 `verify_skeleton_preserved` で骨格固定区間の bytes 一致を決定論検査（DE-0512）。**worker のテスト自作は違反。**
+   骨格の固定/自由の分割は **`<<<FILL>>>` 行**が正本（`generate_via_runner.py:49`）。FILL 以外は全て固定＝bytes 一致対象。
+5. **DONE の定義:** ROADMAP の `DONE` は **acceptance 記録のみ**を意味する（DE-0488）。live 接続は加算列 `wiring_state` を見る。
+   2DER の作業完了は live 実行痕跡があって DONE、無ければ BUILT。**status の書き換えはしていない。**
+6. **橋（FIX-01c 系譜）・JREV-0010r は凍結。** 再開判断は Taka のみ。
 
-## §2. 現在の本線(上から順に。今ここ → ★)
+## §2. 現在地
 
 | # | 作業 | 状態 | 次の一手 |
 |---|---|---|---|
-| 1 | producer を runner 方式で完成 | ✅ **完了・commit 済み(twoder 85af03c / DE-0497)** | — |
-| 2 | walking skeleton 受入(仕様 §4) | ✅ **完了(DE-0498)。TASK-2DER-AUTO-68518E15 が実台帳に。claim=AUTONOMOUS_SELECTION_DEMONSTRATED_ONCE_UNDER_APPROVAL** | — |
-| ★3(A) | **恒久連結: GENERATE 段 = runner** | 機構完備(passthrough A+B+iv+**provenance** DE-0515)。**§6 DONE 構造達成**(DE-0513)。seam=導管: CREATE.knowledge_packet.provenance を run_runner→run_minimal_slice(provenance=) へ verbatim・門判定素通し。新 immutable 5/5・封印58緑。**P1 済(webui PID 215805 lstart 08:07:33=新コード稼働) / P4 済(封印58緑基準線)** | **残=PROBE-PIPE-02 実走→観測で DONE 判定**。方向確定=(ii) 新 probe(新 task_id)で clean 実行(旧 01=TASK-2DER-6E2C9F16 は JUDGE_REQUIRED で塞がり再利用不可)。**現状 未走行**(DW 最終 ord=702 不変)。**PROBE-PIPE-02 走行済(2026-07-23, TASK-2DER-8ADC31CF)**: D0 PASS(族④無)。**S1 provenance 有**(UTT-0700/RREQ-00212/dw_task_id 一致)。**S2 CONSUMED=0**(attempt-1/2/3 grant のみ)=判定表 **分岐B**。**但し死因が前進**: PROBE-01=step0 provenance gate(REJECTED_BYPASS)で落下→PROBE-02=**step1 token gate**(reason='no scoped approval token (bare boolean not accepted)')で落下。step1 到達=**provenance gate(DE-0301)通過=DE-0515 目的達成**。reason 具体的=**族⑤(RUNNER_FAILED のっぺり)解消確認**。**新=死因#4 裏取り済(token 受け渡しの型不一致)**: seam は str=`tok["approval_id"]` を渡す(generate_via_runner.py:46,111)／runner step1=`validate_approval` は dict=token 全体を要求し `isinstance(token,dict)` False で拒否(live_worker_runtime.py:94 / authority.py:149-150)。判定表 B1/B2/B3 に不適合。**その後 death#4(型)→#5(フィールド)→#6(oracle 分離)と連鎖露呈**(全て submit 前の静的監査で検出=手戻り0)。**現状=TOKEN-GATE-01 完遂 v5 を pre-submit halt**。門機構は E1 補正(検証済・未commit)で整い、残ブロッカーは death#6 の 7/7 検証場所のみ→**Web v6 待ち**(§last_updated / ★3(B) 参照) |
-| ★3(B) | provenance・ts・token=authority 統合 | **ts 完了(DE-0505)**。**provenance 受け渡し完了(DE-0515)**。残: token=authority 方式統合 | 3重複 _now 統合は家事。provenance は A/B と同型欠陥を導管化で解消。**death#4=この token 統合の実欠陥**: seam mint_token が str(approval_id)を返し runner step1 validate_approval は dict(token 全体)を要求(generate_via_runner.py:46,111 / live_worker_runtime.py:94 / authority.py:149-150)→ ★3(A) DONE の実ブロッカー。**裁定材料(2026-07-23 監査)**: validate_approval(authority.py:147-162)は grant 真正性/スコープを**渡された引数から自己申告判定**し、台帳(ds_events GRANT)を**照合しない**。台帳読取は CONSUMED 確認のみ(approval_consumed, authority.py:141-144)=Taka 二分岐の『引数を見るだけ』。**Taka 裁定 2026-07-23: 修正は authority 側**(validate_approval が approval_id を受け ds_events GRANT を引いて存在/action/task スコープ/未消費を照合。引数から真正性を読まない)。seam の str は正しい。**衝突監査: 封印58 に dict 通過前提テスト=0(全 spy _REAL_RUNNER) / 過去 CONSUMED 102 全て実 GRANT 裏付け・orphan 0=遡及汚染なし** → raw_input 起草可。※58外 regression 5本(live_worker_runtime 等)は実 GRANT dict 前提=新 signature 次第で要調整。**仕様=TOKEN-GATE-01 起草済**(新規 twoder/approval_registry.py: validate_approval_by_id が id のみ受理・台帳 GRANT 照合・dict/unknown/consumed 拒否。既存 authority.validate_approval 非改変。immutable tests は裁定と整合)。**⚠️BOOTSTRAP DEADLOCK(監査 halt 2026-07-23)**: (A)TOKEN-GATE-01 は必要だが**不十分**=live_worker_runtime.py:94 の呼出を新 gate へ張り替えないため death#4 は残る / (B)そもそも live funnel で GENERATE できない=token gate(step1, live_worker_runtime.py:94-97)は worker(step3)より前で、seam の str を death#4 で拒否→worker 走らず artifact/immutable tests 未実行(PROBE-PIPE-02 と同型)=「token 門を直す task が壊れた token 門に阻まれる」循環。**進め方=Taka/Web 裁定待ち**(選択肢: A=先に runner 張り替えで funnel 解錠 / B=funnel 外で approval_registry 立上げ→runner 張替 / C=Web が仕様に runner 張替を含める)。CC は submit/実装/張替せず監査のみ。**🚨death#5=token フィールド不整合(v4 監査 halt 2026-07-23, HEAD 8c57eeb)**: seam mint_token(generate_via_runner.py:42-44)が grant する token の3フィールドが run_minimal_slice(live_worker_runtime.py:70-71,94)の照合値と全て不一致→ **action_type: USE_VLLM_INFERENCE≠LIVE_WORKER_MINIMAL / task_id: TASK…#attempt-N≠TASK…(suffix無) / operation_class: DW_MACHINE_OP≠LIVE_WORKER_TASK**(照合=authority.py:152-157)。∴ **v4 の E1(return tok=dict)は isinstance は通るが3フィールドで reject→Phase2 は必ず CONSUMED なし halt(spec は『E1 が効いていない』と誤診)。Phase4 も REG が台帳 GRANT の同3フィールドを照合→同じ不一致→PROBE-PIPE-03 も未通過。TOKEN-GATE-01 は本欠陥を直さない**(自身の immutable tests は grant/validate を同一フィールドで呼ぶため緑、seam 統合は不一致フィールド)。根本=動く regression は token を task_packet 自身のフィールドで grant(test_live_worker_runtime.py:32)、seam の mint_token はハードコードで未整合。**要 Web 仕様修正=mint_token の発行フィールドを runner 照合値に揃える(TOKEN-GATE-01 の範囲外)**。第2潜在=E3 張替後 dict で呼ぶ 58外 regression 5本が赤化(65検証はこれを見ない)。v4 未実行=手戻り0。**E1 補正(death#5)検証済・未commit(repo clean)**: mint_token を action=LIVE_WORKER_MINIMAL/task=素の task_id/op=LIVE_WORKER_TASK に揃え attempt 一意性は ts へ(approval_id=sha1(…|ts)に入り validate は ts 非照合)→実測 attempt1-3 id 一意・fields runner 一致。※v5 の exact E1(attempt→approved_by)は approval_id が approved_by 非依存で**全 attempt 同一 id→consumed 衝突**(実測 APPROVAL-4f84b6b163)ゆえ不可、CC が ts 版へ補正。**🚨death#6=funnel 受入oracle と artifact の分離(v5 監査 halt 2026-07-23)**: run_runner は worker に sandbox の impl.py を書かせ `pytest test_impl.py`(generate_via_runner.py:93-94)だが immutable_tests は `twoder.approval_registry`/`twoder.authority` を import(=最終 module 名, impl でない)→ **in-sandbox テストは worker artifact でなく実 module(未配置)を見る→Phase2 の in-sandbox 7/7 到達不能→v5 Phase2『CONSUMED+テスト赤→halt』が誤発火**。全 PROBE が token 門で先に死んでいたため未露呈の latent。**要 v6**: (i)seam が artifact を module パスへ書き PYTHONPATH で sandbox import 可に / (ii)Phase2 は CONSUMED+artifact 産出で ACCEPT・7/7 は E2 配置後(Phase3 65緑)で検証。★3(A) DONE(=CONSUMED via 台帳門)は approval_registry 構築+E3 張替後に到達可(門機構は E1 補正で整った)。submit せず=手戻り0 |
-| 4 | SPR(解決済み問題の棚卸し)抽出 | 仕様済み・**保留** | Taka の起動指示があれば raw_input 投入(:8005 承認込み) |
-| 5 | 台帳の家事: 機械処分18本 / IDLE 8本裁定 / DISPOSE 16内訳 | 未・裁定不要(決定論) | いつでも並行可。急がない |
-| 6 | 橋(FIX 系譜)・JREV-0010r | **凍結** | 触らない |
+| 1 | producer 完成 | ✅ 完了（DE-0497 / twoder 85af03c） | — |
+| 2 | walking skeleton 受入 | ✅ 完了（DE-0498） | — |
+| ★3(A) | 恒久連結: GENERATE 段 = runner | 機構完備・§6 DONE 構造達成（DE-0513/0515）。**残ブロッカー=death#6 ＋ 骨格マーカー極性（CC監査 07-23）** | (1) 両仕様の骨格を `<<<FILL>>>` 方式へ補正=Web（仮定A1が逆・現行=`generate_via_runner.py:49`） → (2) `SEAM_PKG_MIRROR` で death#6 修正 → (3) 適合プローブ走行 → (4) 実走で DONE |
+| ★3(B) | token=authority 統合 | ts 完了(DE-0505) / provenance 完了(DE-0515)。残=token 統合 | TOKEN-GATE-01 起草済。**先に適合プローブで残破断を一括採取**してから1本の仕様で直す |
+| 4 | SPR 抽出 | 仕様済・保留 | Taka 起動指示待ち |
+| 5 | 台帳の家事（機械処分18／IDLE 8／DISPOSE 16内訳） | 未・裁定不要 | いつでも並行可 |
+| 6 | 橋・JREV-0010r | 凍結 | 触らない |
 
-## §3. 決定ログ(DE 番号。詳細は台帳を引く)
+**★3 の死因ラダー（1件ずつ直列に出ている＝これ自体が問題。→ 適合プローブで並列化する）**
 
-| DE | 内容 |
-|---|---|
-| DE-0489/0490 | 台帳登記簿 / 追跡外 LIVE 台帳の保全 |
-| DE-0492 | producer 裁定(DE-0347 解除)+仕様 v0.1 admission。AUTONOMOUS_TASK_CREATION=REQUIRES_APPROVAL 設置(CHG-0128) |
-| DE-0493 | 初回ファネル走行。canonical 経路で JUDGE_REQUIRED まで到達 |
-| DE-0494 | JUDGE-0001: defect=TEST_DEFECT(worker 自作テストが壊れ・無関係) |
-| DE-0495 | seam defect 知見 DE 化+不変テスト設置。SPR 仕様は受領・保留 |
-| DE-0496 | 不変テスト 5/5(spy 環境)。ceiling: 実配線未検証(stub)。TS 固定トークンバグ発見(U13 死因#2) |
-| DE-0497 | ★1 完了。runner 方式(実配線骨格+Qwen body)で 5/5。stub 逃げ閉塞。commit 済み(twoder 85af03c) |
-| DE-0498 | ★2 完了。**初の自律①→② CREATE が実台帳に**(TASK-2DER-AUTO-68518E15)。封印6件記録・selection_reason は verbatim。admission=staleness に訂正(権限=token)。ceiling: ts/provenance/方式統合は★3 |
-| DE-0499 | ★3(A) §0 棚卸し(GENERATE backend 置換の実シンボル5点)。置換点=webui.cw() / 旧backend=alpha coder / skeleton機構は未存在 |
-| DE-0500 | ★3(A) §4 不変テスト BINDING 挿入(QwenCoder/make_dw_coding_actor)+seam 所見。run_runner/mint_token は既存署名と不一致→seam モジュールに実アダプタ要。flag2件(LEGACY_BETA==RUNNER_ENTRY / test10 vacuous) |
-| DE-0501 | ★3(A) seam generate_via_runner 構築。tests1-11 真通過(実束縛/委譲/fail-closed/token一意)。**cw 未再配線・tests12-13 vacuous**(DE-0500 flag2 未閉塞)。run_runner本番構築=iv ceiling |
-| DE-0502 | ★3(A) cw 再配線 checkpoint。cw() 4分岐中 fallback は1つ(sandbox→beta/alpha)、残り3つ正当(DE-0324 実行リトライ/packet選択/記録先)。G2 no-branch は強すぎ→CLAUDE_WEB へ v0.4(has_no_branch 削除/狭め、has_no_legacy_symbols で担保)。Taka halt-report 指示に忠実に停止 |
-| DE-0503 | ★3(A) cw 再配線 **LIVE**。GENERATE backend=generate\_via\_runner seam(無条件・fallback 無)。webui 再起動。immutable 14/14・保持挙動無傷。契約無しtaskは fail-closed(§5)。test\_live\_coder\_backend は §2 禁止挙動を検証→反転済(DE-0506) |
-| DE-0504 | iv 前段 read-only(削除可・DE-0511 に統合) |
-| DE-0505 | ★3(B) ts 実ISO化。CREATE ts=fingerprint→実ISO8601(clock=failure\_memory.\_now, 最軽量選択)。recompute basis\_fingerprint 自キー化+body で emitted\_ts 封印。**既存5本緑+ts8本=13/13** |
-| DE-0506 | 契約passthrough 棚卸し3点(断点=PLAN が契約キー継承せず)。test\_live\_coder\_backend **反転** 8/8(live backend=seam 検証)。submit.py:88 裏付けDE無し |
-| DE-0507 | 契約passthrough(a) 棚卸し: CREATE kp に契約キー無=断点上流 / seam は task\_id 未受領 |
-| DE-0508 | 契約passthrough A 棚卸し: kp=決定論dict(claims の一部のみ:8005)→契約キーは LLM非経由で封印可 / cw が task\_id 受領 |
-| DE-0509 | 契約passthrough **A 完了**。contract\_seal(決定論マーカー抽出/壊れは ValueError/LLM非経由)→ submit 1行 → create\_task(contract=) → CREATE payload[contract]。8/8 |
-| DE-0510 | 契約passthrough **B 完了**。seam が CREATE payload[contract] を dw.workcell.\_read\_events で読み sha 検証/contract\_source 記録/fail-closed。cw が task\_id 注入。44 green |
-| DE-0511 | iv 棚卸し4点(run\_minimal\_slice 署名/戻り・実呼出=make\_dw\_coding\_actor パターン・sandbox・oracle)。gap: worker は skeleton-fill せず全生成 |
-| DE-0512 | **iv 完成**。run\_runner が task\_packet+sandbox+token+QwenWorker で run\_minimal\_slice 呼出。verify\_skeleton\_preserved(全文生成のまま骨格固定区間の順序bytes一致検査→SKELETON\_VIOLATION)。53本green |
-| DE-0513 | PROBE-PIPE-01 live。**§6 DONE 構造達成**(実 GENERATE に runner run\_id=SLICE-TASK-2DER-6E2C9F16)。claim=CONTRACT\_TASK\_TRAVERSED\_FUNNEL\_ONCE。死因=run\_runner が provenance 未渡し→run\_minimal\_slice REJECTED\_BYPASS(DE-0301) |
-| DE-0514 | provenance 受け渡しテストで **halt**(回避せず)。矛盾2件: (1)実 provenance は payload.knowledge\_packet.provenance(ネスト)で test の flat payload[key] と不一致 (2)fail-closed 要求が B の test\_contract\_is\_read\_from\_ledger(provenance 無で ok=True)と矛盾→B8 緑維持不能。reconcile 待ち |
-| DE-0515 | **provenance 受け渡し完了(死因#3閉塞)**。CLAUDE_WEB が v0.2 で確定(J1: 実在位置=payload.knowledge\_packet.provenance / **J2: fail-closed 要求撤回**=DE-0301 の複製を避け seam は導管に徹する)。改修3点: (1)generate が契約と**同一 CREATE 読取**から provenance 抽出(段間で作り直さない) (2)run_runner が run_minimal_slice(provenance=) へ **verbatim** 受け渡し(未渡し=DE-0513 死因#3 の実体) (3)runner の門判定(status/reason/classification)を作り替えず素通し。欠落時 seam は裁かず捏造もしない(門は runner)。新 immutable 5/5・封印58(旧53+新5)・regression(live_coder_backend 8/8・dispatch_provenance 11/11・live_worker_runtime 15/15)全緑。B8 との矛盾は J2 で**消滅**。**PROBE-PIPE-02(2026-07-23)で live 実証: provenance が step0 gate(DE-0301)を通過=死因#3 閉塞を live で確認**。但し次段 step1(token)で **death#4(token 型不一致)** 露呈のため ★3(A) はまだ DONE でない |
+| # | 死因 | 状態 |
+|---|---|---|
+| #1 | worker 自作テストの品質 | ✅ runner 方式で解決（DE-0497） |
+| #2 | 固定 TS によるトークン永久消費 | ⚠️ **OPEN 継続。** runner `mint_token` に hardcoded 既定 ts 残存（`generate_via_runner.py:45`）→ authority の ISO 化では防げない。**gate1b（同一走行 2 回鋳造→`approval_id` 相異）で決着。**「DE-0505 で消えた」は族E（CC監査 07-23） |
+| #3 | provenance 未渡し | ✅ DE-0515（live 実証済） |
+| #4 | token 型不一致（str / dict） | 裁定済（修正は authority 側＝台帳照合）。実装未 |
+| #5 | token 3フィールド不整合 | ✅ **HEAD に反映済**（`authority.py:133` ts込み hash / mint・validate 整合）。commit すべき diff 無し（CC監査 07-23） |
+| #6 | 受入オラクルと artifact の分離 | **未。`SEAM_PKG_MIRROR` で直す**（TOKEN-GATE-01 の仕様に逃がさない） |
 
-**U13(ファネル歩留まり)の死因、実測2件:** ①worker 自作テストの品質(→runner 方式で解決 DE-0497) ②初回 GENERATE 失敗でトークン永久消費(webui.TS 固定)。
-※②は恒久連結(§2-3)の前に個別修正が要る(§2-3 の前提)。
+## §3. 決定ログ（番号のみ。中身は台帳を引く）
 
-## §4. 小さい保留裁定(本線を塞いでいない)
+- **DE-0489〜0491**: 台帳登記簿 / 追跡外 LIVE 台帳の保全 / canonical 台帳は sole writer 必須
+- **DE-0492〜0498**: producer 裁定 → 初回走行 → TEST_DEFECT 判定 → runner 方式確立 → 初の自律 CREATE
+- **DE-0499〜0503**: GENERATE backend 置換（seam 構築 → cw 再配線 LIVE）
+- **DE-0504〜0512**: 契約 passthrough A/B → ts 実ISO化 → iv 完成（骨格保存検査）
+- **DE-0513〜0515**: PROBE-PIPE-01（§6 DONE 構造達成）→ halt → provenance 受け渡し完了
+- **DE-0488**: DONE の定義確定（§1-5 の典拠）
 
-- principal 統制語彙に CLAUDE_WEB を足すか、設計主体は provenance 側表現と明文化するか(現状 content_provenance で回避中)
-- Claude Code による authority.POLICY 追加(CHG-0128)の事後承認 / 次回からゲート追加も Qwen 経由か
-- create_task アダプタの完全 dispatchability 化(DS/RRI provenance)を ★2 で詰めるか ★3 に回すか
-- **【SPR 行候補・別族】trust-relevant metadata の自己申告(emitter self-report)**(Taka 裁定 2026-07-23)。原則=trust に関わる metadata は**呼び出し側が registry/台帳から封印**し emitter に自己申告させない。実例3件: retention_class / watcher metadata / **今回=人間の扉そのもの(authority.validate_approval が渡された dict の自己申告で判定し台帳 GRANT を照合しない)**。※握り潰し族(§上)とは別族(型/信頼の封印元の問題)。death#4 の修正=この原則の適用
-- **submit.py:88 の決定論 ts 規約(`ts="2026-07-11T08:00:00" # no Date.now`)に裏付け DE は無い**(DE-0505/0506/0507 で計3回確認)。規約を DE 化して棚に載せるか、コード規約のまま放置するか。→ **もう調べ直さない(この行を典拠とする)**
-- **【SPR 行候補】段間診断情報の握り潰し族(inter-stage diagnostic swallowing)**(CLAUDE_WEB 記録票 2026-07-23)。共通型=ある段が下位段の具体的失敗理由/値をのっぺり成功/失敗に潰して上位へ返す(J2 の一般形: seam は導管、診断を捨てるな、門でないのに裁くな)。メンバー: **①契約A=DE-0509 解消 / ②契約B=DE-0510 解消 / ③provenance=DE-0515 解消 / ④submit.py:410-411 が create_task の WorkflowViolation を握り潰す(既存タスク有りを成功で潰す)=裏取り済(F1 submit.py:409-411 `try/except: pass`・F2 workcell.py:320-321 `raise WorkflowViolation("task already exists")`・F3 例外は戻り値に現れない)=DE 化可 / ⑤runner reason の RUNNER_FAILED のっぺり化=**DE-0515 で解消・確認済**(PROBE-PIPE-02 で reason が具体的='no scoped approval token…'=のっぺりでない)**。方針=族一括で「捨てずに具体を上げる」。**①②③⑤解消・④裏取り済(DE 化いつでも可)=族は実質クローズ**(現場係「SPR まで待つ」推奨は 2026-07-23 撤回)。※**死因#4(token str/dict 型不一致)は本族と別物**(診断握り潰しでなく型エラー。★3(B)/★3(A) 側で扱う)
+> §3 は本来 DE 台帳から機械生成できる。手で書き足さないこと。生成スクリプトが出来たら本節ごと差し替える。
 
-## §5. セッションの回し方(チェックリスト)
+## §4. 保留裁定（本線を塞いでいない）
 
-1. [ ] 本書を貼る。「本書に従う。再発明禁止。仕様起草前に §1 と突き合わせる」と一言添える
-2. [ ] 作業は §2 の ★ から。飛ばすときは理由を DE に残す
-3. [ ] 新しい教訓が出たら: DE 化 → 本書更新 → 可能なら**配線に埋める**(読む棚ではなく通る道へ)
-4. [ ] セッション終了時: §2 の状態と §3 の DE 番号を更新した本書を保存する
-5. [ ] 「前に決めたはず」と思ったら、思い出させようとせず DE 番号か本書を投げる
-6. [ ] **情報の更新は本書(ANCHOR)へ**(Taka 指示 2026-07-23)。チャットに散らさず状態は本書に集約する
-7. [ ] **監査観測の既定=PROBE-PIPE-02 節度条件**(CLAUDE_WEB 2026-07-23): 判定は S1(新 task_id+CREATE の kp.provenance 有無)/S2(attempt token CONSUMED 有無)の2点で付ける。成功なら10行で終える。失敗時のみ段階2/3(test_result 全文・artifact sha・PID/lstart・log・分岐痕跡)を開く。観測外の発見は「観測外: 事実1行」で止め掘らない。厚くする時は現場係が明示指定
+- principal 統制語彙に CLAUDE_WEB を足すか（現状 content_provenance で回避中）
+- CHG-0128（authority.POLICY 追加）の事後承認 / 次回からゲート追加も Qwen 経由か
+- `submit.py:88` の決定論 ts 規約に裏付け DE 無し → **もう調べ直さない**（この行を典拠とする）
+- 自律経路（select_and_create）に前提検査ゲートが無く、承認ゲート(CHG-0128)がその代役である件の明文化
+- 今日の CC 監査 3 件（#5=HEAD反映済 / #2=runner 既定 ts で OPEN / 骨格A1逆）の **DE 化**（番号は Taka／台帳側で採番。anchor は反映済だが SoR 未記帳）
 
-## §6. 本書の廃止条件(成功の定義)
+## §5. 回し方
 
-§2-3(恒久連結)完了後、本書 §2 相当は決定論の status 導出(twoder_status 系譜)が生成できるはずである。
-機械生成が本書と同等になった時点で、手動アンカーは廃止する。**この文書が要らなくなることが、繋がったことの証明。**
+1. 本書を貼る。「本書に従う。再発明禁止。仕様起草前に §1 と突き合わせる」
+2. 作業は §2 の ★ から。飛ばすなら理由を DE に残す
+3. 新しい教訓 → DE 化 → 本書更新 → **可能なら配線に埋める**（読む棚ではなく通る道へ）
+4. **観測は節度条件で**: 判定は 2 点まで。成功なら 10 行で終える。失敗時のみ詳細を開く。観測外の発見は「観測外: 事実1行」で止める
+5. 「前に決めたはず」と思ったら思い出させようとせず DE 番号を投げる
+6. **halt したら halt を報告する。** 回避策を自分で発明しない
+
+## §6. 廃止条件
+
+§2/§3 が決定論で生成できた時点で本書は廃止する。**この文書が要らなくなることが、繋がったことの証明。**
