@@ -27,7 +27,7 @@
 |---|---|---|---|
 | 1 | producer 完成 | ✅ 完了（DE-0497 / twoder 85af03c） | — |
 | 2 | walking skeleton 受入 | ✅ 完了（DE-0498） | — |
-| ★3(A) | 恒久連結: GENERATE 段 = runner | 機構完備・§6 DONE 構造達成（DE-0513/0515）。SEAM v0.3（conftest 廃し in-module fixture 化）。**残=death#6 ＋ v0.3 監査で blocker: 不変テストが artifact を発見不可（runner は `impl.py` を書くが `_load_artifact` は `pkg_mirror.py` を探す）＋ sandbox で `import twoder` 可否 未確定（CC監査 07-23, docs/CC_AUDIT_2026-07-23_PKG_MIRROR_v0_3.md）** | (1) Web が v0.3 の artifact 発見経路＋sandbox twoder 可視性を確定 → (2) `SEAM_PKG_MIRROR_v0_3` submit→10/10（death#6） → (3) `CONFORMANCE_PROBE_v0_4` submit→走行 → (4) 実走で DONE |
+| ★3(A) | 恒久連結: GENERATE 段 = runner | 機構完備・§6 DONE 構造達成（DE-0513/0515）。SEAM v0.4（合成パッケージ検査で death#6/#7 を回避、Finding 1/2 解消＝CC監査 07-23, docs/CC_AUDIT_2026-07-23_PKG_MIRROR_v0_4.md）。**残=submit 機構: contract マーカー `<<<2DER:SKELETON/IMMUTABLE_TESTS…END>>>` が raw_input に必要（本文に未挿入・`contract_seal.py:43-44`）** | (1) submit ラッパが §2骨格（フェンス除外）/§3テストを生コードで `<<<2DER:…>>>` 囲みと確認=Web → (2) `SEAM_PKG_MIRROR_v0_4` submit→12/12（death#6/#7） → (3) `CONFORMANCE_PROBE_v0_5` submit→走行 → (4) 実走で DONE |
 | ★3(B) | token=authority 統合 | ts 完了(DE-0505) / provenance 完了(DE-0515)。残=token 統合 | TOKEN-GATE-01 起草済。**先に適合プローブで残破断を一括採取**してから1本の仕様で直す |
 | 4 | SPR 抽出 | 仕様済・保留 | Taka 起動指示待ち |
 | 5 | 台帳の家事（機械処分18／IDLE 8／DISPOSE 16内訳） | 未・裁定不要 | いつでも並行可 |
@@ -42,7 +42,8 @@
 | #3 | provenance 未渡し | ✅ DE-0515（live 実証済） |
 | #4 | token 型不一致（str / dict） | 裁定済（修正は authority 側＝台帳照合）。実装未 |
 | #5 | token 3フィールド不整合 | ✅ **HEAD に反映済**（`authority.py:133` ts込み hash / mint・validate 整合）。commit すべき diff 無し（CC監査 07-23） |
-| #6 | 受入オラクルと artifact の分離 | **未。`SEAM_PKG_MIRROR_v0_2` で直す**（TOKEN-GATE-01 の仕様に逃がさない） |
+| #6 | 受入オラクルと artifact の分離 | **未。`SEAM_PKG_MIRROR_v0_4` で直す**（TOKEN-GATE-01 の仕様に逃がさない） |
+| #7 | sandbox に PYTHONPATH 未設定＝パッケージ import 不可 | ⚠️ **命名済（Web Y-3）。** `_run_test` が env 無指定（`live_worker_runtime.py:36-41`）。SEAM の配線（PYTHONPATH=sandbox＋複製）が #6 と同時に閉じる。配線は SEAM 範囲外 |
 
 ## §3. 決定ログ（番号のみ。中身は台帳を引く）
 
