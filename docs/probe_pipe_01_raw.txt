@@ -1,0 +1,49 @@
+PROBE-PIPE-01 — 経路実証用の使い捨てタスク(BUILD_CAPABILITY / 新規コード実装)。
+実装対象: twoder/probe_pipe.py。probe_stamp() は実 clock から取得した時刻を含む dict を返す。時刻を自前生成してはならない(骨格の import に束縛)。
+受入は同梱 IMMUTABLE_TESTS の全通過のみ。成果物は破棄してよい。
+
+<<<2DER:SKELETON>>>
+from twoder.failure_memory import _now as _REAL_CLOCK
+
+
+def clock():
+    return _REAL_CLOCK()
+
+
+def probe_stamp():
+    # <<<FILL:body>>>
+    raise NotImplementedError
+<<<2DER:END>>>
+
+<<<2DER:IMMUTABLE_TESTS>>>
+import datetime
+import importlib
+
+MOD = "twoder.probe_pipe"
+
+
+def _is_iso8601(v):
+    if not isinstance(v, str):
+        return False
+    try:
+        datetime.datetime.fromisoformat(v.replace("Z", "+00:00"))
+        return True
+    except ValueError:
+        return False
+
+
+def test_returns_ok():
+    m = importlib.import_module(MOD)
+    assert m.probe_stamp()["ok"] is True
+
+
+def test_at_is_iso8601():
+    m = importlib.import_module(MOD)
+    assert _is_iso8601(m.probe_stamp()["at"])
+
+
+def test_clock_binding_is_real():
+    m = importlib.import_module(MOD)
+    real = m.__dict__["_REAL_CLOCK"]
+    assert getattr(real, "__module__", MOD) != MOD, "clock が自作定義"
+<<<2DER:END>>>
