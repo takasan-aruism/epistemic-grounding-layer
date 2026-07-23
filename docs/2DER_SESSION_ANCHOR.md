@@ -72,6 +72,7 @@
 - Claude Code による authority.POLICY 追加(CHG-0128)の事後承認 / 次回からゲート追加も Qwen 経由か
 - create_task アダプタの完全 dispatchability 化(DS/RRI provenance)を ★2 で詰めるか ★3 に回すか
 - **submit.py:88 の決定論 ts 規約(`ts="2026-07-11T08:00:00" # no Date.now`)に裏付け DE は無い**(DE-0505/0506/0507 で計3回確認)。規約を DE 化して棚に載せるか、コード規約のまま放置するか。→ **もう調べ直さない(この行を典拠とする)**
+- **【SPR 行候補】段間診断情報の握り潰し族(inter-stage diagnostic swallowing)**(CLAUDE_WEB 記録票 2026-07-23)。共通型=ある段が下位段の具体的失敗理由/値をのっぺり成功/失敗に潰して上位へ返す(J2 の一般形: seam は導管、診断を捨てるな、門でないのに裁くな)。メンバー: **①契約A=DE-0509 解消 / ②契約B=DE-0510 解消 / ③provenance=DE-0515 解消 / ④submit.py:410-411 が create_task の WorkflowViolation を握り潰す(既存タスク有りを成功で潰す)=裏取り済(F1 submit.py:409-411 `try/except: pass`・F2 workcell.py:320-321 `raise WorkflowViolation("task already exists")`・F3 例外は戻り値に現れない)=DE 化可 / ⑤runner reason の RUNNER_FAILED のっぺり化=DE-0515 で解消の可能性・PROBE-PIPE-02 再走の副産物で自動判定(具体 reason→解消/のっぺり→未解消 or 旧コード)**。方針=族一括で「捨てずに具体を上げる」。**急がない・本線を塞がない。DE 化は今でも SPR 起動時でも可**(現場係推奨=SPR まで待って二度手間回避)
 
 ## §5. セッションの回し方(チェックリスト)
 
