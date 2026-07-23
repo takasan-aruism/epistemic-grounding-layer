@@ -27,7 +27,7 @@
 |---|---|---|---|
 | 1 | producer 完成 | ✅ 完了（DE-0497 / twoder 85af03c） | — |
 | 2 | walking skeleton 受入 | ✅ 完了（DE-0498） | — |
-| ★3(A) | 恒久連結: GENERATE 段 = runner | 機構完備・§6 DONE 構造達成（DE-0513/0515）。骨格マーカー極性=仕様で補正済（SEAM v0.2 / PROBE v0.3）。**残=death#6 ＋ 発注側 conftest（`pkg_root`/`probe_env` 未存在・twoder に conftest.py 皆無=CC監査 07-23）** | (1) 発注側が conftest（`pkg_root`/`probe_env`）同梱=Web → (2) `SEAM_PKG_MIRROR_v0_2` submit→7/7（death#6） → (3) `CONFORMANCE_PROBE_v0_3` submit→走行 → (4) 実走で DONE |
+| ★3(A) | 恒久連結: GENERATE 段 = runner | 機構完備・§6 DONE 構造達成（DE-0513/0515）。SEAM v0.3（conftest 廃し in-module fixture 化）。**残=death#6 ＋ v0.3 監査で blocker: 不変テストが artifact を発見不可（runner は `impl.py` を書くが `_load_artifact` は `pkg_mirror.py` を探す）＋ sandbox で `import twoder` 可否 未確定（CC監査 07-23, docs/CC_AUDIT_2026-07-23_PKG_MIRROR_v0_3.md）** | (1) Web が v0.3 の artifact 発見経路＋sandbox twoder 可視性を確定 → (2) `SEAM_PKG_MIRROR_v0_3` submit→10/10（death#6） → (3) `CONFORMANCE_PROBE_v0_4` submit→走行 → (4) 実走で DONE |
 | ★3(B) | token=authority 統合 | ts 完了(DE-0505) / provenance 完了(DE-0515)。残=token 統合 | TOKEN-GATE-01 起草済。**先に適合プローブで残破断を一括採取**してから1本の仕様で直す |
 | 4 | SPR 抽出 | 仕様済・保留 | Taka 起動指示待ち |
 | 5 | 台帳の家事（機械処分18／IDLE 8／DISPOSE 16内訳） | 未・裁定不要 | いつでも並行可 |
