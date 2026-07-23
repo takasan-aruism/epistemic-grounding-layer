@@ -11,7 +11,7 @@
 
 ## §1. 不変の前提（変更は Taka 裁定のみ。再議論しない）
 
-1. **Claude Code = 監査のみ。** 実装は Qwen（2DER 経由）のみ。例外議論は再開しない。
+1. **【2026-07-23 Taka 裁定で変更】実装 = 本 Claude Code インスタンス**（旧 Qwen worker の役）。仕様起草 = 別の Claude Code インスタンス（旧 Claude Web の役）で、**spec を `egl/docs` に書き込む**。本インスタンスは `egl/docs` を能動監視し（本セッション: Monitor task b0718vzrg）、spec の投下/更新を検知したら **twoder working tree に実装し §3 immutable tests を green** にする。commit は人間の扉＝Taka。旧「CC=監査のみ／実装は Qwen／submit→runner」（下の §1-2・§1-4）は**本フローでは置換**。
 2. **投入経路:** 開発依頼は仕様文書を raw_input として submit へ。手作りタスク禁止（DE-0301 が弾く）。
 3. **人間の扉は2枚:** 判定(JUDGE) と 実 repo 書込み(トークン)。自動化しない。
 4. **runner 方式が標準:** 骨格＋不変テストは発注側が固定。**worker は全文生成する**（穴埋め worker は存在しない=DE-0511）。
@@ -27,7 +27,7 @@
 |---|---|---|---|
 | 1 | producer 完成 | ✅ 完了（DE-0497 / twoder 85af03c） | — |
 | 2 | walking skeleton 受入 | ✅ 完了（DE-0498） | — |
-| ★3(A) | 恒久連結: GENERATE 段 = runner | 機構完備・§6 DONE 構造達成（DE-0513/0515）。SEAM v0.4（合成パッケージ検査で death#6/#7 を回避、Finding 1/2 解消＝CC監査 07-23, docs/CC_AUDIT_2026-07-23_PKG_MIRROR_v0_4.md）。**残=submit 機構: contract マーカー `<<<2DER:SKELETON/IMMUTABLE_TESTS…END>>>` が raw_input に必要（本文に未挿入・`contract_seal.py:43-44`）** | (1) submit ラッパが §2骨格（フェンス除外）/§3テストを生コードで `<<<2DER:…>>>` 囲みと確認=Web → (2) `SEAM_PKG_MIRROR_v0_4` submit→12/12（death#6/#7） → (3) `CONFORMANCE_PROBE_v0_5` submit→走行 → (4) 実走で DONE |
+| ★3(A) | 恒久連結: GENERATE 段 = runner | 機構完備・§6 DONE 構造達成（DE-0513/0515）。SEAM v0.4（合成パッケージ検査で death#6/#7 を回避、Finding 1/2 解消＝CC監査 07-23, docs/CC_AUDIT_2026-07-23_PKG_MIRROR_v0_4.md）。**フロー変更（§1-1）: submit→Qwen を廃し CC 直接実装。contract マーカー blocker は旧 submit 経路のみの問題で本フローでは moot。** | (1) 起草インスタンスが SEAM spec を `egl/docs` に投下（CC 能動監視 task b0718vzrg） → (2) CC が `twoder/seam/pkg_mirror.py`＋tests を working tree に実装し §3 を 12/12 green → (3) 同様に `CONFORMANCE_PROBE` → (4) commit=Taka で DONE |
 | ★3(B) | token=authority 統合 | ts 完了(DE-0505) / provenance 完了(DE-0515)。残=token 統合 | TOKEN-GATE-01 起草済。**先に適合プローブで残破断を一括採取**してから1本の仕様で直す |
 | 4 | SPR 抽出 | 仕様済・保留 | Taka 起動指示待ち |
 | 5 | 台帳の家事（機械処分18／IDLE 8／DISPOSE 16内訳） | 未・裁定不要 | いつでも並行可 |
