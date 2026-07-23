@@ -5,7 +5,7 @@
   それ以上書きたくなったら DE を切って番号だけ置く。**v1 は 21KB まで肥大して読めなくなった。同じ轍を踏まない。**
 - **序列: 台帳(DE) > 実測4部作 > MANAGER_ANCHOR > 本書 > 誰の記憶よりも。**
 - **保存:** `egl/docs/2DER_SESSION_ANCHOR.md` / 更新はセッション末に依頼された側が行い Taka は保存のみ。
-- last_updated: 2026-07-23 / 前版(21KB)を SUPERSEDE / CC 監査反映（death#5=HEAD反映済・#2=OPEN継続・骨格A1逆）
+- last_updated: 2026-07-23 / 前版(21KB)を SUPERSEDE / CC 監査反映（death#5=HEAD反映済・#2=OPEN継続・骨格A1逆）＋ 仕様2本 pre-submit 監査（SEAM v0.2 / PROBE v0.3）
 
 ---
 
@@ -27,7 +27,7 @@
 |---|---|---|---|
 | 1 | producer 完成 | ✅ 完了（DE-0497 / twoder 85af03c） | — |
 | 2 | walking skeleton 受入 | ✅ 完了（DE-0498） | — |
-| ★3(A) | 恒久連結: GENERATE 段 = runner | 機構完備・§6 DONE 構造達成（DE-0513/0515）。**残ブロッカー=death#6 ＋ 骨格マーカー極性（CC監査 07-23）** | (1) 両仕様の骨格を `<<<FILL>>>` 方式へ補正=Web（仮定A1が逆・現行=`generate_via_runner.py:49`） → (2) `SEAM_PKG_MIRROR` で death#6 修正 → (3) 適合プローブ走行 → (4) 実走で DONE |
+| ★3(A) | 恒久連結: GENERATE 段 = runner | 機構完備・§6 DONE 構造達成（DE-0513/0515）。骨格マーカー極性=仕様で補正済（SEAM v0.2 / PROBE v0.3）。**残=death#6 ＋ 発注側 conftest（`pkg_root`/`probe_env` 未存在・twoder に conftest.py 皆無=CC監査 07-23）** | (1) 発注側が conftest（`pkg_root`/`probe_env`）同梱=Web → (2) `SEAM_PKG_MIRROR_v0_2` submit→7/7（death#6） → (3) `CONFORMANCE_PROBE_v0_3` submit→走行 → (4) 実走で DONE |
 | ★3(B) | token=authority 統合 | ts 完了(DE-0505) / provenance 完了(DE-0515)。残=token 統合 | TOKEN-GATE-01 起草済。**先に適合プローブで残破断を一括採取**してから1本の仕様で直す |
 | 4 | SPR 抽出 | 仕様済・保留 | Taka 起動指示待ち |
 | 5 | 台帳の家事（機械処分18／IDLE 8／DISPOSE 16内訳） | 未・裁定不要 | いつでも並行可 |
@@ -42,7 +42,7 @@
 | #3 | provenance 未渡し | ✅ DE-0515（live 実証済） |
 | #4 | token 型不一致（str / dict） | 裁定済（修正は authority 側＝台帳照合）。実装未 |
 | #5 | token 3フィールド不整合 | ✅ **HEAD に反映済**（`authority.py:133` ts込み hash / mint・validate 整合）。commit すべき diff 無し（CC監査 07-23） |
-| #6 | 受入オラクルと artifact の分離 | **未。`SEAM_PKG_MIRROR` で直す**（TOKEN-GATE-01 の仕様に逃がさない） |
+| #6 | 受入オラクルと artifact の分離 | **未。`SEAM_PKG_MIRROR_v0_2` で直す**（TOKEN-GATE-01 の仕様に逃がさない） |
 
 ## §3. 決定ログ（番号のみ。中身は台帳を引く）
 
