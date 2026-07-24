@@ -1,0 +1,21 @@
+{
+  "patch_for": "RRI_SPEC_MACHINE_v1_1.json",
+  "by": "Taka 2026-07-24 (recorded by CC-alpha; relay to CLAUDE_WEB for JSON master update)",
+  "reason": "question_ledger.conservation_law の記載欠陥(未処分項の省略)＋ 次元取り違え(第5項を suspense=科目次元にすると『分類済み・未処分』の問いで raised==0 に破綻)。複式(処分次元 I1 / 科目次元 I2)へ訂正。走行ゼロ・手戻りゼロで恒等式を紙上で微分して検出。",
+  "replace": {
+    "question_ledger.conservation_law": "I1 (disposal dim): raised_total == resolved + open_gap + rejected + merged + in_flight, where in_flight = undisposed count. I2 (account dim): sum of per-account balances == raised_total (every question has exactly one account_id, UNCLASSIFIED included). BOTH hold at every state transition; violation => halt.",
+    "question_ledger.suspense_account": {
+      "name": "UNCLASSIFIED",
+      "dimension": "account (orthogonal to disposal)",
+      "rule": "unclassifiable questions may rest here; balance always visible. At RESOLVED: no question may carry disposal=RESOLVED while account=UNCLASSIFIED; unclassified questions exit only via OPEN_GAP | REJECTED | MERGED_INTO (ADJUDICATION_SENSITIVE: 16). Looseness is permitted temporarily, never permanently."
+    }
+  },
+  "append": {
+    "request_thread.projection_fields": ["in_flight_count"],
+    "note": "suspense_balance は UNCLASSIFIED 件数(per_account_balances['UNCLASSIFIED'])の別名として残す。処分次元(in_flight_count)と科目次元(suspense_balance)は別物なので両方要る。"
+  },
+  "cc_alpha_design_decisions_flagged": [
+    "account_id default='DEFAULT'(stage1 で RESOLVED を可能にするため。UNCLASSIFIED は分類保留特殊値)。Taka レビュー対象。",
+    "stage1 でも account 次元 I2 を持つ(chart/mining は stage2、account_id 次元自体は stage1 から)。"
+  ]
+}
