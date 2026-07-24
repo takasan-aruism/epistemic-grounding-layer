@@ -148,9 +148,10 @@ def main():
     print("D2 chart 検証(off-chart拒否 + 不在fail-closed):", "PASS" if check_D2_chart() else "FAIL")
     ok = a_ok and b_ok and check_C1_i1() and selftest_account() and check_C2_account() and check_D1_suspense() and check_D2_chart()
     print("\nVERDICT:", "CONSISTENT" if ok else "NOT CONSISTENT")
-    print("\n注(finding F-2, 非ブロッカー): advance_state の suspense!=0 ガードは in_flight==0 に包摂され到達不能"
-          "(suspense ⊆ in_flight)。RESOLVED 保護は in_flight ガードで load-bearing、suspense ガードは冗長 dead code。"
-          "設計(CC-α)の『G-1 修理』理由付けが不正確。cleanup 推奨。")
+    # F-2(冗長 suspense guard)は F2FIX で解消済み: advance_state から到達不能ガードを除去
+    # (suspense ⊆ in_flight ゆえ in_flight==0 ガードに包摂)。account 保存検査は残置。
+    guard_gone = "unsettled suspense" not in open(SRC).read()
+    print("\nF-2 解消(冗長 suspense guard 除去):", "OK" if guard_gone else "⚠️まだ残存")
     return 0 if ok else 1
 
 
