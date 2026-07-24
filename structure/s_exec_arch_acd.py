@@ -190,11 +190,12 @@ def _symbols_exist(A, D):
 
 
 def check():
-    A, C, D, contra = build_all()
+    # A のみ(C/D は Task Contract=s_task_contract へ再導出・supersede/DE-0525。A は完成クローズ)。
+    A = build_A()
+    D, _ = build_D()   # symbol 実在検査用の helper(ファイルには書かない)
     red = []
-    for path, recs in ((OUT_A, A), (OUT_C, C), (OUT_D, D)):
-        if not os.path.isfile(path) or open(path, encoding="utf-8").read() != _ser(recs):
-            red.append("REGEN_MISMATCH: %s" % os.path.basename(path))
+    if not os.path.isfile(OUT_A) or open(OUT_A, encoding="utf-8").read() != _ser(A):
+        red.append("REGEN_MISMATCH: %s" % os.path.basename(OUT_A))
     bad = _symbols_exist(A, D)
     if bad:
         red.append("DANGLING_SYMBOL: " + ", ".join(bad[:5]))
@@ -204,18 +205,13 @@ def check():
         A2 = [r for r in build_A() if r != hidden[0]]
         if len(A2) >= len(A):
             red.append("NEG_CONTROL_A_FAILED: hiding an entrypoint not detectable")
-    # 陰性対照(§4-5): 既知 alias 衝突を注入→捕捉できるか(検出器 load-bearing)
-    probe = _detect_alias([{"state_symbol": "X_DUP", "source_file": "a.py"},
-                           {"state_symbol": "X_DUP", "source_file": "b.py"}])
-    if not probe:
-        red.append("NEG_CONTROL_D_FAILED: injected alias conflict not detected")
     if red:
         print("EXEC_ARCH_ACD --check: RED")
         for m in red:
             print("  " + m)
         return 1
-    print("EXEC_ARCH_ACD --check: GREEN (byte-identical A/C/D; symbols exist; neg-controls A/D load-bearing; "
-          "%d entrypoints, %d state-symbols, %d alias-contradictions)" % (len(A), len(D), len(contra)))
+    print("EXEC_ARCH_ACD --check: GREEN (A-only; byte-identical ENTRYPOINTS_EXT; symbols exist; "
+          "neg-control A load-bearing; %d entrypoints. C/D superseded by s_task_contract.)" % len(A))
     return 0
 
 
@@ -229,17 +225,10 @@ def _detect_alias(D_like):
 def main(argv):
     if "--check" in argv:
         return check()
-    A, C, D, contra = build_all()
+    A = build_A()   # A のみ書く(C/D は s_task_contract=Task Contract へ再導出・supersede/DE-0525)
     open(OUT_A, "w", encoding="utf-8").write(_ser(A))
-    open(OUT_C, "w", encoding="utf-8").write(_ser(C))
-    open(OUT_D, "w", encoding="utf-8").write(_ser(D))
-    print("A entrypoints=%d | C read-path rows=%d | D state-symbols=%d | alias-contradictions=%d"
-          % (len(A), len(C), len(D), len(contra)))
+    print("A entrypoints=%d (C/D は s_task_contract へ再導出=supersede)" % len(A))
     print("A kinds:", {k: sum(1 for r in A if r["kind"] == k) for k in sorted({r["kind"] for r in A})})
-    print("D unmapped(UNRESOLVED_NO_VOCAB):", sum(1 for r in D if str(r["mapped_to"]).startswith("UNRESOLVED")))
-    if contra:
-        print("alias contradictions (別掲・CONTRADICTIONS への追記は s6 sole writer):",
-              [c["state_symbol"] for c in contra][:8])
     return 0
 
 

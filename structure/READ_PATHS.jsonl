@@ -1,14 +1,17 @@
-{"actually_loaded": "UNRESOLVED_DYNAMIC_DISPATCH", "path": "<runtime>", "required_by_design": "reaches a --check gate?", "stage": "GATE_COVERAGE", "verdict": "UNRESOLVED_DYNAMIC_DISPATCH"}
-{"actually_loaded": "UNRESOLVED_DYNAMIC_DISPATCH", "path": "<runtime>", "required_by_design": "reaches a --check gate?", "stage": "GATE_COVERAGE", "verdict": "UNRESOLVED_DYNAMIC_DISPATCH"}
-{"actually_loaded": "UNRESOLVED_DYNAMIC_DISPATCH", "path": "dev-workcell/experiments/adjudicator_efficacy_v0.1/adjexp/problems/Q07_aggregate_execution_defect/sealed/baseline_setup/setup.sh", "required_by_design": "reaches a --check gate?", "stage": "GATE_COVERAGE", "verdict": "UNRESOLVED_DYNAMIC_DISPATCH"}
-{"actually_loaded": "UNRESOLVED_DYNAMIC_DISPATCH", "path": "dev-workcell/experiments/adjudicator_efficacy_v0.1/adjexp/problems/Q07_aggregate_execution_defect/setup.sh", "required_by_design": "reaches a --check gate?", "stage": "GATE_COVERAGE", "verdict": "UNRESOLVED_DYNAMIC_DISPATCH"}
-{"actually_loaded": "UNRESOLVED_DYNAMIC_DISPATCH", "path": "egl/autonomy/amend.sh", "required_by_design": "reaches a --check gate?", "stage": "GATE_COVERAGE", "verdict": "UNRESOLVED_DYNAMIC_DISPATCH"}
-{"actually_loaded": "UNRESOLVED_DYNAMIC_DISPATCH", "path": "egl/docs/SUBMIT_2026-07-21/06_runtime/run-with-proxy.sh", "required_by_design": "reaches a --check gate?", "stage": "GATE_COVERAGE", "verdict": "UNRESOLVED_DYNAMIC_DISPATCH"}
-{"actually_loaded": "UNRESOLVED_DYNAMIC_DISPATCH", "path": "egl/docs/SUBMIT_2026-07-21/06_runtime/twoder-status.service", "required_by_design": "reaches a --check gate?", "stage": "GATE_COVERAGE", "verdict": "UNRESOLVED_DYNAMIC_DISPATCH"}
-{"actually_loaded": "UNRESOLVED_DYNAMIC_DISPATCH", "path": "egl/docs/SUBMIT_2026-07-21/06_runtime/vllm-socket-proxy.service", "required_by_design": "reaches a --check gate?", "stage": "GATE_COVERAGE", "verdict": "UNRESOLVED_DYNAMIC_DISPATCH"}
-{"actually_loaded": "UNRESOLVED_DYNAMIC_DISPATCH", "path": "egl/docs/SUBMIT_2026-07-21/06_runtime/workcell-runner@.service", "required_by_design": "reaches a --check gate?", "stage": "GATE_COVERAGE", "verdict": "UNRESOLVED_DYNAMIC_DISPATCH"}
-{"actually_loaded": "UNRESOLVED_DYNAMIC_DISPATCH", "path": "egl/experiments/ITEM-0015-ab/serve_qwen36_27b_ab_sleep.sh", "required_by_design": "reaches a --check gate?", "stage": "GATE_COVERAGE", "verdict": "UNRESOLVED_DYNAMIC_DISPATCH"}
-{"actually_loaded": "UNRESOLVED_DYNAMIC_DISPATCH", "path": "egl/experiments/ITEM-0015-ab/serve_qwen36_ab_sleep.sh", "required_by_design": "reaches a --check gate?", "stage": "GATE_COVERAGE", "verdict": "UNRESOLVED_DYNAMIC_DISPATCH"}
-{"actually_loaded": "UNRESOLVED_DYNAMIC_DISPATCH", "path": "egl/experiments/ITEM-0015-ab/serve_qwen36_nofp8_nosleep_iso.sh", "required_by_design": "reaches a --check gate?", "stage": "GATE_COVERAGE", "verdict": "UNRESOLVED_DYNAMIC_DISPATCH"}
-{"actually_loaded": "UNRESOLVED_DYNAMIC_DISPATCH", "path": "egl/experiments/rri_chain.sh", "required_by_design": "reaches a --check gate?", "stage": "GATE_COVERAGE", "verdict": "UNRESOLVED_DYNAMIC_DISPATCH"}
-{"actually_loaded": true, "note": "7 --check gates present", "path": "egl/structure/s10_ledger_registry.py;egl/structure/s11_ledger_flow.py;egl/structure/s_account_axes.py;egl/structure/s_embed_axes.py;egl/structure/s_exec_arch_acd.py;egl/structure/s_llm_invocations.py;egl/structure/s_mine_accounts.py", "required_by_design": "n/a", "stage": "GATE_INVENTORY", "verdict": "OK"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s10_ledger_registry", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s11_ledger_flow", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s1_manifest", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s1_reach", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s1_symbols", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s2_extract", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s3_components", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s4_edges", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s5_history", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s6_contradictions", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s7_traceability", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s9_done_semantics", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["ACCOUNT_AXES_v1.json", "ACCOUNT_MEMBERSHIP.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_account_axes", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["DESIGN_EVIDENCE_LEDGER.jsonl", "EMBED_AXES_CANDIDATE.jsonl", "EMBED_AXES_STABILITY.json", "rri_records.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_embed_axes", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["ENTRYPOINTS_EXT.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_exec_arch_acd", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["LLM_INVOCATIONS.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_llm_invocations", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["ACCOUNT_CHART_CANDIDATE.jsonl", "ACCOUNT_CHART_STABILITY.json", "DESIGN_EVIDENCE_LEDGER.jsonl", "rri_records.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_mine_accounts", "verdict": "UNRESOLVED_NO_CONTRACT"}
