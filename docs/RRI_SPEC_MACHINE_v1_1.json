@@ -1,0 +1,323 @@
+{
+  "meta": {
+    "artifact": "RRI_SPEC_MACHINE",
+    "version": "1.1-draft",
+    "generated": "2026-07-24",
+    "author": "CLAUDE_WEB",
+    "nature": "RESOLVED merge of RRI_BASE_SPEC_v1_0_draft.md + RRI_AUDIT_DISPOSITION_v1_1.md + RRI_ADDENDUM_SEMANTIC_INDEX_v1_1.md (diffs applied; this file is the single normative input for CC-alpha)",
+    "human_readable_sources": [
+      "RRI_BASE_SPEC_v1_0_draft.md",
+      "RRI_AUDIT_DISPOSITION_v1_1.md",
+      "RRI_ADDENDUM_SEMANTIC_INDEX_v1_1.md"
+    ],
+    "conflict_rule": "If this JSON conflicts with the MD sources or with real code, HALT and report. Do not silently pick a side.",
+    "claim_ceiling": [
+      "Only section 'measured_baseline' is measurement; everything else is design.",
+      "Temperature is an ordinal budget cap, not a measurement of true need.",
+      "This spec does not claim divergence can be made impossible; only reduced, detected, contained.",
+      "Layer-3 (semantic index) guarantees retrieval only; it never participates in truth, identity, or state transitions."
+    ],
+    "adjudication_status": "All items in pending_adjudications are PROPOSED_AWAITING_TAKA. Treat them as working assumptions; flag any implementation decision that would change materially if an item is rejected."
+  },
+
+  "measured_baseline": {
+    "live_functions": [
+      {"symbol": "rri/context_binding.bind_context", "role": "bind request to existing context"},
+      {"symbol": "rri/request_type.classify_request_type", "role": "5-class: OBSERVE_CURRENT_STATE|BUILD_CAPABILITY|MODIFY_EXISTING|RESUME_PRIOR|DECIDE; explainable; DE-0157"},
+      {"symbol": "rri/research_intent.classify_blockage", "role": "blockage class: research|measurement|policy|implementation"},
+      {"symbol": "rri/research_intent.need_validation", "role": ""},
+      {"symbol": "rri/research_intent.form_resolution_requirements", "role": ""},
+      {"symbol": "rri/admission_request.detect", "role": "literal-substring only; known defect DE-0451"},
+      {"symbol": "rri/residual_update.form_residual", "role": "return_loop.py:33; zero tests (HIGH)"},
+      {"symbol": "rri/intent_record.py", "role": "mints RREQ/RINT/RSIG; sole writer of rri_records.jsonl (680 lines, untracked)"},
+      {"symbol": "rri/preflight_gate.detect", "role": "HBB-30; deterministic; submit-entry only"}
+    ],
+    "wired_unentered_validators": {
+      "location": "twoder/rri_formal.py::run_formal_validation via submit.py:99 'if formal_candidates:' (default empty)",
+      "validators": ["iec", "resolved_intent", "research_axis", "rq_candidate", "approved_rq_set", "rdec", "request_resolution", "need_validation"],
+      "executed": "0/337 traces",
+      "cause": "DE-0231 deliberately deferred candidate GENERATION (:8005) to a separate slice",
+      "implication": "This spec restores the missing generation wing; first energization of the 8 validators is EXPECTED to fail broadly and must be treated as breakage-list collection, not design failure."
+    },
+    "known_defects": [
+      {"id": "a", "de": "DE-0451", "text": "admission_request.detect literal-match only; semantically obvious admissions pass through"},
+      {"id": "b", "text": "admission_request.py and residual_update.py are live but imported by zero tests"},
+      {"id": "c", "de": "DE-0492", "text": "preflight_gate absent on autonomous path (select_and_create); stand-in is approval gate CHG-0128 (= Taka)"},
+      {"id": "d", "de": "DE-0186", "text": "rri_records.jsonl is a single untracked file"}
+    ],
+    "demonstrated_capability": {
+      "des": ["DE-0084", "DE-0072", "DE-0073", "DE-0074"],
+      "summary": "Question-splitting (externally-answerable vs machine-only), blockage verdicts, decision packets to human — all demonstrated, but Claude was the outer loop (DE-0151 BOOTSTRAP_ORCHESTRATED_BY_CLAUDE). Missing: the container and cross-turn accumulation (DE-0159 REASONING_ORPHANED)."
+    }
+  },
+
+  "architecture": {
+    "layers": [
+      {"n": 1, "name": "event_stream", "nature": "SoR", "guarantees": ["append-only", "sole writer", "byte-identical reconstruction"]},
+      {"n": 2, "name": "projection", "nature": "DERIVED", "guarantees": ["deterministic derivation from layer 1", "state/balances/conservation computed here"]},
+      {"n": 3, "name": "semantic_index", "nature": "DERIVED/disposable", "guarantees": ["retrieval only", "non-determinism permitted", "layer 1 never depends on layer 3"]}
+    ],
+    "first_class_stores": ["event streams only"],
+    "rthread_status": "RTHREAD is an aggregate ID minted at contact + a projection over its events. It is NOT a stored fat record and NOT a first-class store parallel to the event store or EGL.",
+    "egl_status": "EGL remains the knowledge/evidence ledger, referenced from events by ID (unchanged)."
+  },
+
+  "request_thread": {
+    "unit": {
+      "definition": "1 contact event = 1 RTHREAD. Unit is the fact that the user contacted 2DER with intent (discrete, countable, timestamped, immutable after the fact) — NOT the soft textual content (which drifts).",
+      "rules": [
+        "Conversation turns do not create new RTHREADs (same funding source).",
+        "Divergence into a different intent => THREAD_SPLIT event creating child RTHREAD(s); question totals conserved across parent+children."
+      ],
+      "bookkeeping_direction": {"credit_source": "contact event", "debit_uses": "investigations/questions/tasks drawn from it across multiple accounts"}
+    },
+    "aggregate_id": "RTHREAD-<8hex>",
+    "sole_writer": "rri/request_thread.py (new module; only sanctioned writer of the RTHREAD event stream)",
+    "event_types": [
+      {"type": "THREAD_OPENED", "fields": ["thread_id", "ds_thread_ref", "ts", "sealed_by"]},
+      {"type": "QUESTION_RAISED", "fields": ["thread_id", "question_id", "account_id|UNCLASSIFIED", "memo", "ts", "sealed_by"]},
+      {"type": "QUESTION_DISPOSED", "fields": ["thread_id", "question_id", "disposal(RESOLVED|OPEN_GAP|REJECTED|MERGED_INTO)", "reason_code(required for REJECTED)", "target_id(required for MERGED_INTO)", "ts", "sealed_by"]},
+      {"type": "NARROWED", "fields": ["thread_id", "before_count", "after_count", "basis", "ts"]},
+      {"type": "EXPANDED", "fields": ["thread_id", "expansion_trigger{reason,source_ref}", "ts"]},
+      {"type": "GAP_PRESENTED", "fields": ["thread_id", "question_ids[]", "ds_delivery_receipt", "ts"]},
+      {"type": "HUMAN_REPLIED", "fields": ["thread_id", "answer_refs[]", "ts"], "constraint": "via DS only"},
+      {"type": "STATE_ADVANCED", "fields": ["thread_id", "from", "to", "guard_evidence{}", "ts", "sealed_by"], "note": "admission-checked against state_machine.transitions; illegal advance rejected"},
+      {"type": "THREAD_SPLIT", "fields": ["thread_id", "child_thread_ids[]", "question_transfers[{question_id,target_thread}]", "ts"]},
+      {"type": "THREAD_ACCEPTED", "fields": ["thread_id", "residual_gaps[{question_id, disposal(DECLINED|TRANSFERRED), target_id?}]", "human_ref", "ts"], "note": "the human door; enumeration must be exhaustive or event is rejected"},
+      {"type": "INVESTIGATION_HOP", "fields": ["thread_id", "branch_id", "hop_cost{tokens,wall_s}", "new_axes_count", "ts"]},
+      {"type": "LINK_CONFIRMED", "fields": ["source_id", "target_id", "judged_by", "reason", "reversible", "ts"], "note": "semantic-index candidates become links only via this event"}
+    ],
+    "projection_fields": ["status", "turn_count", "candidate_space{research_axis[],rq_candidate[],approved_rq_set[]}", "open_gaps[]", "suspense_balance", "per_account_balances{}", "depth_budget", "depth_spent", "branch_budgets{}", "saturation_signal", "presentation_level", "prior_consult{queried,hits[],misses[]}"],
+    "state_machine": {
+      "states": ["SOFT", "NARROWING", "AWAITING_HUMAN", "RESOLVED", "DISPATCHABLE", "CLOSED"],
+      "transitions": [
+        {"from": null, "to": "SOFT", "guards": ["DS mints thread_id"]},
+        {"from": "SOFT", "to": "NARROWING", "guards": ["classify_request_type ok", "bind_context ok", "prior_consult performed (hit or recorded miss)"]},
+        {"from": "NARROWING", "to": "NARROWING", "guards": ["candidate_space decreased OR expansion_trigger recorded"]},
+        {"from": "NARROWING", "to": "AWAITING_HUMAN", "guards": ["open_gaps nonempty AND not self-fillable"]},
+        {"from": "NARROWING", "to": "AWAITING_HUMAN", "guards": ["turn_count >= limit (FORCED)"]},
+        {"from": "AWAITING_HUMAN", "to": "NARROWING", "guards": ["HUMAN_REPLIED via DS"]},
+        {"from": "NARROWING", "to": "RESOLVED", "guards": ["approved_rq_set fixed", "all 8 validators pass", "all questions disposed", "all OPEN_GAP reached presented", "suspense_balance==0 OR remainder explicitly disposed to OPEN_GAP", "THREAD_ACCEPTED recorded (human, with exhaustive residual enumeration)"]},
+        {"from": "RESOLVED", "to": "DISPATCHABLE", "guards": ["EGL consult passed (EGL wins on conflict)", "provenance resolvable (DE-0301)"]},
+        {"from": "*", "to": "CLOSED", "guards": ["human closes OR superseded upstream"]}
+      ],
+      "no_timeout": "AWAITING_HUMAN has no expiry (abandonment tolerance is a primary constraint). No auto-close, no auto-nag. Provide a derived waiting-inventory view (threads with idle days); waking is always human-initiated and must be cheap."
+    }
+  },
+
+  "question_ledger": {
+    "unit": "1 question, immutable id Q-<8hex> minted at generation; id survives rephrasing",
+    "conservation_law": "raised_total == resolved + open_gap + rejected(reason_code required) + merged(target required). Must hold at EVERY state transition; violation => halt (fail-closed).",
+    "disposal_types": ["RESOLVED", "OPEN_GAP", "REJECTED", "MERGED_INTO"],
+    "merge_split_rule": "Merge/split are transactions, never deletions: dispose old ids (MERGED_INTO), raise new; totals conserved. Axis split conserves counts (parent == sum(children)).",
+    "suspense_account": {"name": "UNCLASSIFIED", "rule": "unclassifiable questions may rest here; balance always visible; must be 0 or explicitly disposed at RESOLVED. Looseness is permitted temporarily, never permanently."},
+    "open_gap_lifecycle": {
+      "states": ["raised", "presented(DS delivery receipt)", "answered|declined|transferred"],
+      "rules": [
+        "OPEN_GAP is an exit with delivery duty, not a parking lot.",
+        "Unpresented gaps block RESOLVED.",
+        "Re-raising a declined question requires flag re_raised_after_decline.",
+        "No mechanical cap on gap balance (value judgment stays with LLM/human); gap-rate per thread and per account is a first-class statistic surfaced to human."
+      ]
+    },
+    "rejected_rule": "reason is a classification code + memo (free text). Rejection rate per account is a first-class statistic. Laundering is not blocked mechanically but is always conspicuous.",
+    "journal_entry": {"is": "an event (layer 1). No separate journal store.", "fields": ["thread_id", "account_id", "memo", "question_ids[]", "amount"]},
+    "division_of_labor": {"llm": ["which account a question belongs to", "whether to split/merge accounts"], "machine": ["balance equality", "per-axis residuals", "total conservation"]}
+  },
+
+  "pipeline": {
+    "stages": [
+      {"s": 0, "name": "intake", "actors": ["DS", "classify_request_type", "bind_context", "prior_consult"]},
+      {"s": 1, "name": "temperature", "actor": "machine"},
+      {"s": 2, "name": "plan", "actor": "LLM-A proposer", "output": "research_axis[], rq_candidate[]", "forbidden": "investigating"},
+      {"s": 3, "name": "investigate", "actor": "LLM-B investigator", "input": "A's output VERBATIM", "forbidden": "reinterpreting A, adding axes"},
+      {"s": 4, "name": "accumulate", "target": "EGL", "note": "freshness class sealed by caller"},
+      {"s": 5, "name": "saturation", "actor": "machine", "rule": "saturated == zero new axes in last k hops; saturated OR budget exhausted -> exit loop; else -> s2"},
+      {"s": 6, "name": "presentation_level", "actor": "LLM-C editor", "forbidden": "holding full investigation volume"},
+      {"s": 7, "name": "gap_cutout", "path": "open_gaps -> DS -> human (AWAITING_HUMAN); reply -> s1 (temperature recomputed)"},
+      {"s": 8, "name": "design_depth"},
+      {"s": 9, "name": "implementation_survey", "rule": "recursive reapplication of s1-s5 with target 'this repo' instead of 'the world'; no dedicated mechanism"}
+    ],
+    "temperature": {
+      "nature": "ordinal upper bound on investigation hops per request; NOT effort prediction; leaving budget unspent is success-compatible",
+      "base": {"OBSERVE_CURRENT_STATE": 1, "RESUME_PRIOR": 1, "MODIFY_EXISTING": 2, "DECIDE": 2, "BUILD_CAPABILITY": 4},
+      "adjust": [
+        {"if": "prior_consult hit", "delta": -1, "floor": 0},
+        {"if": "blockage==research", "delta": 1},
+        {"if": "blockage==measurement", "action": "route to measurement, not investigation (DE-0072)"},
+        {"if": "blockage==policy", "action": "route to human (value judgment is a human door)"},
+        {"if": "blockage==implementation", "action": "go directly to s9"}
+      ],
+      "clamp": [0, 6],
+      "hop_definition": "1 hop = 1 bounded work unit: 1 acquisition OR 1 :8005 classification call, each with a token cap and wall-clock cap. Overrun is cut-and-redraw, never extended (bimodal convergence finding).",
+      "branch_decay": "per-branch independent: remaining = temperature - hop_distance; 0 => prune branch (prevents exponential blowup)",
+      "cost_model": "estimated_effort ~= sum(branch remaining budgets) * mean hop cost; hop_cost stamped on every INVESTIGATION_HOP from day one so statistics later replace guesses"
+    }
+  },
+
+  "chart_of_accounts": {
+    "source": "MINED, never imagined. Initial chart = deterministic clustering over DE ledger (491) + rri_records (680) — both are records of intent-bearing contact — then LLM naming by 3-seed consensus (>=2/3 label overlap).",
+    "rejected_alternative": "Claude pre-generating accounts by imagining cases (precedent: the fabricated A-E stage table was replaced by measurement).",
+    "status": "DERIVED / regenerable / versioned; never SoR. Account NAME is a label on an id, not identity itself (C3 analogue).",
+    "promotion": "New account proposals live as sub-labels under UNCLASSIFIED; promote to formal account only after recurrence in N independent threads; promotions/demotions are transactions.",
+    "explosion_valve": "Hard cap on account count. New-account proposal requires recorded 'why memo cannot express this'. Small stable chart + rich memo.",
+    "statistics": ["frequency", "co-occurrence", "resolution_rate (self-closes vs returns to human)", "temperature_consumption", "gap_rate", "rejection_rate"],
+    "mining_spec_order": {
+      "deliverable": "MINING_SPEC v0.1 (separate)",
+      "features": "deterministic only: ID-reference co-occurrence, repos touched, request_type, blockage, DE band, progression transitions. Free text is NOT a feature (prose Jaccard 0.51).",
+      "clustering": "deterministic: fixed seed, fixed tie-breaking, byte-identical regeneration",
+      "acceptance": ["byte-identical regeneration", "negative control: shuffled input yields no stable clusters (a miner confident on noise is a vacuous oracle)", "cross-seed cluster agreement measured and recorded"]
+    },
+    "self_reference_note": "Classifying DEs with a chart mined from DEs does not contaminate as long as the chart stays DERIVED and classification results never write back into DE bodies."
+  },
+
+  "accumulation": {
+    "store": "EGL (no new DB — dual-ledger family F). Purpose doctrine: 'priority determines subject; do not read everything'.",
+    "freshness_classes": {"VOLATILE": "short refresh", "SEASONAL": "medium", "STABLE": "long or none"},
+    "freshness_sealing": "sealed by caller from registry; emitter self-report forbidden (retention_class failed twice before — do not make it a third)",
+    "auto_update": {
+      "write_mode": "append + superseded_by; overwrite forbidden",
+      "contradiction_rule": "If an update negates a premise of a decided RTHREAD: record supersede -> identify affected RTHREADs -> force them to AWAITING_HUMAN -> notify human. This is the core of abandonment tolerance. Silent accumulation over stale decisions is harmful.",
+      "authority": "auto-update is human-triggerless writing; budget caps and REQUIRES_APPROVAL-family gates must be fixed before enabling; usage (calls/tokens/wall) recorded"
+    }
+  },
+
+  "presentation": {
+    "levels": {"L0": "conclusion 1-3 lines (default: return)", "L1": "options with strengths (default: return)", "L2": "grounds/sources (on request)", "L3": "raw/full volume (ledger reference only; never returned)"},
+    "boundary_criterion": "'Would Taka be unable to choose without knowing this?' — information that does not affect choice drops to L2 or below.",
+    "item_cap": "per-turn cap applies to L0+L1 (see invariant T2); axis-tree depth from account hierarchy provides the natural skeleton for levels"
+  },
+
+  "divergence_ledger": {
+    "vocabulary": "DE prose uses '乖離 (divergence from expected semantics)'; 'hallucination' only as parenthesized historical alias. Vocabulary decides the schema: 'hallucination' fills cause fields with model traits; 'divergence' fills them with generation-time conditions.",
+    "measurable_object": "conditional empirical distribution P(divergence | conditions); model internals untouchable (API-only), and that is fine",
+    "record": {"id": "DIV-<8hex>", "fields": ["detected_by(ORACLE_*|HUMAN_INTUITION)", "oracle_kind", "output_ref", "divergence", "grounding_present", "format_demanded", "role", "seam_ref", "model", "seed", "temperature", "prior_consult"], "sealing": "cause fields are generation-time observable conditions only, sealed by caller; model-trait speculation forbidden"},
+    "writers": ["machine oracles (repo check, ledger check, tests, conservation law) — proven: caught 5 fabricated commit hashes", "human intuition (existing tsutsuki-log merges into the SAME schema)"],
+    "traps": [
+      {"name": "detection_coverage_bias", "rule": "no-oracle conditions record UNRESOLVED_NO_ORACLE, never zero. Statistics otherwise mark the most dangerous places as safest."},
+      {"name": "denominator", "rule": "condition stamps go on EVERY generation, not only divergent ones; otherwise you have frequency, not probability."}
+    ],
+    "condition_table": "the 5 hypothesized conditions (no grounding / format pressure / seam compression / self-report / role-grounding mismatch) are HYPOTHESES stored in the ledger, not rules; conditions become conditions by surviving data",
+    "improvement_loop": {
+      "phase1": "detection + stamps + denominator (this spec)",
+      "phase2": "DIV records link countermeasure_ref (a DE); recurrence rate per condition computed by machine (generalization of live failure_memory: 109 fires / 27 blocks)",
+      "phase3_boundary": "promoting a condition to a standing gate is TAKA-ONLY adjudication. Auto-promotion == self-improvement claim, which v0 mainline explicitly disclaims."
+    }
+  },
+
+  "semantic_index": {
+    "why": "Literal matching already lost in measurement: DE-0451 pass-through; prior_consult under literal matching returns systematic misses indistinguishable from true absence; DS bind_context ('that thing') cannot be grep.",
+    "role": "layer 3: retrieval flashlight. The ledger is the map. Confirmed links (LINK_CONFIRMED events) accumulate as the asset; the index is a consumable.",
+    "flow": "index -> k candidates -> LLM identity judgment -> LINK_CONFIRMED event in ledger (dated, reasoned, attributed, reversible). Confirmed links take precedence over fresh index results.",
+    "insertion_order": [
+      {"rank": 1, "target": "prior_consult", "gain": "the 'never repeat an investigation' promise stops being empty"},
+      {"rank": 2, "target": "DE-0451 second stage", "gain": "retire the human-writes-literal-markers workaround"},
+      {"rank": 3, "target": "DS bind_context", "gain": "'that thing' resolution"},
+      {"rank": 4, "target": "THREAD_SPLIT kin suggestion", "gain": "optional, later"}
+    ],
+    "prohibitions": [
+      "similarity-threshold auto-merge (mechanized question laundering)",
+      "embeddings as MINING_SPEC features (breaks byte-identical acceptance)",
+      "embedding scores in guards/branches/transitions",
+      "index as SoR or index-only information",
+      "index miss as proof of absence — record UNRESOLVED_INDEX_MISS; the index can say 'not found', never 'does not exist'"
+    ],
+    "implementation": {"base": "existing vLLM host + a Qwen-family embedding model (verify GPU headroom by measurement)", "store": "one local vector store, derived, fully rebuildable from ledger, one-way ledger->index", "update": "async on event append; index lag/loss degrades to retrieval misses only; layer 1 never blocks on layer 3", "authority": ":8005-family contact; follows existing USE_VLLM_INFERENCE gating"}
+  },
+
+  "global_disciplines": [
+    {"id": "G-1", "rule": "Trust-relevant fields (ids, disposals, transitions, freshness, divergence conditions) are sealed by the caller from registries; LLM/downstream self-report forbidden.", "basis": "family C; 3 real failures"},
+    {"id": "G-2", "rule": "Value/direction judgments (no ground truth) may go to LLM; factual judgments (ground truth exists) machine-only; stop/saturation decisions machine-only.", "basis": "the Taka-signature rule applied to LLMs"},
+    {"id": "G-3", "rule": "Seams pass content verbatim with count reconciliation; compression/summarization across seams forbidden.", "basis": "family D"},
+    {"id": "G-4", "rule": "UNRESOLVED is a first-class output of every LLM stage; never apply format pressure that forces fabricated specifics.", "basis": "C2"},
+    {"id": "G-5", "rule": "Derived artifacts (chart, condition table, index, projections) are DERIVED/regenerable; never SoR.", "basis": "family F"},
+    {"id": "G-6", "rule": "Build on the existing 8-term vocabulary; invent no new design vocabulary."},
+    {"id": "G-7", "rule": "The only exit toward the human is DS."}
+  ],
+
+  "invariant_tests": {
+    "global": [
+      {"id": "G-T1", "rule": "every test below must once be shown to turn red when its target is broken (mutation check) before adoption"},
+      {"id": "G-T2", "rule": "machine sealing of trust fields is itself tested"},
+      {"id": "G-T3", "rule": "derived artifacts regenerate byte-identical"}
+    ],
+    "tests": [
+      {"id": "T1", "rule": "candidate space shrinks each turn; growth requires recorded expansion_trigger"},
+      {"id": "T2", "rule": "per-turn items returned to human capped; overflow rolls to open_gaps; breach fail-closed"},
+      {"id": "T3", "rule": "human-bound payload = unresolved items + current narrowing only; never full volume"},
+      {"id": "T4", "rule": "prior_consult before any investigation; unconsulted investigation rejected"},
+      {"id": "T5", "rule": "writes toward human via DS only"},
+      {"id": "T6", "rule": "confirmation goes through EGL consult; EGL wins conflicts"},
+      {"id": "T7", "rule": "DW tickets only from DISPATCHABLE"},
+      {"id": "T8", "rule": "turn_count cap forces AWAITING_HUMAN"},
+      {"id": "T9", "rule": "temperature is a cap; implementations forcing budget exhaustion rejected"},
+      {"id": "T10", "rule": "saturation decided by machine; LLM 'enough' never accepted"},
+      {"id": "T11", "rule": "LLM-A and LLM-B are separate calls/prompts"},
+      {"id": "T12", "rule": "A's axis count == B's input axis count"},
+      {"id": "T13", "rule": "per-branch decay mandatory; undecayed recursion rejected"},
+      {"id": "T14", "rule": "conservation law holds at every transition; mismatch halts"},
+      {"id": "T15", "rule": "disposals limited to 4 types with required reason/target"},
+      {"id": "T16", "rule": "merge conserves totals"},
+      {"id": "T17", "rule": "split conserves totals"},
+      {"id": "T18", "rule": "RESOLVED requires suspense 0 or explicit disposal"},
+      {"id": "T19", "rule": "accumulation append-only; existing lines sha256-stable"},
+      {"id": "T20", "rule": "premise-negating update forces affected RTHREAD to AWAITING_HUMAN"},
+      {"id": "T21", "rule": "human default payload is L0+L1; L3 leakage is a violation"},
+      {"id": "T22", "rule": "accounts promote by recurrence only"},
+      {"id": "T23", "rule": "new account requires 'memo cannot express this' record"},
+      {"id": "T24", "rule": "memo never used in conservation math"},
+      {"id": "T25", "rule": "1 contact event = 1 RTHREAD"},
+      {"id": "T26", "rule": "embedding scores never in branch conditions"},
+      {"id": "T27", "rule": "full index wipe leaves all functions reconstructible from ledger"},
+      {"id": "T28", "rule": "UNRESOLVED accepted as valid output"},
+      {"id": "T29", "rule": "divergence cause fields are generation-time observable conditions only"},
+      {"id": "T30", "rule": "no-oracle conditions record UNRESOLVED_NO_ORACLE, not zero"},
+      {"id": "T31", "rule": "condition stamps on every generation"},
+      {"id": "T32", "rule": "human-intuition detections share the machine schema"},
+      {"id": "T33", "rule": "RRI direct writes to user surface detected (mechanized T5)"},
+      {"id": "T34", "rule": "the 8 validators actually execute in the RESOLVED guard (WIRED_UNENTERED regression detector)"},
+      {"id": "T35", "rule": "positive control at each rollout stage: deliberately drop one item; conservation must go red"},
+      {"id": "T36", "rule": "RTHREAD projection regenerates byte-identical from events; direct projection writes violate"},
+      {"id": "T37", "rule": "state transitions guarded as STATE_ADVANCED admissions; illegal advances rejected"},
+      {"id": "T38", "rule": "RESOLVED rejected while unpresented OPEN_GAPs exist"},
+      {"id": "T39", "rule": "re-raise of declined question only with re_raised_after_decline flag"},
+      {"id": "T40", "rule": "THREAD_ACCEPTED must enumerate all residual gaps; non-enumerated residual rejects the event"},
+      {"id": "T41", "rule": "hops are bounded (token+time caps); unbounded hop implementations rejected"},
+      {"id": "T42", "rule": "DIV conditions with countermeasure_ref carry machine-computed recurrence counters"},
+      {"id": "T43", "rule": "condition->gate promotion requires a human adjudication event"},
+      {"id": "T44", "rule": "index wipe + full functional tests pass (CI, not annual)"},
+      {"id": "T45", "rule": "static check: index API callers limited to retrieval paths"},
+      {"id": "T46", "rule": "index miss recorded as UNRESOLVED_INDEX_MISS; 'no match' never passed downstream as fact"},
+      {"id": "T47", "rule": "confirmed links outrank fresh index results"},
+      {"id": "T48", "rule": "index update failure/lag never blocks event append"}
+    ]
+  },
+
+  "rollout": {
+    "preconditions": ["star3 closed (E1 commit -> death#6 seam-side fix -> conformance probe) OR cw() rolled back; never half-migrated", "adjudications batch-answered", "denylist boundary DE cut (request-refinement candidate generation is NOT the forbidden 'alternative generation' of DE-0160/0163; ban limited to HBB/AFE failure-detection engines per DE-0112)", "mainline transition DE cut (v0 mainline achieved at star3; request-thread becomes next mainline)"],
+    "stages": [
+      {"n": 1, "what": "conservation law inside one RTHREAD, totals only (no accounts)"},
+      {"n": 2, "what": "accounts introduced; LLM assigns, machine balances"},
+      {"n": 3, "what": "suspense settlement discipline in RESOLVED guard"},
+      {"n": 4, "what": "split/merge as transactions"},
+      {"n": 5, "what": "link ledger (embeddings candidates-only)"}
+    ],
+    "each_stage": "run T35 positive control; first energization of the 8 validators treated as breakage-list collection (broad failure is the expected, healthy outcome)",
+    "termination_condition": "One real request travels SOFT -> DISPATCHABLE with the 8 validators actually executing, human-returned items within L0+L1, and the conservation law holding at every transition. Spec completion is NOT success (anti-tributary clause)."
+  },
+
+  "pending_adjudications": {
+    "status": "PROPOSED_AWAITING_TAKA (24 base + 5 disposition + 4 addendum = 33 items; see MD sources for full text)",
+    "material_for_implementation": [
+      {"id": 25, "proposal": "RTHREAD = projection over event stream (no fat record)"},
+      {"id": 26, "proposal": "RESOLVED = annotated closing (human acceptance with exhaustive residual enumeration)"},
+      {"id": 27, "proposal": "OPEN_GAP delivery-duty + statistics; no mechanical balance cap; no timeout"},
+      {"id": 28, "proposal": "improvement loop machine through phase2; gate promotion human-only"},
+      {"id": 29, "proposal": "MINING_SPEC separate deliverable with 3 acceptance conditions"},
+      {"id": 30, "proposal": "layer-3 semantic index adopted"},
+      {"id": 31, "proposal": "insertion order prior_consult -> DE-0451 -> bind_context"},
+      {"id": 32, "proposal": "embedding model co-hosted on vLLM; one local derived store"},
+      {"id": 33, "proposal": "the 5 index prohibitions adopted"}
+    ]
+  }
+}
