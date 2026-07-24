@@ -1,0 +1,15 @@
+{
+  "purpose": "2DER 自律ループ(GENERATE 実走が緑 = LIVE_WORKER_MINIMAL_PASS)を塞ぐ障害物トラッカー。status_board の機械可読ソース。",
+  "source_of_truth": "現状の正本は egl/docs/2DER_SESSION_ANCHOR.md §2 の死因ラダー表。本ファイルはそこから起こした機械可読ミラー。正本を本JSONへ一本化し anchor 表を本JSONから生成するかは設計監査CC/Taka の裁定事項(未裁定)。それまでは anchor が正本、本ファイルは board 計器。",
+  "status_values": {"closed": "解決", "open": "未解決(通常)", "open_hard": "未解決(本線を塞ぐ)"},
+  "updated": "2026-07-23",
+  "deaths": [
+    {"id": "1", "name": "worker 自作テストの品質",        "status": "closed",    "ref": "DE-0497", "note": "runner 方式で解決"},
+    {"id": "2", "name": "固定 TS によるトークン永久消費",  "status": "closed",    "ref": "twoder 38d1988", "note": "CLOSED 2026-07-23。gate1b=実 mint 経路 mint_token を attempt 違いで2回→approval_id 相異で決着(実経路は非退化)"},
+    {"id": "3", "name": "provenance 未渡し",              "status": "closed",    "ref": "DE-0515", "note": "seam 導管化で live 実証"},
+    {"id": "4", "name": "token 型不一致(str/dict)",        "status": "closed",    "ref": "twoder 38d1988", "note": "DONE 2026-07-23。approval_registry.validate_by_token(dict/str→approval_id 台帳照合)で6経路統一"},
+    {"id": "5", "name": "token 3フィールド不整合",         "status": "closed",    "ref": "",        "note": "authority.py:133 に反映済。commit すべき diff 無し"},
+    {"id": "6", "name": "受入オラクルと artifact の分離",   "status": "open_hard", "ref": "",        "note": "SEAM_PKG_MIRROR で直す(TOKEN-GATE-01 仕様に逃がさない)"},
+    {"id": "7", "name": "sandbox PYTHONPATH 未設定",       "status": "open",      "ref": "",        "note": "live_worker_runtime.py:36-41 が env 無指定。SEAM 配線で #6 と同時に閉じる"}
+  ]
+}

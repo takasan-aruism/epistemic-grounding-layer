@@ -1,0 +1,236 @@
+SEAM-PKG-MIRROR v0.4 — BUILD_CAPABILITY / 新規コード実装（runner 方式・使い捨てでない恒久 seam）。
+実装対象: twoder/seam/pkg_mirror.py（sandbox 受入時の名前は impl.py）。
+パッケージを sandbox 内へ byte-for-byte 複製し、新規モジュール artifact をパッケージ相対に配置する mirror_package を実装せよ。死因#6（受入オラクルと artifact が別名前空間）の恒久修正。
+骨格の固定区間（import 等）を bytes 一致で保存したまま FILL マーカー部分のみを実装し、同梱 IMMUTABLE_TESTS を全通過させよ。
+受入は 12/12（S1–S10、S6 は 3 パラメータ）。stdlib 以外を import してはならない（S10 が AST 検査）。
+
+<<<2DER:SKELETON>>>
+"""パッケージ複製 seam — 新規モジュール artifact を実パッケージ名前空間で受け入れる。
+
+death#6: 受入オラクル(pytest)と artifact が別名前空間に居るため、新規モジュールを
+産出する task は原理的に 7/7 を取れなかった。オラクルを弱める(CONSUMED+産出で ACCEPT)
+のは族A の再生産なので採らない。artifact 側をパッケージ相対に置く。
+
+death#7: sandbox に PYTHONPATH が張られない(live_worker_runtime.py:36-41)ため、
+本モジュールは実パッケージの可視性に依存してはならない。pkg_root は引数で受け取り、
+自分で探しに行かない。
+
+claim ceiling: pkg_root への書込みは 0 バイト。複製は sandbox 内のみ。
+複製が元と同一であることは MIRROR_MANIFEST の sha256 でのみ接地する。
+生成した中間 __init__.py は元に対応物が無いため sha256 突合の対象外とし、
+manifest の "created" に分離して載せる。空欄にしない。
+
+本モジュールは stdlib 以外を import しない。これは §0.3 ブートストラップ限定条項の
+適格条件そのものであり、S10 が AST で機械検査する。twoder.* の import を足したら違反。
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import shutil
+<<<FILL>>>
+
+MIRROR_MANIFEST = "MIRROR_MANIFEST.json"
+
+# 複製から除外するもの。ここを増やすのは仕様変更であり、worker が判断してはならない。
+MIRROR_EXCLUDE = ("__pycache__", ".pyc", ".pyo", ".so", ".git")
+
+
+class MirrorHalt(RuntimeError):
+    """解決できない前提に当たったら回避策を発明せず halt する(ANCHOR §5-6)。"""
+
+
+<<<FILL>>>
+
+
+def sha256_file(path: str) -> str:
+    """ファイルの sha256 を返す。manifest と検査の唯一の突合手段。"""
+<<<FILL>>>
+
+
+def mirror_package(pkg_root: str, sandbox_root: str, artifacts: dict) -> dict:
+    """pkg_root を sandbox_root/<pkgname>/ へ複製し、artifacts を追加配置する。
+
+    引数:
+      pkg_root    : 複製元パッケージのディレクトリ。読み取り専用。呼び出し側が与える。
+      sandbox_root: 複製先の親。PYTHONPATH に入る側。
+      artifacts   : パッケージ相対パス -> bytes。キーは "/" を含んでよい
+                    (例 {"seam/pkg_mirror.py": b"..."})。
+
+    返り値:
+      {"pkg": str,                     # os.path.basename(pkg_root)
+       "files": {rel_path: sha256},    # 複製 + artifact。元と突合する対象
+       "artifacts": [rel_path],        # 突合対象外(worker 生成物)
+       "created": [rel_path]}          # 生成した中間 __init__.py。突合対象外
+
+    規律(いずれも違反したら MirrorHalt。例外を握り潰さない=族B):
+      1. artifacts のキーが既存ファイルを指したら halt。本 seam は新規モジュール専用。
+      2. 書き先の realpath が pkg_root 配下に解決されたら halt(複製元の保護)。
+      3. artifacts のキーが `..` や絶対パスを含んだら halt(traversal)。
+      4. 中間パスが元側にファイルとして存在したら halt(seam.py と seam/ の衝突)。
+      5. 複製後、artifacts と created を除く全ファイルの sha256 が元と
+         一致しなければ halt。
+      6. manifest は sandbox_root/MIRROR_MANIFEST へ必ず書く。書けなければ halt。
+    """
+<<<FILL>>>
+<<<2DER:END>>>
+
+<<<2DER:IMMUTABLE_TESTS>>>
+import ast, hashlib, importlib.util, json, os, subprocess, sys
+import pytest
+
+_HERE = os.path.dirname(os.path.abspath(__file__))
+
+
+# --- artifact のロード（Finding 1: sandbox の artifact 名は impl.py） -----------
+def _load_artifact():
+    """runner は tp["target_file"]（既定 "impl.py"）へ書き、cwd=ws で pytest を回す。
+    探索名を pkg_mirror.py にしていたのが v0.3 の 0/10 の原因。
+    見つからなければ静かに skip せず落とす。skip は族A(空振り)。"""
+    for cand in (os.environ.get("ARTIFACT_PATH"),
+                 os.path.join(_HERE, "impl.py"),
+                 os.path.join(os.getcwd(), "impl.py")):
+        if cand and os.path.isfile(cand):
+            spec = importlib.util.spec_from_file_location("_pkg_mirror_artifact", cand)
+            mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(mod)
+            mod.__artifact_path__ = cand
+            return mod
+    raise RuntimeError(f"BOOTSTRAP_HALT: impl.py not found (_HERE={_HERE} cwd={os.getcwd()})")
+
+
+M = _load_artifact()
+mirror_package, MirrorHalt = M.mirror_package, M.MirrorHalt
+MIRROR_MANIFEST = M.MIRROR_MANIFEST
+SRC = open(M.__artifact_path__).read()
+
+
+# --- 合成パッケージ（Finding 2: 実 twoder を import しない） --------------------
+@pytest.fixture()
+def pkg_root(tmp_path_factory):
+    """複製元の役。代表性のため intra-package import とサブパッケージを含める。
+    名前を twoder にしないのは、実パッケージとの取り違えを構造的に不可能にするため。"""
+    root = tmp_path_factory.mktemp("src") / "synthpkg"
+    (root / "sub").mkdir(parents=True)
+    (root / "__init__.py").write_text("")
+    (root / "alpha.py").write_text("ALPHA = 1\n")
+    (root / "beta.py").write_text("from synthpkg.alpha import ALPHA\nBETA = ALPHA + 1\n")
+    (root / "sub" / "__init__.py").write_text("")
+    (root / "sub" / "gamma.py").write_text("GAMMA = 3\n")
+    return str(root)
+
+
+def _sha(p):
+    return hashlib.sha256(open(p, "rb").read()).hexdigest()
+
+
+def _tree_sha(root):
+    out = {}
+    for dp, _, fns in os.walk(root):
+        for fn in fns:
+            out[os.path.relpath(os.path.join(dp, fn), root)] = _sha(os.path.join(dp, fn))
+    return out
+
+
+def _run(sandbox, code):
+    return subprocess.run([sys.executable, "-c", code], cwd=str(sandbox),
+                          env={**os.environ, "PYTHONPATH": str(sandbox)},
+                          capture_output=True, text=True)
+
+
+# S1: artifact がパッケージ相対で import できる
+def test_s1_artifact_importable_under_package(tmp_path, pkg_root):
+    m = mirror_package(pkg_root, str(tmp_path), {"newmod.py": b"VALUE = 41 + 1\n"})
+    r = _run(tmp_path, "import synthpkg.newmod as m; print(m.VALUE)")
+    assert r.returncode == 0, r.stderr
+    assert r.stdout.strip() == "42"
+    assert "newmod.py" in m["artifacts"] and m["pkg"] == "synthpkg"
+
+
+# S2: shadow で壊していない。intra-package import とサブパッケージが生きる
+def test_s2_existing_modules_still_importable(tmp_path, pkg_root):
+    mirror_package(pkg_root, str(tmp_path), {"newmod.py": b"VALUE = 1\n"})
+    r = _run(tmp_path, "import synthpkg.beta as b, synthpkg.sub.gamma as g;"
+                       " print(b.BETA, g.GAMMA)")
+    assert r.returncode == 0, r.stderr
+    assert r.stdout.strip() == "2 3"
+
+
+# S3: 複製の接地。artifact と created 以外は元と sha256 一致
+def test_s3_mirror_is_byte_identical(tmp_path, pkg_root):
+    m = mirror_package(pkg_root, str(tmp_path), {"newmod.py": b"VALUE = 1\n"})
+    exempt = set(m["artifacts"]) | set(m["created"])
+    checked = 0
+    for rel, digest in m["files"].items():
+        if rel in exempt:
+            continue
+        assert digest == _sha(os.path.join(pkg_root, rel)), rel
+        checked += 1
+    assert checked >= 5, f"突合対象が {checked} 件。空振りしている(族A)"
+    assert json.load(open(os.path.join(str(tmp_path), MIRROR_MANIFEST)))["files"] == m["files"]
+
+
+# S4: 複製元に 1 バイトも書かない(人間の扉を守る規律の本体)
+def test_s4_source_untouched(tmp_path, pkg_root):
+    before = _tree_sha(pkg_root)
+    mirror_package(pkg_root, str(tmp_path), {"seam/newmod.py": b"VALUE = 1\n"})
+    assert _tree_sha(pkg_root) == before
+
+
+# S5: 既存ファイルの上書きは halt(本 seam は新規モジュール専用)
+def test_s5_overwrite_halts(tmp_path, pkg_root):
+    with pytest.raises(MirrorHalt):
+        mirror_package(pkg_root, str(tmp_path), {"alpha.py": b"# hijack\n"})
+
+
+# S6: path traversal は halt
+@pytest.mark.parametrize("bad", ["../evil.py", "/tmp/evil.py", "a/../../evil.py"])
+def test_s6_traversal_halts(tmp_path, pkg_root, bad):
+    with pytest.raises(MirrorHalt):
+        mirror_package(pkg_root, str(tmp_path), {bad: b"x\n"})
+
+
+# S7 陰性対照: 複製を1バイト壊すと S3 の突合が赤くなる
+def test_s7_negative_control(tmp_path, pkg_root):
+    m = mirror_package(pkg_root, str(tmp_path), {"newmod.py": b"VALUE = 1\n"})
+    exempt = set(m["artifacts"]) | set(m["created"])
+    victim = next(r for r in m["files"] if r not in exempt and r.endswith(".py"))
+    mirrored = os.path.join(str(tmp_path), m["pkg"], victim)
+    open(mirrored, "ab").write(b"\n")
+    assert _sha(mirrored) != _sha(os.path.join(pkg_root, victim))
+
+
+# S8 自己ホスティング: 自分自身を複製し、複製側がパッケージ経由で動く
+# ブートストラップ免除(§0.3)を免除のままにしない。サブパッケージ生成も同時に通る。
+def test_s8_self_hosting(tmp_path, pkg_root):
+    m = mirror_package(pkg_root, str(tmp_path), {"seam/pkg_mirror.py": SRC.encode()})
+    assert "seam/__init__.py" in m["created"]
+    r = _run(tmp_path, "from synthpkg.seam.pkg_mirror import mirror_package as f;"
+                       " print(f.__name__)")
+    assert r.returncode == 0, r.stderr
+    assert r.stdout.strip() == "mirror_package"
+
+
+# S9: 骨格で定義した名前の重複定義禁止(挿入は骨格検査では防げない)
+def test_s9_no_redefinition():
+    names = []
+    for node in ast.parse(SRC).body:
+        if isinstance(node, (ast.FunctionDef, ast.ClassDef)):
+            names.append(node.name)
+        elif isinstance(node, ast.Assign):
+            names += [t.id for t in node.targets if isinstance(t, ast.Name)]
+    for g in ("mirror_package", "sha256_file", "MirrorHalt",
+              "MIRROR_MANIFEST", "MIRROR_EXCLUDE"):
+        assert names.count(g) == 1, f"{g} が {names.count(g)} 回定義されている"
+
+
+# S10: ブートストラップ適格条件。twoder.* の静的 import 禁止
+def test_s10_no_intra_package_static_import():
+    for node in ast.walk(ast.parse(SRC)):
+        if isinstance(node, ast.Import):
+            for a in node.names:
+                assert not a.name.startswith("twoder"), a.name
+        elif isinstance(node, ast.ImportFrom):
+            assert not (node.module or "").startswith("twoder"), node.module
+<<<2DER:END>>>
