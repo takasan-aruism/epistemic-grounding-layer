@@ -1,0 +1,13 @@
+{"args": "", "kind": "CRON", "launch_target": "crontab (runtime; no static *.cron file found)", "source_file": "<runtime>", "status": "UNRESOLVED_DYNAMIC_LAUNCH"}
+{"args": "", "kind": "SHELL", "launch_target": "exit 0", "source_file": "dev-workcell/experiments/adjudicator_efficacy_v0.1/adjexp/problems/Q07_aggregate_execution_defect/sealed/baseline_setup/setup.sh", "status": "WIRED_EXECUTION_UNRESOLVED"}
+{"args": "", "kind": "SHELL", "launch_target": "rm -rf \"$(cd \"$(dirname \"$0\")\" && pwd)/fixtures\"", "source_file": "dev-workcell/experiments/adjudicator_efficacy_v0.1/adjexp/problems/Q07_aggregate_execution_defect/setup.sh", "status": "WIRED_EXECUTION_UNRESOLVED"}
+{"args": "", "kind": "SHELL", "launch_target": "set -eu", "source_file": "egl/autonomy/amend.sh", "status": "WIRED_EXECUTION_UNRESOLVED"}
+{"args": "", "kind": "SHELL", "launch_target": "set -euo pipefail", "source_file": "egl/experiments/ITEM-0015-ab/serve_qwen36_27b_ab_sleep.sh", "status": "WIRED_EXECUTION_UNRESOLVED"}
+{"args": "", "kind": "SHELL", "launch_target": "set -euo pipefail", "source_file": "egl/experiments/ITEM-0015-ab/serve_qwen36_ab_sleep.sh", "status": "WIRED_EXECUTION_UNRESOLVED"}
+{"args": "", "kind": "SHELL", "launch_target": "cd /home/takasan/egl", "source_file": "egl/experiments/rri_chain.sh", "status": "WIRED_EXECUTION_UNRESOLVED"}
+{"args": "", "kind": "SYSTEMD", "launch_target": "/srv/workcell/status/run-status.sh", "source_file": "egl/docs/SUBMIT_2026-07-21/06_runtime/twoder-status.service", "status": "WIRED_EXECUTION_UNRESOLVED"}
+{"args": "", "kind": "SYSTEMD", "launch_target": "/usr/bin/socat UNIX-LISTEN:/run/vllm/qwen.sock,fork,mode=0660 TCP:127.0.0.1:8005", "source_file": "egl/docs/SUBMIT_2026-07-21/06_runtime/vllm-socket-proxy.service", "status": "WIRED_EXECUTION_UNRESOLVED"}
+{"args": "", "kind": "SYSTEMD", "launch_target": "/srv/workcell/bin/run-with-proxy.sh %i", "source_file": "egl/docs/SUBMIT_2026-07-21/06_runtime/workcell-runner@.service", "status": "WIRED_EXECUTION_UNRESOLVED"}
+{"args": "", "kind": "TMUX", "launch_target": "sessions 2der/2der2 (attached; not in static source)", "source_file": "<runtime>", "status": "UNRESOLVED_DYNAMIC_LAUNCH"}
+{"args": "", "kind": "VLLM_ENDPOINT", "launch_target": "set -euo pipefail", "source_file": "egl/docs/SUBMIT_2026-07-21/06_runtime/run-with-proxy.sh", "status": "WIRED_EXECUTION_UNRESOLVED"}
+{"args": "", "kind": "VLLM_ENDPOINT", "launch_target": "set -euo pipefail", "source_file": "egl/experiments/ITEM-0015-ab/serve_qwen36_nofp8_nosleep_iso.sh", "status": "WIRED_EXECUTION_UNRESOLVED"}
