@@ -1,0 +1,30 @@
+{
+  "chart_status": "NO_STABLE_STRUCTURE",
+  "chosen_K": 10,
+  "cluster_vs_record_kind_ARI_at_K": 0.956517,
+  "margin_required": 0.05,
+  "n_features": 858,
+  "n_records": 1215,
+  "neg_control_agreement_by_K": {
+    "10": 0.518148,
+    "4": 0.449676,
+    "6": 0.572613,
+    "8": 0.537993
+  },
+  "note": "NO_STABLE_STRUCTURE: 唯一安定な構造が record-kind の自明分割(cluster vs kind ARI=0.957>=0.50)であり、意味ある account トポロジは無い。決定論素性(cooc/band)は種別しか復元しない=§0 の予想どおり。chart を捏造しない(初版 rejected_alternative の回避)。命名(2b-2)へ進まない。",
+  "real_agreement_by_K": {
+    "10": 0.956564,
+    "4": 0.781795,
+    "6": 0.766785,
+    "8": 0.791638
+  },
+  "real_minus_neg_at_K": 0.438416,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "trivial_kind_threshold": 0.5
+}
