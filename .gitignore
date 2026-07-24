@@ -14,3 +14,4 @@ INVESTIGATIONS.jsonl
 PROBLEMS.jsonl
 HANDOFFS.jsonl
 PROBLEM_LOG.jsonl
+structure/.embed_axes_vectors.npy
