@@ -9,7 +9,8 @@
 ## §0. grounding(実測・2026-07-24)
 - **本コードベースの LLM 呼出プリミティブは `urllib.request.urlopen(req, ...)`**(req は :8005/:8006 の `/v1/chat/completions` を POST)。**`requests`/`openai`/`httpx` は本線では使われていない**(grep 実測: requests.post は denylist/NET_MARKER 定義の2件のみ=呼出でない)。
 - **`:8005` 文字列一致の大半は docstring の否定宣言**(「no LLM/:8005, deterministic, hermetic」)。→ **文字列スキャン単独は vacuous oracle**(呼んでいないモジュールを呼出点と誤認)。**call と mention の区別が spec の核。**
-- 実呼出点(本線・実測): `twoder/qwen_worker.py` / `egl/structure/s2_extract.py` / `egl/autonomy/{ingest,investigate}.py` / `rri/rri/{research_intent,request_type}.py`(`_chat` wrapper) / `egl/egl/{self_grounding,adapters,judge_vllm}.py` / `ds/ds/phase1.py` / `dev-workcell/dw/adapters.py`。wrapper 集約点=`_chat`(rri×2)/`adjudicate`(judge_vllm/judge)/`call_vllm`(runner doc)。
+- 実呼出点(本線・実測): `twoder/qwen_worker.py` / `egl/structure/s2_extract.py` / `egl/autonomy/{ingest,investigate}.py` / `rri/rri/{research_intent,request_type}.py`(`_chat` wrapper) / `egl/egl/{self_grounding,judge_vllm}.py` / `ds/ds/phase1.py` / `dev-workcell/dw/adapters.py`。wrapper 集約点=`_chat`(rri×2)/`adjudicate`(judge_vllm/judge)/`call_vllm`(runner doc)。
+  - **[訂正 2026-07-24, 実装が反証]** 初版 §0 は `egl/egl/adapters.py` を LLM 呼出点に挙げたが**誤り** — これは `_http_get`/`fetch_github`/`fetch_http_static` の **HTTP web-fetch アダプタ**で :8005/chat を持たない(`dev-workcell/dw/adapters.py` との取り違え)。scanner は正しく CALL_SITE にしていない=AST が LLM/非LLM を弁別できている証拠。この訂正自体が「文字列 grounding を鵜呑みにしない」spec の狙いを実証。
 - `experiments/run_*.py`(≈30)は別クラス=研究 one-off。
 - README 矛盾(管理側指摘)の実像: `s2_extract.py:100` は urlopen 実呼出=README「LLM不使用」と**真に矛盾**。`s1_symbols.py:16` は `NET_HINT` 正規表現の定義のみ=**呼出でない**(mention)。→ 区別を台帳に反映。
 
