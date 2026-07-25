@@ -103,4 +103,39 @@ Claudeが徐々に距離を取り、**最終的に上級監査(senior audit)だ�
 - 移行A分析+第一スライス: `egl/docs/CC_MGR_2026-07-26_FRONT_DOOR_MIGRATION_A_ANALYSIS_AND_SLICE1_HANDOFF.md`
 
 ---
+
+## 6. RRI 設計思想と当面の心臓（2026-07-26 追記・Taka 詰め）
+
+この節は §1.2/§3 を深掘りした当面の焦点。**既存の spec/GAP/DE に接続して記録**（新体系を作らない）。
+
+### 6.1 RRI 設計思想（Taka）
+- **2DER は硬い決定論パイプラインではない。「道具を使いこなす LLM」。** 中継の**判断は LLM がやる**（途中の判断を機械化するのは無理）。**2DER の価値＝最初から"メニュー(選択肢)"を用意すること**。良いメニューを渡せば Qwen3.6 級でも矛盾しない選択をする。
+- **判断＝LLM(揺れ許容) / メニュー・構造＝2DER が決定論で用意**（[[llm_arithmetic_drift_tolerant_design]] と一致）。
+
+### 6.2 最重要＝初手に「意図調べ」を構造で強制
+- LLM(GPT/Claude 問わず)は**プロンプトを演算するだけ**で「まず意図を調べよう」と自発しない→放置で**初手で目的を取り違える**。so システムが「意図を調べる step」を**強制的に最初に挟む**必要がある。「何をするか」メニューは**意図が客観化された後**。
+- これは RRI spec の Core Thesis「入口で意図を誤れば高精度で間違った仕事を実行」と同旨。
+
+### 6.3 front RRI vs background RRI（＝別システム）
+- **front RRI**（受付/分類・submit の DS→RRI→EGL）＝**作ってある**。力は「それ既に試して失敗しただろ」を証拠付きで止める *retention/block*（generation でない）。
+- **background RRI**（本体・**大半未実装**）＝問い合わせを**意味分解→内外調査→必要ならEGL登録→必要ならDW呼出(設計/実装)**。EXEC_ARCH(コード構造地図)とは**無関係な別track**。
+
+### 6.4 当面の心臓＝GAP-RRI-5（意図調べ本体・未実装）
+- 具体＝RRI spec **§7 Intent Fluctuation Assessment(4軸: 文脈依存/答えの確定性/意図の広さ/前提の安定)** → **§9 Interpretation Strategy(7択メニュー: DIRECT/CONTEXT_RESOLVE/CHOICE/BOUNDED_MULTI_VIEW/INTENT_PROBE/PREMISE_PROBE/DEFER)**。**text→4軸の判定 LLM が未実装＝GAP-RRI-5**。骨(メニュー)在り・肉(LLM)無し。
+- **HBB-30(preflight_gate/DE-0194)は別物**＝曖昧な量的主張1パターンを見る既製の狭いガード。意図調べ本体ではない。
+- 下流の生成翼(Research Designer)＝GAP-XB-2、EGL emitter＝GAP-XB-3（[[DE-0064]] が命名）。
+
+### 6.5 接続する過去の実証（無視しない）
+- **DE-0068/0069/0071 (ODF実験)**＝背景RRIの中核実証。1観測事象から **RRI が自力で設計ニーズを生成**、独立監査が過剰主張を捕捉、**実 human 介入削減に繋がった**＝作り込む種は実証済み。
+- **DE-0231**＝生成翼(:8005)を意図的に後回し＝validator在り/generation無しの根。**DE-0159**＝07-08..10 reasoning 進化が live から orphaned。
+- 塩漬け実験計画 `OPERATIONAL_DESIGN_FORMATION_EXPERIMENT_PLAN.md`（この生成翼を延ばす）。
+
+### 6.6 実地の知見（2026-07-26）
+- Qwen で意図調べをやらせると**reasoning が発散**（:8005 ハング実測）＝**メニューは"発散しないほど tight"に**要設計。Taka「良いメニュー→矛盾しない選択」＋prompt衛生([[llm-prompt-hygiene-not-budget]])の実地確認。
+
+### 6.7 役割と retention
+- **Claude は RRI を"作る"（正当）が"やる"(grep/登録代行)はやめる**。登録も抽出も LLM判断+メニューで **2DER 自身**の機能に（[[ai-must-be-internal-actor-not-intruder]]）。
+- **この方向は従来 MGR memory + 本doc + 会話にしか無く retention リスク**だった→本節で記録化。formal な DE/spec追補は front door 経由(dogfood)で残すのが筋。
+
+---
 *本書は living overview。大きな状態変化があれば MGR が更新する。*
