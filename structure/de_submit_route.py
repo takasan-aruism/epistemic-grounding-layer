@@ -28,11 +28,20 @@ def build_raw_input(candidate):
     return "%s: %s — %s" % (MARKER, did, obs)
 
 
+def now_ts():
+    """実時刻(UTC・DE ledger の admitted_at 形式 2026-07-25T11:45:21Z)。de_admission 直叩きと同じ実時刻源。"""
+    from datetime import datetime, timezone
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
 def admit_via_submit(candidate, ts=None, ledger_path=None):
     """front door(submit)経由で DE を admit。submit が DS→RRI classify→egl.de_admission→residual→DS thread を回す。
-    返り (result, trace): result=TRACE['EGL_ADMISSION_RESULT']（直叩きと同一関数の戻り）、trace=front-door provenance。
-    ts は submit がハードコードするため注入しない(API 対称性のため受けるだけ)。"""
+    slice1b: ts を submit へ**実注入**(submit は受領のみ・生成しない)。ts 未指定=実時刻を生成して渡す
+    (呼び手が実時刻を与える＝de_admission 直叩きと同じ源＝admitted_at の実時刻運用を維持)。
+    返り (result, trace): result=TRACE['EGL_ADMISSION_RESULT']（直叩きと同一関数の戻り）、trace=front-door provenance。"""
     import twoder.submit as SUB
+    if ts is None:
+        ts = now_ts()
     raw = build_raw_input(candidate)
-    trace = SUB.submit(raw, admission_payload=dict(candidate), ledger_path=ledger_path)
+    trace = SUB.submit(raw, admission_payload=dict(candidate), ledger_path=ledger_path, ts=ts)
     return trace.get("EGL_ADMISSION_RESULT"), trace

@@ -57,21 +57,22 @@ def _hermetic_env():
     return d
 
 
-def run_pair(entry):
-    """1 candidate を2経路で別 temp ledger に admit。同一 ts(submit の正典 ts)で比較。
+# 決定論の実時刻フォーマット ts(harness を安定させるため固定・実運用は de_submit_route.now_ts が実時刻を生成)
+TEST_TS = "2026-07-26T09:00:00Z"
+
+
+def run_pair(entry, ts):
+    """1 candidate を2経路で別 temp ledger に admit。**実時刻フォーマット ts を両経路へ注入**して比較(slice1b)。
     返り dict: label / row_direct / row_submit / res_direct / res_submit / has_frontdoor_trace / loop。"""
     import de_submit_route as R
     from egl import de_admission as DEA
     cand = entry["cand"]
     tmpA = tempfile.mktemp(dir=TMPBASE, suffix="_direct.jsonl")
     tmpB = tempfile.mktemp(dir=TMPBASE, suffix="_submit.jsonl")
-    # route B(submit) 先 → 正典 ts を抽出(submit がハードコードする ts に直叩きを合わせる)
-    resB, trace = R.admit_via_submit(cand, ledger_path=tmpB)
-    rowB = _read(tmpB)
-    ts = json.loads(rowB)["egl_admission"]["admitted_at"] if rowB.strip() else "2026-07-11T08:00:00"
-    # route A(直叩き) 同一 ts
-    resA = DEA.admit_design_evidence(dict(cand), ts, ledger_path=tmpB and tmpA)
-    rowA = _read(tmpA)
+    # route B(submit) に実 ts を注入 / route A(直叩き) 同一 ts
+    resB, trace = R.admit_via_submit(cand, ts=ts, ledger_path=tmpB)
+    resA = DEA.admit_design_evidence(dict(cand), ts, ledger_path=tmpA)
+    rowA, rowB = _read(tmpA), _read(tmpB)
     for t in (tmpA, tmpB):
         if os.path.isfile(t):
             os.unlink(t)
@@ -79,6 +80,20 @@ def run_pair(entry):
             "res_direct": resA, "res_submit": resB,
             "loop": trace.get("ADMISSION_LOOP_TRACE"),
             "has_frontdoor_trace": bool(trace.get("RRI_ADMISSION_CLASSIFICATION")) and bool(trace.get("DS_THREAD_UPDATE") or not resB.get("admitted"))}
+
+
+def _backward_compat_ts():
+    """後方互換: ts を渡さない submit caller は既定ハードコード ts へ fallback(既存挙動不変)。返り (ok, admitted_at)。"""
+    import de_submit_route as R
+    import twoder.submit as SUB
+    cand = CANDIDATES[0]["cand"]
+    tmp = tempfile.mktemp(dir=TMPBASE, suffix="_bc.jsonl")
+    trace = SUB.submit(R.build_raw_input(cand), admission_payload=dict(cand), ledger_path=tmp)  # ts 未指定
+    row = _read(tmp)
+    if os.path.isfile(tmp):
+        os.unlink(tmp)
+    at = json.loads(row)["egl_admission"]["admitted_at"] if row.strip() else None
+    return at == "2026-07-11T08:00:00", at
 
 
 def _diff(a, b):
@@ -94,9 +109,13 @@ def check():
     real_before = _sha(REAL_LEDGER)
     _hermetic_env()
     red, results = [], []
+    # 後方互換(slice1b): ts 未指定 submit は既定ハードコード ts へ fallback(既存 caller 無影響)
+    bc_ok, bc_at = _backward_compat_ts()
+    if not bc_ok:
+        red.append("BACKWARD_COMPAT_BROKEN: ts 未指定 submit の admitted_at=%r (既定 2026-07-11T08:00:00 でない)" % bc_at)
     for entry in CANDIDATES:
         try:
-            r = run_pair(entry)
+            r = run_pair(entry, TEST_TS)
         except Exception as e:
             red.append("ROUTE_ERROR[%s]: %r" % (entry["label"], e))
             continue
@@ -122,9 +141,10 @@ def check():
             print("  " + m)
         return 1
     n_admit = sum(1 for r in results if r["res_submit"].get("admitted"))
-    print("DE_ROUTE_EQUIV --check: GREEN (ledger-row byte 同値 %d candidate[admit=%d/reject=%d]; "
-          "front-door provenance 生成; sole-writer=egl.de_admission 不変; 実 ledger 不汚染; 直叩き未閉塞=並行運用)"
-          % (len(results), n_admit, len(results) - n_admit))
+    print("DE_ROUTE_EQUIV --check: GREEN (実 ts 注入で ledger-row byte 同値 %d candidate[admit=%d/reject=%d]; "
+          "後方互換=ts未指定 submit は既定 ts(%s); front-door provenance 生成; sole-writer=egl.de_admission 不変; "
+          "実 ledger 不汚染; 直叩き未閉塞=並行運用)"
+          % (len(results), n_admit, len(results) - n_admit, bc_at))
     for r in results:
         st = (r["res_submit"] or {}).get("admission_status")
         print("  %-20s route-equal=%s status=%s loop=%s"
