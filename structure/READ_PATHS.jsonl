@@ -1,17 +1,38 @@
-{"actually_loaded": ["REACHABILITY.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s10_ledger_registry", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": ["LEDGER_REGISTRY.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s11_ledger_flow", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": true, "path": "REACHABILITY.jsonl", "required_by_contract": true, "stage": "s10_ledger_registry", "verdict": "OK"}
+{"actually_loaded": true, "path": "LEDGER_REGISTRY.jsonl", "required_by_contract": true, "stage": "s11_ledger_flow", "verdict": "OK"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s1_manifest", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": ["SYMBOL_INDEX.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s1_reach", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": ["FILE_MANIFEST.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s1_symbols", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": ["FILE_MANIFEST.jsonl", "SYMBOL_INDEX.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s2_extract", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": ["ARTIFACT_REGISTRY.jsonl", "COMPLETION_DEFINITION_REGISTRY.jsonl", "EXECUTION_EVIDENCE.jsonl", "FILE_EXTRACTION_CONSENSUS.jsonl", "FILE_MANIFEST.jsonl", "REACHABILITY.jsonl", "ROADMAP_REGISTRY.jsonl", "SYMBOL_INDEX.jsonl", "SYMBOL_REACHABILITY.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s3_components", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": ["COMPONENT_INVENTORY.jsonl", "FILE_MANIFEST.jsonl", "REACHABILITY.jsonl", "SYMBOL_INDEX.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s4_edges", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": true, "path": "SYMBOL_INDEX.jsonl", "required_by_contract": true, "stage": "s1_reach", "verdict": "OK"}
+{"actually_loaded": true, "path": "FILE_MANIFEST.jsonl", "required_by_contract": true, "stage": "s1_symbols", "verdict": "OK"}
+{"actually_loaded": true, "path": "FILE_MANIFEST.jsonl", "required_by_contract": true, "stage": "s2_extract", "verdict": "OK"}
+{"actually_loaded": true, "path": "SYMBOL_INDEX.jsonl", "required_by_contract": true, "stage": "s2_extract", "verdict": "OK"}
+{"actually_loaded": true, "path": "ARTIFACT_REGISTRY.jsonl", "required_by_contract": true, "stage": "s3_components", "verdict": "OK"}
+{"actually_loaded": true, "path": "COMPLETION_DEFINITION_REGISTRY.jsonl", "required_by_contract": true, "stage": "s3_components", "verdict": "OK"}
+{"actually_loaded": true, "path": "EXECUTION_EVIDENCE.jsonl", "required_by_contract": true, "stage": "s3_components", "verdict": "OK"}
+{"actually_loaded": true, "path": "FILE_EXTRACTION_CONSENSUS.jsonl", "required_by_contract": true, "stage": "s3_components", "verdict": "OK"}
+{"actually_loaded": true, "path": "FILE_MANIFEST.jsonl", "required_by_contract": true, "stage": "s3_components", "verdict": "OK"}
+{"actually_loaded": true, "path": "REACHABILITY.jsonl", "required_by_contract": true, "stage": "s3_components", "verdict": "OK"}
+{"actually_loaded": true, "path": "ROADMAP_REGISTRY.jsonl", "required_by_contract": true, "stage": "s3_components", "verdict": "OK"}
+{"actually_loaded": true, "path": "SYMBOL_INDEX.jsonl", "required_by_contract": true, "stage": "s3_components", "verdict": "OK"}
+{"actually_loaded": true, "path": "SYMBOL_REACHABILITY.jsonl", "required_by_contract": true, "stage": "s3_components", "verdict": "OK"}
+{"actually_loaded": true, "path": "COMPONENT_INVENTORY.jsonl", "required_by_contract": true, "stage": "s4_edges", "verdict": "OK"}
+{"actually_loaded": true, "path": "FILE_MANIFEST.jsonl", "required_by_contract": true, "stage": "s4_edges", "verdict": "OK"}
+{"actually_loaded": true, "path": "REACHABILITY.jsonl", "required_by_contract": true, "stage": "s4_edges", "verdict": "OK"}
+{"actually_loaded": true, "path": "SYMBOL_INDEX.jsonl", "required_by_contract": true, "stage": "s4_edges", "verdict": "OK"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s5_history", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": ["COMPONENT_INVENTORY.jsonl", "EDGE_INVENTORY.jsonl", "FILE_EXTRACTION_CONSENSUS.jsonl", "FILE_MANIFEST.jsonl", "ITEM_LADDER.jsonl", "REACHABILITY.jsonl", "SYMBOL_INDEX.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s6_contradictions", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": true, "path": "COMPONENT_INVENTORY.jsonl", "required_by_contract": true, "stage": "s6_contradictions", "verdict": "OK"}
+{"actually_loaded": true, "path": "EDGE_INVENTORY.jsonl", "required_by_contract": true, "stage": "s6_contradictions", "verdict": "OK"}
+{"actually_loaded": true, "path": "FILE_EXTRACTION_CONSENSUS.jsonl", "required_by_contract": true, "stage": "s6_contradictions", "verdict": "OK"}
+{"actually_loaded": true, "path": "FILE_MANIFEST.jsonl", "required_by_contract": true, "stage": "s6_contradictions", "verdict": "OK"}
+{"actually_loaded": true, "path": "ITEM_LADDER.jsonl", "required_by_contract": true, "stage": "s6_contradictions", "verdict": "OK"}
+{"actually_loaded": true, "path": "REACHABILITY.jsonl", "required_by_contract": true, "stage": "s6_contradictions", "verdict": "OK"}
+{"actually_loaded": true, "path": "SYMBOL_INDEX.jsonl", "required_by_contract": true, "stage": "s6_contradictions", "verdict": "OK"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s7_traceability", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": ["CONTRADICTIONS.jsonl", "ITEM_LADDER.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s9_done_semantics", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": true, "path": "CONTRADICTIONS.jsonl", "required_by_contract": true, "stage": "s9_done_semantics", "verdict": "OK"}
+{"actually_loaded": true, "path": "ITEM_LADDER.jsonl", "required_by_contract": true, "stage": "s9_done_semantics", "verdict": "OK"}
 {"actually_loaded": ["ACCOUNT_AXES_v1.json", "ACCOUNT_MEMBERSHIP.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_account_axes", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": ["DESIGN_EVIDENCE_LEDGER.jsonl", "EMBED_AXES_CANDIDATE.jsonl", "EMBED_AXES_STABILITY.json", "rri_records.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_embed_axes", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": true, "path": "DESIGN_EVIDENCE_LEDGER.jsonl", "required_by_contract": true, "stage": "s_embed_axes", "verdict": "OK"}
+{"actually_loaded": true, "path": "rri_records.jsonl", "required_by_contract": true, "stage": "s_embed_axes", "verdict": "OK"}
 {"actually_loaded": ["ENTRYPOINTS_EXT.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_exec_arch_acd", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["LLM_INVOCATIONS.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_llm_invocations", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": ["ACCOUNT_CHART_CANDIDATE.jsonl", "ACCOUNT_CHART_STABILITY.json", "DESIGN_EVIDENCE_LEDGER.jsonl", "rri_records.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_mine_accounts", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": true, "path": "DESIGN_EVIDENCE_LEDGER.jsonl", "required_by_contract": true, "stage": "s_mine_accounts", "verdict": "OK"}
+{"actually_loaded": true, "path": "rri_records.jsonl", "required_by_contract": true, "stage": "s_mine_accounts", "verdict": "OK"}

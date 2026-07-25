@@ -1,1 +1,12 @@
 # REQUIRED_INPUTS(authored)。{task_id, required_inputs:[paths], authored_by}。空で始める。設計/人が書く。build は読むだけ=上書きしない。auto 生成で埋めない。
+{"task_id": "s1_symbols", "required_inputs": ["FILE_MANIFEST.jsonl"], "authored_by": "CC-alpha"}
+{"task_id": "s1_reach", "required_inputs": ["SYMBOL_INDEX.jsonl"], "authored_by": "CC-alpha"}
+{"task_id": "s4_edges", "required_inputs": ["FILE_MANIFEST.jsonl", "SYMBOL_INDEX.jsonl", "REACHABILITY.jsonl", "COMPONENT_INVENTORY.jsonl"], "authored_by": "CC-alpha"}
+{"task_id": "s2_extract", "required_inputs": ["FILE_MANIFEST.jsonl", "SYMBOL_INDEX.jsonl"], "authored_by": "CC-alpha"}
+{"task_id": "s3_components", "required_inputs": ["ARTIFACT_REGISTRY.jsonl", "COMPLETION_DEFINITION_REGISTRY.jsonl", "EXECUTION_EVIDENCE.jsonl", "FILE_EXTRACTION_CONSENSUS.jsonl", "FILE_MANIFEST.jsonl", "REACHABILITY.jsonl", "ROADMAP_REGISTRY.jsonl", "SYMBOL_INDEX.jsonl", "SYMBOL_REACHABILITY.jsonl"], "authored_by": "CC-alpha"}
+{"task_id": "s6_contradictions", "required_inputs": ["COMPONENT_INVENTORY.jsonl", "EDGE_INVENTORY.jsonl", "FILE_EXTRACTION_CONSENSUS.jsonl", "FILE_MANIFEST.jsonl", "ITEM_LADDER.jsonl", "REACHABILITY.jsonl", "SYMBOL_INDEX.jsonl"], "authored_by": "CC-alpha"}
+{"task_id": "s9_done_semantics", "required_inputs": ["CONTRADICTIONS.jsonl", "ITEM_LADDER.jsonl"], "authored_by": "CC-alpha"}
+{"task_id": "s10_ledger_registry", "required_inputs": ["REACHABILITY.jsonl"], "authored_by": "CC-alpha"}
+{"task_id": "s11_ledger_flow", "required_inputs": ["LEDGER_REGISTRY.jsonl"], "authored_by": "CC-alpha"}
+{"task_id": "s_embed_axes", "required_inputs": ["DESIGN_EVIDENCE_LEDGER.jsonl", "rri_records.jsonl"], "authored_by": "CC-alpha"}
+{"task_id": "s_mine_accounts", "required_inputs": ["DESIGN_EVIDENCE_LEDGER.jsonl", "rri_records.jsonl"], "authored_by": "CC-alpha"}
