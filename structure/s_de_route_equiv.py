@@ -82,6 +82,22 @@ def run_pair(entry, ts):
             "has_frontdoor_trace": bool(trace.get("RRI_ADMISSION_CLASSIFICATION")) and bool(trace.get("DS_THREAD_UPDATE") or not resB.get("admitted"))}
 
 
+def _record_de_routes_equal():
+    """正典 record_de の route="submit"(front door) と route="direct"(rollback) が同 candidate+ts で byte 同値 ledger 行。
+    返り (ok, diff)。切替点(呼び出し口)の dispatch が ledger 行を変えないことを確認。"""
+    import de_submit_route as R
+    cand = CANDIDATES[0]["cand"]
+    tmpS = tempfile.mktemp(dir=TMPBASE, suffix="_rd_submit.jsonl")
+    tmpD = tempfile.mktemp(dir=TMPBASE, suffix="_rd_direct.jsonl")
+    R.record_de(cand, ts=TEST_TS, ledger_path=tmpS, route="submit")
+    R.record_de(cand, ts=TEST_TS, ledger_path=tmpD, route="direct")
+    rowS, rowD = _read(tmpS), _read(tmpD)
+    for t in (tmpS, tmpD):
+        if os.path.isfile(t):
+            os.unlink(t)
+    return rowS == rowD, _diff(rowD, rowS)
+
+
 def _backward_compat_ts():
     """後方互換: ts を渡さない submit caller は既定ハードコード ts へ fallback(既存挙動不変)。返り (ok, admitted_at)。"""
     import de_submit_route as R
@@ -113,6 +129,10 @@ def check():
     bc_ok, bc_at = _backward_compat_ts()
     if not bc_ok:
         red.append("BACKWARD_COMPAT_BROKEN: ts 未指定 submit の admitted_at=%r (既定 2026-07-11T08:00:00 でない)" % bc_at)
+    # slice1c: 正典 record_de の front door/direct 両 route が byte 同値(切替点=呼び出し口のみ)
+    rd_ok, rd_diff = _record_de_routes_equal()
+    if not rd_ok:
+        red.append("RECORD_DE_ROUTE_DIVERGENCE: submit vs direct が不一致 — %s" % rd_diff)
     for entry in CANDIDATES:
         try:
             r = run_pair(entry, TEST_TS)

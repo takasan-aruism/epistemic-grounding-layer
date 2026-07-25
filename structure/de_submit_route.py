@@ -45,3 +45,25 @@ def admit_via_submit(candidate, ts=None, ledger_path=None):
     raw = build_raw_input(candidate)
     trace = SUB.submit(raw, admission_payload=dict(candidate), ledger_path=ledger_path, ts=ts)
     return trace.get("EGL_ADMISSION_RESULT"), trace
+
+
+def record_de(candidate, ts=None, ledger_path=None, route=None):
+    """正典 DE 記録ルーチン(slice1c switch)。**既定=front door**(submit 経由・実 ts=admit_via_submit)。
+
+    我々の DE 記録が正面玄関(DS→RRI→egl.de_admission→residual→DS thread)を通る内部アクター化の入口。
+    切替点は**呼び出し口のみ**(de_admission 本体/ledger schema は不変・sole-writer=egl.de_admission)。
+
+    route: "submit"(既定・front door) / "direct"(rollback=直叩き admit_design_evidence)。
+      解決順: 引数 route → env `DE_ROUTE` → "submit"。**Rollback 手順**: `record_de(cand, route="direct")`
+      もしくは `DE_ROUTE=direct` を export すれば即 直叩きへ戻る(直叩き未閉塞・並行運用)。
+    返り: admission result(直叩きと同形: admitted/design_evidence_id/admission_status/…)。
+    """
+    import os as _os
+    r = route or _os.environ.get("DE_ROUTE") or "submit"
+    if ts is None:
+        ts = now_ts()
+    if r == "direct":
+        from egl import de_admission as DEA
+        return DEA.admit_design_evidence(dict(candidate), ts, ledger_path=ledger_path)
+    result, _trace = admit_via_submit(candidate, ts=ts, ledger_path=ledger_path)
+    return result
