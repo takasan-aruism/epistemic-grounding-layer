@@ -12,7 +12,7 @@
 {"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "dev-workcell/dw/workcell.py:STATES", "source_file": "dev-workcell/dw/workcell.py", "state_symbol": "READY_FOR_UPPER_REVIEW"}
 {"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "dev-workcell/dw/workcell.py:STATES", "source_file": "dev-workcell/dw/workcell.py", "state_symbol": "REWORK"}
 {"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "ds/ds/phase1.py:DIALOGUE_STATES", "source_file": "ds/ds/phase1.py", "state_symbol": "ACTIVE"}
-{"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "ds/ds/phase1.py:DIALOGUE_STATES", "source_file": "ds/ds/phase1.py", "state_symbol": "CLOSED"}
+{"canonical": "STATE_THREAD_CLOSED", "machine": "ds/ds/phase1.py:DIALOGUE_STATES", "source_file": "ds/ds/phase1.py", "state_symbol": "CLOSED"}
 {"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "ds/ds/phase1.py:DIALOGUE_STATES", "source_file": "ds/ds/phase1.py", "state_symbol": "DORMANT"}
 {"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "ds/ds/phase1.py:DIALOGUE_STATES", "source_file": "ds/ds/phase1.py", "state_symbol": "OPEN"}
 {"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "ds/ds/phase1.py:DIALOGUE_STATES", "source_file": "ds/ds/phase1.py", "state_symbol": "PARTIALLY_CLOSED"}
@@ -20,7 +20,7 @@
 {"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "ds/ds/phase1.py:DIALOGUE_STATES", "source_file": "ds/ds/phase1.py", "state_symbol": "SUPERSEDED"}
 {"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "ds/ds/phase1.py:DIALOGUE_STATES", "source_file": "ds/ds/phase1.py", "state_symbol": "UNRESOLVED"}
 {"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "rri/rri/request_thread.py:STATES", "source_file": "rri/rri/request_thread.py", "state_symbol": "AWAITING_HUMAN"}
-{"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "rri/rri/request_thread.py:STATES", "source_file": "rri/rri/request_thread.py", "state_symbol": "CLOSED"}
+{"canonical": "STATE_THREAD_CLOSED", "machine": "rri/rri/request_thread.py:STATES", "source_file": "rri/rri/request_thread.py", "state_symbol": "CLOSED"}
 {"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "rri/rri/request_thread.py:STATES", "source_file": "rri/rri/request_thread.py", "state_symbol": "DISPATCHABLE"}
 {"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "rri/rri/request_thread.py:STATES", "source_file": "rri/rri/request_thread.py", "state_symbol": "NARROWING"}
 {"canonical": "UNRESOLVED_NO_CANONICAL", "machine": "rri/rri/request_thread.py:STATES", "source_file": "rri/rri/request_thread.py", "state_symbol": "RESOLVED"}
