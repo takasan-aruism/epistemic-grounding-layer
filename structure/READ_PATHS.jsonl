@@ -1,15 +1,15 @@
-{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s10_ledger_registry", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s11_ledger_flow", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["REACHABILITY.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s10_ledger_registry", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["LEDGER_REGISTRY.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s11_ledger_flow", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s1_manifest", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s1_reach", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s1_symbols", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s2_extract", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s3_components", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s4_edges", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["SYMBOL_INDEX.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s1_reach", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["FILE_MANIFEST.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s1_symbols", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["FILE_MANIFEST.jsonl", "SYMBOL_INDEX.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s2_extract", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["ARTIFACT_REGISTRY.jsonl", "COMPLETION_DEFINITION_REGISTRY.jsonl", "EXECUTION_EVIDENCE.jsonl", "FILE_EXTRACTION_CONSENSUS.jsonl", "FILE_MANIFEST.jsonl", "REACHABILITY.jsonl", "ROADMAP_REGISTRY.jsonl", "SYMBOL_INDEX.jsonl", "SYMBOL_REACHABILITY.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s3_components", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["COMPONENT_INVENTORY.jsonl", "FILE_MANIFEST.jsonl", "REACHABILITY.jsonl", "SYMBOL_INDEX.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s4_edges", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s5_history", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s6_contradictions", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["COMPONENT_INVENTORY.jsonl", "EDGE_INVENTORY.jsonl", "FILE_EXTRACTION_CONSENSUS.jsonl", "FILE_MANIFEST.jsonl", "ITEM_LADDER.jsonl", "REACHABILITY.jsonl", "SYMBOL_INDEX.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s6_contradictions", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s7_traceability", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s9_done_semantics", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["CONTRADICTIONS.jsonl", "ITEM_LADDER.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s9_done_semantics", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["ACCOUNT_AXES_v1.json", "ACCOUNT_MEMBERSHIP.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_account_axes", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["DESIGN_EVIDENCE_LEDGER.jsonl", "EMBED_AXES_CANDIDATE.jsonl", "EMBED_AXES_STABILITY.json", "rri_records.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_embed_axes", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["ENTRYPOINTS_EXT.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_exec_arch_acd", "verdict": "UNRESOLVED_NO_CONTRACT"}

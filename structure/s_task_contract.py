@@ -47,12 +47,21 @@ def _join_literal(node):
     return None
 
 
+def _binop_basename(node):
+    """pathlib の `S / "literal"`(ast.BinOp op=Div)の末尾 str Constant を basename として返す。
+    連鎖 `S/"a"/"b"` は末尾(`b`)を採用(既存 basename 方針と一致)。base の中身は問わない(basename のみ要)。"""
+    if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Div) \
+            and isinstance(node.right, ast.Constant) and isinstance(node.right.value, str):
+        return node.right.value
+    return None
+
+
 def _path_of(node, const):
     if isinstance(node, ast.Constant) and isinstance(node.value, str):
         return node.value
     if isinstance(node, ast.Name):
         return const.get(node.id)
-    return _join_literal(node)
+    return _join_literal(node) or _binop_basename(node)
 
 
 def _writes_and_reads(path):
@@ -66,7 +75,7 @@ def _writes_and_reads(path):
             if isinstance(n.value, ast.Constant) and isinstance(n.value.value, str):
                 v = n.value.value
             else:
-                v = _join_literal(n.value)
+                v = _join_literal(n.value) or _binop_basename(n.value)   # `OUT = S/"X.jsonl"` も解決
             if v is not None:
                 for t in n.targets:
                     if isinstance(t, ast.Name):
@@ -217,6 +226,14 @@ def check():
     tc = build_C([{"task_id": "probe", "required_inputs": ["nonexistent_input.jsonl"], "actually_loaded": []}])
     if not any(r["verdict"] == "MISSING" for r in tc):
         red.append("C_DETECTION_FAILED: unread required input not flagged MISSING")
+    # §pathlib 検出力(陰性対照): s4_edges は open(S/"FILE_MANIFEST.jsonl") 等を pathlib で読む
+    # → actually_loaded に含まれること(Path/"x" 解決を外すと拾えず RED=回帰模擬)
+    _s4 = os.path.join(STRUCT, "s4_edges.py")
+    if os.path.isfile(_s4):
+        _, _s4r = _writes_and_reads(_s4)
+        for _need in ("FILE_MANIFEST.jsonl", "SYMBOL_INDEX.jsonl"):
+            if _need not in _s4r:
+                red.append("PATHLIB_DETECTION_FAILED: s4_edges pathlib read %s not detected" % _need)
     # §authored-wiring 検出力(陰性対照): REQUIRED_INPUTS.jsonl に1件注入 → ①file→dict→merge が保全 ②C が UNRESOLVED_NO_CONTRACT から脱す
     # (源=別ファイルに分離。auto-hardcode 回帰なら注入値が消え RED。実 OUT_REQ は触らず temp で round-trip)
     if contracts:
