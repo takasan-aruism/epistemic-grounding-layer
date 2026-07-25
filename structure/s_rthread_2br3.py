@@ -183,12 +183,15 @@ def build_v2(recs, X, cands):
     v2["n_frozen_axes"] = len(v2["axes"])
     v2["note"] = "v2 = v1 不変コピー + Taka 承認済み新軸 %d 本(2b-r3)。v1 は不変。" % len(new_axes)
 
-    # v2 基準で re-membership(axes_version 自己記述)。dirs = v2 全軸。負の制御相対(A.assign_membership を共有)。
-    dirs = np.array([a["frozen_direction"] for a in v2["axes"]]) if v2["axes"] else np.zeros((0, X.shape[1]))
-    Xall = R._load_vectors(recs)   # 注: 承認時の membership は全 corpus を v2 基準で再評価
-    hits, dens_list, null = A.assign_membership(Xall, dirs)
+    # v2 基準で re-membership(axes_version 自己記述)。**全 corpus(388)** を母集団に(その他部分集合でない=completeness)。
+    # 由来: 2b-r3 は freeze-0 時代(その他=全corpus)に作られたが、v1 が軸を持つ今 その他(274)≠全corpus(388)。
+    # 母集団を全 corpus に戻し、AX-72ead44e 所属114件の欠落・多重所属漏れ・v2 I1 の 274 過小担保を根治。
+    full_recs = R._content_records()
+    Xfull = R._load_vectors(full_recs)
+    dirs = np.array([a["frozen_direction"] for a in v2["axes"]]) if v2["axes"] else np.zeros((0, Xfull.shape[1]))
+    hits, dens_list, null = A.assign_membership(Xfull, dirs)   # 負の制御相対・v2 全軸・多重所属可
     memb2 = []
-    for i, (nid, kind, _) in enumerate(recs):
+    for i, (nid, kind, _) in enumerate(full_recs):
         dens = dens_list[i]
         hit = [{"axis_id": v2["axes"][a]["axis_id"], "density": round(float(dens[a]), 6),
                 "margin_over_null": round(float(dens[a] - null[a]), 6)} for a in hits[i]]
@@ -283,8 +286,13 @@ def check():
             red.append("REGEN_MISMATCH: ACCOUNT_AXES_v2.json")
         if not os.path.isfile(OUT_MEMB2) or open(OUT_MEMB2, encoding="utf-8").read() != _ser_memb(memb2):
             red.append("REGEN_MISMATCH: ACCOUNT_MEMBERSHIP_v2.jsonl")
+        # §completeness: v2 membership は **全 corpus** を母集団に(その他部分集合でない)。全388の zero-drop 担保。
+        n_full = len(R._content_records())
+        if len(memb2) != n_full:
+            red.append("V2_MEMBERSHIP_INCOMPLETE: membership_v2=%d != full corpus %d (その他部分集合で評価している)"
+                       % (len(memb2), n_full))
 
-    # §6-5 I1 保存則 + ゼロ落ち検出(陰性対照): 1件落とすと保存則が破れる
+    # §6-5 I1 保存則 + ゼロ落ち検出(陰性対照): 1件落とすと保存則が破れる(v2 時=全corpus 388, 候補段階=その他)
     ok, info = check_conservation(memb)
     if not ok:
         red.append("I1_CONSERVATION_FAILED: %s" % info)
