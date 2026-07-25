@@ -1,0 +1,29 @@
+#!/bin/sh
+# meta 派生台帳の commit-境界 self-heal。
+# structure/*.py が staged の時のみ発火し、script 集合を走査する meta 派生(LLM_INVOCATIONS/TASK_CONTRACTS)を
+# regen+再ステージ。新 structure/ script 追加で meta が stale→commit 跨ぎ RED、を構造的に断つ。
+# **AST 走査限定・HF/GPU/埋め込み系は絶対に回さない**(regen_meta の META リストが軽量に限定)。
+root=$(git rev-parse --show-toplevel) || exit 0
+cd "$root" || exit 0
+
+# structure/*.py が staged に含まれる時のみ(それ以外=ledger/doc の commit は no-op=latency ゼロ)
+if ! git diff --cached --name-only --diff-filter=ACM | grep -q '^structure/.*\.py$'; then
+    exit 0
+fi
+
+# meta 台帳を regen(決定論・冪等・軽量)
+if ! python3 structure/regen_meta.py; then
+    echo "pre-commit: regen_meta の実行に失敗。commit を中止。" >&2
+    exit 1
+fi
+
+# regen した meta 出力を再ステージ(unchanged なら no-op)
+git add structure/LLM_INVOCATIONS.jsonl structure/TASK_CONTRACTS.jsonl \
+        structure/READ_PATHS.jsonl structure/STATE_MACHINES.jsonl 2>/dev/null
+
+# fold 後も RED(真の異常)なら commit を中止し具体名を表示
+if ! python3 structure/regen_meta.py --check; then
+    echo "pre-commit: META LEDGER STALE — commit を中止(上記 meta を fold せよ)。" >&2
+    exit 1
+fi
+exit 0
