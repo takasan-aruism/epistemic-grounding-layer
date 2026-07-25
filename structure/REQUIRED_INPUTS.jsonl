@@ -1,0 +1,1 @@
+# REQUIRED_INPUTS(authored)。{task_id, required_inputs:[paths], authored_by}。空で始める。設計/人が書く。build は読むだけ=上書きしない。auto 生成で埋めない。

@@ -6,7 +6,8 @@ A/C/D の C/D が解けなかった根因=「比較対象(正典)が未定義」
 判断項目(required_inputs の"読むべき" / 状態の canonical 意味)は**設計が後で authored**。空から慎重に育てる。
 
 生成:
-  TASK_CONTRACTS.jsonl   — 1 タスク 1 行。required_inputs は authored 前は UNRESOLVED_NO_CONTRACT
+  TASK_CONTRACTS.jsonl   — 1 タスク 1 行。required_inputs は REQUIRED_INPUTS.jsonl(authored)から merge・無ければ UNRESOLVED_NO_CONTRACT
+  REQUIRED_INPUTS.jsonl  — required_inputs の authored 源。build は読むだけ=上書きしない(seed-if-absent のみ)。設計/人が書く
   CANONICAL_STATES.jsonl — 正規化辞書(authored)。空で始めてよい。auto-collapse 禁止(同綴り別意を消さない)
   READ_PATHS.jsonl(C)    — 契約駆動: required_inputs vs actually_loaded → MISSING/OK/UNRESOLVED_NO_CONTRACT
   STATE_MACHINES.jsonl(D)— 正規化駆動: 状態→canonical→cross-machine 衝突。未写像=UNRESOLVED_NO_CANONICAL
@@ -24,6 +25,7 @@ ROOT = ACD.ROOT
 STRUCT = ACD.STRUCT
 OUT_CONTRACTS = os.path.join(STRUCT, "TASK_CONTRACTS.jsonl")
 OUT_CANON = os.path.join(STRUCT, "CANONICAL_STATES.jsonl")
+OUT_REQ = os.path.join(STRUCT, "REQUIRED_INPUTS.jsonl")   # authored required_inputs(build は読むだけ・上書きしない)
 OUT_C = os.path.join(STRUCT, "READ_PATHS.jsonl")
 OUT_D = os.path.join(STRUCT, "STATE_MACHINES.jsonl")
 
@@ -86,15 +88,33 @@ def _sole_writer_of(fname):
     return "self(open w)"
 
 
-def build_contracts():
+def load_required(path=None):
+    """authored required_inputs 辞書 {task_id: [paths]}。無ければ空。build は読むだけ・上書きしない
+    (CANONICAL_STATES と同じ authored-persistent 扱い)。auto 生成で埋めない。"""
+    p = path or OUT_REQ
+    if not os.path.isfile(p):
+        return {}
+    m = {}
+    for l in open(p, encoding="utf-8"):
+        if l.strip() and not l.startswith("#"):
+            r = json.loads(l)
+            m[r["task_id"]] = r["required_inputs"]
+    return m
+
+
+def build_contracts(authored=None):
+    if authored is None:
+        authored = load_required()
     recs = []
     for fn in _stage_modules():
         if fn in ("s_task_contract.py",):
             continue
         writes, reads = _writes_and_reads(os.path.join(STRUCT, fn))
+        tid = fn[:-3]
         recs.append({
-            "task_id": fn[:-3],
-            "required_inputs": "UNRESOLVED_NO_CONTRACT",   # 判断=設計が authored(捏造しない)
+            "task_id": tid,
+            # authored にあればその値／無ければ UNRESOLVED_NO_CONTRACT(捏造しない)
+            "required_inputs": authored.get(tid, "UNRESOLVED_NO_CONTRACT"),
             "expected_outputs": writes,                     # 決定論候補
             "allowed_writes": [{"path": w, "via": _sole_writer_of(w)} for w in writes],
             "actually_loaded": reads,                       # 決定論実測
@@ -197,6 +217,23 @@ def check():
     tc = build_C([{"task_id": "probe", "required_inputs": ["nonexistent_input.jsonl"], "actually_loaded": []}])
     if not any(r["verdict"] == "MISSING" for r in tc):
         red.append("C_DETECTION_FAILED: unread required input not flagged MISSING")
+    # §authored-wiring 検出力(陰性対照): REQUIRED_INPUTS.jsonl に1件注入 → ①file→dict→merge が保全 ②C が UNRESOLVED_NO_CONTRACT から脱す
+    # (源=別ファイルに分離。auto-hardcode 回帰なら注入値が消え RED。実 OUT_REQ は触らず temp で round-trip)
+    if contracts:
+        import tempfile
+        victim = contracts[0]["task_id"]
+        _tf = tempfile.NamedTemporaryFile("w", suffix=".jsonl", delete=False,
+                                          dir=os.environ.get("TMPDIR") or "/home/takasan/.cc_tmp", encoding="utf-8")
+        _tf.write(json.dumps({"task_id": victim, "required_inputs": ["EDGE_INVENTORY.jsonl"],
+                              "authored_by": "probe"}) + "\n")
+        _tf.close()
+        inj = build_contracts(authored=load_required(_tf.name))
+        os.unlink(_tf.name)
+        vc = [c for c in inj if c["task_id"] == victim][0]
+        if vc["required_inputs"] != ["EDGE_INVENTORY.jsonl"]:
+            red.append("AUTHORED_MERGE_FAILED: injected required_inputs not preserved (hardcode regression?)")
+        if any(str(r["verdict"]) == "UNRESOLVED_NO_CONTRACT" for r in build_C([vc])):
+            red.append("AUTHORED_WIRING_FAILED: task with authored required_inputs still UNRESOLVED_NO_CONTRACT in C")
     # §3-5 D 検出力: CREATED を両 machine で同 canonical へ写像 → 衝突再検出
     _, conf = build_D([{"raw_symbol": "CREATED", "canonical": "STATE_CREATED", "authored_by": "probe"}])
     if not any(c["canonical"] == "STATE_CREATED" for c in conf):
@@ -222,6 +259,10 @@ def main(argv):
     if not os.path.isfile(OUT_CANON):
         open(OUT_CANON, "w", encoding="utf-8").write(
             "# CANONICAL_STATES(authored)。空で始める。auto-collapse 禁止=同綴り別意は別 canonical。\n")
+    if not os.path.isfile(OUT_REQ):   # authored-persistent: 無ければ header 種のみ・有れば絶対に上書きしない
+        open(OUT_REQ, "w", encoding="utf-8").write(
+            "# REQUIRED_INPUTS(authored)。{task_id, required_inputs:[paths], authored_by}。"
+            "空で始める。設計/人が書く。build は読むだけ=上書きしない。auto 生成で埋めない。\n")
     open(OUT_C, "w", encoding="utf-8").write(_ser(C))
     open(OUT_D, "w", encoding="utf-8").write(_ser(D))
     print("contracts=%d (all required_inputs=UNRESOLVED_NO_CONTRACT・種のみ) | canonical=%d(空=authored 待ち)"
