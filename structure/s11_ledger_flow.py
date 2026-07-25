@@ -23,12 +23,13 @@ REG = {r["ledger_id"]: r for r in map(json.loads, open(S / "LEDGER_REGISTRY.json
 
 # 1 往復の write シーケンス。各要素: (系, 台帳ID, 呼出ファイル:行, 期待シンボル, 説明)
 # 行番号は grep 実測（2026-07-22）。--check が各行に期待シンボルが在ることを確認する。
+# 行番号は grep 実測。front-door slice1b(submit.py に optional ts 追加, DE-0539)で +2 行ずれたため更新(2026-07-26)。
 FORWARD = [
-    ("DS",  "ds/ds_events.jsonl",              "twoder/submit.py:137", "record_dialogue_event", "入力を対話イベントとして記録"),
-    ("RRI", "rri/rri_records.jsonl",           "twoder/submit.py:111", "detect",                "admission/intent を解決・記録"),
-    ("EGL", "egl/DESIGN_EVIDENCE_LEDGER.jsonl","twoder/submit.py:123", "admit_design_evidence", "DE admission（admission request 時）"),
-    ("EGL", "egl/data/events.jsonl",           "twoder/submit.py:179", "answer_question",       "self-grounding 照会 → EGL SoR event"),
-    ("DW",  "dev-workcell/events.jsonl",       "twoder/submit.py:408", "create_task",           "タスク生成（CREATE）※raw_input 起点"),
+    ("DS",  "ds/ds_events.jsonl",              "twoder/submit.py:139", "record_dialogue_event", "入力を対話イベントとして記録"),
+    ("RRI", "rri/rri_records.jsonl",           "twoder/submit.py:113", "detect",                "admission/intent を解決・記録"),
+    ("EGL", "egl/DESIGN_EVIDENCE_LEDGER.jsonl","twoder/submit.py:125", "admit_design_evidence", "DE admission（admission request 時）"),
+    ("EGL", "egl/data/events.jsonl",           "twoder/submit.py:181", "answer_question",       "self-grounding 照会 → EGL SoR event"),
+    ("DW",  "dev-workcell/events.jsonl",       "twoder/submit.py:412", "create_task",           "タスク生成（CREATE）※raw_input 起点"),
 ]
 RETURN = [
     ("DW",  "dev-workcell/events.jsonl",       "twoder/return_loop.py:23", "build_result_packet",  "結果パケット生成"),
