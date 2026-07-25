@@ -10,7 +10,7 @@ A/C/D の C/D が解けなかった根因=「比較対象(正典)が未定義」
   REQUIRED_INPUTS.jsonl  — required_inputs の authored 源。build は読むだけ=上書きしない(seed-if-absent のみ)。設計/人が書く
   CANONICAL_STATES.jsonl — 正規化辞書(authored)。空で始めてよい。auto-collapse 禁止(同綴り別意を消さない)
   READ_PATHS.jsonl(C)    — 契約駆動: required_inputs vs actually_loaded → MISSING/OK/UNRESOLVED_NO_CONTRACT
-  STATE_MACHINES.jsonl(D)— 正規化駆動: 状態→canonical→cross-machine 衝突。未写像=UNRESOLVED_NO_CANONICAL
+  STATE_MACHINES.jsonl(D)— 正規化駆動: 状態→canonical→cross-machine 共有(authored 同一 canonical=合意)。未写像=UNRESOLVED_NO_CANONICAL
 
 usage:  s_task_contract.py [--check]
 """
@@ -171,7 +171,7 @@ def build_D(canon):
     D_raw, _ = ACD.build_D()   # {machine, state_symbol, source_file}(生)
     cmap = _canon_map(canon)
     recs = []
-    canon_owner = {}   # canonical -> set(machine)  衝突検出用(auto-collapse でない=辞書経由のみ)
+    canon_owner = {}   # canonical -> set(source_file)  共有検出用(auto-collapse でない=authored 辞書経由のみ)
     for r in D_raw:
         cs = cmap.get(r["state_symbol"])
         canonical = cs[0] if (cs and len(cs) == 1) else \
@@ -180,18 +180,19 @@ def build_D(canon):
                      "canonical": canonical, "source_file": r["source_file"]})
         if cs and len(cs) == 1:
             canon_owner.setdefault(canonical, set()).add(r["source_file"])
-    conflicts = [{"type": "CROSS_MACHINE_STATE_CONFLICT", "canonical": c, "owners": sorted(o)}
-                 for c, o in canon_owner.items() if len(o) > 1]
+    # 複数 machine が authored された同一 canonical を共有 = 合意(矛盾でない)。auto-collapse 禁止ゆえ写像は人の宣言のみ。
+    shared = [{"type": "CROSS_MACHINE_SHARED_STATE", "canonical": c, "sharing_machines": sorted(o)}
+              for c, o in canon_owner.items() if len(o) > 1]
     recs.sort(key=lambda r: (r["machine"], r["state_symbol"]))
-    return recs, conflicts
+    return recs, shared
 
 
 def build_all():
     contracts = build_contracts()
     canon = load_canonical()
     C = build_C(contracts)
-    D, conflicts = build_D(canon)
-    return contracts, canon, C, D, conflicts
+    D, shared = build_D(canon)
+    return contracts, canon, C, D, shared
 
 
 def _ser(recs):
@@ -212,7 +213,7 @@ def _schema_ok(contracts):
 
 
 def check():
-    contracts, canon, C, D, conflicts = build_all()
+    contracts, canon, C, D, shared = build_all()
     red = []
     for path, recs in ((OUT_CONTRACTS, contracts), (OUT_C, C), (OUT_D, D)):
         if not os.path.isfile(path) or open(path, encoding="utf-8").read() != _ser(recs):
@@ -251,10 +252,10 @@ def check():
             red.append("AUTHORED_MERGE_FAILED: injected required_inputs not preserved (hardcode regression?)")
         if any(str(r["verdict"]) == "UNRESOLVED_NO_CONTRACT" for r in build_C([vc])):
             red.append("AUTHORED_WIRING_FAILED: task with authored required_inputs still UNRESOLVED_NO_CONTRACT in C")
-    # §3-5 D 検出力: CREATED を両 machine で同 canonical へ写像 → 衝突再検出
-    _, conf = build_D([{"raw_symbol": "CREATED", "canonical": "STATE_CREATED", "authored_by": "probe"}])
-    if not any(c["canonical"] == "STATE_CREATED" for c in conf):
-        red.append("D_DETECTION_FAILED: known CREATED cross-machine conflict not re-detected via canonical")
+    # §3-5 D 検出力: CREATED を両 machine で authored 同一 canonical へ写像 → SHARED_STATE で再検出(ラベル load-bearing)
+    _, shared_probe = build_D([{"raw_symbol": "CREATED", "canonical": "STATE_CREATED", "authored_by": "probe"}])
+    if not any(c["canonical"] == "STATE_CREATED" and c["type"] == "CROSS_MACHINE_SHARED_STATE" for c in shared_probe):
+        red.append("D_DETECTION_FAILED: authored same-canonical cross-machine not surfaced as CROSS_MACHINE_SHARED_STATE")
     if red:
         print("TASK_CONTRACT --check: RED")
         for m in red:
@@ -263,15 +264,15 @@ def check():
     n_unres_c = sum(1 for r in C if str(r["verdict"]).startswith("UNRESOLVED"))
     n_unres_d = sum(1 for r in D if str(r["canonical"]).startswith("UNRESOLVED"))
     print("TASK_CONTRACT --check: GREEN (byte-identical; schema ok; neg-controls auto-collapse/C/D load-bearing; "
-          "%d contracts, C UNRESOLVED_NO_CONTRACT=%d, D UNRESOLVED_NO_CANONICAL=%d, live conflicts=%d)"
-          % (len(contracts), n_unres_c, n_unres_d, len(conflicts)))
+          "%d contracts, C UNRESOLVED_NO_CONTRACT=%d, D UNRESOLVED_NO_CANONICAL=%d, live shared_states=%d)"
+          % (len(contracts), n_unres_c, n_unres_d, len(shared)))
     return 0
 
 
 def main(argv):
     if "--check" in argv:
         return check()
-    contracts, canon, C, D, conflicts = build_all()
+    contracts, canon, C, D, shared = build_all()
     open(OUT_CONTRACTS, "w", encoding="utf-8").write(_ser(contracts))
     if not os.path.isfile(OUT_CANON):
         open(OUT_CANON, "w", encoding="utf-8").write(
@@ -284,9 +285,9 @@ def main(argv):
     open(OUT_D, "w", encoding="utf-8").write(_ser(D))
     print("contracts=%d (all required_inputs=UNRESOLVED_NO_CONTRACT・種のみ) | canonical=%d(空=authored 待ち)"
           % (len(contracts), len(canon)))
-    print("C rows=%d (UNRESOLVED_NO_CONTRACT=%d) | D rows=%d (UNRESOLVED_NO_CANONICAL=%d) | live conflicts=%d"
+    print("C rows=%d (UNRESOLVED_NO_CONTRACT=%d) | D rows=%d (UNRESOLVED_NO_CANONICAL=%d) | live shared_states=%d"
           % (len(C), sum(1 for r in C if str(r['verdict']).startswith('UNRESOLVED')),
-             len(D), sum(1 for r in D if str(r['canonical']).startswith('UNRESOLVED')), len(conflicts)))
+             len(D), sum(1 for r in D if str(r['canonical']).startswith('UNRESOLVED')), len(shared)))
     return 0
 
 
