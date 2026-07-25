@@ -8,5 +8,5 @@
 {"task_id": "s9_done_semantics", "required_inputs": ["CONTRADICTIONS.jsonl", "ITEM_LADDER.jsonl"], "authored_by": "CC-alpha"}
 {"task_id": "s10_ledger_registry", "required_inputs": ["REACHABILITY.jsonl"], "authored_by": "CC-alpha"}
 {"task_id": "s11_ledger_flow", "required_inputs": ["LEDGER_REGISTRY.jsonl"], "authored_by": "CC-alpha"}
-{"task_id": "s_embed_axes", "required_inputs": ["DESIGN_EVIDENCE_LEDGER.jsonl", "rri_records.jsonl"], "authored_by": "CC-alpha"}
-{"task_id": "s_mine_accounts", "required_inputs": ["DESIGN_EVIDENCE_LEDGER.jsonl", "rri_records.jsonl"], "authored_by": "CC-alpha"}
+{"task_id": "s_embed_axes", "required_inputs": ["rri_records.jsonl"], "authored_by": "CC-alpha"}
+{"task_id": "s_mine_accounts", "required_inputs": ["rri_records.jsonl"], "authored_by": "CC-alpha"}

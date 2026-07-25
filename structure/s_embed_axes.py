@@ -19,8 +19,7 @@ import sys
 import numpy as np
 
 ROOT = "/home/takasan"
-DE_LEDGER = os.path.join(ROOT, "egl", "DESIGN_EVIDENCE_LEDGER.jsonl")
-RRI_RECORDS = os.path.join(ROOT, "rri", "rri_records.jsonl")
+RRI_RECORDS = os.path.join(ROOT, "rri", "rri_records.jsonl")   # DE台帳は corpus から除外(Flag2 裁定 2026-07-25)
 STRUCT = os.path.join(ROOT, "egl", "structure")
 OUT_STAB = os.path.join(STRUCT, "EMBED_AXES_STABILITY.json")
 OUT_CAND = os.path.join(STRUCT, "EMBED_AXES_CANDIDATE.jsonl")
@@ -38,12 +37,9 @@ TRIVIAL = 0.5
 
 
 def _content_records():
-    """内容テキストのみ(ID/封印は含めない)。DE=observation+decision / REQUEST=content.raw / INTENT=content.resolved。"""
+    """内容テキストのみ(ID/封印は含めない)。corpus=rri_records のみ(DE台帳は除外・Flag2 裁定 2026-07-25=根治)。
+    REQUEST=content.raw_input/raw/t/task / INTENT=content.resolved。measure-first: DE 再投入で軸を無理に出さない。"""
     recs = []
-    for line in open(DE_LEDGER, encoding="utf-8"):
-        d = json.loads(line)
-        txt = " ".join(str(d.get(k, "")) for k in ("observation", "decision")).strip()
-        recs.append((d.get("design_evidence_id") or ("DE?%d" % len(recs)), "DE", txt))
     for line in open(RRI_RECORDS, encoding="utf-8"):
         r = json.loads(line)
         kind, c = r.get("kind"), (r.get("content") or {})

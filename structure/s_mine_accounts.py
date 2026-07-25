@@ -21,8 +21,7 @@ import sys
 import numpy as np
 
 ROOT = "/home/takasan"
-DE_LEDGER = os.path.join(ROOT, "egl", "DESIGN_EVIDENCE_LEDGER.jsonl")
-RRI_RECORDS = os.path.join(ROOT, "rri", "rri_records.jsonl")
+RRI_RECORDS = os.path.join(ROOT, "rri", "rri_records.jsonl")   # DE台帳は corpus から除外(Flag2 裁定 2026-07-25)
 STRUCT = os.path.join(ROOT, "egl", "structure")
 OUT_CAND = os.path.join(STRUCT, "ACCOUNT_CHART_CANDIDATE.jsonl")
 OUT_STAB = os.path.join(STRUCT, "ACCOUNT_CHART_STABILITY.json")
@@ -42,14 +41,8 @@ def _band(status):
 
 
 def _load_records():
-    """node = (node_id, kind, band, ref_ids set)。DE 517 + rri 698。prose は使わない。"""
+    """node = (node_id, kind, band, ref_ids set)。corpus=rri のみ(DE台帳は除外・Flag2 裁定 2026-07-25)。prose は使わない。"""
     recs = []
-    for line in open(DE_LEDGER, encoding="utf-8"):
-        d = json.loads(line)
-        nid = d.get("design_evidence_id") or ("DE?" + str(len(recs)))
-        refs = set(ID_RX.findall(json.dumps(d, ensure_ascii=False)))
-        refs.discard(nid)
-        recs.append((nid, "DE", _band(d.get("claimed_status")), refs))
     for line in open(RRI_RECORDS, encoding="utf-8"):
         r = json.loads(line)
         nid = r.get("rri_record_id") or ("RRI?" + str(len(recs)))

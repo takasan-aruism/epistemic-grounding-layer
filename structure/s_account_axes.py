@@ -26,7 +26,8 @@ OUT_MEMB = os.path.join(STRUCT, "ACCOUNT_MEMBERSHIP.jsonl")
 K = 4                       # r1 の採用 K
 VERSION = "v1"
 PURITY_TH, DIV_TH = R.PURITY_TH, R.DIV_TH
-MEMB_TH = 0.55              # membership 密度(cosine)閾値。全軸未満=その他
+# membership は負の制御相対(density - null > R.MARGIN)。絶対 cosine 閾値(旧 MEMB_TH)は撤廃
+# (e5 anisotropy で全ベクトルが高 cosine=絶対閾値は退化。裁定A: 幻覚的絶対定数の禁止)。
 
 
 def _dist2(X, Y):
@@ -96,6 +97,28 @@ def _neg_silhouette(X, labels):
     return float(_silhouette_samples(Xn, labels).mean())
 
 
+def _null_density(X, dirs):
+    """anisotropy 由来の density 下限 = 列 shuffle した埋め込みの各軸への平均 cosine(軸ごとスカラー)。"""
+    dirs = np.asarray(dirs)
+    if not len(dirs):
+        return np.zeros(0)
+    return (R._shuffle_features(X) @ dirs.T).mean(0)
+
+
+def assign_membership(X, dirs, null=None):
+    """membership を負の制御相対に。所属条件 = density_a(e) - null_a > R.MARGIN(絶対 cosine 閾値なし)。
+    多重所属可・全軸未達=その他。返り: (hits[[axis_idx]], dens[np.array], null[np.array])。
+    2b-r3 の v2 re-membership も本関数を共有(A.MEMB_TH 依存を廃す)。"""
+    dirs = np.asarray(dirs)
+    if not len(dirs):
+        return [[] for _ in range(len(X))], [np.zeros(0) for _ in range(len(X))], np.zeros(0)
+    if null is None:
+        null = _null_density(X, dirs)
+    D = X @ dirs.T
+    hits = [[a for a in range(len(dirs)) if (D[i, a] - null[a]) > R.MARGIN] for i in range(len(X))]
+    return hits, [D[i] for i in range(len(X))], null
+
+
 def build():
     recs = R._content_records()
     X = R._load_vectors(recs)
@@ -126,11 +149,15 @@ def build():
         })
     frozen.sort(key=lambda f: f["axis_id"])
 
+    dirs = np.array([f["frozen_direction"] for f in frozen]) if frozen else np.zeros((0, X.shape[1]))
+    null = _null_density(X, dirs)
     axes_doc = {
         "version": VERSION,
         "model": R.MODEL, "revision": R.REVISION,
         "n_frozen_axes": len(frozen),
-        "membership_threshold": MEMB_TH,
+        "membership_rule": "density_a(e) - null_a > R.MARGIN (負の制御相対・絶対 cosine 閾値なし)",
+        "membership_margin": R.MARGIN,
+        "membership_null_per_axis": {frozen[a]["axis_id"]: round(float(null[a]), 6) for a in range(len(frozen))},
         "real_mean_silhouette": round(real_sil, 6),
         "neg_control_mean_silhouette": round(neg_sil, 6),
         "per_axis_adjudication": [{k: a[k] for k in
@@ -141,18 +168,23 @@ def build():
                  "density は observed のみで gate しない(T26)。account 次元は soft(保存則なし)。" % len(frozen)),
     }
 
-    # §4: membership(多重所属可・全軸未満=その他)。density=frozen_direction への cosine(x は L2 正規化)。
+    # §4: membership(多重所属可・全軸未達=その他)。相対所属 density_a-null_a>R.MARGIN(anisotropy 底上げを null で相殺)。
     memb = []
-    dirs = np.array([f["frozen_direction"] for f in frozen]) if frozen else np.zeros((0, X.shape[1]))
+    hits, dens_list, _ = assign_membership(X, dirs, null=null)
     for i, (nid, kind, _) in enumerate(recs):
-        dens = (X[i] @ dirs.T) if len(dirs) else np.array([])
-        axes_hit = [{"axis_id": frozen[a]["axis_id"], "density": round(float(dens[a]), 6)}
-                    for a in range(len(frozen)) if dens[a] >= MEMB_TH]
+        dens = dens_list[i]
+        axes_hit = [{"axis_id": frozen[a]["axis_id"], "density": round(float(dens[a]), 6),
+                     "margin_over_null": round(float(dens[a] - null[a]), 6)} for a in hits[i]]
         rec = {"element_id": nid, "kind": kind,
-               "axes": sorted(axes_hit, key=lambda x: (-x["density"], x["axis_id"])),
+               "axes": sorted(axes_hit, key=lambda x: (-x["margin_over_null"], x["axis_id"])),
                "unclassified": len(axes_hit) == 0,
                "all_densities": {frozen[a]["axis_id"]: round(float(dens[a]), 6) for a in range(len(frozen))}}
         memb.append(rec)
+    # membership 相対性(陰性対照): shuffle 埋め込みで再割当 → anisotropy 底上げが null で相殺され所属が崩壊
+    hits_shuf, _, _ = assign_membership(R._shuffle_features(X), dirs)
+    axes_doc["membership_real_assigned"] = int(sum(1 for m in memb if not m["unclassified"]))
+    axes_doc["membership_other_count"] = int(sum(1 for m in memb if m["unclassified"]))
+    axes_doc["membership_shuffle_assigned"] = int(sum(1 for h in hits_shuf if h))
     return axes_doc, memb
 
 
@@ -176,13 +208,24 @@ def main(argv):
         # 負の制御 load-bearing: real silhouette が負の制御を上回る(shuffle で崩壊)
         if axes_doc["real_mean_silhouette"] <= axes_doc["neg_control_mean_silhouette"]:
             red.append("NEGATIVE_CONTROL_FAILED: shuffle silhouette >= real (not load-bearing)")
+        # membership 相対性(陰性対照 load-bearing): shuffle 埋め込みでは所属が崩壊(anisotropy 底上げでなく真の近さを測る証拠)
+        if axes_doc["n_frozen_axes"] > 0 and \
+                axes_doc["membership_shuffle_assigned"] >= axes_doc["membership_real_assigned"]:
+            red.append("MEMBERSHIP_NEG_CONTROL_FAILED: shuffled assigned(%d) >= real(%d) (絶対底上げを測っている)"
+                       % (axes_doc["membership_shuffle_assigned"], axes_doc["membership_real_assigned"]))
+        # 絶対 cosine 閾値定数ゼロ(裁定A): MEMB_TH 等が再導入されていないこと
+        if "MEMB_TH" in globals():
+            red.append("ABSOLUTE_CONSTANT_PRESENT: MEMB_TH re-introduced (membership must be neg-control relative)")
         if red:
             print("ACCOUNT_AXES --check: RED")
             for m in red:
                 print("  " + m)
             return 1
-        print("ACCOUNT_AXES --check: GREEN (byte-identical; frozen=%d; real_sil=%.4f neg_sil=%.4f; neg load-bearing)"
-              % (axes_doc["n_frozen_axes"], axes_doc["real_mean_silhouette"], axes_doc["neg_control_mean_silhouette"]))
+        print("ACCOUNT_AXES --check: GREEN (byte-identical; frozen=%d; real_sil=%.4f neg_sil=%.4f; "
+              "membership real_assigned=%d その他=%d shuffle_assigned=%d; neg load-bearing)"
+              % (axes_doc["n_frozen_axes"], axes_doc["real_mean_silhouette"], axes_doc["neg_control_mean_silhouette"],
+                 axes_doc["membership_real_assigned"], axes_doc["membership_other_count"],
+                 axes_doc["membership_shuffle_assigned"]))
         return 0
     open(OUT_AXES, "w", encoding="utf-8").write(at)
     open(OUT_MEMB, "w", encoding="utf-8").write(mt)

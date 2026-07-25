@@ -30,9 +30,8 @@
 {"actually_loaded": true, "path": "CONTRADICTIONS.jsonl", "required_by_contract": true, "stage": "s9_done_semantics", "verdict": "OK"}
 {"actually_loaded": true, "path": "ITEM_LADDER.jsonl", "required_by_contract": true, "stage": "s9_done_semantics", "verdict": "OK"}
 {"actually_loaded": ["ACCOUNT_AXES_v1.json", "ACCOUNT_MEMBERSHIP.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_account_axes", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": true, "path": "DESIGN_EVIDENCE_LEDGER.jsonl", "required_by_contract": true, "stage": "s_embed_axes", "verdict": "OK"}
 {"actually_loaded": true, "path": "rri_records.jsonl", "required_by_contract": true, "stage": "s_embed_axes", "verdict": "OK"}
 {"actually_loaded": ["ENTRYPOINTS_EXT.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_exec_arch_acd", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["LLM_INVOCATIONS.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_llm_invocations", "verdict": "UNRESOLVED_NO_CONTRACT"}
-{"actually_loaded": true, "path": "DESIGN_EVIDENCE_LEDGER.jsonl", "required_by_contract": true, "stage": "s_mine_accounts", "verdict": "OK"}
 {"actually_loaded": true, "path": "rri_records.jsonl", "required_by_contract": true, "stage": "s_mine_accounts", "verdict": "OK"}
+{"actually_loaded": ["ACCOUNT_AXES_FREEZE_CANDIDATE.jsonl", "ACCOUNT_AXES_v1.json", "ACCOUNT_AXES_v2.json", "ACCOUNT_MEMBERSHIP.jsonl", "ACCOUNT_MEMBERSHIP_v2.jsonl", "FREEZE_APPROVALS.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_rthread_2br3", "verdict": "UNRESOLVED_NO_CONTRACT"}
