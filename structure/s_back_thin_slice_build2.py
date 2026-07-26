@@ -111,12 +111,21 @@ def build_query(strategy, request, context=""):
         return req
     if strategy == "CONTEXT_RESOLVE":
         return (ctx + " " + req).strip() if ctx else req
-    if strategy == "CHOICE":
-        return req + " 選択肢 候補 比較"
-    if strategy == "BOUNDED_MULTI_VIEW":
-        return req + " 観点 利点 欠点 評価"
+    suf = QUERY_SUFFIX_VARIANTS[_ACTIVE_SUFFIX]
+    if strategy in suf:
+        return req + " " + suf[strategy]
     return req
 
+
+# ★§3 裁定: 規則を「消す」のでなく「振る」。付加語は**事前に決めて記録し、測定後に動かさない**。
+#   V1 が現行。V2 は CC-α が例示したもの。V3 は同じくらい妥当な第三案として IMPL が事前登録。
+QUERY_SUFFIX_VARIANTS = {
+    "V1_current": {"CHOICE": "選択肢 候補 比較", "BOUNDED_MULTI_VIEW": "観点 利点 欠点 評価"},
+    "V2_cc_alpha": {"CHOICE": "どれ 選ぶ 案", "BOUNDED_MULTI_VIEW": "比較 両面 得失"},
+    "V3_impl": {"CHOICE": "候補 案 選定", "BOUNDED_MULTI_VIEW": "長所 短所 両論"},
+    "V4_minimal": {"CHOICE": "選択", "BOUNDED_MULTI_VIEW": "比較"},
+}
+_ACTIVE_SUFFIX = "V1_current"
 
 _CORPUS_CACHE = {}
 
@@ -179,6 +188,26 @@ def _diff(a, b):
             "jaccard": round(len(inter) / len(ia | ib), 4) if (ia | ib) else None}
 
 
+def classify_broken(correct_strategy, injected_strategy, a, b, diff):
+    """★CC-α 裁定 §2 の判定基準。**決定論**で判定できる3段のみを IMPL が数える。
+    BROKEN-UNSAFE  = 止まるべき入力で動いた（誤解したまま行動する・最も重い）
+    BROKEN-WASTEFUL= 動くべき入力で止まった（無駄に聞き返す・危険ではない）
+    DIVERGENT-CONTENT = routing 同一だが返した証拠が食い違う → **『壊れた』に数えない・保留**
+    NOT-BROKEN     = routing 同一・証拠が実質同じ
+    ★「実質同じ」の閾値は DESIGN が定義していないので、**完全一致のみ NOT-BROKEN** とし、
+      それ以外は DIVERGENT-CONTENT に置く（自分に有利な閾値を作らない）。"""
+    ca, ia = a["routed"], b["routed"]
+    if ca == "STOP" and ia == "ACTION":
+        return "BROKEN-UNSAFE"
+    if ca == "ACTION" and ia == "STOP":
+        return "BROKEN-WASTEFUL"
+    if diff.get("both_stopped"):
+        return "NOT-BROKEN"
+    if diff.get("jaccard") == 1.0 and diff.get("query_identical"):
+        return "NOT-BROKEN"
+    return "DIVERGENT-CONTENT"
+
+
 def injection_test(fixtures):
     """★対にする: 同一 fixture・同一の『正しい戦略』から2アームを導出し、下流だけを差し替える。
     LLM を挟まないので run 間ノイズは 0（下流は完全決定論）。"""
@@ -191,7 +220,8 @@ def injection_test(fixtures):
                     continue
                 a = run_slice(correct, fx["request"], fx.get("context", ""))
                 b = run_slice(dst, fx["request"], fx.get("context", ""))
-                rows.append({"fixture_id": fx["id"], "request": fx["request"],
+                _cls = classify_broken(correct, dst, a, b, _diff(a.get("downstream"), b.get("downstream")))
+                rows.append({"verdict": _cls, "fixture_id": fx["id"], "request": fx["request"],
                              "correct_strategy": correct, "injected_strategy": dst, "swap_kind": kind,
                              "correct_routed": a["routed"], "injected_routed": b["routed"],
                              "routing_changed": a["routed"] != b["routed"],
@@ -294,7 +324,36 @@ def measure():
         b["jaccard_min"] = min(b["jaccards"]) if b["jaccards"] else None
         del b["jaccards"]
     res["injection_by_kind"] = by_kind
-    rows.append({"row_type": "INJECTION", "cases": inj})
+    verdicts = {}
+    for r in inj:
+        verdicts.setdefault(r["swap_kind"], {}).setdefault(r["verdict"], 0)
+        verdicts[r["swap_kind"]][r["verdict"]] += 1
+    res["injection_verdicts"] = verdicts
+    rows.append({"row_type": "INJECTION", "cases": inj, "verdicts": verdicts})
+
+    # ★§3 裁定: 付加語を振って Jaccard が動くか（規則の関数か・規則に依らないか）
+    global _ACTIVE_SUFFIX
+    sweep = {}
+    saved = _ACTIVE_SUFFIX
+    for name in QUERY_SUFFIX_VARIANTS:
+        _ACTIVE_SUFFIX = name
+        _rows = injection_test(D2P2.FIXTURES)
+        js = [r["diff"]["jaccard"] for r in _rows
+              if r["swap_kind"] == "NEAR" and r["diff"].get("jaccard") is not None]
+        vs = {}
+        for r in _rows:
+            vs[r["verdict"]] = vs.get(r["verdict"], 0) + 1
+        sweep[name] = {"suffixes": QUERY_SUFFIX_VARIANTS[name], "near_jaccards": js,
+                       "jaccard_mean": round(sum(js) / len(js), 4) if js else None,
+                       "jaccard_min": min(js) if js else None, "jaccard_max": max(js) if js else None,
+                       "verdicts": vs}
+    _ACTIVE_SUFFIX = saved
+    means = [v["jaccard_mean"] for v in sweep.values() if v["jaccard_mean"] is not None]
+    res["suffix_sweep"] = sweep
+    res["suffix_sweep_spread"] = round(max(means) - min(means), 4) if means else None
+    rows.append({"row_type": "SUFFIX_SENSITIVITY", "variants": sweep,
+                 "mean_spread": res["suffix_sweep_spread"],
+                 "note": "付加語は事前登録・測定後に動かしていない。規則を消す対照(両アーム同一問い→Jaccard 自明に1.0)は無効なので採らない。"})
 
     res["long_input"] = long_input_probe()
     rows.append({"row_type": "LONG_INPUT", "buckets": res["long_input"]})
@@ -367,7 +426,12 @@ def main(argv):
               "問いが同一=%-3d Jaccard 平均=%s 最小=%s"
               % (k, b["n"], b["routing_changed"], b["one_side_stopped"], b["both_stopped"],
                  b["query_identical"], b["jaccard_mean"], b["jaccard_min"]))
-    print("  §5 入力長ごとの下流（%d bucket）:" % len(res["long_input"]))
+    print("  ★判定(CC-α 裁定の3段・UNSAFE と WASTEFUL は必ず分ける): %s" % res["injection_verdicts"])
+    print("  ★付加語の感度掃引(数値は規則の関数か): 平均の振れ幅=%s" % res["suffix_sweep_spread"])
+    for k, v in res["suffix_sweep"].items():
+        print("     %-12s Jaccard 平均=%-7s 最小=%-5s 最大=%-5s 判定=%s"
+              % (k, v["jaccard_mean"], v["jaccard_min"], v["jaccard_max"], v["verdicts"]))
+    print("  §5 入力長ごとの下流:")
     for k, v in res["long_input"].items():
         print("     %-9s corpus内=%-4d 平均入力長=%-7s 平均hit=%-5s hit0件=%s"
               % (k, v["n_in_corpus"], v["mean_input_len"], v["mean_hits"], v["zero_hit_n"]))
