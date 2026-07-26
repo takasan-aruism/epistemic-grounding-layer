@@ -1,0 +1,2530 @@
+{
+ "summary": {
+  "de_admission": {
+   "total_call_sites": 5,
+   "files": [
+    "egl/structure/s_de_route_equiv.py",
+    "twoder/live_worker_runtime.py",
+    "twoder/regression/test_artifact_registry.py",
+    "twoder/runtime_supervisor.py"
+   ],
+   "n_files": 4,
+   "test_sites": 2,
+   "non_test_sites": 3,
+   "by_edge_status": {
+    "UNKNOWN(この呼出箇所は EDGE_INVENTORY に無い)": 1,
+    "LIVE": 2,
+    "TEST_ONLY_ISLAND": 2
+   },
+   "unresolved_sites": 1
+  },
+  "dw_workcell": {
+   "total_call_sites": 214,
+   "files": [
+    "dev-workcell/dw/dispatch.py",
+    "dev-workcell/experiments/adjudicator_efficacy_v0.1/harness.py",
+    "dev-workcell/run_esde_task.py",
+    "dev-workcell/run_rri_task.py",
+    "dev-workcell/test_actor_exception_guard.py",
+    "dev-workcell/test_adjudication_routing.py",
+    "dev-workcell/test_auto_disposition.py",
+    "dev-workcell/test_disposition.py",
+    "dev-workcell/test_dw_gate.py",
+    "dev-workcell/test_dw_workflow.py",
+    "dev-workcell/test_dw_workflow_equivalence.py",
+    "dev-workcell/test_plan_template.py",
+    "dev-workcell/test_process_trace.py",
+    "dev-workcell/test_upper_review_gate.py",
+    "egl/experiments/ITEM-0015-ab/live_0008.py",
+    "egl/experiments/f1_reconstruct.py",
+    "egl/experiments/process_aggregate.py",
+    "egl/experiments/run_odf_narrow.py",
+    "egl/experiments/run_rri_batch.py",
+    "egl/experiments/run_rri_dw_slice.py",
+    "egl/experiments/run_rri_iec_trial.py",
+    "egl/experiments/run_rri_needval_trial.py",
+    "egl/experiments/run_rri_rda_trial.py",
+    "egl/experiments/run_rri_rdec_trial.py",
+    "egl/experiments/run_rri_rint_trial.py",
+    "egl/experiments/run_rri_rqgate_trial.py",
+    "twoder/build_planner.py",
+    "twoder/counterfactual_runner.py",
+    "twoder/dispatch_provenance.py",
+    "twoder/execution_event_log.py",
+    "twoder/experiment_candidate.py",
+    "twoder/ids.py",
+    "twoder/live_worker_runtime.py",
+    "twoder/operator.py",
+    "twoder/regression/test_adjudicator_flag.py",
+    "twoder/regression/test_alpha_beta_integration.py",
+    "twoder/regression/test_build_planner.py",
+    "twoder/regression/test_concurrency_and_run_gate.py",
+    "twoder/regression/test_dispatch_provenance.py",
+    "twoder/regression/test_edge6_complete_close.py",
+    "twoder/regression/test_execution_event_log.py",
+    "twoder/regression/test_execution_retry.py",
+    "twoder/regression/test_forward_admission.py",
+    "twoder/regression/test_full_live_e2e.py",
+    "twoder/regression/test_live_coder_backend.py",
+    "twoder/regression/test_operator_dw_advance.py",
+    "twoder/regression/test_return_loop.py",
+    "twoder/regression/test_runtime_supervisor.py",
+    "twoder/regression/test_scoped_approval.py",
+    "twoder/return_loop.py",
+    "twoder/select_and_create.py",
+    "twoder/webui.py"
+   ],
+   "n_files": 52,
+   "test_sites": 118,
+   "non_test_sites": 96,
+   "by_edge_status": {
+    "UNKNOWN(この呼出箇所は EDGE_INVENTORY に無い)": 9,
+    "IMPLEMENTED_UNWIRED": 68,
+    "TEST_ONLY_ISLAND": 119,
+    "LIVE": 18
+   },
+   "unresolved_sites": 9
+  }
+ },
+ "sites": {
+  "de_admission": [
+   {
+    "file": "egl/structure/s_de_route_equiv.py",
+    "line": 74,
+    "callee": "admit_design_evidence",
+    "edge_status": [
+     "UNKNOWN(この呼出箇所は EDGE_INVENTORY に無い)"
+    ],
+    "status_resolution": "UNRESOLVED",
+    "is_test": false,
+    "source": "resA = DEA.admit_design_evidence(dict(cand), ts, ledger_path=tmpA)"
+   },
+   {
+    "file": "twoder/live_worker_runtime.py",
+    "line": 140,
+    "callee": "admit_design_evidence",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "res = DA.admit_design_evidence(cand, ts=ts, ledger_path=egl_ledger_path)"
+   },
+   {
+    "file": "twoder/regression/test_artifact_registry.py",
+    "line": 88,
+    "callee": "admit_design_evidence",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"3 DE implementation claim WITHOUT affected_artifact_ids rejected\", DEA.admit_design_evidence(de_no, ts=ts, ledger_pa"
+   },
+   {
+    "file": "twoder/regression/test_artifact_registry.py",
+    "line": 91,
+    "callee": "admit_design_evidence",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "res = DEA.admit_design_evidence(de_ok, ts=ts, ledger_path=LEDGER)"
+   },
+   {
+    "file": "twoder/runtime_supervisor.py",
+    "line": 218,
+    "callee": "admit_design_evidence",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "return DEA.admit_design_evidence(cand, ts=ts, ledger_path=ledger_path)"
+   }
+  ],
+  "dw_workcell": [
+   {
+    "file": "dev-workcell/dw/dispatch.py",
+    "line": 50,
+    "callee": "derive_state",
+    "edge_status": [
+     "UNKNOWN(この呼出箇所は EDGE_INVENTORY に無い)"
+    ],
+    "status_resolution": "UNRESOLVED",
+    "is_test": false,
+    "source": "state, view = W.derive_state(task_id)"
+   },
+   {
+    "file": "dev-workcell/dw/dispatch.py",
+    "line": 81,
+    "callee": "derive_state",
+    "edge_status": [
+     "UNKNOWN(この呼出箇所は EDGE_INVENTORY に無い)"
+    ],
+    "status_resolution": "UNRESOLVED",
+    "is_test": false,
+    "source": "_, view = W.derive_state(task_id)"
+   },
+   {
+    "file": "dev-workcell/dw/dispatch.py",
+    "line": 95,
+    "callee": "record_plan",
+    "edge_status": [
+     "UNKNOWN(この呼出箇所は EDGE_INVENTORY に無い)"
+    ],
+    "status_resolution": "UNRESOLVED",
+    "is_test": false,
+    "source": "W.record_plan(task_id, packet, ts, \"2der-auto-plan-template\")   # deterministic, no :8005, no LLM"
+   },
+   {
+    "file": "dev-workcell/dw/dispatch.py",
+    "line": 128,
+    "callee": "derive_state",
+    "edge_status": [
+     "UNKNOWN(この呼出箇所は EDGE_INVENTORY に無い)"
+    ],
+    "status_resolution": "UNRESOLVED",
+    "is_test": false,
+    "source": "_, view = W.derive_state(task_id)"
+   },
+   {
+    "file": "dev-workcell/experiments/adjudicator_efficacy_v0.1/harness.py",
+    "line": 207,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "WC.create_task(tid, \"adjudicator-efficacy\", problem[\"requirement\"][:80], {\"public\": True}, ts(), \"harness\")"
+   },
+   {
+    "file": "dev-workcell/experiments/adjudicator_efficacy_v0.1/harness.py",
+    "line": 208,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "WC.record_plan(tid, {\"entry\": problem[\"entry\"], \"steps\": [\"implement\", \"test\"]}, ts(), \"harness\")"
+   },
+   {
+    "file": "dev-workcell/experiments/adjudicator_efficacy_v0.1/harness.py",
+    "line": 220,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = WC.derive_state(tid)"
+   },
+   {
+    "file": "dev-workcell/experiments/adjudicator_efficacy_v0.1/harness.py",
+    "line": 237,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "_, view = WC.derive_state(tid)"
+   },
+   {
+    "file": "dev-workcell/experiments/adjudicator_efficacy_v0.1/harness.py",
+    "line": 243,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "_, view = WC.derive_state(tid)"
+   },
+   {
+    "file": "dev-workcell/experiments/adjudicator_efficacy_v0.1/harness.py",
+    "line": 268,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = WC.derive_state(tid)"
+   },
+   {
+    "file": "dev-workcell/run_esde_task.py",
+    "line": 167,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(TASK_ID, \"ESDE\", ip[\"narrow_goal\"], kp, tick(), mgr)"
+   },
+   {
+    "file": "dev-workcell/run_esde_task.py",
+    "line": 168,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(TASK_ID, ip, tick(), mgr)"
+   },
+   {
+    "file": "dev-workcell/run_esde_task.py",
+    "line": 184,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, _ = W.derive_state(TASK_ID)"
+   },
+   {
+    "file": "dev-workcell/run_esde_task.py",
+    "line": 199,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = W.derive_state(TASK_ID)"
+   },
+   {
+    "file": "dev-workcell/run_rri_task.py",
+    "line": 167,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(TASK_ID, \"RRI\", ip[\"narrow_goal\"], kp, tick(), mgr)"
+   },
+   {
+    "file": "dev-workcell/run_rri_task.py",
+    "line": 168,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(TASK_ID, ip, tick(), mgr)"
+   },
+   {
+    "file": "dev-workcell/run_rri_task.py",
+    "line": 186,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, _ = W.derive_state(TASK_ID)"
+   },
+   {
+    "file": "dev-workcell/run_rri_task.py",
+    "line": 204,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = W.derive_state(TASK_ID)"
+   },
+   {
+    "file": "dev-workcell/test_actor_exception_guard.py",
+    "line": 22,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(tid, \"AXG\", \"goal\", {}, next(clk), \"mgr\")"
+   },
+   {
+    "file": "dev-workcell/test_actor_exception_guard.py",
+    "line": 23,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(tid, IP, next(clk), \"mgr\")"
+   },
+   {
+    "file": "dev-workcell/test_adjudication_routing.py",
+    "line": 18,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(tid, \"T\", \"g\", {}, TS, \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_adjudication_routing.py",
+    "line": 19,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(tid, {\"packet_type\": \"IMPLEMENTATION_PACKET\"}, TS, \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_adjudication_routing.py",
+    "line": 33,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "_, view = W.derive_state(tid)"
+   },
+   {
+    "file": "dev-workcell/test_adjudication_routing.py",
+    "line": 44,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ok(\"audit->DISPOSITION_REQUIRED\", W.derive_state(\"T-ORACLE\")[0] == \"DISPOSITION_REQUIRED\")"
+   },
+   {
+    "file": "dev-workcell/test_adjudication_routing.py",
+    "line": 46,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ok(\"oracle_routes_to_judge\", W.derive_state(\"T-ORACLE\")[0] == \"JUDGE_REQUIRED\""
+   },
+   {
+    "file": "dev-workcell/test_adjudication_routing.py",
+    "line": 54,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ok(\"oracle_via_reference\", W.derive_state(\"T-ORACLE2\")[0] == \"JUDGE_REQUIRED\""
+   },
+   {
+    "file": "dev-workcell/test_adjudication_routing.py",
+    "line": 63,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ok(\"code_routes_to_regenerate\", W.derive_state(\"T-CODE\")[0] == \"READY_FOR_REGENERATE\", W.derive_state(\"T-CODE\")[0])"
+   },
+   {
+    "file": "dev-workcell/test_adjudication_routing.py",
+    "line": 70,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ok(\"execution_retry\", W.derive_state(\"T-EXEC\")[0] == \"READY_FOR_REGENERATE\" and d[0][\"defect_class\"] == \"EXECUTION_DEFEC"
+   },
+   {
+    "file": "dev-workcell/test_adjudication_routing.py",
+    "line": 79,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ok(\"indeterminate_to_judge\", W.derive_state(\"T-IND\")[0] == \"JUDGE_REQUIRED\" and d[0][\"defect_class\"] == \"INDETERMINATE\","
+   },
+   {
+    "file": "dev-workcell/test_adjudication_routing.py",
+    "line": 88,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(tid, \"T\", \"g\", {}, TS, \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_adjudication_routing.py",
+    "line": 89,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(tid, {\"packet_type\": \"IMPLEMENTATION_PACKET\"}, TS, \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_adjudication_routing.py",
+    "line": 96,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ok(\"behavior_preserving\", W.derive_state(tid)[0] == \"READY_FOR_REGENERATE\", W.derive_state(tid)[0])"
+   },
+   {
+    "file": "dev-workcell/test_auto_disposition.py",
+    "line": 15,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(task, \"DISP\", \"goal\", {\"related_failure_patterns\": []}, next(clk), \"mgr\")"
+   },
+   {
+    "file": "dev-workcell/test_auto_disposition.py",
+    "line": 16,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(task, IP, next(clk), \"mgr\")"
+   },
+   {
+    "file": "dev-workcell/test_auto_disposition.py",
+    "line": 33,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"2 reproducing finding ACCEPTED -> rework\", W.derive_state(\"T-D1\")[0] == \"READY_FOR_REGENERATE\")"
+   },
+   {
+    "file": "dev-workcell/test_auto_disposition.py",
+    "line": 38,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"3 non-reproducing finding auto-REJECTED -> straight to upper review\", W.derive_state(\"T-D2\")[0] == \"READY_FOR_UPPER_"
+   },
+   {
+    "file": "dev-workcell/test_auto_disposition.py",
+    "line": 42,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"4 judgment finding is NOT mechanically dispositionable\", DISP.mechanically_dispositionable(W._latest_findings(W.deri"
+   },
+   {
+    "file": "dev-workcell/test_auto_disposition.py",
+    "line": 47,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T-D4\", \"DISP\", \"goal\", {}, next(clk), \"mgr\")"
+   },
+   {
+    "file": "dev-workcell/test_auto_disposition.py",
+    "line": 52,
+    "callee": "_read_events",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "disp_events = [e for e in W._read_events(\"T-D5\") if e.get(\"phase\") == \"DISPOSE\" or \"disposition\" in str(e.get(\"payload\","
+   },
+   {
+    "file": "dev-workcell/test_auto_disposition.py",
+    "line": 53,
+    "callee": "_read_events",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"8 the DISPOSE was auto-served by 2der-auto-dispose (no Claude)\", any(\"2der-auto-dispose\" in str(e) for e in W._read_"
+   },
+   {
+    "file": "dev-workcell/test_disposition.py",
+    "line": 13,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(T,\"RRI\",\"g\",{\"related_failure_patterns\":[]},iso(0),M)"
+   },
+   {
+    "file": "dev-workcell/test_disposition.py",
+    "line": 14,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(T,{\"narrow_goal\":\"g\"},iso(1),M)"
+   },
+   {
+    "file": "dev-workcell/test_disposition.py",
+    "line": 20,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"CF-DISP-1 findings ありは AUDIT 後 DISPOSITION_REQUIRED(自動 rework しない)\", W.derive_state(\"T1\")[0]==\"DISPOSITION_REQUIRED\""
+   },
+   {
+    "file": "dev-workcell/test_disposition.py",
+    "line": 22,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"CF-DISP-1 REJECTED(passing code)→ READY_FOR_UPPER_REVIEW(rework なし)\", W.derive_state(\"T1\")[0]==\"READY_FOR_UPPER_REVI"
+   },
+   {
+    "file": "dev-workcell/test_disposition.py",
+    "line": 26,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"CF-DISP-2 ACCEPTED → READY_FOR_REGENERATE\", W.derive_state(\"T2\")[0]==\"READY_FOR_REGENERATE\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_gate.py",
+    "line": 34,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T1\", \"RRI\", \"goal\", {}, \"t0\", \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_gate.py",
+    "line": 35,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(\"T1\", {\"narrow_goal\": \"x\"}, \"t1\", \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_gate.py",
+    "line": 48,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T2\", \"RRI\", \"goal\", {}, \"t0\", \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_gate.py",
+    "line": 49,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(\"T2\", {\"narrow_goal\": \"x\"}, \"t1\", \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_gate.py",
+    "line": 66,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T3\", \"RRI\", \"goal\", {}, \"t0\", \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_gate.py",
+    "line": 67,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(\"T3\", {\"narrow_goal\": \"x\"}, \"t1\", \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_gate.py",
+    "line": 85,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T6\", \"ESDE\", \"goal\", {}, \"t0\", \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_gate.py",
+    "line": 86,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(\"T6\", {\"narrow_goal\": \"x\"}, \"t1\", \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_gate.py",
+    "line": 91,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "state, _ = W.derive_state(\"T6\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_gate.py",
+    "line": 105,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T4\", \"RRI\", \"goal\", {}, \"t0\", \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_gate.py",
+    "line": 110,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(\"T4\", {\"narrow_goal\": \"x\"}, \"t1\", \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_gate.py",
+    "line": 122,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T5\", \"RRI\", \"goal\", {}, \"t0\", \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_gate.py",
+    "line": 123,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(\"T5\", {\"narrow_goal\": \"x\"}, \"t1\", \"claude-manager\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_workflow.py",
+    "line": 49,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "bool(W._independent_audit_runs(W.derive_state(\"T-ESDE-1\")[1])))"
+   },
+   {
+    "file": "dev-workcell/test_dw_workflow_equivalence.py",
+    "line": 42,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(B, \"EQ\", \"goal\", KP, next(clk), \"mgr\")"
+   },
+   {
+    "file": "dev-workcell/test_dw_workflow_equivalence.py",
+    "line": 43,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(B, IP, next(clk), \"mgr\")                       # PLAN barrier (Claude supplies)"
+   },
+   {
+    "file": "dev-workcell/test_dw_workflow_equivalence.py",
+    "line": 59,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "sB = W.derive_state(B)[0]"
+   },
+   {
+    "file": "dev-workcell/test_plan_template.py",
+    "line": 30,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T-P1\", \"PLANT\", \"reproduce X\", REPRO_KP, next(clk), \"mgr\")"
+   },
+   {
+    "file": "dev-workcell/test_plan_template.py",
+    "line": 35,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"3 after auto-PLAN the task advanced past PLAN (READY_FOR_IMPLEMENTATION)\", W.derive_state(\"T-P1\")[0] == \"READY_FOR_I"
+   },
+   {
+    "file": "dev-workcell/test_plan_template.py",
+    "line": 43,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T-P2\", \"PLANT\", \"new feature\", FREEFORM_KP, next(clk), \"mgr\")"
+   },
+   {
+    "file": "dev-workcell/test_plan_template.py",
+    "line": 49,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T-P3\", \"PLANT\", \"goal\", {}, next(clk), \"mgr\")"
+   },
+   {
+    "file": "dev-workcell/test_plan_template.py",
+    "line": 53,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T-P4\", \"PLANT\", \"reproduce Y\", REPRO_KP, next(clk), \"mgr\")"
+   },
+   {
+    "file": "dev-workcell/test_process_trace.py",
+    "line": 12,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(T,\"RRI\",\"g\",{\"related_failure_patterns\":[]},iso(0),M)"
+   },
+   {
+    "file": "dev-workcell/test_process_trace.py",
+    "line": 13,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_process_event(T,\"RUN_START\",{},iso(1)); W.record_plan(T,{\"narrow_goal\":\"g\"},iso(2),M)"
+   },
+   {
+    "file": "dev-workcell/test_process_trace.py",
+    "line": 19,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "st,view=W.derive_state(T); tr=W.derive_process_trace(T)"
+   },
+   {
+    "file": "dev-workcell/test_upper_review_gate.py",
+    "line": 20,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(tid, \"URG\", \"goal\", {}, next(clk), \"mgr\")"
+   },
+   {
+    "file": "dev-workcell/test_upper_review_gate.py",
+    "line": 21,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(tid, IP, next(clk), \"mgr\")"
+   },
+   {
+    "file": "dev-workcell/test_upper_review_gate.py",
+    "line": 37,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"5 auto-pass does NOT complete the task — stops at PROPOSE_COMPLETE gate\", D.next_legal_operation(\"T-UR1\")[\"operation"
+   },
+   {
+    "file": "dev-workcell/test_upper_review_gate.py",
+    "line": 39,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "_, v = W.derive_state(\"T-UR1\")"
+   },
+   {
+    "file": "dev-workcell/test_upper_review_gate.py",
+    "line": 51,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.derive_state(\"T-UR3\")"
+   },
+   {
+    "file": "egl/experiments/ITEM-0015-ab/live_0008.py",
+    "line": 28,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "if W.derive_state(TASK)[0] == \"BLOCKED\":              # fresh task"
+   },
+   {
+    "file": "egl/experiments/ITEM-0015-ab/live_0008.py",
+    "line": 29,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(TASK, \"LIVE0008\", IP[\"narrow_goal\"], KP, next(clk), \"manager-claude\")"
+   },
+   {
+    "file": "egl/experiments/ITEM-0015-ab/live_0008.py",
+    "line": 30,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(TASK, IP, next(clk), \"manager-claude\")"
+   },
+   {
+    "file": "egl/experiments/ITEM-0015-ab/live_0008.py",
+    "line": 31,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "print(\"PRE_DW_STATE\", W.derive_state(TASK)[0], \"| PRE_STATE_ID\", meta[\"pre_state_id\"])"
+   },
+   {
+    "file": "egl/experiments/ITEM-0015-ab/live_0008.py",
+    "line": 75,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "actor=\"2der-operator\", run_meta={\"task_id\": TASK, \"final_dw_state\": W.derive_state(TASK)[0],"
+   },
+   {
+    "file": "egl/experiments/ITEM-0015-ab/live_0008.py",
+    "line": 79,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "print(\"POST_STATE_ID\", post[\"dialogue_event_id\"], \"| FINAL_DW_STATE\", W.derive_state(TASK)[0])"
+   },
+   {
+    "file": "egl/experiments/ITEM-0015-ab/live_0008.py",
+    "line": 80,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "json.dump({\"post_state_id\": post[\"dialogue_event_id\"], \"final_state\": W.derive_state(TASK)[0],"
+   },
+   {
+    "file": "egl/experiments/f1_reconstruct.py",
+    "line": 16,
+    "callee": "_read_events",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "ev = W._read_events()"
+   },
+   {
+    "file": "egl/experiments/f1_reconstruct.py",
+    "line": 22,
+    "callee": "_read_events",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "ev = W._read_events(task_id)"
+   },
+   {
+    "file": "egl/experiments/f1_reconstruct.py",
+    "line": 25,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = W.derive_state(task_id)"
+   },
+   {
+    "file": "egl/experiments/process_aggregate.py",
+    "line": 18,
+    "callee": "_read_events",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "return [e[\"task_id\"] for e in W._read_events() if e[\"phase\"] == \"CREATE\"]"
+   },
+   {
+    "file": "egl/experiments/process_aggregate.py",
+    "line": 22,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = W.derive_state(tid)"
+   },
+   {
+    "file": "egl/experiments/process_aggregate.py",
+    "line": 24,
+    "callee": "_read_events",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "audits = [e for e in W._read_events(tid) if e[\"phase\"] == \"AUDIT\"]"
+   },
+   {
+    "file": "egl/experiments/process_aggregate.py",
+    "line": 25,
+    "callee": "_read_events",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "disposes = [e for e in W._read_events(tid) if e[\"phase\"] == \"DISPOSE\"]"
+   },
+   {
+    "file": "egl/experiments/run_odf_narrow.py",
+    "line": 135,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(TASK, \"ODF\", \"narrow the assignment-context candidate to minimal + fix trust-root\", {}, ts(), mgr)"
+   },
+   {
+    "file": "egl/experiments/run_odf_narrow.py",
+    "line": 136,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(TASK, {\"narrow_goal\": \"≤2 load-bearing fields, declared trust-root, presence≠sufficiency, one escalation r"
+   },
+   {
+    "file": "egl/experiments/run_odf_narrow.py",
+    "line": 150,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, _ = W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_odf_narrow.py",
+    "line": 164,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_rri_batch.py",
+    "line": 59,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(BATCH_TASK, \"RRI\", \"batched B-mode process container\", {\"related_failure_patterns\": []}, iso(), \"claude-ma"
+   },
+   {
+    "file": "egl/experiments/run_rri_batch.py",
+    "line": 66,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(tasks[s], \"RRI\", cfgs[s][\"goal\"], {\"related_failure_patterns\": [\"IMPLEMENTATION_TO_CLAIM_SCOPE_EXPANSION\"]"
+   },
+   {
+    "file": "egl/experiments/run_rri_batch.py",
+    "line": 67,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(tasks[s], {\"narrow_goal\": cfgs[s][\"goal\"]}, iso(), \"claude-manager\")"
+   },
+   {
+    "file": "egl/experiments/run_rri_batch.py",
+    "line": 81,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "st, view = W.derive_state(tasks[s])"
+   },
+   {
+    "file": "egl/experiments/run_rri_batch.py",
+    "line": 93,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "rework = [s for s in SLICES if W.derive_state(tasks[s])[0] == \"READY_FOR_REGENERATE\"]"
+   },
+   {
+    "file": "egl/experiments/run_rri_batch.py",
+    "line": 107,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "st, view = W.derive_state(tasks[s])"
+   },
+   {
+    "file": "egl/experiments/run_rri_batch.py",
+    "line": 116,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "st, view = W.derive_state(tasks[s])"
+   },
+   {
+    "file": "egl/experiments/run_rri_dw_slice.py",
+    "line": 314,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(TASK,\"RRI\",cfg[\"goal\"],{\"related_failure_patterns\":[\"IMPLEMENTATION_TO_CLAIM_SCOPE_EXPANSION\"]},ts(),mgr)"
+   },
+   {
+    "file": "egl/experiments/run_rri_dw_slice.py",
+    "line": 316,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(TASK,{\"narrow_goal\":cfg[\"goal\"]},ts(),mgr)"
+   },
+   {
+    "file": "egl/experiments/run_rri_dw_slice.py",
+    "line": 328,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "st,view=W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_rri_dw_slice.py",
+    "line": 350,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "st,view=W.derive_state(TASK); trial[\"final_state\"]=st"
+   },
+   {
+    "file": "egl/experiments/run_rri_iec_trial.py",
+    "line": 168,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(TASK, \"RRI\", \"implement validate_iec (§10, anti-fabrication + C-TOTALITY)\", kp, ts(), mgr)"
+   },
+   {
+    "file": "egl/experiments/run_rri_iec_trial.py",
+    "line": 169,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(TASK, {\"narrow_goal\": \"validate_iec: R1 fields / R2 strategy enum / R3 no fabricated basis_ref / R4 C-TOTA"
+   },
+   {
+    "file": "egl/experiments/run_rri_iec_trial.py",
+    "line": 195,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, _ = W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_rri_iec_trial.py",
+    "line": 213,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_rri_needval_trial.py",
+    "line": 172,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(TASK, \"RRI\", \"implement validate_research_need (§19-20, Need Validation before research + C-TOTALITY)\", kp"
+   },
+   {
+    "file": "egl/experiments/run_rri_needval_trial.py",
+    "line": 173,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(TASK, {\"narrow_goal\": \"validate_research_need: N2 nec present / N3 validated True / N4 alternative_causes "
+   },
+   {
+    "file": "egl/experiments/run_rri_needval_trial.py",
+    "line": 199,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, _ = W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_rri_needval_trial.py",
+    "line": 217,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_rri_rda_trial.py",
+    "line": 169,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(TASK, \"RRI\", \"implement research_design_audit_gate (§27-28, findings dispositioned before proceeding)\", kp"
+   },
+   {
+    "file": "egl/experiments/run_rri_rda_trial.py",
+    "line": 170,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(TASK, {\"narrow_goal\": \"research_design_audit_gate: D1 C-TOTALITY / D2 MAJOR must be dispositioned (no OPEN"
+   },
+   {
+    "file": "egl/experiments/run_rri_rda_trial.py",
+    "line": 196,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, _ = W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_rri_rda_trial.py",
+    "line": 214,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_rri_rdec_trial.py",
+    "line": 171,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(TASK, \"RRI\", \"implement validate_rdec (§23, decision-linked, no non-load-bearing axis + C-TOTALITY)\", kp, "
+   },
+   {
+    "file": "egl/experiments/run_rri_rdec_trial.py",
+    "line": 172,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(TASK, {\"narrow_goal\": \"validate_rdec: C1 fields / C2 decision traces / C3 expected_decision_effect non-emp"
+   },
+   {
+    "file": "egl/experiments/run_rri_rdec_trial.py",
+    "line": 198,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, _ = W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_rri_rdec_trial.py",
+    "line": 216,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_rri_rint_trial.py",
+    "line": 175,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(TASK, \"RRI\", \"implement validate_resolved_intent (§11, anti-fabrication + dont-lose-residual + C-TOTALITY)"
+   },
+   {
+    "file": "egl/experiments/run_rri_rint_trial.py",
+    "line": 176,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(TASK, {\"narrow_goal\": \"validate_resolved_intent: R1 fields / R2 status enum / R3 strategy enum / R4-R5 no "
+   },
+   {
+    "file": "egl/experiments/run_rri_rint_trial.py",
+    "line": 202,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, _ = W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_rri_rint_trial.py",
+    "line": 220,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_rri_rqgate_trial.py",
+    "line": 171,
+    "callee": "create_task",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(TASK, \"RRI\", \"implement approved_rq_set_gate (§29, sanctioned path / no research bypass)\", kp, ts(), mgr)"
+   },
+   {
+    "file": "egl/experiments/run_rri_rqgate_trial.py",
+    "line": 172,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(TASK, {\"narrow_goal\": \"approved_rq_set_gate: G2 APPROVED / G3 design+revision lineage (no bypass) / G4 req"
+   },
+   {
+    "file": "egl/experiments/run_rri_rqgate_trial.py",
+    "line": 198,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, _ = W.derive_state(TASK)"
+   },
+   {
+    "file": "egl/experiments/run_rri_rqgate_trial.py",
+    "line": 216,
+    "callee": "derive_state",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = W.derive_state(TASK)"
+   },
+   {
+    "file": "twoder/build_planner.py",
+    "line": 160,
+    "callee": "_read_events",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "for e in (W._read_events(task_id) or []):"
+   },
+   {
+    "file": "twoder/build_planner.py",
+    "line": 301,
+    "callee": "record_plan",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(task_id, plan, ts, identity)   # EXISTING CREATED -> READY_FOR_IMPLEMENTATION transition"
+   },
+   {
+    "file": "twoder/counterfactual_runner.py",
+    "line": 5,
+    "callee": "create_task",
+    "edge_status": [
+     "UNKNOWN(この呼出箇所は EDGE_INVENTORY に無い)"
+    ],
+    "status_resolution": "UNRESOLVED",
+    "is_test": false,
+    "source": "submit -> DS/RRI/EGL -> create_task(provenance) -> alpha dispatch -> beta(QwenWorker) -> REAL test -> judge"
+   },
+   {
+    "file": "twoder/counterfactual_runner.py",
+    "line": 50,
+    "callee": "record_plan",
+    "edge_status": [
+     "IMPLEMENTED_UNWIRED"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(TASK, {\"requirement\": \"a Python function add(a,b) returning a+b\", \"target_file\": \"impl.py\","
+   },
+   {
+    "file": "twoder/dispatch_provenance.py",
+    "line": 71,
+    "callee": "_read_events",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "for e in W._read_events(task_id):"
+   },
+   {
+    "file": "twoder/execution_event_log.py",
+    "line": 48,
+    "callee": "_read_events",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "for e in (W._read_events(None) or []):"
+   },
+   {
+    "file": "twoder/experiment_candidate.py",
+    "line": 116,
+    "callee": "create_task",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.create_task(dw_task_id, \"2DER-edge5\", goal, kp, ts, dw_data_manager)"
+   },
+   {
+    "file": "twoder/ids.py",
+    "line": 45,
+    "callee": "_read_events",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "evs = W._read_events(rid)"
+   },
+   {
+    "file": "twoder/ids.py",
+    "line": 46,
+    "callee": "derive_state",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "return {\"task_id\": rid, \"events\": len(evs), \"state\": W.derive_state(rid)[0]} if evs else None"
+   },
+   {
+    "file": "twoder/live_worker_runtime.py",
+    "line": 176,
+    "callee": "_read_events",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "evs = W._read_events(task_id)"
+   },
+   {
+    "file": "twoder/operator.py",
+    "line": 44,
+    "callee": "derive_state",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "s, v = W.derive_state(task_id); nlo = D.next_legal_operation(task_id)"
+   },
+   {
+    "file": "twoder/operator.py",
+    "line": 147,
+    "callee": "derive_state",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "pre_state, _ = W.derive_state(task_id)"
+   },
+   {
+    "file": "twoder/operator.py",
+    "line": 153,
+    "callee": "derive_state",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "post_state, _ = W.derive_state(task_id)          # ACTUAL state after the raise (may be unchanged or partial)"
+   },
+   {
+    "file": "twoder/operator.py",
+    "line": 181,
+    "callee": "derive_state",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "post_state, view = W.derive_state(task_id)"
+   },
+   {
+    "file": "twoder/regression/test_adjudicator_flag.py",
+    "line": 23,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(tid, \"T\", \"g\", {\"knowledge_packet\": ip}, TS, \"claude-manager\")"
+   },
+   {
+    "file": "twoder/regression/test_adjudicator_flag.py",
+    "line": 24,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(tid, ip, TS, \"claude-manager\")"
+   },
+   {
+    "file": "twoder/regression/test_adjudicator_flag.py",
+    "line": 39,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "_, view = W.derive_state(tid)"
+   },
+   {
+    "file": "twoder/regression/test_adjudicator_flag.py",
+    "line": 44,
+    "callee": "_read_events",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "cats = [f.get(\"category\") for e in W._read_events(tid) if e[\"phase\"] == \"AUDIT\""
+   },
+   {
+    "file": "twoder/regression/test_adjudicator_flag.py",
+    "line": 57,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "_, view = W.derive_state(tid)"
+   },
+   {
+    "file": "twoder/regression/test_adjudicator_flag.py",
+    "line": 61,
+    "callee": "_read_events",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "cats = [f.get(\"category\") for e in W._read_events(tid) if e[\"phase\"] == \"AUDIT\""
+   },
+   {
+    "file": "twoder/regression/test_alpha_beta_integration.py",
+    "line": 62,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(TASK, IMPL, TS, \"manager-claude-senior\")"
+   },
+   {
+    "file": "twoder/regression/test_alpha_beta_integration.py",
+    "line": 79,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "_, view_after = W.derive_state(TASK)"
+   },
+   {
+    "file": "twoder/regression/test_build_planner.py",
+    "line": 130,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(tid, \"2DER-TEST\", \"build a jsonl analyzer cli tool\", kp, TS, \"test-conductor\")"
+   },
+   {
+    "file": "twoder/regression/test_build_planner.py",
+    "line": 172,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(tid, \"2DER-TEST\", \"reproduce X\", kp, TS, \"t\")"
+   },
+   {
+    "file": "twoder/regression/test_build_planner.py",
+    "line": 187,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "state, _ = W.derive_state(tid)"
+   },
+   {
+    "file": "twoder/regression/test_build_planner.py",
+    "line": 199,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(tid, \"2DER-TEST\", \"build a jsonl cli\", kp, TS, \"t\")"
+   },
+   {
+    "file": "twoder/regression/test_build_planner.py",
+    "line": 202,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "state, _ = W.derive_state(tid)"
+   },
+   {
+    "file": "twoder/regression/test_build_planner.py",
+    "line": 216,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "state, _ = W.derive_state(tid)"
+   },
+   {
+    "file": "twoder/regression/test_build_planner.py",
+    "line": 263,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "_, view = W.derive_state(tid)"
+   },
+   {
+    "file": "twoder/regression/test_build_planner.py",
+    "line": 293,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "_, view = W.derive_state(tid)"
+   },
+   {
+    "file": "twoder/regression/test_build_planner.py",
+    "line": 295,
+    "callee": "_read_events",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "plan_ev = next((e for e in W._read_events(tid) if e.get(\"phase\") == \"PLAN\"), None)"
+   },
+   {
+    "file": "twoder/regression/test_build_planner.py",
+    "line": 315,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "state, _ = W.derive_state(tid)"
+   },
+   {
+    "file": "twoder/regression/test_concurrency_and_run_gate.py",
+    "line": 28,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "return len(W.derive_state(GPU)[1].get(\"regenerate_runs\", []))"
+   },
+   {
+    "file": "twoder/regression/test_dispatch_provenance.py",
+    "line": 31,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(TASK, \"2DER\", \"add(a,b)\", {\"packet_type\": \"KNOWLEDGE_PACKET\", \"provenance\": GOOD_PROV}, TS, \"2der-conducto"
+   },
+   {
+    "file": "twoder/regression/test_dispatch_provenance.py",
+    "line": 58,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(OTHER, \"2DER\", \"other\", {\"packet_type\": \"KNOWLEDGE_PACKET\", \"provenance\": {**GOOD_PROV, \"dw_task_id\": TASK"
+   },
+   {
+    "file": "twoder/regression/test_dispatch_provenance.py",
+    "line": 67,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(NOSTAMP, \"2DER\", \"x\", {\"packet_type\": \"KNOWLEDGE_PACKET\"}, TS, \"2der-conductor\")  # no provenance key"
+   },
+   {
+    "file": "twoder/regression/test_edge6_complete_close.py",
+    "line": 21,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(t, \"p\", \"edge6 goal\", {\"packet_type\": \"KNOWLEDGE_PACKET\"}, ts, m)"
+   },
+   {
+    "file": "twoder/regression/test_edge6_complete_close.py",
+    "line": 22,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(t, {\"packet_type\": \"IMPLEMENTATION_PACKET\"}, ts, m)"
+   },
+   {
+    "file": "twoder/regression/test_edge6_complete_close.py",
+    "line": 33,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"2 DW task is now COMPLETE\", W.derive_state(A)[0] == \"COMPLETE\")"
+   },
+   {
+    "file": "twoder/regression/test_edge6_complete_close.py",
+    "line": 41,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(B, \"p\", \"edge6 not-ready\", {\"packet_type\": \"KNOWLEDGE_PACKET\"}, ts, m)"
+   },
+   {
+    "file": "twoder/regression/test_edge6_complete_close.py",
+    "line": 42,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(B, {\"packet_type\": \"IMPLEMENTATION_PACKET\"}, ts, m)"
+   },
+   {
+    "file": "twoder/regression/test_edge6_complete_close.py",
+    "line": 47,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"8 not-ready task did NOT reach COMPLETE\", W.derive_state(B)[0] != \"COMPLETE\")"
+   },
+   {
+    "file": "twoder/regression/test_execution_event_log.py",
+    "line": 27,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"TASK-EEL-1\", \"T\", \"g\", {}, TS, \"t\")"
+   },
+   {
+    "file": "twoder/regression/test_execution_event_log.py",
+    "line": 35,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"TASK-EEL-2\", \"T\", \"g\", {}, TS, \"t\")"
+   },
+   {
+    "file": "twoder/regression/test_execution_retry.py",
+    "line": 30,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(tid, \"T\", \"g\", {\"knowledge_packet\": ip, \"provenance\": {\"dw_task_id\": tid}}, TS, \"claude-manager\")"
+   },
+   {
+    "file": "twoder/regression/test_execution_retry.py",
+    "line": 31,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(tid, ip, TS, \"claude-manager\")"
+   },
+   {
+    "file": "twoder/regression/test_execution_retry.py",
+    "line": 40,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "disp = ADJ.adjudicate_dispose_fn(W._latest_findings(W.derive_state(tid)[1]), W.derive_state(tid)[1])"
+   },
+   {
+    "file": "twoder/regression/test_execution_retry.py",
+    "line": 43,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ok(\"routes_to_regenerate\", W.derive_state(tid)[0] == \"READY_FOR_REGENERATE\", W.derive_state(tid)[0])"
+   },
+   {
+    "file": "twoder/regression/test_execution_retry.py",
+    "line": 50,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "_, view = W.derive_state(tid)"
+   },
+   {
+    "file": "twoder/regression/test_execution_retry.py",
+    "line": 55,
+    "callee": "_read_events",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "evs = W._read_events(tid)"
+   },
+   {
+    "file": "twoder/regression/test_execution_retry.py",
+    "line": 61,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ok(\"proceeds_after_recovery\", W.derive_state(tid)[0] in (\"READY_FOR_AUDIT\",), W.derive_state(tid)[0])"
+   },
+   {
+    "file": "twoder/regression/test_forward_admission.py",
+    "line": 43,
+    "callee": "_read_events",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "create = next(e for e in W._read_events(tr[\"DW_TASK_ID\"]) if e[\"phase\"] == \"CREATE\")"
+   },
+   {
+    "file": "twoder/regression/test_full_live_e2e.py",
+    "line": 44,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(TASK, {\"requirement\": \"a Python function add(a,b) that returns a+b\", \"target_file\": \"impl.py\","
+   },
+   {
+    "file": "twoder/regression/test_live_coder_backend.py",
+    "line": 25,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(task_id, \"2DER\", \"goal\", {\"packet_type\": \"KNOWLEDGE_PACKET\", \"provenance\": provenance}, TS, \"2der-conducto"
+   },
+   {
+    "file": "twoder/regression/test_live_coder_backend.py",
+    "line": 37,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(T1, {\"requirement\": \"add(a,b)\", \"target_file\": \"impl.py\", \"allowed_files\": [\"impl.py\", \"test_impl.py\"],"
+   },
+   {
+    "file": "twoder/regression/test_live_coder_backend.py",
+    "line": 40,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "r1 = reg[\"CODING_WORKER\"](T1, W.derive_state(T1)[1], {\"operation\": \"GENERATE\"})"
+   },
+   {
+    "file": "twoder/regression/test_live_coder_backend.py",
+    "line": 45,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"4 DW recorded the generate run\", len(W.derive_state(T1)[1].get(\"generate_runs\") or []) >= 1)"
+   },
+   {
+    "file": "twoder/regression/test_live_coder_backend.py",
+    "line": 50,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(T2, {\"requirement\": \"do something\", \"notes\": \"no target_file / no test\"}, TS, \"manager\")"
+   },
+   {
+    "file": "twoder/regression/test_live_coder_backend.py",
+    "line": 51,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "r2 = reg[\"CODING_WORKER\"](T2, W.derive_state(T2)[1], {\"operation\": \"GENERATE\"})"
+   },
+   {
+    "file": "twoder/regression/test_operator_dw_advance.py",
+    "line": 30,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T-A1\", \"OPADV\", \"goal\", {}, next(clk), \"mgr\")"
+   },
+   {
+    "file": "twoder/regression/test_operator_dw_advance.py",
+    "line": 31,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(\"T-A1\", IP, next(clk), \"mgr\")                       # -> READY_FOR_IMPLEMENTATION"
+   },
+   {
+    "file": "twoder/regression/test_operator_dw_advance.py",
+    "line": 39,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "_, view = W.derive_state(\"T-A1\")"
+   },
+   {
+    "file": "twoder/regression/test_operator_dw_advance.py",
+    "line": 43,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T-A2\", \"OPADV\", \"goal\", {}, next(clk), \"mgr\")"
+   },
+   {
+    "file": "twoder/regression/test_operator_dw_advance.py",
+    "line": 44,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(\"T-A2\", IP, next(clk), \"mgr\")"
+   },
+   {
+    "file": "twoder/regression/test_operator_dw_advance.py",
+    "line": 45,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "before_state, _ = W.derive_state(\"T-A2\")"
+   },
+   {
+    "file": "twoder/regression/test_operator_dw_advance.py",
+    "line": 47,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "after_state, av = W.derive_state(\"T-A2\")"
+   },
+   {
+    "file": "twoder/regression/test_return_loop.py",
+    "line": 20,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(T, \"proj\", \"return-loop demo goal\", {\"packet_type\": \"KNOWLEDGE_PACKET\"}, ts, mgr)"
+   },
+   {
+    "file": "twoder/regression/test_return_loop.py",
+    "line": 21,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(T, {\"packet_type\": \"IMPLEMENTATION_PACKET\"}, ts, mgr)"
+   },
+   {
+    "file": "twoder/regression/test_return_loop.py",
+    "line": 29,
+    "callee": "derive_state",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "ck(\"0 DW task reached COMPLETE\", W.derive_state(T)[0] == \"COMPLETE\")"
+   },
+   {
+    "file": "twoder/regression/test_runtime_supervisor.py",
+    "line": 83,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(tid, \"T\", \"goal\", {\"provenance\": {\"dw_task_id\": tid}}, TS, \"t\")"
+   },
+   {
+    "file": "twoder/regression/test_runtime_supervisor.py",
+    "line": 89,
+    "callee": "_read_events",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "evs = W._read_events(tid)"
+   },
+   {
+    "file": "twoder/regression/test_runtime_supervisor.py",
+    "line": 127,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"TASK-RS-E\", \"T\", \"build a jsonl cli\", {\"provenance\": prov}, TS, \"t\")"
+   },
+   {
+    "file": "twoder/regression/test_scoped_approval.py",
+    "line": 30,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T-APV\", \"APV\", \"goal\", {}, next(clk), \"mgr\")"
+   },
+   {
+    "file": "twoder/regression/test_scoped_approval.py",
+    "line": 31,
+    "callee": "record_plan",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.record_plan(\"T-APV\", IP, next(clk), \"mgr\")"
+   },
+   {
+    "file": "twoder/regression/test_scoped_approval.py",
+    "line": 44,
+    "callee": "create_task",
+    "edge_status": [
+     "TEST_ONLY_ISLAND"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": true,
+    "source": "W.create_task(\"T-APV\", \"APV\", \"goal\", {}, next(clk), \"mgr\") if False else None"
+   },
+   {
+    "file": "twoder/return_loop.py",
+    "line": 22,
+    "callee": "derive_state",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "_, view = W.derive_state(task_id)"
+   },
+   {
+    "file": "twoder/select_and_create.py",
+    "line": 66,
+    "callee": "create_task",
+    "edge_status": [
+     "UNKNOWN(この呼出箇所は EDGE_INVENTORY に無い)"
+    ],
+    "status_resolution": "UNRESOLVED",
+    "is_test": false,
+    "source": "def create_task(item, sealed_fields=None, ts=None):"
+   },
+   {
+    "file": "twoder/select_and_create.py",
+    "line": 80,
+    "callee": "create_task",
+    "edge_status": [
+     "UNKNOWN(この呼出箇所は EDGE_INVENTORY に無い)"
+    ],
+    "status_resolution": "UNRESOLVED",
+    "is_test": false,
+    "source": "return _workcell.create_task(task_id, \"2DER\", goal, kp, ts, \"2der-producer\")"
+   },
+   {
+    "file": "twoder/select_and_create.py",
+    "line": 91,
+    "callee": "create_task",
+    "edge_status": [
+     "UNKNOWN(この呼出箇所は EDGE_INVENTORY に無い)"
+    ],
+    "status_resolution": "UNRESOLVED",
+    "is_test": false,
+    "source": "#  - create_task(item, sealed_fields={...}, ts=emitted_ts) で呼ぶ。ts は kwarg で明示的に渡す(封印した emitted_ts と一致)。"
+   },
+   {
+    "file": "twoder/select_and_create.py",
+    "line": 150,
+    "callee": "create_task",
+    "edge_status": [
+     "UNKNOWN(この呼出箇所は EDGE_INVENTORY に無い)"
+    ],
+    "status_resolution": "UNRESOLVED",
+    "is_test": false,
+    "source": "create_task(item, sealed_fields=sealed_fields, ts=emitted_ts)"
+   },
+   {
+    "file": "twoder/webui.py",
+    "line": 89,
+    "callee": "_read_events",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "return W._read_events(task_id)"
+   },
+   {
+    "file": "twoder/webui.py",
+    "line": 108,
+    "callee": "derive_state",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = W.derive_state(task_id)"
+   },
+   {
+    "file": "twoder/webui.py",
+    "line": 146,
+    "callee": "derive_state",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "state, view = W.derive_state(task_id)"
+   },
+   {
+    "file": "twoder/webui.py",
+    "line": 311,
+    "callee": "derive_state",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "_, view = W.derive_state(task_id)"
+   },
+   {
+    "file": "twoder/webui.py",
+    "line": 315,
+    "callee": "record_plan",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "W.record_plan(task_id, result[\"implementation_packet\"], TS, \"claude-manager\")"
+   },
+   {
+    "file": "twoder/webui.py",
+    "line": 330,
+    "callee": "_read_events",
+    "edge_status": [
+     "LIVE"
+    ],
+    "status_resolution": "PER_CALL_SITE",
+    "is_test": false,
+    "source": "for e in W._read_events(None):"
+   }
+  ]
+ },
+ "rules": {
+  "front_door_files": {
+   "de_admission": [
+    "twoder/submit.py",
+    "egl/structure/de_submit_route.py"
+   ],
+   "dw_workcell": [
+    "twoder/submit.py",
+    "twoder/dispatch.py",
+    "dw/dispatch.py"
+   ]
+  },
+  "symbols": {
+   "de_admission": [
+    "admit_design_evidence"
+   ],
+   "dw_workcell": [
+    "create_task",
+    "record_plan",
+    "derive_state",
+    "_read_events"
+   ]
+  },
+  "note": "front door 自身は除外。判定できないものは UNKNOWN と書き、推測で分類しない。"
+ },
+ "scope_note": "★棚卸しのみ。閉塞の提案はしない（依頼 D4-I）。"
+}
