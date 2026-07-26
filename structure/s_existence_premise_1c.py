@@ -260,6 +260,12 @@ def check():
                        ("自己言及で GROUNDED にならない", "M6_no_false_grounding")):
         print("[%s] %s" % ("PASS" if res[key] else "FAIL", label))
         ok &= res[key]
+    # ★裁定 §3-3: 閾値の感度域を --check で毎回出す。将来 corpus が広がって固定値が感度域に入ったら自動で見える。
+    ex = res["M8_rule_exercised"]
+    print("[INFO] df 閾値: 固定=%d / 感度がある閾値域=%s / 閾値20 で除外される語=%s"
+          % (ex["fixed_threshold"], ex["sensitive_range"], ex["excluded_tokens_at_fixed"]))
+    print("       感度がある probe=%s / 無い probe=%s" % (ex["sensitive_probes"], ex["insensitive_probes"]))
+    print("       ★現状この規則は**不活性**。NOT_FOUND を守っているのは散文除去と完全一致の接地である。")
     a = json.dumps(measure()[0], ensure_ascii=False, sort_keys=True)
     b = json.dumps(measure()[0], ensure_ascii=False, sort_keys=True)
     print("[%s] 決定論再現(2回走らせて完全一致)" % ("PASS" if a == b else "FAIL"))

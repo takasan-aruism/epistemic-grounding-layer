@@ -1,0 +1,62 @@
+{
+ "A2_preceding_ref": {
+  "first_in_conversation_is_null": true,
+  "second_points_to_first": true,
+  "third_points_to_second": true,
+  "other_conversation_is_null": true,
+  "records": [
+   {
+    "utterance_id": "UTT-0001",
+    "conversation_id": "conv-A",
+    "preceding_utterance_ref": null,
+    "ts_source": "CALLER"
+   },
+   {
+    "utterance_id": "UTT-0002",
+    "conversation_id": "conv-A",
+    "preceding_utterance_ref": "UTT-0001",
+    "ts_source": "CALLER"
+   },
+   {
+    "utterance_id": "UTT-0003",
+    "conversation_id": "conv-A",
+    "preceding_utterance_ref": "UTT-0002",
+    "ts_source": "CALLER"
+   },
+   {
+    "utterance_id": "UTT-0004",
+    "conversation_id": "conv-B",
+    "preceding_utterance_ref": null,
+    "ts_source": "DEFAULT"
+   }
+  ],
+  "ok": true
+ },
+ "A3_ts_source": {
+  "caller_marked": true,
+  "default_marked": true,
+  "ok": true
+ },
+ "A4_baseline": {
+  "checked": true,
+  "baseline_lines": 1160,
+  "live_lines": 1160,
+  "existing_records_unchanged": true,
+  "changed_line_numbers": [],
+  "appended_since_baseline": 0
+ },
+ "A5_corpus": {
+  "user_utterances": 488,
+  "machine_generated_excluded": 29,
+  "after_exclusion": 459,
+  "unique_deduped": 298,
+  "dedup_applied": true
+ },
+ "live_field_coverage": {
+  "utterances_total": 738,
+  "with_preceding_ref": 0,
+  "with_ts_source": 0,
+  "ts_source_breakdown": {}
+ },
+ "forward_only": "既存 459 件は復元しない。前向きのみ。本 SPEC 完了時点で新フィールドが埋まった記録が0件なのは正常である（記録が入ることと P2 が効くことは別）。"
+}
