@@ -180,13 +180,18 @@ def llm_compare(runs=10, batches=2):
     batch_out = []
     for b in range(batches):
         rows = []
+        import concurrent.futures as _cf
         for i in range(runs):
-            for fx in D2P2.FIXTURES:
-                for seed in D2P2.SEEDS:
-                    for arm in ("A_postfilter", "B_menurestrict"):
-                        r = _arm_run(fx, seed, arm)
-                        rows.append({"batch": b, "run": i, "fixture_id": fx["id"], "seed": seed, "arm": arm,
-                                     "expected": fx["expected_strategy"], **r})
+            tasks = [(fx, seed, arm) for fx in D2P2.FIXTURES for seed in D2P2.SEEDS
+                     for arm in ("A_postfilter", "B_menurestrict")]
+
+            def _go(t):
+                fx, seed, arm = t
+                r = _arm_run(fx, seed, arm)
+                return {"batch": b, "run": i, "fixture_id": fx["id"], "seed": seed, "arm": arm,
+                        "expected": fx["expected_strategy"], **r}
+            with _cf.ThreadPoolExecutor(max_workers=D2P2.MAX_PARALLEL) as ex:
+                rows.extend(ex.map(_go, tasks))
             print("    batch%d run%d done" % (b, i), flush=True)
         # ★振り直し: 同一 (fixture, seed, run) で A が NO_CANDIDATE だった回、B は何を返したか
         reass = []
@@ -200,6 +205,10 @@ def llm_compare(runs=10, batches=2):
                               "B_status": m["status"], "B_choice": m["choice"],
                               "reassigned": m["status"] != "NO_CANDIDATE",
                               "reassigned_correct": m["choice"] == r["expected"]})
+        # ★D5-V: per-(fixture,seed,run) の選択結果を必ず保存する（前回は保存しておらず再集計できなかった）
+        with open(os.path.join(STRUCT, "MENU_RESTRICTION_BUILD4_ROWS.jsonl"), "a", encoding="utf-8") as _fh:
+            for _r in rows:
+                _fh.write(json.dumps(_r, ensure_ascii=False) + "\n")
         batch_out.append({"batch": b, "aggregate": _agg(rows), "reassignment": {
             "A_no_candidate_n": len(reass),
             "reassigned_n": sum(1 for x in reass if x["reassigned"]),
