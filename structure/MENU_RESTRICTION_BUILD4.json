@@ -1,0 +1,330 @@
+{
+ "preconditions": {
+  "CONTEXT_RESOLVE": {
+   "kind": "CONTEXT_NONEMPTY",
+   "why": "定義が『直前の文脈に支配的な解釈があり文脈で絞れる』。文脈が無ければ定義上あり得ない"
+  },
+  "DIRECT": {
+   "kind": "NONE",
+   "why": "前提なし"
+  },
+  "CHOICE": {
+   "kind": "NONE",
+   "why": "前提なし"
+  },
+  "BOUNDED_MULTI_VIEW": {
+   "kind": "NONE",
+   "why": "前提なし"
+  },
+  "INTENT_PROBE": {
+   "kind": "NONE",
+   "why": "前提なし"
+  },
+  "PREMISE_PROBE": {
+   "kind": "NONE",
+   "why": "前提なし"
+  },
+  "DEFER": {
+   "kind": "NONE",
+   "why": "前提なし"
+  }
+ },
+ "forbidden_preconditions": [
+  {
+   "signal": "指示語の束縛先の有無 (Build 1a BIND-RULE-001)",
+   "why_not": "束縛先が在っても INTENT_PROBE が正しい場合がある（束縛先が複数ある等）。前提にすると正しい選択肢を殺す"
+  },
+  {
+   "signal": "対象の接地状態 (Build 1c existence_grounding)",
+   "why_not": "接地していても PREMISE_PROBE が正しい場合がある（存在はするが別物かもしれない）。同上"
+  }
+ ],
+ "receipt1_empty_context_no_CONTEXT_RESOLVE": {
+  "n": 17,
+  "ok": true,
+  "failed": []
+ },
+ "receipt2_with_context_has_CONTEXT_RESOLVE": {
+  "n": 3,
+  "ok": true,
+  "fixtures": [
+   "CR1",
+   "CR2",
+   "CR3"
+  ],
+  "failed": []
+ },
+ "receipt3_other_six_always_present": {
+  "n": 20,
+  "ok": true,
+  "failed": []
+ },
+ "baseline_shows_CONTEXT_RESOLVE_even_when_empty": 17,
+ "llm_compare": {
+  "batches": [
+   {
+    "batch": 0,
+    "aggregate": {
+     "A_postfilter": {
+      "n": 600,
+      "M1_far": 0.0167,
+      "M1a_unsafe": 0.0167,
+      "M1b_wasteful": 0.0,
+      "M2_match": 0.755,
+      "NO_CANDIDATE": 13
+     },
+     "B_menurestrict": {
+      "n": 600,
+      "M1_far": 0.0167,
+      "M1a_unsafe": 0.0167,
+      "M1b_wasteful": 0.0,
+      "M2_match": 0.7533,
+      "NO_CANDIDATE": 7
+     }
+    },
+    "reassignment": {
+     "A_no_candidate_n": 13,
+     "reassigned_n": 13,
+     "reassigned_correct_n": 8,
+     "cases": [
+      {
+       "fixture_id": "IP2",
+       "seed": 0,
+       "run": 0,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "PREMISE_PROBE",
+       "reassigned": true,
+       "reassigned_correct": false
+      },
+      {
+       "fixture_id": "PP2",
+       "seed": 1,
+       "run": 0,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "PREMISE_PROBE",
+       "reassigned": true,
+       "reassigned_correct": true
+      },
+      {
+       "fixture_id": "PP3",
+       "seed": 2,
+       "run": 0,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "PREMISE_PROBE",
+       "reassigned": true,
+       "reassigned_correct": true
+      },
+      {
+       "fixture_id": "IP2",
+       "seed": 1,
+       "run": 2,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "PREMISE_PROBE",
+       "reassigned": true,
+       "reassigned_correct": false
+      },
+      {
+       "fixture_id": "DF2",
+       "seed": 0,
+       "run": 2,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "DEFER",
+       "reassigned": true,
+       "reassigned_correct": true
+      },
+      {
+       "fixture_id": "IP2",
+       "seed": 1,
+       "run": 3,
+       "B_status": "OK",
+       "B_choice": "BOUNDED_MULTI_VIEW",
+       "reassigned": true,
+       "reassigned_correct": false
+      },
+      {
+       "fixture_id": "PP3",
+       "seed": 1,
+       "run": 5,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "PREMISE_PROBE",
+       "reassigned": true,
+       "reassigned_correct": true
+      },
+      {
+       "fixture_id": "DF2",
+       "seed": 0,
+       "run": 5,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "DEFER",
+       "reassigned": true,
+       "reassigned_correct": true
+      },
+      {
+       "fixture_id": "IP2",
+       "seed": 1,
+       "run": 8,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "BOUNDED_MULTI_VIEW",
+       "reassigned": true,
+       "reassigned_correct": false
+      },
+      {
+       "fixture_id": "IP2",
+       "seed": 2,
+       "run": 8,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "PREMISE_PROBE",
+       "reassigned": true,
+       "reassigned_correct": false
+      },
+      {
+       "fixture_id": "PP3",
+       "seed": 1,
+       "run": 8,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "PREMISE_PROBE",
+       "reassigned": true,
+       "reassigned_correct": true
+      },
+      {
+       "fixture_id": "DF2",
+       "seed": 2,
+       "run": 8,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "DEFER",
+       "reassigned": true,
+       "reassigned_correct": true
+      },
+      {
+       "fixture_id": "DF2",
+       "seed": 0,
+       "run": 9,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "DEFER",
+       "reassigned": true,
+       "reassigned_correct": true
+      }
+     ]
+    }
+   },
+   {
+    "batch": 1,
+    "aggregate": {
+     "A_postfilter": {
+      "n": 600,
+      "M1_far": 0.0167,
+      "M1a_unsafe": 0.0167,
+      "M1b_wasteful": 0.0,
+      "M2_match": 0.7517,
+      "NO_CANDIDATE": 10
+     },
+     "B_menurestrict": {
+      "n": 600,
+      "M1_far": 0.0217,
+      "M1a_unsafe": 0.0217,
+      "M1b_wasteful": 0.0,
+      "M2_match": 0.7433,
+      "NO_CANDIDATE": 9
+     }
+    },
+    "reassignment": {
+     "A_no_candidate_n": 10,
+     "reassigned_n": 7,
+     "reassigned_correct_n": 4,
+     "cases": [
+      {
+       "fixture_id": "DF2",
+       "seed": 0,
+       "run": 0,
+       "B_status": "NO_CANDIDATE",
+       "B_choice": null,
+       "reassigned": false,
+       "reassigned_correct": false
+      },
+      {
+       "fixture_id": "IP2",
+       "seed": 1,
+       "run": 1,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "PREMISE_PROBE",
+       "reassigned": true,
+       "reassigned_correct": false
+      },
+      {
+       "fixture_id": "IP2",
+       "seed": 2,
+       "run": 1,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "BOUNDED_MULTI_VIEW",
+       "reassigned": true,
+       "reassigned_correct": false
+      },
+      {
+       "fixture_id": "BV3",
+       "seed": 0,
+       "run": 2,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "BOUNDED_MULTI_VIEW",
+       "reassigned": true,
+       "reassigned_correct": true
+      },
+      {
+       "fixture_id": "DF2",
+       "seed": 2,
+       "run": 2,
+       "B_status": "NO_CANDIDATE",
+       "B_choice": null,
+       "reassigned": false,
+       "reassigned_correct": false
+      },
+      {
+       "fixture_id": "DF2",
+       "seed": 1,
+       "run": 3,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "DEFER",
+       "reassigned": true,
+       "reassigned_correct": true
+      },
+      {
+       "fixture_id": "IP2",
+       "seed": 2,
+       "run": 5,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "PREMISE_PROBE",
+       "reassigned": true,
+       "reassigned_correct": false
+      },
+      {
+       "fixture_id": "DF2",
+       "seed": 0,
+       "run": 5,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "DEFER",
+       "reassigned": true,
+       "reassigned_correct": true
+      },
+      {
+       "fixture_id": "PP3",
+       "seed": 1,
+       "run": 7,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "PREMISE_PROBE",
+       "reassigned": true,
+       "reassigned_correct": true
+      },
+      {
+       "fixture_id": "DF2",
+       "seed": 0,
+       "run": 8,
+       "B_status": "NO_CANDIDATE",
+       "B_choice": null,
+       "reassigned": false,
+       "reassigned_correct": false
+      }
+     ]
+    }
+   }
+  ]
+ }
+}
