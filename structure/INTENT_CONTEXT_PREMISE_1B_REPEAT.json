@@ -1,0 +1,1114 @@
+{
+ "summary": {
+  "runs": 12,
+  "pairs_per_run": 60,
+  "empty_context_pairs_per_run": 51,
+  "exclusions_total": 17,
+  "exclusion_rate_per_empty_pair": 0.0278,
+  "delta_i_mean": 0.0014,
+  "delta_ii_mean": 0.0014,
+  "delta_i_values": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0166,
+   0.0,
+   0.0
+  ],
+  "A_i_values": [
+   0.7333,
+   0.7833,
+   0.8,
+   0.75,
+   0.7667,
+   0.75,
+   0.7167,
+   0.75,
+   0.7667,
+   0.7667,
+   0.7667,
+   0.7
+  ],
+  "B_i_values": [
+   0.7333,
+   0.7833,
+   0.8,
+   0.75,
+   0.7667,
+   0.75,
+   0.7167,
+   0.75,
+   0.7667,
+   0.7833,
+   0.7667,
+   0.7
+  ],
+  "moved_total": 15,
+  "moved_became_correct": 1,
+  "moved_became_wrong": 0,
+  "moved_detail": [
+   {
+    "fixture_id": "IP2",
+    "seed": 0,
+    "A": "CONTEXT_RESOLVE",
+    "B": "BOUNDED_MULTI_VIEW",
+    "expected": "INTENT_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   },
+   {
+    "fixture_id": "IP2",
+    "seed": 1,
+    "A": "CONTEXT_RESOLVE",
+    "B": null,
+    "expected": "INTENT_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   },
+   {
+    "fixture_id": "IP2",
+    "seed": 2,
+    "A": "CONTEXT_RESOLVE",
+    "B": null,
+    "expected": "INTENT_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   },
+   {
+    "fixture_id": "IP2",
+    "seed": 0,
+    "A": "CONTEXT_RESOLVE",
+    "B": "BOUNDED_MULTI_VIEW",
+    "expected": "INTENT_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   },
+   {
+    "fixture_id": "IP2",
+    "seed": 0,
+    "A": "CONTEXT_RESOLVE",
+    "B": "BOUNDED_MULTI_VIEW",
+    "expected": "INTENT_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   },
+   {
+    "fixture_id": "IP2",
+    "seed": 2,
+    "A": "CONTEXT_RESOLVE",
+    "B": null,
+    "expected": "INTENT_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   },
+   {
+    "fixture_id": "PP3",
+    "seed": 2,
+    "A": "CONTEXT_RESOLVE",
+    "B": null,
+    "expected": "PREMISE_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   },
+   {
+    "fixture_id": "IP2",
+    "seed": 0,
+    "A": "CONTEXT_RESOLVE",
+    "B": "BOUNDED_MULTI_VIEW",
+    "expected": "INTENT_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   },
+   {
+    "fixture_id": "IP2",
+    "seed": 0,
+    "A": "CONTEXT_RESOLVE",
+    "B": "BOUNDED_MULTI_VIEW",
+    "expected": "INTENT_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   },
+   {
+    "fixture_id": "IP2",
+    "seed": 2,
+    "A": "CONTEXT_RESOLVE",
+    "B": null,
+    "expected": "INTENT_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   },
+   {
+    "fixture_id": "PP3",
+    "seed": 1,
+    "A": "CONTEXT_RESOLVE",
+    "B": null,
+    "expected": "PREMISE_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   },
+   {
+    "fixture_id": "IP3",
+    "seed": 0,
+    "A": "CONTEXT_RESOLVE",
+    "B": "INTENT_PROBE",
+    "expected": "INTENT_PROBE",
+    "A_correct": false,
+    "B_correct": true
+   },
+   {
+    "fixture_id": "IP2",
+    "seed": 0,
+    "A": "CONTEXT_RESOLVE",
+    "B": "BOUNDED_MULTI_VIEW",
+    "expected": "INTENT_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   },
+   {
+    "fixture_id": "IP2",
+    "seed": 0,
+    "A": "CONTEXT_RESOLVE",
+    "B": "BOUNDED_MULTI_VIEW",
+    "expected": "INTENT_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   },
+   {
+    "fixture_id": "IP2",
+    "seed": 2,
+    "A": "CONTEXT_RESOLVE",
+    "B": null,
+    "expected": "INTENT_PROBE",
+    "A_correct": false,
+    "B_correct": false
+   }
+  ],
+  "negative_control_all_ok": true,
+  "targets_context_resolve_present": 8,
+  "targets_observed": 24
+ },
+ "runs": [
+  {
+   "run": 0,
+   "exclusions_n": 1,
+   "exclusion_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_before": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ]
+    }
+   ],
+   "A_i": 0.7333,
+   "B_i": 0.7333,
+   "A_ii": 0.8833,
+   "B_ii": 0.8833,
+   "delta_i": 0.0,
+   "delta_ii": 0.0,
+   "moved_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "A": "CONTEXT_RESOLVE",
+     "B": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    }
+   ],
+   "negative_control_ok": true,
+   "targets": [
+    {
+     "fixture_id": "IP1",
+     "seed": 1,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_A": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "candidates_B": [
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "context_resolve_in_candidates_A": true,
+     "removed_by_p3": true,
+     "final_A": "CONTEXT_RESOLVE",
+     "final_B": "BOUNDED_MULTI_VIEW",
+     "moved_to": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE"
+    }
+   ],
+   "wall": 4.67,
+   "llm_calls": {
+    "llm": 4,
+    "reused": 118
+   }
+  },
+  {
+   "run": 1,
+   "exclusions_n": 2,
+   "exclusion_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 1,
+     "candidates_before": [
+      "CONTEXT_RESOLVE"
+     ]
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 2,
+     "candidates_before": [
+      "CONTEXT_RESOLVE"
+     ]
+    }
+   ],
+   "A_i": 0.7833,
+   "B_i": 0.7833,
+   "A_ii": 0.8833,
+   "B_ii": 0.8833,
+   "delta_i": 0.0,
+   "delta_ii": 0.0,
+   "moved_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 1,
+     "A": "CONTEXT_RESOLVE",
+     "B": null,
+     "expected": "INTENT_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 2,
+     "A": "CONTEXT_RESOLVE",
+     "B": null,
+     "expected": "INTENT_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    }
+   ],
+   "negative_control_ok": true,
+   "targets": [
+    {
+     "fixture_id": "IP1",
+     "seed": 1,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_A": [
+      "DEFER"
+     ],
+     "candidates_B": [
+      "DEFER"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "DEFER",
+     "final_B": "DEFER",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    }
+   ],
+   "wall": 5.25,
+   "llm_calls": {
+    "llm": 6,
+    "reused": 116
+   }
+  },
+  {
+   "run": 2,
+   "exclusions_n": 1,
+   "exclusion_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_before": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ]
+    }
+   ],
+   "A_i": 0.8,
+   "B_i": 0.8,
+   "A_ii": 0.9,
+   "B_ii": 0.9,
+   "delta_i": 0.0,
+   "delta_ii": 0.0,
+   "moved_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "A": "CONTEXT_RESOLVE",
+     "B": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    }
+   ],
+   "negative_control_ok": true,
+   "targets": [
+    {
+     "fixture_id": "IP1",
+     "seed": 1,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_A": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "candidates_B": [
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "context_resolve_in_candidates_A": true,
+     "removed_by_p3": true,
+     "final_A": "CONTEXT_RESOLVE",
+     "final_B": "BOUNDED_MULTI_VIEW",
+     "moved_to": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE"
+    }
+   ],
+   "wall": 5.25,
+   "llm_calls": {
+    "llm": 6,
+    "reused": 118
+   }
+  },
+  {
+   "run": 3,
+   "exclusions_n": 0,
+   "exclusion_cases": [],
+   "A_i": 0.75,
+   "B_i": 0.75,
+   "A_ii": 0.8667,
+   "B_ii": 0.8667,
+   "delta_i": 0.0,
+   "delta_ii": 0.0,
+   "moved_cases": [],
+   "negative_control_ok": true,
+   "targets": [
+    {
+     "fixture_id": "IP1",
+     "seed": 1,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    }
+   ],
+   "wall": 4.66,
+   "llm_calls": {
+    "llm": 4,
+    "reused": 120
+   }
+  },
+  {
+   "run": 4,
+   "exclusions_n": 3,
+   "exclusion_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_before": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ]
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 2,
+     "candidates_before": [
+      "CONTEXT_RESOLVE"
+     ]
+    },
+    {
+     "fixture_id": "PP3",
+     "seed": 2,
+     "candidates_before": [
+      "CONTEXT_RESOLVE"
+     ]
+    }
+   ],
+   "A_i": 0.7667,
+   "B_i": 0.7667,
+   "A_ii": 0.9,
+   "B_ii": 0.9,
+   "delta_i": 0.0,
+   "delta_ii": 0.0,
+   "moved_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "A": "CONTEXT_RESOLVE",
+     "B": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 2,
+     "A": "CONTEXT_RESOLVE",
+     "B": null,
+     "expected": "INTENT_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    },
+    {
+     "fixture_id": "PP3",
+     "seed": 2,
+     "A": "CONTEXT_RESOLVE",
+     "B": null,
+     "expected": "PREMISE_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    }
+   ],
+   "negative_control_ok": true,
+   "targets": [
+    {
+     "fixture_id": "IP1",
+     "seed": 1,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_A": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "candidates_B": [
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "context_resolve_in_candidates_A": true,
+     "removed_by_p3": true,
+     "final_A": "CONTEXT_RESOLVE",
+     "final_B": "BOUNDED_MULTI_VIEW",
+     "moved_to": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE"
+    }
+   ],
+   "wall": 4.27,
+   "llm_calls": {
+    "llm": 2,
+    "reused": 114
+   }
+  },
+  {
+   "run": 5,
+   "exclusions_n": 1,
+   "exclusion_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_before": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ]
+    }
+   ],
+   "A_i": 0.75,
+   "B_i": 0.75,
+   "A_ii": 0.8667,
+   "B_ii": 0.8667,
+   "delta_i": 0.0,
+   "delta_ii": 0.0,
+   "moved_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "A": "CONTEXT_RESOLVE",
+     "B": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    }
+   ],
+   "negative_control_ok": true,
+   "targets": [
+    {
+     "fixture_id": "IP1",
+     "seed": 1,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_A": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "candidates_B": [
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "context_resolve_in_candidates_A": true,
+     "removed_by_p3": true,
+     "final_A": "CONTEXT_RESOLVE",
+     "final_B": "BOUNDED_MULTI_VIEW",
+     "moved_to": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE"
+    }
+   ],
+   "wall": 4.3,
+   "llm_calls": {
+    "llm": 2,
+    "reused": 118
+   }
+  },
+  {
+   "run": 6,
+   "exclusions_n": 3,
+   "exclusion_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_before": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ]
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 2,
+     "candidates_before": [
+      "CONTEXT_RESOLVE"
+     ]
+    },
+    {
+     "fixture_id": "PP3",
+     "seed": 1,
+     "candidates_before": [
+      "CONTEXT_RESOLVE"
+     ]
+    }
+   ],
+   "A_i": 0.7167,
+   "B_i": 0.7167,
+   "A_ii": 0.8333,
+   "B_ii": 0.8333,
+   "delta_i": 0.0,
+   "delta_ii": 0.0,
+   "moved_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "A": "CONTEXT_RESOLVE",
+     "B": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 2,
+     "A": "CONTEXT_RESOLVE",
+     "B": null,
+     "expected": "INTENT_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    },
+    {
+     "fixture_id": "PP3",
+     "seed": 1,
+     "A": "CONTEXT_RESOLVE",
+     "B": null,
+     "expected": "PREMISE_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    }
+   ],
+   "negative_control_ok": true,
+   "targets": [
+    {
+     "fixture_id": "IP1",
+     "seed": 1,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_A": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "candidates_B": [
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "context_resolve_in_candidates_A": true,
+     "removed_by_p3": true,
+     "final_A": "CONTEXT_RESOLVE",
+     "final_B": "BOUNDED_MULTI_VIEW",
+     "moved_to": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE"
+    }
+   ],
+   "wall": 5.06,
+   "llm_calls": {
+    "llm": 6,
+    "reused": 114
+   }
+  },
+  {
+   "run": 7,
+   "exclusions_n": 1,
+   "exclusion_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_before": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ]
+    }
+   ],
+   "A_i": 0.75,
+   "B_i": 0.75,
+   "A_ii": 0.9,
+   "B_ii": 0.9,
+   "delta_i": 0.0,
+   "delta_ii": 0.0,
+   "moved_cases": [],
+   "negative_control_ok": true,
+   "targets": [
+    {
+     "fixture_id": "IP1",
+     "seed": 1,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_A": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "candidates_B": [
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "context_resolve_in_candidates_A": true,
+     "removed_by_p3": true,
+     "final_A": "BOUNDED_MULTI_VIEW",
+     "final_B": "BOUNDED_MULTI_VIEW",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    }
+   ],
+   "wall": 5.45,
+   "llm_calls": {
+    "llm": 8,
+    "reused": 118
+   }
+  },
+  {
+   "run": 8,
+   "exclusions_n": 0,
+   "exclusion_cases": [],
+   "A_i": 0.7667,
+   "B_i": 0.7667,
+   "A_ii": 0.8833,
+   "B_ii": 0.8833,
+   "delta_i": 0.0,
+   "delta_ii": 0.0,
+   "moved_cases": [],
+   "negative_control_ok": true,
+   "targets": [
+    {
+     "fixture_id": "IP1",
+     "seed": 1,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_A": [
+      "DEFER"
+     ],
+     "candidates_B": [
+      "DEFER"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "DEFER",
+     "final_B": "DEFER",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    }
+   ],
+   "wall": 4.0,
+   "llm_calls": {
+    "llm": 2,
+    "reused": 120
+   }
+  },
+  {
+   "run": 9,
+   "exclusions_n": 1,
+   "exclusion_cases": [
+    {
+     "fixture_id": "IP3",
+     "seed": 0,
+     "candidates_before": [
+      "CONTEXT_RESOLVE",
+      "INTENT_PROBE"
+     ]
+    }
+   ],
+   "A_i": 0.7667,
+   "B_i": 0.7833,
+   "A_ii": 0.8667,
+   "B_ii": 0.8833,
+   "delta_i": 0.0166,
+   "delta_ii": 0.0166,
+   "moved_cases": [
+    {
+     "fixture_id": "IP3",
+     "seed": 0,
+     "A": "CONTEXT_RESOLVE",
+     "B": "INTENT_PROBE",
+     "expected": "INTENT_PROBE",
+     "A_correct": false,
+     "B_correct": true
+    }
+   ],
+   "negative_control_ok": true,
+   "targets": [
+    {
+     "fixture_id": "IP1",
+     "seed": 1,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    }
+   ],
+   "wall": 5.15,
+   "llm_calls": {
+    "llm": 6,
+    "reused": 118
+   }
+  },
+  {
+   "run": 10,
+   "exclusions_n": 1,
+   "exclusion_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_before": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ]
+    }
+   ],
+   "A_i": 0.7667,
+   "B_i": 0.7667,
+   "A_ii": 0.9167,
+   "B_ii": 0.9167,
+   "delta_i": 0.0,
+   "delta_ii": 0.0,
+   "moved_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "A": "CONTEXT_RESOLVE",
+     "B": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    }
+   ],
+   "negative_control_ok": true,
+   "targets": [
+    {
+     "fixture_id": "IP1",
+     "seed": 1,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_A": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "candidates_B": [
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "context_resolve_in_candidates_A": true,
+     "removed_by_p3": true,
+     "final_A": "CONTEXT_RESOLVE",
+     "final_B": "BOUNDED_MULTI_VIEW",
+     "moved_to": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE"
+    }
+   ],
+   "wall": 6.1,
+   "llm_calls": {
+    "llm": 10,
+    "reused": 118
+   }
+  },
+  {
+   "run": 11,
+   "exclusions_n": 3,
+   "exclusion_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_before": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ]
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 2,
+     "candidates_before": [
+      "CONTEXT_RESOLVE"
+     ]
+    },
+    {
+     "fixture_id": "PP3",
+     "seed": 0,
+     "candidates_before": [
+      "CONTEXT_RESOLVE",
+      "PREMISE_PROBE"
+     ]
+    }
+   ],
+   "A_i": 0.7,
+   "B_i": 0.7,
+   "A_ii": 0.8667,
+   "B_ii": 0.8667,
+   "delta_i": 0.0,
+   "delta_ii": 0.0,
+   "moved_cases": [
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "A": "CONTEXT_RESOLVE",
+     "B": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 2,
+     "A": "CONTEXT_RESOLVE",
+     "B": null,
+     "expected": "INTENT_PROBE",
+     "A_correct": false,
+     "B_correct": false
+    }
+   ],
+   "negative_control_ok": true,
+   "targets": [
+    {
+     "fixture_id": "IP1",
+     "seed": 1,
+     "candidates_A": [
+      "PREMISE_PROBE"
+     ],
+     "candidates_B": [
+      "PREMISE_PROBE"
+     ],
+     "context_resolve_in_candidates_A": false,
+     "removed_by_p3": false,
+     "final_A": "PREMISE_PROBE",
+     "final_B": "PREMISE_PROBE",
+     "moved_to": null,
+     "expected": "INTENT_PROBE"
+    },
+    {
+     "fixture_id": "IP2",
+     "seed": 0,
+     "candidates_A": [
+      "CONTEXT_RESOLVE",
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "candidates_B": [
+      "BOUNDED_MULTI_VIEW"
+     ],
+     "context_resolve_in_candidates_A": true,
+     "removed_by_p3": true,
+     "final_A": "CONTEXT_RESOLVE",
+     "final_B": "BOUNDED_MULTI_VIEW",
+     "moved_to": "BOUNDED_MULTI_VIEW",
+     "expected": "INTENT_PROBE"
+    }
+   ],
+   "wall": 6.05,
+   "llm_calls": {
+    "llm": 10,
+    "reused": 114
+   }
+  }
+ ],
+ "prompt_id": "1b-p3-context-premise-v1"
+}
