@@ -1,0 +1,15 @@
+{"record_type": "NOT_BUILT", "action": "REGISTER", "reason": "Build 2 は thin。RETRIEVE のみ end-to-end", "live_callee_symbols": ["admit_design_evidence"]}
+{"record_type": "NOT_BUILT", "action": "PREP_IMPL", "reason": "Build 2 は thin。RETRIEVE のみ end-to-end", "live_callee_symbols": ["create_task", "record_plan"]}
+{"record_type": "NOT_BUILT", "action": "OBSERVE", "reason": "Build 2 は thin。RETRIEVE のみ end-to-end", "live_callee_symbols": ["derive_state"]}
+{"record_type": "NOT_BUILT", "action": "CONVERSE", "reason": "Build 2 は thin。RETRIEVE のみ end-to-end", "live_callee_symbols": ["record_dialogue_event"]}
+{"record_type": "NO_ACTION", "fixture_id": "IP1", "strategy": "INTENT_PROBE", "note": "聞き返し/保留で停止。失敗ではなく発見として記録（NO_CANDIDATE と同型）"}
+{"record_type": "NO_ACTION", "fixture_id": "IP1", "strategy": "INTENT_PROBE", "note": "聞き返し/保留で停止。失敗ではなく発見として記録（NO_CANDIDATE と同型）"}
+{"record_type": "NO_ACTION", "fixture_id": "IP2", "strategy": "INTENT_PROBE", "note": "聞き返し/保留で停止。失敗ではなく発見として記録（NO_CANDIDATE と同型）"}
+{"record_type": "NO_ACTION", "fixture_id": "IP2", "strategy": "INTENT_PROBE", "note": "聞き返し/保留で停止。失敗ではなく発見として記録（NO_CANDIDATE と同型）"}
+{"record_type": "NO_ACTION", "fixture_id": "IP3", "strategy": "INTENT_PROBE", "note": "聞き返し/保留で停止。失敗ではなく発見として記録（NO_CANDIDATE と同型）"}
+{"record_type": "NO_ACTION", "fixture_id": "IP3", "strategy": "INTENT_PROBE", "note": "聞き返し/保留で停止。失敗ではなく発見として記録（NO_CANDIDATE と同型）"}
+{"record_type": "NO_ACTION", "fixture_id": "PP1", "strategy": "PREMISE_PROBE", "note": "聞き返し/保留で停止。失敗ではなく発見として記録（NO_CANDIDATE と同型）"}
+{"record_type": "NO_ACTION", "fixture_id": "PP2", "strategy": "PREMISE_PROBE", "note": "聞き返し/保留で停止。失敗ではなく発見として記録（NO_CANDIDATE と同型）"}
+{"record_type": "NO_ACTION", "fixture_id": "PP3", "strategy": "PREMISE_PROBE", "note": "聞き返し/保留で停止。失敗ではなく発見として記録（NO_CANDIDATE と同型）"}
+{"record_type": "NO_ACTION", "fixture_id": "DF1", "strategy": "DEFER", "note": "聞き返し/保留で停止。失敗ではなく発見として記録（NO_CANDIDATE と同型）"}
+{"record_type": "NO_ACTION", "fixture_id": "DF2", "strategy": "DEFER", "note": "聞き返し/保留で停止。失敗ではなく発見として記録（NO_CANDIDATE と同型）"}
