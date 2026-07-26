@@ -1,0 +1,181 @@
+{"_meta": "INTENT_ROLE_SPLIT_D2P2(cheap fix: 別解/DEFER是正/空入力reject/DE-0547)。基本形=員数制約付き1回観測+決定論確定。", "acceptable": {"CH1": [["BOUNDED_MULTI_VIEW"], "有限選択肢でもあり観点比較でもある"], "CH3": [["BOUNDED_MULTI_VIEW"], "有限の選択肢が存在せず観点比較が答え。Taka 承認"], "CR1": [["BOUNDED_MULTI_VIEW"], "文脈で主題は絞れるが絞った上で答えは多観点比較。排他でない"], "IP3": [["PREMISE_PROBE"], "対象不明かつ存在前提。どちらでも応答は「聞き返す」で実質同じ"]}, "aggregate": {"DF1": ["DEFER", "DEFER", "DEFER"], "DF2": ["DEFER", "DEFER", "DEFER"], "IP1": ["INTENT_PROBE", "CONTEXT_RESOLVE", "PREMISE_PROBE"], "IP2": ["CONTEXT_RESOLVE", "PREMISE_PROBE", "PREMISE_PROBE"], "auto_confirmed_n": 57, "candidate_upper_with_alt": 0.9167, "connect_df3incl_no_alt": 0.746, "connect_raw": "47/63", "final_no_alt_i": 0.7833, "final_no_alt_raw": "47/60", "final_with_alt_ii": 0.9167, "final_with_alt_raw": "55/60", "no_candidate_n": 0, "note": "見出しは(i)別解なし。(ii)は別解込み(緩めた分)。arm-C2 0.83(汚染)とは並べない。能力主張でない・A3B。", "order_agreement": 0.9833, "selector_eff_ge2_only": 0.6667, "selector_ge2_raw": "2/3", "yes_ge3": 0, "yes_mean": 1.05}, "defer_def": "不正形・解釈不能で、意味のある聞き返しすら組み立てられない", "exclude_words": ["として", "ですか", "ますか", "でしょう", "について", "における", "のような", "すべき", "どちら"], "n_fixtures": 20, "prompt_id": "d2p2-cheapfix-v1", "seeds": [0, 1, 2], "wall_seconds": 4.99}
+{"fixture_id": "D1", "raw_output": "{\n\"yes\": [\n\"DIRECT\"\n],\n\"reason\": \"Windows 10の一般提供開始日は2015年7月29日という明確な事実が存在し、単一の答えで回答可能であるため。\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["DIRECT"]}
+{"fixture_id": "D1", "raw_output": "{\"yes\":[\"DIRECT\"],\"reason\":\"Windows 10の一般提供開始日は2015年10月7日という明確な事実であるため。\"}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["DIRECT"]}
+{"fixture_id": "D1", "raw_output": "{\"yes\":[\"DIRECT\"],\"reason\":\"Windows 10の一般提供開始日は2015年7月29日という単一事実だから\"}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["DIRECT"]}
+{"fixture_id": "D2", "raw_output": "{\n\"yes\": [\"DIRECT\"],\n\"reason\": \"1024が2の何乗かという数学的問いは単一の解を持ち、迷いがないため。\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["DIRECT"]}
+{"fixture_id": "D2", "raw_output": "{\n \"yes\": [\n  \"DIRECT\"\n ],\n \"reason\": \"数学的に一意に定まり、迷う余地がないため。\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["DIRECT"]}
+{"fixture_id": "D2", "raw_output": "{\"yes\":[\"DIRECT\"],\"reason\":\"数学的に一意な答えが存在する明確な質問であるため。\"}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["DIRECT"]}
+{"fixture_id": "D3", "raw_output": "{\"yes\":[\"DIRECT\"],\"reason\":\"明確な単位変換の事実を問う単一解答型質問であるため。\"}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["DIRECT"]}
+{"fixture_id": "D3", "raw_output": "{\"yes\":[\"DIRECT\"],\"reason\":\"単位変換は定義が固定され単一解答が可能だから\"}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["DIRECT"]}
+{"fixture_id": "D3", "raw_output": "{\n\"yes\": [\n\"DIRECT\"\n],\n\"reason\": \"単位変換の定義は明確であり、単一の数値で回答可能であるため。\"\n}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["DIRECT"]}
+{"fixture_id": "CR1", "raw_output": "{\n\"yes\": [\n\"BOUNDED_MULTI_VIEW\"\n],\n\"reason\": \"軍事・経済損失という文脈下、政治的・軍事的多角的な展望比較が妥当な回答となる。\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "CR1", "raw_output": "{\"yes\":[\"BOUNDED_MULTI_VIEW\"],\"reason\":\"将来予測は不確実性が高く、多角的なシナリオ比較が回答として最も妥当だから。\"}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "CR1", "raw_output": "{\"yes\":[\"BOUNDED_MULTI_VIEW\"],\"reason\":\"複数の予測シナリオを比較提示するのが適切だから\"}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "CR2", "raw_output": "{\n\"yes\": [\n\"CONTEXT_RESOLVE\"\n],\n\"reason\": \"直前の投手成績議論から、評価対象がその投手と特定できるため。\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["CONTEXT_RESOLVE"]}
+{"fixture_id": "CR2", "raw_output": "{\n\"yes\": [\n\"CONTEXT_RESOLVE\"\n],\n\"reason\": \"文脈から評価対象が先発投手と特定でき、回答範囲が絞れるため。\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["CONTEXT_RESOLVE"]}
+{"fixture_id": "CR2", "raw_output": "{\n\"yes\": [\n\"CONTEXT_RESOLVE\"\n],\n\"reason\": \"直前の投手議論により「彼」がその投手と特定でき、文脈で解釈が絞られるため。\"\n}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["CONTEXT_RESOLVE"]}
+{"fixture_id": "CR3", "raw_output": "{\n\"yes\": [\n\"CONTEXT_RESOLVE\",\n\"BOUNDED_MULTI_VIEW\"\n],\n\"reason\": \"ロードマップ文脈下で特定の版の日程を特定し、複数候補を比較提示するのが妥当\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["CONTEXT_RESOLVE", "BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "CR3", "raw_output": "{\n\"yes\": [\n\"CONTEXT_RESOLVE\"\n],\n\"reason\": \"直前のロードマップ文脈により、対象OSSの次のリリース時期を問う具体的回答が求まるため。\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["CONTEXT_RESOLVE"]}
+{"fixture_id": "CR3", "raw_output": "{\"yes\":[\"CONTEXT_RESOLVE\"],\"reason\":\"直前文脈がロードマップの話題であるため、質問の主体が特定される。\"}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["CONTEXT_RESOLVE"]}
+{"fixture_id": "CH1", "raw_output": "{\n\"yes\": [\n\"CHOICE\"\n],\n\"reason\": \"複数の選択肢から最適な一つを選ぶよう問うているため。\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["CHOICE"]}
+{"fixture_id": "CH1", "raw_output": "{\n\"yes\": [\n\"CHOICE\"\n],\n\"reason\": \"複数選択肢を提示し、ユーザーの文脈に合わせて選定させるのが適切であるため。\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["CHOICE"]}
+{"fixture_id": "CH1", "raw_output": "{\"yes\":[\"CHOICE\"],\"reason\":\"複数の選択肢を提示し比較検討が適切だから\"}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["CHOICE"]}
+{"fixture_id": "CH2", "raw_output": "{\n\"yes\": [\"CHOICE\"],\n\"reason\": \"明確な回答が複数あり、候補を提示して選択を促すのが妥当な戦略だからです。\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["CHOICE"]}
+{"fixture_id": "CH2", "raw_output": "{\n\"yes\": [\n\"CHOICE\"\n],\n\"reason\": \"複数候補からユーザに選択を促すため\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["CHOICE"]}
+{"fixture_id": "CH2", "raw_output": "{\"yes\":[\"CHOICE\"],\"reason\":\"目的地の候補を複数提示し選択を求めるのが自然な対話 flow だから\"}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["CHOICE"]}
+{"fixture_id": "CH3", "raw_output": "{\"yes\":[\"BOUNDED_MULTI_VIEW\"],\"reason\":\"政治的見解が多様で、複数視点の比較提示が適切だから。\"}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "CH3", "raw_output": "{\"yes\":[\"BOUNDED_MULTI_VIEW\"],\"reason\":\"将来予測は不確実性が高く、多角的な分析が最も妥当な回答形式であるため。\"}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "CH3", "raw_output": "{\n  \"yes\": [\n    \"BOUNDED_MULTI_VIEW\"\n  ],\n  \"reason\": \"将来予測は不確実性が高いため、複数のシナリオを比較提示するのが最も妥当な回答形式であるため。\"\n}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "BV1", "raw_output": "{\n\"yes\": [\n\"BOUNDED_MULTI_VIEW\"\n],\n\"reason\": \"価値を多角的に比較提示するのが最も妥当な回答形式であるため。\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "BV1", "raw_output": "{\n\"yes\": [\n\"BOUNDED_MULTI_VIEW\"\n],\n\"reason\": \"価格、強度、用途など複数の観点で比較提示するのが適切だから。\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "BV1", "raw_output": "{\n \"yes\": [\n  \"BOUNDED_MULTI_VIEW\"\n ],\n \"reason\": \"材質、強度、用途など複数の観点から価値を比較提示するのが最も妥当な回答形式であるため\"\n}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "BV2", "raw_output": "{\n\"yes\": [\n\"BOUNDED_MULTI_VIEW\"\n],\n\"reason\": \"是非を問う一般論に対し、多角的な視点を比較提示するのが適切な回答形式であるため。\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "BV2", "raw_output": "{\n \"yes\": [\n  \"BOUNDED_MULTI_VIEW\"\n ],\n \"reason\": \"導入の是非は利点と欠点を比較提示することが適切な回答形式だから。\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "BV2", "raw_output": "{\n  \"yes\": [\n    \"BOUNDED_MULTI_VIEW\"\n  ],\n  \"reason\": \"導入効果と課題を両面から比較提示するのが最も妥当な回答形式だから。\"\n}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "BV3", "raw_output": "{\n\"yes\": [\n\"BOUNDED_MULTI_VIEW\"\n],\n\"reason\": \"設計案の多角的な評価を求められており、複数の視点での比較提示が回答として妥当であるため。\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "BV3", "raw_output": "{\n\"yes\": [\n\"BOUNDED_MULTI_VIEW\"\n],\n\"reason\": \"設計案の良し悪しを多角的に比較評価する回答が妥当だから。\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "BV3", "raw_output": "{\"yes\":[\"BOUNDED_MULTI_VIEW\"],\"reason\":\"得失を多角的に比較提示するのが回答の主旨だから\"}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "IP1", "raw_output": "{\n\"yes\": [\n\"INTENT_PROBE\"\n],\n\"reason\": \"「あれ」の参照対象が不明確であり、何を探しているか確認する必要があるため。\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["INTENT_PROBE"]}
+{"fixture_id": "IP1", "raw_output": "{\n \"yes\": [\n  \"CONTEXT_RESOLVE\"\n ],\n \"reason\": \"「あれ」の指す特定対象は会話の直前文脈で決定するため。\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["CONTEXT_RESOLVE"]}
+{"fixture_id": "IP1", "raw_output": "{\n\"yes\": [\n\"PREMISE_PROBE\"\n],\n\"reason\": \"「あれ」の指す対象が不明で、存在確認が必要\"\n}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["PREMISE_PROBE"]}
+{"fixture_id": "IP2", "raw_output": "{\n\"yes\": [\n\"CONTEXT_RESOLVE\",\n\"BOUNDED_MULTI_VIEW\"\n],\n\"reason\": \"前後の文脈で対象を特定するか、複数の可能性を比較して答えとするのが妥当\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["CONTEXT_RESOLVE", "BOUNDED_MULTI_VIEW"]}
+{"fixture_id": "IP2", "raw_output": "{\n\"yes\": [\n\"PREMISE_PROBE\"\n],\n\"reason\": \"「それ」の指す対象が不明で、事実確認なく回答不能\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["PREMISE_PROBE"]}
+{"fixture_id": "IP2", "raw_output": "{\n\"yes\": [\n\"PREMISE_PROBE\"\n],\n\"reason\": \"「それ」の指す事柄や背景が不明で、前提確認が必要\"\n}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["PREMISE_PROBE"]}
+{"fixture_id": "IP3", "raw_output": "{\n\"yes\": [\"INTENT_PROBE\"],\n\"reason\": \"「例のやつ」が何を指すか不明で、確認が必要なため\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["INTENT_PROBE"]}
+{"fixture_id": "IP3", "raw_output": "{\n\"yes\": [\n\"PREMISE_PROBE\"\n],\n\"reason\": \"「例のやつ」が何を指すか不明確であり、前提となる対象の確認が必要。\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["PREMISE_PROBE"]}
+{"fixture_id": "IP3", "raw_output": "{\"yes\":[\"INTENT_PROBE\",\"PREMISE_PROBE\"],\"reason\":\"「例のやつ」の指す対象が不明で前提も曖昧なため。\"}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["INTENT_PROBE", "PREMISE_PROBE"]}
+{"fixture_id": "PP1", "raw_output": "{\n\"yes\": [\n\"PREMISE_PROBE\"\n],\n\"reason\": \"該当仕様やファイルの存在を確認できないため。\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["PREMISE_PROBE"]}
+{"fixture_id": "PP1", "raw_output": "{\n\"yes\": [\n\"PREMISE_PROBE\"\n],\n\"reason\": \"特定のWatcher仕様の存在確認が不明で、前提の検証が必要\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["PREMISE_PROBE"]}
+{"fixture_id": "PP1", "raw_output": "{\n  \"yes\": [\n    \"PREMISE_PROBE\"\n  ],\n  \"reason\": \"Watcher仕様の存在や内容が不確かであり、前提の確認が必要\"\n}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["PREMISE_PROBE"]}
+{"fixture_id": "PP2", "raw_output": "{\n\"yes\": [\n\"PREMISE_PROBE\"\n],\n\"reason\": \"先週の方針が存在する前提が怪しく、確認せずに回答すべきか判断不能。\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["PREMISE_PROBE"]}
+{"fixture_id": "PP2", "raw_output": "{\n\"yes\": [\n\"PREMISE_PROBE\"\n],\n\"reason\": \"「先週決めた方針」の存在と内容が不明確で、前提の確認が必要\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["PREMISE_PROBE"]}
+{"fixture_id": "PP2", "raw_output": "{\n  \"yes\": [\n    \"PREMISE_PROBE\"\n  ],\n  \"reason\": \"先週の方針が存在するか不明なため、前提の確認が必要\"\n}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["PREMISE_PROBE"]}
+{"fixture_id": "PP3", "raw_output": "{\n\"yes\": [\"PREMISE_PROBE\"],\n\"reason\": \"予備の鍵が存在しない可能性があり、前提の確認が必要\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["PREMISE_PROBE"]}
+{"fixture_id": "PP3", "raw_output": "{\n\"yes\": [\n\"PREMISE_PROBE\"\n],\n\"reason\": \"「君」が誰で「予備の鍵」が何の物か前提が不明確\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["PREMISE_PROBE"]}
+{"fixture_id": "PP3", "raw_output": "{\n\"yes\": [\n\"PREMISE_PROBE\"\n],\n\"reason\": \"「予備の鍵」の所在や存在が不明確な前提を含んでいるため。\"\n}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["PREMISE_PROBE"]}
+{"fixture_id": "DF1", "raw_output": "{\n\"yes\": [\n\"DEFER\"\n],\n\"reason\": \"意味を成さない文字列であり、意図の解釈不能により処理不能。\"\n}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["DEFER"]}
+{"fixture_id": "DF1", "raw_output": "{\n  \"yes\": [\n    \"DEFER\"\n  ],\n  \"reason\": \"意味のある問い合わせと解釈不能な文字列の羅列のため。\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["DEFER"]}
+{"fixture_id": "DF1", "raw_output": "{\"yes\":[\"DEFER\"],\"reason\":\"意味不明な文字列であり解釈不能のため\"}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["DEFER"]}
+{"fixture_id": "DF2", "raw_output": "{\"yes\":[\"DEFER\"],\"reason\":\"文字列が意味をなさないため解釈不能\"}", "row": "screen", "seed": 0, "verdict": "OK", "yes": ["DEFER"]}
+{"fixture_id": "DF2", "raw_output": "{\n\"yes\": [\n\"DEFER\"\n],\n\"reason\": \"意味を成さないため、確認質問も組み立てられない。\"\n}", "row": "screen", "seed": 1, "verdict": "OK", "yes": ["DEFER"]}
+{"fixture_id": "DF2", "raw_output": "{\n  \"yes\": [\n    \"DEFER\"\n  ],\n  \"reason\": \"意味を成さず応答不能\"\n}", "row": "screen", "seed": 2, "verdict": "OK", "yes": ["DEFER"]}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D1", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D1", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D1", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D2", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D2", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D2", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D3", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D3", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DIRECT"], "choice": "DIRECT", "fixture_id": "D3", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "CR1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "CR1", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "CR1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "CR1", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "CR1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "CR1", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CONTEXT_RESOLVE"], "choice": "CONTEXT_RESOLVE", "fixture_id": "CR2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CONTEXT_RESOLVE"], "choice": "CONTEXT_RESOLVE", "fixture_id": "CR2", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CONTEXT_RESOLVE"], "choice": "CONTEXT_RESOLVE", "fixture_id": "CR2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CONTEXT_RESOLVE"], "choice": "CONTEXT_RESOLVE", "fixture_id": "CR2", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CONTEXT_RESOLVE"], "choice": "CONTEXT_RESOLVE", "fixture_id": "CR2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CONTEXT_RESOLVE"], "choice": "CONTEXT_RESOLVE", "fixture_id": "CR2", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CONTEXT_RESOLVE", "BOUNDED_MULTI_VIEW"], "choice": "CONTEXT_RESOLVE", "fixture_id": "CR3", "order": "fwd", "raw_choice": "CONTEXT_RESOLVE", "raw_output": "{\n\"choice\": \"CONTEXT_RESOLVE\",\n\"reason\": \"開発ロードマップの文脈から、特定のリリース日程を特定できるため。\"\n}", "row": "sel", "seed": 0, "status": "OK"}
+{"candidates": ["CONTEXT_RESOLVE", "BOUNDED_MULTI_VIEW"], "choice": "CONTEXT_RESOLVE", "fixture_id": "CR3", "order": "rev", "raw_choice": "CONTEXT_RESOLVE", "raw_output": "{\"choice\":\"CONTEXT_RESOLVE\",\"reason\":\"開発ロードマップの文脈から将来のリリース時期を問うているため\"}", "row": "sel", "seed": 0, "status": "OK"}
+{"candidates": ["CONTEXT_RESOLVE"], "choice": "CONTEXT_RESOLVE", "fixture_id": "CR3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CONTEXT_RESOLVE"], "choice": "CONTEXT_RESOLVE", "fixture_id": "CR3", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CONTEXT_RESOLVE"], "choice": "CONTEXT_RESOLVE", "fixture_id": "CR3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CONTEXT_RESOLVE"], "choice": "CONTEXT_RESOLVE", "fixture_id": "CR3", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CHOICE"], "choice": "CHOICE", "fixture_id": "CH1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CHOICE"], "choice": "CHOICE", "fixture_id": "CH1", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CHOICE"], "choice": "CHOICE", "fixture_id": "CH1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CHOICE"], "choice": "CHOICE", "fixture_id": "CH1", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CHOICE"], "choice": "CHOICE", "fixture_id": "CH1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CHOICE"], "choice": "CHOICE", "fixture_id": "CH1", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CHOICE"], "choice": "CHOICE", "fixture_id": "CH2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CHOICE"], "choice": "CHOICE", "fixture_id": "CH2", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CHOICE"], "choice": "CHOICE", "fixture_id": "CH2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CHOICE"], "choice": "CHOICE", "fixture_id": "CH2", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CHOICE"], "choice": "CHOICE", "fixture_id": "CH2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CHOICE"], "choice": "CHOICE", "fixture_id": "CH2", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "CH3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "CH3", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "CH3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "CH3", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "CH3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "CH3", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV1", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV1", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV1", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV2", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV2", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV2", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV3", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV3", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["BOUNDED_MULTI_VIEW"], "choice": "BOUNDED_MULTI_VIEW", "fixture_id": "BV3", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["INTENT_PROBE"], "choice": "INTENT_PROBE", "fixture_id": "IP1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["INTENT_PROBE"], "choice": "INTENT_PROBE", "fixture_id": "IP1", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CONTEXT_RESOLVE"], "choice": "CONTEXT_RESOLVE", "fixture_id": "IP1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CONTEXT_RESOLVE"], "choice": "CONTEXT_RESOLVE", "fixture_id": "IP1", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "IP1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "IP1", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["CONTEXT_RESOLVE", "BOUNDED_MULTI_VIEW"], "choice": "CONTEXT_RESOLVE", "fixture_id": "IP2", "order": "fwd", "raw_choice": "CONTEXT_RESOLVE", "raw_output": "{\n\"choice\": \"CONTEXT_RESOLVE\",\n\"reason\": \"直前の文脈を基に単一の答えへ絞り込む必要があるため。\"\n}", "row": "sel", "seed": 0, "status": "OK"}
+{"candidates": ["CONTEXT_RESOLVE", "BOUNDED_MULTI_VIEW"], "choice": "CONTEXT_RESOLVE", "fixture_id": "IP2", "order": "rev", "raw_choice": "CONTEXT_RESOLVE", "raw_output": "{\n\"choice\": \"CONTEXT_RESOLVE\",\n\"reason\": \"「その後」は直前の状況に依存するため、文脈で解釈が絞られる。\"\n}", "row": "sel", "seed": 0, "status": "OK"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "IP2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "IP2", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "IP2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "IP2", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["INTENT_PROBE"], "choice": "INTENT_PROBE", "fixture_id": "IP3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["INTENT_PROBE"], "choice": "INTENT_PROBE", "fixture_id": "IP3", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "IP3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "IP3", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["INTENT_PROBE", "PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "IP3", "order": "fwd", "raw_choice": "PREMISE_PROBE", "raw_output": "{\"choice\":\"PREMISE_PROBE\",\"reason\":\"「例のやつ」が誰を指すか不明で、前提事実の確認が必須だから。\"}", "row": "sel", "seed": 2, "status": "OK"}
+{"candidates": ["INTENT_PROBE", "PREMISE_PROBE"], "choice": "INTENT_PROBE", "fixture_id": "IP3", "order": "rev", "raw_choice": "INTENT_PROBE", "raw_output": "{\n\"choice\": \"INTENT_PROBE\",\n\"reason\": \"「例のやつ」が何を指すか不明確なため、まず確認が必要\"\n}", "row": "sel", "seed": 2, "status": "OK"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP1", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP1", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP1", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP2", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP2", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP2", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP3", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP3", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP3", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["PREMISE_PROBE"], "choice": "PREMISE_PROBE", "fixture_id": "PP3", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DEFER"], "choice": "DEFER", "fixture_id": "DF1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DEFER"], "choice": "DEFER", "fixture_id": "DF1", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DEFER"], "choice": "DEFER", "fixture_id": "DF1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DEFER"], "choice": "DEFER", "fixture_id": "DF1", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DEFER"], "choice": "DEFER", "fixture_id": "DF1", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DEFER"], "choice": "DEFER", "fixture_id": "DF1", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DEFER"], "choice": "DEFER", "fixture_id": "DF2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DEFER"], "choice": "DEFER", "fixture_id": "DF2", "order": "rev", "raw_output": "", "row": "sel", "seed": 0, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DEFER"], "choice": "DEFER", "fixture_id": "DF2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DEFER"], "choice": "DEFER", "fixture_id": "DF2", "order": "rev", "raw_output": "", "row": "sel", "seed": 1, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DEFER"], "choice": "DEFER", "fixture_id": "DF2", "order": "fwd", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
+{"candidates": ["DEFER"], "choice": "DEFER", "fixture_id": "DF2", "order": "rev", "raw_output": "", "row": "sel", "seed": 2, "status": "AUTO_CONFIRMED"}
