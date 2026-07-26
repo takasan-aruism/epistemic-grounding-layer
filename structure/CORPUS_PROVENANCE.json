@@ -1,0 +1,147 @@
+{
+ "series": {
+  "raw_user_utterances": 492,
+  "excluded_total": 189,
+  "after_exclusion": 303,
+  "unique_deduped": 147
+ },
+ "per_rule_first_match": {
+  "R1-DE-ADMISSION": 33,
+  "R2-DE-ADMISSION-ALT": 30,
+  "R3-GEN-NONCE": 103,
+  "R4-IMPLEMENT-STANDALONE": 14,
+  "R5-MUST-CONTAIN": 0,
+  "R6-STDLIB-ONLY": 2,
+  "R7-BUILD-CAPABILITY-TASK": 6,
+  "R8-IMPLEMENT-ITEM": 1
+ },
+ "per_rule_any_match": {
+  "R1-DE-ADMISSION": 33,
+  "R2-DE-ADMISSION-ALT": 30,
+  "R3-GEN-NONCE": 103,
+  "R4-IMPLEMENT-STANDALONE": 78,
+  "R5-MUST-CONTAIN": 83,
+  "R6-STDLIB-ONLY": 94,
+  "R7-BUILD-CAPABILITY-TASK": 6,
+  "R8-IMPLEMENT-ITEM": 1
+ },
+ "rules": [
+  {
+   "id": "R1-DE-ADMISSION",
+   "kind": "PREFIX",
+   "marker": "開発エビデンスを登録",
+   "why": "front door の DE 記録ラッパ de_submit_route.build_raw_input が生成する決定論文字列"
+  },
+  {
+   "id": "R2-DE-ADMISSION-ALT",
+   "kind": "PREFIX",
+   "marker": "開発根拠を登録",
+   "why": "同じ DE 記録の旧表記。同一の機械生成系統"
+  },
+  {
+   "id": "R3-GEN-NONCE",
+   "kind": "CONTAINS",
+   "marker": "# gen-nonce",
+   "why": "codegen ループが投入するプロンプトの nonce ヘッダ"
+  },
+  {
+   "id": "R4-IMPLEMENT-STANDALONE",
+   "kind": "CONTAINS",
+   "marker": "IMPLEMENT a NEW standalone",
+   "why": "codegen プロンプトのテンプレート文言"
+  },
+  {
+   "id": "R5-MUST-CONTAIN",
+   "kind": "CONTAINS",
+   "marker": "MUST contain",
+   "why": "同上（受入条件節のテンプレート）"
+  },
+  {
+   "id": "R6-STDLIB-ONLY",
+   "kind": "CONTAINS",
+   "marker": "stdlib ONLY",
+   "why": "同上（依存制約節のテンプレート）"
+  },
+  {
+   "id": "R7-BUILD-CAPABILITY-TASK",
+   "kind": "CONTAINS",
+   "marker": "BUILD_CAPABILITY / 新規コード実装",
+   "why": "我々が書いた実装タスク投入テンプレートの見出し。人間の会話文には現れない"
+  },
+  {
+   "id": "R8-IMPLEMENT-ITEM",
+   "kind": "CONTAINS",
+   "marker": "IMPLEMENT ITEM-",
+   "why": "ITEM 仕様の実装指示テンプレート"
+  }
+ ],
+ "length": {
+  "median": 79,
+  "mean": 137.2,
+  "max": 4089,
+  "over_400_n": 2,
+  "over_400_pct": 1.4
+ },
+ "residual_longest": [
+  {
+   "len": 4089,
+   "head": "既存RRI分類結果からBUILD taskを生成する前に、evidence-bound investigation artifactを必須化する最小gateを追加する。  必要な最小挙動: - rough request"
+  },
+  {
+   "len": 1092,
+   "head": "既存RRI分類結果からBUILD taskを生成する前に、evidence-bound investigation artifactを必須化する最小gateを追加する。  必要な最小挙動: - rough request"
+  },
+  {
+   "len": 269,
+   "head": "V022-THINKING-OFF-SOLVES-THROUGHPUT-EXPOSES-FIXPOINT の起票。v0.2.2 捺印・適用・配備(全条件実測充足)。thinking 無効で **空応答 6/8→0/8・有"
+  },
+  {
+   "len": 263,
+   "head": "RUNNER-V023-FAILURE-HISTORY-RETENTION-DIFF-UNSEALED の起票。runner v0.2.3 diff 提示(未適用・未捺印): 全既往反復との reply_sha256 照"
+  },
+  {
+   "len": 246,
+   "head": "RUNNER-V022-THINKING-CONTROL-DIFF-UNSEALED の起票。runner v0.2.2 diff 提示(未適用・未捺印): packet の enable_thinking を chat"
+  },
+  {
+   "len": 245,
+   "head": "FEEDBACK-FIXED-POINT-TYPE-AND-THINKING-COMPARISON の起票。観測記帳3件: (i) thinking on/off 4構成比較——無効化で完走率 0/8→8/8(限定条件付"
+  },
+  {
+   "len": 243,
+   "head": "S0-2-MAXTOKENS-CEILING-REASONING-CONSUMPTION の起票。max_tokens=32768 は HTTP 400(max_model_len と同値のため prompt 有無に関わ"
+  },
+  {
+   "len": 242,
+   "head": "EMIT-API-PROVENANCE-CITATION-MISMATCH の起票。Q1(emit_api 配置承認)が指す run_id 20260719T232557Z-9f7b7712 / sha 9d38a7a3"
+  },
+  {
+   "len": 242,
+   "head": "REASONING-FILLS-ANY-BUDGET-D-OPTION-FALSIFIED の起票。context 65536・予算32768 で S0.2 再実行。**予算仮説は否定**——暴走時の思考は与えた予算をち"
+  },
+  {
+   "len": 240,
+   "head": "JSONLファイルを読み込み、指定キーの数値の平均を計算するPython CLIツール src/cli.py を作成してください。各行のJSONを検証し、壊れた行はstderrに'MALFORMED line N'として"
+  }
+ ],
+ "negative_control": [
+  {
+   "text": "本番環境を調べて",
+   "excluded": false
+  },
+  {
+   "text": "前の件を優先して進めて",
+   "excluded": false
+  },
+  {
+   "text": "ベトナム語アプリを直して",
+   "excluded": false
+  },
+  {
+   "text": "schedulerを復活させて検知に使って",
+   "excluded": false
+  }
+ ],
+ "negative_control_ok": true,
+ "caveat": "★正典の確定は DESIGN/MGR。本スクリプトは規則ごとの件数と残りを出すだけである。残った長文が依然として機械生成に見える場合、規則が足りない可能性があるが、**数字が望む形になるまで規則を足すことはしない**（計器を自分に有利にしないため）。"
+}
