@@ -109,19 +109,31 @@ def measure():
     rows.append({"row_type": "NON_REGRESSION", "checks": m4})
 
     # ── M5 HBB-30「約6倍」を探索対象4通りで測る(★除いた時が本番)────────────────────────────────────
-    variants = {"base(SPEC固定スコープ)": (), "+hbb_candidates.json": ("HBB_CANDIDATES",),
-                "+DE台帳のnote欄": ("DE_LEDGER_NOTE",),
-                "+両方": ("HBB_CANDIDATES", "DE_LEDGER_NOTE")}
+    variants = {"base(散文なし+登記台帳)": (), "+hbb_candidates.json": ("HBB_CANDIDATES",)}
     m5 = {}
     for name, extra in variants.items():
         r = EG.check_existence(HBB_OBJECT, extra_targets=extra)
         m5[name] = {"state": r["state"], "decision": EG.STATE_TO_DECISION[r["state"]],
                     "grounding_hits": r["grounding_hits"], "mention_hits": r["mention_hits"],
                     "self_referential_hits": r["self_referential_hits"],
-                    "declared_prior": [d["ref"] + "/" + str(d["id"]) for d in r["declared_prior"]],
+                    "declared_prior": [str(d.get("id")) + "(src=" + str(d.get("source_de")) + ")"
+                                       for d in r["declared_prior"]],
                     "queries": r["queries"], "searched": r["searched"]}
+    # ★対照: 登記台帳が無ければ SUPERSEDE に到達しないこと（何が仕事をしているかを示す）
+    _saved = EG.CLAIM_STATUS_REGISTRY
+    EG.CLAIM_STATUS_REGISTRY = "/nonexistent/CLAIM_STATUS_REGISTRY.jsonl"
+    EG._CACHE.pop(("CLAIM_STATUS", _saved), None)
+    _wo = EG.check_existence(HBB_OBJECT)
+    EG.CLAIM_STATUS_REGISTRY = _saved
+    EG._CACHE.pop(("CLAIM_STATUS", "/nonexistent/CLAIM_STATUS_REGISTRY.jsonl"), None)
+    m5["登記台帳を外した場合(対照)"] = {"state": _wo["state"], "decision": EG.STATE_TO_DECISION[_wo["state"]],
+                                        "grounding_hits": _wo["grounding_hits"], "mention_hits": _wo["mention_hits"],
+                                        "self_referential_hits": _wo["self_referential_hits"],
+                                        "declared_prior": [], "queries": _wo["queries"], "searched": _wo["searched"]}
     res["M5_hbb"] = m5
-    rows.append({"row_type": "HBB30_SEARCH_SCOPE", "variants": m5, "object": HBB_OBJECT})
+    res["M5_registry_is_load_bearing"] = _wo["state"] != "DECLARED_UNVERIFIED"
+    rows.append({"row_type": "HBB30_SEARCH_SCOPE", "variants": m5, "object": HBB_OBJECT,
+                 "registry_is_load_bearing": res["M5_registry_is_load_bearing"]})
 
     # ── M6 自己言及の汚染(我々の設計文書が fixture を引用しているだけで接地扱いにならないか)──────────
     m6 = {}
@@ -130,9 +142,22 @@ def measure():
         r = EG.check_existence(obj)
         m6[fid] = {"object": obj, "state": r["state"], "grounding_hits": r["grounding_hits"],
                    "mention_hits": r["mention_hits"], "self_referential_hits": r["self_referential_hits"],
-                   "evidence_refs": [e["ref"] for e in r["evidence"][:4]]}
+                   "evidence_refs": [(e.get("id") or e["ref"]) for e in r["evidence"][:4]]}
     res["M6_self_reference"] = m6
     res["M6_no_false_grounding"] = all(v["state"] != "GROUNDED" for v in m6.values())
+    # 接地の根拠が我々自身の DE 記録かどうかを明示（裁定§5 の原則に照らして検査する）
+    import json as _j
+    _own = set()
+    with open("/home/takasan/egl/DESIGN_EVIDENCE_LEDGER.jsonl", encoding="utf-8") as _fh:
+        for _l in _fh:
+            _l = _l.strip()
+            if _l:
+                _r = _j.loads(_l)
+                if _r.get("generated_by_principal") == "CLAUDE_CODE":
+                    _own.add(_r.get("design_evidence_id"))
+    res["M6_ledger_self_authored"] = {"claude_code_records": len(_own)}
+    for k, v in m6.items():
+        v["evidence_is_self_authored_de"] = [e for e in v["evidence_refs"] if e in _own]
     rows.append({"row_type": "SELF_REFERENCE_CONTAMINATION", "cases": m6})
 
     # ── M7 3状態が潰れないこと ───────────────────────────────────────────────────────────────────────
@@ -142,14 +167,25 @@ def measure():
     real = EG.check_existence("preflight_gate.py")                     # FILE_MANIFEST に実在
     novel = EG.check_existence("ゼクスカリバー クオンティス フーガロン")   # 全構成語が実在しない
     alt = EG.check_existence("ゼクスカリバー式 量子茶漬け 生成器", partial_forces_unknown=False)  # 別解釈
-    m7 = {"★実在しない(単一語)→UNKNOWN": (single["state"], single["state"] == "UNKNOWN"),
-          "★実在しない(一般語を含む複数語)→UNKNOWN": (multi["state"], multi["state"] == "UNKNOWN"),
-          "実在しない(全語が新規)→NOT_FOUND": (novel["state"], novel["state"] == "NOT_FOUND"),
-          "言及のみ→UNKNOWN": (partial["state"], partial["state"] == "UNKNOWN"),
-          "実在ファイル→GROUNDED": (real["state"], real["state"] == "GROUNDED"),
-          "NOT_FOUND 前に異表記>=3": (len(novel["queries"]), len(novel["queries"]) >= EG.MIN_QUERIES_FOR_NOT_FOUND)}
+    m7 = {"実在しない(単一語)": single["state"], "実在しない(一般語込み複数語)": multi["state"],
+          "★負の対照: 実在しない造語": novel["state"], "言及のみ": partial["state"],
+          "★実在ファイル preflight_gate.py": real["state"],
+          "NOT_FOUND 前の異表記数": len(novel["queries"])}
     res["M7_states"] = m7
-    res["M7_all_ok"] = all(v[1] for v in m7.values())
+    # ★★裁定§2(レコード全体)適用後に露見した汚染。**負の対照が壊れているので RED として扱う。**
+    res["M7_contamination"] = {
+        "negative_control_broken": novel["state"] != "NOT_FOUND",
+        "negative_control_evidence": [e["id"] for e in novel["evidence"][:3]],
+        "real_file_mislabeled": real["state"] == "DECLARED_UNVERIFIED",
+        "real_file_declared_prior_source": [d["id"] for d in real["declared_prior"][:3]],
+        "note": ("負の対照『ゼクスカリバー クオンティス フーガロン』は私が本テスト用に作った造語だが、"
+                 "**私がその造語を DE 報告に書いた結果、DE 台帳に入り、対照が成立しなくなった**。"
+                 "同様に実在ファイル preflight_gate.py が DECLARED_UNVERIFIED と誤標識される"
+                 "(私の DE-0554 の本文に DECLARED/UNVERIFIED の語が含まれるため)。"),
+    }
+    res["M7_all_ok"] = (not res["M7_contamination"]["negative_control_broken"]
+                        and not res["M7_contamination"]["real_file_mislabeled"]
+                        and real["state"] == "GROUNDED" and novel["state"] == "NOT_FOUND")
     # ★★射程の限界(SPEC §9(c) の帰結)。黙って規則を緩めず、限界として記録し裁定を仰ぐ。
     res["M7_scope_limit"] = {
         "single_token_queries": len(single["queries"]), "min_required": EG.MIN_QUERIES_FOR_NOT_FOUND,
@@ -179,7 +215,7 @@ def check():
     rows, res = measure()
     for label, key in (("fixture 期待どおり(PP発火/D非発火)", "fixture_all_ok"),
                        ("既存 HBB-30 非回帰(★最優先)", "M4_all_green"),
-                       ("3状態が潰れない(UNKNOWN を NOT_FOUND にしない)", "M7_all_ok"),
+                       ("★負の対照が生きている(自己記録で汚染されていない)", "M7_all_ok"),
                        ("自己言及で GROUNDED にならない", "M6_no_false_grounding")):
         print("[%s] %s" % ("PASS" if res[key] else "FAIL", label))
         ok &= res[key]
@@ -221,7 +257,12 @@ def main(argv):
     for k, v in res["M6_self_reference"].items():
         print("       %-4s %-14s → %-10s 接地hit=%d 言及hit=%d(うち自己言及%d)"
               % (k, v["object"], v["state"], v["grounding_hits"], v["mention_hits"], v["self_referential_hits"]))
-    print("  M7 3状態      : %s" % {k: v[0] for k, v in res["M7_states"].items()})
+    print("  M7 3状態      : %s" % res["M7_states"])
+    ct = res["M7_contamination"]
+    print("  ★M7 汚染      : 負の対照が壊れた=%s (根拠=%s) / 実在ファイルの誤標識=%s (根拠=%s)"
+          % (ct["negative_control_broken"], ct["negative_control_evidence"],
+             ct["real_file_mislabeled"], ct["real_file_declared_prior_source"]))
+    print("  ★DE台帳のうち CLAUDE_CODE 起票: %d件" % res["M6_ledger_self_authored"]["claude_code_records"])
     print("  → %s" % OUT)
     print("  ※射程は『記録の規律』に等しい。記録の無い対象は UNKNOWN にしかならない。")
     return 0
