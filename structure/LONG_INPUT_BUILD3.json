@@ -1,0 +1,387 @@
+{
+ "summary": {
+  "S": {
+   "M1_far_rate": {
+    "values": [
+     0.0333
+    ],
+    "mean": 0.0333,
+    "min": 0.0333,
+    "max": 0.0333
+   },
+   "M1a_unsafe_rate": {
+    "values": [
+     0.0333
+    ],
+    "mean": 0.0333,
+    "min": 0.0333,
+    "max": 0.0333
+   },
+   "M1b_wasteful_rate": {
+    "values": [
+     0.0
+    ],
+    "mean": 0.0,
+    "min": 0.0,
+    "max": 0.0
+   },
+   "M2_match_rate": {
+    "values": [
+     0.7667
+    ],
+    "mean": 0.7667,
+    "min": 0.7667,
+    "max": 0.7667
+   },
+   "M3_false_context_rate": {
+    "values": [
+     0.0392
+    ],
+    "mean": 0.0392,
+    "min": 0.0392,
+    "max": 0.0392
+   },
+   "M4_yes_mean": {
+    "values": [
+     1.03
+    ],
+    "mean": 1.03,
+    "min": 1.03,
+    "max": 1.03
+   },
+   "M4_no_candidate": {
+    "values": [
+     1
+    ],
+    "mean": 1.0,
+    "min": 1,
+    "max": 1
+   },
+   "M5_length_finish": {
+    "values": [
+     0
+    ],
+    "mean": 0.0,
+    "min": 0,
+    "max": 0
+   },
+   "M5_diverge": {
+    "values": [
+     0
+    ],
+    "mean": 0.0,
+    "min": 0,
+    "max": 0
+   },
+   "mean_input_len": 12.8
+  },
+  "L3_IRRELEVANT": {
+   "M1_far_rate": {
+    "values": [
+     0.4
+    ],
+    "mean": 0.4,
+    "min": 0.4,
+    "max": 0.4
+   },
+   "M1a_unsafe_rate": {
+    "values": [
+     0.0333
+    ],
+    "mean": 0.0333,
+    "min": 0.0333,
+    "max": 0.0333
+   },
+   "M1b_wasteful_rate": {
+    "values": [
+     0.3667
+    ],
+    "mean": 0.3667,
+    "min": 0.3667,
+    "max": 0.3667
+   },
+   "M2_match_rate": {
+    "values": [
+     0.4167
+    ],
+    "mean": 0.4167,
+    "min": 0.4167,
+    "max": 0.4167
+   },
+   "M3_false_context_rate": {
+    "values": [
+     0.0588
+    ],
+    "mean": 0.0588,
+    "min": 0.0588,
+    "max": 0.0588
+   },
+   "M4_yes_mean": {
+    "values": [
+     0.98
+    ],
+    "mean": 0.98,
+    "min": 0.98,
+    "max": 0.98
+   },
+   "M4_no_candidate": {
+    "values": [
+     1
+    ],
+    "mean": 1.0,
+    "min": 1,
+    "max": 1
+   },
+   "M5_length_finish": {
+    "values": [
+     0
+    ],
+    "mean": 0.0,
+    "min": 0,
+    "max": 0
+   },
+   "M5_diverge": {
+    "values": [
+     0
+    ],
+    "mean": 0.0,
+    "min": 0,
+    "max": 0
+   },
+   "mean_input_len": 3514.8
+  },
+  "L3_RELATED": {
+   "M1_far_rate": {
+    "values": [
+     0.3333
+    ],
+    "mean": 0.3333,
+    "min": 0.3333,
+    "max": 0.3333
+   },
+   "M1a_unsafe_rate": {
+    "values": [
+     0.0
+    ],
+    "mean": 0.0,
+    "min": 0.0,
+    "max": 0.0
+   },
+   "M1b_wasteful_rate": {
+    "values": [
+     0.3333
+    ],
+    "mean": 0.3333,
+    "min": 0.3333,
+    "max": 0.3333
+   },
+   "M2_match_rate": {
+    "values": [
+     0.4167
+    ],
+    "mean": 0.4167,
+    "min": 0.4167,
+    "max": 0.4167
+   },
+   "M3_false_context_rate": {
+    "values": [
+     0.0
+    ],
+    "mean": 0.0,
+    "min": 0.0,
+    "max": 0.0
+   },
+   "M4_yes_mean": {
+    "values": [
+     0.98
+    ],
+    "mean": 0.98,
+    "min": 0.98,
+    "max": 0.98
+   },
+   "M4_no_candidate": {
+    "values": [
+     1
+    ],
+    "mean": 1.0,
+    "min": 1,
+    "max": 1
+   },
+   "M5_length_finish": {
+    "values": [
+     0
+    ],
+    "mean": 0.0,
+    "min": 0,
+    "max": 0
+   },
+   "M5_diverge": {
+    "values": [
+     0
+    ],
+    "mean": 0.0,
+    "min": 0,
+    "max": 0
+   },
+   "mean_input_len": 3514.8
+  },
+  "L3_ASSERTS": {
+   "M1_far_rate": {
+    "values": [
+     0.4167
+    ],
+    "mean": 0.4167,
+    "min": 0.4167,
+    "max": 0.4167
+   },
+   "M1a_unsafe_rate": {
+    "values": [
+     0.0
+    ],
+    "mean": 0.0,
+    "min": 0.0,
+    "max": 0.0
+   },
+   "M1b_wasteful_rate": {
+    "values": [
+     0.4167
+    ],
+    "mean": 0.4167,
+    "min": 0.4167,
+    "max": 0.4167
+   },
+   "M2_match_rate": {
+    "values": [
+     0.2667
+    ],
+    "mean": 0.2667,
+    "min": 0.2667,
+    "max": 0.2667
+   },
+   "M3_false_context_rate": {
+    "values": [
+     0.0196
+    ],
+    "mean": 0.0196,
+    "min": 0.0196,
+    "max": 0.0196
+   },
+   "M4_yes_mean": {
+    "values": [
+     0.97
+    ],
+    "mean": 0.97,
+    "min": 0.97,
+    "max": 0.97
+   },
+   "M4_no_candidate": {
+    "values": [
+     3
+    ],
+    "mean": 3.0,
+    "min": 3,
+    "max": 3
+   },
+   "M5_length_finish": {
+    "values": [
+     0
+    ],
+    "mean": 0.0,
+    "min": 0,
+    "max": 0
+   },
+   "M5_diverge": {
+    "values": [
+     0
+    ],
+    "mean": 0.0,
+    "min": 0,
+    "max": 0
+   },
+   "mean_input_len": 3514.8
+  }
+ },
+ "batch_spread": {
+  "M1_far_rate": null,
+  "M1a_unsafe_rate": null,
+  "M1b_wasteful_rate": null,
+  "M2_match_rate": null,
+  "M3_false_context_rate": null,
+  "M4_yes_mean": null,
+  "M4_no_candidate": null,
+  "M5_length_finish": null,
+  "M5_diverge": null
+ },
+ "batches": [
+  {
+   "batch": 0,
+   "aggregate": {
+    "S": {
+     "n": 60,
+     "M1_far_rate": 0.0333,
+     "M1a_unsafe_rate": 0.0333,
+     "M1b_wasteful_rate": 0.0,
+     "near_miss_rate": 0.1833,
+     "M2_match_rate": 0.7667,
+     "M3_false_context_rate": 0.0392,
+     "M3_raw": "2/51",
+     "M4_yes_mean": 1.03,
+     "M4_no_candidate": 1,
+     "M5_length_finish": 0,
+     "M5_diverge": 0,
+     "mean_input_len": 12.8
+    },
+    "L3_IRRELEVANT": {
+     "n": 60,
+     "M1_far_rate": 0.4,
+     "M1a_unsafe_rate": 0.0333,
+     "M1b_wasteful_rate": 0.3667,
+     "near_miss_rate": 0.1667,
+     "M2_match_rate": 0.4167,
+     "M3_false_context_rate": 0.0588,
+     "M3_raw": "3/51",
+     "M4_yes_mean": 0.98,
+     "M4_no_candidate": 1,
+     "M5_length_finish": 0,
+     "M5_diverge": 0,
+     "mean_input_len": 3514.8
+    },
+    "L3_RELATED": {
+     "n": 60,
+     "M1_far_rate": 0.3333,
+     "M1a_unsafe_rate": 0.0,
+     "M1b_wasteful_rate": 0.3333,
+     "near_miss_rate": 0.2333,
+     "M2_match_rate": 0.4167,
+     "M3_false_context_rate": 0.0,
+     "M3_raw": "0/51",
+     "M4_yes_mean": 0.98,
+     "M4_no_candidate": 1,
+     "M5_length_finish": 0,
+     "M5_diverge": 0,
+     "mean_input_len": 3514.8
+    },
+    "L3_ASSERTS": {
+     "n": 60,
+     "M1_far_rate": 0.4167,
+     "M1a_unsafe_rate": 0.0,
+     "M1b_wasteful_rate": 0.4167,
+     "near_miss_rate": 0.2667,
+     "M2_match_rate": 0.2667,
+     "M3_false_context_rate": 0.0196,
+     "M3_raw": "1/51",
+     "M4_yes_mean": 0.97,
+     "M4_no_candidate": 3,
+     "M5_length_finish": 0,
+     "M5_diverge": 0,
+     "mean_input_len": 3514.8
+    }
+   },
+   "n_rows": 240
+  }
+ ],
+ "prompt_id": "build3-long-input-v1",
+ "runs": 1,
+ "n_batches": 1,
+ "wall_seconds": 20.1
+}
