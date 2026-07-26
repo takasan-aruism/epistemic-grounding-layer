@@ -207,6 +207,47 @@ def measure():
     rows.append({"row_type": "THREE_STATES", "checks": m7, "scope_limit": res["M7_scope_limit"],
                  "nonexistent_multi_detail": {k: multi[k] for k in ("queries", "searched", "hits", "basis")},
                  "nonexistent_single_detail": {k: single[k] for k in ("queries", "hits", "basis")}})
+    # ── M8 df 閾値の頑健性（CC-α 依頼B③）★測定後に都合の良い値へ動かさない ─────────────────────────
+    probes = [("負の対照(造語)", "ゼクスカリバー クオンティス フーガロン", "NOT_FOUND"),
+              ("PP1", "Watcher 仕様", "UNKNOWN"), ("PP2", "方針のメモ", "UNKNOWN"),
+              ("PP3", "予備の鍵", "UNKNOWN"),
+              ("実在ファイル", "preflight_gate.py", "GROUNDED"),
+              ("HBB-30", HBB_OBJECT, "DECLARED_UNVERIFIED"),
+              # ★弁別語規則が実際に働くのは TOKEN 部分一致が立つ時だけ。それを狙った probe を入れる。
+              ("一般語込み(生成器)", "ゼクスカリバー式 量子茶漬け 生成器", "UNKNOWN"),
+              ("既存語込み(preflight_gate)", "架空の preflight_gate 仕様書", "UNKNOWN")]
+    thresholds = (1, 5, 10, 20, 50, 100, 500)
+    m8 = {}
+    for name, obj, expect in probes:
+        row = {}
+        for th in thresholds:
+            row[th] = EG.check_existence(obj, df_threshold=th)["state"]
+        m8[name] = {"expected_at_fixed_threshold": expect, "by_threshold": row,
+                    "stable": len(set(row.values())) == 1,
+                    "matches_expectation_at_20": row[EG.DISCRIMINATIVE_DF_THRESHOLD] == expect
+                    if EG.DISCRIMINATIVE_DF_THRESHOLD in row else None}
+    res["M8_threshold_sensitivity"] = m8
+    res["M8_fixed_threshold"] = EG.DISCRIMINATIVE_DF_THRESHOLD
+    res["M8_all_stable"] = all(v["stable"] for v in m8.values())
+    # ★「安定」と「効いていない」を混同しない。規則が働くには df >= 閾値 の構成語が要る。
+    dfs = {}
+    for name, obj, _e in probes:
+        dfs[name] = EG.check_existence(obj)["token_document_frequency"]
+    max_df = max([d for v in dfs.values() for d in v.values()] or [0])
+    res["M8_rule_exercised"] = {
+        "token_document_frequencies": dfs, "max_observed_df": max_df,
+        "fixed_threshold": EG.DISCRIMINATIVE_DF_THRESHOLD,
+        "any_token_excluded_at_fixed_threshold": max_df >= EG.DISCRIMINATIVE_DF_THRESHOLD,
+        "excluded_tokens_at_fixed": sorted({tok for v in dfs.values() for tok, d in v.items()
+                                            if d >= EG.DISCRIMINATIVE_DF_THRESHOLD}),
+        "sensitive_probes": sorted(k for k, v in m8.items() if not v["stable"]),
+        "insensitive_probes": sorted(k for k, v in m8.items() if v["stable"]),
+        "sensitive_range": sorted({th for k, v in m8.items() if not v["stable"]
+                                   for th in thresholds
+                                   if v["by_threshold"][th] != v["by_threshold"][thresholds[-1]]}),
+    }
+    rows.append({"row_type": "DF_THRESHOLD_SENSITIVITY", "fixed": EG.DISCRIMINATIVE_DF_THRESHOLD,
+                 "thresholds": list(thresholds), "cases": m8})
     return rows, res
 
 
@@ -263,6 +304,18 @@ def main(argv):
           % (ct["negative_control_broken"], ct["negative_control_evidence"],
              ct["real_file_mislabeled"], ct["real_file_declared_prior_source"]))
     print("  ★DE台帳のうち CLAUDE_CODE 起票: %d件" % res["M6_ledger_self_authored"]["claude_code_records"])
+    print("  M8 df 閾値の頑健性 (固定値=%d):" % res["M8_fixed_threshold"])
+    for k, v in res["M8_threshold_sensitivity"].items():
+        print("       %-16s %s  安定=%s" % (k, v["by_threshold"], v["stable"]))
+    print("       → 全 probe が閾値に対して安定: %s" % res["M8_all_stable"])
+    ex = res["M8_rule_exercised"]
+    print("       ★観測された最大 df=%d / 固定閾値=%d → 閾値で除外された語がある: %s"
+          % (ex["max_observed_df"], ex["fixed_threshold"], ex["any_token_excluded_at_fixed_threshold"]))
+    print("       ★閾値20 で除外される語: %s" % ex["excluded_tokens_at_fixed"])
+    print("       ★閾値に感度がある probe: %s / 無い probe: %s"
+          % (ex["sensitive_probes"], ex["insensitive_probes"]))
+    print("       ★感度がある閾値域: %s (固定値 %d はこの域の外)"
+          % (ex["sensitive_range"], ex["fixed_threshold"]))
     print("  → %s" % OUT)
     print("  ※射程は『記録の規律』に等しい。記録の無い対象は UNKNOWN にしかならない。")
     return 0
