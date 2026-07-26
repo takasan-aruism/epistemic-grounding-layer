@@ -32,9 +32,11 @@
 {"actually_loaded": ["ACCOUNT_AXES_v1.json", "ACCOUNT_MEMBERSHIP.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_account_axes", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["ACCOUNT_AXES_v2.json", "ACCOUNT_AXIS_NAMES.jsonl", "ACCOUNT_MEMBERSHIP_v2.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_account_axis_names", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["ds_events.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_ambiguity_stage_build1", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["ds_events.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_binder_real_context_feasibility", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_de_route_equiv", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": true, "path": "rri_records.jsonl", "required_by_contract": true, "stage": "s_embed_axes", "verdict": "OK"}
 {"actually_loaded": ["ENTRYPOINTS_EXT.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_exec_arch_acd", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_intent_context_premise_1b", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["INTENT_DIALOGUE_PROBE.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_intent_dialogue_probe", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["INTENT_PROBE_ARMC.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_intent_probe_armc", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["INTENT_PROBE_ARMC2.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_intent_probe_armc2", "verdict": "UNRESOLVED_NO_CONTRACT"}

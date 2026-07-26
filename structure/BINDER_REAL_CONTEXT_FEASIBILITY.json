@@ -1,0 +1,62 @@
+{
+ "corpus": {
+  "utterances": 730,
+  "user": 480,
+  "natural_after_exclusion": 459,
+  "unique_deduped": 298,
+  "dialogue_events": 414
+ },
+ "means_examined": {
+  "preceding_utterance_ref": {
+   "populated": 0,
+   "of": 459,
+   "resolvable": 0,
+   "usable": false
+  },
+  "timestamp_ordering": {
+   "distinct_timestamps": 98,
+   "utterances": 730,
+   "usable": false
+  },
+  "conversation_id_threads": {
+   "buckets": 69,
+   "largest_bucket": [
+    "taka-main",
+    377
+   ],
+   "usable": false
+  },
+  "dialogue_event_adjacency": {
+   "utterance_refs_len_distribution": {
+    "1": 414
+   },
+   "usable": false
+  }
+ },
+ "targets": [
+  {
+   "utterance_id": "UTT-0001",
+   "text": "QwenとCoderの切替3分が完全にボトルネック。前の件を優先して進めて",
+   "conversation_id": "taka-main",
+   "position_in_conversation": 1,
+   "conversation_size": 377,
+   "preceding_utterance_ref": null,
+   "prev_by_line_order": null,
+   "dialogue_events_covering": 0,
+   "thread_candidates": []
+  },
+  {
+   "utterance_id": "UTT-0044",
+   "text": "前の件のQwenとCoderの切替タスクをそのまま進めて",
+   "conversation_id": "taka-main",
+   "position_in_conversation": 44,
+   "conversation_size": 377,
+   "preceding_utterance_ref": null,
+   "prev_by_line_order": "ベトナム語アプリを直して",
+   "dialogue_events_covering": 0,
+   "thread_candidates": []
+  }
+ ],
+ "real_context_measurement_feasible": false,
+ "conclusion": "実 context を復元する手段が corpus に存在しないため、M6 の実 context 版は測定できない。"
+}
