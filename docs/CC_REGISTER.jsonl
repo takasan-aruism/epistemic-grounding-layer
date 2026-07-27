@@ -71,3 +71,5 @@
 {"kind": "DOC", "doc_id": "ART-14ae94cb42", "path": "docs/CC_IMPL_2026-07-28_TMP_FILES_NOT_FROM_MY_HARNESSES.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T00:16:39"}
 {"kind": "DOC", "doc_id": "ART-8656cf3e16", "path": "docs/CC_MGR_2026-07-28_D27_RECEIVED_TMP_IS_THE_CAUSE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T00:19:34"}
 {"kind": "DONE", "doc_id": "ART-e8c96ff77c", "by": "MGR", "by_doc_id": "ART-8656cf3e16", "ts": "2026-07-28T00:19:34"}
+{"kind": "DOC", "doc_id": "ART-59cb4a37a4", "path": "docs/CC_MGR_2026-07-28_D28_APPROVED_WALK_THE_PATH.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T00:28:02"}
+{"kind": "DONE", "doc_id": "ART-8e56914ea9", "by": "MGR", "by_doc_id": "ART-59cb4a37a4", "ts": "2026-07-28T00:28:02"}
