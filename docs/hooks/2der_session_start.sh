@@ -19,4 +19,7 @@ CTX=$(cat <<'EOF'
 役割と手続き: /home/takasan/egl/docs/CC_OPERATING_POLICY.md (作業前に読み、文書冒頭に「運用方針 確認済(版)」と書く)
 EOF
 )
-jq -nc --arg c "$CTX" '{hookSpecificOutput:{hookEventName:"SessionStart",additionalContext:$c}}'
+BOARD="$(/home/takasan/.claude/hooks/2der_status.sh full 2>/dev/null || echo '(状況表の取得に失敗)')"
+jq -nc --arg c "$CTX
+
+$BOARD" '{hookSpecificOutput:{hookEventName:"SessionStart",additionalContext:$c}}'

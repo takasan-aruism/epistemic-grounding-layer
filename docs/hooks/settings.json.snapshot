@@ -14,6 +14,17 @@
         ]
       }
     ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -nc --arg c \"$(/home/takasan/.claude/hooks/2der_status.sh brief)\" '{hookSpecificOutput:{hookEventName:\"UserPromptSubmit\",additionalContext:$c}}'",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Read|Bash",
