@@ -42,11 +42,17 @@
 **調査対象 commit**【実】（`git -C <repo> rev-parse --short HEAD`）:
 | repo | commit | 最終 commit 時刻 |
 |---|---|---|
-| `ds` | `f64c990` | 2026-07-27 20:32 |
-| `rri` | `86f992d` | 2026-07-27 20:32 |
-| `egl` | `7b0cb5f` | 2026-07-27 22:01 |
-| `dev-workcell` | `c51dcc3` | 2026-07-27 20:32 |
+| `ds` | `b0dcd32` | — |
+| `rri` | `b1adab2` | — |
+| `egl` | `4c300c1` | — |
+| `dev-workcell` | `9388fb2` | — |
 | `twoder` | `88bfa31` | 2026-07-27 18:14 |
+
+**更新履歴（§8 の更新義務・変わった1点だけ直す）**
+| 版 | 変更 | 契機 |
+|---|---|---|
+| v0.1 初版 | — | 段2 |
+| v0.1+1 | **`cc_register.py` の `normalize_path` 追加と `counts()` の母数訂正を反映。commit を更新** | 状況表「実行構造の資料: ★古い」の初回発動 |
 
 ---
 
@@ -207,6 +213,12 @@ PLANNED: 長文 → 明細（1問い合わせ = 複数明細）                 
 | `ARTIFACT_REGISTRY.jsonl` / `CHANGE_LOG.jsonl` | `twoder.artifact_registry` | `twoder/audit/` |
 | `rri_records.jsonl` | RRI | `rri/` |
 | `CC_REGISTER.jsonl`（**暫定**） | `egl/docs/cc_register.py` | `egl/docs/`（**退役条件つき**） |
+
+**`cc_register.py` の補足（D21FIX で変更・§8 の更新義務による反映）**
+- `record_doc` は `normalize_path` で path を1表記に寄せる（先頭 `egl/` を1回剥がし、`docs/` 以外は `ValueError`）。**`doc_id` は `artifact_registry.artifact_id_for` と一致する。**
+- `counts().files_since_start` は `egl/docs/` 直下の `*.md` / `*.json` を数える（`CC_*.md` 限定をやめた母数の訂正）。
+- **★利用側は `sys.path` に `/home/takasan/egl/docs` を足すこと**（口伝だったので明記）。
+- **★`_meta` の1行目を1回だけ書き換えた**（追記のみの例外）。**MGR 裁定により、以後は `META_UPDATE` 行を追記する。**
 
 **★書ける者・書けない者**
 | 主体 | production repo | 根拠 |

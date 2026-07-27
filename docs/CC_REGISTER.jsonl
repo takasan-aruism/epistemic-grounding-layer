@@ -49,3 +49,4 @@
 {"kind": "DONE", "doc_id": "ART-6def893e3c", "by": "MGR", "by_doc_id": "ART-cafe1a7b4a", "ts": "2026-07-27T22:41:50"}
 {"kind": "DONE", "doc_id": "ART-5c28a2ff90", "by": "MGR", "by_doc_id": "ART-cafe1a7b4a", "ts": "2026-07-27T22:41:50"}
 {"kind": "DONE", "doc_id": "ART-df3a3c4829", "by": "MGR", "by_doc_id": "ART-cafe1a7b4a", "ts": "2026-07-27T22:41:50"}
+{"kind": "DOC", "doc_id": "ART-95932f3636", "path": "docs/CC_MGR_2026-07-27_BUILD14_RECEIVED_AUTHORITY_GATE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:52:30"}
