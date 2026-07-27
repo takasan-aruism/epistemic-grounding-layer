@@ -348,9 +348,11 @@
       "repo": "twoder",
       "file": "twoder/qwen_worker.py, twoder/generate_via_runner.py",
       "symbol": "CODING_WORKER",
-      "status": "LIVE",
+      "status": "WIRED_UNPROVEN",
       "evidence": [
-        "EXEC: Build 12 で GENERATE が記録され actor_id=QWEN_LIVECODER"
+        "EXEC: GENERATE は記録された(Build 12/14)が、いずれも run_runner の手前で fail-closed",
+        "EXEC: Build 12=契約不在 / Build 14=token gate の語彙不一致",
+        "★worker が成果物を出した観測は1件も無い"
       ],
       "last_verified_commit": "88bfa31"
     },
@@ -512,10 +514,10 @@
       "mechanism": "call",
       "input_schema": "IMPLEMENTATION_PACKET + contract",
       "output_schema": "{diff, test_result, problems}",
-      "runtime_proven": true,
-      "status": "LIVE",
+      "runtime_proven": false,
+      "status": "WIRED_UNPROVEN",
       "evidence": [
-        "EXEC: Build 12 で GENERATE 記録・contract 不在で fail-closed"
+        "EXEC: dispatch は成立するが run_runner に到達しない(Build 12/14)"
       ]
     },
     {
@@ -847,9 +849,9 @@
     },
     {
       "id": "G-12",
-      "summary": "DW の generate_runs.ts が既定値(2026-07-11T09:00:00)",
+      "summary": "DW の generate_runs.ts が既定値(2026-07-11T09:00:00)。★approval_id がこの固定 ts に依存するため token の一意性に効く",
       "kind": "gap",
-      "status": "OPEN",
+      "status": "OPEN_RAISED",
       "evidence": [
         "HEARSAY: Build 12 BUILT の逐語"
       ]
@@ -880,6 +882,17 @@
       "evidence": [
         "EXEC: stat"
       ]
+    },
+    {
+      "id": "G-16",
+      "summary": "mint 側(generate_via_runner.mint_token)と検証側(approval_registry)が action_type/task_id/operation_class の3項目とも別の語彙を使う",
+      "kind": "contradiction",
+      "status": "OPEN",
+      "evidence": [
+        "EXEC: Build 14 の problems 逐語",
+        "READ: mint_token は USE_VLLM_INFERENCE / #attempt-N / DW_MACHINE_OP"
+      ],
+      "note": "#attempt-N は死因#2 修正で load-bearing(approval_id が固定 ts に依存)。単純除去は再発する"
     }
   ],
   "planned_extensions": [
