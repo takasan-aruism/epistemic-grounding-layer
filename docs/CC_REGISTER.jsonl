@@ -164,3 +164,4 @@
 {"kind": "DOC", "doc_id": "ART-9de359a958", "path": "docs/CC_MGR_2026-07-28_D40B_RECEIVED_ESCALATE_TRACE_RESOLVER.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T06:43:37"}
 {"kind": "DONE", "doc_id": "ART-72b5c04574", "by": "MGR", "by_doc_id": "ART-9de359a958", "ts": "2026-07-28T06:43:37"}
 {"kind": "DOC", "doc_id": "ART-de3871e0f5", "path": "docs/RRI_CANONICAL_SPEC_v1_0.md", "type": "FINDING", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T06:44:48"}
+{"kind": "DOC", "doc_id": "ART-de3871e0f5", "path": "docs/RRI_CANONICAL_SPEC_v1_0.md", "type": "FINDING", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T06:48:37"}
