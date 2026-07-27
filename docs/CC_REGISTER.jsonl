@@ -83,3 +83,5 @@
 {"kind": "DONE", "doc_id": "ART-a1971c1212", "by": "MGR", "by_doc_id": "ART-c1214e356a", "ts": "2026-07-28T01:37:33"}
 {"kind": "DOC", "doc_id": "ART-c78ba367a1", "path": "docs/CC_MGR_2026-07-28_BUILD18_APPROVED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T01:40:44"}
 {"kind": "DOC", "doc_id": "ART-831634bb24", "path": "docs/CC_MGR_2026-07-28_INCIDENT_RUNAWAY_WORKER_ARTIFACT.md", "type": "STATUS", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T01:43:41"}
+{"kind": "DOC", "doc_id": "ART-239d653df9", "path": "docs/CC_IMPL_2026-07-28_BUILD18_ARTIFACT_RECEIVED.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T02:00:08"}
+{"kind": "DOC", "doc_id": "ART-e395039cc1", "path": "docs/CC_IMPL_2026-07-28_BUILD18_ARTIFACT_NOT_SELF_SPAWNING.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T02:02:45"}
