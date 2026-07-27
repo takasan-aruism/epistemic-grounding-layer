@@ -52,3 +52,5 @@
 {"kind": "DOC", "doc_id": "ART-95932f3636", "path": "docs/CC_MGR_2026-07-27_BUILD14_RECEIVED_AUTHORITY_GATE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:52:30"}
 {"kind": "DOC", "doc_id": "ART-cd276a29de", "path": "docs/CC_MGR_2026-07-27_BUILD14_AUDIT_RECEIVED_ALIGN_VOCAB.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:57:00"}
 {"kind": "DONE", "doc_id": "ART-2aa2ab6957", "by": "MGR", "by_doc_id": "ART-cd276a29de", "ts": "2026-07-27T22:57:00"}
+{"kind": "DOC", "doc_id": "ART-7765ebb5a5", "path": "docs/CC_MGR_2026-07-27_D25_APPROVED_FIX_MINT_ONLY.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T23:04:10"}
+{"kind": "DONE", "doc_id": "ART-61adfe1ac9", "by": "MGR", "by_doc_id": "ART-7765ebb5a5", "ts": "2026-07-27T23:04:10"}
