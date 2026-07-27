@@ -109,3 +109,6 @@
 {"kind": "DONE", "doc_id": "ART-e67ef7802c", "by": "MGR", "by_doc_id": "ART-36056a0194", "ts": "2026-07-28T03:40:53"}
 {"kind": "DOC", "doc_id": "ART-c43f698406", "path": "docs/CC_MGR_2026-07-28_UNFREEZE_APPROVED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T03:51:22"}
 {"kind": "DONE", "doc_id": "ART-97a29d875a", "by": "MGR", "by_doc_id": "ART-c43f698406", "ts": "2026-07-28T03:51:22"}
+{"kind": "DOC", "doc_id": "ART-76a2df190c", "path": "docs/CC_MGR_2026-07-28_VERDICT_RECEIVED_RUNNER_FAILED_IS_NOW_FIRST.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T04:01:59"}
+{"kind": "DONE", "doc_id": "ART-2c92921279", "by": "MGR", "by_doc_id": "ART-76a2df190c", "ts": "2026-07-28T04:01:59"}
+{"kind": "DONE", "doc_id": "ART-14613f9d94", "by": "MGR", "by_doc_id": "ART-76a2df190c", "ts": "2026-07-28T04:01:59"}
