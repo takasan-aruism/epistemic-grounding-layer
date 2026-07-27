@@ -12,12 +12,13 @@
 
 ## 5.1 Executive Summary
 
-**2DER は、書く側の経路は繋がっており、読む側と、決定論で絞る側が繋がっていない。**
+**2DER は、書く側も読む側（`/api/resolve`）も繋がっている。繋がっていないのは、決定論で絞る側である。**
+> **★2026-07-28 訂正**: 初版は「読む側が繋がっていない」と書いたが、**誤りだった**。探索範囲を `submit()` の枝に限っていた。
 
 | # | 事実 | 状態 |
 |---|---|---|
 | **1** | 入口は `submit()` 1つ。呼び方が3通りあり、**等価ではない** | `LIVE`（§5.3） |
-| **2** | **front door から台帳を読む経路は無い** | 欠落（§5.7） |
+| **2** | **★訂正: front door から台帳は引ける**（`GET /api/resolve`・2026-07-28 実測）。`submit()` の acquisition 枝に無かっただけ | `LIVE`（§5.7） |
 | **3** | **勘定科目の自動設定は EGL 登録経路に繋がっていない** | `BUILT`（§5.10） |
 | **4** | **4軸→7戦略の決定論セレクタは、既定で入らない分岐の中にある。4軸のうち3軸は本番で生成されていない** | `WIRED_UNPROVEN` / 一部欠落（§5.10） |
 | **5** | **PLAN は Qwen が書く。決定論テンプレは front door 由来 task では原理的に発火しない** | `LIVE`（§5.6） |
@@ -64,6 +65,7 @@
 | CLI（直起動） | `python3 twoder/submit.py` | — | **★起動しない** | — | `DEPRECATED`【実】 |
 | webui | `POST /api/submit`（body `{"raw": …}`） | **要**（Basic / user=`taka`） | できる | できる | `LIVE`【実】 |
 | webui（進行） | `POST /api/run_next` / `/api/run_until_barrier` | 要 | — | できる | `LIVE`【実】 |
+| **webui（参照）** | **`GET /api/resolve?id=…`** | **要** | — | — | **`LIVE`【実】（read-only）** |
 | 運転者ループ | `twoder/operator.py:151` | — | — | できる | `【未確認】` |
 
 ```
@@ -120,7 +122,7 @@ DW ループ（submit() は進めない。webui の RUN NEXT / operator.py が�
 ### 5.4-2 ★切断箇所（CURRENT で繋がっていない所）
 | # | 切断 | 状態 |
 |---|---|---|
-| **D-1** | **front door → 台帳の読み出し** | **経路が無い**（§5.7） |
+| ~~D-1~~ | ~~front door → 台帳の読み出し~~ | **★取り消し。`GET /api/resolve` で通る**（2026-07-28 実測） |
 | **D-2** | **EGL 登録 → 勘定科目の自動設定** | **繋がっていない**（§5.10） |
 | **D-3** | **4軸 assessment → 決定論の戦略選択** | **既定で入らない ＋ 3軸は生成されていない** |
 | **D-4** | **CLI → DW ループの進行** | **経路が無い**（§5.3-1） |
@@ -129,7 +131,7 @@ DW ループ（submit() は進めない。webui の RUN NEXT / operator.py が�
 
 ### 5.4-3 PLANNED（現行と分離する）
 ```
-PLANNED: front door → ids.resolve → ART- の本文（hash 照合つき）      ← 設計済・未実装
+PLANNED: ART- の**本文**を返す1段（hash 照合つき）  ← ★所在と版を返す /api/resolve は既に LIVE。本文の返却だけが未実装
 PLANNED: DS の選別（空 / 無意味 / 意味の薄い投稿の機械的検知）        ← 未設計
 PLANNED: 長文 → 明細（1問い合わせ = 複数明細）                        ← 未設計
 ```
@@ -200,7 +202,7 @@ PLANNED: 長文 → 明細（1問い合わせ = 複数明細）                 
 |---|---|---|
 | EGL の接地情報 | `self_grounding.answer_question`（段3a） | `LIVE` |
 | 過去の失敗 | `failure_memory`（段7・read-only） | `LIVE` |
-| **台帳の中身（ID 指定）** | **`twoder/ids.py::resolve`** | **`BUILT`。front door から到達する経路が無い** |
+| **台帳の中身（ID 指定）** | **`GET /api/resolve` → `resolve_view` → `twoder/ids.py::resolve`** | **★`LIVE`**（2026-07-28 実測。存在しない ID は `resolved:false`） |
 | ランタイム状態 | `runtime_inspection`（GPU/コンテナ/プロセス/ポート） | `LIVE`。**★`information_need` を選別に使わず全件実行** |
 
 ```
@@ -291,7 +293,7 @@ CURRENT:
 
 | id | 内容 | 種別 | 状態 |
 |---|---|---|---|
-| **G-01** | **front door から台帳を読む経路が無い** | Gap | 未着手（設計済） |
+| **G-01** | **★誤りだった。** front door から台帳は引ける（`GET /api/resolve`）。`submit()` の acquisition 枝には無いが、別の口に在った | Gap | **CLOSED**（2026-07-28 実測） |
 | **G-02** | **勘定科目が EGL 登録経路に繋がっていない** | Gap | 未着手 |
 | **G-03** | **4軸→7戦略の決定論選択が既定で入らない。3軸は本番で生成されない** | Gap | 未着手 |
 | **G-04** | **DS に選別も断りの返答も無い**（空入力は `ds/phase0.py:101` の `ValueError`） | Gap | 未着手 |
@@ -351,4 +353,4 @@ CURRENT:
 | 14 | commit 前に Taka へ提示 | **未**（MGR が仲介） |
 
 ---
-*2DER Execution Architecture v0.1（常設・正典）。`2DER_MECHANISM_MAP.md` を包含し統合する（正典を2本にしない）。★要約=書く側は繋がり、読む側と決定論で絞る側が繋がっていない。最大の切断は front door から台帳を読む経路の不在(G-01)。勘定科目は EGL 登録経路に無く(G-02)、4軸→7戦略の決定論選択は既定で入らない分岐にあり3軸は本番で生成されない(G-03)。PLAN は Qwen が書き(決定論テンプレは front door 由来 task では原理的に発火しない)、worker は契約(skeleton+immutable_tests)が無ければ着手せず、契約は依頼者(Claude)が渡す。worker は production repo に三重の保証で書けず、配置は Claude の役割。Gap Register は G-01〜G-15。★未達=commit 記録／EventStore 等の責務比較／構想との差分／機械可読版／Taka への提示。調査の大半は静的であり、`【読】` を `LIVE` に昇格させていない。*
+*2DER Execution Architecture v0.1（常設・正典）。`2DER_MECHANISM_MAP.md` を包含し統合する（正典を2本にしない）。★要約=書く側も読む側(`GET /api/resolve`)も繋がっており、繋がっていないのは決定論で絞る側である（★2026-07-28 訂正: 初版は「読む側が繋がっていない」「最大の切断は G-01」と書いたが**誤りだった**——探索範囲を `submit()` の acquisition 枝に限っており、別の口を見ていなかった。G-01 は CLOSED）。勘定科目は EGL 登録経路に無く(G-02)、4軸→7戦略の決定論選択は既定で入らない分岐にあり3軸は本番で生成されない(G-03)。PLAN は Qwen が書き(決定論テンプレは front door 由来 task では原理的に発火しない)、worker は契約(skeleton+immutable_tests)が無ければ着手せず、契約は依頼者(Claude)が渡す。worker は production repo に三重の保証で書けず、配置は Claude の役割。Gap Register は G-01〜G-29（本日 G-16〜G-29 を追加・同期）。★未達=commit 記録／EventStore 等の責務比較／構想との差分／機械可読版／Taka への提示。調査の大半は静的であり、`【読】` を `LIVE` に昇格させていない。*

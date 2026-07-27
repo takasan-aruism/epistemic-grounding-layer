@@ -1040,6 +1040,17 @@
         "CC-α が ids.resolve() を『一度も実行していない』と5回書き、5回とも実行しなかった"
       ],
       "note": "対処: 【未確認】を書くときは『いつ誰が確かめるか』を同じ行に書く。書けないならその場で確かめる。運用方針 v2.1 に格上げ済(MGR)"
+    },
+    {
+      "id": "G-30",
+      "summary": "ds.phase0.record_utterance は HUMAN_RELAYED/relayed_by/authored_by を受け取れるが、twoder.submit が引数を持たず origin=MACHINE_SUBMIT を直書きしている",
+      "kind": "gap",
+      "status": "OPEN",
+      "evidence": [
+        "READ: ds/ds/phase0.py:85-97",
+        "READ: twoder/submit.py:85, :99-101 / twoder/webui.py:536"
+      ],
+      "note": "∴ front door から人間の発話を『人間が書いた』として記録できず、台帳の speaker=USER は『人間が言った』を意味しない。Taka の依頼が台帳に1件も無いことの直接原因(D-37/D-38)"
     }
   ],
   "planned_extensions": [
