@@ -15,9 +15,12 @@ deny() {
 }
 REASON='2DER 境界: 台帳の直読は禁止です(egl/docs/CC_2DER_USAGE_GUIDE.md §2)。台帳の中身は 2DER に聞いてください。答えられないなら「答えられなかった」が結果であり、それが次に作る読み出し機能です。'
 
+REASON_TRACE='2DER 境界: 実行結果(TRACE/runs)の横読みは禁止です。2DER に聞いて返させること。返せないなら「返せない」が結果であり、それが次に作る機能です(egl/docs/CC_2DER_USAGE_GUIDE.md §2)。'
+
 if [ "$TOOL" = "Read" ]; then
   P="$(printf '%s' "$IN" | jq -r '.tool_input.file_path // ""')"
   printf '%s' "$P" | grep -Eq "$ROOTS.*[.]jsonl$" && deny "$REASON"
+  printf '%s' "$P" | grep -Eq '/twoder/runs/' && deny "$REASON_TRACE"
   exit 0
 fi
 
@@ -28,6 +31,13 @@ C="$(printf '%s' "$IN" | jq -r '.tool_input.command // ""')"
 printf '%s' "$C" | grep -Eq '(^|[|;&[:space:]])git([[:space:]]|$)' && exit 0
 # 除外2: フック自身の保守
 printf '%s' "$C" | grep -q '2der_ledger_guard' && exit 0
+
+# 実行結果(runs/)の横読みも塞ぐ
+if printf '%s' "$C" | grep -Eq '/twoder/runs/|twoder/runs/[^ ]*\.json'; then
+  if printf '%s' "$C" | grep -Eq '(^|[|;&[:space:]])(cat|head|tail|less|more|grep|rg|sed|awk|jq|wc|sort|uniq|cut|nl|tac|ls)([[:space:]]|$)'; then
+    deny "$REASON_TRACE"
+  fi
+fi
 
 # パスとして現れる .jsonl のみを対象にする(文中の言及は対象外)
 printf '%s' "$C" | grep -Eq "(^|[[:space:]<>=('\"\`])[./~][^[:space:]'\"\`]*[.]jsonl" || exit 0
