@@ -9,6 +9,8 @@ ROOTS='/home/takasan/(egl|ds|rri|twoder|dev-workcell)/'
 CHEATLOG=/home/takasan/.claude/hooks/.cheat_attempts.log
 deny() {
   # ★逃げ道を使おうとした回数を機械で数える(自己申告に頼らない)
+  # ただし自己試験の実行は数えない(計器が自分の活動を数えるのを避ける)
+  [ -n "${GUARD_SELFTEST:-}" ] && { jq -nc --arg r "$1" '{hookSpecificOutput:{hookEventName:"PreToolUse",permissionDecision:"deny",permissionDecisionReason:$r}}'; exit 0; }
   printf '%s\t%s\t%s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$TOOL" "$(printf '%s' "${C:-${P:-}}" | head -c 160 | tr '\n' ' ')" >> "$CHEATLOG" 2>/dev/null
   jq -nc --arg r "$1" '{hookSpecificOutput:{hookEventName:"PreToolUse",permissionDecision:"deny",permissionDecisionReason:$r}}'
   exit 0
