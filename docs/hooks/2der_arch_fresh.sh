@@ -22,7 +22,14 @@ for repo,c in rec.items():
     except Exception:
         ch=''
     py=[l for l in ch.splitlines() if l.endswith('.py')]
-    if py: stale.append('%s(記録%s→現在%s / .py %d本変化)'%(repo,c[:7],head[:7],len(py)))
+    # ★資料に載っているファイルが変わった時だけ「古い」とする(無関係な .py で鳴らない)
+    listed=set()
+    for coll in ('components','edges','entrypoints','llm_invocations'):
+        for it in j.get(coll,[]) or []:
+            f=it.get('file') or ''
+            if f: listed.add(f.split('/')[-1])
+    hit=[l for l in py if l.split('/')[-1] in listed]
+    if hit: stale.append('%s(記録%s→現在%s / 資料掲載ファイル %d本変化: %s)'%(repo,c[:7],head[:7],len(hit),','.join(x.split('/')[-1] for x in hit[:3])))
 g=len(j.get('gaps',[])); cmp=len(j.get('components',[])); e=len(j.get('edges',[]))
 if stale:
     print('実行構造の資料: ★古い — '+' '.join(stale)+' / 要更新 (gap %d)'%g)
