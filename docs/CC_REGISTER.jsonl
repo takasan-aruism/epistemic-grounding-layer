@@ -54,3 +54,5 @@
 {"kind": "DONE", "doc_id": "ART-2aa2ab6957", "by": "MGR", "by_doc_id": "ART-cd276a29de", "ts": "2026-07-27T22:57:00"}
 {"kind": "DOC", "doc_id": "ART-7765ebb5a5", "path": "docs/CC_MGR_2026-07-27_D25_APPROVED_FIX_MINT_ONLY.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T23:04:10"}
 {"kind": "DONE", "doc_id": "ART-61adfe1ac9", "by": "MGR", "by_doc_id": "ART-7765ebb5a5", "ts": "2026-07-27T23:04:10"}
+{"kind": "DOC", "doc_id": "ART-2631772c1d", "path": "docs/CC_MGR_2026-07-27_D25_RULING_NO_FIELD_ABUSE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T23:16:48"}
+{"kind": "DONE", "doc_id": "ART-c2ba530306", "by": "MGR", "by_doc_id": "ART-2631772c1d", "ts": "2026-07-27T23:16:48"}
