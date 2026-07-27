@@ -94,3 +94,6 @@
 {"kind": "DOC", "doc_id": "ART-afd5e4397a", "path": "docs/CC_MGR_2026-07-28_BUILD19_APPROVED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T02:15:29"}
 {"kind": "DONE", "doc_id": "ART-b64e5dd668", "by": "MGR", "by_doc_id": "ART-afd5e4397a", "ts": "2026-07-28T02:15:29"}
 {"kind": "DOC", "doc_id": "ART-16fb8d092c", "path": "docs/CC_MGR_2026-07-28_D30_THINKING_OS_PRIMING.md", "type": "FINDING", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T02:24:16"}
+{"kind": "DOC", "doc_id": "ART-c81a6254e0", "path": "docs/CC_IMPL_2026-07-28_BUILD19_KILLGROUP_AND_PRECHECK_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T02:28:04"}
+{"kind": "DOC", "doc_id": "ART-7711aee32f", "path": "docs/CC_MGR_2026-07-28_BUILD19_RECEIVED_UNFREEZE_NOT_YET.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T02:28:45"}
+{"kind": "DONE", "doc_id": "ART-c81a6254e0", "by": "MGR", "by_doc_id": "ART-7711aee32f", "ts": "2026-07-28T02:28:45"}
