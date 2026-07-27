@@ -25,3 +25,6 @@
 {"kind": "DONE", "doc_id": "ART-5290ded30f", "by": "MGR", "by_doc_id": "ART-015ca92364", "ts": "2026-07-27T22:20:31"}
 {"kind": "DONE", "doc_id": "ART-f3de61c41f", "by": "MGR", "by_doc_id": "ART-015ca92364", "ts": "2026-07-27T22:20:31"}
 {"kind": "DOC", "doc_id": "ART-6def893e3c", "path": "docs/CC_DESIGN_2026-07-27_D21_PATH_CONVENTION_DEFECT.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:22:37"}
+{"kind": "DOC", "doc_id": "ART-2a8766be2e", "path": "egl/docs/CC_MGR_2026-07-27_STAGE3_GO_RESUME_DEV.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:30:04"}
+{"kind": "DONE", "doc_id": "ART-48a812a415", "by": "MGR", "by_doc_id": "ART-2a8766be2e", "ts": "2026-07-27T22:30:04"}
+{"kind": "DONE", "doc_id": "ART-ea212ef275", "by": "MGR", "by_doc_id": "ART-2a8766be2e", "ts": "2026-07-27T22:30:04"}
