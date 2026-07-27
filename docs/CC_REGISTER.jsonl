@@ -130,3 +130,4 @@
 {"kind": "DONE", "doc_id": "ART-c5d45506f7", "by": "MGR", "by_doc_id": "ART-af1e182804", "ts": "2026-07-28T05:04:47"}
 {"kind": "DOC", "doc_id": "ART-855aacd347", "path": "docs/CC_DESIGN_2026-07-28_VERSION_TABLE_HAS_NO_ORDER.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:07:17"}
 {"kind": "DONE", "doc_id": "ART-855aacd347", "by": "MGR", "by_doc_id": "ART-af1e182804", "ts": "2026-07-28T05:07:17"}
+{"kind": "DOC", "doc_id": "ART-d8b4a5ee84", "path": "docs/CC_MGR_2026-07-28_D34_ARCH_IS_STALE_AND_FINDINGS_DONT_FLOW.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:16:38"}
