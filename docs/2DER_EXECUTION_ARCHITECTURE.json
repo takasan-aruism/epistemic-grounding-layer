@@ -1051,6 +1051,29 @@
         "READ: twoder/submit.py:85, :99-101 / twoder/webui.py:536"
       ],
       "note": "∴ front door から人間の発話を『人間が書いた』として記録できず、台帳の speaker=USER は『人間が言った』を意味しない。Taka の依頼が台帳に1件も無いことの直接原因(D-37/D-38)"
+    },
+    {
+      "id": "G-31",
+      "summary": "/api/state で段2〜3e は引けるが、TRACE が task_id 単位で上書きされるため発話単位の帰属ができない。加えて INTENT_STRATEGY が /api/state に出ない",
+      "kind": "gap",
+      "status": "OPEN",
+      "evidence": [
+        "EXEC: GET /api/state?task_id=TASK-2DER-B9B4DA3B → rri.resolved_intent.request_type=BUILD_CAPABILITY / egl.source_refs=[DE-0557]",
+        "EXEC: ds.input_ref=UTT-0762（対象の UTT-0769 ではない＝上書き）",
+        "READ: webui.py:112 build_state が _trace(task_id) を読む / :542-543 で submit のたびに上書き"
+      ],
+      "note": "★初版『front door から中間結果を引く手段が無い』は誤りで撤回した(/api/resolve だけ試し /api/state を試していなかった)。残る真の欠落は『発話単位の帰属ができない』と『INTENT_STRATEGY が出ない』の2点"
+    },
+    {
+      "id": "G-32",
+      "summary": "CC-α が『探した範囲に無い』を『無い』と書く(本日3回)",
+      "kind": "process_defect",
+      "status": "OPEN",
+      "evidence": [
+        "G-01: submit() の acquisition 枝だけ見て結論(/api/resolve に在った)",
+        "G-31: /api/resolve を1回試して結論(/api/state に在った)"
+      ],
+      "note": "対処=『無い』と書く前にその種類の口を列挙する。1つ試して無かったで済ませない。★直前に同じ型で撤回した直後に再発"
     }
   ],
   "planned_extensions": [
