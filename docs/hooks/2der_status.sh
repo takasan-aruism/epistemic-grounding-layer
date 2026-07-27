@@ -22,14 +22,30 @@ for r in $REPOS; do
   [ "${a:-0}" != "0" ] && AHEAD="$AHEAD $r:+$a"
 done
 
-# --- 2. MGR 未応答の受信箱(mtime 比較・決定論) ---
-LASTMGR=$(ls -t "$DOCS"/CC_MGR_*.md 2>/dev/null | head -1)
-if [ -n "${LASTMGR:-}" ]; then
-  PENDING=$(find "$DOCS" -maxdepth 1 -name 'CC_DESIGN_*.md' -newer "$LASTMGR" -o -maxdepth 1 -name 'CC_IMPL_*.md' -newer "$LASTMGR" 2>/dev/null | sort)
-else
-  PENDING=""
-fi
-PN=$(printf '%s' "$PENDING" | grep -c . || true)
+# --- 2. MGR 未応答（★台帳から引く。ls と mtime の走査をやめた＝D-21 のゴール） ---
+LEDGER_PENDING=$(python3 -c "
+import sys; sys.path.insert(0,'docs')
+try:
+    import cc_register as R
+    rows=R.pending('MGR')
+    print(len(rows))
+    for x in rows[:8]: print('  - '+x.get('path','?'))
+except Exception as e:
+    print('ERR '+str(e)[:60])
+" 2>/dev/null)
+PN=$(printf '%s' "$LEDGER_PENDING" | head -1)
+PENDING=$(printf '%s' "$LEDGER_PENDING" | tail -n +2)
+# ずれ検出(F1): 台帳の DOC 行数 と 実ファイル数
+DRIFT=$(cd /home/takasan/egl && python3 -c "
+import sys,glob; sys.path.insert(0,'docs')
+try:
+    import cc_register as R
+    c=R.counts(); import os
+    files=len([f for f in glob.glob('docs/CC_*.md')])
+    print('台帳 DOC %s / docs 実ファイル %d' % (c.get('doc_rows','?'), files))
+except Exception as e:
+    print('判定不能')
+" 2>/dev/null)
 
 # --- 3. 台帳登記の整合(既存プログラムを呼ぶ。台帳の直読ではない) ---
 # 重いので full のときだけ実行し、結果をキャッシュする
@@ -44,7 +60,8 @@ fi
 line "【2DER 状況表 / $(date '+%m-%d %H:%M') / mode=$MODE】"
 line "repo 未commit :${DIRTY:- なし}"
 line "repo 未push   :${AHEAD:- なし}"
-line "MGR 未応答    : ${PN} 件"
+line "MGR 未応答    : ${PN} 件（台帳から。走査ではない）"
+line "台帳のずれ    : ${DRIFT}"
 if [ "$PN" != "0" ]; then
   printf '%s\n' "$PENDING" | sed 's|.*/|  - |' | head -8
 fi
@@ -77,6 +94,7 @@ else
   line "台帳の直読を試みた回数: 0（記録開始以降）"
 fi
 
+line "$(/home/takasan/.claude/hooks/2der_arch_fresh.sh 2>/dev/null || echo '実行構造の資料: 判定不能')"
 line "$(/home/takasan/.claude/hooks/2der_layers.sh 2>/dev/null || echo '層飛ばし: 判定不能')"
 line "全体: 2DER を一本の道にする(横から見る経路を潰し、使うことで育てる)"
 line "現在地: 段0 済(所在発見) / 段1 済(繋がっていない と判明) / ★段2 進行中=Execution Architecture 現状記録 / 段3 待=台帳を読める仕組み・worker 再挑戦"

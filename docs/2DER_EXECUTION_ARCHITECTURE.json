@@ -1,0 +1,231 @@
+{
+  "architecture_id": "2DER-EXECUTION-ARCHITECTURE",
+  "version": "0.1",
+  "_meta": {
+    "human_readable": "egl/docs/2DER_EXECUTION_ARCHITECTURE.md",
+    "authority": "egl/docs/EXEC_ARCH_WORK_ORDER_v0_1.md",
+    "authored_by": "CC-alpha (DESIGN/AUDIT)",
+    "authored_at": "2026-07-27",
+    "divergence_control": "v0.1 は Markdown と本 JSON を並行して手で書いている。生成関係は無い。★検証方法(未実装・PLANNED): egl/docs/ に決定論チェッカを置き、(a) gaps[].id の集合が MD §5.11 の表の id 集合と一致すること (b) components[].status の値が MD の状態語彙8種に含まれること (c) generated_from.commits が各 repo の HEAD と一致すること、の3点を --check で照合する。乖離したら非0で落とす。**現時点では未実装であり、乖離は検出されない。**",
+    "evidence_kinds": {
+      "EXEC": "実行して確認",
+      "READ": "ソースを読んだだけ",
+      "HEARSAY": "他者の報告",
+      "UNVERIFIED": "未確認"
+    },
+    "limits": [
+      "調査の大半は静的(READ)。動的確認は本日の数回の観測に限る",
+      "READ を LIVE に昇格させていない",
+      "EXEC_ARCH_WORK_ORDER_v0_1.md は全文を読んだが、内容の妥当性評価はしていない",
+      "TASK_CONTRACTS.jsonl / ARTIFACT_REGISTRY.jsonl / LEDGER_REGISTRY.jsonl の中身は UNKNOWN(台帳の直読を避けたため)",
+      "呼び出し元の網羅はしていない(submit( の呼び出しは CLI と webui の2箇所を確認した範囲)"
+    ]
+  },
+  "generated_from": {
+    "repositories": ["ds", "rri", "egl", "dev-workcell", "twoder"],
+    "commits": [
+      {"repo": "ds", "commit": "f64c990", "committed_at": "2026-07-27 20:32"},
+      {"repo": "rri", "commit": "86f992d", "committed_at": "2026-07-27 20:32"},
+      {"repo": "egl", "commit": "7b0cb5f", "committed_at": "2026-07-27 22:01"},
+      {"repo": "dev-workcell", "commit": "c51dcc3", "committed_at": "2026-07-27 20:32"},
+      {"repo": "twoder", "commit": "88bfa31", "committed_at": "2026-07-27 18:14"}
+    ],
+    "documents": [
+      "egl/docs/EXEC_ARCH_WORK_ORDER_v0_1.md",
+      "egl/docs/CC_DESIGN_2026-07-27_D18_ANSWER_TWO_MECHANISMS.md",
+      "egl/docs/CC_DESIGN_2026-07-27_D23_ANSWER_TWO_CONTRACTS.md",
+      "egl/docs/CC_DESIGN_2026-07-27_BUILD12_AUDIT_CONTRACT_MISSING.md",
+      "egl/docs/2DER_MECHANISM_MAP.md (SUPERSEDED by the .md of this architecture)"
+    ]
+  },
+
+  "entrypoints": [
+    {"id": "EP-CLI-MODULE", "repo": "twoder", "file": "twoder/submit.py", "symbol": "__main__ via -m twoder.submit",
+     "status": "LIVE", "evidence": ["EXEC: IMPL が exit=0 と台帳増分を実測(Build 8/9B)"], "last_verified_commit": "88bfa31",
+     "auth": "none", "can_create_task": true, "can_advance_loop": false},
+    {"id": "EP-CLI-DIRECT", "repo": "twoder", "file": "twoder/submit.py", "symbol": "python3 twoder/submit.py",
+     "status": "DEPRECATED", "evidence": ["EXEC: ImportError — twoder/operator.py が標準ライブラリ operator を隠す"], "last_verified_commit": "88bfa31",
+     "auth": "none", "can_create_task": false, "can_advance_loop": false},
+    {"id": "EP-WEBUI-SUBMIT", "repo": "twoder", "file": "twoder/webui.py", "symbol": "POST /api/submit",
+     "status": "LIVE", "evidence": ["EXEC: Build 9C/10/11/12 で投入"], "last_verified_commit": "88bfa31",
+     "auth": "HTTP Basic (user=taka, token file twoder/.access_token 0600)", "can_create_task": true, "can_advance_loop": true},
+    {"id": "EP-WEBUI-RUNNEXT", "repo": "twoder", "file": "twoder/webui.py", "symbol": "POST /api/run_next",
+     "status": "LIVE", "evidence": ["EXEC: Build 11 で PLAN、Build 12 で GENERATE を dispatch"], "last_verified_commit": "88bfa31",
+     "auth": "HTTP Basic", "can_create_task": false, "can_advance_loop": true},
+    {"id": "EP-OPERATOR", "repo": "twoder", "file": "twoder/operator.py", "symbol": "dispatch_once caller (line 151)",
+     "status": "UNKNOWN", "evidence": ["READ: 呼び出しは在る。起動経路と実運用は未確認"], "last_verified_commit": "88bfa31",
+     "auth": "unknown", "can_create_task": false, "can_advance_loop": true}
+  ],
+
+  "components": [
+    {"id": "C-DS-RECORD", "repo": "ds", "file": "ds/ds/phase0.py", "symbol": "record_utterance", "status": "LIVE",
+     "evidence": ["READ: submit.py:99 から呼ばれる"], "last_verified_commit": "f64c990"},
+    {"id": "C-DS-SELECT", "repo": "ds", "file": "-", "symbol": "接続判定(空/無意味/意味の薄い投稿の検知)", "status": "UNKNOWN",
+     "evidence": ["READ: 該当する実装が見つからない。空入力は ds/phase0.py:101 の ValueError で落ちる"], "last_verified_commit": "f64c990"},
+    {"id": "C-RRI-CONTEXT", "repo": "rri", "file": "rri/rri/context_binding.py", "symbol": "bind_context", "status": "LIVE",
+     "evidence": ["READ: submit.py:178"], "last_verified_commit": "86f992d"},
+    {"id": "C-RRI-REQTYPE", "repo": "rri", "file": "rri/rri/request_type.py", "symbol": "classify_request_type", "status": "LIVE",
+     "evidence": ["READ: submit.py:202", "READ: REQUEST_TYPES 6件"], "last_verified_commit": "86f992d"},
+    {"id": "C-RRI-PREFLIGHT", "repo": "rri", "file": "rri/rri/preflight_gate.py", "symbol": "detect / next_legal_operation", "status": "LIVE",
+     "evidence": ["READ: submit.py:239", "EXEC: 非回帰 13/13 PASS"], "last_verified_commit": "86f992d"},
+    {"id": "C-RRI-INTENT-LLM", "repo": "rri", "file": "rri/rri/intent_strategy.py", "symbol": "resolve", "status": "LIVE",
+     "evidence": ["READ: submit.py:263", "EXEC: 2026-07-27 18:42 の TRACE に INTENT_STRATEGY が出現"], "last_verified_commit": "86f992d"},
+    {"id": "C-RRI-STRATEGY-DET", "repo": "rri", "file": "rri/rri/request_resolution.py", "symbol": "select_strategy", "status": "WIRED_UNPROVEN",
+     "evidence": ["READ: 本番経路は twoder/rri_formal.py:27 のみ", "READ: submit.py:106 の if formal_candidates: 既定 None", "READ: CLI(submit.py:489) も webui(webui.py:536) も渡さない"], "last_verified_commit": "86f992d"},
+    {"id": "C-RRI-AXES-SOURCE", "repo": "rri", "file": "rri/rri/context_binding.py", "symbol": "4軸のうち context_anchoring のみ", "status": "BUILT",
+     "evidence": ["READ: answer_determinacy / intent_breadth / premise_stability は egl/structure/s_intent_probe_proto.py・テスト・demo・run_rri_task.py にのみ存在"], "last_verified_commit": "86f992d"},
+    {"id": "C-EGL-GROUNDING", "repo": "egl", "file": "egl/egl/self_grounding.py", "symbol": "answer_question", "status": "LIVE",
+     "evidence": ["READ: submit.py:187"], "last_verified_commit": "7b0cb5f"},
+    {"id": "C-EGL-ADMISSION", "repo": "egl", "file": "egl/egl/de_admission.py", "symbol": "admit_design_evidence", "status": "LIVE",
+     "evidence": ["READ: docstring 'The ONLY sanctioned writer of DESIGN_EVIDENCE_LEDGER.jsonl'", "READ: submit.py:131"], "last_verified_commit": "7b0cb5f"},
+    {"id": "C-EGL-ACCOUNTS", "repo": "egl", "file": "egl/structure/s_embed_axes.py, s_account_axes.py, s_rthread_2br3.py, s_account_axis_names.py", "symbol": "勘定科目の自動設定(埋め込み軸)", "status": "BUILT",
+     "evidence": ["READ: 本番コード(egl/egl, ds/ds, rri/rri, dev-workcell/dw, twoder/*.py)からの参照 0件", "READ: de_admission は json/re/pathlib しか import しない", "READ: 呼び出しは egl/structure/ 内のみ"], "last_verified_commit": "7b0cb5f"},
+    {"id": "C-EGL-EXECARCH", "repo": "egl", "file": "egl/structure/s_exec_arch_acd.py, s_task_contract.py", "symbol": "EXEC_ARCH / Task Contract", "status": "BUILT",
+     "evidence": ["READ: 本番4repo から EXEC_ARCH 参照 0件", "READ: TASK_CONTRACTS.jsonl の参照者は egl/structure/ 内のみ"], "last_verified_commit": "7b0cb5f"},
+    {"id": "C-IDS-RESOLVE", "repo": "twoder", "file": "twoder/ids.py", "symbol": "resolve", "status": "BUILT",
+     "evidence": ["READ: 15系統の接頭辞を持ち主のストアへ解決", "READ: SELECTED_ACQUISITION_METHOD 8種のいずれも呼んでいない"], "last_verified_commit": "88bfa31"},
+    {"id": "C-CONTRACT-SEAL", "repo": "twoder", "file": "twoder/contract_seal.py", "symbol": "extract_contract", "status": "LIVE",
+     "evidence": ["READ: submit.py:430-431 で PLAN より前に封印", "EXEC: 契約不在時に SPEC_INCOMPLETE_NO_CONTRACT が観測された(Build 12)"], "last_verified_commit": "88bfa31"},
+    {"id": "C-ARTIFACT-REGISTRY", "repo": "twoder", "file": "twoder/artifact_registry.py", "symbol": "register / record_change / verify", "status": "BUILT",
+     "evidence": ["READ: KINDS に spec_doc/audit_doc、supersedes フィールドあり", "UNVERIFIED: 現在の登記内容は未読"], "last_verified_commit": "88bfa31"},
+    {"id": "C-DW-DISPATCH", "repo": "dev-workcell", "file": "dev-workcell/dw/dispatch.py", "symbol": "dispatch_once / run_until_barrier", "status": "LIVE",
+     "evidence": ["EXEC: Build 11(PLAN) / Build 12(GENERATE)"], "last_verified_commit": "c51dcc3"},
+    {"id": "C-DW-EXECUTOR", "repo": "dev-workcell", "file": "dev-workcell/dw/executor.py", "symbol": "run_command", "status": "LIVE",
+     "evidence": ["READ: cwd は repo_root 配下に限定、allowed_commands の allowlist"], "last_verified_commit": "c51dcc3"},
+    {"id": "C-BUILD-PLANNER", "repo": "twoder", "file": "twoder/build_planner.py", "symbol": "make_dw_planner_actor / validate_plan", "status": "LIVE",
+     "evidence": ["READ: webui.py:305 で無条件に登録", "EXEC: Build 11 で PLAN が記録された"], "last_verified_commit": "88bfa31"},
+    {"id": "C-QWEN-WORKER", "repo": "twoder", "file": "twoder/qwen_worker.py, twoder/generate_via_runner.py", "symbol": "CODING_WORKER", "status": "LIVE",
+     "evidence": ["EXEC: Build 12 で GENERATE が記録され actor_id=QWEN_LIVECODER"], "last_verified_commit": "88bfa31"},
+    {"id": "C-RUNTIME-INSPECTION", "repo": "twoder", "file": "twoder/runtime_inspection.py", "symbol": "inspect", "status": "LIVE",
+     "evidence": ["READ: _CATALOG は gpu_memory/running_containers/top_memory_processes/listening_ports の4件", "READ: build_request が information_need を選別に使わず全件を requested にする"], "last_verified_commit": "88bfa31"},
+    {"id": "C-CC-REGISTER", "repo": "egl", "file": "egl/docs/cc_register.py", "symbol": "record_doc / record_done / pending / counts", "status": "BUILT",
+     "evidence": ["HEARSAY: IMPL が 1往復の実行結果を報告(D-21 BUILT)", "UNVERIFIED: 私は実行していない"], "last_verified_commit": "7b0cb5f",
+     "note": "暫定。退役条件=front door から ART- の本文が返るようになったら登記へ移して廃止"}
+  ],
+
+  "llm_invocations": [
+    {"id": "L-REQTYPE", "component": "C-RRI-REQTYPE", "purpose": "要求種別の分類(6)", "status": "LIVE", "endpoint": ":8005"},
+    {"id": "L-INTENT", "component": "C-RRI-INTENT-LLM", "purpose": "7戦略を生テキストから直接選ぶ", "status": "LIVE", "endpoint": ":8005"},
+    {"id": "L-PLANNER", "component": "C-BUILD-PLANNER", "purpose": "PLAN の起草(決定論バリデーションつき)", "status": "LIVE", "endpoint": ":8005"},
+    {"id": "L-WORKER", "component": "C-QWEN-WORKER", "purpose": "コード生成(skeleton の body のみ)", "status": "LIVE", "endpoint": ":8005"},
+    {"id": "L-AUDITOR", "component": "twoder/adjudicator QwenAuditor", "purpose": "独立監査", "status": "UNKNOWN", "endpoint": ":8005"},
+    {"id": "L-AXISNAME", "component": "C-EGL-ACCOUNTS", "purpose": "勘定科目の命名(3-seed consensus)", "status": "BUILT", "endpoint": ":8005"}
+  ],
+
+  "edges": [
+    {"id": "E-SUBMIT-DS", "from": "EP-WEBUI-SUBMIT", "to": "C-DS-RECORD", "mechanism": "call",
+     "input_schema": "raw_input:str", "output_schema": "utterance", "runtime_proven": true, "status": "LIVE",
+     "evidence": ["EXEC: 台帳行数の増分を IMPL が実測"]},
+    {"id": "E-SUBMIT-INTENT", "from": "EP-WEBUI-SUBMIT", "to": "C-RRI-INTENT-LLM", "mechanism": "call",
+     "input_schema": "raw_input + anchoring", "output_schema": "INTENT_STRATEGY", "runtime_proven": true, "status": "LIVE",
+     "evidence": ["EXEC: 18:42 の TRACE に INTENT_STRATEGY"]},
+    {"id": "E-SUBMIT-STRATEGY-DET", "from": "EP-WEBUI-SUBMIT", "to": "C-RRI-STRATEGY-DET", "mechanism": "call",
+     "input_schema": "assessment(4軸)", "output_schema": "strategy", "runtime_proven": false, "status": "WIRED_UNPROVEN",
+     "evidence": ["READ: if formal_candidates: の中。既定 None のため到達しない"]},
+    {"id": "E-ADMISSION-ACCOUNTS", "from": "C-EGL-ADMISSION", "to": "C-EGL-ACCOUNTS", "mechanism": "call",
+     "input_schema": "-", "output_schema": "-", "runtime_proven": false, "status": "UNKNOWN",
+     "evidence": ["READ: 該当する呼出が存在しない(参照 0件)"], "note": "★このエッジは存在しない。欠落として G-02 に登録"},
+    {"id": "E-FRONTDOOR-IDS", "from": "EP-WEBUI-SUBMIT", "to": "C-IDS-RESOLVE", "mechanism": "call",
+     "input_schema": "-", "output_schema": "-", "runtime_proven": false, "status": "UNKNOWN",
+     "evidence": ["READ: acquisition method 8種のいずれも呼んでいない"], "note": "★このエッジは存在しない。欠落として G-01 に登録"},
+    {"id": "E-DISPATCH-PLANNER", "from": "C-DW-DISPATCH", "to": "C-BUILD-PLANNER", "mechanism": "call",
+     "input_schema": "task_id + nlo", "output_schema": "{recorded, stage, reason, plan}", "runtime_proven": true, "status": "LIVE",
+     "evidence": ["EXEC: Build 11 で PLAN 記録"]},
+    {"id": "E-DISPATCH-WORKER", "from": "C-DW-DISPATCH", "to": "C-QWEN-WORKER", "mechanism": "call",
+     "input_schema": "IMPLEMENTATION_PACKET + contract", "output_schema": "{diff, test_result, problems}", "runtime_proven": true, "status": "LIVE",
+     "evidence": ["EXEC: Build 12 で GENERATE 記録・contract 不在で fail-closed"]},
+    {"id": "E-CLI-ADVANCE", "from": "EP-CLI-MODULE", "to": "C-DW-DISPATCH", "mechanism": "call",
+     "input_schema": "-", "output_schema": "-", "runtime_proven": false, "status": "UNKNOWN",
+     "evidence": ["READ: grep dispatch_once twoder/submit.py → 0件", "EXEC: webui の run-gate が CLI の task を refused"], "note": "★このエッジは存在しない。欠落として G-05 に登録"}
+  ],
+
+  "read_paths": [
+    {"id": "R-GROUNDING", "stage": "3a", "target": "EGL 接地", "via": "self_grounding.answer_question", "status": "LIVE"},
+    {"id": "R-FAILURE-MEMORY", "stage": "7", "target": "過去の失敗", "via": "failure_memory (read-only)", "status": "LIVE"},
+    {"id": "R-RUNTIME", "stage": "4", "target": "GPU/コンテナ/プロセス/ポート", "via": "runtime_inspection._CATALOG", "status": "LIVE",
+     "note": "information_need を選別に使わず全件実行(G-06)"},
+    {"id": "R-LEDGER-BY-ID", "stage": "-", "target": "台帳の中身(ID 指定)", "via": "twoder/ids.py::resolve", "status": "BUILT",
+     "note": "★front door から到達する経路が無い(G-01)"}
+  ],
+
+  "write_paths": [
+    {"store": "egl/DESIGN_EVIDENCE_LEDGER.jsonl", "sole_writer": "egl.de_admission.admit_design_evidence", "status": "LIVE"},
+    {"store": "ds/ds_events.jsonl", "sole_writer": "ds.phase0", "status": "LIVE"},
+    {"store": "dev-workcell events", "sole_writer": "dw.workcell", "status": "LIVE"},
+    {"store": "twoder/audit/ARTIFACT_REGISTRY.jsonl, CHANGE_LOG.jsonl", "sole_writer": "twoder.artifact_registry", "status": "BUILT"},
+    {"store": "rri/rri_records.jsonl", "sole_writer": "rri", "status": "LIVE"},
+    {"store": "egl/docs/CC_REGISTER.jsonl", "sole_writer": "egl/docs/cc_register.py", "status": "BUILT", "note": "暫定・退役条件つき"}
+  ],
+
+  "canonical_stores": [
+    {"id": "CS-DE", "name": "DESIGN_EVIDENCE_LEDGER", "owner": "EGL", "status": "LIVE"},
+    {"id": "CS-DS", "name": "ds_events", "owner": "DS", "status": "LIVE"},
+    {"id": "CS-DW", "name": "DW events", "owner": "DW", "status": "LIVE"},
+    {"id": "CS-ART", "name": "ARTIFACT_REGISTRY / CHANGE_LOG", "owner": "twoder", "status": "BUILT"},
+    {"id": "CS-RRI", "name": "rri_records", "owner": "RRI", "status": "LIVE"},
+    {"id": "CS-ACCOUNTS", "name": "ACCOUNT_AXES_v2 / ACCOUNT_MEMBERSHIP_v2 / FREEZE_APPROVALS", "owner": "EGL structure", "status": "BUILT"},
+    {"id": "CS-TASKCONTRACT", "name": "TASK_CONTRACTS / REQUIRED_INPUTS / CANONICAL_STATES", "owner": "EGL structure", "status": "BUILT"}
+  ],
+
+  "state_machines": [
+    {"id": "SM-DW", "file": "dev-workcell/dw/dispatch.py", "symbol": "_MAP", "status": "LIVE",
+     "transitions": [
+       {"state": "CREATED", "operation": "PLAN", "actor_role": "MANAGER", "claude_barrier": true, "machine_override": "BUILD_PLANNER (Qwen) / RULE_TEMPLATE_PLAN"},
+       {"state": "READY_FOR_IMPLEMENTATION", "operation": "GENERATE", "actor_role": "CODING_WORKER", "claude_barrier": false},
+       {"state": "READY_FOR_AUDIT", "operation": "AUDIT", "actor_role": "INDEPENDENT_AUDITOR", "claude_barrier": false},
+       {"state": "DISPOSITION_REQUIRED", "operation": "DISPOSE", "actor_role": "MANAGER", "claude_barrier": true, "machine_override": "MECHANICAL_DISPOSITION"},
+       {"state": "READY_FOR_REGENERATE", "operation": "REGENERATE", "actor_role": "CODING_WORKER", "claude_barrier": false},
+       {"state": "READY_FOR_UPPER_REVIEW", "operation": "UPPER_REVIEW", "actor_role": "CLAUDE_SENIOR", "claude_barrier": true, "machine_override": "TRIVIALLY_CLEAN_UPPER_REVIEW"},
+       {"state": "COMPLETE", "operation": "NONE", "actor_role": "-", "claude_barrier": false},
+       {"state": "BLOCKED", "operation": "BLOCKED", "actor_role": "-", "claude_barrier": true}
+     ]}
+  ],
+
+  "execution_flows": [
+    {"id": "F-SUBMIT", "name": "front door の1回の投入", "status": "LIVE",
+     "steps": ["ts 受領", "1 DS record_utterance", "1.5 EGL DE admission fast path", "(1.6) RRI formal validation [WIRED_UNPROVEN]",
+               "2 RRI bind_context", "3a EGL self_grounding", "3b RRI classify_request_type", "3c dead-approach guard",
+               "3d preflight_gate", "3e intent_strategy(LLM)", "4 ROUTING", "7 failure_memory_guard"],
+     "note": "submit() はループを進めない"},
+    {"id": "F-DW", "name": "DW ループ", "status": "LIVE",
+     "steps": ["CREATED -> PLAN (Qwen BUILD_PLANNER)", "READY_FOR_IMPLEMENTATION -> GENERATE (Qwen worker・contract 必須)",
+               "READY_FOR_AUDIT -> AUDIT [UNKNOWN]", "-> UPPER_REVIEW / DISPOSE / COMPLETE [UNKNOWN]"],
+     "driver": "webui RUN NEXT または twoder/operator.py。submit() ではない"}
+  ],
+
+  "gaps": [
+    {"id": "G-01", "summary": "front door から台帳を読む経路が無い", "kind": "gap", "status": "OPEN", "evidence": ["READ: LEDGER_QUERY 相当 0件", "READ: acquisition method 8種に該当なし"]},
+    {"id": "G-02", "summary": "勘定科目の自動設定が EGL 登録経路に繋がっていない", "kind": "gap", "status": "OPEN", "evidence": ["READ: 本番コードからの参照 0件", "READ: de_admission は json/re/pathlib のみ import"]},
+    {"id": "G-03", "summary": "4軸->7戦略の決定論選択が既定で入らない。4軸のうち3軸は本番で生成されない", "kind": "gap", "status": "OPEN", "evidence": ["READ: if formal_candidates: 既定 None", "READ: 3軸は研究/テスト/demo にのみ存在"]},
+    {"id": "G-04", "summary": "DS に選別も断りの返答も無い(空入力は ValueError)", "kind": "gap", "status": "OPEN", "evidence": ["READ: ds/phase0.py:101"]},
+    {"id": "G-05", "summary": "CLI から DW ループを進める経路が無い。CLI の task は webui からも進まない", "kind": "gap", "status": "OPEN", "evidence": ["READ: submit.py に dispatch_once 0件", "EXEC: run-gate が refused"]},
+    {"id": "G-06", "summary": "information_need が acquisition の選別に使われず全件実行される", "kind": "gap", "status": "OPEN", "evidence": ["READ: runtime_inspection.build_request"]},
+    {"id": "G-07", "summary": "同じ規律(契約が無ければ進めない)が分析層と生成層に互いを知らずに実装されている", "kind": "isomorph_not_identical", "status": "RECORDED_NOT_MERGED", "evidence": ["READ: UNRESOLVED_NO_CONTRACT (s_task_contract)", "READ: SPEC_INCOMPLETE_NO_CONTRACT (generate_via_runner)"], "decision": "統合しない。可視化する"},
+    {"id": "G-08", "summary": "front door の結果が設計/監査へ自動で届かない(7回連続で手読み)", "kind": "gap", "status": "OPEN", "evidence": ["HEARSAY: IMPL の到達経路(A) 申告が7回連続"]},
+    {"id": "G-09", "summary": "s10_ledger_registry.py:26 の TODAY がハードコード(放置日数が常に 2026-07-22 基準)", "kind": "instrument_defect", "status": "OPEN", "evidence": ["READ"]},
+    {"id": "G-10", "summary": "s4_edges.py に --check が無く、実行すると EDGE_INVENTORY を書き換える", "kind": "instrument_defect", "status": "OPEN", "evidence": ["EXEC: grep で --check 不在を確認"]},
+    {"id": "G-11", "summary": "twoder/operator.py が標準ライブラリの operator を隠し、直接起動を不能にしている", "kind": "contradiction", "status": "DEFERRED", "evidence": ["EXEC: ImportError"], "decision": "改名しない。-m を正典化"},
+    {"id": "G-12", "summary": "DW の generate_runs.ts が既定値(2026-07-11T09:00:00)", "kind": "gap", "status": "OPEN", "evidence": ["HEARSAY: Build 12 BUILT の逐語"]},
+    {"id": "G-13", "summary": "test_submit_e2e の3件が失敗(Build 10 以前から)", "kind": "gap", "status": "OPEN", "evidence": ["EXEC: IMPL が git stash で変更前も 7/10 を確認"]},
+    {"id": "G-14", "summary": "DS reconstruct_snapshot failed: HTTP 400", "kind": "gap", "status": "OPEN", "evidence": ["HEARSAY"]},
+    {"id": "G-15", "summary": "LEDGER_REGISTRY と EDGE_INVENTORY の鮮度が不揃い(07-22 / 07-26)", "kind": "instrument_defect", "status": "OPEN", "evidence": ["EXEC: stat"]}
+  ],
+
+  "planned_extensions": [
+    {"id": "P-01", "summary": "front door -> ids.resolve -> ART- の本文(登記時 hash と照合し VERIFIED/CHANGED_SINCE_REGISTRATION/MISSING を返す)", "status": "PLANNED", "design": "CC_DESIGN_2026-07-27_PRIORITY1_UNIFIED_DESIGN.md"},
+    {"id": "P-02", "summary": "DS の選別(空/無意味/意味の薄い投稿の機械的検知)と、繋がない理由の返答", "status": "PLANNED", "design": "未設計"},
+    {"id": "P-03", "summary": "長文を明細に分解する(1問い合わせ=複数明細)", "status": "PLANNED", "design": "未設計"},
+    {"id": "P-04", "summary": "D-18 状況表(機構ごとに一本の流れに乗っているかを機械が出す)", "status": "PLANNED", "design": "CC_DESIGN_2026-07-27_D18_STATUS_BOARD_DESIGN.md"},
+    {"id": "P-05", "summary": "Markdown と本 JSON の乖離検証チェッカ", "status": "PLANNED", "design": "_meta.divergence_control"}
+  ],
+
+  "unknowns": [
+    {"id": "U-01", "summary": "AUDIT 以降の DW 段(AUDIT / UPPER_REVIEW / DISPOSE / COMPLETE)を一度も通していない"},
+    {"id": "U-02", "summary": "twoder/operator.py の起動経路と実運用"},
+    {"id": "U-03", "summary": "TASK_CONTRACTS.jsonl / ARTIFACT_REGISTRY.jsonl / LEDGER_REGISTRY.jsonl の中身"},
+    {"id": "U-04", "summary": "EventStore / EGL / 各 Ledger / RTHREAD の責務比較(作業指示書 完了条件8)"},
+    {"id": "U-05", "summary": "Development Context / Knowledge Dispatcher 構想との差分(完了条件9)。構想文書を未読"},
+    {"id": "U-06", "summary": "PLAN を書いたのが Qwen であることは導出であり、record_plan の identity を観測していない"},
+    {"id": "U-07", "summary": "ids.resolve() を一度も実行していない"}
+  ]
+}

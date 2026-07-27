@@ -39,7 +39,14 @@
 | `dev-workcell` | DW（task の状態機械・dispatch・executor） | `LIVE` |
 | `twoder` | front door・webui・worker/planner・登記 | `LIVE` |
 
-**調査対象 commit**: **`【未確認】`。** **本文書は各 repo の commit を記録していない**（作業指示書 §10-1 未達）。**次版で埋める。**
+**調査対象 commit**【実】（`git -C <repo> rev-parse --short HEAD`）:
+| repo | commit | 最終 commit 時刻 |
+|---|---|---|
+| `ds` | `f64c990` | 2026-07-27 20:32 |
+| `rri` | `86f992d` | 2026-07-27 20:32 |
+| `egl` | `7b0cb5f` | 2026-07-27 22:01 |
+| `dev-workcell` | `c51dcc3` | 2026-07-27 20:32 |
+| `twoder` | `88bfa31` | 2026-07-27 18:14 |
 
 ---
 
@@ -283,7 +290,22 @@ CURRENT:
 ---
 
 ## 6. 機械可読版
-**★未作成。** **作業指示書 §4.2 / §6 / 完了条件11 は未達である。** **次版で作る。**
+**`egl/docs/2DER_EXECUTION_ARCHITECTURE.json`**（§6 の最低 schema に準拠）。
+```
+再現【実】: python3 -c "import json;json.load(open('2DER_EXECUTION_ARCHITECTURE.json'))"
+結果: JSON 妥当。entrypoints 5 / components 21 / llm_invocations 6 / edges 8 /
+      read_paths 4 / write_paths 6 / state_machines 1 / canonical_stores 7 /
+      execution_flows 2 / gaps 15 / planned_extensions 5 / unknowns 7
+      状態語彙(8種)の逸脱: なし / commits: 5
+```
+### 6-1. ★乖離しない生成・検証方法（§4.2 の要求）
+**v0.1 は Markdown と JSON を並行して手で書いている。生成関係は無い。** **これを隠さない。**
+**検証方法（`P-05`・未実装）**: 決定論チェッカを置き、`--check` で次の3点を照合する。
+1. `gaps[].id` の集合が MD §5.11 の表の id 集合と一致する
+2. `components[].status` が §2.2 の8語彙に含まれる（**現時点で逸脱0を実測済**）
+3. `generated_from.commits` が各 repo の `HEAD` と一致する
+
+**★現時点では未実装であり、乖離は検出されない。** **これは `P-05` として登録済みである。**
 
 ## 7. 調査方法（本版で用いた範囲）
 - **7.2 静的調査**: 実施（本文の再現コマンド）。
@@ -293,7 +315,7 @@ CURRENT:
 ## 10. 完了条件の達成状況
 | # | 条件 | 達成 |
 |---|---|---|
-| 1 | 全対象 repo の commit 記録 | **未達**（§5.2） |
+| 1 | 全対象 repo の commit 記録 | **達成**（§5.2・5 repo） |
 | 2 | 正式 entrypoint の特定 | 達成 |
 | 3 | 主要実行経路の file/function 追跡 | 達成（§5.5） |
 | 4 | LLM invocation 一覧 | 達成（§5.6） |
@@ -303,7 +325,7 @@ CURRENT:
 | 8 | EventStore/EGL/Ledger/RTHREAD の責務比較 | **未達** |
 | 9 | Development Context / Knowledge Dispatcher 構想との差分 | **未達**（構想文書を未読） |
 | 10 | Gap Register | 達成（§5.11） |
-| 11 | 機械可読版 | **未達** |
+| 11 | 機械可読版 | **達成**（§6・JSON 妥当性を実測）。**ただし乖離検証は未実装（`P-05`）** |
 | 12 | 再現コマンドと証拠 | 達成 |
 | 13 | 正式文書体系への登録場所 | **本文書＝`egl/docs/`。`2DER_MECHANISM_MAP.md` を統合し SUPERSEDED とする** |
 | 14 | commit 前に Taka へ提示 | **未**（MGR が仲介） |

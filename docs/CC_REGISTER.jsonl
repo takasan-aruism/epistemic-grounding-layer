@@ -1,3 +1,27 @@
 {"_meta": "CC 管理台帳(暫定)。目的=3インスタンスが『どの文書が在り、誰宛で、未処理か』をディレクトリ走査でなく1本から知る。★退役条件=front door から ART- の本文が返るようになったら、内容を artifact_registry の登記へ移し、本台帳と本 _meta の doc_id 計算式の重複、および状況表のずれ検出行を同時に廃止する。doc_id = 'ART-' + sha1('<repo>|<relative_path>').hexdigest()[:10] ——式の出所は twoder/artifact_registry.py:30-31 の artifact_id_for()。実読して区切り '|' と桁数 [:10] に合わせた(仕様案の [:8] は【未確認】とされていたため実物を採った)。重複であることを隠さない(MGR 裁定 F3: 消える重複 < 残る依存)。", "started_at": "2026-07-27T20:32:06"}
 {"kind": "DOC", "doc_id": "ART-ffd8456279", "path": "egl/docs/CC_IMPL_2026-07-27_BUILD12_RUN_WORKER_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T20:32:06"}
 {"kind": "DONE", "doc_id": "ART-ffd8456279", "by": "DESIGN", "by_doc_id": "ART-dummy0001", "ts": "2026-07-27T20:32:06"}
+{"kind": "DOC", "doc_id": "ART-5290ded30f", "path": "egl/docs/CC_DESIGN_2026-07-27_BUILD12_AUDIT_CONTRACT_MISSING.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:15:37"}
+{"kind": "DOC", "doc_id": "ART-f3de61c41f", "path": "egl/docs/CC_DESIGN_2026-07-27_D21_AUDIT.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:15:37"}
+{"kind": "DOC", "doc_id": "ART-ef36ddfb3e", "path": "egl/docs/CC_DESIGN_2026-07-27_D18_ANSWER_TWO_MECHANISMS.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:15:37"}
+{"kind": "DOC", "doc_id": "ART-b141065f84", "path": "egl/docs/CC_DESIGN_2026-07-27_D23_ANSWER_TWO_CONTRACTS.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:15:37"}
+{"kind": "DOC", "doc_id": "ART-48a812a415", "path": "egl/docs/2DER_EXECUTION_ARCHITECTURE.md", "type": "STATUS", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:15:37"}
+{"kind": "DOC", "doc_id": "ART-ea212ef275", "path": "egl/docs/2DER_EXECUTION_ARCHITECTURE.json", "type": "STATUS", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:15:37"}
+{"kind": "DOC", "doc_id": "ART-629aefc197", "path": "egl/docs/CC_IMPL_2026-07-27_D21_CC_REGISTER_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:15:37"}
+{"kind": "DONE", "doc_id": "ART-629aefc197", "by": "DESIGN", "by_doc_id": "ART-f3de61c41f", "ts": "2026-07-27T22:15:37"}
+{"kind": "DOC", "doc_id": "ART-7fcdb24a50", "path": "egl/docs/CC_MGR_2026-07-27_D18_REGOAL_ONE_STREAM.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:15:37"}
+{"kind": "DONE", "doc_id": "ART-7fcdb24a50", "by": "DESIGN", "by_doc_id": "ART-ef36ddfb3e", "ts": "2026-07-27T22:15:37"}
+{"kind": "DOC", "doc_id": "ART-72a1100586", "path": "egl/docs/CC_MGR_2026-07-27_D23_LOCATE_EXEC_ARCH.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:15:37"}
+{"kind": "DONE", "doc_id": "ART-72a1100586", "by": "DESIGN", "by_doc_id": "ART-b141065f84", "ts": "2026-07-27T22:15:37"}
+{"kind": "DOC", "doc_id": "ART-a2ad38f659", "path": "egl/docs/CC_MGR_2026-07-27_D18_ANSWER_RECEIVED_NOT_ONE_STREAM.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:15:37"}
+{"kind": "DONE", "doc_id": "ART-a2ad38f659", "by": "DESIGN", "by_doc_id": "ART-b141065f84", "ts": "2026-07-27T22:15:37"}
+{"kind": "DOC", "doc_id": "ART-462305a6c2", "path": "egl/docs/CC_MGR_2026-07-27_D23_RECEIVED_D22_CLOSED_HOLD_AND_SURVEY.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:15:37"}
+{"kind": "DONE", "doc_id": "ART-462305a6c2", "by": "DESIGN", "by_doc_id": "ART-48a812a415", "ts": "2026-07-27T22:15:37"}
+{"kind": "DOC", "doc_id": "ART-851d9e7d7c", "path": "egl/docs/CC_MGR_2026-07-27_STAGE2_GO.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:15:37"}
+{"kind": "DONE", "doc_id": "ART-851d9e7d7c", "by": "DESIGN", "by_doc_id": "ART-48a812a415", "ts": "2026-07-27T22:15:37"}
+{"kind": "DOC", "doc_id": "ART-015ca92364", "path": "egl/docs/CC_MGR_2026-07-27_MY_INSTRUMENT_WAS_WRONG_AND_RULINGS.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:20:31"}
+{"kind": "DONE", "doc_id": "ART-ef36ddfb3e", "by": "MGR", "by_doc_id": "ART-015ca92364", "ts": "2026-07-27T22:20:31"}
+{"kind": "DONE", "doc_id": "ART-b141065f84", "by": "MGR", "by_doc_id": "ART-015ca92364", "ts": "2026-07-27T22:20:31"}
+{"kind": "DONE", "doc_id": "ART-5290ded30f", "by": "MGR", "by_doc_id": "ART-015ca92364", "ts": "2026-07-27T22:20:31"}
+{"kind": "DONE", "doc_id": "ART-f3de61c41f", "by": "MGR", "by_doc_id": "ART-015ca92364", "ts": "2026-07-27T22:20:31"}
+{"kind": "DOC", "doc_id": "ART-6def893e3c", "path": "docs/CC_DESIGN_2026-07-27_D21_PATH_CONVENTION_DEFECT.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:22:37"}
