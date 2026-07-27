@@ -1,0 +1,31 @@
+{
+  "model": "opus",
+  "theme": "light",
+  "tui": "fullscreen",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/takasan/.claude/hooks/2der_session_start.sh",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Read|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/home/takasan/.claude/hooks/2der_ledger_guard.sh",
+            "timeout": 10,
+            "statusMessage": "2DER 境界チェック"
+          }
+        ]
+      }
+    ]
+  }
+}

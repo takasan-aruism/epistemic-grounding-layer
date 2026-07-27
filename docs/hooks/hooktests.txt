@@ -1,0 +1,9 @@
+deny|Read on ledger|{"tool_name":"Read","tool_input":{"file_path":"/home/takasan/egl/DESIGN_EVIDENCE_LEDGER.jsonl"}}
+allow|Read on code|{"tool_name":"Read","tool_input":{"file_path":"/home/takasan/twoder/ids.py"}}
+deny|grep ledger path|{"tool_name":"Bash","tool_input":{"command":"grep DE-0106 /home/takasan/egl/DESIGN_EVIDENCE_LEDGER.jsonl"}}
+deny|cat ledger relative|{"tool_name":"Bash","tool_input":{"command":"cat ./structure/EXISTENCE_PREMISE_1C.jsonl | head -3"}}
+allow|python structure script|{"tool_name":"Bash","tool_input":{"command":"python3 structure/s10_ledger_registry.py --check"}}
+allow|git commit mentioning ledger|{"tool_name":"Bash","tool_input":{"command":"git commit -m 'foo.jsonl を grep して直した'"}}
+deny|adhoc python read|{"tool_name":"Bash","tool_input":{"command":"python3 -c \"import json;[json.loads(l) for l in open('./egl/DESIGN_EVIDENCE_LEDGER.jsonl')]\""}}
+allow|ls dir|{"tool_name":"Bash","tool_input":{"command":"ls -la /home/takasan/egl/structure/"}}
+allow|grep code|{"tool_name":"Bash","tool_input":{"command":"grep -n resolve /home/takasan/twoder/ids.py"}}
