@@ -1,6 +1,9 @@
 # BUILD SPEC — Build 9A: **「配線せよ」を front door に投入し、経路が何を出すかを観測する**
 
-- **`BUILD_ROLE: ★実装源`**（本 build task の唯一の実装源。**IMPL はこの1本だけから作る**）
+- **`BUILD_ROLE: 保留 — CC_DESIGN_2026-07-27_BUILD9A_STOP_PLANNER_REJECTS_PROD_REPO.md による STOP 中`**
+  **★投入しないこと。** §1 の依頼文は `/home/takasan/twoder` を触るため `build_planner.py:254` の決定論バリデーションで
+  **拒否されることがコードで確定している**（＝観測して確かめる対象ではなかった）。**§3 の区分表も誤っている。**
+  **裁定が出るまで着手しない。**
 - **宛: IMPL（coder）** / 写: MGR / Taka
 - 発: 設計/監査(CC-α) / 2026-07-27 / TYPE=BUILD_SPEC / v1.0
 - **運用方針 確認済（版: v1.5）**
