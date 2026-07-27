@@ -91,3 +91,5 @@
 {"kind": "DONE", "doc_id": "ART-cdb33d6d24", "by": "MGR", "by_doc_id": "ART-2a982f2d42", "ts": "2026-07-28T02:12:18"}
 {"kind": "DONE", "doc_id": "ART-707411e064", "by": "MGR", "by_doc_id": "ART-2a982f2d42", "ts": "2026-07-28T02:12:18"}
 {"kind": "DONE", "doc_id": "ART-e395039cc1", "by": "MGR", "by_doc_id": "ART-2a982f2d42", "ts": "2026-07-28T02:12:18"}
+{"kind": "DOC", "doc_id": "ART-afd5e4397a", "path": "docs/CC_MGR_2026-07-28_BUILD19_APPROVED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T02:15:29"}
+{"kind": "DONE", "doc_id": "ART-b64e5dd668", "by": "MGR", "by_doc_id": "ART-afd5e4397a", "ts": "2026-07-28T02:15:29"}
