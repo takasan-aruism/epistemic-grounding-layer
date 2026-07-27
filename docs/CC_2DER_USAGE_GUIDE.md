@@ -56,9 +56,30 @@ immutable_tests に「行頭が def test_ で始まる行」が1件も無けれ�
 
 ## 2. ★台帳を読みたいとき
 1. **直接読まない。** `cat` / `grep` / `Read` は**フックが拒否する。**
-2. **2DER に聞く。** 現時点で **ID から記録を引く経路は未配線**（`twoder/ids.py::resolve` は在るが front door から到達しない）。
-3. **∴ いま多くの問いは「答えられない」。** **それを記録する。** **その一覧が、次に作る読み出し機能の一覧である。**
-4. **どうしても直読が必要なら `【直読】` と明記し、理由を書く。** **回数が「読み出し機能が足りない」ことの数字になる。**
+2. **★2DER に聞く。読み出しの口は在る。動く**（2026-07-28 実測・下記 §2-1）。
+3. **どうしても直読が必要なら `【直読】` と明記し、理由を書く。** **回数が「読み出し機能が足りない」ことの数字になる。**
+
+### 2-1. ★front door で ID を引く（実測・2026-07-28）
+```
+GET http://100.107.6.119:8770/api/resolve?id=<ID>     ← Basic 認証（user=taka / token=twoder/.access_token）
+※ webui は 127.0.0.1 ではなく tailscale アドレスに bind されている。localhost では繋がらない。
+
+実測:
+  TASK-2DER-21F64D9D → {"resolved": true,  "record": {"task_id":…, "state":"READY_FOR_AUDIT", "events":8}, "read_only": true}
+  DE-0300            → {"resolved": true,  "record": {claimed_status / observation / decision / evidence_refs …}}
+  NO-SUCH-ID-XYZ     → {"resolved": false, "record": null}
+```
+- **★`resolved` が true/false で返る。** **存在するかしないかが、決定論で分かれて返ってくる**（Taka の第一原則が、ここでは既に実装されている）。
+- **中身は `webui.py::resolve_view` → `twoder/ids.py::resolve` が返す。** **DS / EGL / DW の台帳を横断する。**
+- **`read_only: true`。** **書かない。**
+
+### 2-2. ★2026-07-28 の訂正（消さない）
+**本ガイドは長らく「ID から記録を引く経路は未配線（`ids.resolve` は在るが front door から到達しない）」と書いていた。**
+> **★誤りである。** **`webui.py:512` に `/api/resolve` が在り、`resolve_view` 経由で `ids.resolve` を呼んでいる。**
+> **∴ 「次に作る」と言い続けていた読み出し機能は、★既に在って動いていた。**
+> **∴ 我々は、在るものを無いと思い込んで、優先順位を組んでいた。**
+
+**★残っている本当の課題は「作ること」ではなく「どの ID 族が引けるか」である**（`UTT-` / `DEV-` / `THREAD-` / `OBS-` / `SRC-` / `RUN-` / `TASK-` / `DE-` ほか。**網羅は未確認**）。
 
 **読んでよいもの**: **コードの構造**（どの関数がどこから呼ばれているか）。**それは実装作業そのものである。**
 **読んではいけないもの**: **台帳の中身**（何が記帳されているか、値は何か）。
