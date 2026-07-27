@@ -48,7 +48,7 @@
       },
       {
         "repo": "twoder",
-        "commit": "88bfa31"
+        "commit": "134f295"
       }
     ],
     "documents": [
@@ -892,7 +892,7 @@
         "EXEC: Build 14 の problems 逐語",
         "READ: mint_token は USE_VLLM_INFERENCE / #attempt-N / DW_MACHINE_OP"
       ],
-      "note": "#attempt-N は死因#2 修正で load-bearing(approval_id が固定 ts に依存)。単純除去は再発する"
+      "note": "#attempt-N は死因#2 修正で load-bearing だった。★Build 15 で修理済: authority.grant_approval に optional nonce を追加し、mint_token は正典語彙(LIVE_WORKER_MINIMAL / LIVE_WORKER_TASK)・素の task_id・nonce=attempt に変更。既定 None で approval_id 不変(前後実測一致)、gate1b_ts は probe 未変更で passed。★ただし run_runner に到達した観測がまだ無いため status は OPEN のまま。GENERATE が通ったら解消に更新する。"
     }
   ],
   "planned_extensions": [

@@ -64,3 +64,4 @@
 {"kind": "DOC", "doc_id": "ART-c920f7a92d", "path": "docs/CC_IMPL_2026-07-27_BUILD15_NONCE_VOCAB_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T23:41:15"}
 {"kind": "DOC", "doc_id": "ART-4a8d6fd696", "path": "docs/CC_MGR_2026-07-27_BUILD15_AUDIT_RECEIVED_PROCEED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T23:53:03"}
 {"kind": "DONE", "doc_id": "ART-81048df1af", "by": "MGR", "by_doc_id": "ART-4a8d6fd696", "ts": "2026-07-27T23:53:03"}
+{"kind": "DOC", "doc_id": "ART-b7b50a793c", "path": "docs/CC_MGR_2026-07-28_CC_REGISTER_HANGS_FROM_OTHER_CWD.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T00:04:13"}

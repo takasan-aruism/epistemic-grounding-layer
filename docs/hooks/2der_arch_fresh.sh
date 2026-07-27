@@ -2,9 +2,10 @@
 # Execution Architecture の鮮度: 記録された commit と現在の HEAD を比べる
 # (作業指示書 §8 の自動検査案の最小版。新しい機構を作らず、既存 JSON と git だけを使う)
 set -uo pipefail
+cd /home/takasan/egl 2>/dev/null || true
 J=/home/takasan/egl/docs/2DER_EXECUTION_ARCHITECTURE.json
 [ -f "$J" ] || { echo "実行構造の資料: 無い"; exit 0; }
-python3 - "$J" <<'PY'
+timeout 15 python3 - "$J" <<'PY'
 import json,subprocess,sys
 j=json.load(open(sys.argv[1],encoding='utf-8'))
 rec={c['repo']:c['commit'] for c in j.get('generated_from',{}).get('commits',[])}

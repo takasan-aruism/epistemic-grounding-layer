@@ -23,8 +23,8 @@ for r in $REPOS; do
 done
 
 # --- 2. MGR 未応答（★台帳から引く。ls と mtime の走査をやめた＝D-21 のゴール） ---
-LEDGER_PENDING=$(python3 -c "
-import sys; sys.path.insert(0,'docs')
+LEDGER_PENDING=$(cd /home/takasan/egl && timeout 10 python3 -c "
+import sys; sys.path.insert(0,'/home/takasan/egl/docs')
 try:
     import cc_register as R
     rows=R.pending('MGR')
@@ -36,8 +36,8 @@ except Exception as e:
 PN=$(printf '%s' "$LEDGER_PENDING" | head -1)
 PENDING=$(printf '%s' "$LEDGER_PENDING" | tail -n +2)
 # ずれ検出(F1): 台帳の DOC 行数 と 実ファイル数
-DRIFT=$(cd /home/takasan/egl && python3 -c "
-import sys,glob; sys.path.insert(0,'docs')
+DRIFT=$(cd /home/takasan/egl && timeout 10 python3 -c "
+import sys,glob,os; os.chdir('/home/takasan/egl'); sys.path.insert(0,'/home/takasan/egl/docs')
 try:
     import cc_register as R
     c=R.counts(); import os
