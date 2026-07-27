@@ -48,7 +48,7 @@
       },
       {
         "repo": "twoder",
-        "commit": "134f295"
+        "commit": "a75ad56"
       }
     ],
     "documents": [
@@ -887,12 +887,102 @@
       "id": "G-16",
       "summary": "mint 側(generate_via_runner.mint_token)と検証側(approval_registry)が action_type/task_id/operation_class の3項目とも別の語彙を使う",
       "kind": "contradiction",
-      "status": "OPEN",
+      "status": "CLOSED",
       "evidence": [
         "EXEC: Build 14 の problems 逐語",
         "READ: mint_token は USE_VLLM_INFERENCE / #attempt-N / DW_MACHINE_OP"
       ],
-      "note": "#attempt-N は死因#2 修正で load-bearing だった。★Build 15 で修理済: authority.grant_approval に optional nonce を追加し、mint_token は正典語彙(LIVE_WORKER_MINIMAL / LIVE_WORKER_TASK)・素の task_id・nonce=attempt に変更。既定 None で approval_id 不変(前後実測一致)、gate1b_ts は probe 未変更で passed。★ただし run_runner に到達した観測がまだ無いため status は OPEN のまま。GENERATE が通ったら解消に更新する。"
+      "note": "#attempt-N は死因#2 修正で load-bearing だった。★Build 15 で修理済: authority.grant_approval に optional nonce を追加し、mint_token は正典語彙(LIVE_WORKER_MINIMAL / LIVE_WORKER_TASK)・素の task_id・nonce=attempt に変更。既定 None で approval_id 不変(前後実測一致)、gate1b_ts は probe 未変更で passed。★ただし run_runner に到達した観測がまだ無いため status は OPEN のまま。GENERATE が通ったら解消に更新する。 ★Build 18 で run_runner に到達し成果物が出たことで実証・解消。"
+    },
+    {
+      "id": "G-20",
+      "summary": "サンドボックス保証(process_kill_cleanup 等)が仕様辞書の自己申告を検査するだけで実装が無かった",
+      "kind": "contradicted",
+      "status": "PARTIALLY_CLOSED",
+      "evidence": [
+        "本日の FINDING 群(CC_DESIGN_2026-07-27/28_*)"
+      ],
+      "note": "Build 19 で `_run_test` については実装になった(修理前 孫1→修理後 孫0 を実測)。host_filesystem_unreachable 等の他項目は宣言のまま ∴ CONTRADICTED 維持"
+    },
+    {
+      "id": "G-21",
+      "summary": " の timeout が直接の子しか殺さず、孫以降が生き残る",
+      "kind": "gap",
+      "status": "CLOSED",
+      "evidence": [
+        "本日の FINDING 群(CC_DESIGN_2026-07-27/28_*)"
+      ],
+      "note": "Build 19 で start_new_session＋killpg により解消。実測 pg_cleanup survivors 2→0"
+    },
+    {
+      "id": "G-22",
+      "summary": "生成コードの危険な形(__main__ 重複・自己 subprocess 起動)を実行前に見る検査が無い",
+      "kind": "gap",
+      "status": "OPEN",
+      "evidence": [
+        "本日の FINDING 群(CC_DESIGN_2026-07-27/28_*)"
+      ],
+      "note": "Build 19 で artifact_precheck を作成、Build 20 で run_oracle_guarded に配線。★`_run_test` を直接呼ぶ他の経路は素通りのまま"
+    },
+    {
+      "id": "G-23",
+      "summary": "計器が自分自身を数えてしまう(測る側の命令行に探索文字列が現れる)",
+      "kind": "instrument_defect",
+      "status": "OPEN",
+      "evidence": [
+        "本日の FINDING 群(CC_DESIGN_2026-07-27/28_*)"
+      ],
+      "note": "本日3件(MGR の df / Build 19 の孫3＋自分のシェルを落とした pkill / Build 20 の survivors_independent=1)。運用方針 §4-15 に格上げ済。3件とも実装者が自分から申告した"
+    },
+    {
+      "id": "G-24",
+      "summary": "runtime_supervisor.qwen_raw_call は system を受け取れるが build_planner は渡していない(auditor は渡している)",
+      "kind": "gap",
+      "status": "OPEN",
+      "evidence": [
+        "本日の FINDING 群(CC_DESIGN_2026-07-27/28_*)"
+      ],
+      "note": "D-30。5役割中 system を持つのは分類と監査の2つ。呼び出し間で状態は持ち越されない(履歴を積む箇所0件)"
+    },
+    {
+      "id": "G-25",
+      "summary": "RUNNER_FAILED が『落ちた/走らせられなかった/1件も集まらなかった』を1語に潰す",
+      "kind": "gap",
+      "status": "CLOSED",
+      "evidence": [
+        "本日の FINDING 群(CC_DESIGN_2026-07-27/28_*)"
+      ],
+      "note": "Build 21 で runner_exit を追加し 5(0件)と 1(失敗)を区別。reason 文字列は不変"
+    },
+    {
+      "id": "G-26",
+      "summary": "immutable_tests の書式要件(pytest が集める test_* 関数)がどこにも書かれず、空の検査を封じられた",
+      "kind": "gap",
+      "status": "CLOSED",
+      "evidence": [
+        "本日の FINDING 群(CC_DESIGN_2026-07-27/28_*)"
+      ],
+      "note": "Build 21 で contract_seal に ^def test_ 0件なら ValueError を追加。本日の依頼文で実証。★既存 fixture は全て test_* を持っており、外れていたのは CC-α が書いた1件だけだった"
+    },
+    {
+      "id": "G-27",
+      "summary": "検査の供給者と合否の判定者が同一(設計/監査が immutable_tests と受入基準の両方を書く)",
+      "kind": "gap",
+      "status": "OPEN",
+      "evidence": [
+        "本日の FINDING 群(CC_DESIGN_2026-07-27/28_*)"
+      ],
+      "note": "MGR 記録。現構成では自然だが、本日 供給物の欠陥は独立検定でなく MGR の問い直しで見つかった。今は直さない"
+    },
+    {
+      "id": "G-28",
+      "summary": "運用方針 §12 の改訂履歴に一貫した並び順が無く、位置で最新版を判定できない",
+      "kind": "instrument_defect",
+      "status": "OPEN",
+      "evidence": [
+        "本日の FINDING 群(CC_DESIGN_2026-07-27/28_*)"
+      ],
+      "note": "並びは v1.0→v2.0→v1.9→…→v1.1。head も tail も最新に届かない。★判定は日付が最も新しい行を採る。CC-α が存在しない v2.0 を5文書の確認宣言に書き、IMPL が実物を読んで止めた"
     }
   ],
   "planned_extensions": [

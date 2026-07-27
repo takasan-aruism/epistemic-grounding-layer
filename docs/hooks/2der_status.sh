@@ -98,6 +98,7 @@ else
   line "台帳の直読を試みた回数: 0（記録開始以降）"
 fi
 
+line "$(/home/takasan/.claude/hooks/2der_gap_flow.sh 2>/dev/null || echo 'Gap の流れ: 判定不能')"
 line "$(/home/takasan/.claude/hooks/2der_arch_fresh.sh 2>/dev/null || echo '実行構造の資料: 判定不能')"
 line "$(/home/takasan/.claude/hooks/2der_layers.sh 2>/dev/null || echo '層飛ばし: 判定不能')"
 line "全体: 2DER を一本の道にする(横から見る経路を潰し、使うことで育てる)"
