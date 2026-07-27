@@ -153,3 +153,4 @@
 {"kind": "DOC", "doc_id": "ART-1941cb987a", "path": "docs/CC_DESIGN_2026-07-28_BUILD22_SPEC_HUMAN_RELAYED_PASSTHROUGH.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-28T06:19:23"}
 {"kind": "DOC", "doc_id": "ART-81b895f43d", "path": "docs/CC_MGR_2026-07-28_BUILD22_APPROVED_WITH_3_AMENDMENTS.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T06:19:23"}
 {"kind": "DONE", "doc_id": "ART-1941cb987a", "by": "MGR", "by_doc_id": "ART-81b895f43d", "ts": "2026-07-28T06:19:23"}
+{"kind": "DOC", "doc_id": "ART-fd78506aad", "path": "docs/CC_MGR_2026-07-28_D40_EXECUTION_TRACE_FROM_UTT0772.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T06:25:02"}
