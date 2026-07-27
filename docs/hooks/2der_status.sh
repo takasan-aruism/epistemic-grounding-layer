@@ -49,5 +49,23 @@ if [ "$PN" != "0" ]; then
   printf '%s\n' "$PENDING" | sed 's|.*/|  - |' | head -8
 fi
 line "台帳登記 check: $RC"
+
+# --- 4. ★動いているプロセスが、いまのソースを持っているか ---
+# (2026-07-27: webui が4日前起動のまま=修理が実行中の系に入っていない、を見逃した)
+STALE=""
+for spec in "twoder.webui:/home/takasan/twoder:/home/takasan/dev-workcell" "twoder.operator:/home/takasan/twoder"; do
+  mod="${spec%%:*}"; dirs="${spec#*:}"
+  pid=$(pgrep -f "python3 -m $mod" | head -1)
+  [ -z "$pid" ] && continue
+  pstart=$(stat -c %Y /proc/"$pid" 2>/dev/null || echo 0)
+  newest=0
+  for d in $(printf '%s' "$dirs" | tr ':' ' '); do
+    m=$(find "$d" -name '*.py' -newermt "@$pstart" -print -quit 2>/dev/null)
+    [ -n "$m" ] && newest=1
+  done
+  age=$(( ( $(date +%s) - pstart ) / 3600 ))
+  if [ "$newest" = "1" ]; then STALE="$STALE ${mod}(pid $pid, ${age}h前起動: ★ソースが新しい=再起動が要る)"; fi
+done
+line "実行中プロセス:${STALE:- ソースより新しい起動 or 該当なし}"
 line "優先度(MGR 固定): 1=台帳を読める仕組み(front door→ids.resolve 配線) / 2=状況表 D-18(孤児一覧) / 3=忘れている機能の棚卸し"
 line "規律: 記憶で俯瞰しない。既存を読んでから作る。ソースに在る≠動く。1回の観測で断定しない。台帳の直読は【直読】と明記。"
