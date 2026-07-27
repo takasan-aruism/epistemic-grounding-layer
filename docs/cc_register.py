@@ -33,7 +33,8 @@ _META = ("CC 管理台帳(暫定)。目的=3インスタンスが『どの文書
          "doc_id = 'ART-' + sha1('<repo>|<relative_path>').hexdigest()[:10] ——式の出所は "
          "twoder/artifact_registry.py:30-31 の artifact_id_for()。実読して区切り '|' と桁数 [:10] に合わせた"
          "(仕様案の [:8] は【未確認】とされていたため実物を採った)。重複であることを隠さない"
-         "(MGR 裁定 F3: 消える重複 < 残る依存)。")
+         "(MGR 裁定 F3: 消える重複 < 残る依存)。"
+         "移行時、path が 'egl/' で始まる行は接頭辞を剥がして doc_id を再計算する。")
 
 
 def _now():
@@ -78,8 +79,20 @@ def started_at():
     return None
 
 
+def normalize_path(path):
+    """★台帳に書く path を1つの表記に寄せる（D-21 修正）。
+    先頭の "egl/" を**1回だけ**剥がし、"docs/" で始まらなければ ValueError（中核性質を守る検査）。
+    理由: `artifact_id_for(repo, relative_path)` は repo 相対を期待する。2表記が混ざると
+    doc_id が登記と一致せず、ずれ検出が毎回誤検出する。"""
+    p = path[4:] if path.startswith("egl/") else path
+    if not p.startswith("docs/"):
+        raise ValueError("path must be repo-relative under docs/ (got %r -> %r)" % (path, p))
+    return p
+
+
 def record_doc(path, type, frm, to, build_role, supersedes=None):
-    """文書を登録し doc_id を返す。**列を足さない。**"""
+    """文書を登録し doc_id を返す。**列を足さない。** path は normalize_path で正規化する。"""
+    path = normalize_path(path)
     if type not in TYPES:
         raise ValueError("type must be one of %s, got %r" % (list(TYPES), type))
     if frm not in ACTORS or to not in ACTORS:
@@ -108,14 +121,21 @@ def pending(to=None):
 
 
 def counts():
-    """★`files_since_start` は `_meta.started_at` 以降に作られた `egl/docs/CC_*.md` だけを数える。
-    過去の文書は数えない（前向きのみ——数えると常にずれる）。"""
+    """★`files_since_start` は `_meta.started_at` 以降に作られた文書だけを数える。
+    過去の文書は数えない（前向きのみ——数えると常にずれる）。
+    対象は egl/docs 直下の *.md と *.json（本台帳自身と本モジュールは除く）。"""
     rows = _rows()
     start = started_at()
     n_files = 0
     if start:
         t0 = datetime.datetime.fromisoformat(start).timestamp()
-        for p in glob.glob(os.path.join(DOCS_DIR, "CC_*.md")):
-            if os.path.getmtime(p) >= t0:
-                n_files += 1
+        # ★母数の訂正（追加ではない）: 常設文書(2DER_EXECUTION_ARCHITECTURE.md/.json)も台帳に載せる
+        #   対象なのに CC_*.md 限定の glob だとファイル側に現れず、常にずれとして出ていたため。
+        skip = {"CC_REGISTER.jsonl", "cc_register.py"}
+        for pat in ("*.md", "*.json"):
+            for p in glob.glob(os.path.join(DOCS_DIR, pat)):
+                if os.path.basename(p) in skip:
+                    continue
+                if os.path.getmtime(p) >= t0:
+                    n_files += 1
     return {"doc_rows": sum(1 for r in rows if r.get("kind") == "DOC"), "files_since_start": n_files}
