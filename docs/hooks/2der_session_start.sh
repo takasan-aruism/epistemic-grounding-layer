@@ -19,7 +19,19 @@ CTX=$(cat <<'EOF'
 役割と手続き: /home/takasan/egl/docs/CC_OPERATING_POLICY.md (作業前に読み、文書冒頭に「運用方針 確認済(版)」と書く)
 EOF
 )
-BOARD="$(/home/takasan/.claude/hooks/2der_status.sh full 2>/dev/null || echo '(状況表の取得に失敗)')"
+ROLE="$(/home/takasan/.claude/hooks/2der_role.sh get 2>/dev/null || true)"
+if [ -n "$ROLE" ]; then
+  RB="$(/home/takasan/.claude/hooks/2der_board.sh "$ROLE" 2>/dev/null || true)"
+else
+  RB="【役割が未設定】作業を始める前に次を実行すること:
+  ~/.claude/hooks/2der_role.sh set MGR      (管理)
+  ~/.claude/hooks/2der_role.sh set DESIGN   (設計/監査)
+  ~/.claude/hooks/2der_role.sh set IMPL     (実装)
+★役割を設定するまで、自分宛でない文書に基づいて作業を始めないこと。"
+fi
+BOARD="$RB
+
+$(/home/takasan/.claude/hooks/2der_status.sh full 2>/dev/null || echo '(状況表の取得に失敗)')"
 jq -nc --arg c "$CTX
 
 $BOARD" '{hookSpecificOutput:{hookEventName:"SessionStart",additionalContext:$c}}'
