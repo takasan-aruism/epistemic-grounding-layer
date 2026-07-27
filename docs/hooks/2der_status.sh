@@ -90,6 +90,10 @@ if [ -f "$CL" ]; then
   TODAY_N=$(grep -c "^$(date '+%Y-%m-%d')" "$CL" 2>/dev/null || echo 0)
   ALL_N=$(wc -l < "$CL" 2>/dev/null || echo 0)
   line "台帳の直読を試みた回数: 本日 ${TODAY_N} / 累計 ${ALL_N}（フックが拒否した実数）"
+  # ★数字だけでは「何を読もうとしたか」が分からず、計器が誤解を招く。直近1件を出す。
+  if [ "${TODAY_N:-0}" -gt 0 ] 2>/dev/null; then
+    line "  直近の拒否: $(tail -1 "$CL" 2>/dev/null | cut -c1-150)"
+  fi
 else
   line "台帳の直読を試みた回数: 0（記録開始以降）"
 fi
