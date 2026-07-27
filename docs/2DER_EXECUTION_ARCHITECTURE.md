@@ -77,6 +77,14 @@
 `webui.py:29-32` の run-gate は `_LAST`（**webui プロセス内のモジュール変数**・`:545` の `/api/submit` でのみ設定）を見て `tid != gate["task_id"]` なら拒否する。
 **∴ CLI が作った task は webui からも進められない。** **【実】**（Build 9C 段0: `refused: true / "task … is not the current runnable submit task"`）
 
+### 5.3-2 ★再起動すると run-gate は初期化される（運用上の帰結）
+**`_LAST` はプロセス内変数なので、再起動で「まだ何も投入されていない」に戻る。**
+**∴ 既存 task を進めたくても、再起動後の `run_next` は `refused: "no submit yet"` になる。** **【実】**（Build 17 で観測）
+> **★対処: 同一の依頼文を1回だけ再投入して gate を立て直す。** **task id は依頼文の `sha1` なので、同一文なら同じ task を指し、新しい task を作らない。**
+
+**★これは「知っていたのに手順に入っていなかった」ものである。** `_LAST` がプロセス内変数であることは Build 9C 監査で既に記録していた。
+**∴ 知識が手順になっていなければ、無いのと同じである。** **再起動の常設手順に含める**（`CC_2DER_USAGE_GUIDE.md` §1-2-1 と対）。
+
 ---
 
 ## 5.4 End-to-End Execution Flows

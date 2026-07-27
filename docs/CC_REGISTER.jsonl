@@ -77,3 +77,4 @@
 {"kind": "DOC", "doc_id": "ART-cd26c25f64", "path": "docs/CC_IMPL_2026-07-28_BUILD17_BLOCKED_NO_SUBMIT_YET.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T01:16:52"}
 {"kind": "DOC", "doc_id": "ART-db5483006a", "path": "docs/CC_MGR_2026-07-28_RESUBMIT_ONCE_AFTER_RESTART.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T01:18:09"}
 {"kind": "DONE", "doc_id": "ART-cd26c25f64", "by": "MGR", "by_doc_id": "ART-db5483006a", "ts": "2026-07-28T01:18:09"}
+{"kind": "DOC", "doc_id": "ART-1ed5786446", "path": "docs/CC_MGR_2026-07-28_BUILD17_ADDENDUM_APPROVED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T01:21:54"}
