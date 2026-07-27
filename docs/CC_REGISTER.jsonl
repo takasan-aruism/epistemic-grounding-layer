@@ -140,3 +140,6 @@
 {"kind": "DONE", "doc_id": "ART-df8cc65809", "by": "MGR", "by_doc_id": "ART-92ef276b8e", "ts": "2026-07-28T05:36:38"}
 {"kind": "DOC", "doc_id": "ART-522a52e24f", "path": "docs/CC_MGR_2026-07-28_D37_LIVE_TRACE_OF_WHAT_ACTUALLY_RUNS.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:40:31"}
 {"kind": "DOC", "doc_id": "ART-387d920ba5", "path": "docs/CC_MGR_2026-07-28_D37_PREMISE_FAILS_TAKA_UTTERANCE_NEVER_ENTERED.md", "type": "FINDING", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:48:47"}
+{"kind": "DOC", "doc_id": "ART-395218b006", "path": "docs/CC_DESIGN_2026-07-28_D38_HUMAN_RELAYED_EXISTS_BUT_FRONT_DOOR_HARDCODES.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:53:12"}
+{"kind": "DOC", "doc_id": "ART-b7328c2c9f", "path": "docs/CC_MGR_2026-07-28_G30_RULING_NOT_BLOAT_BUILD22.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:53:12"}
+{"kind": "DONE", "doc_id": "ART-395218b006", "by": "MGR", "by_doc_id": "ART-b7328c2c9f", "ts": "2026-07-28T05:53:12"}
