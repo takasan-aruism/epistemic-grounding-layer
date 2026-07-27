@@ -78,5 +78,5 @@ else
 fi
 
 line "$(/home/takasan/.claude/hooks/2der_layers.sh 2>/dev/null || echo '層飛ばし: 判定不能')"
-line "優先度(MGR 固定): 1=台帳を読める仕組み(front door→ids.resolve 配線) / 2=状況表 D-18(孤児一覧) / 3=忘れている機能の棚卸し"
+line "優先度(MGR 固定): 1=段0 途中まで在るものの発見(D-23 EXEC_ARCH/Task Contract) / 2=段1 4軸7カテゴリ・勘定科目の自動設定は繋がっているか / 3=段2 Execution Architecture 本体(EXEC_ARCH_WORK_ORDER_v0_1.md) / 4=台帳を読める仕組み"
 line "規律: 記憶で俯瞰しない。既存を読んでから作る。ソースに在る≠動く。1回の観測で断定しない。台帳の直読は【直読】と明記。"
