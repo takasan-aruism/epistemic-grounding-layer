@@ -67,5 +67,16 @@ for spec in "twoder.webui:/home/takasan/twoder:/home/takasan/dev-workcell" "twod
   if [ "$newest" = "1" ]; then STALE="$STALE ${mod}(pid $pid, ${age}h前起動: ★ソースが新しい=再起動が要る)"; fi
 done
 line "実行中プロセス:${STALE:- ソースより新しい起動 or 該当なし}"
+# --- 5. ★逃げ道を使おうとした回数(フックが拒否した実数・自己申告でない) ---
+CL=/home/takasan/.claude/hooks/.cheat_attempts.log
+if [ -f "$CL" ]; then
+  TODAY_N=$(grep -c "^$(date '+%Y-%m-%d')" "$CL" 2>/dev/null || echo 0)
+  ALL_N=$(wc -l < "$CL" 2>/dev/null || echo 0)
+  line "台帳の直読を試みた回数: 本日 ${TODAY_N} / 累計 ${ALL_N}（フックが拒否した実数）"
+else
+  line "台帳の直読を試みた回数: 0（記録開始以降）"
+fi
+
+line "$(/home/takasan/.claude/hooks/2der_layers.sh 2>/dev/null || echo '層飛ばし: 判定不能')"
 line "優先度(MGR 固定): 1=台帳を読める仕組み(front door→ids.resolve 配線) / 2=状況表 D-18(孤児一覧) / 3=忘れている機能の棚卸し"
 line "規律: 記憶で俯瞰しない。既存を読んでから作る。ソースに在る≠動く。1回の観測で断定しない。台帳の直読は【直読】と明記。"
