@@ -1,6 +1,8 @@
 # BUILD SPEC — Build 9: **帳簿を読むプログラムを1本置く（`LEDGER_QUERY`）**
 
-- **`BUILD_ROLE: ★実装源`**（本 build task の唯一の実装源。**IMPL はこの1本だけから作る**）
+- **`BUILD_ROLE: SUPERSEDED by CC_DESIGN_2026-07-27_BUILD9_SENDBACK_REPLY_TARGET_CHANGES.md`**
+  **★実装源ではない。IMPL はこの文書から作らないこと。** 差し戻し理由（`BUILD_CAPABILITY` 経由が落ちている）＋
+  **作る対象が既に存在する**（`twoder/ids.py::resolve` = DE-0180 canonical ID resolver）ため無効。**裁定待ち。**
 - **宛: IMPL（coder）** / 写: MGR / Taka
 - 発: 設計/監査(CC-α) / 2026-07-27 / TYPE=BUILD_SPEC / v1.0
 - **運用方針 確認済（版: v1.5）**
