@@ -78,5 +78,7 @@ else
 fi
 
 line "$(/home/takasan/.claude/hooks/2der_layers.sh 2>/dev/null || echo '層飛ばし: 判定不能')"
-line "優先度(MGR 固定): 1=段0 途中まで在るものの発見(D-23 EXEC_ARCH/Task Contract) / 2=段1 4軸7カテゴリ・勘定科目の自動設定は繋がっているか / 3=段2 Execution Architecture 本体(EXEC_ARCH_WORK_ORDER_v0_1.md) / 4=台帳を読める仕組み"
+line "全体: 2DER を一本の道にする(横から見る経路を潰し、使うことで育てる)"
+line "現在地: 段0 済(所在発見) / 段1 済(繋がっていない と判明) / ★段2 進行中=Execution Architecture 現状記録 / 段3 待=台帳を読める仕組み・worker 再挑戦"
+line "MGR の担当: 段2 の指示と受領 / Taka への提示と仲介 / 裁定 / commit・push / この表の維持"
 line "規律: 記憶で俯瞰しない。既存を読んでから作る。ソースに在る≠動く。1回の観測で断定しない。台帳の直読は【直読】と明記。"
