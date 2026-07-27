@@ -129,6 +129,21 @@
       "auth": "unknown",
       "can_create_task": false,
       "can_advance_loop": true
+    },
+    {
+      "id": "EP-WEBUI-RESOLVE",
+      "repo": "twoder",
+      "file": "twoder/webui.py",
+      "symbol": "GET /api/resolve",
+      "status": "LIVE",
+      "evidence": [
+        "EXEC(2026-07-28): 3件の ID で実測"
+      ],
+      "last_verified_commit": "a75ad56",
+      "auth": "HTTP Basic",
+      "can_create_task": false,
+      "can_advance_loop": false,
+      "read_only": true
     }
   ],
   "components": [
@@ -278,10 +293,11 @@
       "repo": "twoder",
       "file": "twoder/ids.py",
       "symbol": "resolve",
-      "status": "BUILT",
+      "status": "LIVE",
       "evidence": [
-        "READ: 15系統の接頭辞を持ち主のストアへ解決",
-        "READ: SELECTED_ACQUISITION_METHOD 8種のいずれも呼んでいない"
+        "EXEC(2026-07-28): GET /api/resolve?id=DE-0300 / TASK-2DER-21F64D9D → resolved:true",
+        "EXEC: 存在しない ID は resolved:false / record:null（捏造しない）",
+        "READ: webui.py:512 /api/resolve → webui.py:181 resolve_view → twoder/ids.py:25 resolve"
       ],
       "last_verified_commit": "88bfa31"
     },
@@ -563,9 +579,9 @@
       "id": "R-LEDGER-BY-ID",
       "stage": "-",
       "target": "台帳の中身(ID 指定)",
-      "via": "twoder/ids.py::resolve",
-      "status": "BUILT",
-      "note": "★front door から到達する経路が無い(G-01)"
+      "via": "GET /api/resolve → resolve_view → twoder/ids.py::resolve",
+      "status": "LIVE",
+      "note": "★2026-07-28 訂正: 『front door から到達する経路が無い』は誤りだった"
     }
   ],
   "write_paths": [
@@ -743,13 +759,14 @@
   "gaps": [
     {
       "id": "G-01",
-      "summary": "front door から台帳を読む経路が無い",
+      "summary": "front door から台帳を読む経路が無い —— ★誤りだった。submit() の acquisition 枝には無いが、GET /api/resolve に在った",
       "kind": "gap",
-      "status": "OPEN",
+      "status": "CLOSED",
       "evidence": [
         "READ: LEDGER_QUERY 相当 0件",
         "READ: acquisition method 8種に該当なし"
-      ]
+      ],
+      "note": "CC-α は `SELECTED_ACQUISITION_METHOD` 8種を根拠に「経路が無い」と結論したが、探索範囲を明示していなかった。2026-07-28 実測: /api/resolve?id= で DE-0300 と TASK-2DER-21F64D9D が resolved:true、存在しない ID は resolved:false/record:null。★破ったのは Taka の問いであり、内部の3者は全員が同じ思い込みを持っていた。"
     },
     {
       "id": "G-02",
@@ -895,6 +912,36 @@
       "note": "#attempt-N は死因#2 修正で load-bearing だった。★Build 15 で修理済: authority.grant_approval に optional nonce を追加し、mint_token は正典語彙(LIVE_WORKER_MINIMAL / LIVE_WORKER_TASK)・素の task_id・nonce=attempt に変更。既定 None で approval_id 不変(前後実測一致)、gate1b_ts は probe 未変更で passed。★ただし run_runner に到達した観測がまだ無いため status は OPEN のまま。GENERATE が通ったら解消に更新する。 ★Build 18 で run_runner に到達し成果物が出たことで実証・解消。"
     },
     {
+      "id": "G-17",
+      "summary": "/tmp 直下に約1000万エントリ。ルート FS の使用 inode の約88%を占め、cwd を /tmp にすると Python の import が返らない",
+      "kind": "gap",
+      "status": "CLOSED",
+      "evidence": [
+        "CC_DESIGN_2026-07-28_D27_ANSWER_NOT_THE_MODULE.md / _D28_RETRY_PATH_EXISTS.md"
+      ],
+      "note": "D-27。原因は G-20/G-21/G-22 の連鎖(worker 成果物が自己増殖し .jsonl を delete=False で作り続けた)。MGR が停止と削除を実施: inode 11,520,462→1,376,328、中身のある311件は全て現存。全1014万件が本件由来かは数えていない(断定しない)"
+    },
+    {
+      "id": "G-18",
+      "summary": "cc_register.py は egl/docs に在り、利用側が sys.path を通す必要がある(口伝だった)",
+      "kind": "gap",
+      "status": "OPEN",
+      "evidence": [
+        "CC_DESIGN_2026-07-28_D27_ANSWER_NOT_THE_MODULE.md / _D28_RETRY_PATH_EXISTS.md"
+      ],
+      "note": "D-27 §4。呼び出し側が解決する裁定。docstring に1行書くべきだが未実施"
+    },
+    {
+      "id": "G-19",
+      "summary": "GENERATE は失敗しても段を進める(record_generate が成否に関わらず遷移を記録する)",
+      "kind": "gap",
+      "status": "OPEN",
+      "evidence": [
+        "CC_DESIGN_2026-07-28_D27_ANSWER_NOT_THE_MODULE.md / _D28_RETRY_PATH_EXISTS.md"
+      ],
+      "note": "D-28。∴ 同じ task で GENERATE をやり直すには AUDIT→(必要なら DISPOSE)→REGENERATE を経る。近道は dispatch.py:307 で意図的に塞がれている"
+    },
+    {
       "id": "G-20",
       "summary": "サンドボックス保証(process_kill_cleanup 等)が仕様辞書の自己申告を検査するだけで実装が無かった",
       "kind": "contradicted",
@@ -983,6 +1030,16 @@
         "本日の FINDING 群(CC_DESIGN_2026-07-27/28_*)"
       ],
       "note": "並びは v1.0→v2.0→v1.9→…→v1.1。head も tail も最新に届かない。★判定は日付が最も新しい行を採る。CC-α が存在しない v2.0 を5文書の確認宣言に書き、IMPL が実物を読んで止めた"
+    },
+    {
+      "id": "G-29",
+      "summary": "『【未確認】』が閉じる期限も担当も持たず、宣言が確認の代わりになる",
+      "kind": "process_defect",
+      "status": "OPEN",
+      "evidence": [
+        "CC-α が ids.resolve() を『一度も実行していない』と5回書き、5回とも実行しなかった"
+      ],
+      "note": "対処: 【未確認】を書くときは『いつ誰が確かめるか』を同じ行に書く。書けないならその場で確かめる。運用方針 v2.1 に格上げ済(MGR)"
     }
   ],
   "planned_extensions": [

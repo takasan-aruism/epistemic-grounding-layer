@@ -139,3 +139,4 @@
 {"kind": "DOC", "doc_id": "ART-92ef276b8e", "path": "docs/CC_MGR_2026-07-28_RITUAL_RECEIVED_POLICY_v2_1.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:36:38"}
 {"kind": "DONE", "doc_id": "ART-df8cc65809", "by": "MGR", "by_doc_id": "ART-92ef276b8e", "ts": "2026-07-28T05:36:38"}
 {"kind": "DOC", "doc_id": "ART-522a52e24f", "path": "docs/CC_MGR_2026-07-28_D37_LIVE_TRACE_OF_WHAT_ACTUALLY_RUNS.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:40:31"}
+{"kind": "DOC", "doc_id": "ART-387d920ba5", "path": "docs/CC_MGR_2026-07-28_D37_PREMISE_FAILS_TAKA_UTTERANCE_NEVER_ENTERED.md", "type": "FINDING", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:48:47"}
