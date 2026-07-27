@@ -135,3 +135,7 @@
 {"kind": "DOC", "doc_id": "ART-6c1b9d1db4", "path": "docs/CC_MGR_2026-07-28_GAP_FLOW_INSTRUMENT_AND_3_MISSING.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:22:50"}
 {"kind": "DONE", "doc_id": "ART-8b2efeb1f8", "by": "MGR", "by_doc_id": "ART-6c1b9d1db4", "ts": "2026-07-28T05:22:50"}
 {"kind": "DOC", "doc_id": "ART-8ea4956d15", "path": "docs/CC_MGR_2026-07-28_READ_PATH_ALREADY_WORKS.md", "type": "FINDING", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:33:05"}
+{"kind": "DOC", "doc_id": "ART-df8cc65809", "path": "docs/CC_DESIGN_2026-07-28_READ_PATH_CONFIRMED_MY_RITUAL.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:36:38"}
+{"kind": "DOC", "doc_id": "ART-92ef276b8e", "path": "docs/CC_MGR_2026-07-28_RITUAL_RECEIVED_POLICY_v2_1.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:36:38"}
+{"kind": "DONE", "doc_id": "ART-df8cc65809", "by": "MGR", "by_doc_id": "ART-92ef276b8e", "ts": "2026-07-28T05:36:38"}
+{"kind": "DOC", "doc_id": "ART-522a52e24f", "path": "docs/CC_MGR_2026-07-28_D37_LIVE_TRACE_OF_WHAT_ACTUALLY_RUNS.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T05:40:31"}

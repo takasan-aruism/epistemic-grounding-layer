@@ -28,7 +28,9 @@ for p in glob.glob("docs/CC_*.md"):
     except Exception:
         continue
     for m in set(re.findall(r"\bG-\d+\b", s)):
-        if (n := norm(m)):
+        # G-9999 は自己試験用の予約 id。文書がそれを引用しても数えない
+        # (2026-07-28: 自分が試験の様子を文書に書いたら、計器が自分を数えた。本日5回目の自己一致)
+        if (n := norm(m)) and n != "G-9999":
             in_docs.setdefault(n, []).append(os.path.basename(p))
 
 missing = sorted(set(in_docs) - in_json, key=lambda x: int(x.split("-")[1]))
