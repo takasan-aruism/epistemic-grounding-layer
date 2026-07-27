@@ -97,6 +97,6 @@ fi
 line "$(/home/takasan/.claude/hooks/2der_arch_fresh.sh 2>/dev/null || echo '実行構造の資料: 判定不能')"
 line "$(/home/takasan/.claude/hooks/2der_layers.sh 2>/dev/null || echo '層飛ばし: 判定不能')"
 line "全体: 2DER を一本の道にする(横から見る経路を潰し、使うことで育てる)"
-line "現在地: 段0 済(所在発見) / 段1 済(繋がっていない と判明) / ★段2 進行中=Execution Architecture 現状記録 / 段3 待=台帳を読める仕組み・worker 再挑戦"
-line "MGR の担当: 段2 の指示と受領 / Taka への提示と仲介 / 裁定 / commit・push / この表の維持"
+line "現在地: 段0済(所在発見) / 段1済(繋がっていないと判明) / 段2済(Execution Architecture 作成・運用へ) / ★段3進行中=worker 再挑戦(契約つき)→台帳を読める仕組み→CC_*.md 直読の閉塞"
+line "MGR の担当: 段3 の指示と受領 / 裁定 / Taka への報告 / commit・push / 計器の維持"
 line "規律: 記憶で俯瞰しない。既存を読んでから作る。ソースに在る≠動く。1回の観測で断定しない。台帳の直読は【直読】と明記。"

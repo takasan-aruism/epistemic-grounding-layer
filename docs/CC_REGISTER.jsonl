@@ -28,3 +28,6 @@
 {"kind": "DOC", "doc_id": "ART-2a8766be2e", "path": "egl/docs/CC_MGR_2026-07-27_STAGE3_GO_RESUME_DEV.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:30:04"}
 {"kind": "DONE", "doc_id": "ART-48a812a415", "by": "MGR", "by_doc_id": "ART-2a8766be2e", "ts": "2026-07-27T22:30:04"}
 {"kind": "DONE", "doc_id": "ART-ea212ef275", "by": "MGR", "by_doc_id": "ART-2a8766be2e", "ts": "2026-07-27T22:30:04"}
+{"kind": "DOC", "doc_id": "ART-555b02c4ec", "path": "docs/CC_DESIGN_2026-07-27_BUILD13_SPEC_WORKER_WITH_CONTRACT.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-27T22:32:19"}
+{"kind": "DOC", "doc_id": "ART-aabf2bc30a", "path": "egl/docs/CC_MGR_2026-07-27_BUILD13_APPROVED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-27T22:34:17"}
+{"kind": "DONE", "doc_id": "ART-d204611c23", "by": "MGR", "by_doc_id": "ART-aabf2bc30a", "ts": "2026-07-27T22:34:17"}

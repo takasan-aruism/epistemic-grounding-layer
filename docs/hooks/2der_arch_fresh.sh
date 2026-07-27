@@ -15,7 +15,14 @@ for repo,c in rec.items():
         head=subprocess.run(['git','-C',d,'rev-parse','--short','HEAD'],capture_output=True,text=True).stdout.strip()
     except Exception:
         head='?'
-    if head and head[:7]!=c[:7]: stale.append('%s(記録%s→現在%s)'%(repo,c[:7],head[:7]))
+    if not head or head[:7]==c[:7]: continue
+    # ★コードが変わった時だけ「古い」とする(文書 commit で鳴らない)
+    try:
+        ch=subprocess.run(['git','-C',d,'diff','--name-only',c+'..HEAD'],capture_output=True,text=True).stdout
+    except Exception:
+        ch=''
+    py=[l for l in ch.splitlines() if l.endswith('.py')]
+    if py: stale.append('%s(記録%s→現在%s / .py %d本変化)'%(repo,c[:7],head[:7],len(py)))
 g=len(j.get('gaps',[])); cmp=len(j.get('components',[])); e=len(j.get('edges',[]))
 if stale:
     print('実行構造の資料: ★古い — '+' '.join(stale)+' / 要更新 (gap %d)'%g)
