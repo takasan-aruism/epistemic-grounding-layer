@@ -1,0 +1,20 @@
+{"fixture_id": "D1", "lines": ["直前の文脈は記録に存在しない。"], "trace": ["CTX_EMPTY"]}
+{"fixture_id": "D2", "lines": ["直前の文脈は記録に存在しない。"], "trace": ["CTX_EMPTY"]}
+{"fixture_id": "D3", "lines": ["直前の文脈は記録に存在しない。"], "trace": ["CTX_EMPTY"]}
+{"fixture_id": "CR1", "lines": ["直前の文脈が記録にある: 直前の会話はロシア・ウクライナ戦争の軍事・経済損失の分析が支配的。"], "trace": ["CTX_PRESENT"]}
+{"fixture_id": "CR2", "lines": ["直前の文脈が記録にある: 直前は、ある先発投手の今季成績と防御率の議論が続いている。"], "trace": ["CTX_PRESENT"]}
+{"fixture_id": "CR3", "lines": ["直前の文脈が記録にある: 直前は、ある OSS ライブラリの開発ロードマップの話をしていた。"], "trace": ["CTX_PRESENT"]}
+{"fixture_id": "CH1", "lines": ["直前の文脈は記録に存在しない。"], "trace": ["CTX_EMPTY"]}
+{"fixture_id": "CH2", "lines": ["直前の文脈は記録に存在しない。"], "trace": ["CTX_EMPTY"]}
+{"fixture_id": "CH3", "lines": ["直前の文脈は記録に存在しない。"], "trace": ["CTX_EMPTY"]}
+{"fixture_id": "BV1", "lines": ["直前の文脈は記録に存在しない。"], "trace": ["CTX_EMPTY"]}
+{"fixture_id": "BV2", "lines": ["直前の文脈は記録に存在しない。"], "trace": ["CTX_EMPTY"]}
+{"fixture_id": "BV3", "lines": ["直前の文脈は記録に存在しない。"], "trace": ["CTX_EMPTY"]}
+{"fixture_id": "IP1", "lines": ["直前の文脈は記録に存在しない。", "「あれ」が指す対象は記録から特定できない。"], "trace": ["CTX_EMPTY", "REF_UNBOUND"]}
+{"fixture_id": "IP2", "lines": ["直前の文脈は記録に存在しない。", "「それ」が指す対象は記録から特定できない。"], "trace": ["CTX_EMPTY", "REF_UNBOUND"]}
+{"fixture_id": "IP3", "lines": ["直前の文脈は記録に存在しない。", "「例のやつ」が指す対象は記録から特定できない。"], "trace": ["CTX_EMPTY", "REF_UNBOUND"]}
+{"fixture_id": "PP1", "lines": ["直前の文脈は記録に存在しない。", "「Watcher 仕様」が記録にあるか判定できない。"], "trace": ["CTX_EMPTY", "EXIST_UNKNOWN"]}
+{"fixture_id": "PP2", "lines": ["直前の文脈は記録に存在しない。", "「方針のメモ」が記録にあるか判定できない。"], "trace": ["CTX_EMPTY", "EXIST_UNKNOWN"]}
+{"fixture_id": "PP3", "lines": ["直前の文脈は記録に存在しない。", "「予備の鍵」が記録にあるか判定できない。"], "trace": ["CTX_EMPTY", "EXIST_UNKNOWN"]}
+{"fixture_id": "DF1", "lines": ["直前の文脈は記録に存在しない。"], "trace": ["CTX_EMPTY"]}
+{"fixture_id": "DF2", "lines": ["直前の文脈は記録に存在しない。"], "trace": ["CTX_EMPTY"]}

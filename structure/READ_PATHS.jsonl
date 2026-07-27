@@ -35,11 +35,13 @@
 {"actually_loaded": ["EDGE_INVENTORY.jsonl", "ds_events.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_back_thin_slice_build2", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["ds_events.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_binder_real_context_feasibility", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["ds_events.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_corpus_provenance", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["MENU_RESTRICTION_BUILD4_ROWS.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_d5v_far_error_pairs", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_de_route_equiv", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": true, "path": "rri_records.jsonl", "required_by_contract": true, "stage": "s_embed_axes", "verdict": "OK"}
 {"actually_loaded": ["ENTRYPOINTS_EXT.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_exec_arch_acd", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["DESIGN_EVIDENCE_LEDGER.jsonl", "ds_events.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_existence_premise_1c", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["EDGE_INVENTORY.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_front_door_bypass_inventory", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_give_the_fact_build5", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_intent_context_premise_1b", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["INTENT_DIALOGUE_PROBE.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_intent_dialogue_probe", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["INTENT_PROBE_ARMC.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_intent_probe_armc", "verdict": "UNRESOLVED_NO_CONTRACT"}

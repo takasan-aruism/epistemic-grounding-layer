@@ -1,0 +1,872 @@
+{
+ "batches": [
+  {
+   "batch": 0,
+   "aggregate": {
+    "A_current": {
+     "n": 600,
+     "M1_far": 0.0267,
+     "M1a_unsafe": 0.0267,
+     "M1b_wasteful": 0.0,
+     "M2_strict": 0.7483,
+     "M2_with_alt": 0.8833,
+     "NO_CANDIDATE": 7
+    },
+    "B_menurestrict": {
+     "n": 600,
+     "M1_far": 0.0233,
+     "M1a_unsafe": 0.0233,
+     "M1b_wasteful": 0.0,
+     "M2_strict": 0.7583,
+     "M2_with_alt": 0.8933,
+     "NO_CANDIDATE": 4
+    },
+    "C_givefact": {
+     "n": 600,
+     "M1_far": 0.0217,
+     "M1a_unsafe": 0.0,
+     "M1b_wasteful": 0.0217,
+     "M2_strict": 0.8233,
+     "M2_with_alt": 0.935,
+     "NO_CANDIDATE": 0
+    }
+   },
+   "per_fixture": {
+    "D1": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "DIRECT",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "D2": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "DIRECT",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "D3": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "DIRECT",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "CR1": {
+     "A_current": {
+      "n": 30,
+      "hit": 0,
+      "rate": 0.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 1,
+      "rate": 0.0333
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 4,
+      "rate": 0.1333
+     },
+     "expected": "CONTEXT_RESOLVE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.1333
+    },
+    "CR2": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 29,
+      "rate": 0.9667
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "CONTEXT_RESOLVE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "CR3": {
+     "A_current": {
+      "n": 30,
+      "hit": 21,
+      "rate": 0.7
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 23,
+      "rate": 0.7667
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "CONTEXT_RESOLVE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.3
+    },
+    "CH1": {
+     "A_current": {
+      "n": 30,
+      "hit": 22,
+      "rate": 0.7333
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 21,
+      "rate": 0.7
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 20,
+      "rate": 0.6667
+     },
+     "expected": "CHOICE",
+     "broken_by_C": true,
+     "delta_C_minus_A": -0.0666
+    },
+    "CH2": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 28,
+      "rate": 0.9333
+     },
+     "expected": "CHOICE",
+     "broken_by_C": true,
+     "delta_C_minus_A": -0.0667
+    },
+    "CH3": {
+     "A_current": {
+      "n": 30,
+      "hit": 0,
+      "rate": 0.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 0,
+      "rate": 0.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 0,
+      "rate": 0.0
+     },
+     "expected": "CHOICE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "BV1": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 28,
+      "rate": 0.9333
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 24,
+      "rate": 0.8
+     },
+     "expected": "BOUNDED_MULTI_VIEW",
+     "broken_by_C": true,
+     "delta_C_minus_A": -0.2
+    },
+    "BV2": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "BOUNDED_MULTI_VIEW",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "BV3": {
+     "A_current": {
+      "n": 30,
+      "hit": 28,
+      "rate": 0.9333
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 17,
+      "rate": 0.5667
+     },
+     "expected": "BOUNDED_MULTI_VIEW",
+     "broken_by_C": true,
+     "delta_C_minus_A": -0.3666
+    },
+    "IP1": {
+     "A_current": {
+      "n": 30,
+      "hit": 8,
+      "rate": 0.2667
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 10,
+      "rate": 0.3333
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 27,
+      "rate": 0.9
+     },
+     "expected": "INTENT_PROBE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.6333
+    },
+    "IP2": {
+     "A_current": {
+      "n": 30,
+      "hit": 0,
+      "rate": 0.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 1,
+      "rate": 0.0333
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 19,
+      "rate": 0.6333
+     },
+     "expected": "INTENT_PROBE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.6333
+    },
+    "IP3": {
+     "A_current": {
+      "n": 30,
+      "hit": 16,
+      "rate": 0.5333
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 16,
+      "rate": 0.5333
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 26,
+      "rate": 0.8667
+     },
+     "expected": "INTENT_PROBE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.3334
+    },
+    "PP1": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "PREMISE_PROBE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "PP2": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "PREMISE_PROBE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "PP3": {
+     "A_current": {
+      "n": 30,
+      "hit": 29,
+      "rate": 0.9667
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 29,
+      "rate": 0.9667
+     },
+     "expected": "PREMISE_PROBE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "DF1": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "DEFER",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "DF2": {
+     "A_current": {
+      "n": 30,
+      "hit": 25,
+      "rate": 0.8333
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 26,
+      "rate": 0.8667
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "DEFER",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.1667
+    }
+   }
+  },
+  {
+   "batch": 1,
+   "aggregate": {
+    "A_current": {
+     "n": 600,
+     "M1_far": 0.03,
+     "M1a_unsafe": 0.0283,
+     "M1b_wasteful": 0.0017,
+     "M2_strict": 0.765,
+     "M2_with_alt": 0.89,
+     "NO_CANDIDATE": 4
+    },
+    "B_menurestrict": {
+     "n": 600,
+     "M1_far": 0.0183,
+     "M1a_unsafe": 0.0183,
+     "M1b_wasteful": 0.0,
+     "M2_strict": 0.7517,
+     "M2_with_alt": 0.88,
+     "NO_CANDIDATE": 10
+    },
+    "C_givefact": {
+     "n": 600,
+     "M1_far": 0.0167,
+     "M1a_unsafe": 0.0,
+     "M1b_wasteful": 0.0167,
+     "M2_strict": 0.83,
+     "M2_with_alt": 0.945,
+     "NO_CANDIDATE": 1
+    }
+   },
+   "per_fixture": {
+    "D1": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "DIRECT",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "D2": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "DIRECT",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "D3": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "DIRECT",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "CR1": {
+     "A_current": {
+      "n": 30,
+      "hit": 1,
+      "rate": 0.0333
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 0,
+      "rate": 0.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 4,
+      "rate": 0.1333
+     },
+     "expected": "CONTEXT_RESOLVE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.1
+    },
+    "CR2": {
+     "A_current": {
+      "n": 30,
+      "hit": 27,
+      "rate": 0.9
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 28,
+      "rate": 0.9333
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 29,
+      "rate": 0.9667
+     },
+     "expected": "CONTEXT_RESOLVE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0667
+    },
+    "CR3": {
+     "A_current": {
+      "n": 30,
+      "hit": 27,
+      "rate": 0.9
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 22,
+      "rate": 0.7333
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 29,
+      "rate": 0.9667
+     },
+     "expected": "CONTEXT_RESOLVE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0667
+    },
+    "CH1": {
+     "A_current": {
+      "n": 30,
+      "hit": 24,
+      "rate": 0.8
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 24,
+      "rate": 0.8
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 20,
+      "rate": 0.6667
+     },
+     "expected": "CHOICE",
+     "broken_by_C": true,
+     "delta_C_minus_A": -0.1333
+    },
+    "CH2": {
+     "A_current": {
+      "n": 30,
+      "hit": 28,
+      "rate": 0.9333
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 28,
+      "rate": 0.9333
+     },
+     "expected": "CHOICE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "CH3": {
+     "A_current": {
+      "n": 30,
+      "hit": 0,
+      "rate": 0.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 0,
+      "rate": 0.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 0,
+      "rate": 0.0
+     },
+     "expected": "CHOICE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "BV1": {
+     "A_current": {
+      "n": 30,
+      "hit": 29,
+      "rate": 0.9667
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 27,
+      "rate": 0.9
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 25,
+      "rate": 0.8333
+     },
+     "expected": "BOUNDED_MULTI_VIEW",
+     "broken_by_C": true,
+     "delta_C_minus_A": -0.1334
+    },
+    "BV2": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 29,
+      "rate": 0.9667
+     },
+     "expected": "BOUNDED_MULTI_VIEW",
+     "broken_by_C": true,
+     "delta_C_minus_A": -0.0333
+    },
+    "BV3": {
+     "A_current": {
+      "n": 30,
+      "hit": 28,
+      "rate": 0.9333
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 29,
+      "rate": 0.9667
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 21,
+      "rate": 0.7
+     },
+     "expected": "BOUNDED_MULTI_VIEW",
+     "broken_by_C": true,
+     "delta_C_minus_A": -0.2333
+    },
+    "IP1": {
+     "A_current": {
+      "n": 30,
+      "hit": 9,
+      "rate": 0.3
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 9,
+      "rate": 0.3
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 26,
+      "rate": 0.8667
+     },
+     "expected": "INTENT_PROBE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.5667
+    },
+    "IP2": {
+     "A_current": {
+      "n": 30,
+      "hit": 0,
+      "rate": 0.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 2,
+      "rate": 0.0667
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 22,
+      "rate": 0.7333
+     },
+     "expected": "INTENT_PROBE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.7333
+    },
+    "IP3": {
+     "A_current": {
+      "n": 30,
+      "hit": 19,
+      "rate": 0.6333
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 18,
+      "rate": 0.6
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 27,
+      "rate": 0.9
+     },
+     "expected": "INTENT_PROBE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.2667
+    },
+    "PP1": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "PREMISE_PROBE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "PP2": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "PREMISE_PROBE",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "PP3": {
+     "A_current": {
+      "n": 30,
+      "hit": 29,
+      "rate": 0.9667
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 28,
+      "rate": 0.9333
+     },
+     "expected": "PREMISE_PROBE",
+     "broken_by_C": true,
+     "delta_C_minus_A": -0.0334
+    },
+    "DF1": {
+     "A_current": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "DEFER",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0
+    },
+    "DF2": {
+     "A_current": {
+      "n": 30,
+      "hit": 28,
+      "rate": 0.9333
+     },
+     "B_menurestrict": {
+      "n": 30,
+      "hit": 22,
+      "rate": 0.7333
+     },
+     "C_givefact": {
+      "n": 30,
+      "hit": 30,
+      "rate": 1.0
+     },
+     "expected": "DEFER",
+     "broken_by_C": false,
+     "delta_C_minus_A": 0.0667
+    }
+   }
+  }
+ ]
+}

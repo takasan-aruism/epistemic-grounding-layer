@@ -68,85 +68,49 @@
      "A_postfilter": {
       "n": 600,
       "M1_far": 0.0167,
-      "M1a_unsafe": 0.0167,
-      "M1b_wasteful": 0.0,
-      "M2_match": 0.755,
-      "NO_CANDIDATE": 13
+      "M1a_unsafe": 0.015,
+      "M1b_wasteful": 0.0017,
+      "M2_match": 0.7667,
+      "NO_CANDIDATE": 8
      },
      "B_menurestrict": {
       "n": 600,
-      "M1_far": 0.0167,
-      "M1a_unsafe": 0.0167,
+      "M1_far": 0.0217,
+      "M1a_unsafe": 0.0217,
       "M1b_wasteful": 0.0,
-      "M2_match": 0.7533,
-      "NO_CANDIDATE": 7
+      "M2_match": 0.7517,
+      "NO_CANDIDATE": 3
      }
     },
     "reassignment": {
-     "A_no_candidate_n": 13,
-     "reassigned_n": 13,
-     "reassigned_correct_n": 8,
+     "A_no_candidate_n": 8,
+     "reassigned_n": 8,
+     "reassigned_correct_n": 7,
      "cases": [
-      {
-       "fixture_id": "IP2",
-       "seed": 0,
-       "run": 0,
-       "B_status": "AUTO_CONFIRMED",
-       "B_choice": "PREMISE_PROBE",
-       "reassigned": true,
-       "reassigned_correct": false
-      },
-      {
-       "fixture_id": "PP2",
-       "seed": 1,
-       "run": 0,
-       "B_status": "AUTO_CONFIRMED",
-       "B_choice": "PREMISE_PROBE",
-       "reassigned": true,
-       "reassigned_correct": true
-      },
-      {
-       "fixture_id": "PP3",
-       "seed": 2,
-       "run": 0,
-       "B_status": "AUTO_CONFIRMED",
-       "B_choice": "PREMISE_PROBE",
-       "reassigned": true,
-       "reassigned_correct": true
-      },
-      {
-       "fixture_id": "IP2",
-       "seed": 1,
-       "run": 2,
-       "B_status": "AUTO_CONFIRMED",
-       "B_choice": "PREMISE_PROBE",
-       "reassigned": true,
-       "reassigned_correct": false
-      },
-      {
-       "fixture_id": "DF2",
-       "seed": 0,
-       "run": 2,
-       "B_status": "AUTO_CONFIRMED",
-       "B_choice": "DEFER",
-       "reassigned": true,
-       "reassigned_correct": true
-      },
       {
        "fixture_id": "IP2",
        "seed": 1,
        "run": 3,
-       "B_status": "OK",
-       "B_choice": "BOUNDED_MULTI_VIEW",
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "PREMISE_PROBE",
        "reassigned": true,
        "reassigned_correct": false
       },
       {
-       "fixture_id": "PP3",
-       "seed": 1,
+       "fixture_id": "DF2",
+       "seed": 0,
+       "run": 4,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "DEFER",
+       "reassigned": true,
+       "reassigned_correct": true
+      },
+      {
+       "fixture_id": "BV3",
+       "seed": 0,
        "run": 5,
        "B_status": "AUTO_CONFIRMED",
-       "B_choice": "PREMISE_PROBE",
+       "B_choice": "BOUNDED_MULTI_VIEW",
        "reassigned": true,
        "reassigned_correct": true
       },
@@ -160,38 +124,29 @@
        "reassigned_correct": true
       },
       {
-       "fixture_id": "IP2",
-       "seed": 1,
-       "run": 8,
+       "fixture_id": "DF2",
+       "seed": 0,
+       "run": 6,
        "B_status": "AUTO_CONFIRMED",
-       "B_choice": "BOUNDED_MULTI_VIEW",
-       "reassigned": true,
-       "reassigned_correct": false
-      },
-      {
-       "fixture_id": "IP2",
-       "seed": 2,
-       "run": 8,
-       "B_status": "AUTO_CONFIRMED",
-       "B_choice": "PREMISE_PROBE",
-       "reassigned": true,
-       "reassigned_correct": false
-      },
-      {
-       "fixture_id": "PP3",
-       "seed": 1,
-       "run": 8,
-       "B_status": "AUTO_CONFIRMED",
-       "B_choice": "PREMISE_PROBE",
+       "B_choice": "DEFER",
        "reassigned": true,
        "reassigned_correct": true
       },
       {
        "fixture_id": "DF2",
-       "seed": 2,
+       "seed": 0,
        "run": 8,
        "B_status": "AUTO_CONFIRMED",
        "B_choice": "DEFER",
+       "reassigned": true,
+       "reassigned_correct": true
+      },
+      {
+       "fixture_id": "BV3",
+       "seed": 1,
+       "run": 9,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "BOUNDED_MULTI_VIEW",
        "reassigned": true,
        "reassigned_correct": true
       },
@@ -212,30 +167,48 @@
     "aggregate": {
      "A_postfilter": {
       "n": 600,
-      "M1_far": 0.0167,
-      "M1a_unsafe": 0.0167,
+      "M1_far": 0.0233,
+      "M1a_unsafe": 0.0233,
       "M1b_wasteful": 0.0,
-      "M2_match": 0.7517,
-      "NO_CANDIDATE": 10
+      "M2_match": 0.7667,
+      "NO_CANDIDATE": 8
      },
      "B_menurestrict": {
       "n": 600,
-      "M1_far": 0.0217,
-      "M1a_unsafe": 0.0217,
+      "M1_far": 0.0167,
+      "M1a_unsafe": 0.0167,
       "M1b_wasteful": 0.0,
-      "M2_match": 0.7433,
-      "NO_CANDIDATE": 9
+      "M2_match": 0.7617,
+      "NO_CANDIDATE": 6
      }
     },
     "reassignment": {
-     "A_no_candidate_n": 10,
-     "reassigned_n": 7,
-     "reassigned_correct_n": 4,
+     "A_no_candidate_n": 8,
+     "reassigned_n": 6,
+     "reassigned_correct_n": 1,
      "cases": [
+      {
+       "fixture_id": "IP1",
+       "seed": 1,
+       "run": 0,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "PREMISE_PROBE",
+       "reassigned": true,
+       "reassigned_correct": false
+      },
+      {
+       "fixture_id": "IP1",
+       "seed": 1,
+       "run": 2,
+       "B_status": "AUTO_CONFIRMED",
+       "B_choice": "PREMISE_PROBE",
+       "reassigned": true,
+       "reassigned_correct": false
+      },
       {
        "fixture_id": "DF2",
        "seed": 0,
-       "run": 0,
+       "run": 2,
        "B_status": "NO_CANDIDATE",
        "B_choice": null,
        "reassigned": false,
@@ -243,53 +216,35 @@
       },
       {
        "fixture_id": "IP2",
-       "seed": 1,
-       "run": 1,
+       "seed": 2,
+       "run": 5,
        "B_status": "AUTO_CONFIRMED",
        "B_choice": "PREMISE_PROBE",
-       "reassigned": true,
-       "reassigned_correct": false
-      },
-      {
-       "fixture_id": "IP2",
-       "seed": 2,
-       "run": 1,
-       "B_status": "AUTO_CONFIRMED",
-       "B_choice": "BOUNDED_MULTI_VIEW",
        "reassigned": true,
        "reassigned_correct": false
       },
       {
        "fixture_id": "BV3",
        "seed": 0,
-       "run": 2,
+       "run": 6,
        "B_status": "AUTO_CONFIRMED",
        "B_choice": "BOUNDED_MULTI_VIEW",
        "reassigned": true,
        "reassigned_correct": true
       },
       {
-       "fixture_id": "DF2",
-       "seed": 2,
-       "run": 2,
-       "B_status": "NO_CANDIDATE",
-       "B_choice": null,
-       "reassigned": false,
-       "reassigned_correct": false
-      },
-      {
-       "fixture_id": "DF2",
+       "fixture_id": "IP2",
        "seed": 1,
-       "run": 3,
+       "run": 6,
        "B_status": "AUTO_CONFIRMED",
-       "B_choice": "DEFER",
+       "B_choice": "PREMISE_PROBE",
        "reassigned": true,
-       "reassigned_correct": true
+       "reassigned_correct": false
       },
       {
        "fixture_id": "IP2",
        "seed": 2,
-       "run": 5,
+       "run": 7,
        "B_status": "AUTO_CONFIRMED",
        "B_choice": "PREMISE_PROBE",
        "reassigned": true,
@@ -298,25 +253,7 @@
       {
        "fixture_id": "DF2",
        "seed": 0,
-       "run": 5,
-       "B_status": "AUTO_CONFIRMED",
-       "B_choice": "DEFER",
-       "reassigned": true,
-       "reassigned_correct": true
-      },
-      {
-       "fixture_id": "PP3",
-       "seed": 1,
        "run": 7,
-       "B_status": "AUTO_CONFIRMED",
-       "B_choice": "PREMISE_PROBE",
-       "reassigned": true,
-       "reassigned_correct": true
-      },
-      {
-       "fixture_id": "DF2",
-       "seed": 0,
-       "run": 8,
        "B_status": "NO_CANDIDATE",
        "B_choice": null,
        "reassigned": false,
