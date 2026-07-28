@@ -305,3 +305,4 @@
 {"kind": "DOC", "doc_id": "ART-ea497c1c7a", "path": "docs/CC_DESIGN_2026-07-29_D48_RETRACTION_HALT_WAS_RESOLVED.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T00:24:06"}
 {"kind": "DOC", "doc_id": "ART-35b7dcd7ca", "path": "docs/CC_MGR_2026-07-29_D48_HALT_RESOLVED_QUESTION_REOPENS.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T00:24:06"}
 {"kind": "DONE", "doc_id": "ART-ea497c1c7a", "by": "MGR", "by_doc_id": "ART-35b7dcd7ca", "ts": "2026-07-29T00:24:06"}
+{"kind": "DOC", "doc_id": "ART-aea5a9884e", "path": "docs/CC_MGR_2026-07-29_D49_UI_TWO_ITEMS_SPEC_REQUEST.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T00:36:28"}
