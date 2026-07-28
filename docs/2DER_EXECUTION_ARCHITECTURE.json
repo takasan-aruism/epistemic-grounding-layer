@@ -1385,6 +1385,59 @@
     "EXEC: 呼び手は dev-workcell/run_task.py:13(手動実行スクリプト)と egl/docs/report のデモ"
    ],
    "note": "★Taka ⑤(過去の走査を流用せず再走査)が出したもの。IMPL が『数を合わせない』と書いたから出た。★CC-α は (a)入口一覧に加えて据え置く を推す（依頼経路でないなら run_id が無いのは正常で、塞ぐと『呼び手の数だけ合流点が増える』膨張になり確定した原則に反する）。★13番目が出た以上14番目が無いとは言えず、Taka ⑤を『済』と言えない——『もう1度やる』を無限に繰り返さない基準が要る(MGR 裁定事項) ★MGR 裁定 A: 入口一覧に加えて据え置き、合流点を足さない。【未確認: run_task.py が依頼経路でないことはコード読みのみ / 誰が=CC-α / いつ=次段で必要になったとき。今は確かめなくてよい】"
+  },
+  {
+   "id": "G-51",
+   "summary": "RRI の終了条件 — 定義は request_thread に例外で強制されているが、本番から一度も呼ばれない",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "READ: STATES=(SOFT,NARROWING,AWAITING_HUMAN,RESOLVED,DISPATCHABLE,CLOSED)",
+    "READ: ('NARROWING','RESOLVED') のガード4件 all_disposed/suspense_settled/all_gaps_presented/thread_accepted",
+    "READ: advance_state が in_flight_count!=0 / 未提示 OPEN_GAP / THREAD_ACCEPTED 欠如 で例外",
+    "READ: accept_thread は residual_gaps の完全一致を要求(RThreadResidualIncomplete)",
+    "EXEC: request_thread.py の呼び手は0(G-45)"
+   ],
+   "note": "★分類=既定義。『終了条件が無い』のではなく『在るが本番の RRI はそれを通らない』。D-46(Taka 逐語の登記命令)"
+  },
+  {
+   "id": "G-52",
+   "summary": "RRI への再入時の扱い — 2つの機構が別々に在り互いを知らない。RESOLVED からの再入は無い",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "READ: TRANSITIONS に ('AWAITING_HUMAN','NARROWING'):('human_replied',) ＝人間の返答による再入は定義済",
+    "READ: TRANSITIONS に RESOLVED/CLOSED からの再入(REOPEN)が無い",
+    "READ: submit 側は RESUME_PRIOR + _active_2der_tasks + 『盲目的に active[-1] を採らない』(DE-0165)",
+    "★両者は接続していない(RESUME_PRIOR は DW task を継ぐがスレッド状態に触れない)"
+   ],
+   "note": "★分類=部分定義。D-46"
+  },
+  {
+   "id": "G-53",
+   "summary": "RRI の状態と正規保存場所 — 定義された保存場所と本番が書いている場所が違う",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "READ: request_thread.py:3 『first-class store は event stream のみ(architecture)』＝rthread_events.jsonl",
+    "READ: project() が event 列から state を導出 / check_conservation が保存則を検査",
+    "EXEC: 本番が書くのは rri_records.jsonl(intent_record の RREQ/RINT/RSIG)で state を持たない"
+   ],
+   "note": "★分類=既定義。ただし『正規保存場所は定義されているが本番はそこに書いていない』。D-46"
+  },
+  {
+   "id": "G-54",
+   "summary": "Event Trace から RRI へ辿る参照構造 — id は辿れるが判断・根拠・残差・trace_id は辿れない",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "EXEC: RRI event の outputs に rri_record_id: RSIG-00329 が載る",
+    "EXEC: GET /api/resolve?id=RSIG-00329 → resolved=True(kind=RESEARCH_SIGNAL)",
+    "EXEC: 同 event の trace_id / task_id は null",
+    "READ: 判断結果(request_type/INTENT_STRATEGY/RRI_PREFLIGHT)は台帳を書かないため emit されない",
+    "READ: RRI_RESIDUAL は submit.py:151 で TRACE にのみ記録(G-46 の35件の1つ)"
+   ],
+   "note": "★分類=部分定義。Taka 訂正『辿れない現状は設計の到達点ではなく欠落である』はこの3項目について当たる。D-46"
   }
  ],
  "planned_extensions": [
