@@ -1144,9 +1144,10 @@
     "READ: webui.py:541 同名 trace.json を上書き ＝最後の1回だけ残る",
     "READ: webui.py:118-140 build_state の列挙に INTENT_STRATEGY / RRI_PREFLIGHT が無い（submit.py:240,265 で _rec 済）",
     "EXEC: GET /api/claude_packet?task_id=TASK-2DER-B9B4DA3B → provenance.ds_input_id=UTT-0761(最初) / TRACE は UTT-0762 / 追跡対象 UTT-0769 はどちらにも無い ＝両端しか残らないことの実値",
-    "EXEC: provenance={trace_id:TRACE-330d22a317, rri_request_id:RREQ-00218, rri_intent_id:RINT-00235, egl_source_refs:[DE-0554]} ＝封印は【実】"
+    "EXEC: provenance={trace_id:TRACE-330d22a317, rri_request_id:RREQ-00218, rri_intent_id:RINT-00235, egl_source_refs:[DE-0554]} ＝封印は【実】",
+    "★2026-07-29 更新: webui.py:541 は submit ごとに一意キー key=(tid or 'SUBMIT')+'-'+乱数 の trace も書いている ∴ 過去分はディスクに残っている。ただし /api/state?task_id=<key> は build_state(webui.py:107) が DW task を要求するため {'error':'no such task'} を返す＝読む口が無い(実測)"
    ],
-   "note": "★D-41 で再訂正。旧版『発話単位の帰属ができない』は言い過ぎ——trace_id は発話ごとに一意で provenance は DW CREATE payload に永続する。できないのは過去分の保存。MGR 裁定: 列挙漏れ(2行追加)は Taka に聞く / 上書きは今は解かない(未解決として残す)"
+   "note": "★D-41 で再訂正。旧版『発話単位の帰属ができない』は言い過ぎ——trace_id は発話ごとに一意で provenance は DW CREATE payload に永続する。できないのは過去分の保存。MGR 裁定: 列挙漏れ(2行追加)は Taka に聞く / 上書きは今は解かない(未解決として残す) ★2026-07-29 訂正: 『過去分が保存されない』は不正確だった——保存はされている。読む口が無い。"
   },
   {
    "id": "G-32",
@@ -1438,6 +1439,72 @@
     "READ: RRI_RESIDUAL は submit.py:151 で TRACE にのみ記録(G-46 の35件の1つ)"
    ],
    "note": "★分類=部分定義。Taka 訂正『辿れない現状は設計の到達点ではなく欠落である』はこの3項目について当たる。D-46"
+  },
+  {
+   "id": "G-55",
+   "summary": "request_thread.py は正典であり halt も解けテストも在るが、本番から一度も呼ばれない — 理由は未解明",
+   "kind": "gap",
+   "status": "DEFERRED",
+   "evidence": [
+    "READ: SPEC 3本(SPEC_RTHREAD_STAGE1_v0.1/v0.2/STAGE2a_v0.1)＋上位 RRI_IMPL_SPEC_v0.1 が在る",
+    "READ: 監査5本がすべて CONSISTENT / git 3 commit(2026-07-24)",
+    "READ: SPEC_RTHREAD_STAGE1_v0.1 の FLOW NOTE に『Taka 裁定 2026-07-24: RRI も実装インスタンス』＝halt は解けている",
+    "EXEC: rri/rri/test_request_thread_stage1.py(+_cov) が実在＝成果物3 投下済",
+    "EXEC: 各 SPEC の submit/配線 言及は 0/1/1/4 行で、読むといずれも『DE 起票に submit を使う』手順の話であり配線の発注ではない",
+    "EXEC: request_thread の呼び手は0(G-45)"
+   ],
+   "note": "★D-47 §4『halt が理由』は D-48 で撤回済。理由は未解明に戻った。★MGR 裁定: いま追わない(Phase 2 の中心=管理UI ではないため。Taka『横に広がりすぎると元の目的を失う』)。中心が終わってから。★現時点で言えるのは『置く作業が一度も発注されていない』までで、なぜ発注されなかったかは未解明"
+  },
+  {
+   "id": "G-56",
+   "summary": "DW task を作らない依頼は管理UI で開けない — /api/state が『no such task』を返し /command は何も描かない",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "EXEC: GET /api/state?task_id=SUBMIT-zzzzzz → {'error':'no such task'}",
+    "READ: webui.py:107 build_state は DW task が無ければ error で抜ける",
+    "READ: webui.py:687 /command の JS は TASK が無ければ『現在 runnable な DW task はありません』だけ出して return",
+    "★今日の ETR-f0fe8461c407 は OBSERVE_CURRENT_STATE で task_id=None ∴ UI で開けない"
+   ],
+   "note": "D-49 で発見。★MGR の受入条件『本日の ETR-f0fe8461c407 が使えるはず』はそのままでは満たせない。直すには新しい口が要る(MGR 条件2)ため本 SPEC で作らず裁定に上げた"
+  },
+  {
+   "id": "G-57",
+   "summary": "run_id を直接入れて event 列だけ見る手段が無い — 今日の run(ETR-f0fe8461c407)を画面で見るにはこれが要る",
+   "kind": "gap",
+   "status": "DEFERRED",
+   "evidence": [
+    "READ: /command の JS は TASK(=DW task_id)を起点にしか描かない(webui.py:687)",
+    "EXEC: /api/resolve?id=ETR-… は front door で引ける(CC-α 実測)が、UI から入力する口が無い"
+   ],
+   "note": "MGR 裁定『登記・据え置き』。★新しい口が要るため D-49 では作らない。中心(UI に2項目)が先"
+  },
+  {
+   "id": "G-58",
+   "summary": "submit ごとの trace(runs/<key>.trace.json)を読む口が無い — 過去分はディスクに残っているが読めない",
+   "kind": "gap",
+   "status": "DEFERRED",
+   "evidence": [
+    "READ: webui.py:541 key=(tid or 'SUBMIT')+'-'+乱数 で submit ごとに一意キーの trace を書く",
+    "EXEC: /api/state?task_id=<key> は build_state(webui.py:107)が DW task を要求するため {'error':'no such task'}",
+    "★∴ 保存はされている。読む口が無い"
+   ],
+   "note": "★G-31 の理解を更新する材料——『上書きされて消える』ではなく『残っているが読めない』だった可能性が在る。MGR 裁定『登記だけして先へ。今は追わない』"
+  },
+  {
+   "id": "G-59",
+   "summary": "HALT 後のライフサイクル管理が無い — halt を出す/記録する機構は在るが、解けたことを伝える機構と『まだ止まっている』を表示する機構が無い",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "READ: halt を出す機構は在る(spec 自身の『矛盾規則: halt』)",
+    "READ: halt を記録する機構は在る(CC_IMPL_2026-07-24_RRI_HALT.md)",
+    "READ: halt を解く裁定は同日に出た(SPEC_RTHREAD_STAGE1_v0.1 の FLOW NOTE / RRI_IMPL_SPEC_v0.1:6 の『置換』)",
+    "★解けたことを止まっていた作業に伝える機構は無い",
+    "★halt 中の作業を『まだ止まっている』と表示する機構も無い",
+    "EXEC(実害): 2026-07-29 に CC-α が『5日間止まっている』と誤読し、MGR が Taka へ既出の裁定を求める寸前だった"
+   ],
+   "note": "★Taka 指示(2026-07-29 逐語)『今回見つかった HALT 後のライフサイクル管理は Phase2 で扱う価値があります。これは RRI 固有の話ではなく、2DER 全体の運用基盤として残しておくとよい改善点』。★分類=2DER 全体の運用基盤(RRI 固有ではない)。★いま着手しない(Taka は『Phase 2 で扱う価値がある』と書いており『いま扱え』ではない／Phase 2 の中心は管理UI)。★MGR の気付き=本件は完了像⑤『欠損・失敗・未確認が見える』と同じ形(halt は見えていない状態)であり中心が進めば一部が射程に入りうるが、これは予想であって設計ではなく中心を歪めてまで含めない"
   }
  ],
  "planned_extensions": [
