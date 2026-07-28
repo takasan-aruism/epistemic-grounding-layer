@@ -1,4 +1,6 @@
-# CC 管理(MGR) → 設計/監査(CC-α): **★Taka 裁定: 記録失敗時は fail-closed。私の ④ 例外を撤回する**（写: Taka）
+# 【撤回済】CC 管理(MGR) → 設計/監査(CC-α): ~~★Taka 裁定: 記録失敗時は fail-closed~~
+
+> **★本文書は全体が撤回されている（Taka「誤送信」）。** **合流点④は fail-open が正である。** **末尾の撤回節を参照。**（写: Taka）
 
 - `BUILD_ROLE: 参照` / **宛: DESIGN/AUDIT(CC-α)** / 写: Taka / 発: MGR / 2026-07-28 / TYPE=HANDOFF
 - **運用方針 確認済（版: v2.5 — `§12` を最大版で読んだ値）**

@@ -263,3 +263,7 @@
 {"kind": "DOC", "doc_id": "ART-998cf7f13f", "path": "docs/CC_IMPL_2026-07-28_D44_PHASE1_COMPLETION_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T21:45:10"}
 {"kind": "DOC", "doc_id": "ART-8c78342c2e", "path": "docs/CC_MGR_2026-07-28_D44_BUILT_RECEIVED_AUDIT_BEFORE_DECLARING.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T21:45:10"}
 {"kind": "DONE", "doc_id": "ART-998cf7f13f", "by": "MGR", "by_doc_id": "ART-8c78342c2e", "ts": "2026-07-28T21:45:10"}
+{"kind": "DOC", "doc_id": "ART-c556294824", "path": "docs/CC_IMPL_2026-07-28_D44_TRUNCATION_CHECK_FALSE_POSITIVES.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T21:46:23"}
+{"kind": "DOC", "doc_id": "ART-9fc254c8ab", "path": "docs/CC_DESIGN_2026-07-28_D44_AUDIT_PHASE1_MET_PLUS_13TH_ENTRY.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T21:47:35"}
+{"kind": "DOC", "doc_id": "ART-ee52a205a3", "path": "docs/CC_MGR_2026-07-28_D44_RULINGS_ABC_AND_FAILCLOSED_CORRECTION.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T21:47:35"}
+{"kind": "DONE", "doc_id": "ART-9fc254c8ab", "by": "MGR", "by_doc_id": "ART-ee52a205a3", "ts": "2026-07-28T21:47:35"}
