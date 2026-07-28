@@ -1133,12 +1133,12 @@
    "id": "G-37",
    "summary": "provenance.ds_thread_id が実データで null（threads が空）— Session ID 候補として当てにできない",
    "kind": "gap",
-   "status": "OPEN",
+   "status": "DEFERRED",
    "evidence": [
     "EXEC: /api/claude_packet の provenance.ds_thread_id = null",
     "READ: submit.py:420 (threads[0].get('thread_id') if threads else None)"
    ],
-   "note": "D-41。∴ Session ID は ds_thread_id でなく conversation_id を採るべき。threads が空になった原因は未調査(誰が=CC-α / いつ=MGR の要請時)"
+   "note": "D-41。∴ Session ID は ds_thread_id でなく conversation_id を採るべき。★threads が空になった原因は【未確認・誰が=CC-α / いつ=Event Trace の SPEC 着手時】（MGR 裁定: 本線から外れるので今は調べない）"
   }
  ],
  "planned_extensions": [
