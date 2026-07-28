@@ -320,3 +320,7 @@
 {"kind": "DOC", "doc_id": "ART-224f1e2baf", "path": "docs/CC_MGR_2026-07-29_D49_ALLOW_ONE_WEBUI_SUBMIT_SAME_TEXT.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T01:22:12"}
 {"kind": "DONE", "doc_id": "ART-0a9b25d137", "by": "MGR", "by_doc_id": "ART-224f1e2baf", "ts": "2026-07-29T01:22:12"}
 {"kind": "DOC", "doc_id": "ART-128a692277", "path": "docs/CC_DESIGN_2026-07-29_D49_RELAY_ONE_WEBUI_SUBMIT.md", "type": "HANDOFF", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T01:23:11"}
+{"kind": "DOC", "doc_id": "ART-9a828b2b47", "path": "docs/CC_IMPL_2026-07-29_D49_UI_TWO_ITEMS_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T01:25:08"}
+{"kind": "DOC", "doc_id": "ART-9a828b2b47", "path": "docs/CC_IMPL_2026-07-29_D49_UI_TWO_ITEMS_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T01:36:14"}
+{"kind": "DOC", "doc_id": "ART-648bf71476", "path": "docs/CC_MGR_2026-07-29_D49_BUILT_RECEIVED_MY_PREMISE_BROKE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T01:36:14"}
+{"kind": "DONE", "doc_id": "ART-9a828b2b47", "by": "MGR", "by_doc_id": "ART-648bf71476", "ts": "2026-07-29T01:36:14"}
