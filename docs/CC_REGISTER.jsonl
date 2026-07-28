@@ -202,3 +202,6 @@
 {"kind": "DOC", "doc_id": "ART-b4d6594cdc", "path": "docs/CC_IMPL_2026-07-28_D42_EVENT_TRACE_PHASE1_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T14:23:06"}
 {"kind": "DOC", "doc_id": "ART-ed468a2c4e", "path": "docs/CC_MGR_2026-07-28_D42_BUILT_RECEIVED_PHASE1_NOT_MET.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T14:23:06"}
 {"kind": "DONE", "doc_id": "ART-b4d6594cdc", "by": "MGR", "by_doc_id": "ART-ed468a2c4e", "ts": "2026-07-28T14:23:06"}
+{"kind": "DOC", "doc_id": "ART-f7604c1c1c", "path": "docs/CC_DESIGN_2026-07-28_D42_AUDIT_OF_BUILT.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T14:30:34"}
+{"kind": "DOC", "doc_id": "ART-eddc1a095b", "path": "docs/CC_MGR_2026-07-28_D42_RULINGS_ABC_AFTER_AUDIT.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T14:30:34"}
+{"kind": "DONE", "doc_id": "ART-f7604c1c1c", "by": "MGR", "by_doc_id": "ART-eddc1a095b", "ts": "2026-07-28T14:30:34"}
