@@ -1164,6 +1164,19 @@
     "READ: dw/adjudicator.py:180 from twoder import failure_resource_precheck"
    ],
    "note": "D-42 の置き場所選定中に発見。本 build の範囲外(直さない)。ds/rri/egl は互いを1つも import しない葉である"
+  },
+  {
+   "id": "G-40",
+   "summary": "Event Trace の概念的な持ち主は EGL だが、辺の向きの制約により ds に置いた（設計上の妥協）",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "READ: EGL は既に『実行の証拠』を持つ(egl/structure/EXECUTION_EVIDENCE.jsonl / s1e_executed.py)",
+    "EXEC: ds/rri/egl は互いを1つも import しない葉 ∴ import では下位が決まらない",
+    "READ: submit.py の実行順は 段1 DS → 段3a EGL → 段3b-e RRI → 段4 DW ∴ ds→egl は前→後で逆行",
+    "裁定: CC_MGR_2026-07-28_D42_BUILD_SPEC_APPROVED.md §2"
+   ],
+   "note": "★良い置き場所を選んだのではない。辺の向きの制約に負けた結果である。いま動かさない——動かすなら別の裁定。★これを登録しないと半年後に『なぜ対話記録の repo に実行トレースが在るのか』を再導出する"
   }
  ],
  "planned_extensions": [

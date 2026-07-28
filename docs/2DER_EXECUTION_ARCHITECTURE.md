@@ -308,6 +308,31 @@ CURRENT:
 | **G-13** | **`test_submit_e2e` の3件が失敗（Build 10 以前から）** | Gap | 未調査 |
 | **G-14** | **DS `reconstruct_snapshot failed: HTTP 400`** | Gap | 未調査 |
 | **G-15** | **`LEDGER_REGISTRY` と `EDGE_INVENTORY` の鮮度が不揃い**（07-22 / 07-26） | 計器の欠陥 | 未着手 |
+| **G-16** | mint 側(generate_via_runner.mint_token)と検証側(approval_registry)が action_type/task_id/operation_class の3項目とも別の語彙を使う | 矛盾 | **CLOSED** |
+| **G-17** | /tmp 直下に約1000万エントリ。ルート FS の使用 inode の約88%を占め、cwd を /tmp にすると Python の import が返らない | Gap | **CLOSED** |
+| **G-18** | cc_register.py は egl/docs に在り、利用側が sys.path を通す必要がある(口伝だった) | Gap | 未着手 |
+| **G-19** | GENERATE は失敗しても段を進める(record_generate が成否に関わらず遷移を記録する) | Gap | 未着手 |
+| **G-20** | サンドボックス保証(process_kill_cleanup 等)が仕様辞書の自己申告を検査するだけで実装が無かった | contradicted | PARTIALLY_CLOSED |
+| **G-21** |  の timeout が直接の子しか殺さず、孫以降が生き残る | Gap | **CLOSED** |
+| **G-22** | 生成コードの危険な形(__main__ 重複・自己 subprocess 起動)を実行前に見る検査が無い | Gap | 未着手 |
+| **G-23** | 計器が自分自身を数えてしまう(測る側の命令行に探索文字列が現れる) | 計器の欠陥 | 未着手 |
+| **G-24** | runtime_supervisor.qwen_raw_call は system を受け取れるが build_planner は渡していない(auditor は渡している) | Gap | 未着手 |
+| **G-25** | RUNNER_FAILED が『落ちた/走らせられなかった/1件も集まらなかった』を1語に潰す | Gap | **CLOSED** |
+| **G-26** | immutable_tests の書式要件(pytest が集める test_* 関数)がどこにも書かれず、空の検査を封じられた | Gap | **CLOSED** |
+| **G-27** | 検査の供給者と合否の判定者が同一(設計/監査が immutable_tests と受入基準の両方を書く) | Gap | 未着手 |
+| **G-28** | 運用方針 §12 の改訂履歴に一貫した並び順が無く、位置で最新版を判定できない | 計器の欠陥 | 未着手 |
+| **G-29** | 『【未確認】』が閉じる期限も担当も持たず、宣言が確認の代わりになる | 作法の欠陥 | 未着手 |
+| **G-30** | ds.phase0.record_utterance は HUMAN_RELAYED/relayed_by/authored_by を受け取れるが、twoder.submit が引数を持たず origin=MACHINE_SUBMIT を直書きしている | Gap | 未着手 |
+| **G-31** | 同一文面の再投入で、途中の発話の実行記録が保存されない（DW CREATE は最初の1回・TRACE ファイルは最後の1回しか残らない）。加えて INTENT_STRATEGY / RRI_PREFLIGHT が /api/state に出ない | Gap | 未着手 |
+| **G-32** | 『探した範囲に無い』を『無い』と書く／確かめずに上流へ流す（本日 CC-α 3回・MGR 3回） | 作法の欠陥 | 未着手 |
+| **G-33** | RRI の event stream (rthread_events.jsonl) は実装されているが本番経路から一度も呼ばれない | Gap | 未着手 |
+| **G-34** | TRACE は系列でなくスナップショット — 1回の submit の中でも途中経過が消える | Gap | 未着手 |
+| **G-35** | どの記録機構も『親 Event ID』を持たない — 一本の系列が作れない | Gap | 未着手 |
+| **G-36** | CLI 投入(python3 -m twoder.submit)は TRACE を1件も残さない — 使用ガイドが名指しする投入経路が実行記録を作らない | Gap | 未着手 |
+| **G-37** | provenance.ds_thread_id が実データで null（threads が空）— Session ID 候補として当てにできない | Gap | **DEFERRED**（原因は【未確認・誰が=CC-α / いつ=Event Trace の SPEC 着手時】。MGR 裁定で本線外） |
+| **G-38** | Event Trace の合流点④(DW `_append_event`)は fail-open — 記録の取りこぼしが起きうる | Gap | 未着手（★穴を見える場所に置いた・SPEC §2-5） |
+| **G-39** | 既存の依存逆転 — `dw` が `twoder` を import している(3箇所) | Gap | 未着手（D-42 範囲外） |
+| **G-40** | Event Trace の概念的な持ち主は EGL だが、辺の向きの制約により `ds` に置いた（設計上の妥協） | Gap | 未着手（★いま動かさない。動かすなら別の裁定） |
 
 ---
 
@@ -353,4 +378,4 @@ CURRENT:
 | 14 | commit 前に Taka へ提示 | **未**（MGR が仲介） |
 
 ---
-*2DER Execution Architecture v0.1（常設・正典）。`2DER_MECHANISM_MAP.md` を包含し統合する（正典を2本にしない）。★要約=書く側も読む側(`GET /api/resolve`)も繋がっており、繋がっていないのは決定論で絞る側である（★2026-07-28 訂正: 初版は「読む側が繋がっていない」「最大の切断は G-01」と書いたが**誤りだった**——探索範囲を `submit()` の acquisition 枝に限っており、別の口を見ていなかった。G-01 は CLOSED）。勘定科目は EGL 登録経路に無く(G-02)、4軸→7戦略の決定論選択は既定で入らない分岐にあり3軸は本番で生成されない(G-03)。PLAN は Qwen が書き(決定論テンプレは front door 由来 task では原理的に発火しない)、worker は契約(skeleton+immutable_tests)が無ければ着手せず、契約は依頼者(Claude)が渡す。worker は production repo に三重の保証で書けず、配置は Claude の役割。Gap Register は G-01〜G-29（本日 G-16〜G-29 を追加・同期）。★未達=commit 記録／EventStore 等の責務比較／構想との差分／機械可読版／Taka への提示。調査の大半は静的であり、`【読】` を `LIVE` に昇格させていない。*
+*2DER Execution Architecture v0.1（常設・正典）。`2DER_MECHANISM_MAP.md` を包含し統合する（正典を2本にしない）。★要約=書く側も読む側(`GET /api/resolve`)も繋がっており、繋がっていないのは決定論で絞る側である（★2026-07-28 訂正: 初版は「読む側が繋がっていない」「最大の切断は G-01」と書いたが**誤りだった**——探索範囲を `submit()` の acquisition 枝に限っており、別の口を見ていなかった。G-01 は CLOSED）。勘定科目は EGL 登録経路に無く(G-02)、4軸→7戦略の決定論選択は既定で入らない分岐にあり3軸は本番で生成されない(G-03)。PLAN は Qwen が書き(決定論テンプレは front door 由来 task では原理的に発火しない)、worker は契約(skeleton+immutable_tests)が無ければ着手せず、契約は依頼者(Claude)が渡す。worker は production repo に三重の保証で書けず、配置は Claude の役割。Gap Register は G-01〜G-40（★2026-07-28 D-41 で G-33〜G-35 を追加し、MD 表を JSON と同期した——それまで MD 表は G-15 で止まっており、§6 が自ら宣言した不変条件『`gaps[].id` の集合が MD §5.11 の表と一致する』が破れていた。★この不変条件を検査する計器は存在しない）。★未達=commit 記録／EventStore 等の責務比較／構想との差分／機械可読版／Taka への提示。調査の大半は静的であり、`【読】` を `LIVE` に昇格させていない。*
