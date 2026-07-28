@@ -172,3 +172,4 @@
 {"kind": "DOC", "doc_id": "ART-90208df046", "path": "docs/CC_DESIGN_2026-07-28_G31_FINAL_ONE_KEY_NOT_EXPOSED.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T10:28:25"}
 {"kind": "DOC", "doc_id": "ART-c0d636bf39", "path": "docs/CC_MGR_2026-07-28_G31_FINAL_RECEIVED_ASKING_TAKA_NARROW.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T10:28:25"}
 {"kind": "DONE", "doc_id": "ART-90208df046", "by": "MGR", "by_doc_id": "ART-c0d636bf39", "ts": "2026-07-28T10:28:25"}
+{"kind": "DOC", "doc_id": "ART-2630d0a995", "path": "docs/EVENT_TRACE_WORK_ORDER_v1_0.md", "type": "FINDING", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T10:30:32"}
