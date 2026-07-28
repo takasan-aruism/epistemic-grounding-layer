@@ -197,3 +197,4 @@
 {"kind": "DOC", "doc_id": "ART-e4dc352a76", "path": "docs/CC_MGR_2026-07-28_D42_BUILD_SPEC_APPROVED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T13:20:46"}
 {"kind": "DONE", "doc_id": "ART-a2fe2c3ce1", "by": "MGR", "by_doc_id": "ART-e4dc352a76", "ts": "2026-07-28T13:20:46"}
 {"kind": "DOC", "doc_id": "ART-136f881904", "path": "docs/CC_DESIGN_2026-07-28_D42_HANDOFF_TO_IMPL.md", "type": "HANDOFF", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T13:25:11"}
+{"kind": "DOC", "doc_id": "ART-b4d6594cdc", "path": "docs/CC_IMPL_2026-07-28_D42_EVENT_TRACE_PHASE1_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T14:18:15"}

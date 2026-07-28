@@ -167,6 +167,23 @@ def admit_design_evidence(candidate, ts, ledger_path=None, reverify=None):
     with ledger.open("a") as fh:
         fh.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
+    # 合流点③(Event Trace)。DESIGN_EVIDENCE_LEDGER の唯一の書き手の内側。★返り値を変えない（副作用のみ）。
+    # `ds` は各 repo が sys.path に足す前提なので、単独起動でも届くよう相対で解決する（利用者名を埋め込まない）。
+    try:
+        from ds import etrace as _ET
+    except ImportError:
+        # `ds` が「中身の無い名前空間」として先に束縛されているとパスを足すだけでは解決しない。
+        # その場合に限り束縛を捨てて解決し直す（実体を持つ `ds` は捨てない）。
+        import sys as _sys, pathlib as _pl, importlib as _il
+        _sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[2] / "ds"))
+        if getattr(_sys.modules.get("ds"), "__file__", None) is None:
+            _sys.modules.pop("ds", None)
+        _il.invalidate_caches()
+        from ds import etrace as _ET
+    _ET.emit("EGL", "admit_design_evidence", None,
+             {"design_evidence_id": did, "admission_id": admission_id,
+              "admission_status": admission_status}, "OK")
+
     return {"admitted": True, "admission_status": admission_status, "design_evidence_id": did,
             "admission_id": admission_id, "validation_target": validation_target, "record_class": record_class,
             "reasons": reasons or ["record-occurrence admitted"], "downgrades": downgrades,
