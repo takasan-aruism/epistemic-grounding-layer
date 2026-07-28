@@ -1328,7 +1328,7 @@
    "id": "G-46",
    "summary": "TRACE に置いた値57件のうち35件(61%)が front door から読めない — ETRACE_RUN_ID はその1件",
    "kind": "gap",
-   "status": "OPEN",
+   "status": "PARTIALLY_CLOSED",
    "evidence": [
     "EXEC: grep -n 'ETRACE_RUN_ID' twoder/submit.py twoder/webui.py → submit.py:99 のみ / webui.py は0件",
     "EXEC(CC-α): /api/resolve で ETR- の分岐は生きている(resolved=False/record=None)が、引くべき id を知る経路が無い",
@@ -1336,7 +1336,8 @@
     "CLI(python3 -m twoder.submit)は TRACE 全体を印字するので CLI 経路だけは取れる",
     "EXEC: placed(submit.py の _rec 全キー+ETRACE_RUN_ID)=57 / exposed(webui.py 全体の tr.get・tr[])=22 / 差=35",
     "EXEC: webui が TRACE を丸ごと返す口は無い(json.dumps(tr) はファイル書き込み2箇所のみ)",
-    "★別経路が在るものも含む: TRACE_ID/RRI_REQUEST_ID/RRI_INTENT_ID/DS_EVENT_ID は /api/claude_packet の provenance から取れる(本日【実】)——ただし DW task が在るときだけ"
+    "★別経路が在るものも含む: TRACE_ID/RRI_REQUEST_ID/RRI_INTENT_ID/DS_EVENT_ID は /api/claude_packet の provenance から取れる(本日【実】)——ただし DW task が在るときだけ",
+    "★2026-07-29 D-49: build_state の列挙に etrace_run_id を追加し、GET /api/state?task_id=TASK-2DER-D84215A8 で etrace_run_id=ETR-0f6fae35665a を CC-α が実測 ∴ webui 投入の run は UI から引けるようになった。★ただし CLI 投入の run は依然引けない(G-36) / TRACE の残り33件も出ていない"
    ],
    "note": "★MGR 新規則 v2.4 §5-12『置いたなら読める所まで書け』を既存に当てた結果。G-31(2件)→G-46(1件)と数えていたが実際は35件で、ETRACE_RUN_ID はその1つ。∴『次段で直す』の規模が2行か35件かで裁定の前提が変わる。選別の基準は CC-α が決めず MGR へ: (a)Taka の問いに要る RRI 判断値だけ (b)別経路が無いものだけ【CC-α 推奨】 (c)全部。★別経路の有無は35件すべてを調べておらず『無い』ではなく『私は知らない』(G-32)"
   },
@@ -1505,6 +1506,19 @@
     "EXEC(実害): 2026-07-29 に CC-α が『5日間止まっている』と誤読し、MGR が Taka へ既出の裁定を求める寸前だった"
    ],
    "note": "★Taka 指示(2026-07-29 逐語)『今回見つかった HALT 後のライフサイクル管理は Phase2 で扱う価値があります。これは RRI 固有の話ではなく、2DER 全体の運用基盤として残しておくとよい改善点』。★分類=2DER 全体の運用基盤(RRI 固有ではない)。★いま着手しない(Taka は『Phase 2 で扱う価値がある』と書いており『いま扱え』ではない／Phase 2 の中心は管理UI)。★MGR の気付き=本件は完了像⑤『欠損・失敗・未確認が見える』と同じ形(halt は見えていない状態)であり中心が進めば一部が射程に入りうるが、これは予想であって設計ではなく中心を歪めてまで含めない"
+  },
+  {
+   "id": "G-60",
+   "summary": "「1文字も変えない」を運ぶ手順が無い — $(cat file) が末尾改行を落とし task_id が変わる（本日2度目の実害）",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "EXEC(CC-α 独立計算): 承認文面135字→TASK-2DER-AC13F06E / 末尾改行あり136字→TASK-2DER-D84215A8",
+    "EXEC(IMPL): CLI 投入=AC13F06E / webui 投入=D84215A8 ＝上記と完全一致",
+    "★同型の1度目: Build 17(2410字 vs 2411字で task_id が変わった)",
+    "★MGR の前提『新しい DW task は増えない』を CC-α が確かめずに中継した(投入前に計算できた)"
+   ],
+   "note": "★task_id = sha1(raw_input) である以上、運び方の1文字が別 task を作る。文面を変えていなくても起きる。★CC-α の落ち度=決定論で確定できる前提を確かめずに中継した(本日2回目)。IMPL は指示どおり1回だけ投入し、増えたことを自ら報告し原因を決定論で特定し消していない ∴ 止まる必要は無かった(監査判定)"
   }
  ],
  "planned_extensions": [
