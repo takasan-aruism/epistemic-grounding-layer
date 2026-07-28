@@ -1286,6 +1286,22 @@
     "EXEC: dev-workcell/dw/authorization.py:46 呼び手0"
    ],
    "note": "MGR 裁定 §5-4『塞がない・据え置く』。★MGR は『G-41 として登録』と書いたが G-41 は別内容(進行経路にⓠが無い)で既に使用済のため G-45 を採番した——MGR に報告済。到達可能になった時点で本件を再開する"
+  },
+  {
+   "id": "G-46",
+   "summary": "TRACE に置いた値57件のうち35件(61%)が front door から読めない — ETRACE_RUN_ID はその1件",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "EXEC: grep -n 'ETRACE_RUN_ID' twoder/submit.py twoder/webui.py → submit.py:99 のみ / webui.py は0件",
+    "EXEC(CC-α): /api/resolve で ETR- の分岐は生きている(resolved=False/record=None)が、引くべき id を知る経路が無い",
+    "READ: /api/submit の応答は明示キー列挙(webui.py:551) / build_state も TRACE から拾う項目を1つずつ列挙(G-31 で確定した構造)",
+    "CLI(python3 -m twoder.submit)は TRACE 全体を印字するので CLI 経路だけは取れる",
+    "EXEC: placed(submit.py の _rec 全キー+ETRACE_RUN_ID)=57 / exposed(webui.py 全体の tr.get・tr[])=22 / 差=35",
+    "EXEC: webui が TRACE を丸ごと返す口は無い(json.dumps(tr) はファイル書き込み2箇所のみ)",
+    "★別経路が在るものも含む: TRACE_ID/RRI_REQUEST_ID/RRI_INTENT_ID/DS_EVENT_ID は /api/claude_packet の provenance から取れる(本日【実】)——ただし DW task が在るときだけ"
+   ],
+   "note": "★MGR 新規則 v2.4 §5-12『置いたなら読める所まで書け』を既存に当てた結果。G-31(2件)→G-46(1件)と数えていたが実際は35件で、ETRACE_RUN_ID はその1つ。∴『次段で直す』の規模が2行か35件かで裁定の前提が変わる。選別の基準は CC-α が決めず MGR へ: (a)Taka の問いに要る RRI 判断値だけ (b)別経路が無いものだけ【CC-α 推奨】 (c)全部。★別経路の有無は35件すべてを調べておらず『無い』ではなく『私は知らない』(G-32)"
   }
  ],
  "planned_extensions": [
