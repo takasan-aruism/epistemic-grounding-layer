@@ -1315,6 +1315,28 @@
     "READ: 合流点③ de_admission は submit.py:140 の DE 登録 fast path でのみ呼ばれる ∴ 今回は通っていない(それ自体は正常)"
    ],
    "note": "★MGR §2 の問いへの答え=「通らなかったから正常」ではなく「通ったのに記録が無い」＝欠陥。★設計(CC-α)の欠陥5件目——合流点③を de_admission にしたが、その ONLY sanctioned writer 宣言の対象は DESIGN_EVIDENCE_LEDGER.jsonl 1つだけで、EGL には egl/data/events.jsonl を書く別の店が在る。∴ 次段⑤は『確認』でなく『合流点③の範囲を広げるか』の裁定"
+  },
+  {
+   "id": "G-48",
+   "summary": "twoder 自身の台帳9つは Event Trace の外に在る（Taka の境界イベント7つの対象外）",
+   "kind": "gap",
+   "status": "DEFERRED",
+   "evidence": [
+    "IMPL の全走査(D-42 受入⑦c)で 4区分のどれにも入らなかった9台帳: artifact_registry / failure_memory / roadmap_registry / human_escalation_ledger / economy_decision_ledger / completion_definition_registry / benchmark_run_ledger / active_work_and_wait_ledger / claude_intervention_log",
+    "READ: これらは DS/RRI/EGL/DW の台帳ではない"
+   ],
+   "note": "MGR 裁定『今は触らない。ついでに入れない。入れるなら別の裁定』。★MGR は『G-47 として登録』と書いたが G-47 は別内容(EGL 迂回)で使用済のため G-48 を採番——MGR に報告済。本日 id 採番の衝突はこれで2度目(G-45 も同様)"
+  },
+  {
+   "id": "G-49",
+   "summary": "acquisition.py 固有の境界イベント（実装監査用 Instrumentation）— Phase 2 で必要性を判断する",
+   "kind": "gap",
+   "status": "DEFERRED_TO_PHASE2",
+   "evidence": [
+    "裁定(Taka): 責務点＝唯一の書き手 egl/egl/core.py::append_event。acquisition.py 固有の境界イベントは Phase 1 の完了条件に含まれない",
+    "CC_MGR_2026-07-28_D44_A_CONFIRMED_PROCEED.md §3"
+   ],
+   "note": "★『Phase 2 でやること』の一覧ではなく『Phase 2 で必要性を判断すること』の一覧（MGR 明示）。★MGR は G-48 として登記と書いたが G-48 は twoder 自身の台帳9件で使用済のため G-49 を採番——本日3度目の id 衝突(G-41/G-45/G-48)"
   }
  ],
  "planned_extensions": [

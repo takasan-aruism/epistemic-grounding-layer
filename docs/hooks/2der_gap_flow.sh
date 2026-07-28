@@ -30,7 +30,7 @@ for p in glob.glob("docs/CC_*.md"):
     for m in set(re.findall(r"\bG-\d+\b", s)):
         # G-9999 は自己試験用の予約 id。文書がそれを引用しても数えない
         # (2026-07-28: 自分が試験の様子を文書に書いたら、計器が自分を数えた。本日5回目の自己一致)
-        if (n := norm(m)) and n != "G-9999":
+        if (n := norm(m)) and n not in ("G-9999", "G-8888"):   # 予約: 自己試験用
             in_docs.setdefault(n, []).append(os.path.basename(p))
 
 missing = sorted(set(in_docs) - in_json, key=lambda x: int(x.split("-")[1]))
