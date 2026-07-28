@@ -1139,6 +1139,31 @@
     "READ: submit.py:420 (threads[0].get('thread_id') if threads else None)"
    ],
    "note": "D-41。∴ Session ID は ds_thread_id でなく conversation_id を採るべき。★threads が空になった原因は【未確認・誰が=CC-α / いつ=Event Trace の SPEC 着手時】（MGR 裁定: 本線から外れるので今は調べない）"
+  },
+  {
+   "id": "G-38",
+   "summary": "Event Trace の合流点④(DW _append_event)は fail-open — 記録の取りこぼしが起きうる",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "裁定: CC_MGR_2026-07-28_D42_RULINGS_A_B_AND_TEXT_APPROVED.md §2-2",
+    "理由: worker 実行中に止めると成果物が失われる(Build 18 で成果物が消える経路を実見)",
+    "緩和: 失敗をカウントし次に成功した emit が dropped_before:N を載せる / 書けなければ stderr"
+   ],
+   "note": "★穴を無くせないので穴を見える場所に置いた。G-20(宣言だけの保証)を繰り返さないため、SPEC 本文 §2-5 に明記することを実装条件にしている"
+  },
+  {
+   "id": "G-39",
+   "summary": "既存の依存逆転 — dev-workcell(dw) が twoder を import している(3箇所)",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "EXEC: 5repo 総当たり import 計数 → dw -> twoder : 3 箇所（他方向は twoder -> ds/rri/egl/dw のみ）",
+    "READ: dw/dispatch.py:23 from twoder import execution_economy",
+    "READ: dw/adapters.py:139 from twoder import runtime_supervisor",
+    "READ: dw/adjudicator.py:180 from twoder import failure_resource_precheck"
+   ],
+   "note": "D-42 の置き場所選定中に発見。本 build の範囲外(直さない)。ds/rri/egl は互いを1つも import しない葉である"
   }
  ],
  "planned_extensions": [

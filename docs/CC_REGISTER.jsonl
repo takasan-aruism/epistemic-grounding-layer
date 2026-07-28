@@ -192,3 +192,7 @@
 {"kind": "DOC", "doc_id": "ART-68ec53680c", "path": "docs/CC_DESIGN_2026-07-28_D42_EVENT_TRACE_PHASE1_SPEC.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T13:09:50"}
 {"kind": "DOC", "doc_id": "ART-e6aaaca864", "path": "docs/CC_MGR_2026-07-28_D42_RULINGS_A_B_AND_TEXT_APPROVED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T13:09:50"}
 {"kind": "DONE", "doc_id": "ART-68ec53680c", "by": "MGR", "by_doc_id": "ART-e6aaaca864", "ts": "2026-07-28T13:09:50"}
+{"kind": "DOC", "doc_id": "ART-a2fe2c3ce1", "path": "docs/CC_DESIGN_2026-07-28_D42_EVENT_TRACE_PHASE1_BUILD_SPEC_v1_0.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "MGR", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-28T13:20:43"}
+{"kind": "DOC", "doc_id": "ART-a2fe2c3ce1", "path": "docs/CC_DESIGN_2026-07-28_D42_EVENT_TRACE_PHASE1_BUILD_SPEC_v1_0.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-28T13:20:46"}
+{"kind": "DOC", "doc_id": "ART-e4dc352a76", "path": "docs/CC_MGR_2026-07-28_D42_BUILD_SPEC_APPROVED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T13:20:46"}
+{"kind": "DONE", "doc_id": "ART-a2fe2c3ce1", "by": "MGR", "by_doc_id": "ART-e4dc352a76", "ts": "2026-07-28T13:20:46"}
