@@ -333,6 +333,11 @@ CURRENT:
 | **G-38** | Event Trace の合流点④(DW `_append_event`)は fail-open — 記録の取りこぼしが起きうる | Gap | 未着手（★穴を見える場所に置いた・SPEC §2-5） |
 | **G-39** | 既存の依存逆転 — `dw` が `twoder` を import している(3箇所) | Gap | 未着手（D-42 範囲外） |
 | **G-40** | Event Trace の概念的な持ち主は EGL だが、辺の向きの制約により `ds` に置いた（設計上の妥協） | Gap | 未着手（★いま動かさない。動かすなら別の裁定） |
+| **G-41** | 合流点⓪(run の発行)は「投入」経路にしか無く「進行」経路に無い — 進行中の記録に `run_id` が付かない | Gap | 未着手（★裁定事項） |
+| **G-42** | `event_trace.jsonl` は書けるが読めない（`ORPHAN`）— 完了条件⑥が構造上満たせない | Gap | 未着手（★裁定事項） |
+| **G-43** | 設計の受入基準が「入口」と「台帳への書き込み」を混同していた | 作法の欠陥 | 未着手（★設計の落ち度） |
+| **G-44** | Event Trace の id prefix が EGL と衝突（`RUN-` / `EV-` の**2件**）— 実在する id を 2DER が「穴」と報告している | Gap | 未着手（★3者共通の型として登録） |
+| **G-45** | 本番未到達の台帳書き手3件（`request_thread` / `egl.core.append_event` / `dw.authorization`） | Gap | **DEFERRED**（MGR 裁定: 塞がず据え置き） |
 
 ---
 
@@ -378,4 +383,4 @@ CURRENT:
 | 14 | commit 前に Taka へ提示 | **未**（MGR が仲介） |
 
 ---
-*2DER Execution Architecture v0.1（常設・正典）。`2DER_MECHANISM_MAP.md` を包含し統合する（正典を2本にしない）。★要約=書く側も読む側(`GET /api/resolve`)も繋がっており、繋がっていないのは決定論で絞る側である（★2026-07-28 訂正: 初版は「読む側が繋がっていない」「最大の切断は G-01」と書いたが**誤りだった**——探索範囲を `submit()` の acquisition 枝に限っており、別の口を見ていなかった。G-01 は CLOSED）。勘定科目は EGL 登録経路に無く(G-02)、4軸→7戦略の決定論選択は既定で入らない分岐にあり3軸は本番で生成されない(G-03)。PLAN は Qwen が書き(決定論テンプレは front door 由来 task では原理的に発火しない)、worker は契約(skeleton+immutable_tests)が無ければ着手せず、契約は依頼者(Claude)が渡す。worker は production repo に三重の保証で書けず、配置は Claude の役割。Gap Register は G-01〜G-40（★2026-07-28 D-41 で G-33〜G-35 を追加し、MD 表を JSON と同期した——それまで MD 表は G-15 で止まっており、§6 が自ら宣言した不変条件『`gaps[].id` の集合が MD §5.11 の表と一致する』が破れていた。★この不変条件を検査する計器は存在しない）。★未達=commit 記録／EventStore 等の責務比較／構想との差分／機械可読版／Taka への提示。調査の大半は静的であり、`【読】` を `LIVE` に昇格させていない。*
+*2DER Execution Architecture v0.1（常設・正典）。`2DER_MECHANISM_MAP.md` を包含し統合する（正典を2本にしない）。★要約=書く側も読む側(`GET /api/resolve`)も繋がっており、繋がっていないのは決定論で絞る側である（★2026-07-28 訂正: 初版は「読む側が繋がっていない」「最大の切断は G-01」と書いたが**誤りだった**——探索範囲を `submit()` の acquisition 枝に限っており、別の口を見ていなかった。G-01 は CLOSED）。勘定科目は EGL 登録経路に無く(G-02)、4軸→7戦略の決定論選択は既定で入らない分岐にあり3軸は本番で生成されない(G-03)。PLAN は Qwen が書き(決定論テンプレは front door 由来 task では原理的に発火しない)、worker は契約(skeleton+immutable_tests)が無ければ着手せず、契約は依頼者(Claude)が渡す。worker は production repo に三重の保証で書けず、配置は Claude の役割。Gap Register は G-01〜G-45（★2026-07-28 D-41 で G-33〜G-35 を追加し、MD 表を JSON と同期した——それまで MD 表は G-15 で止まっており、§6 が自ら宣言した不変条件『`gaps[].id` の集合が MD §5.11 の表と一致する』が破れていた。★この不変条件を検査する計器は存在しない）。★未達=commit 記録／EventStore 等の責務比較／構想との差分／機械可読版／Taka への提示。調査の大半は静的であり、`【読】` を `LIVE` に昇格させていない。*

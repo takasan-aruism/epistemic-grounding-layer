@@ -19,7 +19,9 @@
    "EXEC_ARCH_WORK_ORDER_v0_1.md は全文を読んだが、内容の妥当性評価はしていない",
    "TASK_CONTRACTS.jsonl / ARTIFACT_REGISTRY.jsonl / LEDGER_REGISTRY.jsonl の中身は UNKNOWN(台帳の直読を避けたため)",
    "呼び出し元の網羅はしていない(submit( の呼び出しは CLI と webui の2箇所を確認した範囲)"
-  ]
+  ],
+  "last_synced_at": "2026-07-28 (D-42/D-43)",
+  "sync_note": "★2026-07-28: D-42 で phase0.py / de_admission.py / submit.py / workcell.py / intent_record.py に etrace の emit が入り ds/ds/etrace.py が新設された。commit を現在の HEAD に更新し C-ETRACE と辺2本を追加した。★status は LIVE でなく WIRED_UNPROVEN — 記録の中身を誰も読めていないため(G-42)。読み出し口(D-43)が入るまで昇格させない。"
  },
  "generated_from": {
   "repositories": [
@@ -32,23 +34,23 @@
   "commits": [
    {
     "repo": "ds",
-    "commit": "b0dcd32"
+    "commit": "e7ac5b0"
    },
    {
     "repo": "rri",
-    "commit": "b1adab2"
+    "commit": "b9fc1bc"
    },
    {
     "repo": "egl",
-    "commit": "4c300c1"
+    "commit": "7f78b2a"
    },
    {
     "repo": "dev-workcell",
-    "commit": "9388fb2"
+    "commit": "83884b3"
    },
    {
     "repo": "twoder",
-    "commit": "a75ad56"
+    "commit": "b2464d9"
    }
   ],
   "documents": [
@@ -396,6 +398,20 @@
    ],
    "last_verified_commit": "4c300c1",
    "note": "暫定。退役条件=front door から ART- の本文が返るようになったら登記へ移して廃止。D21FIX: path を normalize_path で1表記に正規化(先頭 egl/ を1回剥がし docs/ 以外は ValueError)。counts().files_since_start は egl/docs 直下の *.md/*.json を数える。★利用側は sys.path に /home/takasan/egl/docs を足すこと(口伝の解消)。★_meta の1行目を1回書き換えた(追記のみの例外)——MGR 裁定により今後は META_UPDATE 行を追記する"
+  },
+  {
+   "id": "C-ETRACE",
+   "repo": "ds",
+   "file": "ds/ds/etrace.py",
+   "symbol": "open_run/emit/span",
+   "status": "WIRED_UNPROVEN",
+   "evidence": [
+    "BUILT(IMPL): D-42 で新規作成。合流点5つから呼ばれる",
+    "★中身は設計も実装も1行も見ていない(読み出し口が無いため)＝LIVE に昇格させない",
+    "EXEC: LEDGER_REGISTRY 判定 ORPHAN(読み手が無い) — G-42",
+    "★id prefix が EGL と衝突している(RUN- / EV-) — G-44"
+   ],
+   "last_verified_commit": "e7ac5b0"
   }
  ],
  "llm_invocations": [
@@ -550,6 +566,34 @@
     "EXEC: webui の run-gate が CLI の task を refused"
    ],
    "note": "★このエッジは存在しない。欠落として G-05 に登録"
+  },
+  {
+   "id": "E-SUBMIT-ETRACE",
+   "from": "EP-WEBUI-SUBMIT",
+   "to": "C-ETRACE",
+   "mechanism": "call",
+   "input_schema": "component,function,inputs,outputs,result",
+   "output_schema": "event_id|None",
+   "runtime_proven": false,
+   "status": "WIRED_UNPROVEN",
+   "evidence": [
+    "BUILT(IMPL): D-42。合流点⓪ submit() 先頭 open_run / fail-closed",
+    "★記録が読めないため runtime_proven にできない(G-42)"
+   ]
+  },
+  {
+   "id": "E-DS-ETRACE",
+   "from": "C-DS-RECORD",
+   "to": "C-ETRACE",
+   "mechanism": "call",
+   "input_schema": "component,function,inputs,outputs,result",
+   "output_schema": "event_id|None",
+   "runtime_proven": false,
+   "status": "WIRED_UNPROVEN",
+   "evidence": [
+    "BUILT(IMPL): D-42。合流点① phase0 の唯一の書き手の内側 / fail-closed",
+    "★記録が読めないため runtime_proven にできない(G-42)"
+   ]
   }
  ],
  "read_paths": [
@@ -1177,6 +1221,71 @@
     "裁定: CC_MGR_2026-07-28_D42_BUILD_SPEC_APPROVED.md §2"
    ],
    "note": "★良い置き場所を選んだのではない。辺の向きの制約に負けた結果である。いま動かさない——動かすなら別の裁定。★これを登録しないと半年後に『なぜ対話記録の repo に実行トレースが在るのか』を再導出する"
+  },
+  {
+   "id": "G-41",
+   "summary": "合流点⓪(run の発行)は「投入」経路にしか無く「進行」経路(run_next/run_until_barrier/operator)に無い — 進行中の記録に run_id が付かない",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "EXEC: webui.py:591-592 /api/run_next は D.dispatch_once を直接呼び submit() を通らない",
+    "EXEC: dispatch.py:132 _emit_pending が Claude barrier 時に pending_actor.jsonl へ書く(本番到達・呼び手実測)",
+    "READ: IMPL 12入口表 ⑨〜⑫(create_task 直呼び3件 / record_utterance 直呼び1件)も run_id=None"
+   ],
+   "note": "D-42 監査。★IMPL の『抜け道4件』のうち本番到達は1件のみで、その根はここ。_emit_pending に emit を足しても run_id の無い event が増えるだけ。第一段階の範囲外(第二段階の先取りに当たりうる)ため裁定事項"
+  },
+  {
+   "id": "G-42",
+   "summary": "event_trace.jsonl は書けるが読めない — LEDGER_REGISTRY 判定 ORPHAN。Taka の完了条件⑥(実データを貼る)が構造上満たせない",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "EXEC(IMPL): grep -n 'event_trace|etrace' twoder/webui.py twoder/ids.py → 0件",
+    "EXEC(IMPL): GET /api/resolve?id=RUN-ee28ab4e9438 → resolved:false",
+    "EXEC(IMPL): s10_ledger_registry --apply → ds/data/event_trace.jsonl ORPHAN NONE_ORPHAN",
+    "台帳直読は PreToolUse フックが拒否"
+   ],
+   "note": "D-42 監査。★『作ったが読み手が無い』型の10回目を我々自身が作った。既に Taka に上がっている『2行の表示追加』と同じ性質——合流させるか別に立てるかは裁定事項"
+  },
+  {
+   "id": "G-43",
+   "summary": "設計(CC-α)の受入基準が『入口』と『台帳への書き込み』を混同していた — 判定を4倍に膨らませた",
+   "kind": "process_defect",
+   "status": "OPEN",
+   "evidence": [
+    "SPEC §3-3 の4区分は DS/RRI/EGL/DW の台帳に限定され、twoder 自身の9台帳に枠が無かった(IMPL が『区分の不足』として自己申告)",
+    "IMPL は基準どおりに分類した結果、本番到達しない3件を『抜け道』に入れざるを得なかった",
+    "SPEC §3-4 の予想は routing を確かめず DW task 作成を前提にした(実際は OBSERVE_CURRENT_STATE / task_id=None)"
+   ],
+   "note": "★実装の落ち度ではなく設計の落ち度。依頼文『追跡が途切れる箇所を挙げてください』は観測の依頼であり classify_request_type の返りは投入前に決定論で確かめられた。『予想を固定する前に決定論で確定する』に反した"
+  },
+  {
+   "id": "G-44",
+   "summary": "Event Trace の id prefix が EGL と衝突（RUN- / EV- の2件）— 実在する id を 2DER が『穴』と報告している",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "READ: twoder/ids.py docstring — OBS-/SRC-/ARUN-/RUN-/LEG-/SNAP- は EGL (egl.core.get_state)",
+    "READ: egl/egl/core.py:289 new_prefix=\"RUN\" ＝EGL は今も RUN- を発行している",
+    "EXEC(IMPL): GET /api/resolve?id=RUN-ee28ab4e9438 → resolved:false ＝口が無いのでなく EGL へ転送された",
+    "EXEC: ETR- / EV- は ids.py(22 prefix) と estimation_basis_binding.KNOWN_ID_PREFIXES(17 prefix) のどちらにも無い",
+    "EXEC: 全走査で2つ目の衝突を発見 — egl/egl/core.py:105 evid = f\"EV-{hw.get('EV',0)+1:05d}\" ＝EV- も EGL が使用中",
+    "EXEC: ds/ds/etrace.py:104 も EV- を発行している ＝両者が同一 prefix",
+    "EXEC: 発行済 prefix の全集合(56件)に ETR / ETE は無い"
+   ],
+   "note": "★3者に共通する型として登録する(MGR 裁定: 個人の欠陥として登録しない)。型＝『読んだ表に在るものを、確かめずに再利用した』(本日の型の5つ目。MGR も伝聞をそのまま渡す同型を2回やっている)。★ids.py の原則『an id that does not resolve is a hole』に対し、実在する id を穴と報告する状態になっている。裁定(MGR)=RUN- を EGL から取らず etrace 側の prefix を変える。EGL を1行も変えない。既存2件を黙って処理しない。新 prefix を ids.py の所有表に登記する"
+  },
+  {
+   "id": "G-45",
+   "summary": "本番未到達の台帳書き手3件（request_thread / egl.core.append_event / dw.authorization）— 塞がず据え置き",
+   "kind": "gap",
+   "status": "DEFERRED",
+   "evidence": [
+    "EXEC: rri/rri/request_thread.py:73 呼び手0(監査スクリプトのみ)",
+    "EXEC: egl/egl/core.py:119 は egl/curator.py・egl/pipeline.py からのみ。twoder/ds/rri/dw はそれらを import しない",
+    "EXEC: dev-workcell/dw/authorization.py:46 呼び手0"
+   ],
+   "note": "MGR 裁定 §5-4『塞がない・据え置く』。★MGR は『G-41 として登録』と書いたが G-41 は別内容(進行経路にⓠが無い)で既に使用済のため G-45 を採番した——MGR に報告済。到達可能になった時点で本件を再開する"
   }
  ],
  "planned_extensions": [
