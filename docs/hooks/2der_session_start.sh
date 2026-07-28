@@ -10,8 +10,8 @@ CTX=$(cat <<'EOF'
 1. あなたは 2DER の外にいる市民である。2DER 内部に入らない。
 2. 台帳(*.jsonl の運用データ)を直接読まない・書かない。PreToolUse フックが拒否する。
 3. 知りたいことは 2DER に聞く。答えられなければ「答えられなかった」が結果であり、それが次に作る機能である。
-4. 投入は `python3 -m twoder.submit "<依頼文>"`(`python3 twoder/submit.py` は operator.py の shadowing で動かない)。
-   CLI は task を作れるが進められない。進めるなら webui 経路。
+4. ★投入は webui 経路(/api/submit)を使う。CLI(`python3 -m twoder.submit`)は task を作れるが進められず、
+   ★実行記録(TRACE)を1件も残さない(2026-07-28 実測・G-36)。CLI を使うなら「記録が残らない」と書いてから使う。
 5. worker は production repo に書けない(サンドボックスの保証)。受け取って配置するのは Claude の役割。
    成果物は tempfile 配下で消えるので、受け取りは同じ作業の中で完了させる。
 6. 「ソースに在る」を「動く」と書かない。動作の主張には実行した再現コマンドと結果を併記する。
