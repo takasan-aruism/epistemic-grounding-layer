@@ -281,3 +281,5 @@
 {"kind": "DOC", "doc_id": "ART-d735a42148", "path": "docs/CC_DESIGN_2026-07-28_ONE_UNCONTAMINATED_AXIS_REMAINS.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T22:06:26"}
 {"kind": "DOC", "doc_id": "ART-1b6af1e732", "path": "docs/CC_MGR_2026-07-28_REACHABILITY_INDEPENDENT_CHECK_APPROVED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T22:06:26"}
 {"kind": "DONE", "doc_id": "ART-d735a42148", "by": "MGR", "by_doc_id": "ART-1b6af1e732", "ts": "2026-07-28T22:06:26"}
+{"kind": "DOC", "doc_id": "ART-b603d8dc7b", "path": "docs/CC_DESIGN_2026-07-28_CORRECTION_25_NOT_21.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T22:16:01"}
+{"kind": "DOC", "doc_id": "ART-7d6cae62f0", "path": "docs/PHASE2_DIRECTION_MANAGEMENT_UI_v1_0.md", "type": "FINDING", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T22:23:30"}
