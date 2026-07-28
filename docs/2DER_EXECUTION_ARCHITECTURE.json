@@ -1062,7 +1062,9 @@
     "READ: submit.py:312,418 trace_id = TRACE-sha1(utterance_id + ts) ← ★発話ごとに一意。帰属は可能",
     "READ: workcell.create_task:320 既存 task なら WorkflowViolation → submit.py:434 except: pass ＝最初の1回だけ残る",
     "READ: webui.py:541 同名 trace.json を上書き ＝最後の1回だけ残る",
-    "READ: webui.py:118-140 build_state の列挙に INTENT_STRATEGY / RRI_PREFLIGHT が無い（submit.py:240,265 で _rec 済）"
+    "READ: webui.py:118-140 build_state の列挙に INTENT_STRATEGY / RRI_PREFLIGHT が無い（submit.py:240,265 で _rec 済）",
+    "EXEC: GET /api/claude_packet?task_id=TASK-2DER-B9B4DA3B → provenance.ds_input_id=UTT-0761(最初) / TRACE は UTT-0762 / 追跡対象 UTT-0769 はどちらにも無い ＝両端しか残らないことの実値",
+    "EXEC: provenance={trace_id:TRACE-330d22a317, rri_request_id:RREQ-00218, rri_intent_id:RINT-00235, egl_source_refs:[DE-0554]} ＝封印は【実】"
    ],
    "note": "★D-41 で再訂正。旧版『発話単位の帰属ができない』は言い過ぎ——trace_id は発話ごとに一意で provenance は DW CREATE payload に永続する。できないのは過去分の保存。MGR 裁定: 列挙漏れ(2行追加)は Taka に聞く / 上書きは今は解かない(未解決として残す)"
   },
@@ -1113,6 +1115,30 @@
     "READ: ds/ds/phase0.py:106 preceding_utterance_ref のみ ＝発話の直列であってイベントの親子ではない(未知参照は :109 で ValueError)"
    ],
    "note": "D-41 の最重要項目。基盤候補 DW events.jsonl に足りないのは Event ID / 親 Event ID / Function 名 / 次に渡した先 の4項目。新設の可否は MGR→Taka の裁定待ち(新しい保存先は不要・既存レコードへのフィールド追加で足りる)"
+  },
+  {
+   "id": "G-36",
+   "summary": "CLI 投入(python3 -m twoder.submit)は TRACE を1件も残さない — 使用ガイドが名指しする投入経路が実行記録を作らない",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "EXEC: grep -rn 'trace.json' --include=*.py 全5repo → 書き手は twoder/webui.py:541,543 の2箇所のみ",
+    "READ: twoder/submit.py は :113/:129/:155/:231/:254/:481 で return TRACE するだけ。ファイル書き込みが無い",
+    "READ: twoder/submit.py:487 CLI は print(json.dumps(...)) で標準出力に出すだけ",
+    "READ: CC_2DER_USAGE_GUIDE §4 が python3 -m twoder.submit を投入の作法として名指ししている"
+   ],
+   "note": "D-41 実証中に発見。∴ TRACE に残るのは『最後の webui 投入』であって『最後の投入』ではない。UTT-0769 の痕跡が無いのは上書きでなく最初から書かれていない可能性が高い。裁定②(『呼ばれなかった』の範囲)の材料=submit() 内部が見えないのは一覧の欠落だけでなく記録先の欠落でもある"
+  },
+  {
+   "id": "G-37",
+   "summary": "provenance.ds_thread_id が実データで null（threads が空）— Session ID 候補として当てにできない",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "EXEC: /api/claude_packet の provenance.ds_thread_id = null",
+    "READ: submit.py:420 (threads[0].get('thread_id') if threads else None)"
+   ],
+   "note": "D-41。∴ Session ID は ds_thread_id でなく conversation_id を採るべき。threads が空になった原因は未調査(誰が=CC-α / いつ=MGR の要請時)"
   }
  ],
  "planned_extensions": [
