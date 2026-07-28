@@ -341,6 +341,7 @@ CURRENT:
 | **G-47** | EGL への書き込みが合流点③を迂回する — `core.append_event` は本番到達し、今日の投入が通ったのに EGL event が無い | Gap | 未着手（★「通ったのに記録が無い」＝欠陥・設計の落ち度） |
 | **G-48** | `twoder` 自身の台帳9つは Event Trace の外に在る | Gap | **DEFERRED**（MGR 裁定・ついでに入れない） |
 | **G-49** | `acquisition.py` 固有の境界イベント（実装監査用 Instrumentation） | Gap | **DEFERRED_TO_PHASE2**（★「やること」でなく「必要性を判断すること」） |
+| **G-50** | 入口一覧が不完全だった — `dw/workflow.py:37` が**13番目**の入口 | Gap | 未着手（★`Taka ⑤` が出した・裁定待ち） |
 | **G-46** | **TRACE に置いた値57件のうち35件(61%)が front door から読めない**（`ETRACE_RUN_ID` はその1件） | Gap | 未着手（★規模が判明・選別の裁定待ち） |
 
 ---
@@ -387,4 +388,4 @@ CURRENT:
 | 14 | commit 前に Taka へ提示 | **未**（MGR が仲介） |
 
 ---
-*2DER Execution Architecture v0.1（常設・正典）。`2DER_MECHANISM_MAP.md` を包含し統合する（正典を2本にしない）。★要約=書く側も読む側(`GET /api/resolve`)も繋がっており、繋がっていないのは決定論で絞る側である（★2026-07-28 訂正: 初版は「読む側が繋がっていない」「最大の切断は G-01」と書いたが**誤りだった**——探索範囲を `submit()` の acquisition 枝に限っており、別の口を見ていなかった。G-01 は CLOSED）。勘定科目は EGL 登録経路に無く(G-02)、4軸→7戦略の決定論選択は既定で入らない分岐にあり3軸は本番で生成されない(G-03)。PLAN は Qwen が書き(決定論テンプレは front door 由来 task では原理的に発火しない)、worker は契約(skeleton+immutable_tests)が無ければ着手せず、契約は依頼者(Claude)が渡す。worker は production repo に三重の保証で書けず、配置は Claude の役割。Gap Register は G-01〜G-49（★2026-07-28 D-41 で G-33〜G-35 を追加し、MD 表を JSON と同期した——それまで MD 表は G-15 で止まっており、§6 が自ら宣言した不変条件『`gaps[].id` の集合が MD §5.11 の表と一致する』が破れていた。★この不変条件を検査する計器は存在しない）。★未達=commit 記録／EventStore 等の責務比較／構想との差分／機械可読版／Taka への提示。調査の大半は静的であり、`【読】` を `LIVE` に昇格させていない。*
+*2DER Execution Architecture v0.1（常設・正典）。`2DER_MECHANISM_MAP.md` を包含し統合する（正典を2本にしない）。★要約=書く側も読む側(`GET /api/resolve`)も繋がっており、繋がっていないのは決定論で絞る側である（★2026-07-28 訂正: 初版は「読む側が繋がっていない」「最大の切断は G-01」と書いたが**誤りだった**——探索範囲を `submit()` の acquisition 枝に限っており、別の口を見ていなかった。G-01 は CLOSED）。勘定科目は EGL 登録経路に無く(G-02)、4軸→7戦略の決定論選択は既定で入らない分岐にあり3軸は本番で生成されない(G-03)。PLAN は Qwen が書き(決定論テンプレは front door 由来 task では原理的に発火しない)、worker は契約(skeleton+immutable_tests)が無ければ着手せず、契約は依頼者(Claude)が渡す。worker は production repo に三重の保証で書けず、配置は Claude の役割。Gap Register は G-01〜G-50（★2026-07-28 D-41 で G-33〜G-35 を追加し、MD 表を JSON と同期した——それまで MD 表は G-15 で止まっており、§6 が自ら宣言した不変条件『`gaps[].id` の集合が MD §5.11 の表と一致する』が破れていた。★この不変条件を検査する計器は存在しない）。★未達=commit 記録／EventStore 等の責務比較／構想との差分／機械可読版／Taka への提示。調査の大半は静的であり、`【読】` を `LIVE` に昇格させていない。*

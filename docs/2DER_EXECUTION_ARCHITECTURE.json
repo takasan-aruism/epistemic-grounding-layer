@@ -20,8 +20,8 @@
    "TASK_CONTRACTS.jsonl / ARTIFACT_REGISTRY.jsonl / LEDGER_REGISTRY.jsonl の中身は UNKNOWN(台帳の直読を避けたため)",
    "呼び出し元の網羅はしていない(submit( の呼び出しは CLI と webui の2箇所を確認した範囲)"
   ],
-  "last_synced_at": "2026-07-28 (D-42/D-43)",
-  "sync_note": "★2026-07-28: D-42 で phase0.py / de_admission.py / submit.py / workcell.py / intent_record.py に etrace の emit が入り ds/ds/etrace.py が新設された。commit を現在の HEAD に更新し C-ETRACE と辺2本を追加した。★status は LIVE でなく WIRED_UNPROVEN — 記録の中身を誰も読めていないため(G-42)。読み出し口(D-43)が入るまで昇格させない。"
+  "last_synced_at": "2026-07-28 (D-44 BUILT 後)",
+  "sync_note": "★2026-07-28 D-44: 合流点⑤(egl/core.append_event)を追加し、CLI 1件の依頼が SUBMIT→DS→RRI→EGL の21 event で 1本に繋がることを front door から確認(CC-α 独立検算)。C-ETRACE を WIRED_UNPROVEN→LIVE に昇格した——理由は『記録の中身を front door から実際に読めた』こと。★依頼経路の台帳7つのうち6つが合流点でカバーされ、残る pending_actor.jsonl は G-41(進行経路に run が無い)として範囲外。"
  },
  "generated_from": {
   "repositories": [
@@ -34,23 +34,23 @@
   "commits": [
    {
     "repo": "ds",
-    "commit": "e7ac5b0"
+    "commit": "9a10b1a"
    },
    {
     "repo": "rri",
-    "commit": "b9fc1bc"
+    "commit": "c0d60b7"
    },
    {
     "repo": "egl",
-    "commit": "7f78b2a"
+    "commit": "0aa8118"
    },
    {
     "repo": "dev-workcell",
-    "commit": "83884b3"
+    "commit": "397a0df"
    },
    {
     "repo": "twoder",
-    "commit": "b2464d9"
+    "commit": "a08130b"
    }
   ],
   "documents": [
@@ -146,6 +146,17 @@
    "can_create_task": false,
    "can_advance_loop": false,
    "read_only": true
+  },
+  {
+   "id": "EP-RESOLVE-ETR",
+   "kind": "http_read",
+   "file": "twoder/ids.py",
+   "symbol": "resolve(ETR-*)",
+   "status": "LIVE",
+   "evidence": [
+    "EXEC(CC-α): /api/resolve?id=ETR-… が run/event を返す。ids.py:14 の所有表に登記済",
+    "★新しい endpoint を作らず /api/resolve の分岐追加のみ"
+   ]
   }
  ],
  "components": [
@@ -403,15 +414,27 @@
    "id": "C-ETRACE",
    "repo": "ds",
    "file": "ds/ds/etrace.py",
-   "symbol": "open_run/emit/span",
-   "status": "WIRED_UNPROVEN",
+   "symbol": "open_run/emit/span/resolve_run/resolve_event",
+   "status": "LIVE",
    "evidence": [
-    "BUILT(IMPL): D-42 で新規作成。合流点5つから呼ばれる",
-    "★中身は設計も実装も1行も見ていない(読み出し口が無いため)＝LIVE に昇格させない",
-    "EXEC: LEDGER_REGISTRY 判定 ORPHAN(読み手が無い) — G-42",
-    "★id prefix が EGL と衝突している(RUN- / EV-) — G-44"
+    "EXEC(CC-α 2026-07-28): GET /api/resolve?id=ETR-f0fe8461c407 → count=total=21 / truncated=False / component={SUBMIT:1,DS:1,RRI:1,EGL:18} / root=1 / 孤立0",
+    "★WIRED_UNPROVEN から昇格した理由: 記録の中身を front door から実際に読めたため(D-43 で読み出し口・D-44 で EGL まで到達)",
+    "READ: prefix は ETR-（RUN-/EV- は EGL 所有。G-44）"
    ],
-   "last_verified_commit": "e7ac5b0"
+   "last_verified_commit": "9a10b1a"
+  },
+  {
+   "id": "C-EGL-APPEND",
+   "repo": "egl",
+   "file": "egl/egl/core.py",
+   "symbol": "append_event",
+   "status": "LIVE",
+   "evidence": [
+    "READ: egl/data/events.jsonl の唯一の書き手(contracts.py の GUARD_CONTRACTS が physical sole-writer と宣言)",
+    "BUILT(IMPL D-44): 合流点⑤として emit を追加(fail-closed / _idlock の外)",
+    "EXEC: 上記 run で EGL event が18件出た"
+   ],
+   "last_verified_commit": "0aa8118"
   }
  ],
  "llm_invocations": [
@@ -593,6 +616,19 @@
    "evidence": [
     "BUILT(IMPL): D-42。合流点① phase0 の唯一の書き手の内側 / fail-closed",
     "★記録が読めないため runtime_proven にできない(G-42)"
+   ]
+  },
+  {
+   "id": "E-EGL-ETRACE",
+   "from": "C-EGL-APPEND",
+   "to": "C-ETRACE",
+   "mechanism": "call",
+   "input_schema": "event_type,object_type,new_prefix",
+   "output_schema": "event_id",
+   "runtime_proven": true,
+   "status": "LIVE",
+   "evidence": [
+    "EXEC: ETR-f0fe8461c407 に component=EGL の event が18件・親子で連結"
    ]
   }
  ],
@@ -1194,7 +1230,7 @@
     "理由: worker 実行中に止めると成果物が失われる(Build 18 で成果物が消える経路を実見)",
     "緩和: 失敗をカウントし次に成功した emit が dropped_before:N を載せる / 書けなければ stderr"
    ],
-   "note": "★穴を無くせないので穴を見える場所に置いた。G-20(宣言だけの保証)を繰り返さないため、SPEC 本文 §2-5 に明記することを実装条件にしている"
+   "note": "★2026-07-28 訂正: 『全合流点を fail-closed に』という Taka 裁定は**誤送信により撤回済**であり、合流点④の fail-open は**正**である(未実装の宿題ではない)。本 Gap は『取りこぼしが起きうる』という事実の登記として維持する。緩和(dropped_before / stderr)は実装済。"
   },
   {
    "id": "G-39",
@@ -1337,6 +1373,18 @@
     "CC_MGR_2026-07-28_D44_A_CONFIRMED_PROCEED.md §3"
    ],
    "note": "★『Phase 2 でやること』の一覧ではなく『Phase 2 で必要性を判断すること』の一覧（MGR 明示）。★MGR は G-48 として登記と書いたが G-48 は twoder 自身の台帳9件で使用済のため G-49 を採番——本日3度目の id 衝突(G-41/G-45/G-48)"
+  },
+  {
+   "id": "G-50",
+   "summary": "入口一覧が不完全だった — dw/workflow.py:37 が13番目の入口(create_task 直呼び)。12入口は漏れていた",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "EXEC(打ち切り無し): grep create_task( 全5repo → 総10件。うち dev-workcell/dw/workflow.py:37 は CC-α の12入口に無かった",
+    "READ: run_standard_workflow() は 1 Task Unit を CREATE→PLAN→GENERATE→AUDIT まで貫通させ create_task を直接呼ぶ ∴ submit() を通らず run_id が付かない",
+    "EXEC: 呼び手は dev-workcell/run_task.py:13(手動実行スクリプト)と egl/docs/report のデモ"
+   ],
+   "note": "★Taka ⑤(過去の走査を流用せず再走査)が出したもの。IMPL が『数を合わせない』と書いたから出た。★CC-α は (a)入口一覧に加えて据え置く を推す（依頼経路でないなら run_id が無いのは正常で、塞ぐと『呼び手の数だけ合流点が増える』膨張になり確定した原則に反する）。★13番目が出た以上14番目が無いとは言えず、Taka ⑤を『済』と言えない——『もう1度やる』を無限に繰り返さない基準が要る(MGR 裁定事項) ★MGR 裁定 A: 入口一覧に加えて据え置き、合流点を足さない。【未確認: run_task.py が依頼経路でないことはコード読みのみ / 誰が=CC-α / いつ=次段で必要になったとき。今は確かめなくてよい】"
   }
  ],
  "planned_extensions": [
