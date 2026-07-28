@@ -18,6 +18,9 @@ GUARD_CONTRACTS = {
             "physical sole-writer(events.jsonl を書く唯一の経路)",
             "id-event atomicity(id 採番と書込が同一 lock/critical section, DE-0006)",
             "H6: 並行採番の直列化(flock)",
+            "Event Trace へ emit する(fail-closed)。書けなければ RuntimeError で中断する"
+            "(合流点⑤ / Taka 裁定「記録失敗時は fail-closed で」)。★_idlock の外で emit するので"
+            "ロック保持時間は延びない",
         ],
         "non_guarantees": [
             "semantic write authority の *prevention* は保証しない: 単一プロセスでは capability を"

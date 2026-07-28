@@ -118,6 +118,23 @@ def append_event(run_id, event_type, object_type, object_id, payload, new_prefix
             ev["capability"] = capability
         with open(EVENTS, "a") as f:
             f.write(json.dumps(ev, ensure_ascii=False) + "\n")
+    # 合流点⑤(Event Trace)。★_idlock を出てから emit する(ロック保持時間を延ばさず H6 の直列化を壊さない)。
+    # ★fail-closed(Taka 裁定)。ここは submit() の外からも呼ばれるので、書けなければ例外を送出する。
+    # 引数・返り値・保存内容は1つも変えない(記録は内側の副作用)。
+    try:
+        from ds import etrace as _ET
+    except ImportError:
+        import sys as _sys, pathlib as _pl, importlib as _il
+        _sys.path.insert(0, str(_pl.Path(__file__).resolve().parents[2] / "ds"))
+        if getattr(_sys.modules.get("ds"), "__file__", None) is None:
+            _sys.modules.pop("ds", None)
+        _il.invalidate_caches()
+        from ds import etrace as _ET
+    if _ET.emit("EGL", "append_event",
+                {"event_type": event_type, "object_type": object_type, "new_prefix": new_prefix},
+                {"object_id": object_id}, "OK") is None:
+        raise RuntimeError(
+            "EGL append_event: Event Trace に書けなかったため中断した (fail-closed)")
     return object_id
 
 
