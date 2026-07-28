@@ -1277,15 +1277,15 @@
   },
   {
    "id": "G-45",
-   "summary": "本番未到達の台帳書き手3件（request_thread / egl.core.append_event / dw.authorization）— 塞がず据え置き",
+   "summary": "本番未到達の台帳書き手2件（request_thread / dw.authorization）— 塞がず据え置き",
    "kind": "gap",
    "status": "DEFERRED",
    "evidence": [
     "EXEC: rri/rri/request_thread.py:73 呼び手0(監査スクリプトのみ)",
-    "EXEC: egl/egl/core.py:119 は egl/curator.py・egl/pipeline.py からのみ。twoder/ds/rri/dw はそれらを import しない",
-    "EXEC: dev-workcell/dw/authorization.py:46 呼び手0"
+    "EXEC: dev-workcell/dw/authorization.py:46 呼び手0",
+    "★2026-07-28 訂正: egl/egl/core.py:119 を本件から外した — 本番到達することが判明(G-47)"
    ],
-   "note": "MGR 裁定 §5-4『塞がない・据え置く』。★MGR は『G-41 として登録』と書いたが G-41 は別内容(進行経路にⓠが無い)で既に使用済のため G-45 を採番した——MGR に報告済。到達可能になった時点で本件を再開する"
+   "note": "MGR 裁定『塞がない・据え置き』。★当初3件としたが CC-α の測定誤り(head -8 で切れた結果を全体として扱った)により1件は到達すると判明し2件に訂正。★『呼び手0』の2件も grep で数えただけで動的 import は見ていない(G-32 の範囲)"
   },
   {
    "id": "G-46",
@@ -1302,6 +1302,19 @@
     "★別経路が在るものも含む: TRACE_ID/RRI_REQUEST_ID/RRI_INTENT_ID/DS_EVENT_ID は /api/claude_packet の provenance から取れる(本日【実】)——ただし DW task が在るときだけ"
    ],
    "note": "★MGR 新規則 v2.4 §5-12『置いたなら読める所まで書け』を既存に当てた結果。G-31(2件)→G-46(1件)と数えていたが実際は35件で、ETRACE_RUN_ID はその1つ。∴『次段で直す』の規模が2行か35件かで裁定の前提が変わる。選別の基準は CC-α が決めず MGR へ: (a)Taka の問いに要る RRI 判断値だけ (b)別経路が無いものだけ【CC-α 推奨】 (c)全部。★別経路の有無は35件すべてを調べておらず『無い』ではなく『私は知らない』(G-32)"
+  },
+  {
+   "id": "G-47",
+   "summary": "EGL への書き込み経路が合流点③を迂回する — core.append_event は本番到達し、今日の投入が通ったのに Event Trace に EGL event が無い",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "EXEC: twoder/runtime_inspection.py:147 / research_acquisition.py:50 / gpu_inspection.py:139 が from egl import core, acquisition",
+    "READ: submit.py:376-395 OBSERVE_CURRENT_STATE 枝が RI.inspect を呼び EGL_OBSERVATION_INGEST / EGL_SOURCE_REFS を記録",
+    "EXEC(IMPL): 今日の CLI 投入 ETR-75b58cfddf27 は OBSERVE_CURRENT_STATE で、event は SUBMIT/DS/RRI の3件のみ＝EGL event が無い",
+    "READ: 合流点③ de_admission は submit.py:140 の DE 登録 fast path でのみ呼ばれる ∴ 今回は通っていない(それ自体は正常)"
+   ],
+   "note": "★MGR §2 の問いへの答え=「通らなかったから正常」ではなく「通ったのに記録が無い」＝欠陥。★設計(CC-α)の欠陥5件目——合流点③を de_admission にしたが、その ONLY sanctioned writer 宣言の対象は DESIGN_EVIDENCE_LEDGER.jsonl 1つだけで、EGL には egl/data/events.jsonl を書く別の店が在る。∴ 次段⑤は『確認』でなく『合流点③の範囲を広げるか』の裁定"
   }
  ],
  "planned_extensions": [
