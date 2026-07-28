@@ -198,3 +198,7 @@
 {"kind": "DONE", "doc_id": "ART-a2fe2c3ce1", "by": "MGR", "by_doc_id": "ART-e4dc352a76", "ts": "2026-07-28T13:20:46"}
 {"kind": "DOC", "doc_id": "ART-136f881904", "path": "docs/CC_DESIGN_2026-07-28_D42_HANDOFF_TO_IMPL.md", "type": "HANDOFF", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T13:25:11"}
 {"kind": "DOC", "doc_id": "ART-b4d6594cdc", "path": "docs/CC_IMPL_2026-07-28_D42_EVENT_TRACE_PHASE1_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T14:18:15"}
+{"kind": "DOC", "doc_id": "ART-f7604c1c1c", "path": "docs/CC_DESIGN_2026-07-28_D42_AUDIT_OF_BUILT.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T14:21:48"}
+{"kind": "DOC", "doc_id": "ART-b4d6594cdc", "path": "docs/CC_IMPL_2026-07-28_D42_EVENT_TRACE_PHASE1_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T14:23:06"}
+{"kind": "DOC", "doc_id": "ART-ed468a2c4e", "path": "docs/CC_MGR_2026-07-28_D42_BUILT_RECEIVED_PHASE1_NOT_MET.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T14:23:06"}
+{"kind": "DONE", "doc_id": "ART-b4d6594cdc", "by": "MGR", "by_doc_id": "ART-ed468a2c4e", "ts": "2026-07-28T14:23:06"}
