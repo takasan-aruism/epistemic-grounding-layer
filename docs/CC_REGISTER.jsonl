@@ -290,3 +290,6 @@
 {"kind": "DOC", "doc_id": "ART-c813937a7a", "path": "docs/CC_DESIGN_2026-07-28_D45_UI_MEASURED.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T23:41:18"}
 {"kind": "DOC", "doc_id": "ART-9913a35a58", "path": "docs/RRI_AS_A_SYSTEM_MGR_UNDERSTANDING_v1_0.md", "type": "FINDING", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T23:57:58"}
 {"kind": "DOC", "doc_id": "ART-c813937a7a", "path": "docs/CC_DESIGN_2026-07-28_D45_UI_MEASURED.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-28T23:57:58"}
+{"kind": "DOC", "doc_id": "ART-9913a35a58", "path": "docs/RRI_AS_A_SYSTEM_MGR_UNDERSTANDING_v1_0.md", "type": "FINDING", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T00:00:07"}
+{"kind": "DOC", "doc_id": "ART-8c60ce8c4d", "path": "docs/CC_MGR_2026-07-28_D46_REGISTER_4_UNDEFINED_AND_SURVEY.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T00:00:07"}
+{"kind": "DONE", "doc_id": "ART-c813937a7a", "by": "MGR", "by_doc_id": "ART-8c60ce8c4d", "ts": "2026-07-29T00:00:07"}
