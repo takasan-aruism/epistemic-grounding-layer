@@ -20,8 +20,8 @@
    "TASK_CONTRACTS.jsonl / ARTIFACT_REGISTRY.jsonl / LEDGER_REGISTRY.jsonl の中身は UNKNOWN(台帳の直読を避けたため)",
    "呼び出し元の網羅はしていない(submit( の呼び出しは CLI と webui の2箇所を確認した範囲)"
   ],
-  "last_synced_at": "2026-07-28 (D-44 BUILT 後)",
-  "sync_note": "★2026-07-28 D-44: 合流点⑤(egl/core.append_event)を追加し、CLI 1件の依頼が SUBMIT→DS→RRI→EGL の21 event で 1本に繋がることを front door から確認(CC-α 独立検算)。C-ETRACE を WIRED_UNPROVEN→LIVE に昇格した——理由は『記録の中身を front door から実際に読めた』こと。★依頼経路の台帳7つのうち6つが合流点でカバーされ、残る pending_actor.jsonl は G-41(進行経路に run が無い)として範囲外。"
+  "last_synced_at": "2026-07-29 (D-50 BUILT 後)",
+  "sync_note": "★2026-07-29 D-49/D-50: 管理UI に『通過した処理』『欠損・失敗・未確認』を出し(build_state に etrace_run_id/boundary_failures を追加)、さらに /command が run_id(ETR-)を鍵にして依頼を開けるようにした(JS のみ・Python 側 1行も変えず・投入0回)。★Phase 2 は完了していない——Taka の残件7件のうち減ったのは2件(ETRACE_RUN_ID の Web UI 読み出し / run_id で開く手段)。"
  },
  "generated_from": {
   "repositories": [
@@ -34,23 +34,23 @@
   "commits": [
    {
     "repo": "ds",
-    "commit": "9a10b1a"
+    "commit": "59868fb"
    },
    {
     "repo": "rri",
-    "commit": "c0d60b7"
+    "commit": "f4b636b"
    },
    {
     "repo": "egl",
-    "commit": "0aa8118"
+    "commit": "3503044"
    },
    {
     "repo": "dev-workcell",
-    "commit": "397a0df"
+    "commit": "6aa0fd4"
    },
    {
     "repo": "twoder",
-    "commit": "a08130b"
+    "commit": "9d00104"
    }
   ],
   "documents": [
@@ -155,7 +155,22 @@
    "status": "LIVE",
    "evidence": [
     "EXEC(CC-α): /api/resolve?id=ETR-… が run/event を返す。ids.py:14 の所有表に登記済",
-    "★新しい endpoint を作らず /api/resolve の分岐追加のみ"
+    "★新しい endpoint を作らず /api/resolve の分岐追加のみ",
+    "★2026-07-29 D-50: /command が ETR- を受け付け、run→task_id→既存画面 に繋がるようになった(Python 側は1行も変えず JS のみ)"
+   ]
+  },
+  {
+   "id": "EP-COMMAND-RUN",
+   "kind": "ui_read",
+   "file": "twoder/webui.py",
+   "symbol": "PAGE / openByRun",
+   "status": "LIVE",
+   "evidence": [
+    "READ: 77062ed webui.py +47/-1 はすべて PAGE(:617 以降)＝JS/HTML 側。Python 側は1行も変わっていない(差分の @@ が 643/726/804 行目＝PAGE 内)",
+    "EXEC(CC-α): /api/state?task_id=TASK-2DER-D84215A8 → etrace_run_id=ETR-0f6fae35665a / boundary_failures=2 / keys=19",
+    "EXEC(CC-α): /api/resolve?id=ETR-000000000000 → resolved=false(壊れない)",
+    "READ: task_id 複数なら『複数在る』と画面に出し TASK を採らない(実装済・★ただし複数 run が存在せず実測できない)",
+    "READ: 赤字/警告色(bad クラス)を1つも使っていない(差分に0件)"
    ]
   }
  ],
