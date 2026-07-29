@@ -454,3 +454,5 @@
 {"kind": "DOC", "doc_id": "ART-b3e581df12", "path": "docs/CC_DESIGN_2026-07-29_D68_SENT_ON_SUCCESS_BUILD_SPEC_v1_0.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T21:49:28"}
 {"kind": "DOC", "doc_id": "ART-1c173c30ba", "path": "docs/CC_MGR_2026-07-29_D68_APPROVED_BUT_DONT_OVERLOAD_THE_PATH_FIELD.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T21:49:28"}
 {"kind": "DONE", "doc_id": "ART-b3e581df12", "by": "MGR", "by_doc_id": "ART-1c173c30ba", "ts": "2026-07-29T21:49:28"}
+{"kind": "DOC", "doc_id": "ART-de30c71fed", "path": "docs/CC_DESIGN_2026-07-29_D68_HANDOFF_TO_IMPL.md", "type": "HANDOFF", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T21:51:23"}
+{"kind": "DOC", "doc_id": "ART-de30c71fed", "path": "docs/CC_DESIGN_2026-07-29_D68_HANDOFF_TO_IMPL.md", "type": "HANDOFF", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T21:51:39"}
