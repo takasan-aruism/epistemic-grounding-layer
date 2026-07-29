@@ -524,3 +524,5 @@
 {"kind": "DOC", "doc_id": "ART-2582e759f2", "path": "docs/CC_TAKA_2026-07-30_WHO_ADJUDICATES.md", "type": "HANDOFF", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T00:54:26"}
 {"kind": "DOC", "doc_id": "ART-4c58b2501a", "path": "docs/CC_MGR_2026-07-30_D73v21_APPROVED_AND_TAKA_ITEM_2.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T00:54:26"}
 {"kind": "DONE", "doc_id": "ART-85f8e08f0b", "by": "MGR", "by_doc_id": "ART-4c58b2501a", "ts": "2026-07-30T00:54:26"}
+{"kind": "DOC", "doc_id": "ART-0e72f39650", "path": "docs/CC_IMPL_2026-07-30_D73v21_TASK_SUMMARY_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T01:22:57"}
+{"kind": "DOC", "doc_id": "ART-0e72f39650", "path": "docs/CC_IMPL_2026-07-30_D73v21_TASK_SUMMARY_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T01:23:45"}
