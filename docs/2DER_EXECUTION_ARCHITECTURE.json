@@ -20,8 +20,8 @@
    "TASK_CONTRACTS.jsonl / ARTIFACT_REGISTRY.jsonl / LEDGER_REGISTRY.jsonl の中身は UNKNOWN(台帳の直読を避けたため)",
    "呼び出し元の網羅はしていない(submit( の呼び出しは CLI と webui の2箇所を確認した範囲)"
   ],
-  "last_synced_at": "2026-07-29 (D-50 BUILT 後)",
-  "sync_note": "★2026-07-29 D-49/D-50: 管理UI に『通過した処理』『欠損・失敗・未確認』を出し(build_state に etrace_run_id/boundary_failures を追加)、さらに /command が run_id(ETR-)を鍵にして依頼を開けるようにした(JS のみ・Python 側 1行も変えず・投入0回)。★Phase 2 は完了していない——Taka の残件7件のうち減ったのは2件(ETRACE_RUN_ID の Web UI 読み出し / run_id で開く手段)。"
+  "last_synced_at": "2026-07-29 (D-56 BUILT 後)",
+  "sync_note": "★2026-07-29 D-55/D-56: 管理UI に取りこぼし件数を出したが、**数字ではなく数字の限界を出す**形にした（『0件』は『失われていない』ではなく『失われたことを記録できた件数が0』。併記文言を全場合で必須にし、ok/bad の色を使わない）。『取れない』は (c1)/(c2) に文言だけで分割。★Phase 2 は完了していない——Taka の残件7件のうち減ったのは2件。★D-57/D-57b で2画面24件の『無い』文言を数え切り、8件がまとめていることを確認（9件の一括修正は未着手）。"
  },
  "generated_from": {
   "repositories": [
@@ -34,23 +34,23 @@
   "commits": [
    {
     "repo": "ds",
-    "commit": "59868fb"
+    "commit": "eb3ae5b"
    },
    {
     "repo": "rri",
-    "commit": "f4b636b"
+    "commit": "939c234"
    },
    {
     "repo": "egl",
-    "commit": "3503044"
+    "commit": "4be9b73"
    },
    {
     "repo": "dev-workcell",
-    "commit": "6aa0fd4"
+    "commit": "2311181"
    },
    {
     "repo": "twoder",
-    "commit": "9d00104"
+    "commit": "6a268a4"
    }
   ],
   "documents": [
@@ -170,7 +170,8 @@
     "EXEC(CC-α): /api/state?task_id=TASK-2DER-D84215A8 → etrace_run_id=ETR-0f6fae35665a / boundary_failures=2 / keys=19",
     "EXEC(CC-α): /api/resolve?id=ETR-000000000000 → resolved=false(壊れない)",
     "READ: task_id 複数なら『複数在る』と画面に出し TASK を採らない(実装済・★ただし複数 run が存在せず実測できない)",
-    "READ: 赤字/警告色(bad クラス)を1つも使っていない(差分に0件)"
+    "READ: 赤字/警告色(bad クラス)を1つも使っていない(差分に0件)",
+    "★2026-07-29 D-55/D-56: 『欠損・失敗・未確認』カードに取りこぼし件数を出し(D-55)、『取れない』を (c1) run_id が無い / (c2) run_id は在るが引けなかった に文言だけで分けた(D-56)。EXEC(CC-α): /command に両方の文言が在ることを実取得で確認。差分は PAGE 内のみで Python 側は0行、ok/bad も0行"
    ]
   }
  ],
@@ -1636,6 +1637,19 @@
     "EXEC: rthread_chart への言及は全5repo で1行(定義のみ)＝候補を chart にする側が居ない"
    ],
    "note": "★Taka 裁定(2026-07-29)により『正式な未完案件』として登記。★『あと1段で動く』と書かない・実装しない・配線しない。理由=定義されているのは 測る→凍結→多重所属→濃淡→再凍結 の5段で、切れているのは『凍結した ACCOUNT_AXES を chart として渡す1段』だが、その1段が何をする段かを設計が書いていない(STAGE2b PLAN の chart 言及は0行) ∴『1段だけ』と書くとその中身を我々が発明することになる。★Phase 2 の中心には混ぜない。"
+  },
+  {
+   "id": "G-69",
+   "summary": "「欠損・失敗の記録なし」が2つの場合を1つの文言でまとめている — 起きなかったのか、記録されなかったのかが分からない（4段目）",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "READ: webui.py missingCard の parts.length ? … : '<div class=\"empty\">欠損・失敗の記録なし</div>'",
+    "★併記文言(DROP_NOTE)は取りこぼしブロックにしか付かない ∴ この行は安心の材料として読める",
+    "EXEC(CC-α): TASK-2DER-B9B4DA3B は boundary_failures 2件・ds_limitation 在りで parts が空にならない",
+    "★『parts が空になる依頼』の実例は見つけていない。作って試さない"
+   ],
+   "note": "★MGR の問い『4段目が在るか』への答え=在る。『取りこぼし 0件』と完全に同じ形（1つの文言が2つの場合をまとめている）。★構造としては実在するが実例は無い。G-61・(a)・(c2) と同じ扱いで未検証のまま登記。★CC-α は直さない（D-56 の範囲外／文言は MGR 逐語の系列なので発明しない）。直すかどうかは MGR が決める"
   }
  ],
  "planned_extensions": [
