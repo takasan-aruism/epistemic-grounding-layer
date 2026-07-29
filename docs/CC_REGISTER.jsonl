@@ -417,3 +417,9 @@
 {"kind": "DOC", "doc_id": "ART-f6427d866b", "path": "docs/CC_DESIGN_2026-07-29_D58_SYNC_DONE_NO_FALSE_RED.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T15:56:54"}
 {"kind": "DOC", "doc_id": "ART-f6427d866b", "path": "docs/CC_DESIGN_2026-07-29_D58_SYNC_DONE_NO_FALSE_RED.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T15:57:57"}
 {"kind": "DOC", "doc_id": "ART-5822ff5736", "path": "docs/CC_MGR_2026-07-29_D59_INDEPENDENT_CHECK_BASIC_DESIGN_DRAFT_v0_1.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T15:59:56"}
+{"kind": "DOC", "doc_id": "ART-c0a6fe975f", "path": "docs/CC_DESIGN_2026-07-29_D59_INDEPENDENT_CHECK_DETAIL_v0_1.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T16:01:46"}
+{"kind": "DOC", "doc_id": "ART-68361e805d", "path": "docs/CC_TAKA_2026-07-29_BROWSER_CHECK_ONLY_TAKA_CAN_DO.md", "type": "HANDOFF", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T16:04:06"}
+{"kind": "DOC", "doc_id": "ART-c0a6fe975f", "path": "docs/CC_DESIGN_2026-07-29_D59_INDEPENDENT_CHECK_DETAIL_v0_1.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T16:04:59"}
+{"kind": "DOC", "doc_id": "ART-87c34097c6", "path": "docs/CC_MGR_2026-07-29_D59_RULING_DONT_REWRITE_PAST_AND_TAKA_CHANNEL.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T16:04:59"}
+{"kind": "DONE", "doc_id": "ART-c0a6fe975f", "by": "MGR", "by_doc_id": "ART-87c34097c6", "ts": "2026-07-29T16:04:59"}
+{"kind": "DONE", "doc_id": "ART-f6427d866b", "by": "MGR", "by_doc_id": "ART-966a9e2cfa", "ts": "2026-07-29T16:04:59"}
