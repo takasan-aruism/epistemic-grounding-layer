@@ -491,3 +491,7 @@
 {"kind": "DOC", "doc_id": "ART-3b058006ec", "path": "docs/CC_DESIGN_2026-07-29_D74_TWO_MEASUREMENTS_DISAGREE.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:45:20"}
 {"kind": "DOC", "doc_id": "ART-21428f9201", "path": "docs/CC_MGR_2026-07-29_D74_RULING_18_IS_RIGHT_AND_MEASURE_THE_BREAKDOWN.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:45:20"}
 {"kind": "DONE", "doc_id": "ART-3b058006ec", "by": "MGR", "by_doc_id": "ART-21428f9201", "ts": "2026-07-29T23:45:20"}
+{"kind": "DOC", "doc_id": "ART-a60fae08ca", "path": "docs/CC_DESIGN_2026-07-29_D75_THE_BOTTLENECK_IS_142X_REREAD.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:47:47"}
+{"kind": "DOC", "doc_id": "ART-a60fae08ca", "path": "docs/CC_DESIGN_2026-07-29_D75_THE_BOTTLENECK_IS_142X_REREAD.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:53:38"}
+{"kind": "DOC", "doc_id": "ART-7ef5cd5c59", "path": "docs/CC_MGR_2026-07-29_D75_RULING_LIFT_THE_THIRD_CONSTRAINT.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:53:38"}
+{"kind": "DONE", "doc_id": "ART-a60fae08ca", "by": "MGR", "by_doc_id": "ART-7ef5cd5c59", "ts": "2026-07-29T23:53:38"}
