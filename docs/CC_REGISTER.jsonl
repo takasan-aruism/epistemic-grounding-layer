@@ -375,3 +375,4 @@
 {"kind": "DOC", "doc_id": "ART-655556182d", "path": "docs/CC_IMPL_2026-07-29_D55_DROPPED_BEFORE_UI_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T10:54:10"}
 {"kind": "DOC", "doc_id": "ART-e23843b488", "path": "docs/CC_MGR_2026-07-29_D55_BUILT_RECEIVED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T10:54:10"}
 {"kind": "DONE", "doc_id": "ART-655556182d", "by": "MGR", "by_doc_id": "ART-e23843b488", "ts": "2026-07-29T10:54:10"}
+{"kind": "DOC", "doc_id": "ART-9ac8ee0a7a", "path": "docs/CC_MGR_2026-07-29_EXEC_ARCH_NEXT_VERSION_CANDIDATE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T11:06:21"}
