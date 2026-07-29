@@ -425,3 +425,4 @@
 {"kind": "DONE", "doc_id": "ART-f6427d866b", "by": "MGR", "by_doc_id": "ART-966a9e2cfa", "ts": "2026-07-29T16:04:59"}
 {"kind": "DOC", "doc_id": "ART-eac89574dc", "path": "docs/CC_MGR_2026-07-29_D60_TWO_RULINGS_I_WAS_SITTING_ON.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T19:18:36"}
 {"kind": "DOC", "doc_id": "ART-baa28feb0f", "path": "docs/CC_MGR_2026-07-29_D61_WHY_I_STOP_AND_THE_COUNTERMEASURE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T19:42:01"}
+{"kind": "DOC", "doc_id": "ART-5856ea231c", "path": "docs/CC_MGR_2026-07-29_D62_TAKA_OPENED_THE_SCREEN_FIRST_FINDING.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T19:51:20"}
