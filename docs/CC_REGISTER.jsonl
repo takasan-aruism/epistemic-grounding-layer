@@ -559,3 +559,6 @@
 {"kind": "DOC", "doc_id": "ART-1d6c8e24db", "path": "docs/CC_MGR_2026-07-30_D87_A2_ZERO_ADJUDICATION_NEEDED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T02:50:48"}
 {"kind": "DONE", "doc_id": "ART-e83e641f98", "by": "MGR", "by_doc_id": "ART-1d6c8e24db", "ts": "2026-07-30T02:50:48"}
 {"kind": "DONE", "doc_id": "ART-2582e759f2", "by": "MGR", "by_doc_id": "ART-1d6c8e24db", "ts": "2026-07-30T02:50:48"}
+{"kind": "DOC", "doc_id": "ART-8eef908988", "path": "docs/TAKA_2026-07-30_2DER_FIRST_PRINCIPLE.md", "type": "STATUS", "from": "TAKA", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T02:52:34"}
+{"kind": "DOC", "doc_id": "ART-4d4e9634a8", "path": "docs/CC_MGR_2026-07-30_D88_2DER_FIRST_APPLIED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T02:53:32"}
+{"kind": "DONE", "doc_id": "ART-8eef908988", "by": "MGR", "by_doc_id": "ART-4d4e9634a8", "ts": "2026-07-30T02:53:32"}
