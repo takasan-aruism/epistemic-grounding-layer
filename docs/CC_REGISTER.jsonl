@@ -540,3 +540,4 @@
 {"kind": "DOC", "doc_id": "ART-c559dbe6b7", "path": "docs/CC_IMPL_2026-07-30_D73v22_SPLIT_AND_BREAKDOWN_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T01:42:31"}
 {"kind": "DOC", "doc_id": "ART-c400c946e4", "path": "docs/CC_MGR_2026-07-30_D80_I_AMPLIFIED_A_CANNOT_TWICE_TODAY.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T01:42:31"}
 {"kind": "DONE", "doc_id": "ART-0c5f04e7cd", "by": "MGR", "by_doc_id": "ART-c400c946e4", "ts": "2026-07-30T01:42:31"}
+{"kind": "DOC", "doc_id": "ART-2c813fc776", "path": "docs/CC_MGR_2026-07-30_D81_TAKA_OPENED_IT_ONE_ROW_IS_MISSING.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T01:45:27"}
