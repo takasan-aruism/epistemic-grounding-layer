@@ -344,3 +344,7 @@
 {"kind": "DOC", "doc_id": "ART-e6237429cb", "path": "docs/CC_DESIGN_2026-07-29_D50_HANDOFF_TO_IMPL.md", "type": "HANDOFF", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T03:11:06"}
 {"kind": "DOC", "doc_id": "ART-e6237429cb", "path": "docs/CC_DESIGN_2026-07-29_D50_HANDOFF_TO_IMPL.md", "type": "HANDOFF", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T03:19:21"}
 {"kind": "DOC", "doc_id": "ART-7f3d10df67", "path": "docs/CC_MGR_2026-07-29_D51_EMBEDDING_ACCOUNTS_SURVEY.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T09:46:58"}
+{"kind": "DOC", "doc_id": "ART-2eeaab34d1", "path": "docs/CC_IMPL_2026-07-29_D50_OPEN_BY_RUN_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T09:48:58"}
+{"kind": "DOC", "doc_id": "ART-2eeaab34d1", "path": "docs/CC_IMPL_2026-07-29_D50_OPEN_BY_RUN_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T09:50:13"}
+{"kind": "DOC", "doc_id": "ART-cb3fa7a012", "path": "docs/CC_MGR_2026-07-29_D50_BUILT_RECEIVED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T09:50:13"}
+{"kind": "DONE", "doc_id": "ART-2eeaab34d1", "by": "MGR", "by_doc_id": "ART-cb3fa7a012", "ts": "2026-07-29T09:50:13"}
