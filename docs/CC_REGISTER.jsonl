@@ -352,3 +352,5 @@
 {"kind": "DOC", "doc_id": "ART-8971ef98f0", "path": "docs/CC_DESIGN_2026-07-29_D50_AUDIT_AND_SYNC_DONE.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T09:55:14"}
 {"kind": "DOC", "doc_id": "ART-f2c88f03d6", "path": "docs/CC_MGR_2026-07-29_D50_CLOSED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T09:55:14"}
 {"kind": "DONE", "doc_id": "ART-8971ef98f0", "by": "MGR", "by_doc_id": "ART-f2c88f03d6", "ts": "2026-07-29T09:55:14"}
+{"kind": "DOC", "doc_id": "ART-deda4100cd", "path": "docs/CC_DESIGN_2026-07-29_D51_EMBEDDING_ACCOUNTS_SURVEY_REPORT.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T09:58:56"}
+{"kind": "DOC", "doc_id": "ART-deda4100cd", "path": "docs/CC_DESIGN_2026-07-29_D51_EMBEDDING_ACCOUNTS_SURVEY_REPORT.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T10:00:39"}
