@@ -552,3 +552,5 @@
 {"kind": "DOC", "doc_id": "ART-e48e1f52e1", "path": "docs/TAKA_2026-07-30_ABC_TRIAGE_PRINCIPLE.md", "type": "STATUS", "from": "TAKA", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T02:23:40"}
 {"kind": "DOC", "doc_id": "ART-d23ab8b2f5", "path": "docs/CC_MGR_2026-07-30_D84_ABC_ASSIGNMENT_OF_OPEN_ITEMS.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T02:25:32"}
 {"kind": "DONE", "doc_id": "ART-e48e1f52e1", "by": "MGR", "by_doc_id": "ART-d23ab8b2f5", "ts": "2026-07-30T02:25:32"}
+{"kind": "DOC", "doc_id": "ART-1d4989a33d", "path": "docs/CC_MGR_2026-07-30_D85_A3_CONFIRMED_ONE_WORD_LEFT_IN_ENGLISH.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T02:36:13"}
+{"kind": "DONE", "doc_id": "ART-68361e805d", "by": "TAKA", "by_doc_id": "ART-1d4989a33d", "ts": "2026-07-30T02:36:13"}
