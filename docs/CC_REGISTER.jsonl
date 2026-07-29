@@ -456,3 +456,7 @@
 {"kind": "DONE", "doc_id": "ART-b3e581df12", "by": "MGR", "by_doc_id": "ART-1c173c30ba", "ts": "2026-07-29T21:49:28"}
 {"kind": "DOC", "doc_id": "ART-de30c71fed", "path": "docs/CC_DESIGN_2026-07-29_D68_HANDOFF_TO_IMPL.md", "type": "HANDOFF", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T21:51:23"}
 {"kind": "DOC", "doc_id": "ART-de30c71fed", "path": "docs/CC_DESIGN_2026-07-29_D68_HANDOFF_TO_IMPL.md", "type": "HANDOFF", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T21:51:39"}
+{"kind": "DOC", "doc_id": "ART-d0a0bc292e", "path": "docs/CC_IMPL_2026-07-29_D68_SENT_ON_SUCCESS_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T22:05:13"}
+{"kind": "DOC", "doc_id": "ART-e4a0762f12", "path": "docs/CC_DESIGN_2026-07-29_D68_AUDIT_PASSED.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T22:10:53"}
+{"kind": "DOC", "doc_id": "ART-d0a0bc292e", "path": "docs/CC_IMPL_2026-07-29_D68_SENT_ON_SUCCESS_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T22:14:05"}
+{"kind": "DOC", "doc_id": "ART-77cc3a5c8e", "path": "docs/CC_MGR_2026-07-29_D69_MY_ORDERING_RULE_WAS_SELF_CONTRADICTORY.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T22:14:05"}
