@@ -545,3 +545,6 @@
 {"kind": "DOC", "doc_id": "ART-9369f81c72", "path": "docs/CC_IMPL_2026-07-30_D81_ROW_EXISTS_IN_SERVED_PAGE.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T01:49:37"}
 {"kind": "DOC", "doc_id": "ART-c63310c268", "path": "docs/CC_MGR_2026-07-30_D82_WITHDRAWN_AND_EVIDENCE_ORDER.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T02:02:38"}
 {"kind": "DOC", "doc_id": "ART-b102abd507", "path": "docs/DIRECTION_DRIFT_CASE_001_MGR_CLASSIFIED_FROM_OUTSIDE.md", "type": "STATUS", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T02:03:34"}
+{"kind": "DOC", "doc_id": "ART-678963701b", "path": "docs/TAKA_2026-07-30_PREMISE_CLAUDE_BREAKS_BUILD_2DER_FASTER.md", "type": "STATUS", "from": "TAKA", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T02:09:00"}
+{"kind": "DONE", "doc_id": "ART-b102abd507", "by": "MGR", "by_doc_id": "ART-678963701b", "ts": "2026-07-30T02:09:00"}
+{"kind": "DOC", "doc_id": "ART-5af8dd87d6", "path": "docs/CC_MGR_2026-07-30_D83_SCOPE_NARROWED_REGISTER_DONT_FIX.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T02:10:08"}
