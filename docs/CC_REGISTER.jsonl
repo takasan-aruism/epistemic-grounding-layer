@@ -447,3 +447,6 @@
 {"kind": "DOC", "doc_id": "ART-60e69f19bd", "path": "docs/CC_MGR_2026-07-29_D65_RULING_A_YES_B_NO_C_YES.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T20:43:15"}
 {"kind": "DONE", "doc_id": "ART-51a21e260c", "by": "MGR", "by_doc_id": "ART-60e69f19bd", "ts": "2026-07-29T20:43:15"}
 {"kind": "DOC", "doc_id": "ART-99a9d188c4", "path": "docs/CC_MGR_2026-07-29_D66_IT_WORKED_AND_THREE_NEW_FINDINGS.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T20:46:59"}
+{"kind": "DOC", "doc_id": "ART-4408c53845", "path": "docs/TAKA_2026-07-29_FIRST_CLOSED_LOOP_OBSERVATION.md", "type": "STATUS", "from": "TAKA", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T21:25:49"}
+{"kind": "DOC", "doc_id": "ART-2fd4584946", "path": "docs/CC_MGR_2026-07-29_D67_TAKA_CANON_AND_SUMMARY_DESIGN.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T21:29:18"}
+{"kind": "DONE", "doc_id": "ART-4408c53845", "by": "MGR", "by_doc_id": "ART-2fd4584946", "ts": "2026-07-29T21:29:18"}
