@@ -1343,7 +1343,7 @@
     },
     {
       "id": "G-46",
-      "summary": "TRACE に置いた値57件のうち35件(61%)が front door から読めない — ETRACE_RUN_ID はその1件",
+      "summary": "TRACE に置いた値57件のうち★24件が front door から読めない（★2026-07-30 実測。2026-07-28 は35件だったが `ETRACE_RUN_ID` が★読めるようになり34件、うち別経路が在る9件を除いて24件） — ★`ETRACE_RUN_ID`（Taka 残件②）は★済",
       "kind": "gap",
       "status": "PARTIALLY_CLOSED",
       "evidence": [
@@ -1354,9 +1354,12 @@
         "EXEC: placed(submit.py の _rec 全キー+ETRACE_RUN_ID)=57 / exposed(webui.py 全体の tr.get・tr[])=22 / 差=35",
         "EXEC: webui が TRACE を丸ごと返す口は無い(json.dumps(tr) はファイル書き込み2箇所のみ)",
         "★別経路が在るものも含む: TRACE_ID/RRI_REQUEST_ID/RRI_INTENT_ID/DS_EVENT_ID は /api/claude_packet の provenance から取れる(本日【実】)——ただし DW task が在るときだけ",
-        "★2026-07-29 D-49: build_state の列挙に etrace_run_id を追加し、GET /api/state?task_id=TASK-2DER-D84215A8 で etrace_run_id=ETR-0f6fae35665a を CC-α が実測 ∴ webui 投入の run は UI から引けるようになった。★ただし CLI 投入の run は依然引けない(G-36) / TRACE の残り33件も出ていない"
+        "★2026-07-29 D-49: build_state の列挙に etrace_run_id を追加し、GET /api/state?task_id=TASK-2DER-D84215A8 で etrace_run_id=ETR-0f6fae35665a を CC-α が実測 ∴ webui 投入の run は UI から引けるようになった。★ただし CLI 投入の run は依然引けない(G-36) / TRACE の残り33件も出ていない",
+        "EXEC(CC-α・2026-07-30・打ち切り無し): placed 57(submit.py の _rec 全キー＋ETRACE_RUN_ID) / exposed 23(webui.py の tr.get・tr[]) → ★読めない34件。2026-07-28 の35件との差は ★ETRACE_RUN_ID 1件だけ＝★読めるようになった",
+        "EXEC(CC-α・2026-07-30): 34件を8状態×(/api/state・/api/claude_packet・/api/resolve)の和集合と照合 → ★別経路が在る9件(ACTOR_ROLE DS_THREAD_ID RRI_INPUT_REF RRI_INTENT_ID RRI_REQUEST_ID RRI_RESEARCH_SIGNAL_ID RRI_RESIDUAL SENIOR_REVIEW_CANDIDATE TRACE_ID) / ★見つからない25件",
+        "★最初 CREATED の task 1件だけで測って『4件』と出し、8状態で測り直して9件になった(CREATED では下流の欄が空＝出せない場所で測っていた)。★1回目の4件を消さずに残す"
       ],
-      "note": "★MGR 新規則 v2.4 §5-12『置いたなら読める所まで書け』を既存に当てた結果。G-31(2件)→G-46(1件)と数えていたが実際は35件で、ETRACE_RUN_ID はその1つ。∴『次段で直す』の規模が2行か35件かで裁定の前提が変わる。選別の基準は CC-α が決めず MGR へ: (a)Taka の問いに要る RRI 判断値だけ (b)別経路が無いものだけ【CC-α 推奨】 (c)全部。★別経路の有無は35件すべてを調べておらず『無い』ではなく『私は知らない』(G-32)"
+      "note": "★2026-07-30 D-92 で MGR 裁定=**`ETRACE_RUN_ID`(Taka 残件②)は済**（差分を取って1件を名指しした）。**残る24件は【C】**——Taka の残件7件に入っておらず、D-60 で MGR が「2件なのか30件なのかで進め方が変わる」と書いた答えが24件だったため**Phase 2 の中でやる量ではない ∴ 登記だけ。口を作りに行かない**。★判定の限界: **名前一致で判定し値の同一性は確かめていない／8状態×各1件しか見ていない／`/api/control`・`/api/pending_approvals` は見ていない** ∴ **「24件は取れない」と書かず「見つからない」と書く**(`G-32`・MGR が採用)。 ★旧note: ★MGR 新規則 v2.4 §5-12『置いたなら読める所まで書け』を既存に当てた結果。G-31(2件)→G-46(1件)と数えていたが実際は35件で、ETRACE_RUN_ID はその1つ。∴『次段で直す』の規模が2行か35件かで裁定の前提が変わる。選別の基準は CC-α が決めず MGR へ: (a)Taka の問いに要る RRI 判断値だけ (b)別経路が無いものだけ【CC-α 推奨】 (c)全部。★別経路の有無は35件すべてを調べておらず『無い』ではなく『私は知らない』(G-32)"
     },
     {
       "id": "G-47",
@@ -1395,15 +1398,18 @@
     },
     {
       "id": "G-50",
-      "summary": "入口一覧が不完全だった — dw/workflow.py:37 が13番目の入口(create_task 直呼び)。12入口は漏れていた",
+      "summary": "入口一覧が不完全だった — dw/workflow.py:37 が13番目の入口(create_task 直呼び)。★2026-07-30 述語を1つ決めて1回走査し総数を記録 → CLOSED（★総数88件・本番16件）",
       "kind": "gap",
-      "status": "OPEN",
+      "status": "CLOSED",
       "evidence": [
         "EXEC(打ち切り無し): grep create_task( 全5repo → 総10件。うち dev-workcell/dw/workflow.py:37 は CC-α の12入口に無かった",
         "READ: run_standard_workflow() は 1 Task Unit を CREATE→PLAN→GENERATE→AUDIT まで貫通させ create_task を直接呼ぶ ∴ submit() を通らず run_id が付かない",
-        "EXEC: 呼び手は dev-workcell/run_task.py:13(手動実行スクリプト)と egl/docs/report のデモ"
+        "EXEC: 呼び手は dev-workcell/run_task.py:13(手動実行スクリプト)と egl/docs/report のデモ",
+        "EXEC(CC-α・2026-07-30・D-60 裁定①の実行): ★述語=「.py を構文木で解析し、呼び出し名が submit / create_task である Call ノード」(コメント・文字列・埋め込み JS・def 行は原理的に入らない)。全5repo・.py 全件・打ち切り無し・構文解析失敗0件 → ★総数88件",
+        "EXEC: 同じ述語・同じ1回の走査を置き場所で分けると テスト59 / ★本番16 / 実験・資料13。本番16件は dw/workflow.py:37 ほかを全件 列挙済(D-92 §3)",
+        "★述語を1回 変えた(grep → 構文木)。理由=最初の述語はコメントと埋め込み JS を数えており「呼び出し」を数えていなかった(D-60「述語を変えたときだけ数え直し、理由を書く」に従う)"
       ],
-      "note": "★Taka ⑤(過去の走査を流用せず再走査)が出したもの。IMPL が『数を合わせない』と書いたから出た。★CC-α は (a)入口一覧に加えて据え置く を推す（依頼経路でないなら run_id が無いのは正常で、塞ぐと『呼び手の数だけ合流点が増える』膨張になり確定した原則に反する）。★13番目が出た以上14番目が無いとは言えず、Taka ⑤を『済』と言えない——『もう1度やる』を無限に繰り返さない基準が要る(MGR 裁定事項) ★MGR 裁定 A: 入口一覧に加えて据え置き、合流点を足さない。【未確認: run_task.py が依頼経路でないことはコード読みのみ / 誰が=CC-α / いつ=次段で必要になったとき。今は確かめなくてよい】"
+      "note": "★2026-07-30 D-92 で MGR 裁定により CLOSED。**条件は「述語を書いて1回走査し総数を記録したら CLOSED」であり満たした** ∴ **14番目を探しに行かない**。★**「本番16件」を「16個の入口」と書かない——数えただけで中身は1件も読んでいない**。★終わらせるのは発見ではなく定義である(D-60)。 ★旧note: ★Taka ⑤(過去の走査を流用せず再走査)が出したもの。IMPL が『数を合わせない』と書いたから出た。★CC-α は (a)入口一覧に加えて据え置く を推す（依頼経路でないなら run_id が無いのは正常で、塞ぐと『呼び手の数だけ合流点が増える』膨張になり確定した原則に反する）。★13番目が出た以上14番目が無いとは言えず、Taka ⑤を『済』と言えない——『もう1度やる』を無限に繰り返さない基準が要る(MGR 裁定事項) ★MGR 裁定 A: 入口一覧に加えて据え置き、合流点を足さない。【未確認: run_task.py が依頼経路でないことはコード読みのみ / 誰が=CC-α / いつ=次段で必要になったとき。今は確かめなくてよい】"
     },
     {
       "id": "G-51",
