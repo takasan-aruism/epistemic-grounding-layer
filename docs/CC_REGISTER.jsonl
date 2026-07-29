@@ -435,3 +435,6 @@
 {"kind": "DOC", "doc_id": "ART-700376f6b0", "path": "docs/CC_DESIGN_2026-07-29_D63_SUBMIT_SILENT_FAILURE_MECHANISM.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T19:59:53"}
 {"kind": "DOC", "doc_id": "ART-deb516f600", "path": "docs/CC_MGR_2026-07-29_D63_RULING_A_AND_B_NOT_C.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T19:59:53"}
 {"kind": "DONE", "doc_id": "ART-700376f6b0", "by": "MGR", "by_doc_id": "ART-deb516f600", "ts": "2026-07-29T19:59:53"}
+{"kind": "DOC", "doc_id": "ART-828ccaeba7", "path": "docs/CC_DESIGN_2026-07-29_D64_SILENT_FAILURE_BUILD_SPEC_v1_0.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T20:23:05"}
+{"kind": "DOC", "doc_id": "ART-21de2cbf5b", "path": "docs/CC_MGR_2026-07-29_D64_APPROVED_TWO_CONDITIONS_CANNOT_BE_MET_AS_WRITTEN.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T20:23:05"}
+{"kind": "DONE", "doc_id": "ART-828ccaeba7", "by": "MGR", "by_doc_id": "ART-21de2cbf5b", "ts": "2026-07-29T20:23:05"}
