@@ -423,3 +423,4 @@
 {"kind": "DOC", "doc_id": "ART-87c34097c6", "path": "docs/CC_MGR_2026-07-29_D59_RULING_DONT_REWRITE_PAST_AND_TAKA_CHANNEL.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T16:04:59"}
 {"kind": "DONE", "doc_id": "ART-c0a6fe975f", "by": "MGR", "by_doc_id": "ART-87c34097c6", "ts": "2026-07-29T16:04:59"}
 {"kind": "DONE", "doc_id": "ART-f6427d866b", "by": "MGR", "by_doc_id": "ART-966a9e2cfa", "ts": "2026-07-29T16:04:59"}
+{"kind": "DOC", "doc_id": "ART-eac89574dc", "path": "docs/CC_MGR_2026-07-29_D60_TWO_RULINGS_I_WAS_SITTING_ON.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T19:18:36"}
