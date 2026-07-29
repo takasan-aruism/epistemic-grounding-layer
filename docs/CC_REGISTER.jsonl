@@ -498,3 +498,6 @@
 {"kind": "DOC", "doc_id": "ART-c295375fe7", "path": "docs/CC_DESIGN_2026-07-30_D76_PASS_EVENTS_BUILD_SPEC_v1_0.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:56:53"}
 {"kind": "DOC", "doc_id": "ART-f24a56efa5", "path": "docs/CC_MGR_2026-07-30_D76_APPROVED_SAY_WHICH_BARRIER.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:56:53"}
 {"kind": "DONE", "doc_id": "ART-c295375fe7", "by": "MGR", "by_doc_id": "ART-f24a56efa5", "ts": "2026-07-29T23:56:53"}
+{"kind": "DOC", "doc_id": "ART-094af140f6", "path": "docs/CC_IMPL_2026-07-30_D76_PASS_EVENTS_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T00:05:04"}
+{"kind": "DOC", "doc_id": "ART-094af140f6", "path": "docs/CC_IMPL_2026-07-30_D76_PASS_EVENTS_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T00:13:38"}
+{"kind": "DOC", "doc_id": "ART-a856e9ee6b", "path": "docs/CC_MGR_2026-07-30_D76_RECEIVED_BUT_155_VS_160_IS_UNEXPLAINED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T00:13:38"}
