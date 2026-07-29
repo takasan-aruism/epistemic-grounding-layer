@@ -484,3 +484,6 @@
 {"kind": "DONE", "doc_id": "ART-71b40a7d3b", "by": "MGR", "by_doc_id": "ART-cbaa8ac6b6", "ts": "2026-07-29T23:09:37"}
 {"kind": "DOC", "doc_id": "ART-11921d2da6", "path": "docs/CC_DESIGN_2026-07-29_D73_HANDOFF_TO_IMPL.md", "type": "HANDOFF", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:11:25"}
 {"kind": "DOC", "doc_id": "ART-11921d2da6", "path": "docs/CC_DESIGN_2026-07-29_D73_HANDOFF_TO_IMPL.md", "type": "HANDOFF", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:11:44"}
+{"kind": "DOC", "doc_id": "ART-83ea6c7b84", "path": "docs/CC_IMPL_2026-07-29_D73_STOPPED_155_CALLS_IS_HEAVY.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:13:20"}
+{"kind": "DOC", "doc_id": "ART-83ea6c7b84", "path": "docs/CC_IMPL_2026-07-29_D73_STOPPED_155_CALLS_IS_HEAVY.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:19:59"}
+{"kind": "DOC", "doc_id": "ART-513020af9f", "path": "docs/CC_MGR_2026-07-29_D74_RULING_MOVE_IT_SERVER_SIDE_I_LIFT_MY_CONSTRAINT.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:19:59"}
