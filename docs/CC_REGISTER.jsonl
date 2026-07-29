@@ -408,3 +408,5 @@
 {"kind": "DONE", "doc_id": "ART-ddf3a4d054", "by": "MGR", "by_doc_id": "ART-54c3e77fce", "ts": "2026-07-29T15:22:43"}
 {"kind": "DOC", "doc_id": "ART-96b7579467", "path": "docs/CC_DESIGN_2026-07-29_D58_HANDOFF_TO_IMPL.md", "type": "HANDOFF", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T15:23:52"}
 {"kind": "DOC", "doc_id": "ART-96b7579467", "path": "docs/CC_DESIGN_2026-07-29_D58_HANDOFF_TO_IMPL.md", "type": "HANDOFF", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T15:24:41"}
+{"kind": "DOC", "doc_id": "ART-7a3d4fc38f", "path": "docs/CC_IMPL_2026-07-29_D58_NINE_WORDINGS_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T15:32:24"}
+{"kind": "DOC", "doc_id": "ART-7a3d4fc38f", "path": "docs/CC_IMPL_2026-07-29_D58_NINE_WORDINGS_BUILT.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T15:32:43"}
