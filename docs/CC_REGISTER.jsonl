@@ -380,3 +380,4 @@
 {"kind": "DOC", "doc_id": "ART-881161f8b8", "path": "docs/CC_DESIGN_2026-07-29_D55_AUDIT_ONE_WORDING_MAY_LIE.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T11:11:02"}
 {"kind": "DOC", "doc_id": "ART-197f1e5eb9", "path": "docs/CC_MGR_2026-07-29_D55_RULING_SPLIT_C.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T11:11:02"}
 {"kind": "DONE", "doc_id": "ART-881161f8b8", "by": "MGR", "by_doc_id": "ART-197f1e5eb9", "ts": "2026-07-29T11:11:02"}
+{"kind": "DOC", "doc_id": "ART-d942e7cda6", "path": "docs/CC_DESIGN_2026-07-29_D56_SPLIT_C_BUILD_SPEC_v1_0.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-29T11:12:01"}
