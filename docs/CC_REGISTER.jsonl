@@ -478,3 +478,7 @@
 {"kind": "DOC", "doc_id": "ART-11f60c3fd6", "path": "docs/CC_DESIGN_2026-07-29_D72_GOAL_IS_OBTAINABLE_BUT_IS_NOT_A_NAME.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:00:29"}
 {"kind": "DOC", "doc_id": "ART-68e0b54479", "path": "docs/CC_MGR_2026-07-29_D72_RULING_TRUNCATE_AND_SAY_SO.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:00:29"}
 {"kind": "DONE", "doc_id": "ART-11f60c3fd6", "by": "MGR", "by_doc_id": "ART-68e0b54479", "ts": "2026-07-29T23:00:29"}
+{"kind": "DOC", "doc_id": "ART-71b40a7d3b", "path": "docs/CC_DESIGN_2026-07-29_D73_TASK_SUMMARY_BUILD_SPEC_v1_0.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-29T23:09:34"}
+{"kind": "DOC", "doc_id": "ART-71b40a7d3b", "path": "docs/CC_DESIGN_2026-07-29_D73_TASK_SUMMARY_BUILD_SPEC_v1_0.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:09:37"}
+{"kind": "DOC", "doc_id": "ART-cbaa8ac6b6", "path": "docs/CC_MGR_2026-07-29_D73_APPROVED_YOUR_FIX_IS_RIGHT_BUT_ACCEPT1_NEEDS_A_BROWSER.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T23:09:37"}
+{"kind": "DONE", "doc_id": "ART-71b40a7d3b", "by": "MGR", "by_doc_id": "ART-cbaa8ac6b6", "ts": "2026-07-29T23:09:37"}
