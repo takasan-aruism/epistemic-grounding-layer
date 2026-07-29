@@ -605,3 +605,4 @@
 {"kind": "DOC", "doc_id": "ART-20475d1a18", "path": "docs/CC_MGR_2026-07-30_D97_PROBE_ORDER_TARGET_IS_THE_RECEIPT_RECORD.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T08:28:26"}
 {"kind": "DONE", "doc_id": "ART-9f10f8f9cb", "by": "MGR", "by_doc_id": "ART-20475d1a18", "ts": "2026-07-30T08:28:26"}
 {"kind": "DONE", "doc_id": "ART-489f47dc6a", "by": "MGR", "by_doc_id": "ART-2505c7c90a", "ts": "2026-07-30T08:28:26"}
+{"kind": "DOC", "doc_id": "ART-b943931797", "path": "docs/CC_MGR_2026-07-30_D98_D_IS_THREE_NUMBERS_NOT_A_VERDICT.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T08:39:04"}
