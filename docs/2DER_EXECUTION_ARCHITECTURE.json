@@ -1546,6 +1546,31 @@
     "★作って試していない(MGR 条件『複数在る run が無いなら確かめられないと書くこと。作って試さない』)"
    ],
    "note": "★D-50 を閉じる際、MGR 裁定により**未検証のまま**登記した。『通った』と書かない。該当する run が自然に発生したら検証できる"
+  },
+  {
+   "id": "G-62",
+   "summary": "「取り下げ済み」と書かれた制約がコードに残っている — account 保存則(D3)は STAGE2b で取り下げられたが check_account_conservation は現存",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "READ(逐語): STAGE2b_REDESIGN_PLAN §0『hard 不変量は問い台帳(stage1 I1)のみ。account 次元は soft。前回私が account に mass 保存を課したのは誤り→取り下げ済み』",
+    "READ: SPEC_RTHREAD_STAGE2a_v0.1:9 の設計判断 D3 = account保存 load-bearing",
+    "READ: rri/rri/request_thread.py:281 def check_account_conservation(projection, valid_accounts) が現存"
+   ],
+   "note": "★D-52 で発見。取り下げは D3 であって D2(chart 検証=machine)ではない。★request_thread に本番呼び手が0(G-45)なので実害は出ていないが、配線されれば取り下げ済みの制約が効く。★私は直していない(調査のみの指示)"
+  },
+  {
+   "id": "G-63",
+   "summary": "科目を作る側(ACCOUNT_CHART_CANDIDATE)と使う側(rthread_chart.json)が別名で設計され、繋ぐ1段が未実装",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "READ: SPEC_RTHREAD_STAGE2a_v0.1:23『本番は stage2b の MINING 生成物』/ :22『DERIVED/versioned(never SoR, G-5)』",
+    "READ: STAGE2b_REDESIGN_PLAN の chart 言及は0行(SPEC_RTHREAD_STAGE2a は41行)。凍結先の名は ACCOUNT_AXES",
+    "EXEC: s_mine_accounts.py が ACCOUNT_CHART_CANDIDATE.jsonl / ACCOUNT_CHART_STABILITY.json を生成し、4ファイルとも実在(存在確認のみ)",
+    "EXEC: rthread_chart への言及は全5repo で1行(request_thread.py:19 の定義)のみ ＝候補を chart にする側が居ない"
+   ],
+   "note": "★Taka 指摘の裏づけ=chart は人が書く固定表ではなく MINING の派生物であり、無いのは『書き忘れ』ではなく『生成する段に到達していない』。∴ 設計の変質ではなく**未完**（固定表方式へ変更した裁定・DE・仕様変更は見つかっていない）。★未実装箇所は ACCOUNT_CHART_CANDIDATE.jsonl → rthread_chart.json の1段"
   }
  ],
  "planned_extensions": [
