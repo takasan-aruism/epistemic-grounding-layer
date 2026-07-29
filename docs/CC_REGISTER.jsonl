@@ -427,3 +427,7 @@
 {"kind": "DOC", "doc_id": "ART-baa28feb0f", "path": "docs/CC_MGR_2026-07-29_D61_WHY_I_STOP_AND_THE_COUNTERMEASURE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T19:42:01"}
 {"kind": "DOC", "doc_id": "ART-5856ea231c", "path": "docs/CC_MGR_2026-07-29_D62_TAKA_OPENED_THE_SCREEN_FIRST_FINDING.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T19:51:20"}
 {"kind": "DOC", "doc_id": "ART-9c69b9ed24", "path": "docs/CC_MGR_2026-07-29_D63_SUBMIT_DID_NOTHING_AND_LEFT_NO_TRACE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T19:53:54"}
+{"kind": "DOC", "doc_id": "ART-b320992560", "path": "docs/CC_DESIGN_2026-07-29_D62_INPUTS_COUNTED_8_ITEMS.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T19:55:36"}
+{"kind": "DOC", "doc_id": "ART-b320992560", "path": "docs/CC_DESIGN_2026-07-29_D62_INPUTS_COUNTED_8_ITEMS.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T19:56:57"}
+{"kind": "DOC", "doc_id": "ART-079d7c7942", "path": "docs/CC_MGR_2026-07-29_D62_APPROVED_BUT_D63_GOES_FIRST.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-29T19:56:57"}
+{"kind": "DONE", "doc_id": "ART-b320992560", "by": "MGR", "by_doc_id": "ART-079d7c7942", "ts": "2026-07-29T19:56:57"}
