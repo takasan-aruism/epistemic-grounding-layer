@@ -20,8 +20,8 @@
    "TASK_CONTRACTS.jsonl / ARTIFACT_REGISTRY.jsonl / LEDGER_REGISTRY.jsonl の中身は UNKNOWN(台帳の直読を避けたため)",
    "呼び出し元の網羅はしていない(submit( の呼び出しは CLI と webui の2箇所を確認した範囲)"
   ],
-  "last_synced_at": "2026-07-29 (D-65 commit 後)",
-  "sync_note": "★2026-07-29 D-65: commit b99f2f3 に余分な \" が在り /command の JS 全体が構文エラーで全ボタンが死んでいた（既に修正・再起動済）。★最も重いのは欠陥そのものではなく、**D-58 の受入4件がすべて『ページが死んでいても同じ答えを返す』形だったこと**（G-71）。★区分を訂正: 『JS が構文として通るか』は決定論（node --check）であり、『人しか出せない』は『開いてどう見えるか』だけ。★Phase 2 は完了していない。"
+  "last_synced_at": "2026-07-29 (D-68 commit 後)",
+  "sync_note": "★2026-07-29 D-64/D-68: 押した結果を画面に出し（4 kind・原因を推測しない）、サーバが `/api/submit` を受けた/返したことを `RECV`/`SENT` の2行で残すようにした（`path` 欄はパスだけ・型名は別欄）。★Taka の実操作で front door → DS → RRI → 実測 → EGL 書き込みの一周が通り、`RECV` が実際に出た。★主張文は Taka 逐語のみ:「2DERが初めて、Web UIから実環境を観測し、証拠をEGLに残して応答する一周を通した。ただし、完了追跡と人間向け要約は未完成」——**「動く」「使える」「自律した」に言い換えない**。★順番の訂正: ①実装が直す ②再起動 ③配信物で検査(node --check) ④設計が受入確認 ⑤MGR が commit ⑥設計が資料同期（②〜⑤の間 本番は未 commit を配信する。消せないので短くする）。"
  },
  "generated_from": {
   "repositories": [
@@ -34,23 +34,23 @@
   "commits": [
    {
     "repo": "ds",
-    "commit": "a30c2e9"
+    "commit": "1f2f675"
    },
    {
     "repo": "rri",
-    "commit": "4003b25"
+    "commit": "b90dbcc"
    },
    {
     "repo": "egl",
-    "commit": "4e109f9"
+    "commit": "50de2b2"
    },
    {
     "repo": "dev-workcell",
-    "commit": "8e39be7"
+    "commit": "9e13228"
    },
    {
     "repo": "twoder",
-    "commit": "5c83f50"
+    "commit": "527b862"
    }
   ],
   "documents": [
@@ -1656,12 +1656,13 @@
    "id": "G-70",
    "summary": "サーバが /api/submit を受けたことを1行も記録していない — 「届いていない」と「断った」を我々の側から区別できない",
    "kind": "gap",
-   "status": "OPEN",
+   "status": "PARTIALLY_CLOSED",
    "evidence": [
     "EXEC(MGR): /home/takasan/webui_8770.log が 0 バイト（4時間25分 稼働・GET も多数在ったのに1行も無い）",
     "契機: Taka 逐語『送信ボタンを押したけど何も動かないよ』→ /api/tasks は 155 のまま増えず",
     "READ: do_POST は _auth_ok() 不成立で _deny()（401・Content-Length 0）を返すが、記録しない",
-    "★G-38 と同型だが同一ではない（あちらは DW の emit、こちらはサーバの受信）"
+    "★G-38 と同型だが同一ではない（あちらは DW の emit、こちらはサーバの受信）",
+    "★2026-07-29 D-64/D-68: RECV と SENT(401/200/500+error_type) を runs/submit_access.log に残すようにした。EXEC(Taka 実操作): 20:44:33 RECV /api/submit が実際に出た ∴ 『届いたかどうか分からない』は解消。★ただし成功時 SENT が実際に出たことは未確認（投入しないと示せない）"
    ],
    "note": "★D-63 で特定。**機構は言えるが原因は言えない**——記録が無いので「401 が返った」も「届いていない」も証拠が無い。確かめる手段が『もう1度押す』しかないので確かめない（Taka 常設の禁止）。★D-64 で計器として直す（時刻/パス/status を1行・fail-open・本文は残さない）。★ただし投入なしでは『出たこと』を示せないので未検証のまま登記する"
   },
