@@ -774,3 +774,4 @@
 {"kind": "DONE", "doc_id": "ART-4b20e579c5", "by": "MGR", "by_doc_id": "ART-3bfcbf883a", "ts": "2026-07-30T22:26:23"}
 {"kind": "DOC", "doc_id": "ART-f7482a8443", "path": "docs/CC_DESIGN_2026-07-30_D137_BUILD_SPEC_E2E_EVIDENCE_PLAN.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-30T22:26:56"}
 {"kind": "DONE", "doc_id": "ART-3bfcbf883a", "by": "DESIGN", "by_doc_id": "ART-f7482a8443", "ts": "2026-07-30T22:26:56"}
+{"kind": "DOC", "doc_id": "ART-410d03c6c0", "path": "docs/CC_MGR_2026-07-30_D138_MY_READING_DIFFERS_ON_STEP_ONE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T22:41:39"}
