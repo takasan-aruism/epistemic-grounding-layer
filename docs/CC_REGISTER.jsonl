@@ -721,3 +721,4 @@
 {"kind": "DONE", "doc_id": "ART-9939bf6382", "by": "MGR", "by_doc_id": "ART-c9dc694b4d", "ts": "2026-07-30T16:08:36"}
 {"kind": "DONE", "doc_id": "ART-bdae5176d5", "by": "TAKA", "by_doc_id": "ART-c9dc694b4d", "ts": "2026-07-30T16:08:36"}
 {"kind": "DONE", "doc_id": "ART-53de0f1f40", "by": "TAKA", "by_doc_id": "ART-c9dc694b4d", "ts": "2026-07-30T16:08:36"}
+{"kind": "DOC", "doc_id": "ART-e07ceec4f6", "path": "docs/CC_MGR_2026-07-30_D124_ONE_HANDOVER_ONLY_CRITERIA_FIRST.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T16:26:21"}
