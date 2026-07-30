@@ -643,3 +643,5 @@
 {"kind": "DONE", "doc_id": "ART-10af1ac090", "by": "MGR", "by_doc_id": "ART-2ba5613409", "ts": "2026-07-30T13:34:01"}
 {"kind": "DOC", "doc_id": "ART-2e9a1a56cc", "path": "docs/CC_IMPL_2026-07-30_D107_MY_PROOF_WAS_WEAKER_THAN_I_WROTE.md", "type": "FINDING", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:42:10"}
 {"kind": "DOC", "doc_id": "ART-f18fd24b2e", "path": "docs/CC_MGR_2026-07-30_D107_EXIT_ZERO_MEANT_TWO_THINGS.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:42:10"}
+{"kind": "DOC", "doc_id": "ART-84cd808c65", "path": "docs/CC_IMPL_2026-07-30_D108_STOP_ACCEPTED_AND_MY_SEARCH_WAS_TOO_NARROW.md", "type": "FINDING", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:51:53"}
+{"kind": "DOC", "doc_id": "ART-a0d16d54ea", "path": "docs/CC_MGR_2026-07-30_D108_MY_STOP_WAS_TOO_BROAD_TWO_NOT_NINETYEIGHT.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:51:53"}
