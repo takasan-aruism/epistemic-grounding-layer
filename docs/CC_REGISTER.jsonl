@@ -771,3 +771,4 @@
 {"kind": "DONE", "doc_id": "ART-bf337270f6", "by": "DESIGN", "by_doc_id": "ART-94bcf56cc3", "ts": "2026-07-30T20:03:09"}
 {"kind": "DOC", "doc_id": "ART-4b20e579c5", "path": "docs/TAKA_2026-07-30_PHASE4_E2E_INSPECTION_ORDER.md", "type": "HANDOFF", "from": "TAKA", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T22:25:28"}
 {"kind": "DOC", "doc_id": "ART-3bfcbf883a", "path": "docs/CC_MGR_2026-07-30_D137_E2E_INSPECTION_RULINGS.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T22:25:28"}
+{"kind": "DONE", "doc_id": "ART-4b20e579c5", "by": "MGR", "by_doc_id": "ART-3bfcbf883a", "ts": "2026-07-30T22:26:23"}
