@@ -714,3 +714,6 @@
 {"kind": "DOC", "doc_id": "ART-27474a0967", "path": "docs/CC_MGR_2026-07-30_D122_YOU_AUDITED_MY_REPORT_TO_TAKA.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T15:46:09"}
 {"kind": "DONE", "doc_id": "ART-7289753480", "by": "MGR", "by_doc_id": "ART-27474a0967", "ts": "2026-07-30T15:46:09"}
 {"kind": "DOC", "doc_id": "ART-9939bf6382", "path": "docs/CC_MGR_HANDOFF_2026-07-30.md", "type": "STATUS", "from": "MGR", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T15:54:27"}
+{"kind": "DOC", "doc_id": "ART-ddd28a1535", "path": "docs/CC_DESIGN_2026-07-30_HANDOFF_TO_NEXT_DESIGN_INSTANCE.md", "type": "HANDOFF", "from": "DESIGN", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T15:55:01"}
+{"kind": "DOC", "doc_id": "ART-ddd28a1535", "path": "docs/CC_DESIGN_2026-07-30_HANDOFF_TO_NEXT_DESIGN_INSTANCE.md", "type": "STATUS", "from": "DESIGN", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T15:57:51"}
+{"kind": "DOC", "doc_id": "ART-0b4b798792", "path": "docs/CC_IMPL_2026-07-30_HANDOFF_FOR_NEXT_IMPL_INSTANCE.md", "type": "STATUS", "from": "IMPL", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T15:57:51"}
