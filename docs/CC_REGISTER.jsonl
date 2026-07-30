@@ -662,3 +662,7 @@
 {"kind": "DOC", "doc_id": "ART-51bbd5e7a4", "path": "docs/CC_DESIGN_2026-07-30_D111_P2_EGL_EVIDENCE_IS_ALREADY_RETRIEVABLE.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T14:09:59"}
 {"kind": "DOC", "doc_id": "ART-6824271599", "path": "docs/CC_MGR_2026-07-30_D111_P2_NEEDS_NO_BUILD_MEASURE_IF_14_MOVES.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T14:09:59"}
 {"kind": "DONE", "doc_id": "ART-51bbd5e7a4", "by": "MGR", "by_doc_id": "ART-6824271599", "ts": "2026-07-30T14:09:59"}
+{"kind": "DOC", "doc_id": "ART-63caccfd06", "path": "docs/CC_DESIGN_2026-07-30_D113_ITEM14_DOES_NOT_MOVE.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T14:11:42"}
+{"kind": "DOC", "doc_id": "ART-e9bd9d4963", "path": "docs/CC_DESIGN_2026-07-30_D112_THIRTYSEVEN_AND_SIXTYONE_AND_MY_EARLIER_42_WAS_WRONG.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T14:12:27"}
+{"kind": "DOC", "doc_id": "ART-2b57b957ec", "path": "docs/CC_MGR_2026-07-30_D112_THE_MARKER_IS_A_FILTER_NOT_A_PROOF.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T14:12:27"}
+{"kind": "DONE", "doc_id": "ART-e9bd9d4963", "by": "MGR", "by_doc_id": "ART-2b57b957ec", "ts": "2026-07-30T14:12:27"}
