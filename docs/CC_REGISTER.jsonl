@@ -698,3 +698,4 @@
 {"kind": "DOC", "doc_id": "ART-04ef71b539", "path": "docs/CC_DESIGN_2026-07-30_D119_DE0568_CONFIRMED_BUT_THE_TARGET_IS_DIFFERENT.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T15:28:16"}
 {"kind": "DOC", "doc_id": "ART-91a394463d", "path": "docs/CC_MGR_2026-07-30_D119B_DONT_CREATE_A_DE_TO_MOVE_A_NUMBER.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T15:28:16"}
 {"kind": "DONE", "doc_id": "ART-04ef71b539", "by": "MGR", "by_doc_id": "ART-91a394463d", "ts": "2026-07-30T15:28:16"}
+{"kind": "DOC", "doc_id": "ART-b6549863cc", "path": "docs/CC_MGR_2026-07-30_D120_NEXT_IS_P5_MEASURE_THE_STOP.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T15:35:01"}
