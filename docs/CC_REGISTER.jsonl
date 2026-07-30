@@ -842,3 +842,9 @@
 {"kind": "DOC", "doc_id": "ART-dcfbe3da37", "path": "docs/CC_DESIGN_2026-07-31_HASH_FORMS_ARE_COMPARABLE.md", "type": "FINDING", "from": "DESIGN", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T03:09:34"}
 {"kind": "DONE", "doc_id": "ART-de01184db8", "by": "DESIGN", "by_doc_id": "ART-dcfbe3da37", "ts": "2026-07-31T03:09:34"}
 {"kind": "DOC", "doc_id": "ART-bf0b0dec84", "path": "docs/CC_MGR_2026-07-31_D153_CITED_BUT_NOT_USED_ONE_MORE_PLACE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T03:14:50"}
+{"kind": "DOC", "doc_id": "ART-cc77ceff07", "path": "docs/CC_DESIGN_2026-07-31_D152_AUDIT_CITED_BUT_NOT_USED.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T03:15:37"}
+{"kind": "DONE", "doc_id": "ART-1e03cee686", "by": "DESIGN", "by_doc_id": "ART-cc77ceff07", "ts": "2026-07-31T03:15:37"}
+{"kind": "DOC", "doc_id": "ART-e1f5edfff2", "path": "docs/CC_DESIGN_2026-07-31_D153_BUILD_SPEC_SHOW_THE_OBSERVATION.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-31T03:17:24"}
+{"kind": "DONE", "doc_id": "ART-bf0b0dec84", "by": "DESIGN", "by_doc_id": "ART-e1f5edfff2", "ts": "2026-07-31T03:17:24"}
+{"kind": "DOC", "doc_id": "ART-c8d233dc34", "path": "docs/CC_MGR_2026-07-31_D154_CONFIRMED_PROCEED_TO_THE_PROMPT.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T03:17:30"}
+{"kind": "DONE", "doc_id": "ART-cc77ceff07", "by": "MGR", "by_doc_id": "ART-c8d233dc34", "ts": "2026-07-31T03:17:30"}
