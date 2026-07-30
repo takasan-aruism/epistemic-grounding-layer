@@ -641,3 +641,5 @@
 {"kind": "DOC", "doc_id": "ART-2ba5613409", "path": "docs/CC_MGR_2026-07-30_D106_STOP_RUNNING_IT_NOW.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:34:01"}
 {"kind": "DOC", "doc_id": "ART-bdae5176d5", "path": "docs/CC_TAKA_2026-07-30_REGRESSION_INJECTS.md", "type": "HANDOFF", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:34:01"}
 {"kind": "DONE", "doc_id": "ART-10af1ac090", "by": "MGR", "by_doc_id": "ART-2ba5613409", "ts": "2026-07-30T13:34:01"}
+{"kind": "DOC", "doc_id": "ART-2e9a1a56cc", "path": "docs/CC_IMPL_2026-07-30_D107_MY_PROOF_WAS_WEAKER_THAN_I_WROTE.md", "type": "FINDING", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:42:10"}
+{"kind": "DOC", "doc_id": "ART-f18fd24b2e", "path": "docs/CC_MGR_2026-07-30_D107_EXIT_ZERO_MEANT_TWO_THINGS.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:42:10"}
