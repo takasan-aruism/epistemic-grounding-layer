@@ -734,3 +734,7 @@
 {"kind": "DONE", "doc_id": "ART-5560f1582a", "by": "MGR", "by_doc_id": "ART-7b194b5bb6", "ts": "2026-07-30T18:56:17"}
 {"kind": "DOC", "doc_id": "ART-144c800c7c", "path": "docs/CC_MGR_2026-07-30_D127_SUBMIT_APPROVED_THE_PLAN_IS_EVIDENCE_NOT_AN_ORDER.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T19:11:33"}
 {"kind": "DONE", "doc_id": "ART-d0d188949b", "by": "MGR", "by_doc_id": "ART-144c800c7c", "ts": "2026-07-30T19:11:33"}
+{"kind": "DOC", "doc_id": "ART-ce2f95407e", "path": "docs/CC_DESIGN_2026-07-30_D127_SUBMITTED_RESULT_NO_HANDOVER.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T19:17:17"}
+{"kind": "DONE", "doc_id": "ART-144c800c7c", "by": "DESIGN", "by_doc_id": "ART-ce2f95407e", "ts": "2026-07-30T19:17:17"}
+{"kind": "DOC", "doc_id": "ART-72b30d0738", "path": "docs/CC_MGR_2026-07-30_D128_NOT_MET_AND_THE_REQUEST_NEVER_REACHED_THE_PLANNER.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T19:21:05"}
+{"kind": "DONE", "doc_id": "ART-ce2f95407e", "by": "MGR", "by_doc_id": "ART-72b30d0738", "ts": "2026-07-30T19:21:05"}

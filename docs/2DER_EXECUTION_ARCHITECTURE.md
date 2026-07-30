@@ -389,6 +389,7 @@ CURRENT:
 | **G-78** | **状況表が「台帳のずれ」を出した★直後に MGR 未応答の一覧を出すため、★ずれの内訳に見える**（Taka 指摘・D-124 §5(a)） | instrument_defect | **OPEN**（★**直さない。登記して、誤用しない**——Taka「修正より先に、今後の判断で誤用しないことを優先します」。★`2der_status.sh:90` の直後 `:91-93` が別計算の `$PENDING` を字下げして出している。★`head -8` の打ち切りもある） |
 | **G-79** | **★処理済みの閉じ込み（`record_done`）が役割間で揃っていない** ∴ **★未処理件数を全体指標として使えない**（Taka 指摘・D-124 §5(b)） | instrument_defect | **OPEN**（★**直さない。かつ使わない**——実測 MGR 0／TAKA 0／**DESIGN 243**／IMPL 24、★`record_done` の呼び手はコード上 **0件**＝閉じ込みは手作業依存。★「DESIGN に243件の手番が在る」という意味ではない） |
 | **G-80** | **★接頭辞 `ART-` が★2つの別の登記簿を指す** — CC 文書の doc_id は `cc_register`→`docs/CC_REGISTER.jsonl`、front door の `ids.resolve` が引くのは `twoder/artifact_registry` ∴ **★文書 id を front door に渡すと `resolved:false`** | isomorph_not_identical | **OPEN**（★**直さない・今は提案もしない**（「0→1 に必要」を確認していない）。★実測(訂正後): 実際に登記されている `ART-e07ceec4f6`／`ART-5e99097abf` の**2件とも** `resolved:false`。★最初 `docs/` を付けずに採番した未登記の id で叩いていた（**CC-α の誤り・結論は不変・根拠は取り直した**）。★`P-01`/`G-18` は近いが**この食い違いは書いていない**。★**設計/監査の受信箱を 2DER に聞けない**根拠でもある） |
+| **G-81** | **★`/api/submit` が返す `measured_state` が、★その文を支持しない DE を典拠として付けてくる**（`record_ids`/`egl_source_refs` = `DE-0543`。★決定論の完全一致で `cc_register`/`CC_REGISTER`/`ART-`/`artifact_registry`/`畳む` が **DE-0543 に1つも無い**） | gap | **OPEN**（★**直さない・登記して進む**。★**EGL の中核「根拠なき claim を認めない」の逆である**が、★**実測1回のみ ∴ 状態の主張にしない**。★確かめるなら別の依頼文で複数回＝今はやらない） |
 
 ---
 
