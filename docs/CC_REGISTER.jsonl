@@ -738,3 +738,7 @@
 {"kind": "DONE", "doc_id": "ART-144c800c7c", "by": "DESIGN", "by_doc_id": "ART-ce2f95407e", "ts": "2026-07-30T19:17:17"}
 {"kind": "DOC", "doc_id": "ART-72b30d0738", "path": "docs/CC_MGR_2026-07-30_D128_NOT_MET_AND_THE_REQUEST_NEVER_REACHED_THE_PLANNER.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T19:21:05"}
 {"kind": "DONE", "doc_id": "ART-ce2f95407e", "by": "MGR", "by_doc_id": "ART-72b30d0738", "ts": "2026-07-30T19:21:05"}
+{"kind": "DOC", "doc_id": "ART-9741692dbc", "path": "docs/CC_DESIGN_2026-07-30_D128_CLASSIFY_IS_LLM_ROUTING_IS_DETERMINISTIC.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T19:22:55"}
+{"kind": "DONE", "doc_id": "ART-72b30d0738", "by": "DESIGN", "by_doc_id": "ART-9741692dbc", "ts": "2026-07-30T19:22:55"}
+{"kind": "DOC", "doc_id": "ART-57c5881c41", "path": "docs/CC_MGR_2026-07-30_D129_I_OVERSTATED_IT_AND_THE_LINE_ON_REWORDING.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T19:25:25"}
+{"kind": "DONE", "doc_id": "ART-9741692dbc", "by": "MGR", "by_doc_id": "ART-57c5881c41", "ts": "2026-07-30T19:25:25"}
