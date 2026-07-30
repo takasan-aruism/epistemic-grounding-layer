@@ -762,3 +762,4 @@
 {"kind": "DONE", "doc_id": "ART-0259b7d3d0", "by": "DESIGN", "by_doc_id": "ART-d95c3bdfc2", "ts": "2026-07-30T19:50:20"}
 {"kind": "DOC", "doc_id": "ART-fbd58dcbfb", "path": "docs/CC_MGR_2026-07-30_D134_MARK2_STANDS_ONE_HANDOVER_IS_ESTABLISHED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T19:54:49"}
 {"kind": "DONE", "doc_id": "ART-d95c3bdfc2", "by": "MGR", "by_doc_id": "ART-fbd58dcbfb", "ts": "2026-07-30T19:54:49"}
+{"kind": "DOC", "doc_id": "ART-e6ce9104f0", "path": "docs/CC_MGR_2026-07-30_D135_AUDIT2_THE_CAUSE_WAS_OUR_WORDING_NOT_NEW_ABILITY.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T19:56:31"}
