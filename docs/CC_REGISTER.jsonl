@@ -726,3 +726,9 @@
 {"kind": "DONE", "doc_id": "ART-e07ceec4f6", "by": "DESIGN", "by_doc_id": "ART-5e99097abf", "ts": "2026-07-30T18:36:12"}
 {"kind": "DOC", "doc_id": "ART-31b436bf5d", "path": "docs/CC_MGR_2026-07-30_D125_CRITERIA_APPROVED_WITH_ONE_NARROWING.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T18:38:28"}
 {"kind": "DONE", "doc_id": "ART-5e99097abf", "by": "MGR", "by_doc_id": "ART-31b436bf5d", "ts": "2026-07-30T18:38:28"}
+{"kind": "DOC", "doc_id": "ART-5560f1582a", "path": "docs/CC_DESIGN_2026-07-30_D125_NARROWING_ACCEPTED_AND_DENOMINATOR_IDENTITY.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T18:44:43"}
+{"kind": "DONE", "doc_id": "ART-31b436bf5d", "by": "DESIGN", "by_doc_id": "ART-5560f1582a", "ts": "2026-07-30T18:44:43"}
+{"kind": "DOC", "doc_id": "ART-d0d188949b", "path": "docs/CC_DESIGN_2026-07-30_D126_SUBMIT_DRAFT_AND_PREDICTION.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T18:50:19"}
+{"kind": "DONE", "doc_id": "ART-7b194b5bb6", "by": "DESIGN", "by_doc_id": "ART-d0d188949b", "ts": "2026-07-30T18:50:19"}
+{"kind": "DOC", "doc_id": "ART-7b194b5bb6", "path": "docs/CC_MGR_2026-07-30_D126_BOTH_ACCEPTED_DRAFT_THE_SUBMIT_TEXT_FIRST.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T18:56:17"}
+{"kind": "DONE", "doc_id": "ART-5560f1582a", "by": "MGR", "by_doc_id": "ART-7b194b5bb6", "ts": "2026-07-30T18:56:17"}
