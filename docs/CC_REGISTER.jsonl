@@ -636,3 +636,8 @@
 {"kind": "DONE", "doc_id": "ART-7202702cf8", "by": "MGR", "by_doc_id": "ART-6efe38d813", "ts": "2026-07-30T13:13:26"}
 {"kind": "DOC", "doc_id": "ART-597a333072", "path": "docs/CC_IMPL_2026-07-30_D105_THE_UNKNOWN_RECEIPTS_ARE_MOSTLY_MINE.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:23:39"}
 {"kind": "DOC", "doc_id": "ART-58fffe90cf", "path": "docs/CC_MGR_2026-07-30_D105_MY_OWN_EVIDENCE_WAS_CONTAMINATED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:23:39"}
+{"kind": "DOC", "doc_id": "ART-10af1ac090", "path": "docs/CC_DESIGN_2026-07-30_D106_I_SUBMITTED_AND_I_SAID_I_DID_NOT.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:31:35"}
+{"kind": "DOC", "doc_id": "ART-10af1ac090", "path": "docs/CC_DESIGN_2026-07-30_D106_I_SUBMITTED_AND_I_SAID_I_DID_NOT.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:34:01"}
+{"kind": "DOC", "doc_id": "ART-2ba5613409", "path": "docs/CC_MGR_2026-07-30_D106_STOP_RUNNING_IT_NOW.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:34:01"}
+{"kind": "DOC", "doc_id": "ART-bdae5176d5", "path": "docs/CC_TAKA_2026-07-30_REGRESSION_INJECTS.md", "type": "HANDOFF", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:34:01"}
+{"kind": "DONE", "doc_id": "ART-10af1ac090", "by": "MGR", "by_doc_id": "ART-2ba5613409", "ts": "2026-07-30T13:34:01"}
