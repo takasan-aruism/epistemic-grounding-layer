@@ -1839,6 +1839,33 @@
         "★1回の観測である（運用方針 §4-13）。★繰り返していない ∴ 「毎回そうなる」とは書かない"
       ],
       "note": "★2026-07-30 登記（CC-α 採番）。★直さない・登記して進む（常設命令）。★重い理由: **EGL の中核は「根拠なき claim を認めない」であり、★支持しない典拠を付けて返すのは、その中核の逆である**。★ただし★1回しか見ていない ∴ **★状態の主張にしない**。★確かめるなら、★別の依頼文で複数回 投入して分布を見る必要がある（★今はやらない。★成果判定の対象外）。"
+    },
+    {
+      "id": "G-82",
+      "summary": "★「その PLAN を誰が作ったか」を 2DER に聞く口が無い（★測って0。★口は在り応答も返るが、`plan_source` の欄が無い）",
+      "kind": "gap",
+      "status": "OPEN",
+      "evidence": [
+        "EXEC(IMPL・2026-07-30・SPEC `D-133` に基づく): `GET /api/state?task_id=TASK-2DER-B11764B3` の最上位19キーを入れ子まで全走査 → `plan_source` / `runtime_recovery` / `packet_type` / `prohibited_actions` は★0件",
+        "EXEC(IMPL・同): `GET /api/resolve?id=TASK-2DER-B11764B3` の `record` は `task_id` / `events` / `state` の★3キーのみ",
+        "EXEC(CC-α・監査で追認): 値そのものは `GET /api/claude_packet?task_id=…` の `implementation_packet_ref` に在る ∴ ★「引けない」ではなく「★状態の口では答えられない」",
+        "★これは『測って0』である（運用方針の書き分け）。★『測れない』ではない",
+        "★実務上の影響: 印2【生成】の検証に、★2DER の外側（モデルサーバのログ）と★コードの実読が要った（`D-133` の往復1回分）"
+      ],
+      "note": "★2026-07-30 登記（CC-α 採番）。★MGR `D-134` §4-1 が「棚に置く」とした2件のうちの1件——★C の一覧が MGR 文書内にのみ在ると資料から消えるため、★Gap 台帳の唯一の書き手である設計が記す（`G-77` と同じ扱い）。★直さない・★提案もしない（Taka「新しい仕組みは 0→1 に必要と確認できた場合のみ」＝★0→1 は既に成立した ∴ 必要条件ではない）。"
+    },
+    {
+      "id": "G-83",
+      "summary": "★planner(Qwen) の1回目の呼び出しが失敗し、★max_tokens を上げた2回目で通った（`attempts: 2` / `final_max_tokens: 4096` / `outcome: RECOVERED`）",
+      "kind": "gap",
+      "status": "OPEN",
+      "evidence": [
+        "EXEC(CC-α・2026-07-30・front door `GET /api/claude_packet?task_id=TASK-2DER-B11764B3`): `implementation_packet_ref.runtime_recovery = {\"attempts\": 2, \"final_max_tokens\": 4096, \"outcome\": \"RECOVERED\"}`",
+        "EXEC(IMPL・別出所): `qwen36_vllm` コンテナのログに、窓 JST 19:32:13〜34 の `POST /v1/chat/completions` が★2件（200 OK）／対照 19:20〜19:30 は★0件",
+        "READ(CC-α): `twoder/build_planner.py:182-183` の `run_with_recovery(call=lambda mt: _qwen_call(prompt, mt))` は1つ、`validate_plan` は決定論 ∴ ★planner の LLM 呼び出しは attempts と同数",
+        "★これは印2 を弱めない（★作ったのは Qwen である）。★ただし「一発で作った」ではない"
+      ],
+      "note": "★2026-07-30 登記（CC-α 採番）。★MGR `D-134` §4-1 の「棚に置いたもの」2件目。★直さない・★提案もしない。★注意（★着手しない・記録のみ）: **`max_tokens` を上げて通ったことを『budget 不足だった』と読むと誤る場合がある**——同型の事象では prompt 側の欠陥（nonce/近重複/途中切断）が真因だったことが在る ∴ **★次に誰かが触るときは、budget を上げる前に prompt を目視すること**。★今は触らない。"
     }
   ],
   "planned_extensions": [
