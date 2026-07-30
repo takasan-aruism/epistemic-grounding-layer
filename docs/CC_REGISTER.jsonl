@@ -803,3 +803,4 @@
 {"kind": "DONE", "doc_id": "ART-82e6dfab90", "by": "TAKA", "by_doc_id": "ART-554e1a4844", "ts": "2026-07-31T00:52:45"}
 {"kind": "DOC", "doc_id": "ART-225c98ac72", "path": "docs/CC_DESIGN_2026-07-31_D144_BUILD_SPEC_TASK_WIRING.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-31T00:54:01"}
 {"kind": "DONE", "doc_id": "ART-554e1a4844", "by": "DESIGN", "by_doc_id": "ART-225c98ac72", "ts": "2026-07-31T00:54:01"}
+{"kind": "DOC", "doc_id": "ART-0ca5c5ca28", "path": "docs/CC_MGR_2026-07-31_D145_DID_THE_TASK_FIX_BREAK_REQUEST.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T01:13:57"}
