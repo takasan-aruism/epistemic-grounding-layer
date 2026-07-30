@@ -745,3 +745,7 @@
 {"kind": "DOC", "doc_id": "ART-3e67a892c5", "path": "docs/CC_DESIGN_2026-07-30_D129_SECOND_SUBMIT_DRAFT.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T19:28:13"}
 {"kind": "DONE", "doc_id": "ART-57c5881c41", "by": "DESIGN", "by_doc_id": "ART-3e67a892c5", "ts": "2026-07-30T19:28:13"}
 {"kind": "DOC", "doc_id": "ART-8d8f86d2fd", "path": "docs/CC_MGR_2026-07-30_D130_EXTERNAL_AUDIT_RECEIVED_CONFIRM_BEFORE_BUILDING.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T19:28:45"}
+{"kind": "DOC", "doc_id": "ART-ae481c75e6", "path": "docs/CC_DESIGN_2026-07-30_D130_HOW_FAR_IT_REACHED.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T19:29:31"}
+{"kind": "DONE", "doc_id": "ART-8d8f86d2fd", "by": "DESIGN", "by_doc_id": "ART-ae481c75e6", "ts": "2026-07-30T19:29:31"}
+{"kind": "DOC", "doc_id": "ART-b6e98cc9d5", "path": "docs/CC_MGR_2026-07-30_D131_APPROVED_RETRY_ON_EXISTING_WIRING.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T19:31:05"}
+{"kind": "DONE", "doc_id": "ART-3e67a892c5", "by": "MGR", "by_doc_id": "ART-b6e98cc9d5", "ts": "2026-07-30T19:31:05"}
