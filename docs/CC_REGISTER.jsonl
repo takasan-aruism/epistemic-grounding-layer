@@ -634,3 +634,5 @@
 {"kind": "DOC", "doc_id": "ART-7202702cf8", "path": "docs/CC_DESIGN_2026-07-30_D104_SIXTY_SIX_RECEIPTS_ZERO_NEW_TASKS.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:13:26"}
 {"kind": "DOC", "doc_id": "ART-6efe38d813", "path": "docs/CC_MGR_2026-07-30_D104_RULING_WATCH_DONT_CHASE_NEXT_IS_P2.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:13:26"}
 {"kind": "DONE", "doc_id": "ART-7202702cf8", "by": "MGR", "by_doc_id": "ART-6efe38d813", "ts": "2026-07-30T13:13:26"}
+{"kind": "DOC", "doc_id": "ART-597a333072", "path": "docs/CC_IMPL_2026-07-30_D105_THE_UNKNOWN_RECEIPTS_ARE_MOSTLY_MINE.md", "type": "BUILT", "from": "IMPL", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:23:39"}
+{"kind": "DOC", "doc_id": "ART-58fffe90cf", "path": "docs/CC_MGR_2026-07-30_D105_MY_OWN_EVIDENCE_WAS_CONTAMINATED.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T13:23:39"}
