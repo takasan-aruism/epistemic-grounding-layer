@@ -617,3 +617,6 @@
 {"kind": "DOC", "doc_id": "ART-07eae26fb8", "path": "docs/CC_DESIGN_2026-07-30_D100_V02_CONNECTION_PROBE_AND_ACTOR_MEASUREMENT.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T12:26:26"}
 {"kind": "DOC", "doc_id": "ART-4bddfb2c1d", "path": "docs/CC_MGR_2026-07-30_D100_RECEIVED_ZERO_OF_EIGHT.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T12:26:26"}
 {"kind": "DONE", "doc_id": "ART-07eae26fb8", "by": "MGR", "by_doc_id": "ART-4bddfb2c1d", "ts": "2026-07-30T12:26:26"}
+{"kind": "DOC", "doc_id": "ART-011d81b448", "path": "docs/TAKA_2026-07-30_PHASE3_START_ORDER.md", "type": "STATUS", "from": "TAKA", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T12:33:56"}
+{"kind": "DOC", "doc_id": "ART-044891b6be", "path": "docs/CC_MGR_2026-07-30_D101_PHASE2_CLOSED_PHASE3_P1_ORDER.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T12:35:53"}
+{"kind": "DONE", "doc_id": "ART-011d81b448", "by": "MGR", "by_doc_id": "ART-044891b6be", "ts": "2026-07-30T12:35:53"}
