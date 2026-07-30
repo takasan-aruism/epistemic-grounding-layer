@@ -756,3 +756,5 @@
 {"kind": "DONE", "doc_id": "ART-966d6304ce", "by": "DESIGN", "by_doc_id": "ART-dae5c2e319", "ts": "2026-07-30T19:36:08"}
 {"kind": "DOC", "doc_id": "ART-9fa2d32d16", "path": "docs/CC_MGR_2026-07-30_D133_FIVE_MARKS_HAVE_MATERIAL_ONE_NEEDS_A_SECOND_PARTY.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T19:38:10"}
 {"kind": "DONE", "doc_id": "ART-dae5c2e319", "by": "MGR", "by_doc_id": "ART-9fa2d32d16", "ts": "2026-07-30T19:38:10"}
+{"kind": "DOC", "doc_id": "ART-5c0f5c2030", "path": "docs/CC_DESIGN_2026-07-30_D133_BUILD_SPEC_VERIFY_PLAN_AUTHOR.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-30T19:38:46"}
+{"kind": "DONE", "doc_id": "ART-9fa2d32d16", "by": "DESIGN", "by_doc_id": "ART-5c0f5c2030", "ts": "2026-07-30T19:38:46"}
