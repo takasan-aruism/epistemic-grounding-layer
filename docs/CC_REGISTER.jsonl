@@ -837,3 +837,5 @@
 {"kind": "DOC", "doc_id": "ART-895752d5de", "path": "docs/TAKA_2026-07-31_HOLD_THE_DIAGRAM_PROVE_PLAN_USES_OBSERVATION.md", "type": "HANDOFF", "from": "TAKA", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T03:02:02"}
 {"kind": "DOC", "doc_id": "ART-e7841c2df5", "path": "docs/CC_MGR_2026-07-31_D152_PROOF_FIRST_LEDGER_WAITS.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T03:02:02"}
 {"kind": "DONE", "doc_id": "ART-895752d5de", "by": "MGR", "by_doc_id": "ART-e7841c2df5", "ts": "2026-07-31T03:02:02"}
+{"kind": "DOC", "doc_id": "ART-352897689e", "path": "docs/CC_DESIGN_2026-07-31_D152_BUILD_SPEC_PLAN_CITES_OBSERVATION.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-31T03:03:25"}
+{"kind": "DONE", "doc_id": "ART-e7841c2df5", "by": "DESIGN", "by_doc_id": "ART-352897689e", "ts": "2026-07-31T03:03:25"}
