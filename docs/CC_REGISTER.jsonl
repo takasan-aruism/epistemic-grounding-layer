@@ -717,3 +717,7 @@
 {"kind": "DOC", "doc_id": "ART-ddd28a1535", "path": "docs/CC_DESIGN_2026-07-30_HANDOFF_TO_NEXT_DESIGN_INSTANCE.md", "type": "HANDOFF", "from": "DESIGN", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T15:55:01"}
 {"kind": "DOC", "doc_id": "ART-ddd28a1535", "path": "docs/CC_DESIGN_2026-07-30_HANDOFF_TO_NEXT_DESIGN_INSTANCE.md", "type": "STATUS", "from": "DESIGN", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T15:57:51"}
 {"kind": "DOC", "doc_id": "ART-0b4b798792", "path": "docs/CC_IMPL_2026-07-30_HANDOFF_FOR_NEXT_IMPL_INSTANCE.md", "type": "STATUS", "from": "IMPL", "to": "IMPL", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T15:57:51"}
+{"kind": "DOC", "doc_id": "ART-c9dc694b4d", "path": "docs/CC_MGR_2026-07-30_D123_TAKA_CLOSED_PHASE3_NEXT_IS_HANDOVER.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-30T16:08:30"}
+{"kind": "DONE", "doc_id": "ART-9939bf6382", "by": "MGR", "by_doc_id": "ART-c9dc694b4d", "ts": "2026-07-30T16:08:36"}
+{"kind": "DONE", "doc_id": "ART-bdae5176d5", "by": "TAKA", "by_doc_id": "ART-c9dc694b4d", "ts": "2026-07-30T16:08:36"}
+{"kind": "DONE", "doc_id": "ART-53de0f1f40", "by": "TAKA", "by_doc_id": "ART-c9dc694b4d", "ts": "2026-07-30T16:08:36"}
