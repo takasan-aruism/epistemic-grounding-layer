@@ -34,23 +34,23 @@
     "commits": [
       {
         "repo": "ds",
-        "commit": "1f2f675"
+        "commit": "0834c0f"
       },
       {
         "repo": "rri",
-        "commit": "b90dbcc"
+        "commit": "9c3c9da"
       },
       {
         "repo": "egl",
-        "commit": "50de2b2"
+        "commit": "2ec4109"
       },
       {
         "repo": "dev-workcell",
-        "commit": "e559bce"
+        "commit": "450566f"
       },
       {
         "repo": "twoder",
-        "commit": "f32e6b1"
+        "commit": "d988640"
       }
     ],
     "documents": [
@@ -1866,6 +1866,19 @@
         "★これは印2 を弱めない（★作ったのは Qwen である）。★ただし「一発で作った」ではない"
       ],
       "note": "★2026-07-30 登記（CC-α 採番）。★MGR `D-134` §4-1 の「棚に置いたもの」2件目。★直さない・★提案もしない。★注意（★着手しない・記録のみ）: **`max_tokens` を上げて通ったことを『budget 不足だった』と読むと誤る場合がある**——同型の事象では prompt 側の欠陥（nonce/近重複/途中切断）が真因だったことが在る ∴ **★次に誰かが触るときは、budget を上げる前に prompt を目視すること**。★今は触らない。"
+    },
+    {
+      "id": "G-84",
+      "summary": "★`submit()` に渡る受理時刻 `ts` が既定値 `2026-07-11T08:00:00` に落ちている（★記録の時刻が実時刻でない）",
+      "kind": "gap",
+      "status": "OPEN",
+      "evidence": [
+        "READ(IMPL・第2試行の実装前調査・2026-07-30): `twoder/submit.py:93-94` で `ts` が既定値に落ちる",
+        "EXEC(IMPL): 実時刻は★Event Trace 側が持っていた（`ETR-` run の `ENTRY` event の `ts`）∴ 今回の `SUBMIT-` 解決では★そちらを使って迂回できた",
+        "EXEC(CC-α・監査で追認): 追加された `_resolve_submit_trace` は `entry[\"ts\"]` を受理時刻として返す ∴ ★`submit()` の `ts` は使っていない",
+        "★出所: MGR `D-141` §4 が「内容で指名する。id は設計が採る」として登記を指示（運用方針 §6-8）"
+      ],
+      "note": "★2026-07-30 登記（CC-α 採番）。★今回の実装対象に足さない（正典「調査で別の欠陥を見つけても今回の実装対象には追加しない」）。★直さない・★提案もしない。★重さの理由（MGR）: **★今回は Event Trace 側の実時刻で迂回できたが、「記録の時刻が既定値」は後で必ず効く**。★迂回できたことを「問題が無い」と読まない。"
     }
   ],
   "planned_extensions": [
