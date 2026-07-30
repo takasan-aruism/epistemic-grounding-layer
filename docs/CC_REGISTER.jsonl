@@ -851,3 +851,4 @@
 {"kind": "DONE", "doc_id": "ART-c8d233dc34", "by": "DESIGN", "by_doc_id": "ART-e1f5edfff2", "ts": "2026-07-31T03:18:24"}
 {"kind": "DONE", "doc_id": "ART-43a281b7b9", "by": "DESIGN", "by_doc_id": "ART-e1f5edfff2", "ts": "2026-07-31T03:24:26"}
 {"kind": "DOC", "doc_id": "ART-43a281b7b9", "path": "docs/CC_MGR_2026-07-31_D155_THE_TEXT.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T03:24:52"}
+{"kind": "DOC", "doc_id": "ART-74f94277c6", "path": "docs/CC_MGR_2026-07-31_D156_TWO_HOURS_OF_SILENCE_STATUS_PLEASE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T05:20:00"}
