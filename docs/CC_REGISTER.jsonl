@@ -831,3 +831,5 @@
 {"kind": "DOC", "doc_id": "ART-2db774ea0f", "path": "docs/CC_MGR_2026-07-31_D151_RESUME_LEDGER_AND_STOP_STOPPING.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T02:54:08"}
 {"kind": "DONE", "doc_id": "ART-7e57cd57cf", "by": "MGR", "by_doc_id": "ART-2db774ea0f", "ts": "2026-07-31T02:54:08"}
 {"kind": "DONE", "doc_id": "ART-8d470a37c2", "by": "TAKA", "by_doc_id": "ART-2db774ea0f", "ts": "2026-07-31T02:54:08"}
+{"kind": "DOC", "doc_id": "ART-6b7ba8a77f", "path": "docs/CC_DESIGN_2026-07-31_D151_BUILD_SPEC_LEDGER_RAW_OUTPUT.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-31T02:56:56"}
+{"kind": "DONE", "doc_id": "ART-2db774ea0f", "by": "DESIGN", "by_doc_id": "ART-6b7ba8a77f", "ts": "2026-07-31T02:56:56"}

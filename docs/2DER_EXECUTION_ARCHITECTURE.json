@@ -1905,6 +1905,19 @@
         "★出所: MGR `D-145` §4 が内容で指名（★id は設計が採る＝運用方針 §6-8）。★IMPL が自分から書いた"
       ],
       "note": "★2026-07-31 登記（CC-α 採番）。★直さない・登記して進む。★重さ: **★「取れなかった」と報告している同じ画面に「92%」が出る**——★これは我々が今日ずっと潰してきた「1つの言い方が2つのことを指す」の、★値の側の形である。★GPU 取得処理には触らない（正典「GPU取得処理そのものの改善は目的ではない」）。"
+    },
+    {
+      "id": "G-87",
+      "summary": "★Task/PLAN が直前の Observation を参照しない — ★たった今 使った観測能力を、★新規実装の対象として重複計画する（`cites_source_ids` が空）",
+      "kind": "gap",
+      "status": "OPEN",
+      "evidence": [
+        "EXEC(CC-α・2026-07-31・front door `GET /api/claude_packet?task_id=TASK-2DER-67FE6548`): `implementation_packet_ref.objective` = \"Create a standalone Python script to retrieve the status of listening ports…\" ／ `files_expected` = `[\"port_checker.py\",\"test_port_checker.py\"]` ／ `steps[2]` = \"Implement port_checker.py … uses subprocess to execute 'ss -tulnp'…\"",
+        "EXEC(同): ★`cites_source_ids` = ★`[]`（空）",
+        "EXEC(同・同一投入): 2DER は★直前に `ss -ltn` を実行し `ARUN-00970`〜`00973` / `OBS-00971`〜`00974` を取っている ∴ ★取った観測を1件も引用せずに、★同じ能力を作り直す計画を立てた",
+        "★Taka 裁定（逐語・2026-07-31）: 「今回のPLANが、直前に取得済みのポート観測を引用せず、同じ観測能力を新規実装しようとしたことを★不具合として扱う。」∴ ★『設計どおり』ではない"
+      ],
+      "note": "★2026-07-31 登記（CC-α 採番。MGR `D-151` §5 が内容で指名し id を指定しなかった＝運用方針 §6-8）。★今回は実装しない（★Taka: 「Ledger修正とPLAN証拠接続の同時実装」は禁止）。★受入条件は Taka の逐語のまま: **`cites_source_ids` が空でない／対象 Observation または Ledger 記録の ID を引用する／既に観測済みの能力を新規作成対象として重複計画しない／証拠から不足が判定された場合だけ改修 Task を作る**。★これは二経路（観測経路・改修経路）を★証拠で接続する裁定の実体である。"
     }
   ],
   "planned_extensions": [
