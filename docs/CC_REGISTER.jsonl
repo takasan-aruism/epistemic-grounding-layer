@@ -801,3 +801,5 @@
 {"kind": "DOC", "doc_id": "ART-554e1a4844", "path": "docs/CC_MGR_2026-07-31_D144_TASK_IS_THE_ONE_FIX.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T00:52:45"}
 {"kind": "DONE", "doc_id": "ART-08c210437d", "by": "MGR", "by_doc_id": "ART-554e1a4844", "ts": "2026-07-31T00:52:45"}
 {"kind": "DONE", "doc_id": "ART-82e6dfab90", "by": "TAKA", "by_doc_id": "ART-554e1a4844", "ts": "2026-07-31T00:52:45"}
+{"kind": "DOC", "doc_id": "ART-225c98ac72", "path": "docs/CC_DESIGN_2026-07-31_D144_BUILD_SPEC_TASK_WIRING.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-31T00:54:01"}
+{"kind": "DONE", "doc_id": "ART-554e1a4844", "by": "DESIGN", "by_doc_id": "ART-225c98ac72", "ts": "2026-07-31T00:54:01"}
