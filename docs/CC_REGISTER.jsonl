@@ -855,3 +855,4 @@
 {"kind": "DOC", "doc_id": "ART-f08271e5f8", "path": "docs/CC_DESIGN_2026-07-31_D156_STATUS_ONE_LINE.md", "type": "STATUS", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T05:21:19"}
 {"kind": "DONE", "doc_id": "ART-74f94277c6", "by": "DESIGN", "by_doc_id": "ART-f08271e5f8", "ts": "2026-07-31T05:21:19"}
 {"kind": "DONE", "doc_id": "ART-f08271e5f8", "by": "MGR", "by_doc_id": "ART-74f94277c6", "ts": "2026-07-31T08:28:03"}
+{"kind": "DOC", "doc_id": "ART-f3fdecdb60", "path": "docs/CC_MGR_2026-07-31_D157_IMPL_WILL_BE_WOKEN.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T08:38:09"}
