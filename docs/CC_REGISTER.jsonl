@@ -815,3 +815,7 @@
 {"kind": "DONE", "doc_id": "ART-b8cdf725f9", "by": "DESIGN", "by_doc_id": "ART-7e87c1ae5d", "ts": "2026-07-31T01:53:35"}
 {"kind": "DOC", "doc_id": "ART-9ae57a857a", "path": "docs/CC_MGR_2026-07-31_D147_PROVENANCE_IS_THE_ONE_FIX.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T01:54:39"}
 {"kind": "DONE", "doc_id": "ART-7e87c1ae5d", "by": "MGR", "by_doc_id": "ART-9ae57a857a", "ts": "2026-07-31T01:54:39"}
+{"kind": "DOC", "doc_id": "ART-a9d72bcf76", "path": "docs/CC_DESIGN_2026-07-31_D147_ADJREQ_SAME_TEXT_CANNOT_SHOW_THE_FIX.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T02:13:50"}
+{"kind": "DONE", "doc_id": "ART-9ae57a857a", "by": "DESIGN", "by_doc_id": "ART-a9d72bcf76", "ts": "2026-07-31T02:13:50"}
+{"kind": "DOC", "doc_id": "ART-fad8e93850", "path": "docs/CC_MGR_2026-07-31_D148_RUN_BOTH_SAME_THEN_A_SECOND_SUBJECT.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T02:16:37"}
+{"kind": "DONE", "doc_id": "ART-a9d72bcf76", "by": "MGR", "by_doc_id": "ART-fad8e93850", "ts": "2026-07-31T02:16:37"}
