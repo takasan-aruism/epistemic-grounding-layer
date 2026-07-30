@@ -75,6 +75,22 @@
 再現【実】: ss -ltn | grep 8770 → LISTEN 100.107.6.119:8770
 ```
 
+### 5.3-0 ★「front door」は2つを指す（★2026-07-30 確定・★以後 分けて書く）
+| # | 呼び方 | 実体 | **★残るもの** |
+|---|---|---|---|
+| **(a)** | **HTTP の入口** | `POST /api/submit`（webui 経由） | **★`RECV`/`SENT` が `runs/submit_access.log` に残る** |
+| **(b)** | **`submit()` の道** | `twoder.submit.submit(...)` を**★プロセスの中で**呼ぶ（DS→RRI→EGL） | **★`RECV` は残らない** |
+
+```
+再現【実】(CC-α・2026-07-30): egl/structure/de_submit_route.py::record_de は既定で (b) を通る。
+  呼んだ後も GET /api/receipt の recv_count は 67 のまま動かない ∴ (a) は通っていない。
+```
+> **★`record_de` の docstring の「既定=front door」は (b) の意味である。**
+> **★(a) だと読むと「`recv_count` で確かめられる」と思ってしまう。★動かないのが正しい。**
+> **★どちらも「2DER を使う」に当たる**（MGR 裁定 2026-07-30）。**★違うのは「使ったか」ではなく「どこに記録が残るか」である。**
+> **★以後、入口を書くときは (a) か (b) かを書く。★「front door」とだけ書かない。**
+> **★`G-77` で止めたテストも (b) である**——**★経路と書き先は同じで、違うのは中身（架空の依頼文か実在の記録か）。★「経路が違うから安全」ではない。**
+
 ### 5.3-1 ★CLI と webui は等価でない
 `webui.py:29-32` の run-gate は `_LAST`（**webui プロセス内のモジュール変数**・`:545` の `/api/submit` でのみ設定）を見て `tid != gate["task_id"]` なら拒否する。
 **∴ CLI が作った task は webui からも進められない。** **【実】**（Build 9C 段0: `refused: true / "task … is not the current runnable submit task"`）
