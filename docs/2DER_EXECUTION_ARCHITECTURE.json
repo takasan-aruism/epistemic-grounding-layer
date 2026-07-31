@@ -34,23 +34,23 @@
     "commits": [
       {
         "repo": "ds",
-        "commit": "a8bcaf0"
+        "commit": "6ea1bb0"
       },
       {
         "repo": "rri",
-        "commit": "df3d988"
+        "commit": "c3f074c"
       },
       {
         "repo": "egl",
-        "commit": "a486158"
+        "commit": "55fcd25"
       },
       {
         "repo": "dev-workcell",
-        "commit": "f17b34b"
+        "commit": "6bead4b"
       },
       {
         "repo": "twoder",
-        "commit": "4c9109c"
+        "commit": "35d7feb"
       }
     ],
     "documents": [
