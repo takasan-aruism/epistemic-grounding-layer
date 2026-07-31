@@ -905,3 +905,7 @@
 {"kind": "DONE", "doc_id": "ART-809f4c6129", "by": "DESIGN", "by_doc_id": "ART-7c7f175f3d", "ts": "2026-07-31T14:02:45"}
 {"kind": "DOC", "doc_id": "ART-f6afac1403", "path": "docs/CC_MGR_2026-07-31_D168_CONTRACT_FIXES_TWO_OF_THREE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T14:14:07"}
 {"kind": "DONE", "doc_id": "ART-7c7f175f3d", "by": "MGR", "by_doc_id": "ART-f6afac1403", "ts": "2026-07-31T14:14:07"}
+{"kind": "DOC", "doc_id": "ART-ffe5778f5a", "path": "docs/CC_DESIGN_2026-07-31_D168_ONE_PREDICTION_IS_NOT_MEASURED.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T14:15:09"}
+{"kind": "DONE", "doc_id": "ART-f6afac1403", "by": "DESIGN", "by_doc_id": "ART-ffe5778f5a", "ts": "2026-07-31T14:15:09"}
+{"kind": "DOC", "doc_id": "ART-742bacebbe", "path": "docs/CC_MGR_2026-07-31_D169_MY_EVIDENCE_CLAIM_WAS_HALF_WRONG.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T14:16:56"}
+{"kind": "DONE", "doc_id": "ART-ffe5778f5a", "by": "MGR", "by_doc_id": "ART-742bacebbe", "ts": "2026-07-31T14:16:56"}
