@@ -952,3 +952,7 @@
 {"kind": "DONE", "doc_id": "ART-cb455b117d", "by": "DESIGN", "by_doc_id": "ART-093b1267c3", "ts": "2026-07-31T18:14:18"}
 {"kind": "DOC", "doc_id": "ART-eb340b0b25", "path": "docs/CC_MGR_2026-07-31_D179_WE_SCORED_A_RULE_WE_NEVER_WROTE.md", "type": "STATUS", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T18:16:13"}
 {"kind": "DONE", "doc_id": "ART-093b1267c3", "by": "MGR", "by_doc_id": "ART-eb340b0b25", "ts": "2026-07-31T18:16:13"}
+{"kind": "DOC", "doc_id": "ART-43d03e360c", "path": "docs/CC_DESIGN_2026-07-31_D179_THE_NEW_DEFINITION_SATURATES.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T18:33:24"}
+{"kind": "DONE", "doc_id": "ART-eb340b0b25", "by": "DESIGN", "by_doc_id": "ART-43d03e360c", "ts": "2026-07-31T18:33:24"}
+{"kind": "DOC", "doc_id": "ART-4870de190b", "path": "docs/CC_MGR_2026-07-31_D180_STOP_SCORING_IT_WRITE_IT_FIRST.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T18:35:46"}
+{"kind": "DONE", "doc_id": "ART-43d03e360c", "by": "MGR", "by_doc_id": "ART-4870de190b", "ts": "2026-07-31T18:35:46"}
