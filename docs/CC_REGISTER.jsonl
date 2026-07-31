@@ -959,3 +959,8 @@
 {"kind": "DOC", "doc_id": "ART-7f814715c1", "path": "docs/CC_DESIGN_2026-07-31_D180_BUILD_SPEC_WRITE_THE_RULE.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-31T18:38:00"}
 {"kind": "DONE", "doc_id": "ART-4870de190b", "by": "DESIGN", "by_doc_id": "ART-7f814715c1", "ts": "2026-07-31T18:38:00"}
 {"kind": "DOC", "doc_id": "ART-f0c2ccc6a9", "path": "docs/CC_MGR_2026-07-31_D181_THE_TEXT_FOR_THE_RULE_RUN.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T18:38:43"}
+{"kind": "DOC", "doc_id": "ART-9db5459069", "path": "docs/CC_DESIGN_2026-07-31_D180_WHO_IS_WAITING_FOR_WHAT.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T18:40:37"}
+{"kind": "DOC", "doc_id": "ART-f78170726e", "path": "docs/CC_DESIGN_2026-07-31_D181_THE_TEXT_AND_A_DENOMINATOR_PROBLEM.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-31T18:40:37"}
+{"kind": "DONE", "doc_id": "ART-f0c2ccc6a9", "by": "DESIGN", "by_doc_id": "ART-f78170726e", "ts": "2026-07-31T18:40:37"}
+{"kind": "DOC", "doc_id": "ART-f5b8efe212", "path": "docs/CC_MGR_2026-07-31_D182_PAIRS_AND_A_REAL_DENOMINATOR.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T18:42:24"}
+{"kind": "DONE", "doc_id": "ART-9db5459069", "by": "MGR", "by_doc_id": "ART-f5b8efe212", "ts": "2026-07-31T18:42:24"}
