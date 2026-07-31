@@ -861,3 +861,6 @@
 {"kind": "DONE", "doc_id": "ART-f3fdecdb60", "by": "DESIGN", "by_doc_id": "ART-5da99a5f8c", "ts": "2026-07-31T09:09:22"}
 {"kind": "DOC", "doc_id": "ART-31882908e0", "path": "docs/CC_MGR_2026-07-31_D158_MARK3_STANDS_AND_MY_DIET_RULE_CAUSED_THE_SILENCE.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T09:11:45"}
 {"kind": "DONE", "doc_id": "ART-5da99a5f8c", "by": "MGR", "by_doc_id": "ART-31882908e0", "ts": "2026-07-31T09:11:45"}
+{"kind": "DOC", "doc_id": "ART-c0fd9dbc6a", "path": "docs/CC_DESIGN_2026-07-31_D158_BUILD_SPEC_PASS_THE_VALUES.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-31T09:14:02"}
+{"kind": "DONE", "doc_id": "ART-31882908e0", "by": "DESIGN", "by_doc_id": "ART-c0fd9dbc6a", "ts": "2026-07-31T09:14:02"}
+{"kind": "DOC", "doc_id": "ART-d20235090b", "path": "docs/CC_MGR_2026-07-31_D159_THE_TEXT_FOR_THE_VALUES_RUN.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T09:15:59"}
