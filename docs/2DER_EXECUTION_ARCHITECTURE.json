@@ -34,23 +34,23 @@
   "commits": [
    {
     "repo": "ds",
-    "commit": "b08bc83"
+    "commit": "6a052fd"
    },
    {
     "repo": "rri",
-    "commit": "482a0bf"
+    "commit": "a0a79e4"
    },
    {
     "repo": "egl",
-    "commit": "26c7ed7"
+    "commit": "bb87d84"
    },
    {
     "repo": "dev-workcell",
-    "commit": "e10c996"
+    "commit": "de0c8d2"
    },
    {
     "repo": "twoder",
-    "commit": "1d1cc80"
+    "commit": "947b4bd"
    }
   ],
   "documents": [
@@ -2010,6 +2010,33 @@
     "READ: 現状の到達点 — DW は多段＋監査/作業分離を★既に持つ（`webui.py:287` で `QwenAuditor(seed=101, supervised=True)` を別 session/別 seed/別 system prompt で生成）が、★AUDIT 段には本日 未到達 ∴ ★ループの後段は1度も回っていない"
    ],
    "note": "★2026-07-31 登記（CC-α 採番）。★★実装しない。★登記のみ。★D-175 §6 の宿題をここで果たした。★着手条件: ★受入3 の定義確定（G-91）と★PLAN 段の決着より後。★★『人間承認』の段が入っている ∴ ★これは自律 RD の有効化ではない。"
+  },
+  {
+   "id": "G-95",
+   "summary": "★prompt に規則を1文 足すと、★出力トークンが伸びて★打ち切りが増える — ★規則には代償が在る（★対照つき実測）",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "MEASURE(CC-α・2026-07-31・:8005 単体・2DER の外・temperature 0・同時実行数10・各10本・打ち切り無しで全数): ★同一 task・同一最終 prompt から★規則の1文（376字）だけを抜いた対照と比較 → ★`finish_reason=length` は ★1/10 → ★4/10、★出力トークン中央値は ★4100 → ★7524",
+    "MEASURE: 解析できた本数 9/10 → 6/10。★母数（対）29 → 12。★× 7 → 2（率 24.1% → 16.7%）",
+    "★率が下がったことは根拠にならない: ★打ち切り4本が解析不可で除外される＝★長く考えた本ほど落ちる★生存者バイアスであり、★バイアスの向きが「率を下げる」側と一致する",
+    "READ: 規則の逐語は `twoder/build_planner.py` `_observation_facts` の末尾 blocks（★挿入1行・SPEC `ART-7f814715c1` §2 の逐語）",
+    "★誰も予告していなかった（★設計 P-1〜P-8・IMPL の予想・MGR の懸念2件のいずれにも無い）"
+   ],
+   "note": "★2026-07-31 登記（CC-α 採番）。★★`G-88` に当たる ∴ ★`max_tokens` を上げて隠さない（★真因は prompt の側）。★次の1件の候補は「★規則の文を短くする」（★1箇所・最小差分）。★★打ち切り4割のままでは、★何を測っても生存者バイアスが乗る ∴ ★率の議論より先に打ち切りを下げないと★測定が成立しない。★決めるのは MGR。"
+  },
+  {
+   "id": "G-96",
+   "summary": "★物差しの母数を、★採点される側（計画）が★自分で決めている — ★`already_satisfied` に何を挙げるかで母数が動く",
+   "kind": "gap",
+   "status": "OPEN",
+   "evidence": [
+    "MEASURE(同一 task・同一 prompt・規則の1文のみ差・各10本): ★母数（対）が ★12（規則あり）対 ★29（規則なし）＝ ★2.4倍 違う",
+    "READ: 規則の逐語は『★every item listed above』を指すが、★`already_satisfied` に何を挙げるかは★計画自身が書く ∴ ★規則の対象範囲を計画が選べる",
+    "MEASURE: 本番1回の `already_satisfied` は★道具寄り（「Commands `ps …` and `nvidia-smi …` are known」）で、★前回（D-176）の内容寄りから★書き方が動いている",
+    "★出所: MGR `D-183` §5（★IMPL が最初に見つけた矛盾を MGR が採った）"
+   ],
+   "note": "★2026-07-31 登記（CC-α 採番）。★★これはモデルの問題ではなく★物差しの弱点である。★★仮説（★未確認）: ★規則を強くするほど、★計画は `already_satisfied` を短く書く動機を持つ（★対象を減らせば違反しない）——★実測の向き（12＜29）は一致するが、★20本では確かめられない。★直さない・登記して進む。"
   }
  ],
  "planned_extensions": [
