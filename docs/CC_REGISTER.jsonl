@@ -917,3 +917,7 @@
 {"kind": "DONE", "doc_id": "ART-230b366b9a", "by": "DESIGN", "by_doc_id": "ART-923ebb8003", "ts": "2026-07-31T14:26:02"}
 {"kind": "DOC", "doc_id": "ART-78a7b638e8", "path": "docs/CC_MGR_2026-07-31_D171_NOTHING_TO_BUILD_ONE_BAN_TO_LIFT.md", "type": "STATUS", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T14:28:15"}
 {"kind": "DONE", "doc_id": "ART-923ebb8003", "by": "MGR", "by_doc_id": "ART-78a7b638e8", "ts": "2026-07-31T14:28:15"}
+{"kind": "DOC", "doc_id": "ART-e842e602b3", "path": "docs/TAKA_2026-07-31_EXPOSE_THE_REJECTION_REASON_PLAN_INPUTS.md", "type": "HANDOFF", "from": "TAKA", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T14:51:02"}
+{"kind": "DOC", "doc_id": "ART-a713b51564", "path": "docs/CC_MGR_2026-07-31_D172_EXPOSE_THE_CONFLICT.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T14:51:02"}
+{"kind": "DONE", "doc_id": "ART-e842e602b3", "by": "MGR", "by_doc_id": "ART-a713b51564", "ts": "2026-07-31T14:51:02"}
+{"kind": "DONE", "doc_id": "ART-78a7b638e8", "by": "TAKA", "by_doc_id": "ART-a713b51564", "ts": "2026-07-31T14:51:02"}
