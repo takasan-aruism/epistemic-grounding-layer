@@ -921,3 +921,10 @@
 {"kind": "DOC", "doc_id": "ART-a713b51564", "path": "docs/CC_MGR_2026-07-31_D172_EXPOSE_THE_CONFLICT.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T14:51:02"}
 {"kind": "DONE", "doc_id": "ART-e842e602b3", "by": "MGR", "by_doc_id": "ART-a713b51564", "ts": "2026-07-31T14:51:02"}
 {"kind": "DONE", "doc_id": "ART-78a7b638e8", "by": "TAKA", "by_doc_id": "ART-a713b51564", "ts": "2026-07-31T14:51:02"}
+{"kind": "DOC", "doc_id": "ART-743a800116", "path": "docs/CC_DESIGN_2026-07-31_D171_SANDBOX_IS_BY_CONSTRUCTION_NOT_BY_WALL.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T14:52:31"}
+{"kind": "DONE", "doc_id": "ART-78a7b638e8", "by": "DESIGN", "by_doc_id": "ART-743a800116", "ts": "2026-07-31T14:52:31"}
+{"kind": "DOC", "doc_id": "ART-8007c5b719", "path": "docs/CC_DESIGN_2026-07-31_D172_THE_CONFLICT_EXPOSED.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T14:54:34"}
+{"kind": "DONE", "doc_id": "ART-a713b51564", "by": "DESIGN", "by_doc_id": "ART-8007c5b719", "ts": "2026-07-31T14:54:34"}
+{"kind": "DONE", "doc_id": "ART-743a800116", "by": "MGR", "by_doc_id": "ART-a713b51564", "ts": "2026-07-31T14:58:16"}
+{"kind": "DOC", "doc_id": "ART-a1accc8908", "path": "docs/CC_MGR_2026-07-31_D173_NO_FIELD_FOR_NOT_BUILDING.md", "type": "STATUS", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T14:59:38"}
+{"kind": "DONE", "doc_id": "ART-8007c5b719", "by": "MGR", "by_doc_id": "ART-a1accc8908", "ts": "2026-07-31T14:59:38"}

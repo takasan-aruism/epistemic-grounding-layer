@@ -114,7 +114,10 @@ GET http://100.107.6.119:8770/api/resolve?id=<ID>     ← Basic 認証（user=ta
 ## 3. 2DER に何かを作らせる
 - **経路**: `BUILD_CAPABILITY` / `MODIFY_EXISTING` → `DW_IMPLEMENTATION` → planner（**Qwen**）→ worker。
 - **★PLAN の仕事は既に Qwen である**（`BUILD_PLANNER` 登録済）。**Claude が書くのではない。**
-- **★worker は production repo に書けない。** `PROD_REPO_ROOTS`（`egl`/`ds`/`rri`/`dev-workcell`/`twoder`）を**決定論で拒否**する。**これは欠落ではなくサンドボックスの保証である。**
+- **★worker は production repo に「書けない」のではなく「書かない」**（★2026-07-31 訂正・`G-90`）。**★旧記述「worker は production repo に書けない／`PROD_REPO_ROOTS` を決定論で拒否する」は★現物より強かった。**
+  - **★実際に効いているのは3つ**（★同時に効いている）: ①**本番の呼び手が `tempfile.mkdtemp(prefix="refora_")` を渡す**（`twoder/webui.py:268`）／②**★planner が** production 配下を `target_workspace` にした計画を弾く（`twoder/build_planner.py:59,293`・**★`PROD_REPO_ROOTS` を見ているのは planner であって worker ではない**）／③`AUTO_COMMIT_FORBIDDEN` が assert で守られ **runtime は `git commit` しない**（`twoder/live_worker_runtime.py:204`）。
+  - **★効いていないもの**: `validate_sandbox` は**設定辞書に `True` と書いてあるかを見るだけ**で **OS レベルの隔離ではない**（`twoder/live_worker_scaffold.py:41-49`）。**★worker 側に production 拒否は無い**（書き先は**呼び手が渡す `sandbox_root`** で決まる）。
+  - **∴ ★「安全だから押してよい」と読まない。★「いまの呼び方なら入らない。★呼び方が変わったら測り直す」である。**
 - **∴ 成果物は sandbox に出る。それを受け取って配置するのは Claude の役割**（Taka: 「外注で生成、配置するまで」）。
 - **★成果物は `tempfile.mkdtemp()` 配下に出る。消える。** **受け取りは同じ作業の中で完了させる。** 失われたら **「失われた」と記録し、黙って再投入しない。**
 - **sandbox は本番モジュールを import できない。** 依頼には **必要な関数を引数で受け取る薄いアダプタ仕様**を渡す。**渡さなければ worker は在りもしない API を想像で埋める。**

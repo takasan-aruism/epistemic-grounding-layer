@@ -1931,6 +1931,35 @@
         "★我々の既存の記録（`G-83` の note）: ★budget を上げる前に prompt を目視すること——★同型の事象では prompt 側の欠陥が真因だったことが在る"
       ],
       "note": "★2026-07-31 登記（CC-α 採番。MGR `D-164` §5 が内容で指名し id を指定しなかった＝運用方針 §6-8）。★直さない・登記して進む。★重さ: **★`finish_reason=length` を「max_tokens 不足」と読んで budget を上げると、★真因（prompt に2つの仕事が同居している）を見落とす**。★これは `G-83` と同じ型の2例目である。★★測定設計上の含意: ★A の結果は「分けられるか」だけを測っていない（★「2つを同時にできるか」も測っている）——★★これは設計(CC-α)の SPEC の欠陥である。"
+    },
+    {
+      "id": "G-89",
+      "summary": "★「作る側と確かめる側を分ける」形を★PLAN の段にも当てる（★案。★未実装）— ★受入3（既に観測済みの能力を重複計画しない）に直接 当たる★唯一の残り案",
+      "kind": "design_gap",
+      "status": "OPEN",
+      "evidence": [
+        "EXEC(CC-α・2026-07-31・40本の対照試験): ★出力契約を整えると①（3区分）②（①に観測値）は 4/10→10/10 になるが、★③（①に無いものだけ）は★2/10 のまま動かない",
+        "EXEC(同・入力側4通り): ★観測なし／取得記録あり／＋値／契約を引く の4通りを試して★③は一度も動かなかった",
+        "READ(CC-α): DW は `GENERATE`(CODING_WORKER) と `AUDIT`(INDEPENDENT_AUDITOR) を★別アクタに分けているが、★`PLAN` の段には分離が無い（`dispatch.py:31-38`）",
+        "★我々自身の実測: ★本日 設計の計器は6回 誤り、★6回とも「機械→目視」の2段で救われた ＝ ★分離が効いた実例（★2DER の中では未実測）",
+        "★出所: MGR `D-171` §4 が「★③に直接 当たる唯一の案なので捨てずに登記せよ」と指示（★id は設計が採る＝§6-8）"
+      ],
+      "note": "★2026-07-31 登記（CC-α 採番）。★案であって実装ではない。★今は出さない（★1件ずつ・★`GENERATE` の禁止の可否が先）。★★注意: ★これは「新しい仕組み」に当たりうる ∴ ★Taka の「0→1 に必要と確認できた場合のみ提案」に照らして、★出すなら必要性の証拠を先に示すこと。"
+    },
+    {
+      "id": "G-90",
+      "summary": "★「worker は production repo に書けない（サンドボックスの保証）」は★正確でない — ★実体は「★書けない」ではなく「★書かない」（呼び手が temp を渡す／planner が弾く／auto-commit しない）",
+      "kind": "gap",
+      "status": "OPEN",
+      "evidence": [
+        "READ(CC-α・2026-07-31・5 repo `*.py` 全走査・打ち切り無し): `PROD_REPO_ROOTS` は★2箇所のみ（`twoder/build_planner.py:59,293`）＝ ★PLAN の `target_workspace` が production 配下なら弾く★計画時の検査である",
+        "READ: worker 側（`twoder/live_worker_runtime.py`）に production 拒否は★無い（`PROD_REPO` の出現 0）。★書き先は `run_minimal_slice(..., sandbox_root, ...)` の★呼び手が渡す値で決まる（`:110,152-153`）",
+        "READ: ★本番(webui)が渡すのは `tempfile.mkdtemp(prefix=\"refora_\")`（`twoder/webui.py:268`）∴ ★実際には /tmp 配下に書く",
+        "READ: `validate_sandbox`（`twoder/live_worker_scaffold.py:41-49`）は★設定辞書に `host_filesystem_unreachable` 等が True と書いてあるかを見るだけ ＝ ★OS レベルの隔離ではない。★宣言の検査である",
+        "READ: ★本物の保証も1つ在る: `AUTO_COMMIT_FORBIDDEN` は★assert で守られている（`live_worker_runtime.py:204`）＝ ★runtime は git commit を実行しない",
+        "★出所: MGR `D-171` §2-1 が「★サンドボックス保証は【伝聞】である。★押す前に設計が現物で確かめること」と指示"
+      ],
+      "note": "★2026-07-31 登記（CC-α 採番）。★直さない・登記して進む。★重さ: **★`GENERATE` の禁止を解くかの判断材料そのものである**。★実務上の結論は変わらない（★本番は temp を渡し、planner は弾き、commit しない）が、★**「到達不能だから安全」ではなく「そう作ってあるから安全」である** ∴ ★呼び手が変われば前提が崩れる。★★使用ガイド §3 の「worker は production repo に書けない（★決定論で拒否）」の記述は、★この現物より強い。★ガイドの改訂は MGR の担当。"
     }
   ],
   "planned_extensions": [

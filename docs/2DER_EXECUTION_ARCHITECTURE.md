@@ -397,6 +397,8 @@ CURRENT:
 | **G-86** | **★同じ応答の中に「実測でない値」と「実測」が並ぶ** — `/api/state` の `egl.current_claims` に「GPU使用率 約0.92 (92%)」が出るが**過去 DE 由来**で、★**今回の実測に使用率は無い** | gap | **OPEN**（★**直さない**。★「取れなかった」と報告している同じ画面に「92%」が出る＝**「1つの言い方が2つを指す」の値の側の形**。★GPU 取得処理には触らない） |
 | **G-87** | **★Task/PLAN が直前の Observation を参照しない** — たった今 `ss -ltn` で取った観測を1件も引用せず（`cites_source_ids` が空）、**★同じ観測能力を `port_checker.py` として新規実装する計画を立てた** | gap | **OPEN**（★**Taka が「不具合として扱う」と裁定**＝設計どおりではない。★**今回は実装しない**（Ledger 修正との同時実装は禁止）。★受入=`cites_source_ids` が空でない／Observation か Ledger の ID を引用／観測済み能力を重複計画しない／証拠から不足が判定された場合だけ改修 Task） |
 | **G-88** | **★対照試験で `finish_reason=length` が2本**（A-2 は `completion_tokens=8192` 使い切り／C-3 は末尾切断）— ★max_tokens 不足に見えるが**★prompt に「PLAN を JSON で出せ」と「3つに分けよ」が同居**している | gap | **OPEN**（★**直さない**。★**budget を上げる前に prompt を目視する**＝`G-83` と同型の2例目。★**A の結果は「分けられるか」だけを測っていない**＝設計(CC-α)の SPEC の欠陥） |
+| **G-89** | **★「作る側と確かめる側を分ける」形を `PLAN` の段にも当てる**（★案・未実装）— ★入力側4通りを試して③は 2/10 のまま動かず、**DW は `GENERATE`/`AUDIT` を分けているが `PLAN` には分離が無い** | design_gap | **OPEN**（★**③に直接 当たる唯一の残り案**。★今は出さない・1件ずつ。★出すなら「0→1 に必要」の証拠を先に） |
+| **G-90** | **★「worker は production repo に書けない」は正確でない** — ★`PROD_REPO_ROOTS` は **planner の計画時検査2箇所のみ**で worker 側に拒否は無く、`validate_sandbox` は**設定辞書に True と書いてあるかを見るだけ**（OS 隔離ではない） | gap | **OPEN**（★**`GENERATE` 解禁の判断材料**。★実務上の結論は同じ〈本番は `tempfile.mkdtemp` を渡し planner が弾き `AUTO_COMMIT_FORBIDDEN` は assert 済〉が、★**「到達不能だから安全」ではなく「そう作ってあるから安全」**。★使用ガイドの記述はこの現物より強い） |
 
 ---
 
