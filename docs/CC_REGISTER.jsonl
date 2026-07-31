@@ -899,3 +899,4 @@
 {"kind": "DOC", "doc_id": "ART-84e0fc9538", "path": "docs/CC_DESIGN_2026-07-31_D166_BUILD_SPEC_FORTY_RUNS.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "IMPL", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-07-31T10:17:43"}
 {"kind": "DONE", "doc_id": "ART-088398ba9c", "by": "DESIGN", "by_doc_id": "ART-84e0fc9538", "ts": "2026-07-31T10:17:43"}
 {"kind": "DONE", "doc_id": "ART-f5aa53afb9", "by": "DESIGN", "by_doc_id": "ART-84e0fc9538", "ts": "2026-07-31T10:17:43"}
+{"kind": "DOC", "doc_id": "ART-809f4c6129", "path": "docs/CC_MGR_2026-07-31_D167_FORTY_RUNS_EXIST_REPORT_DOES_NOT.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T13:51:10"}
