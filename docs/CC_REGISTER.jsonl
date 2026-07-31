@@ -931,3 +931,8 @@
 {"kind": "DOC", "doc_id": "ART-90bd0b72b6", "path": "docs/CC_DESIGN_2026-07-31_D173_FIELD_CAN_BE_ADDED_SAFELY.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T15:10:26"}
 {"kind": "DOC", "doc_id": "ART-d47d62d763", "path": "docs/CC_MGR_2026-07-31_D174_RULE_A_PROMPT_ONLY_WAIT_FOR_THE_SIGNAL.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T15:12:02"}
 {"kind": "DONE", "doc_id": "ART-90bd0b72b6", "by": "MGR", "by_doc_id": "ART-d47d62d763", "ts": "2026-07-31T15:12:02"}
+{"kind": "DONE", "doc_id": "ART-d47d62d763", "by": "DESIGN", "by_doc_id": "ART-90bd0b72b6", "ts": "2026-07-31T15:12:12"}
+{"kind": "DOC", "doc_id": "ART-5043203c85", "path": "docs/TAKA_2026-07-31_D174_EVALUATION_AND_SELF_IMPROVEMENT_LOOP.md", "type": "HANDOFF", "from": "TAKA", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T15:51:13"}
+{"kind": "DOC", "doc_id": "ART-67c5352cc4", "path": "docs/CC_MGR_2026-07-31_D175_EVALUATION_FIXED_BEFORE_MEASURING.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T15:51:13"}
+{"kind": "DONE", "doc_id": "ART-5043203c85", "by": "MGR", "by_doc_id": "ART-67c5352cc4", "ts": "2026-07-31T15:51:13"}
+{"kind": "DONE", "doc_id": "ART-a1accc8908", "by": "TAKA", "by_doc_id": "ART-67c5352cc4", "ts": "2026-07-31T15:51:13"}
