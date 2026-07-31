@@ -996,3 +996,4 @@
 {"kind": "DOC", "doc_id": "ART-c12aa25049", "path": "docs/CC_MGR_HANDOFF_2026-07-31.md", "type": "HANDOFF", "from": "MGR", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T20:35:48"}
 {"kind": "DOC", "doc_id": "ART-3a6a0fa374", "path": "docs/CC_MGR_2026-07-31_D191_FIND_WHETHER_THE_GATE_WAS_INTENDED.md", "type": "STATUS", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T20:49:09"}
 {"kind": "DONE", "doc_id": "ART-c12aa25049", "by": "MGR", "by_doc_id": "ART-3a6a0fa374", "ts": "2026-07-31T20:49:09"}
+{"kind": "DOC", "doc_id": "ART-8a788cd9c5", "path": "docs/CC_MGR_2026-07-31_D192_INVENTORY_FIRST_THEN_A_HUMAN_UI.md", "type": "STATUS", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T23:14:00"}
