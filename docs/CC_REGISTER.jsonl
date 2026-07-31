@@ -981,3 +981,4 @@
 {"kind": "DONE", "doc_id": "ART-c14f1f7eae", "by": "DESIGN", "by_doc_id": "ART-132d12be4b", "ts": "2026-07-31T19:33:19"}
 {"kind": "DOC", "doc_id": "ART-e46d6ac8ce", "path": "docs/CC_MGR_2026-07-31_D186_PLAN_B_AND_MEASURE_FIRST.md", "type": "HANDOFF", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T19:35:34"}
 {"kind": "DONE", "doc_id": "ART-132d12be4b", "by": "MGR", "by_doc_id": "ART-e46d6ac8ce", "ts": "2026-07-31T19:35:34"}
+{"kind": "DOC", "doc_id": "ART-ccd70510bd", "path": "docs/CC_MGR_2026-07-31_D187_I_REPORTED_A_NUMBER_THAT_DID_NOT_REPRODUCE.md", "type": "STATUS", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-07-31T19:49:45"}
