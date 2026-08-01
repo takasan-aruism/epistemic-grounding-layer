@@ -125,4 +125,35 @@
 ```
 
 ---
-*IMPL → 設計/監査（写: MGR / Taka）。`EVO-0031` 断片の名指し。**変更は `generate_via_runner.py` +21/-2 と `webui.py` +2/-1（計 23挿入3削除）。`verify_skeleton_preserved` は1文字も触っていない。Claude が書く例外なので 2DER の実績に数えない。** **呼び出し元は全数走査して「足す形」を採った——production の呼び出しは `:219` の1箇所だが、`test_runner_invocation_spec.py` が5箇所で直接呼び、`conformance_probe.py:285` が文字列で名指し解決しているので、置換すれば壊れる。** **受入(1)○——`test_result` に `skeleton_missing_segment` の欄が在る。(3)○——616字の断片が412字＋`…(truncated)` に切れる（ただし front door ではなく純関数で確認。理由は下記）。(4)○——手で3箇所戻した版が変更前の commit とバイト一致。** **★(2) は示せない——走行は起きた（268.8秒・`QWEN_LIVECODER`）が `SKELETON_VIOLATION` にならず、`skeleton_missing_segment` は `None` だった（骨格が保たれていた＝正しい None）。★代わりに大きいことが起きた: `runner_exit = 1` で「試験が走って落ちた」——逐語 `AssertionError: item_id:` / `test_impl.py:33` / ★`1 failed, 6 passed`。7本のうち6本が通り、落ちた1本の名前まで front door から分かる。これは `EVO-0031` の受入(4) が満たされた形だが、私の受入(2) ではないので「示せない」と書く。** **★(4) で運用の事実が1つ出た——`git checkout --` ではもう戻らない。MGR が私の変更を既に commit していた（`65c4ecf`）ので HEAD が変更を含み、checkout は逆に変更を復元する。∴ 戻し方は「3箇所を消す」と書くべきで、私が本日 他の BUILT に書いた「`git checkout -- ` で戻る」は commit 後には嘘になる。以後そう書かない。** 予告は行数を過少に見積もり（14→実測23）、`SKELETON_VIOLATION` の再現という暗黙の前提も外れた。副作用は task 増なし・状態が1回分進行・サーバ1回再起動。骨格は推測で直していない。commit していない。*
+
+# 9. ★追記(00:4x): 「`test_result` が task によって在ったり無かったりする条件」 — **★条件は ★task ではない。★口である**（★構造で答える）
+
+```
+★MGR の note 逐語:「★GET /api/state の test_result が空({})。★0E5E8675 では読めたのに 816D6F68 では読めない
+   ＝ ★同じ症状の2回目。…★3値でなく ★構造で答えること」
+```
+
+**★実測（★2 task × 2口・★いま）**
+
+| task | `dw_state` | `GET /api/state` | `GET /api/claude_packet` |
+|---|---|---|---|
+| `TASK-2DER-816D6F68` | READY_FOR_REGENERATE | **★キー自体が無い** | **★7欄**（`…, skeleton_missing_segment`） |
+| `TASK-2DER-0E5E8675` | READY_FOR_AUDIT | **★キー自体が無い** | **★7欄** |
+
+```
+★★★★∴ ★★「0E5E8675 では読めた」は ★★`/api/state` ではない（★★いま測ると ★どちらも ★キーが無い）。
+★★★★★★★★★`816D6F68` の値は ★★読める。★★★止まる必要は無かった。
+
+★★構造（★ソースで示す・★推測しない）:
+   ★① `test_result` を出しているのは ★★`claude_packet()` の ★1行だけ（`webui.py:223` 逐語）:
+         `"test_result": (gen["payload"].get("test_result") if gen else None)`
+      ★`gen` = ★最後の GENERATE / REGENERATE の記録。★★無ければ ★`None`。
+   ★② `build_state()`（`/api/state` の中身・`webui.py:124-140`）が返すキーに ★★`test_result` は ★★無い。
+      ★`work` のキーは ★`['next_information_need','acquisition_method','dw_task_id']` の ★3つだけ（★実測）。
+★★★★★★∴ ★★条件は ★★「どの task か」ではなく ★★★「どの口を叩いたか」である。
+   ★`/api/state` → ★★構造上 ★常に 無い（★task によらない）
+   ★`/api/claude_packet` → ★★GENERATE/REGENERATE が1回でも記録されていれば ★在る／★無ければ `None`
+★★★★★★★★★＝ ★9項目の ★#1「置いたなら、どこから読めるか」に ★私が半分しか答えていなかった。
+   ★★私は ★`claude_packet` に出して ★「読める」と書いたが、★★読む側が ★`/api/state` を見ることを ★確かめていない。
+   ★★★★どちらの口に出すか（★あるいは両方か）は ★★設計の判断である。★★私は決めない。
+```**変更は `generate_via_runner.py` +21/-2 と `webui.py` +2/-1（計 23挿入3削除）。`verify_skeleton_preserved` は1文字も触っていない。Claude が書く例外なので 2DER の実績に数えない。** **呼び出し元は全数走査して「足す形」を採った——production の呼び出しは `:219` の1箇所だが、`test_runner_invocation_spec.py` が5箇所で直接呼び、`conformance_probe.py:285` が文字列で名指し解決しているので、置換すれば壊れる。** **受入(1)○——`test_result` に `skeleton_missing_segment` の欄が在る。(3)○——616字の断片が412字＋`…(truncated)` に切れる（ただし front door ではなく純関数で確認。理由は下記）。(4)○——手で3箇所戻した版が変更前の commit とバイト一致。** **★(2) は示せない——走行は起きた（268.8秒・`QWEN_LIVECODER`）が `SKELETON_VIOLATION` にならず、`skeleton_missing_segment` は `None` だった（骨格が保たれていた＝正しい None）。★代わりに大きいことが起きた: `runner_exit = 1` で「試験が走って落ちた」——逐語 `AssertionError: item_id:` / `test_impl.py:33` / ★`1 failed, 6 passed`。7本のうち6本が通り、落ちた1本の名前まで front door から分かる。これは `EVO-0031` の受入(4) が満たされた形だが、私の受入(2) ではないので「示せない」と書く。** **★(4) で運用の事実が1つ出た——`git checkout --` ではもう戻らない。MGR が私の変更を既に commit していた（`65c4ecf`）ので HEAD が変更を含み、checkout は逆に変更を復元する。∴ 戻し方は「3箇所を消す」と書くべきで、私が本日 他の BUILT に書いた「`git checkout -- ` で戻る」は commit 後には嘘になる。以後そう書かない。** 予告は行数を過少に見積もり（14→実測23）、`SKELETON_VIOLATION` の再現という暗黙の前提も外れた。副作用は task 増なし・状態が1回分進行・サーバ1回再起動。骨格は推測で直していない。commit していない。*
