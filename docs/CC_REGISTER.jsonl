@@ -1016,3 +1016,4 @@
 {"kind": "DOC", "doc_id": "ART-afee443d77", "path": "docs/CC_MGR_2026-08-01_D209_C2_THE_APPLICATION_FORM.md", "type": "STATUS", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-01T14:25:30"}
 {"kind": "DOC", "doc_id": "ART-b721693b71", "path": "docs/CC_MGR_2026-08-01_D210_C2_NOT_ACCEPTED_ONE_CONTRACT_ONLY.md", "type": "STATUS", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-01T15:21:39"}
 {"kind": "DOC", "doc_id": "ART-d2f375131b", "path": "docs/CC_MGR_2026-08-01_D211_EVO0031_THE_TEST_NEVER_RUNS.md", "type": "STATUS", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-01T17:02:20"}
+{"kind": "DOC", "doc_id": "ART-5673a1b068", "path": "docs/CC_MGR_2026-08-01_D212_ASK_THE_RUNNER_WHY_IT_FAILED.md", "type": "STATUS", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-01T19:19:52"}
