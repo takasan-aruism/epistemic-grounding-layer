@@ -171,4 +171,32 @@ ERROR test_impl.py
 ```
 
 ---
-*IMPL → 設計/監査（写: MGR / Taka）。`EVO-0031`。**`twoder/webui.py` のみ変更（欄2・行5・既存1行にカンマ／git 実測 6挿入1削除）。`generate_via_runner.py` は1文字も触っていない。Claude が書く例外なので 2DER の実績に数えない。** **受入(1)○——`test_result` の欄は `['status','ok','reason','artifact_sha256','runner_exit','runner_stdout_tail']`。受入(2)○——新しい走行を1回 起こし、`runner_exit = 2`、stdout 全文を §3 に逐語で載せた。** **★中身は `test_impl.py:1: import human_view` → `ModuleNotFoundError: No module named 'human_view'` → `Interrupted: 1 error during collection`。exit=2 は設計が挙げた 5 でも 1 でも null でもなく pytest の収集中エラーで、★試験は1件も走っていない（実装が落ちたのではない）。成果物の置き名の問題だが、SPEC §5 が `cwd`/`test_command` の修正を禁じているので直していない。** **★私の `exit` 予想 `null` は外れた。根拠にした「`worker_run_ref` が null だから実行器が結果を残していない」が誤りで、`worker_run_ref` は今回も null のまま `exit` には 2 が入っていた——`worker_run_ref` の null は「実行器が動いていない」を意味しない。** **受入(3)は但し書きつき——2行を消すとソースは4欄に戻ることを機械で数えて示したが、戻した状態で新しい走行を起こして4欄で記録されることは示していない（この task は `READY_FOR_AUDIT` へ進み、もう1回 GENERATE を起こすには別 task が要る＝task が増える）。なお戻しても既に記録された6欄は消えない（append-only）。** 走行は①（既存 task を `run_next`）で作り、走った。goal の sha1 が同じ id になることを投入前に確認したので task は増えていない。`:8005` は私が直接叩いていない。**★私は SPEC §5 の禁止を1つ破った——`twoder` 配下で python を動かし `operator.py` の罠に落ちた（逐語つき）。Bash の作業場所が呼び出しをまたいで残ることを考えていなかった。その回の結果は使わず `/home/takasan` から測り直した数字だけを載せている。設計も本日 同じ罠に落ちており2人目である。** 副作用は task の状態が `READY_FOR_AUDIT` へ進んだこととサーバ3回再起動（run-gate 初期化）。commit していない。*
+
+# 11. ★追記(21:4x): MGR の2問に ★実測で答える（★`test_result` が「欄ごと無い」件）
+
+```
+★聞かれたこと（`EVO-0031` note 逐語）:
+   「(1) 動いている webui が ★本日の6欄化を実際に持っているか
+    (2) ★`test_result` が ★task によって ★在ったり無かったりする条件」
+```
+
+| task | `dw_state` | **`GET /api/state`** の `test_result` | **`GET /api/claude_packet`** の `test_result` |
+|---|---|---|---|
+| `TASK-2DER-0E5E8675`（★MGR が今日 立てた） | READY_FOR_REGENERATE | **★無し** | **★6欄**（`…, runner_exit, runner_stdout_tail`） |
+| `TASK-2DER-B37727E3` | JUDGE_REQUIRED | **★無し** | **★4欄** |
+| `TASK-2DER-CCCAEAA8` | READY_FOR_AUDIT | **★無し** | **★6欄** |
+
+```
+★★(1) の答え: ★★持っている。★根拠＝ ★`0E5E8675` は ★★webui 再起動(20:19:02)より ★後に GENERATE が走った task であり、
+   ★その記録が ★6欄である。★★動いていなければ ★6欄は ★出ない。
+   ★★★`B37727E3` が4欄なのは ★★その走行が ★変更前に記録されたから（★台帳は append-only ∴ ★遡って増えない）
+   ＝ ★★§2 で「過去は測り直せない」と設計が先に書いたとおりである。
+★★(2) の答え: ★★「task によって」ではない。★★★口が違う。
+   ★`test_result` は ★★どの task でも ★`GET /api/state` には ★★存在しない（★3件とも無し・★実測）。
+   ★★在るのは ★`GET /api/claude_packet` である。
+★★★★★∴ ★MGR が「B37727E3 では読めた」のは ★★`claude_packet` 経由の観測と思われる【★私は MGR の手順を見ていない】。
+★★★★★★★これは ★本日 既に1回 起きた形の ★裏返しである: ★`EVO-0030` では ★私が `claude_packet` に置き、
+   ★読み口は `/api/state` だった。★★今回は ★読む側が ★`/api/state` を見て、★値は `claude_packet` に在る。
+   ＝ ★★★「どの口に出すか」が ★2つの口の間で ★毎回ずれている。★★直すかは ★設計の判断（★私は決めない）。
+★★★★★★★★★私はコードを ★1行も変えていない（★今回は測っただけ）。
+```**`twoder/webui.py` のみ変更（欄2・行5・既存1行にカンマ／git 実測 6挿入1削除）。`generate_via_runner.py` は1文字も触っていない。Claude が書く例外なので 2DER の実績に数えない。** **受入(1)○——`test_result` の欄は `['status','ok','reason','artifact_sha256','runner_exit','runner_stdout_tail']`。受入(2)○——新しい走行を1回 起こし、`runner_exit = 2`、stdout 全文を §3 に逐語で載せた。** **★中身は `test_impl.py:1: import human_view` → `ModuleNotFoundError: No module named 'human_view'` → `Interrupted: 1 error during collection`。exit=2 は設計が挙げた 5 でも 1 でも null でもなく pytest の収集中エラーで、★試験は1件も走っていない（実装が落ちたのではない）。成果物の置き名の問題だが、SPEC §5 が `cwd`/`test_command` の修正を禁じているので直していない。** **★私の `exit` 予想 `null` は外れた。根拠にした「`worker_run_ref` が null だから実行器が結果を残していない」が誤りで、`worker_run_ref` は今回も null のまま `exit` には 2 が入っていた——`worker_run_ref` の null は「実行器が動いていない」を意味しない。** **受入(3)は但し書きつき——2行を消すとソースは4欄に戻ることを機械で数えて示したが、戻した状態で新しい走行を起こして4欄で記録されることは示していない（この task は `READY_FOR_AUDIT` へ進み、もう1回 GENERATE を起こすには別 task が要る＝task が増える）。なお戻しても既に記録された6欄は消えない（append-only）。** 走行は①（既存 task を `run_next`）で作り、走った。goal の sha1 が同じ id になることを投入前に確認したので task は増えていない。`:8005` は私が直接叩いていない。**★私は SPEC §5 の禁止を1つ破った——`twoder` 配下で python を動かし `operator.py` の罠に落ちた（逐語つき）。Bash の作業場所が呼び出しをまたいで残ることを考えていなかった。その回の結果は使わず `/home/takasan` から測り直した数字だけを載せている。設計も本日 同じ罠に落ちており2人目である。** 副作用は task の状態が `READY_FOR_AUDIT` へ進んだこととサーバ3回再起動（run-gate 初期化）。commit していない。*
