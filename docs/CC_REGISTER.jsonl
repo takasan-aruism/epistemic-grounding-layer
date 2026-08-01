@@ -1014,3 +1014,4 @@
 {"kind": "DOC", "doc_id": "ART-858b17ab76", "path": "docs/CC_MGR_2026-08-01_D207_GIVE_THE_UPPER_REVIEW_A_DESTINATION.md", "type": "STATUS", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-01T12:31:56"}
 {"kind": "DOC", "doc_id": "ART-ab29c83e5d", "path": "docs/CC_MGR_2026-08-01_D208_ROUTE_BY_ENTRY_NOT_ONLY_BY_VERDICT.md", "type": "STATUS", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-01T13:03:45"}
 {"kind": "DOC", "doc_id": "ART-afee443d77", "path": "docs/CC_MGR_2026-08-01_D209_C2_THE_APPLICATION_FORM.md", "type": "STATUS", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-01T14:25:30"}
+{"kind": "DOC", "doc_id": "ART-b721693b71", "path": "docs/CC_MGR_2026-08-01_D210_C2_NOT_ACCEPTED_ONE_CONTRACT_ONLY.md", "type": "STATUS", "from": "MGR", "to": "DESIGN", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-01T15:21:39"}
