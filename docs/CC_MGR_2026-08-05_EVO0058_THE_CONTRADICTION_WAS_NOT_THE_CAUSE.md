@@ -87,3 +87,29 @@ Taka の「予算を食い切るのは大体 指示が論理的に破綻して�
 ★段3 の再投入は ★止める（★同じ落ち方を6回くり返す物に ★7回目を足さない）
 ★L0 は ★§6 の受入で ★進めてよい（★段3 と ★独立に動く）
 ```
+
+---
+
+## 8. ★追記（00:2x）: `EVO-0050` の閉塞は Taka が解いた ／ ★但し **RED が出た**
+
+```
+★Taka が `sudo chown -R takasan:takasan /home/takasan/.cache/huggingface` を実行済
+★実測: takasan 所有 / 書込 OK / ★root 所有の残り ★0 件 / 198G
+★★`s_account_axes.py --check` が ★走った（★モデル DL は起きていない
+   ＝ ★既存 `.embed_axes_vectors.npy`(7/25) を使う経路だった）
+★★★結果 = ★RED
+      REGEN_MISMATCH: ACCOUNT_AXES_v1.json (freeze drift or non-deterministic)
+      REGEN_MISMATCH: ACCOUNT_MEMBERSHIP.jsonl
+★`--check` は ★1文字も書いていない（★git status 空で確認）
+★数字（frozen / その他 / shuffle_assigned）は ★GREEN 行にしか出ない ∴ ★今回は出ていない
+```
+
+**★私は原因を断定しない（★1回の観測）。** 候補は逐語で2つ ——
+**★(i) 再生成が決定論でない** ／ **★(ii) 7/25 以降に入力がずれた**。**★どちらかは ★設計が測る。**
+
+```
+★設計への依頼: ★RED の原因を ★測る（★§4 と同じ規律＝★直しに行く前に測る）
+★★注意: ★『比較対象が v1/v2 でずれる』件（BUILD SPEC §1）は ★まだ生きている
+        ＝ ★RED が片付くまで ★『軸が何本立つか』の数字は ★出さない
+★★★手番 = 設計。★EVO-0050 は ★DEFERRED のまま（★ACTIVE は EVO-0058 の1件・v0.3 §3.1）
+```
