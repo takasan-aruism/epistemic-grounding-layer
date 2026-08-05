@@ -21,10 +21,14 @@ import numpy as np
 import s_embed_axes as R   # 埋め込み/records/kmeans/shuffle を継承(同一 pin=決定論)
 
 STRUCT = os.path.dirname(os.path.abspath(__file__))
-OUT_AXES = os.path.join(STRUCT, "ACCOUNT_AXES_v1.json")
-OUT_MEMB = os.path.join(STRUCT, "ACCOUNT_MEMBERSHIP.jsonl")
+# EVO-0050: 書き先を版で切り替える。既定は v1(従来と同じ)。別名で測る時だけ環境変数を渡す。
+# ★v1 を読むだけにするための唯一の口(Taka 裁定 2026-08-05: 別名の版を作る / v1 は触らない)。
+SUFFIX = os.environ.get("ACCOUNT_AXES_SUFFIX", "v1").strip() or "v1"
+OUT_AXES = os.path.join(STRUCT, "ACCOUNT_AXES_%s.json" % SUFFIX)
+OUT_MEMB = os.path.join(STRUCT, "ACCOUNT_MEMBERSHIP.jsonl" if SUFFIX == "v1"
+                        else "ACCOUNT_MEMBERSHIP_%s.jsonl" % SUFFIX)
 K = 4                       # r1 の採用 K
-VERSION = "v1"
+VERSION = SUFFIX
 PURITY_TH, DIV_TH = R.PURITY_TH, R.DIV_TH
 # membership は負の制御相対(density - null > R.MARGIN)。絶対 cosine 閾値(旧 MEMB_TH)は撤廃
 # (e5 anisotropy で全ベクトルが高 cosine=絶対閾値は退化。裁定A: 幻覚的絶対定数の禁止)。
