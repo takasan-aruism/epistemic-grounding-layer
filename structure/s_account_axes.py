@@ -151,6 +151,45 @@ def build():
             "n_members_r1": len(members),
             "silhouette": a["silhouette"], "sub_silhouette": a["sub_silhouette"],
         })
+    # EVO-0050(2026-08-10): CATCH_ALL に降格した寄せ場を★1段だけ 割り直す(★孫は作らない)。
+    # ★割り方は既存のまま=★_sub_silhouette が中で捨てている R._kmeans(Xsub, 2, 0) のラベルを受け取るだけ。
+    # ★裁定も同じ規則(sub>=sil なら CATCH_ALL)。★0本でも成功した実験=★結果は per_axis_adjudication に残す。
+    resplit = []
+    for a in adj:
+        if a["catch_all_verdict"] != "CATCH_ALL":
+            continue
+        idx0 = np.array(a["idx"])
+        Xsub = X[idx0]
+        if len(Xsub) < 4:
+            continue
+        sub_labels = R._kmeans(Xsub, 2, 0)
+        if len(np.unique(sub_labels)) < 2:
+            continue
+        sil_sub_all = _silhouette_samples(Xsub, sub_labels)
+        for c in sorted(np.unique(sub_labels)):
+            m = sub_labels == c
+            sil_c = float(sil_sub_all[m].mean())
+            sub_c = _sub_silhouette(Xsub[m])
+            verdict = "CATCH_ALL" if sub_c >= sil_c else "COHERENT"
+            child = {"parent_cluster": a["cluster"], "child": int(c), "n": int(m.sum()),
+                     "silhouette": round(sil_c, 6), "sub_silhouette": round(sub_c, 6),
+                     "catch_all_verdict": verdict, "depth": 1}
+            resplit.append(child)
+            if verdict != "COHERENT":
+                continue
+            members = sorted(recs[i][0] for i in idx0[m])       # ★id の振り方も既存の作法(AX-+sha1)
+            centroid = Xsub[m].mean(0)
+            n = np.linalg.norm(centroid)
+            direction = (centroid / n) if n > 0 else centroid
+            frozen.append({
+                "axis_id": "AX-" + hashlib.sha1("|".join(members).encode()).hexdigest()[:8],
+                "version": VERSION,
+                "frozen_direction": [round(float(v), 6) for v in direction],
+                "kind_verdict": "TOPIC", "catch_all_verdict": verdict,
+                "seed_member_ids": members[:10], "n_members_r1": len(members),
+                "silhouette": child["silhouette"], "sub_silhouette": child["sub_silhouette"],
+                "from_resplit_of": a["cluster"], "depth": 1,
+            })
     frozen.sort(key=lambda f: f["axis_id"])
 
     dirs = np.array([f["frozen_direction"] for f in frozen]) if frozen else np.zeros((0, X.shape[1]))
@@ -167,6 +206,7 @@ def build():
         "per_axis_adjudication": [{k: a[k] for k in
                                    ("kind_purity", "content_diversity", "silhouette",
                                     "sub_silhouette", "catch_all_verdict")} for a in adj],
+        "resplit_depth1": resplit,          # ★0本でも記録する(★『割れなかった』も結果)
         "axes": frozen,
         "note": ("catch-all 裁定(sub_silhouette>=silhouette=CATCH_ALL 降格)で COHERENT %d 軸のみ凍結。"
                  "density は observed のみで gate しない(T26)。account 次元は soft(保存則なし)。" % len(frozen)),
