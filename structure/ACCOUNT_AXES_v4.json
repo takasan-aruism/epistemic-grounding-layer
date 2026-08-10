@@ -1,0 +1,32 @@
+{
+ "version": "v4",
+ "model": "intfloat/multilingual-e5-small",
+ "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+ "corpus_rule": "corpus から <<<2DER:PROGRESS>>> を『含む』記録を除く(先頭一致ではない)。契約の目印つきは残す。",
+ "n_corpus_before": 3098,
+ "n_corpus_after": 2236,
+ "n_frozen_axes": 0,
+ "membership_margin": 0.05,
+ "membership_null_per_axis": {},
+ "real_mean_silhouette": 0.714043,
+ "neg_control_mean_silhouette": -0.001956,
+ "per_axis_adjudication": [
+  {
+   "kind_purity": 0.8623,
+   "content_diversity": 0.8263,
+   "silhouette": -0.023622,
+   "sub_silhouette": 0.159783,
+   "catch_all_verdict": "CATCH_ALL"
+  },
+  {
+   "kind_purity": 1.0,
+   "content_diversity": 0.4652,
+   "silhouette": 0.164964,
+   "sub_silhouette": 0.225441,
+   "catch_all_verdict": "CATCH_ALL"
+  }
+ ],
+ "axes": [],
+ "canonical": false,
+ "note": "進捗を除いた材料で 同じ規則で立てた版。ACCOUNT_AXES_v3.json は 1バイトも変えていない。"
+}
