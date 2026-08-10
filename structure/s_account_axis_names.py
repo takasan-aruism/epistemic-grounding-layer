@@ -144,18 +144,24 @@ def _llm_propose(prompt, seed):
     return content.strip()
 
 
-def _axes():
-    return json.load(open(IN_AXES2, encoding="utf-8"))["axes"]
+def _paths(version="v2"):
+    """★入口を版で選ぶ(★既定は v2=★既存の呼び方を1文字も変えない=★退行0)。"""
+    return (os.path.join(STRUCT, "ACCOUNT_AXES_%s.json" % version),
+            os.path.join(STRUCT, "ACCOUNT_MEMBERSHIP_%s.jsonl" % version))
 
 
-def _memb():
-    return [json.loads(l) for l in open(IN_MEMB2, encoding="utf-8") if l.strip()]
+def _axes(version="v2"):
+    return json.load(open(_paths(version)[0], encoding="utf-8"))["axes"]
 
 
-def _mkrow(aid, sample_ids, proposals):
+def _memb(version="v2"):
+    return [json.loads(l) for l in open(_paths(version)[1], encoding="utf-8") if l.strip()]
+
+
+def _mkrow(aid, sample_ids, proposals, version="v2"):
     con = consensus(proposals)
     return {
-        "axis_id": aid, "axes_version": "v2", "name": con["name"], "name_status": con["name_status"],
+        "axis_id": aid, "axes_version": version, "name": con["name"], "name_status": con["name_status"],
         "model": MODEL, "endpoint": ":8005", "seeds": list(SEEDS),
         "temperature": TEMPERATURE, "max_tokens": MAX_TOKENS,
         "proposals": proposals, "agreement_count": con["agreement_count"],
@@ -164,16 +170,19 @@ def _mkrow(aid, sample_ids, proposals):
     }
 
 
-def build():
-    """LLM を実行して命名台帳行を生成(初回 main 用)。"""
-    axes, memb, cmap = _axes(), _memb(), _content_map()
+def build(version="v2", only=None):
+    """LLM を実行して命名台帳行を生成(初回 main 用)。
+    ★version=版を選ぶ(既定 v2) ／ ★only=軸 id を絞る(★凍結棚に在る軸だけ=★無理に通さない)。"""
+    axes, memb, cmap = _axes(version), _memb(version), _content_map()
     rows = []
     for ax in axes:
         aid = ax["axis_id"]
+        if only and aid not in only:
+            continue
         sample_ids = _sample(aid, memb)
         prompt = _build_prompt(sample_ids, cmap)
         proposals = {str(s): _llm_propose(prompt, s) for s in SEEDS}
-        rows.append(_mkrow(aid, sample_ids, proposals))
+        rows.append(_mkrow(aid, sample_ids, proposals, version))
     rows.sort(key=lambda r: r["axis_id"])
     return rows
 
@@ -197,6 +206,16 @@ def _header():
                      "未成立=UNRESOLVED_NO_CONSENSUS(捏造ゼロ)。--check=決定論再判定+記録完全性(name byte 再現は不要)。",
             "v2_axes_sha256": _sha(IN_AXES2), "v2_membership_sha256": _sha(IN_MEMB2),
             "model": MODEL, "endpoint": ":8005", "prompt_id": PROMPT_ID}
+
+
+def _header_for(version):
+    """★版に合わせた鍵を返す(★v2 は従来の鍵をそのまま=★退行0 ／ ★他の版は axes_version 付きで足す)。"""
+    if version == "v2":
+        return _header()
+    ax, mb = _paths(version)
+    h = dict(_header())
+    h.update({"axes_version": version, "axes_sha256": _sha(ax), "membership_sha256": _sha(mb)})
+    return h
 
 
 def _ser(rows, header):
