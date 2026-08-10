@@ -235,6 +235,10 @@ def check():
         red.append("GEOMETRY_MUTATED: ACCOUNT_AXES_v2.json が命名後に変化(id正典/幾何不変違反 or 要再命名)")
     if header.get("v2_membership_sha256") != _sha(IN_MEMB2):
         red.append("GEOMETRY_MUTATED: ACCOUNT_MEMBERSHIP_v2.jsonl が変化")
+    # ★裁定/承認で定めた名前は LLM 合議の記録を持たない(proposals={})=★consensus 再判定の対象外。
+    # ★2026-08-10: 私(実装)が ADOPTED 行を足した時に この検査の対象から外さず、--check を落としていた。
+    rows = [r for r in rows if str(r.get("name_status", "")).startswith("CONSENSUS_")
+            or r.get("name_status") == "UNRESOLVED_NO_CONSENSUS"]
     # 2. 対象は v2 凍結棚のみ(scope)
     axis_ids = {a["axis_id"] for a in _axes()}
     if {r["axis_id"] for r in rows} != axis_ids:
