@@ -155,3 +155,12 @@ for r in sorted(rows, key=lambda x: -x["loc"]):
           f"{r['symbols_reached']:5d} {r['execution_signal_count']:6d} {r['doc_mentions']:4d}  "
           f"{lad:^17s}  {r['consensus_capability_gaps']:4d}")
 print(f"\nfile<->ITEM bindings resolved: {len(item_of_file)} files")
+
+try:                    # ★走った事が記録に残る(★裁定 2026-08-14・★s4_edges と同じ型)
+    import sys as _sysR
+    _sysR.path.insert(0, "/home/takasan")
+    _sysR.path.insert(0, "/home/takasan/ds")
+    from ds import etrace as _ETR_S
+    _ETR_S.emit("STRUCTURE", "s3_components", {"stage": "s3_components"}, {"wrote": ['ARTIFACT_REGISTRY.jsonl', 'COMPLETION_DEFINITION_REGISTRY.jsonl', 'COMPONENT_INVENTORY.jsonl', 'EXECUTION_EVIDENCE.jsonl', 'FILE_EXTRACTION_CONSENSUS.jsonl', 'FILE_MANIFEST.jsonl', 'REACHABILITY.jsonl', 'ROADMAP_REGISTRY.jsonl', 'SYMBOL_INDEX.jsonl', 'SYMBOL_REACHABILITY.jsonl']}, "OK", fail_open=True)
+except Exception:
+    pass

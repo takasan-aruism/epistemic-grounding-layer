@@ -156,3 +156,12 @@ print("\n=== 系譜分類 (LOC) ===")
 agg=collections.Counter(); loc=collections.Counter()
 for x in lin: agg[x["lineage"]]+=1; loc[x["lineage"]]+=x["loc"]
 for k in sorted(agg,key=lambda z:-loc[z]): print(f"  {agg[k]:4d} files {loc[k]:7d} LOC  {k}")
+
+try:                    # ★走った事が記録に残る(★裁定 2026-08-14・★s4_edges と同じ型)
+    import sys as _sysR
+    _sysR.path.insert(0, "/home/takasan")
+    _sysR.path.insert(0, "/home/takasan/ds")
+    from ds import etrace as _ETR_S
+    _ETR_S.emit("STRUCTURE", "s6_contradictions", {"stage": "s6_contradictions"}, {"wrote": ['COMPONENT_INVENTORY.jsonl', 'CONTRADICTIONS.jsonl', 'EDGE_INVENTORY.jsonl', 'FILE_EXTRACTION_CONSENSUS.jsonl', 'FILE_MANIFEST.jsonl', 'ITEM_LADDER.jsonl', 'LINEAGE.jsonl', 'REACHABILITY.jsonl', 'SYMBOL_INDEX.jsonl']}, "OK", fail_open=True)
+except Exception:
+    pass

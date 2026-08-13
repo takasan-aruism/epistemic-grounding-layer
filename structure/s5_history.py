@@ -107,3 +107,12 @@ for e in births:
 print()
 byday=collections.Counter(e["date"] for e in events)
 print("commits/day:", " ".join(f"{d[-5:]}:{n}" for d,n in sorted(byday.items())))
+
+try:                    # ★走った事が記録に残る(★裁定 2026-08-14・★s4_edges と同じ型)
+    import sys as _sysR
+    _sysR.path.insert(0, "/home/takasan")
+    _sysR.path.insert(0, "/home/takasan/ds")
+    from ds import etrace as _ETR_S
+    _ETR_S.emit("STRUCTURE", "s5_history", {"stage": "s5_history"}, {"wrote": ['HISTORY_EVENTS.jsonl']}, "OK", fail_open=True)
+except Exception:
+    pass

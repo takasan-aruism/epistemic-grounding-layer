@@ -177,6 +177,19 @@ for key, a in sorted(agg.items()):
     rows.append(a)
 (S/"EDGE_INVENTORY.jsonl").write_text("\n".join(json.dumps(r, ensure_ascii=False) for r in rows)+"\n")
 
+try:                    # ★走った事が記録に残る(★裁定 2026-08-14=★『繋ぐ』ではなく『記録に残る』)
+    import sys as _sys  # ★新台帳0=★既存の event_trace へ1行 ／★落ちても工程を止めない
+    _sys.path.insert(0, "/home/takasan")
+    _sys.path.insert(0, "/home/takasan/ds")
+    from ds import etrace as _ET4
+    _ET4.emit("STRUCTURE", "s4_edges",
+              {"inputs": ["FILE_MANIFEST", "SYMBOL_INDEX", "REACHABILITY", "COMPONENT_INVENTORY"]},
+              {"edges": len(rows), "raw_call_sites": len(edges),
+               "by_status": dict(collections.Counter(r["status"] for r in rows))},
+              "OK", fail_open=True)
+except Exception:
+    pass
+
 print(f"cross-component call edges: {len(rows)}  (raw call sites {len(edges)})")
 c = collections.Counter(r["status"] for r in rows)
 for k, v in c.most_common(): print(f"  {v:5d}  {k}")

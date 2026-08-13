@@ -94,3 +94,12 @@ for k, v in c.most_common():
     print(f"  {v:4d} files  {loc:7d} LOC  {k}")
 print("\nLIVE by repo:", dict(collections.Counter(r["repo"] for r in out if r["wired"])))
 print("max depth:", max((r["reach_depth"] or 0) for r in out))
+
+try:                    # ★走った事が記録に残る(★裁定 2026-08-14・★s4_edges と同じ型)
+    import sys as _sysR
+    _sysR.path.insert(0, "/home/takasan")
+    _sysR.path.insert(0, "/home/takasan/ds")
+    from ds import etrace as _ETR_S
+    _ETR_S.emit("STRUCTURE", "s1_reach", {"stage": "s1_reach"}, {"wrote": ['REACHABILITY.jsonl', 'SYMBOL_INDEX.jsonl']}, "OK", fail_open=True)
+except Exception:
+    pass

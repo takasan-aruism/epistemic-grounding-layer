@@ -95,3 +95,12 @@ for L in LISTS:
 print()
 print("lifecycle no-majority files:", stat["lifecycle_no_majority"], "/", len(out))
 print("files by seed coverage:", {k: v for k, v in stat.items() if k.startswith("files_seeds")})
+
+try:                    # ★走った事が記録に残る(★裁定 2026-08-14・★s4_edges と同じ型)
+    import sys as _sysR
+    _sysR.path.insert(0, "/home/takasan")
+    _sysR.path.insert(0, "/home/takasan/ds")
+    from ds import etrace as _ETR_S
+    _ETR_S.emit("STRUCTURE", "s2b_consensus", {"stage": "s2b_consensus"}, {"wrote": ['FILE_EXTRACTION.jsonl', 'FILE_EXTRACTION_CONSENSUS.jsonl', 'FILE_EXTRACTION_S23.jsonl', 'FILE_EXTRACTION_S47.jsonl', 'UNRESOLVED.jsonl']}, "OK", fail_open=True)
+except Exception:
+    pass

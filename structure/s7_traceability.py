@@ -130,3 +130,12 @@ for k in sorted(res):
     if a < b: allpass = False
     print(f"  {k}  {p}  {a}/{b}   {d}")
 print(f"\nT-1 (機械可読層 + TR 全合格): {'SATISFIED' if allpass else 'NOT SATISFIED'}")
+
+try:                    # ★走った事が記録に残る(★裁定 2026-08-14・★s4_edges と同じ型)
+    import sys as _sysR
+    _sysR.path.insert(0, "/home/takasan")
+    _sysR.path.insert(0, "/home/takasan/ds")
+    from ds import etrace as _ETR_S
+    _ETR_S.emit("STRUCTURE", "s7_traceability", {"stage": "s7_traceability"}, {"wrote": ['ARTIFACT_REGISTRY.jsonl', 'CHANGE_LOG.jsonl', 'DESIGN_EVIDENCE_LEDGER.jsonl', 'EDGE_INVENTORY.jsonl', 'EXECUTION_EVIDENCE.jsonl', 'FILE_EXTRACTION_CONSENSUS.jsonl', 'FILE_MANIFEST.jsonl', 'HISTORY_EVENTS.jsonl', 'ITEM_LADDER.jsonl', 'REACHABILITY.jsonl', 'ROADMAP_REGISTRY.jsonl', 'SYMBOL_INDEX.jsonl']}, "OK", fail_open=True)
+except Exception:
+    pass

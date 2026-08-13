@@ -82,3 +82,12 @@ print("\n=== DONE だがファイル束縛が解決できない (命名規約外
 ub = [r for r in rows if r["roadmap_status"] == "DONE" and not r["bound_files"]]
 print(f"  計 {len(ub)} 件 (TR-2 の未解決分)")
 for r in ub[:8]: print("   ", r["item_id"], "|", (r["title"] or "")[:60])
+
+try:                    # ★走った事が記録に残る(★裁定 2026-08-14・★s4_edges と同じ型)
+    import sys as _sysR
+    _sysR.path.insert(0, "/home/takasan")
+    _sysR.path.insert(0, "/home/takasan/ds")
+    from ds import etrace as _ETR_S
+    _ETR_S.emit("STRUCTURE", "s3b_item_ladder", {"stage": "s3b_item_ladder"}, {"wrote": ['FILE_EXTRACTION_CONSENSUS.jsonl', 'FILE_MANIFEST.jsonl', 'ITEM_LADDER.jsonl', 'REACHABILITY.jsonl', 'ROADMAP_REGISTRY.jsonl', 'SYMBOL_INDEX.jsonl']}, "OK", fail_open=True)
+except Exception:
+    pass

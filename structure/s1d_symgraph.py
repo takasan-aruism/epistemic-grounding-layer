@@ -221,3 +221,12 @@ print(f"module-level LIVE             : {len(mod_live)}")
 print(f"  both                        : {len(rf & mod_live)}")
 print(f"  module-LIVE but no reached symbol : {len(mod_live - rf)}")
 print(f"  symbol-reached but NOT module-LIVE: {len(rf - mod_live)}")
+
+try:                    # ★走った事が記録に残る(★裁定 2026-08-14・★s4_edges と同じ型)
+    import sys as _sysR
+    _sysR.path.insert(0, "/home/takasan")
+    _sysR.path.insert(0, "/home/takasan/ds")
+    from ds import etrace as _ETR_S
+    _ETR_S.emit("STRUCTURE", "s1d_symgraph", {"stage": "s1d_symgraph"}, {"wrote": ['FILE_MANIFEST.jsonl', 'REACHABILITY.jsonl', 'SYMBOL_REACHABILITY.jsonl']}, "OK", fail_open=True)
+except Exception:
+    pass
