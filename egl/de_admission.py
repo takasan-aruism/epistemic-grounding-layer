@@ -64,6 +64,11 @@ def _record_class(cand):
 
 
 def admit_design_evidence(candidate, ts, ledger_path=None, reverify=None):
+    # 受け取ったことを残す
+    try:
+        from ds import etrace as _ET; _ET.emit("EGL", "admit_design_evidence", {"received_from": "HANDOFF.S07", "at": "/home/takasan/egl/egl/de_admission.py::admit_design_evidence"}, {"ok": True}, "OK", fail_open=True)
+    except Exception:
+        pass
     """candidate=proposed DE dict. reverify:()->(ok,detail) for BEHAVIORAL claims. Returns admission result.
     Appends to the ledger ONLY on admit/downgrade (never on reject)."""
     ledger = Path(ledger_path) if ledger_path else LEDGER
