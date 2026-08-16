@@ -1,5 +1,8 @@
 # 【契約・1本】★計器が **自分の 出力を 点検する** ―― ★★`self_check_signals`（★★合否を 出さない）
 
+> **★2026-08-16 MGR: この契約は投入されていない。** 門（`RRI-GATE-UNBOUND-REFERENT-001`）が **保留**（`RRI_PREFLIGHT_HOLD`）。**置き換え先＝`CC_DESIGN_2026-08-16_CONTRACT_SELF_CHECK_SIGNALS_PLAIN_NAMES.md`**（指示語を実名にした版・**通って完了**）。**この文書は消さない**（止まった理由を残すため）。
+
+
 宛: MGR ／ 写: IMPL ／ 発: DESIGN ／ 2026-08-16 16:5x ／ 台帳: `ITEM-2DER-EVO-0058`
 出所: **MGR 16:25**（★`self_check` に 検知を 2つ ／ ★場合を 先に 列挙 ／ ★出てはいけない 結果を 1つ）
 ／ **Taka 指示**（★『タイミングを 合わせて 入れる』＝★本線の 1手が 終わった 後）
