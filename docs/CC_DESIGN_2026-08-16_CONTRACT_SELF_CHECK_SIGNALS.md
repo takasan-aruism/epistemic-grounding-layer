@@ -47,7 +47,7 @@
 
 ## 3. ★★骨格（★★定数 0個 ／ ★★閾値は 呼び手が 渡す）
 
-<<<2DER:SKELETON>>>
+<<<2DER-SUPERSEDED:SKELETON>>>
 def self_check_signals(statuses, counts, previous, min_count):
     """計器の出力に、決まった形が出ていないかを見る。合否は決めない。
 
@@ -80,7 +80,7 @@ def self_check_signals(statuses, counts, previous, min_count):
 
 ## 4. ★★封印試験
 
-<<<2DER:IMMUTABLE_TESTS>>>
+<<<2DER-SUPERSEDED:IMMUTABLE_TESTS>>>
 from impl import self_check_signals
 
 
