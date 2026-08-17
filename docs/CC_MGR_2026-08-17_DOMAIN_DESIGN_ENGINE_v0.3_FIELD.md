@@ -19,7 +19,7 @@
 
 | v0.2 の役 | 現在の実体 | 判定 |
 |---|---|---|
-| 失敗履歴 | `failure_memory`（★照合 143回 発火）／`failure_classifier_*`／`failure_resource_precheck` | **在る・動いている** |
+| 失敗履歴 | `failure_memory`（★型 **7** ／ 照合 **441**(非ブロック)・**507**(全部) ／ 再発台帳の行 **143**）／`failure_classifier_*`／`failure_resource_precheck` | **在る・動いている** |
 | 経路 | `relay_chain`（★18/18）／`route_facts`／`route_adopt`／`name_matches_route` | **在る・動いている** |
 | 成功/契約 | `contract_seal`／`contract_from_plan`／`contract_progress`／`completion_from_materials` | **在る**（★2026-08-17 に揃った） |
 | 環境 | `dw/adjudicator.probe_environment` | **★一部**（下 §3） |
@@ -30,7 +30,7 @@
 ## 2. ★§13 の前提を数で締める ―― 勘定科目は **5件**
 
 ```
-実体 = rri/rri/rthread_chart.json（chart_version ＋ accounts ★5）
+実体 = rri/rri/rthread_chart.json（chart_version ＋ accounts ★5 ＝ `ACC-` **4** ＋ `AX-` **1**・★別種が1件混ざる）
 ```
 v0.2 §13 は「案件を科目で分類 → 過去の required materials を引く」を第一原則にしている。
 **★引く先が 5件しかない** ∴ 当面は**大半が未知処理へ落ちる**。
@@ -44,7 +44,8 @@ v0.2 §13 は「案件を科目で分類 → 過去の required materials を引
 
 ```
 ★見ている（probe_environment）= workspace ／ runner identity ／ timeout・spawn 失敗 ／ 必要成果物
-★見ていない = OS ／ ドライバ ／ GPU・CPU・RAM ／ 権限 ／ 常駐サービス ／ 依存パッケージ
+★見ていない = OS ／ ドライバ ／ GPU・CPU・RAM ／ 常駐サービス ／ 依存パッケージ
+★権限は 2つに割る = 実行時の `permission_denied` は **見ている**（合図9つの1つ）／ 権限の棚卸しは 見ていない
 ```
 **★∴「環境を確認している」と一括で書かない。** 現在は**実行環境の破損検知**であり、**基盤の棚卸しではない**。
 v0.2 §7 の「コードだけ試験して環境未確認」は**半分当たっている**（実行環境は見ている／基盤は見ていない）。
@@ -52,10 +53,13 @@ v0.2 §7 の「コードだけ試験して環境未確認」は**半分当たっ
 ## 4. ★§6 実績計測 ―― **もう記録されている**
 
 ```
-在る（実行記録の欄）= actor_role ／ actor_identity ／ model_id ／ latency_ms
-                      prompt_tokens ／ completion_tokens ／ retry_* ／ task_id ／ trace_id
-在る（別経路）      = files_changed（`live_worker_scaffold.check_diff_safety`）
-                      区間数（`relay_chain` 18）／ 失敗型（`failure_memory` 143回）
+★引ける口を 名指しする（★『在る』だけでは 検算できない ―― DESIGN が実際に外した）
+  `GET /api/resolve?id=TASK-…` の `generation.per_attempt`
+     → actor_role ／ actor_identity ／ model_id ／ latency_ms ／ prompt_tokens ／ completion_tokens
+  `GET /api/etrace?task_id=…`（`task_trace`）
+     → ★task_id ／ trace_id のみ（★上の欄は ここには 出ない）
+  その他 = files_changed（`live_worker_scaffold.check_diff_safety`）／区間 `relay_chain` 18
+          ／ 失敗の型 `failure_memory` **7**（★143 は 再発台帳の行数＝別の鍵）
 ```
 **★∴ §6 の先行計測は「これから貯める」ではなく「既に貯まっている物を引く」。**
 V3 では **新しい計測を足さず、引く口を1つ**にする（★新台帳 0）。
@@ -75,6 +79,7 @@ V3 では **新しい計測を足さず、引く口を1つ**にする（★新�
 
 v0.2 §22 は「内部に答えがあるのに外部検索を起動しない」と禁じている。
 **★現状は口そのものが 0件** ∴ **禁止条項は現時点で発火しない**。
+★但し **語彙は既に在る**（`egl/answer_evidence.py` の `BASIS_KINDS` に `EXTERNAL_RESEARCH`）＝ 実装時 **新語 0**。
 **V3 の書き方**: 「外部調査は**未実装**。禁止条項は**実装時に効く**」と分けて書く（★不在を規律で語らない）。
 
 ## 7. ★§18 出力 ―― 4系統は成立、残り3系統は未着手
