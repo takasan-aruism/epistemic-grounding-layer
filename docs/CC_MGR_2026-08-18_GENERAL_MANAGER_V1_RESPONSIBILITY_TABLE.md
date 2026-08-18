@@ -171,3 +171,23 @@ F2 と同一の根。**別立てにせず F2 に統合する**（責務表を水
 
 **新 Manager の実装には入っていない。** 本書は責務表のみ。
 実装順序・どの責務から作るか・既存 `manager_v0` との関係は、次の裁定で決める。
+
+---
+
+## 追記 2026-08-18（Taka 指示）―― 4欄を別々に持つ前提
+
+**以後、General Manager は次の4欄を別々に持つ。1つの「人／機械」判定へ潰さない。**
+
+| 欄 | 出所（既存の正本・登記簿） | 意味 |
+|---|---|---|
+| `actor_role` | `_MAP[state][1]` | **名前。主体を決めない**（`MANAGER` は人と機械の両方を指す） |
+| `next_operation` | `_MAP[state][0]` | `NONE` / `BLOCKED` を「機械の番」と混ぜない |
+| `machine_supplier` | `_machine_registry()` | **機械が供給できるか**（事実） |
+| `authority_barrier` | `_MAP[state].claude_barrier` | **機械に供給させてよいか**（政策） |
+
+**実証**: この4つを1欄（役名）で代用したため、`decide_rearm` が
+機械供給される `PLAN` を人の関門と判定し、門が `runnable=False` でラッチした
+（詳細 `CC_MGR_2026-08-18_HUMAN_BARRIER_CAUSE.md` / `CC_MGR_2026-08-18_REARM_DEDUP_AND_PLAN_BARRIER.md`）。
+
+**R6（`whose_turn`）は現在 `actor_role` と `next_operation` の2欄しか持たない。**
+残り2欄を足すのは別 item（本件の根とは異なる ―― 本件は語彙、R6 は観測欄）。
