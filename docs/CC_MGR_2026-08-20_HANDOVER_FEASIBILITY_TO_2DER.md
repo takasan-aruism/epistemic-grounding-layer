@@ -5,6 +5,21 @@
 
 ---
 
+## ★★訂正（2026-08-20 08:0x ／ ★この文書の §③ 末尾）
+
+```
+★私は 「`runs/received/TASK-2DER-FD9975C9.py` が difflib を 使って いる」と 書きました。★★誤りです。
+★原因 = ★`grep "unified_diff\|difflib"` の ★或(OR)の 片方 `unified_diff` に 当たった のを
+       ★私が `difflib` の 一致と 読んだ。
+★実測 = ★repo 本体で `difflib` 単独検索 → ★★0件。`apply_unified_diff.py` の difflib 出現 = ★0。
+★正規経路(`/api/resolve?id=TASK-2DER-FD9975C9`)の 答え:
+   artifact.name = ★`apply_unified_diff` ／ paths = twoder/apply_unified_diff.py
+   ★★＝ ★FD9975C9 は 「★当てる 側」の 成果で あって ★「作る 側」では ない。
+★★∴ ★「中身は 既に 在るかも しれない」は ★取り下げます。★A の 根拠には なりません。
+```
+
+---
+
 ## ① ★★2DER 自身が `allowed_target_files.py` を 変えて 2件目を 足せる 正規経路は ★★存在しない
 
 **★経路を 1段ずつ 引きました。★切れている 所を ★★呼び手の 数で 示します。**
