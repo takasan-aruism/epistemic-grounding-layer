@@ -154,6 +154,32 @@
 **★①②とも ★不可逆操作・安全境界・新しい設計判断に 当たる ∴ ★Taka への 上申事項。
 ★私は 直していません ／ 修正案も 書いていません。**
 
+## 4c. ★★周回一覧（★2026-08-20 01:0x 時点・★token 消費 ★0）
+
+| # | task | 戻した停止点 | 2DER が 出した もの | 止まった 所 |
+|---|---|---|---|---|
+| 1 | `76070397` | provenance 不足 | ★packet construction を 自力で 名指し | 同じ provenance |
+| 2 | `1A9EEBD3` | (Taka 要件) SELF_DEV_TOKEN | 要件4点が 文面に 出た | 同上 ／ 実装 0 |
+| 3 | `02BAA787` | 3件が 同じ所で 停止 | 「extract provenance from implementation_packet」 | 同上 |
+| ★ | ★bootstrap `4a94ebd` | ★Taka 許可・接続のみ | ― | ― |
+| 4 | **`834D7DD2`** | (新規 goal) | **★全通過**（test PASS ／ AUDIT 0 ／ 機械 UPPER_REVIEW PASS） | **★成立** |
+| ★事故 | `68f93d9` | ― | ★稼働中 `requeue_decision` を 上書き | ★revert `3dd7d02` |
+| 5 | `16D40E39` | 上書き実害 | ★route_commit_request で 新規/既存を 分離 ／ ★自分で 再発禁止を 書いた | 試験 2 failed |
+| 6 | `92FE6932` | 試験 2件 落ち | 実装と 試験を 書き直し | ★別の 2件が 落ちる |
+| 7 | `DB0203A9` | 自力で 回れない | ★progress_checker ／ requeue_policy ／ ★MGR介入を 禁止事項に | ★ImportError（試験 0件） |
+| 8 | **`CBAFD9EC`** | repo を 見られない | **★repo 調査器を 自作**（`scan_repository`／AST）★全通過 | **★成立**（★但し 呼び手 0） |
+| 9 | `670E3F6C` | 調査器に 呼び手が 無い | ★adapter 設計 ＋ ★制約4つを 明記 | ★★`name_matches_route` が STOP |
+| 10 | （no task） | 名前の 食い違い | ★4件の 推論（★全て 可能性表現） | ★★DECIDE が 知識に なる |
+| 11 | `99CB3F62` | 裁定が 出ない | （観測中） | （観測中） |
+
+```
+★★成立したもの = ★2件（`834D7DD2` ／ `CBAFD9EC`）―― ★どちらも ★Claude DESIGN 0
+★★止まる 型は ★1つに 収束した = ★『材料は 在る ／ 繋ぐ 者が 居ない』
+   ①停止事実を 戻す 主体が 居ない ②作った 道具に 呼び手が 無い ③決めを 求めても 決めが 出ない
+★★実 repo 書き込み = ★revert 以降 ★0（HEAD `3dd7d02` 不変で 実証）
+★★SELF_DEV_TOKEN = ★5/5（★1周が 閉じていない ∴ ★消費 0）
+```
+
 ## 5. ★既知の未解決（★この運転の 外に 置いてある物）
 
 ```
