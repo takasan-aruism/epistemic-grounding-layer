@@ -69,13 +69,61 @@ if _c.get("reason") == "no_function_name":
 | 4 | Qwen 再呼出し / Claude 補完なし | **★成立**（記録済み PLAN を 純関数に 通しただけ） |
 | 5 | Claude DESIGN 0 | **★成立** |
 
-## 5. ★再測定（★追記予定）
+## 5. ★★再測定 ―― **`goal → Qwen PLAN → validate → contract変換` は ★成立**
+
+**`TASK-2DER-3CF23D43`（★goal だけ 投入・★Claude DESIGN 0）**
 
 ```
-★新 goal = TASK-2DER-3CF23D43（22:17:27 ／ CREATED ／ 待ち行列 先頭）
-★測る = goal → Qwen PLAN → validate → contract変換
-（★観測中）
+★記録の 並び = CREATE → PROCESS_EVENT → ★PLAN → GENERATE → AUDIT → DISPOSE
+              → UPPER_REVIEW → REGENERATE → AUDIT → DISPOSE → UPPER_REVIEW
+★PLAN identity = ★2der-qwen-build-planner
+★target_file = impl.py ／ test_file = test_impl.py ／ test_body = 1694B
+★test_body に `from impl import` = ★有り ／ contract_from_plan reason = ★None
+★★∴ ★受入検査を 通り ／ ★契約変換が 成立した
 ```
+
+**★★`SPEC_INCOMPLETE_NO_CONTRACT` は ★消えた（★配線が 効いた 証拠）:**
+
+```
+★配線前(EAACCE21) … reason = ★"SPEC_INCOMPLETE_NO_CONTRACT"（★契約が 無い）
+★★配線後(3CF23D43) … reason = ★★"no provenance supplied (hand-authored packet / bypass)"
+★★＝ ★契約は 渡った（★packet 経路に 入った）。★停止点が ★1つ 先へ 進んだ。
+```
+
+### ★次の停止点（★1つだけ・★直していません）
+
+**`twoder/generate_via_runner.py:282`（★逐語のコメント付き）**
+
+```python
+provenance = None   # J1: 実在位置は CREATE payload.knowledge_packet.provenance(ledger 経路のみ)
+if has_skel and has_tests:          # ★packet 経路（★今回 ここに 入った）
+    ...                              # ★provenance は ★None の まま
+else:                                # ★ledger 経路
+    provenance = payload.get("knowledge_packet", {}).get("provenance")
+```
+
+```
+★★＝ ★packet 経路には ★provenance を 詰める 行が ★無い（★逐語「ledger 経路のみ」）。
+★★但し ★PLAN の 中には provenance が ★在る
+   （鍵 = ds_input_id / ds_thread_id / dw_task_id / egl_open_gaps / egl_source_refs / rri_intent_id …）
+★★∴ ★『存在しない』のでは なく ★『その経路が 読んでいない』。
+★★`generate_via_runner` は ★変更禁止 ∴ ★手を 出していません。
+```
+
+### ★10項目の到達
+
+| # | 測る物 | 結果 |
+|---|---|---|
+| 1 | PLAN identity = qwen | **★成立** |
+| 2 | `validate_plan` 通過 | **★成立** |
+| 3 | 受入検査（`from impl import`） | **★成立**（reason=None） |
+| 4 | skeleton / immutable_tests が packet に入る | **★成立**（★理由コードの 変化が 証拠） |
+| 5 | `SPEC_INCOMPLETE_NO_CONTRACT` 消滅 | **★成立** |
+| 6 | `runner_exit` 非 null | ★未到達（null） |
+| 7 | `runner_stdout_tail` | ★未到達（null） |
+| 8 | diff / artifact が実体 | ★未到達（`artifact_sha256=""`） |
+| 9 | test 実走 | ★未到達 |
+| 10 | Claude DESIGN 介在 | **★0** |
 
 ## 6. ★併せて記録する事実（★私の観測の誤りを含む）
 
