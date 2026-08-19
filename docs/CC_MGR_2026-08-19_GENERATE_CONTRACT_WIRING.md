@@ -77,8 +77,65 @@ skeleton 生成規則 ／ `_MAP` ／ `authority`。
 
 **★受入 #2〜#7 は この1件で測れます。★#1 の文言（7D461717 で）だけは満たせません。**
 
-## 5. 結果（★追記予定）
+## 5. ★結果 ―― **★不成立。最初の停止点 = `precheck` の STOP**
+
+**★配線は 効いている**（★走っている入口が 新コードである 証拠）:
 
 ```
-（★観測中 ―― CREATED → PLAN(Qwen) → GENERATE の 3件目の 記録を 待っています）
+webui.py の 更新 = 21:54:21 ／ commit 323ddad = 21:54:49 ／ ★webui 起動 = ★21:55:05
+★例外の 出力 = ★0行（`[cw] contract_with_precheck failed` は 出ていない）
+```
+
+**★10項目の結果（`TASK-2DER-EAACCE21`）:**
+
+| # | 測る物 | 結果 |
+|---|---|---|
+| 1 | PLAN identity = `2der-qwen-build-planner` | **★成立** |
+| 2 | `validate_plan` 通過 | **★成立**（PLAN が記録された＝有効でなければ何も記録しない） |
+| 3 | `contract_with_precheck` が GO | **★★STOP ―― ここが 最初の 停止点** |
+| 4 | skeleton / immutable_tests が packet に入る | 未到達（両方 None） |
+| 5 | `SPEC_INCOMPLETE_NO_CONTRACT` 消滅 | 未到達（残った） |
+| 6 | `runner_exit` 非 null | 未到達（null） |
+| 7 | `runner_stdout_tail` | 未到達（null） |
+| 8 | diff / artifact が実体 | 未到達（0B） |
+| 9 | test が実走 | 未到達 |
+| 10 | Claude DESIGN 介在 | **★0**（契約 0 ／ skeleton 0 ／ test_body 0 ／ 実装 0 ／ run_next 0） |
+
+### ★最初の停止点（★1つだけ）
+
+```
+★precheck = {"verdict": "STOP",
+             "line": "★実装する 名前が 読めない(★from impl import が 無い)"}
+★★2回 引いて 同じ（★決定論・★揺れていない）
+```
+
+**★なぜ読めなかったか（★Qwen の test_body の実物・先頭6行）:**
+
+```python
+import sys
+import os
+
+# Mock the function to be tested
+def create_unified_diff(before, after, filename):
+    # Placeholder implementation for testing structure
+```
+
+```
+★★Qwen は ★試験の中で ★対象関数を ★自分で 定義した（★mock / placeholder）
+   ＝★`impl.py` を ★import していない ＝★`from impl import ` が ★1行も 無い
+★∴ 変換器は ★実装すべき 名前を 決められない → ★STOP（★fail-closed）
+★★これは ★変換器の 欠陥では なく ★★Qwen の 試験が ★対象を 差していない こと。
+★参考: 前の主対象 `7D461717` の test_body は `from impl import diff_texts` で 始まり ★GO だった。
+```
+
+**★MGR は 修正案を 書きません**（★test_body も 契約も 骨格も 実装も 0）。
+
+## 6. していないこと
+
+```
+★7D461717 は 触っていない（★guard の no_progress_since_last_review は 正しい ∴ 状態変更 0）
+★run_next 0 ／ task 手動前進 0 ／ 状態変更 0
+★`contract_from_plan` / `validate_plan` / `generate_via_runner` / skeleton 生成規則 /
+  `_MAP` / `authority` は ★1文字も 変更していない
+★Claude DESIGN 版 11件は ★触っていない
 ```
