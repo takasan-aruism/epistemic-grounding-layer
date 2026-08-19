@@ -59,6 +59,41 @@
    ＝ ★★上位欠陥 C（作れる ／ 繋がらない）＝ ★実在する 欠陥の ★正当な 指摘。
 ```
 
+## 2b. ★★4件目（`E7E65315`）の 結果 ―― **★条件③は 達成 ／ ★但し ③の 修正は ★半分しか 効かない**
+
+```
+★passed = ★True ／ ★artifact_head 有 = ★True ／ findings = ★`test_failure` のみ
+★★偽陽性（dead_guard / self_report_primitive / scope_expansion）= ★0件
+★UPPER_REVIEW = FAIL（`claude-senior`）×2
+```
+
+**★★上級監査の 主たる 根拠（★逐語）:**
+
+> 「★成果物が repo に存在しない。artifact_sha256 は … 記録内にしか無く、`def classify_finding` を
+> .py 対象で ds/rri/egl/dev-workcell/twoder の5レポおよび /home/takasan 全体 … に走査して★0件
+> だったため、★機械が置いて commit するまで到達していない。」
+
+```
+★★＝ 主たる 根拠は ★★C（作れる ／ 繋がらない）―― ★B では ない。
+★★＝ しかも 監査は ★5レポを 実際に 走査して ★0件 と 数えている（★推測では ない）。
+```
+
+**★★但し ―― ★引数改名は ★この 件では 残った（★正確に 書く）:**
+
+```
+★成果物 = ★`def classify_finding(★a):`（★`a` の まま）
+★理由（★実測）= ★requirement に ★`classify_finding(` が ★含まれていない（★False）
+   ＝ ★署名が 書かれていない ∴ ★fix③ の ★fail-safe が 働いた（★設計どおり）
+★★監査の 逐語 = 「加えて artifact_head の docstring が依頼文の丸写しで★引数も `a` 一つであり、
+   封印試験が形だけ通った疑いが残る。」
+   ＝ ★★B の 症状は ★『加えて』の 従属節に 降格した（★主たる 根拠では ない）が ★消えては いない。
+```
+
+```
+★★∴ ★fix③ が 効くのは ★契約に 署名が 書かれている ときだけ ―― ★4件中 ★2件（`context` `path`）。
+★★残り 2件（`a` の まま）= ★requirement に 署名が 無かった もの。
+```
+
 ## 3. ★残存（★隠さない）
 
 ```
