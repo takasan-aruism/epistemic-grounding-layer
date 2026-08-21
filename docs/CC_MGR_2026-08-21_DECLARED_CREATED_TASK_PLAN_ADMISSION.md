@@ -185,3 +185,92 @@ webui.py の decide_rearm_v2 第5引数
 前 AXIS の REARM 263件 ／ `_GATES_MAX` ／ `SENIOR_CALL_SKIPPED` ／ 周辺欠陥4件 ／
 未commit 30件 ／ 未push ／ `HUMAN_ESCALATION_LEDGER` ／ 台帳 mismatch ／ D188・D190 ／
 EVO-0082 の DISPOSE（私の別の手番・この AXIS の外）。
+
+---
+
+# 追記 v2 — 監査の GO 条件を満たし、HIERARCHY の選択を明記する
+
+発: MGR ／ 宛: ESDE Evaluation 専任監査 ／ **✔ は付けていません**
+監査の返し = `2026-08-21T10:35:37 ETR-3c14f4b61438` **判定=declared は成立し得る(GO 可・条件1つ)**
+
+## v2-1. 監査の GO 条件を満たした（★残っていた UNVERIFIED は消えた）
+
+監査の指摘は正しかった。`build_plan(:216)` と `validate_plan(:282)` は
+`make_dw_planner_actor(:351)` とは**別の関数**で、`W.record_plan(:384)` を通らない。
+**代表1件で実測した（★実装は 0 行のまま）:**
+
+```
+build_plan("TASK-2DER-D7977C1A")   ok=True / stage=built / reasons=[] / 61.4s
+                                   runtime_recovery: attempts=3 ladder 2048→4096→8192 RECOVERED
+validate_plan(plan, task_id=...)   ★valid=True
+  checks: schema_complete=true / provenance_ok=true / workspace_scope_ok=true
+          tests_ok=true / completion_ok=true / no_unauthorised_destructive=true
+  reasons: []
+plan の中身(抜粋):
+  objective    Fix false-positive CLOSED-NEGATIVE detection caused by substring matching
+               without word boundaries.
+  target_file  impl.py / test_file test_impl.py / test_command ['python3','-m','pytest','-q','test_impl.py']
+  completion_criteria  "Requests with 'safety' or 'deliverable' are not blocked." ほか
+```
+
+**★依頼の本旨と一致している**（D7977C1A の goal は「`safety` の中の `afe`、`deliverable` の中の `live` が
+偶然当たって CLOSED-NEGATIVE の復活と誤判定される」＝語の境界問題）。
+
+**∴ §8 の UNVERIFIED は解消。門を通せば `make_dw_planner_actor` が同じ plan を
+`W.record_plan` で記録し、`CREATED → READY_FOR_IMPLEMENTATION` に進む見込みが立った。**
+（★「進む」と断定はしない。本線で通していない。）
+
+## v2-2. ★訂正 ―― 「副作用0」は監査も私も外していた
+
+**実測: `build_plan` を1回呼ぶごとに DW event が1件増える。**
+
+```
+1回目  DW events 4235 → 4236
+2回目  DW events 4236 → 4237
+増えた行  TASK-2DER-D7977C1A / PROCESS_EVENT / identity=2der-runtime-supervisor
+          RUNTIME_SUPERVISOR outcome=RECOVERED attempts=3
+          ladder=[2048,4096,8192] finish_reasons=[length,length,stop]
+state     CREATED のまま(2回とも)
+```
+
+出所は `build_plan` が LIVE 経路で `RS.run_with_recovery(..., dw_record=True, egl_admit=True)`
+を呼ぶこと（`build_planner.py:250-258` 逐語）。**設計どおりの記録**であって事故ではない。
+∴ 正確には **「副作用0」ではなく「★state を動かさない PROCESS_EVENT を1件書く」**。
+成果物（plan）は記録していないので、監査が示した線（代行実装＝記録に成果物を残すこと）には当たらない。
+**★`egl_admit=True` の側の増分は UNVERIFIED** ―― EGL 台帳の直読は境界フックが拒否し（正しい作動）、
+行数を返す口が無い。`GATE_INVENTORY_HAS_NO_READER` と同型の欠落。
+
+## v2-3. ★監査が投げた HIERARCHY の選択 ―― **(ア) を採る**。理由は好みではなく実測
+
+```
+(ア) 足場が渡す材料を変える（webui.py の decide_rearm_v2 第5引数）
+(イ) _MAP の CREATED 行の claude_barrier を False にする（1語・2026-08-07 の前例と同じ形）
+```
+
+**★(イ) は安全でない。実測で示す。**
+`_MAP["CREATED"]` を False にすると、PLAN の2枝（`plannable` / `BUILD_PLANNER`）が
+どちらも成立しなかった周で `dispatch.py:163` の barrier を**通過**し、
+`fn = actors["MANAGER"]` ＝ `webui.py:608` の **`mgr` アダプタが PLAN の文脈で呼ばれる**。
+`mgr` の中身は `W._latest_findings(view)` → `W.record_disposition(...)` **専用**（DISPOSE 用）で、
+**PLAN の task に disposition を書く**。**新しい壊れ方を1つ作ることになる。**
+
+**★(ア) は正本を骨抜きにしない。** `_MAP.claude_barrier` は `dispatch.py:163` で**依然として効く**。
+(ア) が消すのは **門が持っている 2つ目の・より粗い写し**だけで、正本そのものの効力は
+dispatch 側に残る。`BUILD_PLANNER` が作れなければ `:163` が `CLAUDE_BARRIER` で止める。
+これは declared §4 HIERARCHY の required(3)「機械が処理できるかの判断は dispatch が持つ
+（門が持ち直さない）」を**壊すのではなく回復する**。
+
+**★2026-08-07 の前例との違い**: あのときは `CLAUDE_SENIOR` という**役が登記された**ので
+`_MAP` の宣言そのものが古くなった＝1語で直すのが筋。今回は **`_MAP` の宣言は正しいまま**
+（CREATED は原則 人の関門）で、**門が正本より早く・粗く適用しているのが問題**。∴ 直す場所が違う。
+
+## v2-4. ★語の訂正（監査の問③）
+
+監査の指摘どおり、§5 の `<この op に登記された機械が在るか>` は「**機械が在るか**」と読める。
+意図は「**試す資格が在るか**」。以後この語で書く。実装の中身は変えない
+（`supplier_registered` が「試す資格」、「作れるか」は `dispatch_once` が実際に試して fail-closed）。
+
+## v2-5. DECISION
+
+**GO**。残る推測 0。置く差分は §5 のまま（材料1つ・判定は触らない・`_MAP` は 1文字も変えない）。
+実装後、代表1件を正規の実行口に通し、結果を同じ item（EVO-0081）で監査へ返す。
