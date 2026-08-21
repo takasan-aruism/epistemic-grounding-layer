@@ -21,6 +21,7 @@ authority 発行 0・変更 0。既存 authority(may_approve / grant_approval)�
 保存先    既存2台帳のみ。★新しい保存先 0
           egl/ENERGIZATION_LEDGER.jsonl ／ egl/ENERGIZATION_OBSERVATIONS.jsonl
 下位構成  (a) identity rule の1語追加  (b) 承認の writer  (c) 2台帳を併合する reader
+          ★(d) reconciliation の本線 writer(監査 23:58:23 が返した4件目)
 範囲外    apply_cycle 以降 ／ 並行運用(EVO-0084) ／ 周辺欠陥
 ```
 
@@ -51,11 +52,13 @@ authority 発行 0・変更 0。既存 authority(may_approve / grant_approval)�
 | **(3b) `latest_balance_proof`** | **★有** | 最後の `RECONCILIATION_*` の index → その後の `PATCH_APPLICATION` の有無（`bridge_reconciler.py:243-275`） |
 
 **(3b) が読む3つの kind** ＝ `RECONCILIATION_BALANCED` / `RECONCILIATION_IMBALANCED`（`bridge_reconciler.py:31,33`）/ `PATCH_APPLICATION`。
-**3つとも bridge・reconciler の観測** ＝ `egl/ENERGIZATION_OBSERVATIONS.jsonl` 側（DE-0438 decision 逐語
+**3つとも bridge・reconciler の観測**と DE-0438 は書いている ＝ `egl/ENERGIZATION_OBSERVATIONS.jsonl` 側（decision 逐語
 「event store: `egl/ENERGIZATION_LEDGER.jsonl`(Taka 書込 judo1/2) + `egl/ENERGIZATION_OBSERVATIONS.jsonl`(bridge/reconciler 観測)」）。
 
-**∴ 順序に依存する唯一の検査が読む kind は、すべて同じ1ファイルの中にある。
-∴ ファイル間の交錯順序は、どの検査にも影響しない。**
+**★訂正（監査 23:58:23）**: 「3 kind が観測側にある」は **DE-0438 文書からの推論**であって機械から確かめていない
+（egl 台帳は境界フックで直読不可・返す口も無い）。∴ **UNVERIFIED**。
+**★ただし結論は覆らない** ―― どちらのファイルに在っても、順序依存は3 kind の**相対順のみ**であり、
+それは各ファイルの append 順が保たれれば維持される。∴ **併合方式（単純連結）は変えない。**
 
 ### ★確定3: ∴ 正しい併合は **単純な連結**。ソートしない。
 
@@ -84,15 +87,29 @@ LEDGER_ROW_FIELD_NAMES_NOT_READABLE
 ③ principal 判定   principal_of（principal_attribution.py:22）が ★UNKNOWN_PRINCIPAL を返す ← ★欠損(a)
 ④ 承認を記録       egl/ENERGIZATION_LEDGER.jsonl へ ENERGIZATION_ADJUDICATION ← ★欠損(b) 書き手0
 ⑤ event_log を作る 2台帳を連結 ← ★欠損(c) 読み手0
-⑥ token 鋳造       mint_real_energize（bridge_minter.py:71）★実在・DE-0438 で完走実績
-⑦ 以降            apply_cycle → rollback → reconciler → single-use ★DE-0438 で完走実績
+⑥ token 鋳造       mint_real_energize（bridge_minter.py:71）★実在するが ★到達不能 ← ★欠損(d)
+⑦ 以降            apply_cycle → rollback → reconciler → single-use
 ```
 
-**止まっている点は ③④⑤ の3つだけ。⑥⑦ は 2026-07-19 に完走している（DE-0438）。**
+**★訂正（監査 23:58:23）: 止まっているのは 3点ではなく ★4点。**
 
-## ④ DESIGN_HOLD 判定
+```
+欠損(d) RECONCILIATION_EVENT_HAS_NO_MAINLINE_WRITER
+  emit_reconciliation の本線呼び手 = ★0（regression 7件と egl/docs/SUBMIT_2026-07-21 のアーカイブのみ）
+  emit_patch_application の本線呼び手は在る（patch_bridge:298,300 / apply_cycle:93）が
+  recorder は注入引数 ∴ ★DW には1件も落ちていない
+  実測: 本線 DW event 4276件中 PATCH_APPLICATION=0 / RECONCILIATION_BALANCED=0 / RECONCILIATION_IMBALANCED=0
+  ∴ latest_balance_proof は last_recon_idx=None → (None, False) → ★bridge_minter は永久に refuse
+  ★fail-closed 側の壊れ方 ∴ 危険ではない
+```
 
-**推測が残る点＝1（`LEDGER_ROW_FIELD_NAMES_NOT_READABLE`）。** ただしこれは
+**★DE-0438 の扱いを訂正**: あれは**注入した event_log による throwaway の完走**であって**本線ではない**。
+正本 §11 逐語「★単体試験・sandbox 成功を本線成功として扱わない」／§6 逐語
+「★部品の存在や直接呼び出しは observed edge に数えない」に該当する。**私は observed を過大に数えた。**
+
+## ④ DESIGN_HOLD 判定（★監査の指摘を反映して更新）
+
+**推測が残る点＝2**：`LEDGER_ROW_FIELD_NAMES_NOT_READABLE` と、3 kind の所在（UNVERIFIED）。 ただしこれは
 **順序の決定には関与しない**（確定1・2で消費側の実装から確定済み）。
 ∴ **DECISION = GO**。ただし **(c) reader の実装時に、行の鍵名を仮定した箇所を UNVERIFIED として明示する**こと。
 
@@ -101,16 +118,20 @@ LEDGER_ROW_FIELD_NAMES_NOT_READABLE
 ```
 EQUALITY   canonical = append 位置。producer=各台帳の追記。consumer=bridge_minter / bridge_reconciler。
            ★identity rule = リスト内の位置。★ts は identity ではない。
-           status = ★PRESENT（CONFLICT ではない。競合消費者0を全件 grep で確認）
-SYMMETRY   required 3 = (a)identity rule (b)writer (c)reader
-           present 0 / missing 3。missing_ID = TAKA_CREDENTIAL_HAS_NO_PRINCIPAL_RULE /
-           ENERGIZATION_ADJUDICATION_HAS_NO_WRITER / ENERGIZATION_EVENT_LOG_HAS_NO_READER
-LINKAGE    declared 7（①〜⑦）/ observed 2（⑥⑦＝DE-0438）/ broken 3（③④⑤）/ unverified 2（①②は本経路で未実走）
+           status = ★UNVERIFIED（★訂正。CONFLICT ではない＝競合消費者0は全件 grep で確認したが、
+           3 kind がどちらのファイルに在るかは機械から確かめていない）
+SYMMETRY   required 4 = (a)identity rule (b)承認 writer (c)reader (d)★reconciliation writer
+           present 0 / missing 4。missing_ID = TAKA_CREDENTIAL_HAS_NO_PRINCIPAL_RULE /
+           ENERGIZATION_ADJUDICATION_HAS_NO_WRITER / ENERGIZATION_EVENT_LOG_HAS_NO_READER /
+           ★RECONCILIATION_EVENT_HAS_NO_MAINLINE_WRITER
+LINKAGE    declared 7（①〜⑦）/ ★observed 0（★訂正。DE-0438 は注入 event_log の throwaway ∴ 本線ではない）/
+           broken 4（③④⑤⑥）/ unverified 4（①②⑦ と 3 kind の所在）
 HIERARCHY  required 3 (1)判断は 2DER 製の純関数が持つ (2)既存 authority を変えない
            (3)writer は承認記録まで・token は minter・適用と commit は apply_cycle
            passed 3 / violation 0
 UNDERSTANDING  候補 = TAKA_APPROVAL_REACHES_MINTER。★まだ ESTABLISHED にしない。
-               要件 = ③④⑤ が塞がり ⑥が正規上流から1回通ること。
+               要件 = ③④⑤ ★＋(d) が塞がり ⑥が正規上流から1回通ること。
+               ★承認 writer(④)だけを作っても mint には届かない（(d) が空のため）。
 CREATION       NOT_EVALUATED
 DECISION       GO（実装は次段。この declared は実装の前に commit する）
 ```
