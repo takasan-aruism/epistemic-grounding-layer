@@ -1,0 +1,3939 @@
+{
+  "_meta": "LEDGER_ACCOUNT_AXIS_NAMES — 台帳の明細から出した軸の命名(英語=正/日本語=併記)。id が正典・name は装飾。合議は s_account_axis_names.consensus を EN/JA 別々に適用。未成立=UNRESOLVED_NO_CONSENSUS(捏造ゼロ)。★台帳ではない=毎回まるごと作り直す控え。",
+  "endpoint": ":8005",
+  "model": "Qwen3.6-35B-A3B",
+  "names": [
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LCAT-6417f122",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 1,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 40,
+      "name": "データユーティリティ集",
+      "name_en": "Data Utilities Assembly",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Data Utilities Assembly",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": null,
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "データユーティリティ集約",
+        "1": "データユーティリティ集",
+        "2": "データユーティリティ集"
+      },
+      "proposals_en": {
+        "0": "Data Processing Utilities",
+        "1": "Data Assembly Utilities",
+        "2": "Data Assembly Functions"
+      },
+      "raw_replies": {
+        "0-en": "Data Processing Utilities",
+        "0-ja": "データユーティリティ集約",
+        "1-en": "Data Assembly Utilities",
+        "1-ja": "データユーティリティ集",
+        "2-en": "Data Assembly Functions",
+        "2-ja": "データユーティリティ集"
+      },
+      "sample_element_ids": [
+        "Q-54a3c7d8",
+        "Q-d19c4d8e",
+        "Q-9898323e",
+        "Q-de98734d",
+        "Q-a4c71667",
+        "Q-76d69120",
+        "Q-eeab2138",
+        "Q-fabdaa4d",
+        "Q-a45eeb52",
+        "Q-c80a25e4",
+        "Q-1b4da9f8",
+        "Q-53af9d6a"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LCAT-755e4c72",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 1,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 83,
+      "name": "ビジネスルール",
+      "name_en": "Business Rules",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Business Rules",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": null,
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "業務ルール",
+        "1": "ビジネスルール",
+        "2": "ビジネスルール"
+      },
+      "proposals_en": {
+        "0": "Business Rule Definition",
+        "1": "Input Validation Rules",
+        "2": "Business Logic Rules"
+      },
+      "raw_replies": {
+        "0-en": "Business Rule Definition",
+        "0-ja": "業務ルール",
+        "1-en": "Input Validation Rules",
+        "1-ja": "ビジネスルール",
+        "2-en": "Business Logic Rules",
+        "2-ja": "ビジネスルール"
+      },
+      "sample_element_ids": [
+        "Q-86bf28d3",
+        "Q-acb37ab4",
+        "Q-684ed1ed",
+        "Q-9109527a",
+        "Q-98f53806",
+        "Q-2650cad5",
+        "Q-c8087f8d",
+        "Q-070ee5b5",
+        "Q-dd4f883d",
+        "Q-6ee6562d",
+        "Q-ffc385e8",
+        "Q-4b36d557"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LCAT-9d8487ed",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 1,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 145,
+      "name": "入力検証ルール",
+      "name_en": "Input Validation Rules",
+      "name_en_agreement": 2,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Input Validation Rules",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": null,
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "入力検証ルール",
+        "1": "入力検証ルール",
+        "2": "入力検証ルール"
+      },
+      "proposals_en": {
+        "0": "Test Case Design",
+        "1": "Input Validation Rules",
+        "2": "Input Validation Rules"
+      },
+      "raw_replies": {
+        "0-en": "Test Case Design",
+        "0-ja": "入力検証ルール",
+        "1-en": "Input Validation Rules",
+        "1-ja": "入力検証ルール",
+        "2-en": "Input Validation Rules",
+        "2-ja": "入力検証ルール"
+      },
+      "sample_element_ids": [
+        "Q-9c6ff284",
+        "Q-1c9fa717",
+        "Q-84216d5a",
+        "Q-6a374229",
+        "Q-c98e4851",
+        "Q-14a4ee8a",
+        "Q-137223cf",
+        "Q-de2a192b",
+        "Q-75e2351e",
+        "Q-5b4a1d79",
+        "Q-ea644697",
+        "Q-21ff9013"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LCAT-a04a25a1",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 1,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 110,
+      "name": "管理",
+      "name_en": "Management",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Management",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": null,
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "管理",
+        "1": "管理",
+        "2": "管理"
+      },
+      "proposals_en": {
+        "0": "Audit Trail Management",
+        "1": "Traceability Management",
+        "2": "Traceable Record Keeping"
+      },
+      "raw_replies": {
+        "0-en": "Audit Trail Management",
+        "0-ja": "管理",
+        "1-en": "Traceability Management",
+        "1-ja": "管理",
+        "2-en": "Traceable Record Keeping",
+        "2-ja": "管理"
+      },
+      "sample_element_ids": [
+        "Q-93a17014",
+        "Q-5347554c",
+        "Q-a3ebe29e",
+        "Q-f877e6ad",
+        "Q-057fab55",
+        "Q-b2e2fe8a",
+        "Q-f010649c",
+        "Q-4d18e5c8",
+        "Q-18e74f5c",
+        "Q-234b0346",
+        "Q-94384462",
+        "Q-90de182d"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LCAT-a473297b",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 1,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 105,
+      "name": "契約機能設計",
+      "name_en": "Contract Capability Design",
+      "name_en_agreement": 2,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Contract Capability Design",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": null,
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "契約機能設計",
+        "1": "契約仕様設計",
+        "2": "契約機能設計"
+      },
+      "proposals_en": {
+        "0": "Contract Design Specifications",
+        "1": "Contract Capability Design",
+        "2": "Contract Capability Design"
+      },
+      "raw_replies": {
+        "0-en": "Contract Design Specifications",
+        "0-ja": "契約機能設計",
+        "1-en": "Contract Capability Design",
+        "1-ja": "契約仕様設計",
+        "2-en": "Contract Capability Design",
+        "2-ja": "契約機能設計"
+      },
+      "sample_element_ids": [
+        "Q-c7d06a4d",
+        "Q-44da4992",
+        "Q-a06c7c0c",
+        "Q-60fa470e",
+        "Q-e760aa15",
+        "Q-24c495b4",
+        "Q-2f14c629",
+        "Q-0478c07b",
+        "Q-b5d64326",
+        "Q-5697c213",
+        "Q-c417d062",
+        "Q-a28bcd46"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 1,
+      "axes_version": "ledger-v1",
+      "axis_id": "LCAT-d23a39ff",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 1,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 161,
+      "name": null,
+      "name_en": "Audit Verification Tasks",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Audit Verification Tasks",
+      "name_status": "UNRESOLVED_NO_CONSENSUS",
+      "parent": null,
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "監査検証タスク",
+        "1": "監査確認業務",
+        "2": "監査検証作業"
+      },
+      "proposals_en": {
+        "0": "Audit Verification Tasks",
+        "1": "Audit And Verification",
+        "2": "Audit Investigation Tasks"
+      },
+      "raw_replies": {
+        "0-en": "Audit Verification Tasks",
+        "0-ja": "監査検証タスク",
+        "1-en": "Audit And Verification",
+        "1-ja": "監査確認業務",
+        "2-en": "Audit Investigation Tasks",
+        "2-ja": "監査検証作業"
+      },
+      "sample_element_ids": [
+        "Q-951eb594",
+        "Q-b554b2b5",
+        "Q-c2771ec7",
+        "Q-b9119ca7",
+        "Q-4adacdbd",
+        "Q-bc405c08",
+        "Q-8214f4ce",
+        "Q-9ff9b154",
+        "Q-b8d66f64",
+        "Q-96124d00",
+        "Q-4974bc9a",
+        "Q-5940bd23"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-04574589",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 21,
+      "name": "ワークフロー検証ルール",
+      "name_en": "Workflow Validation Rules",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Workflow Validation Rules",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a04a25a1",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "ワークフロー検証ルール",
+        "1": "ワークフロー検証ルール",
+        "2": "ワークフロー検証ルール"
+      },
+      "proposals_en": {
+        "0": "Workflow Validation Rules",
+        "1": "Workflow State Validation",
+        "2": "Task Validation Rules"
+      },
+      "raw_replies": {
+        "0-en": "Workflow Validation Rules",
+        "0-ja": "ワークフロー検証ルール",
+        "1-en": "Workflow State Validation",
+        "1-ja": "ワークフロー検証ルール",
+        "2-en": "Task Validation Rules",
+        "2-ja": "ワークフロー検証ルール"
+      },
+      "sample_element_ids": [
+        "Q-55f3cf1b",
+        "Q-b555f1eb",
+        "Q-057fab55",
+        "Q-18e74f5c",
+        "Q-dc078b42",
+        "Q-b2611000",
+        "Q-c00540d9",
+        "Q-d8b07d3a",
+        "Q-49220d70",
+        "Q-c3e03610",
+        "Q-0886b31b",
+        "Q-a8fa9b3e"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-0f65a4f9",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 1,
+      "name": "プロセス間データ共有",
+      "name_en": "Inter Process Data Sharing",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Inter Process Data Sharing",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a04a25a1",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "プロセス間データ共有",
+        "1": "プロセス間データ共有",
+        "2": "プロセス間データ共有"
+      },
+      "proposals_en": {
+        "0": "Inter-Process Data Sharing",
+        "1": "Shared Persistent Storage",
+        "2": "Inter Process Data Sharing"
+      },
+      "raw_replies": {
+        "0-en": "Inter-Process Data Sharing",
+        "0-ja": "プロセス間データ共有",
+        "1-en": "Shared Persistent Storage",
+        "1-ja": "プロセス間データ共有",
+        "2-en": "Inter Process Data Sharing",
+        "2-ja": "プロセス間データ共有"
+      },
+      "sample_element_ids": [
+        "Q-b8d4622f"
+      ],
+      "sampled_k": 1,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-1213247d",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 17,
+      "name": "入力検証",
+      "name_en": "Input Validation Checks",
+      "name_en_agreement": 2,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Input Validation Checks",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-9d8487ed",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "入力検証",
+        "1": "入力検証",
+        "2": "入力検証"
+      },
+      "proposals_en": {
+        "0": "Input Validation Checks",
+        "1": "Input Validation Checks",
+        "2": "Validation Error Codes"
+      },
+      "raw_replies": {
+        "0-en": "Input Validation Checks",
+        "0-ja": "入力検証",
+        "1-en": "Input Validation Checks",
+        "1-ja": "入力検証",
+        "2-en": "Validation Error Codes",
+        "2-ja": "入力検証"
+      },
+      "sample_element_ids": [
+        "Q-1c9fa717",
+        "Q-14a4ee8a",
+        "Q-39db2f49",
+        "Q-3d8ab9ce",
+        "Q-8f544485",
+        "Q-21ff9013",
+        "Q-fac42c02",
+        "Q-137223cf",
+        "Q-15102f6b",
+        "Q-d445313c",
+        "Q-df4afb12",
+        "Q-e947cab9"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-128c0964",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 11,
+      "name": "関数",
+      "name_en": "Function",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Function",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-d23a39ff",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "関数",
+        "1": "関数",
+        "2": "関数"
+      },
+      "proposals_en": {
+        "0": "Ballot Conclusion Function",
+        "1": "Function Implementation",
+        "2": "Code Skeleton Filling"
+      },
+      "raw_replies": {
+        "0-en": "Ballot Conclusion Function",
+        "0-ja": "関数",
+        "1-en": "Function Implementation",
+        "1-ja": "関数",
+        "2-en": "Code Skeleton Filling",
+        "2-ja": "関数"
+      },
+      "sample_element_ids": [
+        "Q-4974bc9a",
+        "Q-5940bd23",
+        "Q-754b68ac",
+        "Q-94ba591e",
+        "Q-95cd62e3",
+        "Q-9a4f26d3",
+        "Q-c948b657",
+        "Q-d0fefc44",
+        "Q-0e9e3e34",
+        "Q-380452cd",
+        "Q-aa52c75d"
+      ],
+      "sampled_k": 11,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 0,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-15a929ca",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "1-en": 0,
+        "2-en": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 11,
+      "name": null,
+      "name_en": null,
+      "name_en_agreement": 1,
+      "name_en_status": "UNRESOLVED_NO_CONSENSUS",
+      "name_ja_derived_from_en": null,
+      "name_status": "UNRESOLVED_NO_CONSENSUS",
+      "parent": "LCAT-a04a25a1",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {},
+      "proposals_en": {
+        "0": "Deterministic Behavior",
+        "1": "Test Case Specifications",
+        "2": "System Stability Requirements"
+      },
+      "raw_replies": {
+        "0-en": "Deterministic Behavior",
+        "1-en": "Test Case Specifications",
+        "2-en": "System Stability Requirements"
+      },
+      "sample_element_ids": [
+        "Q-1875e804",
+        "Q-4b17df24",
+        "Q-865c8458",
+        "Q-5c18cf44",
+        "Q-f00130fd",
+        "Q-a3541b86",
+        "Q-19d4688d",
+        "Q-da30ac01",
+        "Q-24a9c1f3",
+        "Q-8785de37",
+        "Q-15181fca"
+      ],
+      "sampled_k": 11,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-18da8910",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 5,
+      "name": "台帳ツール",
+      "name_en": "Ledger Utilities",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Ledger Utilities",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-9d8487ed",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "台帳ツール",
+        "1": "台帳ツール",
+        "2": "台帳ユーティリティ"
+      },
+      "proposals_en": {
+        "0": "Ledger Schema Management",
+        "1": "Ledger Discovery Utilities",
+        "2": "Ledger Query Utilities"
+      },
+      "raw_replies": {
+        "0-en": "Ledger Schema Management",
+        "0-ja": "台帳ツール",
+        "1-en": "Ledger Discovery Utilities",
+        "1-ja": "台帳ツール",
+        "2-en": "Ledger Query Utilities",
+        "2-ja": "台帳ユーティリティ"
+      },
+      "sample_element_ids": [
+        "Q-5f5ae011",
+        "Q-f7938fbc",
+        "Q-b5ac6dd7",
+        "Q-b626864a",
+        "Q-2d2df504"
+      ],
+      "sampled_k": 5,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-26ee37a2",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 20,
+      "name": "ルート検証",
+      "name_en": "Route Verification",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Route Verification",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a04a25a1",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "経路検証",
+        "1": "ルート検証",
+        "2": "ルート検証"
+      },
+      "proposals_en": {
+        "0": "Route Table Verification",
+        "1": "Process Flow Verification",
+        "2": "Route Verification"
+      },
+      "raw_replies": {
+        "0-en": "Route Table Verification",
+        "0-ja": "経路検証",
+        "1-en": "Process Flow Verification",
+        "1-ja": "ルート検証",
+        "2-en": "Route Verification",
+        "2-ja": "ルート検証"
+      },
+      "sample_element_ids": [
+        "Q-b2e2fe8a",
+        "Q-f010649c",
+        "Q-90de182d",
+        "Q-69118940",
+        "Q-fd324255",
+        "Q-502ce602",
+        "Q-bfd95c4e",
+        "Q-2a678cc7",
+        "Q-882eacef",
+        "Q-8bf5d6ce",
+        "Q-a1b8ae2c",
+        "Q-0293a943"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-2d01f311",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 20,
+      "name": "分析",
+      "name_en": "Analysis",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Analysis",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-d23a39ff",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "分析",
+        "1": "分析",
+        "2": "分析"
+      },
+      "proposals_en": {
+        "0": "Code Analysis And Refinement",
+        "1": "Codebase Consistency Analysis",
+        "2": "Implementation Planning"
+      },
+      "raw_replies": {
+        "0-en": "Code Analysis And Refinement",
+        "0-ja": "分析",
+        "1-en": "Codebase Consistency Analysis",
+        "1-ja": "分析",
+        "2-en": "Implementation Planning",
+        "2-ja": "分析"
+      },
+      "sample_element_ids": [
+        "Q-951eb594",
+        "Q-8214f4ce",
+        "Q-9ff9b154",
+        "Q-b8d66f64",
+        "Q-4d18bf16",
+        "Q-db6b10a5",
+        "Q-c2771ec7",
+        "Q-2c3d2bd7",
+        "Q-62072f0b",
+        "Q-a6b60605",
+        "Q-4fa79b69",
+        "Q-7066a2cd"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 1,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-2e0002c3",
+      "consolidated_tokens": [
+        {
+          "count": 2,
+          "token": "ステータス"
+        }
+      ],
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 4,
+      "name": "ステータス",
+      "name_en": "Status Enum Definition",
+      "name_en_agreement": 3,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Status Enum Definition",
+      "name_status": "CONSENSUS_CONSOLIDATED",
+      "parent": "LCAT-755e4c72",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "状態列挙型定義",
+        "1": "ステータス列挙型定義",
+        "2": "ステータス列挙定義"
+      },
+      "proposals_en": {
+        "0": "Status Enum Definition",
+        "1": "Status Enum Definition",
+        "2": "Status Enum Definition"
+      },
+      "raw_replies": {
+        "0-en": "Status Enum Definition",
+        "0-ja": "状態列挙型定義",
+        "1-en": "Status Enum Definition",
+        "1-ja": "ステータス列挙型定義",
+        "2-en": "Status Enum Definition",
+        "2-ja": "ステータス列挙定義"
+      },
+      "sample_element_ids": [
+        "Q-6ee6562d",
+        "Q-ffc385e8",
+        "Q-57312d8f",
+        "Q-887907b4"
+      ],
+      "sampled_k": 4,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-39682de4",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 37,
+      "name": "能力構築",
+      "name_en": "Capability Building",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Capability Building",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a473297b",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "能力構築",
+        "1": "能力構築",
+        "2": "能力構築"
+      },
+      "proposals_en": {
+        "0": "Capability Building Tasks",
+        "1": "Contract Capability Definitions",
+        "2": "Capability Building"
+      },
+      "raw_replies": {
+        "0-en": "Capability Building Tasks",
+        "0-ja": "能力構築",
+        "1-en": "Contract Capability Definitions",
+        "1-ja": "能力構築",
+        "2-en": "Capability Building",
+        "2-ja": "能力構築"
+      },
+      "sample_element_ids": [
+        "Q-5697c213",
+        "Q-c417d062",
+        "Q-3bb44bd7",
+        "Q-439dbc2f",
+        "Q-0b039562",
+        "Q-a910d6f5",
+        "Q-38e9e710",
+        "Q-b058697e",
+        "Q-ccf6a3a7",
+        "Q-3f5d241c",
+        "Q-a5da007b",
+        "Q-28262d0b"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-4527cee3",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 3,
+      "name": "機能設計",
+      "name_en": "Capability Design",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Capability Design",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a473297b",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "機能設計",
+        "1": "機能設計",
+        "2": "機能設計"
+      },
+      "proposals_en": {
+        "0": "Capability Design Processing",
+        "1": "Contract Design Documents",
+        "2": "Capability Building"
+      },
+      "raw_replies": {
+        "0-en": "Capability Design Processing",
+        "0-ja": "機能設計",
+        "1-en": "Contract Design Documents",
+        "1-ja": "機能設計",
+        "2-en": "Capability Building",
+        "2-ja": "機能設計"
+      },
+      "sample_element_ids": [
+        "Q-e390ed1d",
+        "Q-9945e201",
+        "Q-d69270b0"
+      ],
+      "sampled_k": 3,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-4ae782a2",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 5,
+      "name": "結合テスト",
+      "name_en": "Integration Testing",
+      "name_en_agreement": 2,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Integration Testing",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a473297b",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "結合テスト",
+        "1": "結合テスト",
+        "2": "結合テスト"
+      },
+      "proposals_en": {
+        "0": "Integration Testing",
+        "1": "Integration Test Execution",
+        "2": "Integration Testing"
+      },
+      "raw_replies": {
+        "0-en": "Integration Testing",
+        "0-ja": "結合テスト",
+        "1-en": "Integration Test Execution",
+        "1-ja": "結合テスト",
+        "2-en": "Integration Testing",
+        "2-ja": "結合テスト"
+      },
+      "sample_element_ids": [
+        "Q-621805d3",
+        "Q-15c3d6f8",
+        "Q-c22550b9",
+        "Q-9fa91e79",
+        "Q-f1ecad1c"
+      ],
+      "sampled_k": 5,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-4e3c2ee6",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 26,
+      "name": "データ統合ツール",
+      "name_en": "Data Assembly Utilities",
+      "name_en_agreement": 2,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Data Assembly Utilities",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-6417f122",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "データ集約ツール",
+        "1": "データ統合ツール",
+        "2": "データ統合ツール"
+      },
+      "proposals_en": {
+        "0": "Data Assembly Utilities",
+        "1": "Data Processing Utilities",
+        "2": "Data Assembly Utilities"
+      },
+      "raw_replies": {
+        "0-en": "Data Assembly Utilities",
+        "0-ja": "データ集約ツール",
+        "1-en": "Data Processing Utilities",
+        "1-ja": "データ統合ツール",
+        "2-en": "Data Assembly Utilities",
+        "2-ja": "データ統合ツール"
+      },
+      "sample_element_ids": [
+        "Q-54a3c7d8",
+        "Q-d19c4d8e",
+        "Q-a4c71667",
+        "Q-de98734d",
+        "Q-9898323e",
+        "Q-76d69120",
+        "Q-eeab2138",
+        "Q-fabdaa4d",
+        "Q-1b4da9f8",
+        "Q-53af9d6a",
+        "Q-5024d62c",
+        "Q-6fd1fc59"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-54662029",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 18,
+      "name": "契約定義",
+      "name_en": "Contract Definition",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Contract Definition",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-d23a39ff",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "契約定義",
+        "1": "契約定義",
+        "2": "契約定義"
+      },
+      "proposals_en": {
+        "0": "Function Contract Definition",
+        "1": "Functional Contract Definition",
+        "2": "Contract Definition And Verification"
+      },
+      "raw_replies": {
+        "0-en": "Function Contract Definition",
+        "0-ja": "契約定義",
+        "1-en": "Functional Contract Definition",
+        "1-ja": "契約定義",
+        "2-en": "Contract Definition And Verification",
+        "2-ja": "契約定義"
+      },
+      "sample_element_ids": [
+        "Q-a25526f5",
+        "Q-fda5d167",
+        "Q-5f12ea76",
+        "Q-6f61abd7",
+        "Q-96124d00",
+        "Q-a6dfd834",
+        "Q-9f587dd6",
+        "Q-77f6bb3f",
+        "Q-7b38fa7d",
+        "Q-b44e75b0",
+        "Q-8e039989",
+        "Q-56276799"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-5b344eb1",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 10,
+      "name": "ルートテーブル検証",
+      "name_en": "Route Table Verification",
+      "name_en_agreement": 2,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Route Table Verification",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a04a25a1",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "ルートテーブル検証",
+        "1": "ルートテーブル検証",
+        "2": "ルーティングテーブル確認"
+      },
+      "proposals_en": {
+        "0": "Route Table Verification",
+        "1": "Route Table Verification",
+        "2": "Route Record Verification"
+      },
+      "raw_replies": {
+        "0-en": "Route Table Verification",
+        "0-ja": "ルートテーブル検証",
+        "1-en": "Route Table Verification",
+        "1-ja": "ルートテーブル検証",
+        "2-en": "Route Record Verification",
+        "2-ja": "ルーティングテーブル確認"
+      },
+      "sample_element_ids": [
+        "Q-01bc8493",
+        "Q-0eda2db3",
+        "Q-4a7e1b98",
+        "Q-6f18ee9b",
+        "Q-7fcdbff0",
+        "Q-8f8e10e9",
+        "Q-910da149",
+        "Q-a37d5cd7",
+        "Q-c69450d3",
+        "Q-2d33800d"
+      ],
+      "sampled_k": 10,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-5e2f8ee4",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 8,
+      "name": "単機能計画実装",
+      "name_en": "Single Function Planning Implementation",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Single Function Planning Implementation",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-d23a39ff",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "単機能計画実装",
+        "1": "単機能計画実装",
+        "2": "単機能計画実装"
+      },
+      "proposals_en": {
+        "0": "Single Function Planning",
+        "1": "Pure Function Implementation",
+        "2": "Single Function Implementation Planning"
+      },
+      "raw_replies": {
+        "0-en": "Single Function Planning",
+        "0-ja": "単機能計画実装",
+        "1-en": "Pure Function Implementation",
+        "1-ja": "単機能計画実装",
+        "2-en": "Single Function Implementation Planning",
+        "2-ja": "単機能計画実装"
+      },
+      "sample_element_ids": [
+        "Q-f9086037",
+        "Q-3ca0e209",
+        "Q-2fe7f1e8",
+        "Q-78764b67",
+        "Q-1d70127c",
+        "Q-7bf60110",
+        "Q-2c147f46",
+        "Q-f2d1e6ef"
+      ],
+      "sampled_k": 8,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-669435b8",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 1,
+      "name": "状態遷移",
+      "name_en": "State Transition",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "State Transition",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-9d8487ed",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "状態遷移",
+        "1": "状態遷移",
+        "2": "状態遷移"
+      },
+      "proposals_en": {
+        "0": "Workflow State Transition",
+        "1": "State Transition",
+        "2": "Task Status Transitions"
+      },
+      "raw_replies": {
+        "0-en": "Workflow State Transition",
+        "0-ja": "状態遷移",
+        "1-en": "State Transition",
+        "1-ja": "状態遷移",
+        "2-en": "Task Status Transitions",
+        "2-ja": "状態遷移"
+      },
+      "sample_element_ids": [
+        "Q-345d09ff"
+      ],
+      "sampled_k": 1,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-68ad5c78",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 33,
+      "name": "アカウント選択ロジック",
+      "name_en": "Account Selection Logic",
+      "name_en_agreement": 2,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Account Selection Logic",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-755e4c72",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "アカウント選択ロジック",
+        "1": "アカウント選択ロジック",
+        "2": "アカウント選択ロジック"
+      },
+      "proposals_en": {
+        "0": "Account Selection Logic",
+        "1": "Account Selection Logic",
+        "2": "Subject Selection Logic"
+      },
+      "raw_replies": {
+        "0-en": "Account Selection Logic",
+        "0-ja": "アカウント選択ロジック",
+        "1-en": "Account Selection Logic",
+        "1-ja": "アカウント選択ロジック",
+        "2-en": "Subject Selection Logic",
+        "2-ja": "アカウント選択ロジック"
+      },
+      "sample_element_ids": [
+        "Q-9109527a",
+        "Q-98f53806",
+        "Q-13a8798b",
+        "Q-f6569dd4",
+        "Q-070ee5b5",
+        "Q-dd4f883d",
+        "Q-4b36d557",
+        "Q-4f682a48",
+        "Q-c7ab22de",
+        "Q-684ed1ed",
+        "Q-8e47080e",
+        "Q-9d19ab92"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-8ae658bd",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 10,
+      "name": "契約設計",
+      "name_en": "Contract Design",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Contract Design",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a473297b",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "契約設計",
+        "1": "契約設計",
+        "2": "契約設計"
+      },
+      "proposals_en": {
+        "0": "Contract Design",
+        "1": "Contract Design Documents",
+        "2": "Contract Capability Design"
+      },
+      "raw_replies": {
+        "0-en": "Contract Design",
+        "0-ja": "契約設計",
+        "1-en": "Contract Design Documents",
+        "1-ja": "契約設計",
+        "2-en": "Contract Capability Design",
+        "2-ja": "契約設計"
+      },
+      "sample_element_ids": [
+        "Q-34ec045d",
+        "Q-daa95a99",
+        "Q-43dbe020",
+        "Q-7c728226",
+        "Q-cd2da902",
+        "Q-64921dbd",
+        "Q-7a761664",
+        "Q-e2aec130",
+        "Q-b9699cae",
+        "Q-b06c17c2"
+      ],
+      "sampled_k": 10,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-8f887782",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 13,
+      "name": "独立検証",
+      "name_en": "Independent Verification",
+      "name_en_agreement": 2,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Independent Verification",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-d23a39ff",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "独立検証",
+        "1": "独立検証",
+        "2": "独立検証"
+      },
+      "proposals_en": {
+        "0": "Independent Verification",
+        "1": "Independent Verification",
+        "2": "Independent Verification Report"
+      },
+      "raw_replies": {
+        "0-en": "Independent Verification",
+        "0-ja": "独立検証",
+        "1-en": "Independent Verification",
+        "1-ja": "独立検証",
+        "2-en": "Independent Verification Report",
+        "2-ja": "独立検証"
+      },
+      "sample_element_ids": [
+        "Q-e3c1b726",
+        "Q-72d76435",
+        "Q-41400943",
+        "Q-9c616d34",
+        "Q-675d63f8",
+        "Q-e55c9c41",
+        "Q-987db2e3",
+        "Q-60da3ab7",
+        "Q-fd402f43",
+        "Q-edcba989",
+        "Q-7a42b3fc",
+        "Q-77accb44"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-978d8242",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 6,
+      "name": "機能設計書",
+      "name_en": "Capability Design Documents",
+      "name_en_agreement": 2,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Capability Design Documents",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a473297b",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "機能設計書",
+        "1": "機能設計書",
+        "2": "機能設計書"
+      },
+      "proposals_en": {
+        "0": "Build Capability",
+        "1": "Capability Design Documents",
+        "2": "Capability Design Documents"
+      },
+      "raw_replies": {
+        "0-en": "Build Capability",
+        "0-ja": "機能設計書",
+        "1-en": "Capability Design Documents",
+        "1-ja": "機能設計書",
+        "2-en": "Capability Design Documents",
+        "2-ja": "機能設計書"
+      },
+      "sample_element_ids": [
+        "Q-04298a8d",
+        "Q-7e1a72d3",
+        "Q-2bd0c0a4",
+        "Q-e739ad97",
+        "Q-febed8bf",
+        "Q-e64237be"
+      ],
+      "sampled_k": 6,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-9a67ce29",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 19,
+      "name": "実装計画",
+      "name_en": "Implementation Planning",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Implementation Planning",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-9d8487ed",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "実装計画",
+        "1": "実装計画",
+        "2": "実装計画"
+      },
+      "proposals_en": {
+        "0": "Implementation Details",
+        "1": "Code Implementation Planning",
+        "2": "Implementation Planning"
+      },
+      "raw_replies": {
+        "0-en": "Implementation Details",
+        "0-ja": "実装計画",
+        "1-en": "Code Implementation Planning",
+        "1-ja": "実装計画",
+        "2-en": "Implementation Planning",
+        "2-ja": "実装計画"
+      },
+      "sample_element_ids": [
+        "Q-cc51cbda",
+        "Q-4a6f41e8",
+        "Q-d0332b85",
+        "Q-de746337",
+        "Q-44857392",
+        "Q-b194cf6d",
+        "Q-d08260f3",
+        "Q-c506eb4b",
+        "Q-72f488e6",
+        "Q-700088eb",
+        "Q-d44adfc5",
+        "Q-27ee9d15"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-9fad13bd",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 12,
+      "name": "リポジトリ",
+      "name_en": "Repository",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Repository",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-9d8487ed",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "リポジトリ",
+        "1": "リポジトリ",
+        "2": "リポジトリ"
+      },
+      "proposals_en": {
+        "0": "Repository Commit and Save",
+        "1": "Implementation Execution Tasks",
+        "2": "Repository Integration"
+      },
+      "raw_replies": {
+        "0-en": "Repository Commit and Save",
+        "0-ja": "リポジトリ",
+        "1-en": "Implementation Execution Tasks",
+        "1-ja": "リポジトリ",
+        "2-en": "Repository Integration",
+        "2-ja": "リポジトリ"
+      },
+      "sample_element_ids": [
+        "Q-21cc7a56",
+        "Q-1a0b0c10",
+        "Q-c23272d5",
+        "Q-ea644697",
+        "Q-1bc960d0",
+        "Q-7c980489",
+        "Q-23cdc7ea",
+        "Q-bf56cc16",
+        "Q-f6c06ffb",
+        "Q-6ba3bf6a",
+        "Q-5483b177",
+        "Q-a6c1aa52"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-9fcf3111",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 1,
+      "name": "名称設定サービス",
+      "name_en": "Name Configuration Service",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Name Configuration Service",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-755e4c72",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "名称設定サービス",
+        "1": "名称設定サービス",
+        "2": "名称設定サービス"
+      },
+      "proposals_en": {
+        "0": "Daemon Name Configuration",
+        "1": "Service Naming Convention",
+        "2": "Service Name Configuration"
+      },
+      "raw_replies": {
+        "0-en": "Daemon Name Configuration",
+        "0-ja": "名称設定サービス",
+        "1-en": "Service Naming Convention",
+        "1-ja": "名称設定サービス",
+        "2-en": "Service Name Configuration",
+        "2-ja": "名称設定サービス"
+      },
+      "sample_element_ids": [
+        "Q-074fe99b"
+      ],
+      "sampled_k": 1,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-a5e121fc",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 8,
+      "name": "関数実装",
+      "name_en": "Function Implementation",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Function Implementation",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-6417f122",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "関数実装",
+        "1": "関数実装",
+        "2": "関数実装"
+      },
+      "proposals_en": {
+        "0": "Unit Test Generation",
+        "1": "Small Function Implementation",
+        "2": "Function Implementation"
+      },
+      "raw_replies": {
+        "0-en": "Unit Test Generation",
+        "0-ja": "関数実装",
+        "1-en": "Small Function Implementation",
+        "1-ja": "関数実装",
+        "2-en": "Function Implementation",
+        "2-ja": "関数実装"
+      },
+      "sample_element_ids": [
+        "Q-c80a25e4",
+        "Q-1c5392cb",
+        "Q-642c7899",
+        "Q-822a4f6e",
+        "Q-31612f01",
+        "Q-fa7a3b77",
+        "Q-cb576493",
+        "Q-bf023aa9"
+      ],
+      "sampled_k": 8,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-a6029f07",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 6,
+      "name": "制御",
+      "name_en": "Control",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Control",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-9d8487ed",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "制御",
+        "1": "制御",
+        "2": "コントロール"
+      },
+      "proposals_en": {
+        "0": "Self Modification Control",
+        "1": "Identity Management Rules",
+        "2": "Access Control Policy"
+      },
+      "raw_replies": {
+        "0-en": "Self Modification Control",
+        "0-ja": "制御",
+        "1-en": "Identity Management Rules",
+        "1-ja": "制御",
+        "2-en": "Access Control Policy",
+        "2-ja": "コントロール"
+      },
+      "sample_element_ids": [
+        "Q-97391deb",
+        "Q-ba987d54",
+        "Q-033d6c59",
+        "Q-c8ecedb9",
+        "Q-d297d721",
+        "Q-df5638ed"
+      ],
+      "sampled_k": 6,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-a779c996",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 4,
+      "name": "デザイン監査",
+      "name_en": "Design Audit",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Design Audit",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-d23a39ff",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "デザイン監査",
+        "1": "デザイン監査",
+        "2": "デザイン監査"
+      },
+      "proposals_en": {
+        "0": "Technical Design Audit",
+        "1": "Code Audit and Verification",
+        "2": "Design Audit Contracts"
+      },
+      "raw_replies": {
+        "0-en": "Technical Design Audit",
+        "0-ja": "デザイン監査",
+        "1-en": "Code Audit and Verification",
+        "1-ja": "デザイン監査",
+        "2-en": "Design Audit Contracts",
+        "2-ja": "デザイン監査"
+      },
+      "sample_element_ids": [
+        "Q-9f1e1428",
+        "Q-73657dda",
+        "Q-86593004",
+        "Q-c4d33659"
+      ],
+      "sampled_k": 4,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-ab132d04",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 7,
+      "name": "投票機能",
+      "name_en": "Vote Function",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Vote Function",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-d23a39ff",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "投票機能",
+        "1": "投票機能",
+        "2": "投票機能"
+      },
+      "proposals_en": {
+        "0": "Vote Aggregation Function",
+        "1": "Function Implementation",
+        "2": "Vote Tallying Function"
+      },
+      "raw_replies": {
+        "0-en": "Vote Aggregation Function",
+        "0-ja": "投票機能",
+        "1-en": "Function Implementation",
+        "1-ja": "投票機能",
+        "2-en": "Vote Tallying Function",
+        "2-ja": "投票機能"
+      },
+      "sample_element_ids": [
+        "Q-142b2f63",
+        "Q-27f4acd0",
+        "Q-71e541da",
+        "Q-849200dd",
+        "Q-8c8b2fe8",
+        "Q-d4ab23a1",
+        "Q-e4eb3f3c"
+      ],
+      "sampled_k": 7,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-ae01943f",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 17,
+      "name": "書籍名検証",
+      "name_en": "Book Name Validation",
+      "name_en_agreement": 3,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Book Name Validation",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-755e4c72",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "書名検証",
+        "1": "書籍名検証",
+        "2": "書籍名検証"
+      },
+      "proposals_en": {
+        "0": "Book Name Validation",
+        "1": "Book Name Validation",
+        "2": "Book Name Validation"
+      },
+      "raw_replies": {
+        "0-en": "Book Name Validation",
+        "0-ja": "書名検証",
+        "1-en": "Book Name Validation",
+        "1-ja": "書籍名検証",
+        "2-en": "Book Name Validation",
+        "2-ja": "書籍名検証"
+      },
+      "sample_element_ids": [
+        "Q-2650cad5",
+        "Q-c8087f8d",
+        "Q-01b44c38",
+        "Q-79ebb798",
+        "Q-39813662",
+        "Q-6af5f695",
+        "Q-00884121",
+        "Q-6e87079e",
+        "Q-86bf28d3",
+        "Q-acb37ab4",
+        "Q-7af021e5",
+        "Q-87605336"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-ae4f49f9",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 24,
+      "name": "契約設計",
+      "name_en": "Contract Design",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Contract Design",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a473297b",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "契約設計",
+        "1": "契約設計",
+        "2": "契約設計"
+      },
+      "proposals_en": {
+        "0": "Contract Processing Design",
+        "1": "Contract Workflow Design",
+        "2": "Contract Management"
+      },
+      "raw_replies": {
+        "0-en": "Contract Processing Design",
+        "0-ja": "契約設計",
+        "1-en": "Contract Workflow Design",
+        "1-ja": "契約設計",
+        "2-en": "Contract Management",
+        "2-ja": "契約設計"
+      },
+      "sample_element_ids": [
+        "Q-c7d06a4d",
+        "Q-44da4992",
+        "Q-7d1797be",
+        "Q-60fa470e",
+        "Q-e760aa15",
+        "Q-2ca0ccce",
+        "Q-f266aadc",
+        "Q-72990597",
+        "Q-9b63ea24",
+        "Q-32076af2",
+        "Q-6c1266cc",
+        "Q-79b2be24"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-aeb46ac5",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 14,
+      "name": "ルート分析機能記録",
+      "name_en": "Route Analysis Functions Record",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Route Analysis Functions Record",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-d23a39ff",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "経路分析機能記録",
+        "1": "ルート分析機能記録",
+        "2": "ルート分析機能記録"
+      },
+      "proposals_en": {
+        "0": "Route Analysis Functions",
+        "1": "Record Analysis Functions",
+        "2": "Route Record Analysis"
+      },
+      "raw_replies": {
+        "0-en": "Route Analysis Functions",
+        "0-ja": "経路分析機能記録",
+        "1-en": "Record Analysis Functions",
+        "1-ja": "ルート分析機能記録",
+        "2-en": "Route Record Analysis",
+        "2-ja": "ルート分析機能記録"
+      },
+      "sample_element_ids": [
+        "Q-37e9d514",
+        "Q-42232685",
+        "Q-aad556ff",
+        "Q-e9bcc590",
+        "Q-10b3cab3",
+        "Q-15f54080",
+        "Q-aad45a1d",
+        "Q-b8d565cf",
+        "Q-4adacdbd",
+        "Q-e94eea31",
+        "Q-abd06d45",
+        "Q-6dd6ee52"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-af967531",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 6,
+      "name": "完了ワークフロー",
+      "name_en": "Completion Workflow",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Completion Workflow",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a04a25a1",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "完了ワークフロー",
+        "1": "完了ワークフロー",
+        "2": "完了ワークフロー"
+      },
+      "proposals_en": {
+        "0": "Coupling Completion Verification",
+        "1": "Workflow Completion Logic",
+        "2": "Workflow Completion Rules"
+      },
+      "raw_replies": {
+        "0-en": "Coupling Completion Verification",
+        "0-ja": "完了ワークフロー",
+        "1-en": "Workflow Completion Logic",
+        "1-ja": "完了ワークフロー",
+        "2-en": "Workflow Completion Rules",
+        "2-ja": "完了ワークフロー"
+      },
+      "sample_element_ids": [
+        "Q-5b3c5dbb",
+        "Q-1519fc7f",
+        "Q-d236c219",
+        "Q-19bd1ebc",
+        "Q-51280435",
+        "Q-0eea340a"
+      ],
+      "sampled_k": 6,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-b0150279",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 3,
+      "name": "監査成果物の分離",
+      "name_en": "Audit Artifact Separation",
+      "name_en_agreement": 2,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Audit Artifact Separation",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-d23a39ff",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "監査成果物の分離",
+        "1": "監査成果物の分離",
+        "2": "監査成果物の分離"
+      },
+      "proposals_en": {
+        "0": "Audit Artifact Separation",
+        "1": "Audit Content Separation",
+        "2": "Audit Artifact Separation"
+      },
+      "raw_replies": {
+        "0-en": "Audit Artifact Separation",
+        "0-ja": "監査成果物の分離",
+        "1-en": "Audit Content Separation",
+        "1-ja": "監査成果物の分離",
+        "2-en": "Audit Artifact Separation",
+        "2-ja": "監査成果物の分離"
+      },
+      "sample_element_ids": [
+        "Q-61ef8965",
+        "Q-797d7e6b",
+        "Q-d854a906"
+      ],
+      "sampled_k": 3,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-b2c8842a",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 8,
+      "name": "ステータス検証ルール",
+      "name_en": "Status Validation Rules",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Status Validation Rules",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-755e4c72",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "状態検証ルール",
+        "1": "ステータス検証ルール",
+        "2": "ステータス検証ルール"
+      },
+      "proposals_en": {
+        "0": "Status Validation Rules",
+        "1": "Approval Status Rules",
+        "2": "Validation Rules"
+      },
+      "raw_replies": {
+        "0-en": "Status Validation Rules",
+        "0-ja": "状態検証ルール",
+        "1-en": "Approval Status Rules",
+        "1-ja": "ステータス検証ルール",
+        "2-en": "Validation Rules",
+        "2-ja": "ステータス検証ルール"
+      },
+      "sample_element_ids": [
+        "Q-46960656",
+        "Q-4cde09af",
+        "Q-a8b7cb04",
+        "Q-16593287",
+        "Q-254cb51c",
+        "Q-a8e2d6e5",
+        "Q-8ce44dcb",
+        "Q-afbed54f"
+      ],
+      "sampled_k": 8,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-b399a7f3",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 8,
+      "name": "タスク状態管理",
+      "name_en": "Task State Management",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Task State Management",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a04a25a1",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "タスク状態管理",
+        "1": "タスク状態管理",
+        "2": "タスク状態管理"
+      },
+      "proposals_en": {
+        "0": "Task State Validation",
+        "1": "Task State Management",
+        "2": "Workflow State Management"
+      },
+      "raw_replies": {
+        "0-en": "Task State Validation",
+        "0-ja": "タスク状態管理",
+        "1-en": "Task State Management",
+        "1-ja": "タスク状態管理",
+        "2-en": "Workflow State Management",
+        "2-ja": "タスク状態管理"
+      },
+      "sample_element_ids": [
+        "Q-1b4eb1a9",
+        "Q-92cd8a80",
+        "Q-18b277da",
+        "Q-f445930a",
+        "Q-2d3d023a",
+        "Q-75fd9135",
+        "Q-41f40da4",
+        "Q-c28b64d9"
+      ],
+      "sampled_k": 8,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-b654430e",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 19,
+      "name": "検証ルール",
+      "name_en": "Validation Rules",
+      "name_en_agreement": 2,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Validation Rules",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-9d8487ed",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "検証ルール",
+        "1": "検証ルール",
+        "2": "検証ルール"
+      },
+      "proposals_en": {
+        "0": "Validation Rules",
+        "1": "Request Validation Rules",
+        "2": "Validation Rules"
+      },
+      "raw_replies": {
+        "0-en": "Validation Rules",
+        "0-ja": "検証ルール",
+        "1-en": "Request Validation Rules",
+        "1-ja": "検証ルール",
+        "2-en": "Validation Rules",
+        "2-ja": "検証ルール"
+      },
+      "sample_element_ids": [
+        "Q-bbb06a43",
+        "Q-dfb72190",
+        "Q-9c6ff284",
+        "Q-d5d34144",
+        "Q-5b4a1d79",
+        "Q-0403c3c5",
+        "Q-322e8821",
+        "Q-064f7cb4",
+        "Q-207a7f93",
+        "Q-6a374229",
+        "Q-759ca8c8",
+        "Q-42f0508f"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-b93a33c9",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 9,
+      "name": "監査",
+      "name_en": "Audit",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Audit",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a04a25a1",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "監査",
+        "1": "監査",
+        "2": "監査"
+      },
+      "proposals_en": {
+        "0": "Auditability Requirements",
+        "1": "Audit And Traceability",
+        "2": "Audit & Verification"
+      },
+      "raw_replies": {
+        "0-en": "Auditability Requirements",
+        "0-ja": "監査",
+        "1-en": "Audit And Traceability",
+        "1-ja": "監査",
+        "2-en": "Audit & Verification",
+        "2-ja": "監査"
+      },
+      "sample_element_ids": [
+        "Q-a3ebe29e",
+        "Q-f877e6ad",
+        "Q-4e512452",
+        "Q-721d9a10",
+        "Q-4d18e5c8",
+        "Q-db180c95",
+        "Q-bb3a2a80",
+        "Q-f560b4a9",
+        "Q-d8c34b8d"
+      ],
+      "sampled_k": 9,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-be8953eb",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 2,
+      "name": "課題管理",
+      "name_en": "Issue Tracking",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Issue Tracking",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-755e4c72",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "課題管理",
+        "1": "課題管理",
+        "2": "課題管理"
+      },
+      "proposals_en": {
+        "0": "Issue Tracking",
+        "1": "Issue Tracking References",
+        "2": "Issue Identifier"
+      },
+      "raw_replies": {
+        "0-en": "Issue Tracking",
+        "0-ja": "課題管理",
+        "1-en": "Issue Tracking References",
+        "1-ja": "課題管理",
+        "2-en": "Issue Identifier",
+        "2-ja": "課題管理"
+      },
+      "sample_element_ids": [
+        "Q-c34563bd",
+        "Q-e73b7683"
+      ],
+      "sampled_k": 2,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-bf9ed182",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 5,
+      "name": "計画制約検証環境",
+      "name_en": "Planning Constraints Sandbox",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Planning Constraints Sandbox",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-9d8487ed",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "計画制約検証環境",
+        "1": "計画制約検証環境",
+        "2": "計画制約サンドボックス"
+      },
+      "proposals_en": {
+        "0": "Planning Constraints",
+        "1": "Sandbox Task Constraints",
+        "2": "Sandbox Planning Constraints"
+      },
+      "raw_replies": {
+        "0-en": "Planning Constraints",
+        "0-ja": "計画制約検証環境",
+        "1-en": "Sandbox Task Constraints",
+        "1-ja": "計画制約検証環境",
+        "2-en": "Sandbox Planning Constraints",
+        "2-ja": "計画制約サンドボックス"
+      },
+      "sample_element_ids": [
+        "Q-4c8d952f",
+        "Q-264f051d",
+        "Q-c012435b",
+        "Q-f52bf1e2",
+        "Q-00c36639"
+      ],
+      "sampled_k": 5,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-bffb419d",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 2,
+      "name": "出所追跡",
+      "name_en": "Provenance Tracking",
+      "name_en_agreement": 3,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Provenance Tracking",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-9d8487ed",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "出所追跡",
+        "1": "出所追跡",
+        "2": "出所追跡"
+      },
+      "proposals_en": {
+        "0": "Provenance Tracking",
+        "1": "Provenance Tracking",
+        "2": "Provenance Tracking"
+      },
+      "raw_replies": {
+        "0-en": "Provenance Tracking",
+        "0-ja": "出所追跡",
+        "1-en": "Provenance Tracking",
+        "1-ja": "出所追跡",
+        "2-en": "Provenance Tracking",
+        "2-ja": "出所追跡"
+      },
+      "sample_element_ids": [
+        "Q-4d7ae576",
+        "Q-7a400784"
+      ],
+      "sampled_k": 2,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-c8cdfe7e",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 18,
+      "name": "文字列入力検証",
+      "name_en": "String Validation Input",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "String Validation Input",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-755e4c72",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "文字列入力検証",
+        "1": "文字列入力検証",
+        "2": "文字列検証入力"
+      },
+      "proposals_en": {
+        "0": "String Parameter Validation",
+        "1": "String Input Validation",
+        "2": "Input Validation Checks"
+      },
+      "raw_replies": {
+        "0-en": "String Parameter Validation",
+        "0-ja": "文字列入力検証",
+        "1-en": "String Input Validation",
+        "1-ja": "文字列入力検証",
+        "2-en": "Input Validation Checks",
+        "2-ja": "文字列検証入力"
+      },
+      "sample_element_ids": [
+        "Q-015b0f1f",
+        "Q-873248be",
+        "Q-d8d4da27",
+        "Q-a0c14ddc",
+        "Q-8a581b42",
+        "Q-ec6558d1",
+        "Q-d987ba62",
+        "Q-a115a9d2",
+        "Q-a3f6998c",
+        "Q-e6d0e72f",
+        "Q-a0e907ca",
+        "Q-fb55c6fe"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-cea22ac0",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 7,
+      "name": "計画ツール",
+      "name_en": "Plan Utilities",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Plan Utilities",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-d23a39ff",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "計画ツール",
+        "1": "計画ツール",
+        "2": "計画ツール"
+      },
+      "proposals_en": {
+        "0": "Plan Preparation Utilities",
+        "1": "Implementation Planning",
+        "2": "Plan Adaptation Utilities"
+      },
+      "raw_replies": {
+        "0-en": "Plan Preparation Utilities",
+        "0-ja": "計画ツール",
+        "1-en": "Implementation Planning",
+        "1-ja": "計画ツール",
+        "2-en": "Plan Adaptation Utilities",
+        "2-ja": "計画ツール"
+      },
+      "sample_element_ids": [
+        "Q-f8aa8812",
+        "Q-6467d712",
+        "Q-fb884c32",
+        "Q-53953d76",
+        "Q-de5b3bce",
+        "Q-21fd9268",
+        "Q-3af742de"
+      ],
+      "sampled_k": 7,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-d153d542",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 4,
+      "name": "移動決定実装",
+      "name_en": "Move Decision Implementation",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Move Decision Implementation",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-d23a39ff",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "移動決定実装",
+        "1": "移動決定実装",
+        "2": "移動決定実装"
+      },
+      "proposals_en": {
+        "0": "Move Decision Implementation",
+        "1": "Decision Function Implementation",
+        "2": "Game Move Decision"
+      },
+      "raw_replies": {
+        "0-en": "Move Decision Implementation",
+        "0-ja": "移動決定実装",
+        "1-en": "Decision Function Implementation",
+        "1-ja": "移動決定実装",
+        "2-en": "Game Move Decision",
+        "2-ja": "移動決定実装"
+      },
+      "sample_element_ids": [
+        "Q-311d2a6c",
+        "Q-aafc76a2",
+        "Q-ba9f6cfb",
+        "Q-a95b615e"
+      ],
+      "sampled_k": 4,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-d2009542",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 8,
+      "name": "契約更新自動化",
+      "name_en": "Contract Refresh Automation",
+      "name_en_agreement": 2,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Contract Refresh Automation",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a473297b",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "契約更新自動化",
+        "1": "契約更新自動化",
+        "2": "契約更新自動化"
+      },
+      "proposals_en": {
+        "0": "Contract Refresh Automation",
+        "1": "Capability Implementation",
+        "2": "Contract Refresh Automation"
+      },
+      "raw_replies": {
+        "0-en": "Contract Refresh Automation",
+        "0-ja": "契約更新自動化",
+        "1-en": "Capability Implementation",
+        "1-ja": "契約更新自動化",
+        "2-en": "Contract Refresh Automation",
+        "2-ja": "契約更新自動化"
+      },
+      "sample_element_ids": [
+        "Q-0e495870",
+        "Q-5835f410",
+        "Q-77a149c7",
+        "Q-8f970f07",
+        "Q-c8899a06",
+        "Q-d53943dd",
+        "Q-dbe8f066",
+        "Q-e3a6de1b"
+      ],
+      "sampled_k": 8,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-d52084b7",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 12,
+      "name": "契約修正設計",
+      "name_en": "Contract Patch Design",
+      "name_en_agreement": 3,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Contract Patch Design",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a473297b",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "契約修正設計",
+        "1": "契約修正設計",
+        "2": "契約修正設計"
+      },
+      "proposals_en": {
+        "0": "Contract Patch Design",
+        "1": "Contract Patch Design",
+        "2": "Contract Patch Design"
+      },
+      "raw_replies": {
+        "0-en": "Contract Patch Design",
+        "0-ja": "契約修正設計",
+        "1-en": "Contract Patch Design",
+        "1-ja": "契約修正設計",
+        "2-en": "Contract Patch Design",
+        "2-ja": "契約修正設計"
+      },
+      "sample_element_ids": [
+        "Q-40dad425",
+        "Q-a28bcd46",
+        "Q-c5f93c9d",
+        "Q-b5d64326",
+        "Q-0478c07b",
+        "Q-24c495b4",
+        "Q-10a8537f",
+        "Q-2f14c629",
+        "Q-a06c7c0c",
+        "Q-e4c33ff1",
+        "Q-7448e450",
+        "Q-95ff9269"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-d7526ed4",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 24,
+      "name": "自主調査",
+      "name_en": "Investigation Self Directed",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Investigation Self Directed",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-a04a25a1",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "自己主導型調査",
+        "1": "自主調査",
+        "2": "自主調査"
+      },
+      "proposals_en": {
+        "0": "Independent Investigation And Planning",
+        "1": "Self Directed Investigation",
+        "2": "Self-Directed Research"
+      },
+      "raw_replies": {
+        "0-en": "Independent Investigation And Planning",
+        "0-ja": "自己主導型調査",
+        "1-en": "Self Directed Investigation",
+        "1-ja": "自主調査",
+        "2-en": "Self-Directed Research",
+        "2-ja": "自主調査"
+      },
+      "sample_element_ids": [
+        "Q-93a17014",
+        "Q-5347554c",
+        "Q-234b0346",
+        "Q-94384462",
+        "Q-c214fbeb",
+        "Q-617dc036",
+        "Q-01be9bed",
+        "Q-775de661",
+        "Q-b4d83b98",
+        "Q-46ee4a85",
+        "Q-7db6334c",
+        "Q-15058f12"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-dc8bc11f",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 24,
+      "name": "ファイルパス検証",
+      "name_en": "File Path Validation",
+      "name_en_agreement": 3,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "File Path Validation",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-9d8487ed",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "ファイルパス検証",
+        "1": "ファイルパス検証",
+        "2": "ファイルパス検証"
+      },
+      "proposals_en": {
+        "0": "File Path Validation",
+        "1": "File Path Validation",
+        "2": "File Path Validation"
+      },
+      "raw_replies": {
+        "0-en": "File Path Validation",
+        "0-ja": "ファイルパス検証",
+        "1-en": "File Path Validation",
+        "1-ja": "ファイルパス検証",
+        "2-en": "File Path Validation",
+        "2-ja": "ファイルパス検証"
+      },
+      "sample_element_ids": [
+        "Q-4d4029da",
+        "Q-625041ef",
+        "Q-84216d5a",
+        "Q-d6f945ea",
+        "Q-61964a95",
+        "Q-11ef140b",
+        "Q-7524581e",
+        "Q-5eaed3c9",
+        "Q-5d97254a",
+        "Q-33359e7f",
+        "Q-30cc0104",
+        "Q-350d6677"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-e0fc9193",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 6,
+      "name": "統一差分生成",
+      "name_en": "Unified Diff Generation",
+      "name_en_agreement": 2,
+      "name_en_status": "CONSENSUS_EXACT",
+      "name_ja_derived_from_en": "Unified Diff Generation",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-6417f122",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "統一差分生成",
+        "1": "統一差分生成",
+        "2": "差分生成"
+      },
+      "proposals_en": {
+        "0": "Unified Diff Generation",
+        "1": "Unified Diff Generator",
+        "2": "Unified Diff Generation"
+      },
+      "raw_replies": {
+        "0-en": "Unified Diff Generation",
+        "0-ja": "統一差分生成",
+        "1-en": "Unified Diff Generator",
+        "1-ja": "統一差分生成",
+        "2-en": "Unified Diff Generation",
+        "2-ja": "差分生成"
+      },
+      "sample_element_ids": [
+        "Q-eddbd4c4",
+        "Q-6020f195",
+        "Q-f6814135",
+        "Q-ca5d0c30",
+        "Q-1c26abd0",
+        "Q-9b9e5918"
+      ],
+      "sampled_k": 6,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-e2940095",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 8,
+      "name": "タスク処理",
+      "name_en": "Task Disposition",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Task Disposition",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-d23a39ff",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "タスク処理",
+        "1": "タスク処理",
+        "2": "タスク処理"
+      },
+      "proposals_en": {
+        "0": "Blocked Task Resolution",
+        "1": "Task Disposition",
+        "2": "Task Disposition Handling"
+      },
+      "raw_replies": {
+        "0-en": "Blocked Task Resolution",
+        "0-ja": "タスク処理",
+        "1-en": "Task Disposition",
+        "1-ja": "タスク処理",
+        "2-en": "Task Disposition Handling",
+        "2-ja": "タスク処理"
+      },
+      "sample_element_ids": [
+        "Q-d0581f63",
+        "Q-3b6b32a3",
+        "Q-895afffe",
+        "Q-8fb656cf",
+        "Q-47d0b190",
+        "Q-7331e9bc",
+        "Q-c2f65e0d",
+        "Q-73218480"
+      ],
+      "sampled_k": 8,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-e9a6c50a",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 44,
+      "name": "監査調査",
+      "name_en": "Audit Investigation",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Audit Investigation",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-d23a39ff",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "監査調査",
+        "1": "監査調査",
+        "2": "監査調査"
+      },
+      "proposals_en": {
+        "0": "Audit And Investigation",
+        "1": "Audit Investigation Tasks",
+        "2": "Audit Investigation"
+      },
+      "raw_replies": {
+        "0-en": "Audit And Investigation",
+        "0-ja": "監査調査",
+        "1-en": "Audit Investigation Tasks",
+        "1-ja": "監査調査",
+        "2-en": "Audit Investigation",
+        "2-ja": "監査調査"
+      },
+      "sample_element_ids": [
+        "Q-b554b2b5",
+        "Q-08e46fc1",
+        "Q-1285a9f0",
+        "Q-bc405c08",
+        "Q-ddf57a4c",
+        "Q-e0a7e7e7",
+        "Q-33b6dd97",
+        "Q-ce3c5b2e",
+        "Q-d4413af9",
+        "Q-db930e89",
+        "Q-a8428fb5",
+        "Q-d1f23f0c"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 2,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-f1ec16d3",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 8,
+      "name": "フィルタリング",
+      "name_en": "Filtering",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Filtering",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-9d8487ed",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "絞り込み",
+        "1": "フィルタリング",
+        "2": "フィルタリング"
+      },
+      "proposals_en": {
+        "0": "Event Log Processing",
+        "1": "Data Filtering",
+        "2": "Row Filtering and Sorting"
+      },
+      "raw_replies": {
+        "0-en": "Event Log Processing",
+        "0-ja": "絞り込み",
+        "1-en": "Data Filtering",
+        "1-ja": "フィルタリング",
+        "2-en": "Row Filtering and Sorting",
+        "2-ja": "フィルタリング"
+      },
+      "sample_element_ids": [
+        "Q-43ab6d4c",
+        "Q-f0720e72",
+        "Q-1b821f00",
+        "Q-3f5801a3",
+        "Q-72df29b0",
+        "Q-ad55a6ef",
+        "Q-2e46dcc3",
+        "Q-94e85de2"
+      ],
+      "sampled_k": 8,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    },
+    {
+      "agreement_count": 3,
+      "axes_version": "ledger-v1",
+      "axis_id": "LDET-f71e5f63",
+      "consolidated_tokens": null,
+      "empty_returns_per_call": {
+        "0-en": 0,
+        "0-ja": 0,
+        "1-en": 0,
+        "1-ja": 0,
+        "2-en": 0,
+        "2-ja": 0
+      },
+      "endpoint": ":8005",
+      "examples_used_per_seed": {
+        "0": 8,
+        "1": 8,
+        "2": 8
+      },
+      "level": 2,
+      "max_tokens": 6144,
+      "model": "Qwen3.6-35B-A3B",
+      "n_members": 27,
+      "name": "テスト",
+      "name_en": "Test",
+      "name_en_agreement": 1,
+      "name_en_status": "CONSENSUS_CONSOLIDATED",
+      "name_ja_derived_from_en": "Test",
+      "name_status": "CONSENSUS_EXACT",
+      "parent": "LCAT-9d8487ed",
+      "prompt_id": "ledger-axis-name-en-then-ja-v2",
+      "proposals": {
+        "0": "テスト",
+        "1": "テスト",
+        "2": "テスト"
+      },
+      "proposals_en": {
+        "0": "Input Validation Tests",
+        "1": "Test Case Specifications",
+        "2": "Unit Test Cases"
+      },
+      "raw_replies": {
+        "0-en": "Input Validation Tests",
+        "0-ja": "テスト",
+        "1-en": "Test Case Specifications",
+        "1-ja": "テスト",
+        "2-en": "Unit Test Cases",
+        "2-ja": "テスト"
+      },
+      "sample_element_ids": [
+        "Q-ccaad640",
+        "Q-de2a192b",
+        "Q-0848bde3",
+        "Q-75e2351e",
+        "Q-b9df6326",
+        "Q-2f63990c",
+        "Q-2165a700",
+        "Q-d6f5abe5",
+        "Q-e68e6a43",
+        "Q-c98e4851",
+        "Q-6592b9a8",
+        "Q-65d2ca1f"
+      ],
+      "sampled_k": 12,
+      "seeds": [
+        0,
+        1,
+        2
+      ],
+      "temperature": 0.7
+    }
+  ],
+  "prompt_id": "ledger-axis-name-en-then-ja-v2",
+  "seeds": [
+    0,
+    1,
+    2
+  ]
+}
