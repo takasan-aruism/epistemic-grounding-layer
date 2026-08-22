@@ -113,6 +113,76 @@ UNDERSTANDING  candidate: ENERGIZATION_MODULE_EQUALITY
                unresolved: [③④⑤は本線で未実走]
                result: ★UNKNOWN（まだ ESTABLISHED にしない）
 
+---
+
+## ⑨ 追記 2026-08-22 13:35 ―― R3 を実測で更新（★ESTABLISHED にはしない）
+
+`EVO-0088` で harness 5本が走るようになったので、**`verify_minter_B.py` を実走させて
+止まる位置を測った**（実 repo 書込 0・workspace は `tempfile`）。
+
+```
+落ちた位置（traceback 逐語）
+  patch_bridge.py:361  bridge_apply_connector → apply_patch_bounded(..., energize=energize_token,
+                                                repo_identity=energize_token.repo_identity)
+  patch_bridge.py:292  apply_patch_bounded   → _apply_to_working(...)
+  patch_bridge.py:146  raise ValueError('apply: %s' % _r.get('reason'))
+                       # ★当てられない=★書かない(fail-closed)
+  ValueError: apply: ★no_hunk
+```
+
+**★門の順序を source で確認した（推測しない）:**
+
+```
+:355  bridge_apply_connector  if not isinstance(energize_token, _EnergizedApply): return NOT_ENERGIZED
+        → ★通った（NOT_ENERGIZED の dict を返さず traceback が先へ進んでいる）
+:???  apply_patch_bounded     if not repo_identity: raise         → ★通った
+                              energize.repo_identity != repo_identity: raise → ★通った
+                              validate_artifact(expected_base, expected_fingerprint) → ★通った
+:94   _apply_to_working 開始
+:100  _require_energize(workspace_dir, energize)
+        → ★通った（★落ちたのは :146 ∴ :100 は実行され例外を出していない）
+        ★中身 = isinstance(_EnergizedApply) の TypeError ＋ grant != realpath の ValueError
+:146  ★ここで止まる = no_hunk
+```
+
+### ★意味
+
+**因果鎖 ①import ②class 取得 ③mint ④isinstance は ★4つとも通った。**
+**⑤書込 だけが到達していない。しかも止めているのは energization ではない。**
+
+```
+R3_INTERNAL_GATES  gates: [import, isinstance(:355), _require_energize(:100)]
+                   passed: ★[import, isinstance(:355), _require_energize(:100)]  ←★3/3
+                   failed: []
+                   status: ★OBSERVED_IN_TEST（★本線ではない）
+R4_REJECTION       ①②の拒否条件は ★発火していない = ★通ったから
+                   ∴ ★「拒否を実際に発火させる」は ★別途 必要（★正本§10⑨ 未了）
+```
+
+### ★それでも ESTABLISHED にしない（理由を明記する）
+
+```
+① これは ★regression harness の実走であり ★本線ではない。
+   正本§11 逐語「単体試験・sandbox 成功を本線成功として扱う」= ★禁止。
+② workspace は ★tempfile.mkdtemp ∴ ★real repo への書込は 1度も起きていない。
+③ R2 分母は ★変わらず 0 = twoder.bridge_minter を読む ★本線の呼び手は今も 0件。
+④ R4 の拒否条件2つを ★まだ実発火させていない。
+```
+
+**∴ `UNDERSTANDING.result` は ★UNKNOWN のまま。`SAFE_EXISTING_FILE_MODIFICATION` へは昇格させない。**
+
+### ★新しく分かったこと ―― 止まる位置が移った
+
+```
+before(08-22 02:00)  ①import で止まる（ModuleNotFoundError）
+after (08-22 13:35)  ⑤書込の直前で止まる（no_hunk）
+
+★止めているのは ★fixture であって energization ではない。
+★既記録の別 finding = HARNESS_FIXTURE_PREDATES_UNIFIED_DIFF_CONTRACT
+  （fixture が '+ NEW' を渡し @@ ヘッダを持たない ／ apply_unified_diff は 2026-08-19 導入）
+★この AXIS では直さない。★別 AXIS の材料として渡す。
+```
+
 CREATION   status: NOT_EVALUATED
 DECISION   GO
 ```
