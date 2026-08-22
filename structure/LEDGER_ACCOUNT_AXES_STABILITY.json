@@ -1,0 +1,234 @@
+{
+  "K_if_chosen_by_real_only": 6,
+  "chart_status": "AXES_FOUND",
+  "chosen_K": 6,
+  "chosen_by": "max(real - neg)",
+  "cluster_vs_verdict_ARI_at_K": 0.001205,
+  "corpus": "台帳の明細(list_account_proposals)",
+  "corpus_fingerprint": "0664f4fd425d3eca",
+  "differs_from_s_embed_axes": "corpus=明細(4,864件のRRI記録ではない) ／ K の選び方=max(real-neg)(max(real)ではない) ／ 出力先とベクトル控えは別ファイル。",
+  "diversity_threshold": 0.3,
+  "dropped_guard": "kind_purity は 明細では 全て 同一種別=無意味 ／ verdict も 638/642 が NOT_DECIDED=自明。∴ 多様性ガードのみ。",
+  "embed_dim": 384,
+  "k_sweep": [
+    4,
+    6,
+    8,
+    10,
+    12,
+    16,
+    20
+  ],
+  "margin_required": 0.05,
+  "model": "intfloat/multilingual-e5-small",
+  "n_records": 643,
+  "n_topic_axes": 6,
+  "n_unique_texts": 506,
+  "neg_control_ari_by_K": {
+    "10": 0.006618,
+    "12": 0.0109,
+    "16": 0.010828,
+    "20": 0.01013,
+    "4": 0.007167,
+    "6": 0.0083,
+    "8": 0.009288
+  },
+  "note": "AXES_FOUND: TOPIC 軸 6 個。命名は 別段(name=null)。",
+  "per_axis": [
+    {
+      "axis_id": "LAX-83e3a429",
+      "content_diversity": 0.8247,
+      "n": 194,
+      "sample_question_ids": [
+        "Q-951eb594",
+        "Q-4adacdbd",
+        "Q-4974bc9a",
+        "Q-5940bd23",
+        "Q-754b68ac",
+        "Q-94ba591e",
+        "Q-95cd62e3",
+        "Q-9a4f26d3",
+        "Q-c948b657",
+        "Q-d0fefc44",
+        "Q-0e9e3e34",
+        "Q-380452cd"
+      ],
+      "sample_texts": [
+        "2つの 不整合を 判定して ほしい。どちらを 直すかは 指定しない。 前提の 出所（記録の ID / ファイル名）: DE-0484 / DE-0457 / DE-0485 / DE-0486 / DE-0452 / DE-0487 / DE-0462 / DE-0467 task: TASK-2DER-99CB3F6",
+        "記録に出るのに経路表に無いキーを出す関数 unregistered_keys を実装してください。 骨格と試験は下に在ります。試験は1バイトも変えないでください。 （前回の契約はここに在りましたが、新しく書くために外しました） （前回の契約はここに在りましたが、新しく書くために外しました）",
+        "票の一覧から結論を1つ決める関数を作ってください(検証2回目)。骨格の FILL の所だけを埋めてください。合格条件は封印試験に全部書いてあります。試験は変更しないでください。 （前回の契約はここに在りましたが、新しく書くために外しました） （前回の契約はここに在りましたが、新しく書くために外しました）",
+        "票の一覧から結論を1つ決める関数を作ってください(検証2回目)。骨格の FILL の所だけを埋めてください。合格条件は封印試験に全部書いてあります。試験は変更しないでください。 （前回の契約はここに在りましたが、新しく書くために外しました） （前回の契約はここに在りましたが、新しく書くために外しました）",
+        "票の一覧から結論を1つ決める関数を作ってください(検証2回目)。骨格の FILL の所だけを埋めてください。合格条件は封印試験に全部書いてあります。試験は変更しないでください。 （前回の契約はここに在りましたが、新しく書くために外しました） （前回の契約はここに在りましたが、新しく書くために外しました）",
+        "票の一覧から結論を1つ決める関数を作ってください(検証2回目)。骨格の FILL の所だけを埋めてください。合格条件は封印試験に全部書いてあります。試験は変更しないでください。 （前回の契約はここに在りましたが、新しく書くために外しました） （前回の契約はここに在りましたが、新しく書くために外しました）"
+      ],
+      "verdict": "TOPIC"
+    },
+    {
+      "axis_id": "LAX-a473297b",
+      "content_diversity": 0.7524,
+      "n": 105,
+      "sample_question_ids": [
+        "Q-c7d06a4d",
+        "Q-44da4992",
+        "Q-a06c7c0c",
+        "Q-60fa470e",
+        "Q-e760aa15",
+        "Q-24c495b4",
+        "Q-2f14c629",
+        "Q-0478c07b",
+        "Q-b5d64326",
+        "Q-5697c213",
+        "Q-c417d062",
+        "Q-a28bcd46"
+      ],
+      "sample_texts": [
+        "BUILD_CAPABILITY: CC_DESIGN_2026-08-19_CONTRACT_DISPOSE_DECISION.md （前回の契約はここに在りましたが、新しく書くために外しました） （前回の契約はここに在りましたが、新しく書くために外しました）",
+        "BUILD_CAPABILITY: CC_DESIGN_2026-08-15_CONTRACT_CLASSIFY_CONTRACT_DOC.md （前回の契約はここに在りましたが、新しく書くために外しました） （前回の契約はここに在りましたが、新しく書くために外しました）",
+        "BUILD_CAPABILITY: CC_DESIGN_2026-08-15_CONTRACT_PATCH_IS_RECORD_ONLY.md （前回の契約はここに在りましたが、新しく書くために外しました） （前回の契約はここに在りましたが、新しく書くために外しました）",
+        "BUILD_CAPABILITY: CC_DESIGN_2026-08-19_CONTRACT_REQUEUE_DECISION.md （前回の契約はここに在りましたが、新しく書くために外しました） （前回の契約はここに在りましたが、新しく書くために外しました）",
+        "BUILD_CAPABILITY: CC_DESIGN_2026-08-19_CONTRACT_PATCH_CORRESPONDENCE.md （前回の契約はここに在りましたが、新しく書くために外しました） （前回の契約はここに在りましたが、新しく書くために外しました）",
+        "BUILD_CAPABILITY: CC_DESIGN_2026-08-15_CONTRACT_PATCH_IS_RECORD_ONLY_v2.md （前回の契約はここに在りましたが、新しく書くために外しました） （前回の契約はここに在りましたが、新しく書くために外しました）"
+      ],
+      "verdict": "TOPIC"
+    },
+    {
+      "axis_id": "LAX-198eb194",
+      "content_diversity": 0.835,
+      "n": 103,
+      "sample_question_ids": [
+        "Q-ea644697",
+        "Q-5c5e25cf",
+        "Q-c506eb4b",
+        "Q-72f488e6",
+        "Q-b194cf6d",
+        "Q-d08260f3",
+        "Q-cc51cbda",
+        "Q-de746337",
+        "Q-44857392",
+        "Q-bf56cc16",
+        "Q-6a374229",
+        "Q-c59a5674"
+      ],
+      "sample_texts": [
+        "2. 承認の記録先の path を そのまま書く。",
+        "2. 段1から段4の順序を そのまま実装すること。",
+        "6. 実走で E を確認する証拠の取り方を書く。",
+        "2. 規則1から規則6を どう実装するか。",
+        "8. 実走で I を確認する証拠の取り方。",
+        "8. 実走で I を確認する証拠の取り方。"
+      ],
+      "verdict": "TOPIC"
+    },
+    {
+      "axis_id": "LAX-929f7a29",
+      "content_diversity": 0.7684,
+      "n": 95,
+      "sample_question_ids": [
+        "Q-93a17014",
+        "Q-b2e2fe8a",
+        "Q-f010649c",
+        "Q-a3ebe29e",
+        "Q-f877e6ad",
+        "Q-5347554c",
+        "Q-4d18e5c8",
+        "Q-90de182d",
+        "Q-057fab55",
+        "Q-18e74f5c",
+        "Q-c214fbeb",
+        "Q-234b0346"
+      ],
+      "sample_texts": [
+        "3. もう一度見直す条件を、既存の記録で表せるか。",
+        "3. 記録する10欄と 一致する5欄。",
+        "3. 記録する10欄と 一致する5欄。",
+        "2. 進んだ根拠が記録から引けること。",
+        "2. 進んだ根拠が記録から引けること。",
+        "2. 外した理由とその証拠を、既存の記録へ残せるか。"
+      ],
+      "verdict": "TOPIC"
+    },
+    {
+      "axis_id": "LAX-1ceff0c0",
+      "content_diversity": 0.8977,
+      "n": 88,
+      "sample_question_ids": [
+        "Q-14a4ee8a",
+        "Q-1c9fa717",
+        "Q-21ff9013",
+        "Q-61964a95",
+        "Q-a0c14ddc",
+        "Q-8f544485",
+        "Q-d6f945ea",
+        "Q-5d97254a",
+        "Q-7524581e",
+        "Q-d8d4da27",
+        "Q-a115a9d2",
+        "Q-fb55c6fe"
+      ],
+      "sample_texts": [
+        "7. acceptance_test が空だと no_acceptance_test で止まる。",
+        "3. acceptance_test が空だと no_acceptance_test。",
+        "6. requested_change が空だと no_requested_change で止まる。",
+        "1. target_file が allowed_files の中に無い。\"unexpected_target\"。",
+        "2. base_identity が文字列でない、または前後の空白を落とすと空。\"no_base_identity\"。",
+        "8. acceptance_test が空で no_acceptance_test になる。"
+      ],
+      "verdict": "TOPIC"
+    },
+    {
+      "axis_id": "LAX-1ddb85e5",
+      "content_diversity": 0.5,
+      "n": 58,
+      "sample_question_ids": [
+        "Q-86bf28d3",
+        "Q-acb37ab4",
+        "Q-9109527a",
+        "Q-98f53806",
+        "Q-6ee6562d",
+        "Q-ffc385e8",
+        "Q-684ed1ed",
+        "Q-4b36d557",
+        "Q-4f682a48",
+        "Q-c7ab22de",
+        "Q-2650cad5",
+        "Q-c8087f8d"
+      ],
+      "sample_texts": [
+        "- book_name が無効なとき: status=INVALID_BOOK_NAME / in_pending=False。",
+        "- book_name が無効なとき: status=INVALID_BOOK_NAME / in_pending=False。",
+        "- 既存科目を選んだとき: status=APPROVED / account=その科目 / in_pending=False。",
+        "- 既存科目を選んだとき: status=APPROVED / account=その科目 / in_pending=False。",
+        "- NOT_IN_LIST で book_name が有効なとき: status=PENDING / book_name=その名前 / in_pending=True。",
+        "- NOT_IN_LIST で book_name が有効なとき: status=PENDING / book_name=その名前 / in_pending=True。"
+      ],
+      "verdict": "TOPIC"
+    }
+  ],
+  "real_ari_by_K": {
+    "10": 0.608468,
+    "12": 0.65762,
+    "16": 0.62381,
+    "20": 0.542799,
+    "4": 0.625421,
+    "6": 0.71101,
+    "8": 0.613521
+  },
+  "real_minus_neg_at_K": 0.70271,
+  "real_minus_neg_by_K": {
+    "10": 0.60185,
+    "12": 0.646721,
+    "16": 0.612981,
+    "20": 0.532669,
+    "4": 0.618253,
+    "6": 0.70271,
+    "8": 0.604233
+  },
+  "revision": "614241f622f53c4eeff9890bdc4f31cfecc418b3",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ]
+}
