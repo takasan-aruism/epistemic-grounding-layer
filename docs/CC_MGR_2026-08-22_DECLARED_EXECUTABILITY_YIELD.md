@@ -402,6 +402,103 @@ R4         §5 の拒否条件5件を ★実際に発火させる
 
 ---
 
+## 10. ★訂正と確定 2026-08-22 15:4x ―― 差分は「除去 → 保持」の1点
+
+### ★訂正7 ―― §3 の「`claude_barrier` / `dispatch_status` を見る」は**両方とも不可**
+
+source で確定した：
+
+```python
+webui.py:202   is_claude = nlo["actor_role"] in ("MANAGER", "CLAUDE_SENIOR")
+webui.py:231   "claude_barrier": is_claude, "dispatch_status": dispatch_status
+```
+
+**∴ `/api/state` が返す `claude_barrier` は `_MAP` 由来ではなく、webui が役名を並べた派生値。
+= Taka が 2026-08-15 に止めた形そのもの。`dispatch_status` と同じ出所。**
+`dispatch.py:66` の `nlo["claude_barrier"]`（`_MAP` の4番目）とは**別物で、同名。**
+
+**★実測（分母つき・私と監査が独立に）**
+
+```
+        私        監査
+分母    585       590
+食い違い ★82      83
+内訳    UPPER_REVIEW 79 / BLOCKED 3     UPPER_REVIEW 80 / BLOCKED 3
+向き    False→True 79 ／ ★True→False 3  「全て False→True」
+                    ↑★私の実測では一様でない。★鍵(分母)の差の可能性 ∴ 両方残す
+```
+
+**∴ 述語に派生値を使ってはならない。**
+
+### ★確定 ―― Taka の求める機構は既に在り、**解決の仕方だけが違う**
+
+`manager_v0.py:421-430`（逐語）:
+
+```python
+if not gate["allow"] or after.get("dw_state") == state.get("dw_state"):
+    _STOPPED_AT.setdefault(task["task_id"], []).append(str(stage))
+d = _use("decide_tick", decide_tick, task, gate, _STOPPED_AT.get(task["task_id"], []))
+# ★★2026-08-15 00:3x: ★止まった 案件が ★並びの 先頭で 詰まると ★後ろが 一生 進まない
+#   ★∴ ★『同じ所で2回』(★2DER が 出す 語)なら ★並びから 落とす=★★叩き続けない ／ ★飛ばさない
+if d.get("reason") == "同じ所で2回":
+    _queue_write([t for t in _queue() if t != task["task_id"]])
+```
+
+**問題意識は Taka と同一。解決が `removed`（並びから落とす）。**
+Taka 逐語「**順番を失うのではなく ★一時的に yield**」。
+
+```
+★∴ 差分 = 「除去 → 保持したまま yield」の ★1点。
+```
+
+これで §5 の2つが具体化した：
+- **対等性 CONFLICT** = 現状 `waiting` と `removed` が**同じ経路に潰れている**
+- **対称性 missing** = `_STOPPED_AT` は逐語「★プロセスの記憶（再起動で消える）」／
+  resume は段②の submitted 経由しか無い ＝ **両側が非対称**
+
+### ★置く最小差分（★2箇所・★新語0・新state0・新機構0）
+
+```python
+# (a) 段① に 段②と同じ形を置く（★判断器も記録も 既存の物）
+_stop = _STOPPED_AT.get(tid) or []
+if _stop:
+    _dq = _use("decide_tick", decide_tick, {"task_id": tid, "dw_state": st}, None, _stop)
+    if _dq.get("action") == STOP:
+        _record({"action": SLEEP, "task_id": tid, "reason": _dq.get("reason")},
+                {"phase": "candidate_skip", "dw_state": st, "stopped_at_stage": list(_stop),
+                 "key_note": "★yield=★並びに残したまま次候補へ(★落とさない)"})
+        keep.append(tid)     # ★★順番を失わない
+        continue             # ★後続の 実行できる 案件へ 進む
+
+# (b) 除去をやめる
+if d.get("reason") == "同じ所で2回":
+    _queue_write([t for t in _queue() if t != task["task_id"]])   # ★★これを消す
+```
+
+**★(a) は 段② が既に使っている `decide_tick`（2DER 製）／`_record`／`phase=candidate_skip` の写し。
+★判断を新しく書かない。★語を増やさない。★順序を変えない（`keep` は元順）。**
+
+**★resume が成り立つ理由**: `_STOPPED_AT` はプロセスの記憶 ∴ 再起動で忘れる
+＝ **恒久の除外表にならない** ＝ 次のプロセスで**元の FIFO 位置のまま再評価される**。
+（★これは既存の性質であって、私が足すものではない。）
+
+### ★常駐を上げる前に Taka へ出す数（★ステップ⑤の材料・★実測）
+
+```
+next_operation = UPPER_REVIEW  ★79件
+  _MAP[JUDGE_REQUIRED / READY_FOR_UPPER_REVIEW].barrier = ★False
+  かつ CLAUDE_SENIOR は _machine_registry に ★在る
+  ∴ dispatch は :163 で止まらず 機械dispatch へ進み ★fn=claude_senior(=claude -p) を呼ぶ
+  ★trivially_clean なら auto_pass。それ以外は ★実呼出。
+
+★実測の裏づけ: 窓1つ(330s)で 頭1件が upper_reviews ★2件(両方FAIL) ＋
+  headless セッション ★2件 を消費し ★dw_state は1歩も動かなかった。
+★∴ 常駐を上げると 194件(Claude不要)と同時に ★79件が Claude を呼びに行く。
+★これは『2DERがClaudeを叩く』設計どおりでもある ∴ ★欠陥と決めつけない。★数だけ出す。
+```
+
+---
+
 ## 8. 触っていないもの
 
 `EVO-0085` writer 4欠損 ／ `EVO-0087`（R4② 未発火）／ `EVO-0088`（閉）／
