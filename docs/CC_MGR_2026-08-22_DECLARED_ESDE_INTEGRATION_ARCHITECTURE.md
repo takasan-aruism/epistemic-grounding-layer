@@ -249,20 +249,88 @@ Claude      当面の上級監査。★判断そのものを authority にしな
 
 ---
 
-## 11. MISSING / CONFLICT / UNVERIFIED 一覧
+## 11. ★Phase 1 の分母 ―― 正本§10② を 2DER が実行できる割合（実測）
+
+**★監査の要請により本体に載せる**（`ITEM-2DER-EVO-0083` 逐語「★『取得不能11件』の内訳は
+★ESDE Phase1 の分母そのもの。★index 0 は重要= ★『索引を作れば取れる』ではないことを
+★分母つきで示した。★ここは Integration Architecture の declared に そのまま載せてほしい」）。
+
+実測の全文 = `CC_MGR_2026-08-22_MEASURE_2DER_SELF_INVESTIGATION_CAPABILITY.md`（egl `1a93c18`）。
+標本 = 本日 私が declared 3枚で証拠として引用した調査 **15件**。
+分母 = **サーバー自身に列挙させた**（未知語 `__probe__` を投げて拒否させ `available` を採取
+＝★正本§10⑨ R4 の使い方。★分母を自分で決めていない）。
 
 ```
-MISSING     ESDE_RESULT_HAS_NO_READER          結果を読む側が存在しない
-            AXIS_STRING_HAS_NO_MACHINE_READER  台帳 note の AXIS= を読む関数 0件
+① 2DER 既存機能だけで取得可能   ★1 / 15  ( 7%)
+② 一部取得可能                  ★3 / 15  (20%)
+③ 取得不能                      ★11 / 15 (73%)
 
-CONFLICT    （★無し。訂正1のとおり「ESDE の語の衝突」は誤りだった）
+★③ 11件の欠落の内訳
+   query入口   ★5   識別子の書き手 / 呼び出し辺 / 門の非破壊試打 /
+                    文書ごとの登記行 / top-level import の本数
+   観測データ  ★3   class 定義の数 / どの関数がどの語を書くか / commit の new_file 内訳
+   identity    ★2   AXIS= の読み手 / 正本2つのうち現行はどちら
+   scope定義   ★1   material 4 の供給者は何処に居るか
+   index       ★0
+```
 
-UNVERIFIED  TIMING                             Manager のどの契機か
+**★`index` が 0 であることが この分母の要点。**
+「索引を作れば取れる」ではない。**足りないのは 口(5) / データ(3) / 語(2) / 枠(1)。**
+
+**∴ Phase 1「AXIS/EQUALITY/SYMMETRY/LINKAGE/HIERARCHY を既存記録から機械取得。
+取得不能は UNVERIFIED」は、現状 ★13/15 が UNVERIFIED になる。**
+
+### ★重い数字3つ（監査が独立に同じ数を出して一致）
+
+```
+① static_edges    2,926 candidate を数えるが ★個別の辺を返す欄が 0（集計のみ）
+② observed_edges  edges 1444 に対し ★返るのは top_rows 30 のみ
+                  ∴ ★「上位30に入らない」と「0件」が区別できない（★不在が遵守に見える）
+③ route_table     18行に ★from / to / producer / consumer / actor / authority が無い
+```
+
+### ★最も安い欠落 と 最も高い欠落
+
+```
+最も安い  呼び出し辺は egl/structure/EDGE_INVENTORY.jsonl に ★既に在る。
+          監査の独立実測= ★855,246 bytes / git 履歴が ★2026-07-22 まで遡る
+          (11feeec / f5671cb / 23e3cc9) ∴ ★今日作った物ではない。
+          ★front door の24面のどれにも出ていないだけ=★新しい観測は要らない。
+最も高い  route_table が「供給者」という★枠を持たない。★口を作っても入れる欄が無い。
+```
+
+---
+
+## 11b. MISSING / CONFLICT / UNVERIFIED 一覧（★更新）
+
+```
+MISSING     AXIS_STRING_HAS_NO_MACHINE_READER  台帳 note の AXIS= を読む関数 0件
+            NO_PREDICATE_QUERY_SURFACE         述語で絞れる引数が 16口・引数18種のうち 0
+            CALL_EDGES_NOT_EXPOSED             EDGE_INVENTORY が front door の24面に無い
+            ROUTE_TABLE_HAS_NO_SUPPLIER_FIELD  経路表に producer/consumer/actor/authority が無い
+
+            ★ESDE_RESULT_HAS_NO_READER は ★取り下げ（追補2 §1・訂正5）
+              = domain_dw.record_stages が本線で回っており Manager が既に読んでいる
+
+CONFLICT    ★TWO_REGISTRIES_SHARE_THE_ART_ID_FORMULA
+              twoder/audit/ARTIFACT_REGISTRY.jsonl（front door が resolve する・222件）と
+              egl/docs/CC_REGISTER.jsonl（role=IDLE・resolve されない）が
+              ★同じ 'ART-'+sha1(repo|path)[:10] を発行する
+              ∴ ★id を見てもどちらの登記簿か分からない = 正本§4 の CONFLICT
+              ★監査が独立に実測して一致（artifact_registry.py:31 / cc_register.py）
+            （★「ESDE の語の衝突」は CONFLICT ではなかった ―― 訂正1）
+
+UNVERIFIED  LEDGER_ROW_COUNT_KEY_MISMATCH      front door 申告 rows:216 対 私の直読 1022
+                                               ★直読で解消しない（★私の直読自体が境界違反）
+            PLUS_MINUS_RETURNS_NULL            語は available に在るのに null が返る
             OUTPUT                             正本§12 の13欄を何の形で載せるか
             AUTHORITY_EFFECT                   ESDE 結果が何を止める/進めるか
-            FUNCTION_TABLE_FIELD_FIT           既存の欄が13欄を載せられるか
-            ESDE_RESEARCH_ASSETS_UNSURVEYED    esde/ESDE-Research(44GB) を調査していない
-            ROUTE_1_18_ATTACHMENT              1〜18経路との接続点
+
+★閉じたもの
+            ESDE_RESEARCH_ASSETS_UNSURVEYED    ★Taka 裁定により無視（調査しない）
+            TIMING / CALLER / INPUT / STORAGE / READER  ★追補2 §1 で OBSERVED
+            CANON_NOT_IN_LEDGER                ★文書登記簿には入れた（★但し上記 CONFLICT により
+                                               front door では resolved=False ＝ 正規面は未成立）
 ```
 
 ---
