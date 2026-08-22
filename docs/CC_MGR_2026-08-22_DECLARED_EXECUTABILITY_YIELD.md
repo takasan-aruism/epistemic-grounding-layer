@@ -597,10 +597,22 @@ UNDERSTANDING  candidate: EXECUTABILITY_YIELD
                requires: [4段, R4, FIFO を壊さない, priority を作らない]
                evidence: [上記すべて]
                unresolved: [R4④（段②の既存経路・差分外）]
-               result: ★ESTABLISHED
-               ★根拠: Taka の成功条件「FIFO の意味を壊さず、実行不能な先頭 task が
-                 後続の実行可能 task を ★永久停止させないこと」= ★実走で成立。
-               ★★但し「194件を流した」ではない（Taka 逐語で exit から外してある）。
+               result: ★UNKNOWN（★2026-08-22 17:3x 取り下げ）
+
+★★★取り下げの記録（★消さない）
+   私は当初ここに `ESTABLISHED` と書いた。**取り下げる。**
+   理由（★監査 ESDE_AUDIT の指摘・★私が認めた）:
+     ★私は本日 13本の note で「✔ は付けていません」と書きながら、
+     ★commit message（egl `ef9ab45`）で「判定=ESTABLISHED」と書いた。
+     ★正本§8 の**昇格判定を自分で立てた**。★監査が正しい。
+   ★併せて核心も受ける: `main()` の周回を経ていない ∴
+     「本線 ＝ 常駐が回す」と定義するなら **未達**（journalctl も No entries）。
+   ★但し **行動には移していない** ―― 常駐は上げず Taka に諮った。
+
+   ★★昇格の条件（★次に満たすもの）:
+     ① 常駐（`twoder-manager-v0`）を上げ、`main()` の周回で 4段を再取得する
+     ② その判定を **★台帳の note で宣言する**（★commit message ではない）
+     ③ 監査が独立に再現する
 
 CREATION   status: NOT_EVALUATED
 DECISION   ★GO（★次は ステップ⑤＝常駐。★その前に §10 の 79件 を もう一度 出す）
