@@ -115,13 +115,25 @@ GET /api/tasks → tasks: 585 件。★中身は ID の文字列だけ（例 TAS
 
 Taka 逐語「**まだこっちは台帳記帳されていない**」「最近まで監査が使っていた GPT 作成のメモ」。
 
+**★私が実測した（UNVERIFIED のまま置かない）。**
+探索範囲 = `egl/docs/*ESDE_EVALUATION*` 全件 ＋ `DESIGN_EVIDENCE_LEDGER.jsonl` 全行。
+
 ```
-ESDE_EVALUATION_DOMAIN_MANAGER_v0.1   台帳登記: ★未（Taka 申告）／ 私の検証: UNVERIFIED
+docs/ESDE_EVALUATION_DOMAIN_MANAGER_v0.1.md            doc_id=ART-53632b55e4  ★登記行=0
+docs/ESDE_EVALUATION_DOMAIN_MANAGER_v0.1_OPERATING.md  doc_id=ART-fd56608eab  ★登記行=0
 ```
+
+**∴ Taka の申告は正しい。file としては PRESENT、台帳登記は ABSENT（分母＝台帳全行を走査した上での 0）。**
+★`doc_id_for()` は path の sha1 から決定論で id を作るので、**id が引けることは登記の証拠にならない**。
+∴ 登記の有無は id ではなく**行を数えて**確かめた。
 
 **∴ 正本は現在 2DER の持ち物ではない。**
 本日 私と監査が正本を根拠に判定を下してきたが、**その根拠は 2DER の外に在る。**
 （記憶「台帳に載らないものは 2DER でない」と同型。）
+
+**★併せて実測: 正本は2つある**（`.md` と `_OPERATING.md`）。**どちらが正本かは UNVERIFIED。**
+正本 §4 の対等性でいう **identity rule が正本自身について未成立**。
+
 **★ここでは登記しない**（Taka の指示は調査と declared のみ）。**MISSING として立てる。**
 
 ---
