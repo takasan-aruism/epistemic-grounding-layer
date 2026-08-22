@@ -307,6 +307,101 @@ Q3 ★EQUALITY の CONFLICT ―― waiting と skipped を分けるべきか。
 
 ---
 
+## 9. ★追記 2026-08-22 15:0x ―― Taka が exit と実走を確定 ／ 計器は既存で足りた
+
+### Taka 指示（逐語の要点）
+
+```
+★EVO-0084 だけ閉じる。
+★監査の3問に答えが出たら ★1件だけで
+  yield → 後続pick → 元task保持 → 条件解消後再評価  を ★実走させる。
+★これが通って ★ESDE 上で ESTABLISHED になったら ★その時点で常駐を上げて 194件を流す。
+```
+
+∴ **194件は exit ではなく ESTABLISHED の後段。順序が確定した。**
+
+### ★Q2（E3 を測る計器の形）は解けた ―― **既存記録で足りる**
+
+探した範囲 = `/api/etrace?task_id=` の返り全欄。
+
+```
+task_trace = {task_id, events, count, truncated, total, run_ids}
+実測(TASK-2DER-731F98A0) = events ★24 / truncated=False
+  component 内訳 = DW 11 / MANAGER_V0 5 / DISPATCH 4 / RUNGATE 4
+
+MANAGER_V0 tick の outputs が持つ欄:
+  action / task_id / reason / handed_to / ★phase /
+  ★dw_state_before / ★dw_state_after / ★stopped_at_stage / gate_cause / planner_outcome
+```
+
+**★Taka の4段を この欄へ そのまま割り当てられる:**
+
+| 段 | 観測 |
+|---|---|
+| ① yield | 対象 task の行に `phase == "candidate_skip"` ＋ `reason` が在る |
+| ② 後続pick | 同じ時刻帯に **別の** task の行が `action == "RUN"` |
+| ③ 元task保持 | 後の周に **同じ** task の行が再び現れる（★消えていない） |
+| ④ 条件解消後再評価 | その行の `dw_state_after` が動く（`before != after`） |
+
+### ★「永久停止」は `before == after` の反復として直接見える（実測）
+
+```
+14:07:38  action=RUN  before=CREATED         → after=★JUDGE_REQUIRED   ★動いた
+14:07:50  action=RUN  before=JUDGE_REQUIRED  → after=JUDGE_REQUIRED    ★動かない
+14:07:55  action=RUN  before=JUDGE_REQUIRED  → after=JUDGE_REQUIRED    ★動かない
+  3行とも phase=after_gate / stopped_at_stage=UPPER_REVIEW
+```
+
+**∴ 分類カウント（194/282）は要らなかった。**私の §0 訂正①の原因はこの計器を使わなかったこと。
+
+### ★最小差分が1つ増えた
+
+```
+(a) 段①の述語に ★入口の判定を渡す
+    ★同じ /api/state の応答に既に在る claude_barrier / dispatch_status を捨てない
+    ★★Q1 が成立することが前提（監査待ち）
+(b) 段①の yield に ★_record を足す
+    ★Taka 逐語「待機 task は ★原因付きで残し」を満たすため
+    ★新機構ではない = 段②が既に使う ★同じ _record・★同じ phase=candidate_skip の形
+```
+
+### ★★実走の前提に UNVERIFIED が1つ（★実装前に明記する）
+
+**「後続 pick」を観測するには 並びに ★実行可能な後続が居なければならない。
+その並び（`runs/manager_queue.json`）の中身は ★front door から引けない。**
+
+```
+探した範囲 = /api/control の 24面 ＋ state / tasks / ledgers / resolve / etrace / roadmap
+★並びを返す面 = ★0
+★直読は境界違反（★本日 実際に門が止めた）
+∴ ★並びの長さ・中身 = ★UNVERIFIED
+```
+
+**∴ 実走が「後続 pick」を示せなかった場合、②実装が悪い と ③並びに後続が居ない を
+★区別できない。** これは §2 で測った「取得不能11件」の型（query入口）が
+**実走の設計そのものに刺さった1例。**
+
+**対処（★新しい口を作らない）**: 実走は **2周以上**回し、
+`MANAGER_V0 tick` の **task_id が2種類以上 現れるか**を見る。
+1種類しか出なければ **「後続が居ない」と結論せず UNVERIFIED として止める**
+（★正本§11「0件・bool(exists)・証拠1件を成功判定に使わない」）。
+
+### ★実走の手順（★実装後・★1件だけ・Taka 逐語）
+
+```
+R1 before  対象 task の /api/etrace を取る（★変更前の行を保存）
+実装       (a)(b) の最小差分のみ
+R1 after   窓を切って ★2周以上 回す
+判定       ①phase=candidate_skip が出たか
+           ②同時刻帯に別 task の action=RUN が出たか
+           ③後の周に同じ task の行が再び出たか
+           ④その行で before != after になったか
+R4         §5 の拒否条件5件を ★実際に発火させる
+★4つとも取れた時だけ ESTABLISHED。★1つでも欠けたら UNKNOWN のまま。
+```
+
+---
+
 ## 8. 触っていないもの
 
 `EVO-0085` writer 4欠損 ／ `EVO-0087`（R4② 未発火）／ `EVO-0088`（閉）／
