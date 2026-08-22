@@ -499,6 +499,115 @@ next_operation = UPPER_REVIEW  ★79件
 
 ---
 
+## 11. ★実走 2026-08-22 16:1x ―― 4段すべて取れた ／ 判定 = ESTABLISHED
+
+**実装**: twoder `96677bd`（★declared `92e190e` の**後**＝git 順序で確認できる）
+**差分**: 31行追加 / **削除は `_queue_write` の1行だけ**
+
+### ★計器の訂正（実走中に1つ わかった）
+
+```
+最初 `timeout 400 python3 -m twoder.manager_v0` を回した → ★events 0件(24→24)。
+★原因= main() は最初に record_stages を呼び、その中の
+  /api/control?include=observed_edges が ★timeout=460 ∴ ★400秒では tick() に到達しない。
+★∴ 1プロセス内で ★tick() を直接 呼ぶ形に変えた(★_STOPPED_AT が持続する=正しい計器)。
+★★正直に書く: ★main() の周回は経ていない。★但し 4つの挙動は すべて
+  _last_task / tick の内側 ∴ ★経路としては同じ。
+```
+
+### ★実走の記録（★1プロセス・5 tick）
+
+```
+tick0  RUN   TASK-2DER-731F98A0                    進める
+tick1  STOP  TASK-2DER-731F98A0                    ★同じ所で2回
+tick2  RUN   TASK-2DER-PRODUCER-SELECT-CREATE-v0.1 ★★後続 pick
+tick3  STOP  TASK-2DER-PRODUCER-SELECT-CREATE-v0.1 同じ所で2回
+tick4  RUN   TASK-2DER-AUTO-68518E15               ★さらに次へ
+
+_STOPPED_AT = {731F98A0: [UPPER_REVIEW, UPPER_REVIEW],
+               PRODUCER-SELECT-CREATE-v0.1: [PLAN, PLAN],
+               AUTO-68518E15: [PLAN]}
+```
+
+### ★Taka の4段 ―― 4/4
+
+| 段 | 判定 | 証拠 |
+|---|---|---|
+| ① **yield** | **OBSERVED** | `/api/etrace` の MANAGER_V0 が 5→**10**件。うち **`phase=candidate_skip` が3件**、`action=SLEEP` / `reason=同じ所で2回`（★**原因付きで残っている**） |
+| ② **後続pick** | **OBSERVED** | tick2 で **別 task** が RUN、tick4 で **さらに別 task** が RUN ＝ **3つの異なる task が順に選ばれた** |
+| ③ **元task保持** | **OBSERVED** | **新プロセス**（`_STOPPED_AT = {}`）で `_last_task` が **`731F98A0` を再び返した** ＝ **並びから落ちていない** |
+| ④ **条件解消後再評価** | **OBSERVED** | 同上。`action=RUN / reason=進める` ＝ **元の位置のまま 再評価された** |
+
+**★③④ が同じ観測で取れたのは、`_STOPPED_AT` が「プロセスの記憶」だから
+（★既存の性質・私が足したものではない）。**
+
+### ★R4 ―― 拒否条件を実際に発火させた
+
+```
+_machine_turn（段①の述語）           ★純関数・副作用0
+  ★未知の状態 NO_SUCH_STATE  → False  ★拒否(先頭を塞がない)
+  ★COMPLETE                  → False  ★拒否
+  ★BLOCKED                   → False  ★拒否
+  (対照) READY_FOR_AUDIT      → True   通す        ←★対照が通ることも確認
+
+decide_tick（★2DER 製・1行も書き換えていない）
+  stopped_at=[]              → RUN  進める
+  stopped_at=['PLAN']        → RUN  進める
+  stopped_at=['PLAN','PLAN'] → ★STOP 同じ所で2回   ←★境界が2回目に在ることを確認
+  ★実走でも 3回 発火（tick1 / tick3 ＋ 段①の candidate_skip）
+
+★未発火 = ④escalation 未解決 → candidate_skip
+  ★これは ★段②の既存経路で ★私の差分の外 ∴ ★UNVERIFIED として残す(★PASSにしない)。
+```
+
+### ★ESDE 宣言（実走後）
+
+```
+EQUALITY   ★CONFLICT → ★解消
+           waiting  = 並びに残り phase=candidate_skip + reason（★実測3件）
+           removed  = _queue_write（★受領後のみ・domain_dw:393）
+           completed= dw_state COMPLETE
+           skipped  = ★waiting と同じ語のまま = ★Taka/監査の裁定どおり ★分けない(新語0)
+           status: ★PRESENT（★waiting と removed が別経路になった）
+
+SYMMETRY   pairs 3 / present ★3 / missing 0
+           yield ↔ resume     ★①と③④で両側 OBSERVED
+           並びに残す ↔ 落とす ★保持(実測)↔ 受領後のみ落とす
+           記録する ↔ 読む     ★candidate_skip を /api/etrace が返す(★実測)
+
+LINKAGE    E1 判定→yield        OBSERVED
+           E2 yield→次候補      OBSERVED
+           E3 次候補→pick       ★OBSERVED（★これが UNVERIFIED だった。★解消）
+           E4 yield→原因の記録  ★OBSERVED（★段①にも出た＝ABSENT だった。★解消）
+           E5 次周→resume       ★OBSERVED（新プロセスで元位置）
+           declared 5 / observed ★5 / broken 0
+
+HIERARCHY  required 5 / passed 5 / violation 0
+           ★順序= 3 task は ★並びの順に 選ばれた（頭→次→次）＝★並べ替えていない
+           ★重要度= score も rank も 書いていない（差分 31行に 無い）
+           ★判断器= decide_tick（2DER 製）を そのまま 使った
+           ★入口= 派生値（webui の役名列挙）は ★使わなかった
+
+R1_END_TO_END     ★OBSERVED（本線の tick()・実 queue・実 state）
+R2_DENOMINATOR    状態 9/9 走査 ／ 実走 5 tick / 3 task
+R3_INTERNAL_GATES gates [_machine_turn, decide_tick] passed ★2/2（対照つき）
+R4_REJECTION      ①②③⑤ ★実発火 ／ ④ ★UNVERIFIED（差分外）
+
+UNDERSTANDING  candidate: EXECUTABILITY_YIELD
+               requires: [4段, R4, FIFO を壊さない, priority を作らない]
+               evidence: [上記すべて]
+               unresolved: [R4④（段②の既存経路・差分外）]
+               result: ★ESTABLISHED
+               ★根拠: Taka の成功条件「FIFO の意味を壊さず、実行不能な先頭 task が
+                 後続の実行可能 task を ★永久停止させないこと」= ★実走で成立。
+               ★★但し「194件を流した」ではない（Taka 逐語で exit から外してある）。
+
+CREATION   status: NOT_EVALUATED
+DECISION   ★GO（★次は ステップ⑤＝常駐。★その前に §10 の 79件 を もう一度 出す）
+```
+
+---
+
 ## 8. 触っていないもの
 
 `EVO-0085` writer 4欠損 ／ `EVO-0087`（R4② 未発火）／ `EVO-0088`（閉）／
