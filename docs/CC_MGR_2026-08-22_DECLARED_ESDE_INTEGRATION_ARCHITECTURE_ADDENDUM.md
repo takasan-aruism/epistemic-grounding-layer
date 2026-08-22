@@ -115,26 +115,80 @@ GET /api/tasks → tasks: 585 件。★中身は ID の文字列だけ（例 TAS
 
 Taka 逐語「**まだこっちは台帳記帳されていない**」「最近まで監査が使っていた GPT 作成のメモ」。
 
-**★私が実測した（UNVERIFIED のまま置かない）。**
-探索範囲 = `egl/docs/*ESDE_EVALUATION*` 全件 ＋ `DESIGN_EVIDENCE_LEDGER.jsonl` 全行。
+### ★訂正4 ―― 私は最初、**別の帳簿を数えていた**
+
+最初 `DESIGN_EVIDENCE_LEDGER.jsonl` を走査して「登記行0」と書いた。**帳簿が違った。**
+`cc_register.REGISTER` = **`egl/docs/CC_REGISTER.jsonl`**（`cc_register.py:23`）。
+∴ 鍵を合わせて測り直した（記憶「数には鍵を添える／食い違いはほぼ常に鍵の違い」）。
 
 ```
-docs/ESDE_EVALUATION_DOMAIN_MANAGER_v0.1.md            doc_id=ART-53632b55e4  ★登記行=0
-docs/ESDE_EVALUATION_DOMAIN_MANAGER_v0.1_OPERATING.md  doc_id=ART-fd56608eab  ★登記行=0
+登記簿 = egl/docs/CC_REGISTER.jsonl   全行 1022 / DOC行 708
+  ESDE_EVALUATION_DOMAIN_MANAGER_v0.1.md            ART-53632b55e4  ★登記行=0
+  ESDE_EVALUATION_DOMAIN_MANAGER_v0.1_OPERATING.md  ART-fd56608eab  ★登記行=0
 ```
 
-**∴ Taka の申告は正しい。file としては PRESENT、台帳登記は ABSENT（分母＝台帳全行を走査した上での 0）。**
+**結論は変わらない（Taka の申告どおり未登記）が、最初に出した証拠は誤りだった。**
 ★`doc_id_for()` は path の sha1 から決定論で id を作るので、**id が引けることは登記の証拠にならない**。
 ∴ 登記の有無は id ではなく**行を数えて**確かめた。
 
-**∴ 正本は現在 2DER の持ち物ではない。**
-本日 私と監査が正本を根拠に判定を下してきたが、**その根拠は 2DER の外に在る。**
-（記憶「台帳に載らないものは 2DER でない」と同型。）
+### ★どちらが正本か ―― 来歴で確定した（推測しない）
 
-**★併せて実測: 正本は2つある**（`.md` と `_OPERATING.md`）。**どちらが正本かは UNVERIFIED。**
-正本 §4 の対等性でいう **identity rule が正本自身について未成立**。
+```
+docs/ESDE_EVALUATION_DOMAIN_MANAGER_v0.1.md            87行/4,883B   受領 2026-08-20  commit 5a6c10f
+  表題「2DER の 構造監査 指標（★正本）」
+docs/ESDE_EVALUATION_DOMAIN_MANAGER_v0.1_OPERATING.md  238行/12,084B 受領 2026-08-21  commit 4d94196
+  表題「Claude運用規則 / 2DER将来統合仕様（実践導入版）」
+  ★ヘッダ逐語「本ファイルは 2026-08-20 時点で §2 §4 §5 §6 §7 §8 §9 §13 §15 を欠いた
+   部分版だった。本版で全文に差し替える。」
+```
 
-**★ここでは登記しない**（Taka の指示は調査と declared のみ）。**MISSING として立てる。**
+**∴ 現行 = `_OPERATING.md`（全文版）／旧 = `v0.1.md`（部分版）。**
+Taka が 2026-08-22 に再送した全文は `_OPERATING.md` と一致する。
+
+### ★Taka 裁定（2026-08-22）と 登記の実行
+
+```
+Q1 先行研究(ESDE-Research)から引いてよいか
+   → ★却下。逐語「ESDE-Research自体現在の開発には影響がないので無視」
+     ∴ 44GB の調査は行わない。UNVERIFIED のまま閉じる（★分からないままにする、が結論）。
+
+Q2 正本を台帳へ登記するか
+   → ★可。ただし前提つき。逐語:
+     「正本登録が遅れたのは 2DER が開発主体にはなれず Claude 依存が残ったから」
+     「その正本を外部においたのは、そもそも★それが絶対の正義にはならず、開発を進める中で
+      洗練させた V2,V3 を作成して正本化するほうが筋がいいかな？と思ったから」
+```
+
+**★登記した（既存機構のみ・新台帳0・新列0）。**
+
+```
+ART-53632b55e4  部分版  BUILD_SPEC / TAKA→MGR / build_role=SUPERSEDED
+ART-fd56608eab  全文版  BUILD_SPEC / TAKA→MGR / build_role=IMPL_SOURCE / supersedes=ART-53632b55e4
+DOC行 708 → 710
+```
+
+`record_doc` は **append-only（元の DOC 行を書き換えない）**・`build_role` に `SUPERSEDED` が既に在り・
+`supersedes` 列が既に在る。∴ **v2/v3 が出たとき、v1 を SUPERSEDED に落として繋げる機構は既存で足りる。**
+**「正本が2つある」という identity 未成立は、これで台帳側が答えを持つ形になった。**
+
+### ★この裁定が declared の読み方を変える点
+
+**正本は絶対規則ではなく「現時点の最良版」であり、開発の実測から v2 へ洗練される前提。**
+∴ 本日の実測は**正本を守るための材料ではなく、v2 の材料**である。v2 へ持ち越す候補：
+
+```
+① YES 膨張（§2）        正本§3 の10語を LLM に付けさせると PRESENT を付けすぎる。
+                        ESDE Language の実測 48スロット中39。★§14 の UNVERIFIED 原則の根拠。
+② 調査面の不在（§1）    正本§10② の全件調査を 2DER が実行できない（front door に述語の口が0）。
+                        ∴ Phase 1「既存記録から機械取得」は現状 前提を欠く。
+③ 正本自身の identity   正本が2つ在り、どちらが現行かを機械が持っていなかった（本項で解消）。
+④ 「一直線」の禁止      §0 の訂正3。正本§10 は工程の列に見えるため、
+                        経路への挿入として読まれやすい。v2 で「調査基盤」と「経路」を分ける語が要る。
+```
+
+**★Taka 逐語「正本登録が遅れたのは 2DER が開発主体にはなれず Claude 依存が残ったから」は
+本追補 §1 の実測と同じことを指している** ―― 記録する主体が Claude のままだから、
+Claude が登記を忘れれば登記されない。**§1 の「調査の主体」と同じ構造が、登記にも出ている。**
 
 ---
 
@@ -218,17 +272,31 @@ DECISION   ★DESIGN_HOLD
 
 ---
 
-## 7. Taka へ返す2問（★私が決めない）
+## 7. Taka へ返した2問 ―― ★両方 裁定済（2026-08-22）
 
 ```
-Q1  調査基盤の「問いの形」を、先行研究（ESDE Language / Genesis）から引いてよいか。
-    ★2026-07-26 に language/lexicon から引いた前例が在る（成功例・§2）。
-    引くのは機能でなく ★手順と失敗記録。
-    ★esde/ESDE-Research は 44GB / 43,069 files ∴ 探す範囲を絞る指示が要る。
-
-Q2  正本（ESDE Evaluation Domain Manager v0.1）を台帳へ登記するか。
-    現在 2DER の外に在る。★私と監査は本日ずっと これを根拠に判定してきた。
+Q1 先行研究から引いてよいか        → ★却下。ESDE-Research は現在の開発に影響しない ∴ 無視。
+                                     44GB は調査しない。★§2 の前例（2026-07-26 の language/lexicon 移植）は
+                                     ★既に 2DER 内の記録として在る ∴ そこから読める分だけを使う。
+Q2 正本を台帳へ登記するか          → ★可（前提つき）。★実行済 = ART-fd56608eab / ART-53632b55e4。
 ```
+
+**∴ 私から Taka へ出す問いは現在 0件。**次の手番は私（MGR）。
+
+### ★次に確定すべきもの（私が進める。★実装ではない）
+
+本追補 §6 のとおり、実装へ進めない理由は2つとも規則側に在る。
+∴ 次は **READER を確定する**こと。**新しい reader を作るのではなく、既存の読み手を探す。**
+探す先（作用ベース・★これから実施）:
+
+```
+manager_v0 の巡回が何を材料に手番を決めているか
+front door /api/control が既に返している欄（function_table を返している前例が在る）
+状況表 2der_status.sh が何を読んでいるか
+route_worker が観測結果を誰に渡しているか
+```
+
+**★「読み手が居ない」と結論する前に、探した範囲を書く**（記憶・板の規則）。
 
 ---
 
