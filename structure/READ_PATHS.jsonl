@@ -51,6 +51,8 @@
 {"actually_loaded": ["INTENT_ROLE_SPLIT.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_intent_role_split", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["INTENT_ROLE_SPLIT_D2P.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_intent_role_split_d2p", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["INTENT_ROLE_SPLIT_D2P2.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_intent_role_split_d2p2", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["LEDGER_ACCOUNT_AXES_CANDIDATE.json", "LEDGER_ACCOUNT_AXES_STABILITY.json"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_ledger_account_axes", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": ["LEDGER_ACCOUNT_AXES_CANDIDATE.json", "LEDGER_ACCOUNT_AXIS_NAMES.json"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_ledger_account_axis_names", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["LLM_INVOCATIONS.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_llm_invocations", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_long_input_build3", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_menu_restriction_build4", "verdict": "UNRESOLVED_NO_CONTRACT"}
