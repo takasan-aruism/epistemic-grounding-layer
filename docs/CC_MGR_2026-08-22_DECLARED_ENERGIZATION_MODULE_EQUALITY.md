@@ -154,10 +154,40 @@ UNDERSTANDING  candidate: ENERGIZATION_MODULE_EQUALITY
 R3_INTERNAL_GATES  gates: [import, isinstance(:355), _require_energize(:100)]
                    passed: ★[import, isinstance(:355), _require_energize(:100)]  ←★3/3
                    failed: []
-                   status: ★OBSERVED_IN_TEST（★本線ではない）
-R4_REJECTION       ①②の拒否条件は ★発火していない = ★通ったから
-                   ∴ ★「拒否を実際に発火させる」は ★別途 必要（★正本§10⑨ 未了）
+                   status: ★UNVERIFIED（★本線では未観測）
+                   evidence: harness(verify_minter_B・tempfile・実repo書込0)では3つとも通った
+R4_REJECTION       rejection_conditions:
+                     ①token が _EnergizedApply でない → TypeError（_require_energize）
+                     ②energize_token が _EnergizedApply でない → refuse NOT_ENERGIZED（:355）
+                   actually_rejected: ★①を実発火（★監査が対照2件で実行）
+                     対照A energize=None      → TypeError 'not an _EnergizedApply (write requires energization)'
+                     対照B energize=別クラス  → ★同じ TypeError
+                   unexpected: [] ／ status: ★①OBSERVED / ②UNVERIFIED
 ```
+
+### ★訂正（2026-08-22 13:45）―― `OBSERVED_IN_TEST` は造語だった
+
+私は上表で当初 `status: OBSERVED_IN_TEST` と書いた。**正本§3 の語彙に無い。**
+正本の状態語は **10語のみ** ―― `PRESENT / ABSENT / OBSERVED / BROKEN / UNVERIFIED / UNKNOWN /
+UNREACHABLE / CONFLICT / ESTABLISHED / REJECTED`。
+§3 逐語「禁止：…読み替えない」に対し、**私は読み替えでなく新語を作った ―― 同じ穴。**
+∴ **`UNVERIFIED`（本線未観測）＋ evidence 行に「harness では通った」を書く形へ直した。**
+**語は増やさない**（監査も増やさない側を推奨。★Taka へは上げない ―― 我々で決着できる）。
+
+### ★「:100 が通った」は推論から 対照へ（監査が実行）
+
+```
+① source の順序（確定・再調査不要）
+   _apply_to_working の関数内で _require_energize は ★7行目 / _APPLY(no_hunk) は ★51行目
+   ∴ ★前者が先。
+② ★但し「落ちた行が後だから前は通った」は ★推論のまま ∴ ★門を直接撃った
+   対照A  energize=None      → ★TypeError 'not an _EnergizedApply (write requires energization)'
+   対照B  energize=別クラス  → ★同じ TypeError
+   ∴ ★energization 門は ★実在し ★実際に拒否する。
+   ★verify_minter_B が :146 まで到達したなら :100 は通っている＝★対照で裏づけた。
+```
+
+**★正本§10⑨「拒否条件を全列挙し、各拒否を実際に発火させる」―― ①は発火済。②は未了。**
 
 ### ★それでも ESTABLISHED にしない（理由を明記する）
 
