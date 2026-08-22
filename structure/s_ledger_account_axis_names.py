@@ -36,6 +36,9 @@ TEMPERATURE = 0.7
 MAX_TOKENS = 6144
 CLIP = 200
 PROMPT_ID = "ledger-axis-name-en-then-ja-v2"
+PARALLEL = 20          # ★軸と軸の 間の 並列数(★Taka 許可 2026-08-23)
+TREE_IN = os.path.join(STRUCT, "LEDGER_ACCOUNT_TREE.json")
+TREE_OUT = os.path.join(STRUCT, "LEDGER_ACCOUNT_TREE_NAMES.json")
 
 # ★2026-08-23 実測(3seed × 4形)=★★字数の縛り「10〜15文字」が 発散の 原因。
 #   ★字数あり= 6144(空) / 3545 / 6144(空)  ← 2/3 落ちる
@@ -205,11 +208,10 @@ def _mkrow(N, ax, sample_ids, prop_en, prop_ja, raw):
     }
 
 
-def build():
-    N = _names_mod()
-    memo = _memo_map()
-    rows = []
-    for ax in _candidates():
+def _name_one(N, memo, ax):
+    """★軸 1本を 命名する(★ここは 直列=英語が 決まってから 日本語を 引く ため)。
+    ★軸と軸の 間は 呼び手が 並列に する。"""
+    if True:
         sample_ids = ax.get("sample_question_ids") or ax.get("members", [])[:12]
         prop_en, prop_ja, raw, shrinks, empty = {}, {}, {}, {}, {}
         for s in SEEDS:
@@ -251,12 +253,34 @@ def build():
         row["name_ja_derived_from_en"] = base_en
         row["examples_used_per_seed"] = shrinks
         row["empty_returns_per_call"] = empty       # ★何回 空だったか(★黙って 減らさない)
-        rows.append(row)
-        r = rows[-1]
-        print("  %s n=%-5d EN=%r [%s] JA=%r [%s]"
-              % (r["axis_id"], r["n_members"], r["name_en"], r["name_en_status"],
-                 r["name"], r["name_status"]))
-    rows.sort(key=lambda r: r["axis_id"])
+        for k in ("level", "parent"):               # ★2層(カテゴリ→詳細)の 時だけ 付く
+            if k in ax:
+                row[k] = ax[k]
+        return row
+
+
+def build(entries=None):
+    """★軸と軸の 間を ★並列に する(★Taka 許可 2026-08-23『30並列でも回せる。20くらいでもかまわん』)。
+    ★1本の 中は 直列の まま=★英語が 決まってから 日本語を 引く 順序を 崩さない。"""
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+    N = _names_mod()
+    memo = _memo_map()
+    items = list(entries if entries is not None else _candidates())
+    lock, done = threading.Lock(), [0]
+
+    def work(ax):
+        r = _name_one(N, memo, ax)
+        with lock:
+            done[0] += 1
+            print("  [%3d/%d] %s n=%-5d EN=%r [%s] JA=%r"
+                  % (done[0], len(items), r["axis_id"], r["n_members"], r["name_en"],
+                     r["name_en_status"], r["name"]), flush=True)
+        return r
+
+    with ThreadPoolExecutor(max_workers=PARALLEL) as ex:
+        rows = list(ex.map(work, items))
+    rows.sort(key=lambda r: (r.get("level", 0), r["axis_id"]))
     return rows
 
 
@@ -269,13 +293,13 @@ def _ser(rows):
     return json.dumps(doc, sort_keys=True, ensure_ascii=False, indent=2) + "\n"
 
 
-def check():
+def check(entries=None):
     if not os.path.isfile(OUT):
         print("LEDGER_ACCOUNT_AXIS_NAMES --check: RED\n  NOT_GENERATED")
         return 1
     N = _names_mod()
     rows = json.load(open(OUT, encoding="utf-8"))["names"]
-    cand_ids = {c["axis_id"] for c in _candidates()}
+    cand_ids = {c["axis_id"] for c in (entries if entries is not None else _candidates())}
     red = []
     if {r["axis_id"] for r in rows} != cand_ids:
         red.append("SCOPE_MISMATCH: 命名対象が候補軸集合と不一致")
@@ -302,7 +326,27 @@ def check():
     return 0
 
 
+def _tree_entries():
+    d = json.load(open(TREE_IN, encoding="utf-8"))
+    return d["categories"] + d["details"]
+
+
 def main(argv):
+    # ★--tree=★2層(カテゴリ→詳細)を 命名する。★入口も 出口も 別ファイル(★1層の 結果を 壊さない)。
+    if "--tree" in argv:
+        global OUT
+        OUT = TREE_OUT
+        entries = _tree_entries()
+        if "--check" in argv:
+            return check(entries)
+        rows = build(entries)
+        open(OUT, "w", encoding="utf-8").write(_ser(rows))
+        n_en = sum(1 for r in rows if str(r["name_en_status"]).startswith("CONSENSUS_"))
+        n_ja = sum(1 for r in rows if str(r["name_status"]).startswith("CONSENSUS_"))
+        print("[build --tree] 軸=%d(カテゴリ%d/詳細%d) 英語成立=%d 日本語成立=%d"
+              % (len(rows), sum(1 for r in rows if r.get("level") == 1),
+                 sum(1 for r in rows if r.get("level") == 2), n_en, n_ja))
+        return 0
     if "--check" in argv:
         return check()
     rows = build()
