@@ -50,6 +50,9 @@ TOKEN = "/home/takasan/twoder/.access_token"
 
 
 _SELF = os.path.abspath(__file__)
+# ★★[Claude実装] 2026-08-24 Taka 裁定②= この Worker が 台帳へ 書く 行為の 名前(★POLICY の 鍵)。
+#   ★1つだけ= ★書く口は 4つ だが ★どれも『1件の評価を追記する』の 部分 ∴ 行為としては 1つ。
+ESDE_WRITE_ACTION = "ESDE_RECORD_EVALUATION"
 # ★★2026-08-24 自己監査で見つけた欠陥: ★走査が `**/*.py` だけだった ∴
 #   ★.sh から python を呼ぶ読み手(実測: .claude/hooks/2der_status.sh:103 が
 #   `from twoder.effective_state import canonical_actor`)を ★見落とし ★偽の欠損を作っていた。
@@ -345,8 +348,20 @@ def write_to_detail(task_id, result, event_id, dry=False):
       task_id と 計器の artifact id。★event_id は 引けない(ETR-NORUN の衝突・58.4%)ため
       ★ref に しない=`evidence_text` に 文字列として 残す(★引けない物を『根拠』に 指さない)。
     ★何も止めない・何も直さない。
+
+    ★★[Claude実装] 2026-08-24 Taka 裁定②(★『Worker が勝手に実行しない8種を authority の門にする。
+      文書規律ではなく 機械的に破れない方がいい』)= ★書く前に ★権限の規則に 掛ける。
+      ★判定は ここに 書かない=★`twoder.authority.POLICY` が 正本(★`domain_ledger` の 前例と 同じ形)。
+      ★通らなければ ★1バイトも 書かずに 断る。
+      ★★効き目の 本体は ★この行為が 通る ことでは なく ★★POLICY に 無い行為が 止まる こと=
+        ★将来 誰かが ここに 状態変更を 足しても ★行為名が POLICY に 無ければ
+        ★`gate()` は REQUIRES_APPROVAL を 返す(★fail-closed・authority.py L125-126)。
     """
     sys.path.insert(0, "/home/takasan/rri")
+    from twoder import authority as _A
+    g = _A.gate(ESDE_WRITE_ACTION)
+    if g.get("requires_approval"):
+        return {"wrote": False, "why": "authority: requires approval", "gate": g}
     from rri import request_thread as RT
     import datetime
     ts = datetime.datetime.now().isoformat()
