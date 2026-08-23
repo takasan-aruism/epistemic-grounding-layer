@@ -1049,3 +1049,4 @@
 {"kind": "DOC", "doc_id": "ART-cdfb54d367", "path": "docs/CC_MGR_2026-08-24_FEEDBACK_AUTOMATION_AND_AB_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T02:54:58"}
 {"kind": "DOC", "doc_id": "ART-61c57cfac2", "path": "docs/CC_MGR_2026-08-24_LOOP_CLOSED_AND_GROUNDING_METER_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T02:54:58"}
 {"kind": "DOC", "doc_id": "ART-f6f5f74899", "path": "docs/CC_MGR_2026-08-24_REGISTRATION_GAP_AND_ID_COLLISION_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T02:57:16"}
+{"kind": "DOC", "doc_id": "ART-e2d85e3359", "path": "docs/CC_MGR_2026-08-24_PROGRESS_AND_BACKLOG_v0.1.md", "type": "STATUS", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T03:12:36"}
