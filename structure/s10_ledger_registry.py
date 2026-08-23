@@ -73,6 +73,25 @@ def all_ledgers():
                 continue
             if re.match(r"docs/SUBMIT_\d{4}-\d{2}-\d{2}/", rel):
                 continue
+            # ★★2026-08-23 統廃合① (★Taka 裁定)。
+            #   ★★統合の基準は『同名か』ではなく ★★同一 schema・同一意味・同一 authority・同一 consumer
+            #     として扱えるか(★Taka 逐語)。★名前が同じでも 別台帳なら 統合しない。
+            #   ★通したのは 実測で 安全を 確かめた 2件だけ:
+            #     ①`DESIGN_EVIDENCE_LEDGER.jsonl` の 非 egl 3本
+            #        → ★DE-0001〜0012 の 12件が ★全部 egl 版に 在る(★欠落 0件・front door で 941行を 走査)
+            #     ②`REVIEW_LEDGER.jsonl` の ★空の 複製だけ(ds / rri = 0行)
+            #        → ★`egl`(JREV 系)と `dev-workcell`(DWREV 系)は ★別の 台帳 ∴ ★両方 残す
+            #   ★★`audit_backlog` は 触らない= ★`GAP-RRI-4` が ★同一 ID・異なる状態
+            #     (egl: class=OPEN_GAP/status=OPEN ／ rri: class=ADDRESSED/status=ADDRESSED_STRUCTURE)
+            #     ∴ ★単純重複では ない。★reader semantics を 確かめるまで 触らない(★別 AXIS)。
+            #   ★ここも ★ファイルは 1バイトも 消さない(★母数から 外すだけ)。
+            _base = os.path.basename(rel)
+            if _base == "DESIGN_EVIDENCE_LEDGER.jsonl" and r != "egl":
+                continue
+            if _base == "REVIEW_LEDGER.jsonl" and r != "egl":
+                _p = ROOT / r / rel
+                if not _p.exists() or not any(ln.strip() for ln in _p.read_text(errors="ignore").splitlines()):
+                    continue                      # ★空の 複製だけ 外す(★中身が 在る dev-workcell は 残す)
             key = f"{r}/{rel}"
             seen[key] = (r, rel, rel in tracked)
     return seen
