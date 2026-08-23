@@ -1065,3 +1065,4 @@
 {"kind": "DOC", "doc_id": "ART-cb3d453df3", "path": "docs/CC_ALPHA_2026-08-24_TASK_THREAD_BULK_READ_HANDOFF_v0.1.md", "type": "HANDOFF", "from": "DESIGN", "to": "MGR", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-08-24T06:26:19"}
 {"kind": "DOC", "doc_id": "ART-d6809170f9", "path": "docs/FINDING_refs_extractor_marker_ba.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T06:31:26"}
 {"kind": "DOC", "doc_id": "ART-8810d0646e", "path": "docs/CC_ALPHA_2026-08-24_STATUS_CACHE_STALE_FINDING_v0.1.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T06:31:51"}
+{"kind": "DOC", "doc_id": "ART-2a589bd5d3", "path": "docs/FINDING_extractor_two_bugs_handoff.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T06:48:38"}
