@@ -1066,3 +1066,5 @@
 {"kind": "DOC", "doc_id": "ART-d6809170f9", "path": "docs/FINDING_refs_extractor_marker_ba.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T06:31:26"}
 {"kind": "DOC", "doc_id": "ART-8810d0646e", "path": "docs/CC_ALPHA_2026-08-24_STATUS_CACHE_STALE_FINDING_v0.1.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T06:31:51"}
 {"kind": "DOC", "doc_id": "ART-2a589bd5d3", "path": "docs/FINDING_extractor_two_bugs_handoff.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T06:48:38"}
+{"kind": "DOC", "doc_id": "ART-7308ecee62", "path": "docs/CC_ALPHA_2026-08-24_GDW_THREE_RULINGS_SPEC_v0.1.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "MGR", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-08-24T06:55:09"}
+{"kind": "DOC", "doc_id": "ART-ddc85390f7", "path": "docs/FINDING_a4_file_key_small_run.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T06:55:14"}
