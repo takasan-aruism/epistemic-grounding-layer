@@ -16,6 +16,7 @@
 出力: egl/structure/LEDGER_REGISTRY.jsonl（登記簿本体） + 標準出力サマリ。
 検査: --check で「宣言された唯一書き手 vs 実測書き手」の食い違いを非0で報告。
 """
+import ast
 import json, os, re, subprocess, sys
 from pathlib import Path
 
@@ -177,13 +178,205 @@ def declared_sole_writer(prod_owners):
     return None
 
 
-def readers(base, writers):
-    rs = [k for k, txt in PY.items() if base in txt and k not in writers]
+# ★★2026-08-23(★Taka 指示=reader 検出器の 品質評価 AXIS)。
+#   ★直す前の 実測(★分母 56台帳 × 769 .py):
+#       precision 0.031 / recall 0.083(★衝突22本を 除くと 0.024 / 0.017)
+#       偽陽性 442= comment/docstring のみ 329 / basename 直書きだが 読まない 80
+#                   / ★registry 自身の 自己参照 32 / import のみ 1
+#       偽陰性 155= ★100% が public API 経由(★読み手が 台帳名を 書かない)
+#       ★CANONICAL 13件中 13件で 自己参照の 偽陽性(★Taka 指定の 対照が 的中)
+#   ★★`path_owner` は 触らない= ★repo で 絞って おり 衝突の 影響を 受けない(★実測で 確認)。
+SELF = "egl/structure/s10_ledger_registry.py"
+_READ_CALL = re.compile(r"\bopen\(|\.read_text\(|\.readlines\(|json\.load\(|\bloads\(")
+
+
+# ★★2026-08-23 実測で 足した= ★台帳ごとに 769 file を ast.parse し直して いた
+#   ∴ ★1台帳 10.7秒 × 56 = 約10分(★直す前は ほぼ 0秒)。★解析は 1回だけ 作って 使い回す。
+_CODE_CACHE = {}
+_TREE_CACHE = {}
+
+
+def _tree_of(k, txt):
+    """★file の ast を 1回だけ 作る。★壊れて いれば None(★黙って 通さない)。"""
+    if k not in _TREE_CACHE:
+        try:
+            _TREE_CACHE[k] = ast.parse(txt)
+        except Exception:
+            _TREE_CACHE[k] = None
+    return _TREE_CACHE[k]
+
+
+def _code_only_cached(k, txt):
+    if k not in _CODE_CACHE:
+        _CODE_CACHE[k] = _code_only(txt)
+    return _CODE_CACHE[k]
+
+
+def _code_only(txt):
+    """★コメントと 文字列リテラルを 落とした 本文。
+
+    ★偽陽性 329件(★最大)は ★台帳名が ★コメント・docstring・文字列にしか 現れない file だった
+      ∴ ★本文から 落として 判定する。★ast が 通らない file は 正規表現で 近似する(★黙って 通さない)。
+    """
+    out = txt
+    try:
+        t = ast.parse(txt)
+        segs = []
+        for n in ast.walk(t):
+            if isinstance(n, ast.Constant) and isinstance(n.value, str):
+                seg = ast.get_source_segment(txt, n)
+                if seg and len(seg) > 4:
+                    segs.append(seg)
+        for seg in sorted(set(segs), key=len, reverse=True):
+            out = out.replace(seg, " ")
+    except Exception:
+        out = re.sub(r'("""|\'\'\')(?:.|\n)*?\1', " ", out)
+        out = re.sub(r'"[^"\n]*"|\'[^\'\n]*\'', " ", out)
+    return re.sub(r"#[^\n]*", " ", out)
+
+
+def _owner_read_funcs(owner_files):
+    """★owner module の ★読み関数の 名前(★書き手は 除く)。
+
+    ★偽陰性の 100% は ★public API 経由(★読み手が 台帳名を 書かない)だった
+      ∴ ★owner を import して ★読み関数を 呼ぶ file を 拾えるように する。
+    """
+    out = set()
+    for k in owner_files:
+        txt = PY.get(k, "")
+        try:
+            t = ast.parse(txt)
+        except Exception:
+            continue
+        body = {}
+        for n in ast.walk(t):
+            if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                body[n.name] = ast.get_source_segment(txt, n) or ""
+        wr = {nm for nm, b in body.items()
+              if "_append(" in b or ".write(" in b or re.search(r'open\([^)]*["\']a', b)}
+        rd = {nm for nm, b in body.items()
+              if nm not in wr and (_READ_CALL.search(b) or "_read(" in b)}
+        rd |= {nm for nm, b in body.items() if nm not in wr and any(d + "(" in b for d in rd)}
+        out |= {nm for nm in rd if not nm.startswith("__")}
+    return out
+
+
+_IMPORTCALL_CACHE = {}
+
+
+def _import_calls(k, txt):
+    """★file の (module別名, 関数別名, 呼ばれた名前) を 1回だけ 抽出する。"""
+    if k in _IMPORTCALL_CACHE:
+        return _IMPORTCALL_CACHE[k]
+    t = _tree_of(k, txt)
+    mods, fns, attr_calls, name_calls = set(), {}, set(), set()
+    if t is not None:
+        for n in ast.walk(t):
+            if isinstance(n, ast.ImportFrom) and n.module:
+                last = n.module.replace(".", "/").split("/")[-1]
+                for a in n.names:
+                    fns.setdefault(a.asname or a.name, []).append((last, a.name))
+                    mods.add((a.name.split(".")[-1], a.asname or a.name.split(".")[-1]))
+            elif isinstance(n, ast.Import):
+                for a in n.names:
+                    mods.add((a.name.split(".")[-1], a.asname or a.name.split(".")[-1]))
+            elif isinstance(n, ast.Call):
+                f = n.func
+                if isinstance(f, ast.Attribute) and isinstance(f.value, ast.Name):
+                    attr_calls.add((f.value.id, f.attr))
+                elif isinstance(f, ast.Name):
+                    name_calls.add(f.id)
+    _IMPORTCALL_CACHE[k] = (mods, fns, attr_calls, name_calls)
+    return _IMPORTCALL_CACHE[k]
+
+
+def _calls_owner_read_cached(k, txt, owner_files, read_funcs):
+    """★`_calls_owner_read` と 同じ 判定を ★1回だけ 作った 解析から 引く。"""
+    if not read_funcs or not owner_files:
+        return False
+    stems = {o.replace(".py", "").split("/")[-1] for o in owner_files}
+    mods, fns, attr_calls, name_calls = _import_calls(k, txt)
+    modalias = {alias for stem, alias in mods if stem in stems}
+    for a, attr in attr_calls:
+        if a in modalias and attr in read_funcs:
+            return True
+    for alias in name_calls:
+        for last, orig in fns.get(alias, []):
+            if last in stems and orig in read_funcs:
+                return True
+    return False
+
+
+def _calls_owner_read(txt, owner_files, read_funcs):
+    """★owner を import して ★読み関数を 呼んでいるか(★別名 import は 元の名前へ 戻す)。"""
+    if not read_funcs:
+        return False
+    try:
+        t = ast.parse(txt)
+    except Exception:
+        return False
+    mods, fns = set(), {}
+    stems = {k.replace(".py", "").split("/")[-1] for k in owner_files}
+    for n in ast.walk(t):
+        if isinstance(n, ast.ImportFrom) and n.module:
+            last = n.module.replace(".", "/").split("/")[-1]
+            if last in stems:
+                for a in n.names:
+                    fns[a.asname or a.name] = a.name
+            else:
+                for a in n.names:
+                    if a.name.split(".")[-1] in stems:
+                        mods.add(a.asname or a.name.split(".")[-1])
+        elif isinstance(n, ast.Import):
+            for a in n.names:
+                if a.name.split(".")[-1] in stems:
+                    mods.add(a.asname or a.name.split(".")[-1])
+    for n in ast.walk(t):
+        if isinstance(n, ast.Call):
+            f = n.func
+            if isinstance(f, ast.Attribute) and isinstance(f.value, ast.Name) and f.value.id in mods:
+                if f.attr in read_funcs:
+                    return True
+            elif isinstance(f, ast.Name) and f.id in fns and fns[f.id] in read_funcs:
+                return True
+    return False
+
+
+def readers(base, writers, repo=None):
+    """★この台帳を ★読んでいる .py。
+
+    ★判定(★台帳ごとに 同じ 手続き ／ ★特別扱いを 1件も 書かない):
+      ①`SELF`(登記器 自身)は 外す ―― ★台帳名の 一覧を 持つだけで ★読み手では ない
+      ②★コメント・文字列を 落とした 本文に 台帳名が 在り かつ ★読み呼び出しが 同じ file に 在る
+      ③または ★owner module を import して ★読み関数を 呼んでいる(★台帳名を 書かない 読み手)
+      ④`repo` を 渡された ときは ★その repo の file を 優先する(★basename が 衝突する 22本の ため)
+    """
+    ow = list(writers or [])
+    read_funcs = _owner_read_funcs(ow)
+    rs = []
+    for k, txt in PY.items():
+        if k == SELF or k in ow:
+            continue
+        hit = False
+        if base in _code_only_cached(k, txt) and _READ_CALL.search(txt):
+            hit = True
+        elif _calls_owner_read_cached(k, txt, ow, read_funcs):
+            hit = True
+        if hit:
+            rs.append(k)
+    if repo:
+        # ★衝突する 台帳では ★その repo の 書き手を 通る 読み手だけが 確実 ∴
+        #   ★repo 外の 直書き一致は 落とす(★owner 経由の 呼び手は 残す)。
+        same = [k for k in rs if k.startswith(repo + "/")
+                or _calls_owner_read_cached(k, PY.get(k, ""), ow, read_funcs)]
+        rs = same
     return sorted(rs)
 
 
-def live_ref(base):
-    return sorted(w for w in WIRED if base in (ROOT / w).read_text(errors="ignore") if (ROOT / w).exists())
+def live_ref(base, repo=None, writers=None):
+    """★live な 配線から 読まれているか。★`readers` と ★同じ 判定に 揃える(★片方だけ 直さない)。"""
+    rs = set(readers(base, writers or [], repo=repo))
+    return sorted(w for w in WIRED if w in rs)
 
 
 def sor_flag(owners, rel):
@@ -267,12 +460,13 @@ def build():
         ow = owner_cache[(repo, base)]
         prod = ow["production"]
         sole = declared_sole_writer(prod)
-        rds = readers(base, ow["programs"])
+        rds = readers(base, ow["programs"], repo=repo)   # ★repo を 渡す(★basename 衝突 22本の ため)
         live_readers = [r for r in rds if r in WIRED]
         wres = classify_writer(repo, base, ow, owner_index)
         is_ship = "/docs/" in rel or "SUBMIT_" in rel   # 出荷束/ドキュメント同梱の複製
         # basename 衝突で live に見える複製・出荷コピーは live 扱いしない
-        live = [] if (wres.startswith("BOOTSTRAP_REPLICA") or is_ship) else live_ref(base)
+        live = [] if (wres.startswith("BOOTSTRAP_REPLICA") or is_ship) else live_ref(
+            base, repo=repo, writers=ow["programs"])
         rows.append({
             "ledger_id": key,
             "basename": base, "repo": repo, "path": rel,
