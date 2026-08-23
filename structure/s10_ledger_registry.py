@@ -59,6 +59,20 @@ def all_ledgers():
                 continue
             if "/fixtures/" in rel or "/problems/" in rel:  # 実験の入力 fixture は台帳でない
                 continue
+            # ★★2026-08-23(★Taka 指示=『いらないんじゃね？ または同じものだなこれ、というのは統廃合する』
+            #   ／ 調査= `docs/CC_DESIGN_2026-08-23_LEDGER_CONSOLIDATION_SURVEY.md`)。
+            #   ★★これは ★登記簿の 母数から 外すだけ= ★ファイルは 1バイトも 消さない。
+            #   ★外す のは ★『実験の 作業ディレクトリ』と『同じ物の 再実行』だけ:
+            #     ・`data_*/` … 実験ごとの 作業場(★6本・合計135行・全部7月)
+            #     ・`_rerun`  … 同じ日・同じ行数の 再実行(★2本)
+            #     ・`docs/SUBMIT_<日付>/` … 出荷した 写し(★2本)
+            #   ★★生きている 台帳を 1本も 外さない= ★下の 3条件は ★実測で 10本だけに 当たる。
+            if re.match(r"data_[a-z0-9_]+/", rel):
+                continue
+            if re.search(r"_rerun\d*\.jsonl$", rel):
+                continue
+            if re.match(r"docs/SUBMIT_\d{4}-\d{2}-\d{2}/", rel):
+                continue
             key = f"{r}/{rel}"
             seen[key] = (r, rel, rel in tracked)
     return seen
