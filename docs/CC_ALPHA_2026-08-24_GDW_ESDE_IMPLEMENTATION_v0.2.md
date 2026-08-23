@@ -12,7 +12,7 @@
 | # | 変更 | 実測の根拠 |
 |---|---|---|
 | 1 | **§0 の前提は既に満たされている** | `ESDE_EVALUATION` の SoR は **`ds/data/event_trace.jsonl`**（ETRACE の1 component）。**ESDE専用 JSONL は元々作っていない** |
-| 2 | **明細へ載せる口を名指しした** | `record_evidence` は **`question_id` を要求する**＝TASK単位では載らない。**新規明細を立てるのは `raise_question`** |
+| 2 | **明細へ載せる口を名指しした** | `record_evidence` は **`question_id=None` で thread全体の根拠**にもなる（逐語）。明細1件に絞るなら `raise_question` で立ててから付ける |
 | 3 | **既存語彙で表現できる範囲を確定** | `EVIDENCE_BASIS_KINDS` に `LOCAL_MEASUREMENT` / `LOCAL_CODE_OBSERVATION`、`EVIDENCE_VALIDATION_MODES` に `MEASURED` / `OBSERVED` / **`UNRESOLVED`** が既に在る |
 | 4 | **provenance は追加不要** | `recorded_by` / `recorded_via` が `record_evidence` と `record_actor` に既に在る |
 | 5 | **§8 の前提を訂正** | **`authority.py` に Domain の語は 0行**。「Workerが勝手に実行しない8種」は**機械の門としては存在しない**（＝人の規律） |
@@ -33,8 +33,9 @@
                                                 basis_kind, validation_mode, ts,
                                                 source_span, evidence_text, retrieved_at,
                                                 recorded_by, recorded_via)        … 根拠を付ける
-                              ★record_evidence は question_id を要求する
-                              ＝★TASK単位では載らない。★必ず 明細1件を先に立てる
+                              ★訂正(2026-08-24 実測)= record_evidence は question_id=None を受ける。
+                              逐語「question_id が None → ★その依頼(thread)全体の 根拠」
+                              ∴ ★TASK単位でも載る。「必ず明細を先に立てる」は ★私の誤りだった
 ③evidence / refs / supersede / actor
                               evidence   ✔ basis_kind 9語 / validation_mode 6語
                               refs       ✔ QUESTION_TYPED の refs（kind + resolved 付き）
