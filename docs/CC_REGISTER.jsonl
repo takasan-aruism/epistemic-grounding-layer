@@ -1060,3 +1060,4 @@
 {"kind": "DOC", "doc_id": "ART-d1267d3ad0", "path": "docs/CC_MGR_2026-08-24_KIND_LLM_PROMPT_FIX_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T05:19:13"}
 {"kind": "DOC", "doc_id": "ART-021c2b8563", "path": "docs/CC_MGR_2026-08-24_A4_SIMILARITY_OBSERVATION_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T05:36:04"}
 {"kind": "DOC", "doc_id": "ART-8e3be7c49e", "path": "docs/CC_MGR_2026-08-24_A4_REFS_AND_SUGGEST_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T05:52:55"}
+{"kind": "DOC", "doc_id": "ART-8b799d93f4", "path": "docs/CC_MGR_2026-08-24_A4_DRYRUN_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T06:07:39"}
