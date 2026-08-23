@@ -1055,3 +1055,4 @@
 {"kind": "DONE", "doc_id": "ART-fd56608eab", "by": "MGR", "by_doc_id": "ART-d44fb3ff4c", "ts": "2026-08-24T03:49:37"}
 {"kind": "DOC", "doc_id": "ART-f5478d8f15", "path": "docs/CC_MGR_2026-08-24_A1_EFFECT_ON_A_FAILED_REQUEST_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T04:02:41"}
 {"kind": "DOC", "doc_id": "ART-949a20588b", "path": "docs/CC_MGR_2026-08-24_A2_A3_EXPANSION_v0.1.md", "type": "BUILT", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T04:27:42"}
+{"kind": "DOC", "doc_id": "ART-b2b626684c", "path": "docs/CC_MGR_2026-08-24_UNVERIFIED_DIAGNOSIS_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T04:52:47"}
