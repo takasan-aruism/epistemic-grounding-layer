@@ -437,6 +437,38 @@ def _summary(r):
     return " ／ ".join(parts)
 
 
+def _check_write_path():
+    """★書き戻しの 経路が ★この呼び方で 生きているかを 見る(★1バイトも 書かない)。
+
+    ★★足した 理由(2026-08-24 の 事故・逐語で 残す)=
+      ★私が 入れた 門(`from twoder import authority`)が ★本番の 書き戻しを 壊していた のに
+      ★`--check` は ★GREEN の ままだった。
+      ★理由= ★`--check` は ★書き込み0の 経路 ∴ ★門を 1度も 通らない
+        =★『GREEN だから 大丈夫』が ★この種類の 故障に対して ★成り立っていなかった。
+    ★★塞ぎ方= ★`--check` も ★同じ import と ★同じ 門を 通す。★書かない。
+      ★これが 効く 根拠= ★`--check` は 本番と 同じく ★この計器を 直接 起こして 実行する
+        ∴ ★`sys.path[0]` が 本番と 同じ=★あの ModuleNotFoundError を ここで 踏む。
+    ★返り= 赤の 行(空なら 合格)。
+    """
+    out = []
+    try:
+        if "/home/takasan" not in sys.path:
+            sys.path.insert(0, "/home/takasan")
+        from twoder import authority as _A
+    except Exception as ex:
+        return ["WRITE_PATH_IMPORT: %s: %s(★本番の書き戻しが落ちる)" % (type(ex).__name__, ex)]
+    try:
+        g = _A.gate(ESDE_WRITE_ACTION)
+    except Exception as ex:
+        return ["WRITE_PATH_GATE: %s: %s" % (type(ex).__name__, ex)]
+    if g.get("requires_approval"):
+        out.append("WRITE_PATH_GATE: %s が REQUIRES_APPROVAL(★書き戻しが止まる)" % ESDE_WRITE_ACTION)
+    # ★負の対照= ★POLICY に 無い行為は ★必ず 止まる こと(★門が 効いている ことの 対照)
+    if not _A.gate("ESDE_NOT_IN_POLICY_NEGATIVE_CONTROL").get("requires_approval"):
+        out.append("WRITE_PATH_GATE: ★負の対照が通ってしまった(POLICYに無い行為が止まっていない)")
+    return out
+
+
 def main(argv):
     dry = "--dry" in argv or "--check" in argv
     task_arg = argv[argv.index("--task") + 1] if "--task" in argv else None
@@ -471,6 +503,7 @@ def main(argv):
                 if not cc[k]:
                     red.append("CROSS_CHECK_FAILED: %s の %s が 正本§4 の値と一致しない" % (r["axis"], k))
     if "--check" in argv:
+        red += _check_write_path()
         if red:
             print("\nS_ESDE_EVALUATE --check: RED")
             for m in red:
