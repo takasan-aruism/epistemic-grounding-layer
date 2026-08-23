@@ -358,6 +358,15 @@ def write_to_detail(task_id, result, event_id, dry=False):
         ★`gate()` は REQUIRES_APPROVAL を 返す(★fail-closed・authority.py L125-126)。
     """
     sys.path.insert(0, "/home/takasan/rri")
+    # ★★[Claude実装] 2026-08-24 訂正= ★この1行が 無くて ★本番の 書き戻しを 壊していた。
+    #   ★実測= 常駐は この計器を ★subprocess で 起こす ∴ `sys.path[0]` は ★この計器の 置き場。
+    #     ★`/home/takasan` は 入っていない ∴ `from twoder import ...` が ModuleNotFoundError。
+    #   ★★見落とした 理由= ★封印試験を ★本番と同じ 呼び方で やらなかった
+    #     (★私の 手元では 既に `/home/takasan` が sys.path に 在った)。
+    #   ★`/home/takasan/twoder` では なく ★`/home/takasan` を 入れる=
+    #     ★twoder を ★パッケージとして 読む(★`twoder/operator.py` が stdlib を 隠すのを 避ける)。
+    if "/home/takasan" not in sys.path:
+        sys.path.insert(0, "/home/takasan")
     from twoder import authority as _A
     g = _A.gate(ESDE_WRITE_ACTION)
     if g.get("requires_approval"):
@@ -446,9 +455,15 @@ def main(argv):
             red.append("TRUNCATED: %s(★欠損IDが切れた=分母つきで残らない)" % r["axis"])
         if task_arg and "--no-detail" not in argv:        # ★★§0: 結果を TASK の明細へ戻す
             w = write_to_detail(task_arg, r, info["event_id"], dry=dry)
-            print("   ★明細へ: wrote=%s thread=%s mode=%s evidence=%s findings=%d"
+            # ★★[Claude実装] 2026-08-24= ★書かなかった時は ★必ず 理由を 出す。
+            #   ★実測(封印試験B)= 門で 止めた時も ★`wrote=False thread=None` と だけ 出ており
+            #     ★『明細が 無い』と 見分けが つかなかった。
+            #   ★★これは 私が 状況表の 計器に 3件 出した のと ★同じ欠陥が 自分の 計器に 在った もの
+            #     (=★『測れなかった』を『測って無かった』と 書かない)。
+            print("   ★明細へ: wrote=%s thread=%s mode=%s evidence=%s findings=%d%s"
                   % (w.get("wrote"), w.get("thread_id"), w.get("validation_mode"),
-                     w.get("evaluation_evidence_id"), len(w.get("findings") or [])))
+                     w.get("evaluation_evidence_id"), len(w.get("findings") or []),
+                     ("  ★書かなかった理由= " + str(w.get("why"))) if not w.get("wrote") else ""))
         cc = r["outputs"].get("cross_check_vs_human")
         if cc:
             print("   ★人の評価との照合: symmetry=%s hierarchy=%s" % (cc["symmetry"], cc["hierarchy"]))
