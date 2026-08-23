@@ -43,18 +43,40 @@ import urllib.request
 import base64
 
 ROOTS = ("twoder", "egl", "dev-workcell", "rri", "ds")
-SKIP = ("/regression/", "/test_", "/tests/", "/.git/", "/experiments/", "/docs/SUBMIT_")
+SKIP = ("/regression/", "/test_", "/tests/", "/.git/", "/experiments/", "/docs/SUBMIT_",
+        "/runs/")   # ★走行の控え= 横読み禁止の面。★計器は触れない
 FRONT = "http://100.107.6.119:8770"
 TOKEN = "/home/takasan/twoder/.access_token"
 
 
 _SELF = os.path.abspath(__file__)
+# ★★2026-08-24 自己監査で見つけた欠陥: ★走査が `**/*.py` だけだった ∴
+#   ★.sh から python を呼ぶ読み手(実測: .claude/hooks/2der_status.sh:103 が
+#   `from twoder.effective_state import canonical_actor`)を ★見落とし ★偽の欠損を作っていた。
+#   ★これは 本日ずっと数えてきた型(読み手が別の形で在るのに 場所の決め打ちで見落とす)そのもの。
+#   ★∴ 読み手を探す時は .py 以外も 見る。★書き手(AST が要る側)は .py のまま。
+#   ★訂正(同じ自己監査の中で見つけた)= 最初 .json も入れたら
+#     ★私自身の投函の控え(走行の控え)が『読み手』に数えられた
+#     =★計器が自分の記録を数える(本日3例目)。★.json は関数を呼べない ∴ 外す。
+#     ★併せて 走行の控えの置き場は ★横読み禁止の面 ∴ 計器が触れてはいけない。
+_READER_EXT = ("*.py", "*.sh")
+_READER_ROOTS = ROOTS + (".claude",)
 
 
 def _files():
-    """★自分自身は 走査しない(★計器が 自分を 数えると 分母が 汚れる)。"""
+    """★書き手を 探す 面(AST を かける)= .py のみ。★自分自身は 走査しない。"""
     return [p for r in ROOTS for p in glob.glob("/home/takasan/" + r + "/**/*.py", recursive=True)
             if not any(s in p for s in SKIP) and os.path.abspath(p) != _SELF]
+
+
+def _reader_files():
+    """★読み手を 探す 面= ★.py に 限らない(★上の欠陥の 直し)。"""
+    out = []
+    for r in _READER_ROOTS:
+        for ext in _READER_EXT:
+            out += [p for p in glob.glob("/home/takasan/" + r + "/**/" + ext, recursive=True)
+                    if not any(s in p for s in SKIP) and os.path.abspath(p) != _SELF]
+    return sorted(set(out))
 
 
 def _get(path):
@@ -119,7 +141,7 @@ def axis_rri():
         tps = sorted(set(re.findall(r'"type"\s*:\s*"([A-Z_]+)"', seg)))
         if tps:
             writers[n.name] = tps
-    files = _files()
+    files = _reader_files()          # ★読み手は .py に限らない(2026-08-24 の自己監査)
     rows, missing = [], []
     for w, tps in sorted(writers.items()):
         n_read = 0
@@ -140,7 +162,9 @@ def axis_rri():
             missing.append(w)
     return {"axis": "RRI", "scope_kind": "MODULE", "scope_id": "rri/rri/request_thread.py",
             "inputs": {"symmetry_method": "書いた event type を誰が読むか(★名前でなく作用・正本§10②)",
-                       "enforced_source": "AST: 公開関数 %d本" % len(writers)},
+                       "enforced_source": "AST: 公開関数 %d本" % len(writers),
+                       "reader_surface": "★.py/.sh/.json (%d本)。★.py だけだと .sh の読み手を見落とす"
+                                         % len(files)},
             "outputs": {"symmetry": {"required": len(rows), "present": len(rows) - len(missing),
                                      "missing_ID": missing, "per_writer": rows},
                         "linkage": {"status": "UNVERIFIED",

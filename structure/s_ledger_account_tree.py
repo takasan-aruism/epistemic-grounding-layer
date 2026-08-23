@@ -31,6 +31,11 @@ import sys
 import numpy as np
 
 STRUCT = os.path.dirname(os.path.abspath(__file__))
+# ★★2026-08-24 自己監査: ★この計器は corpus に 明細(台帳)しか 使わない ∴
+#   ★自分自身を 数える経路は いま 無い。★但し s_esde_evaluate では
+#   ★自分の軸名を ID の発行点と 誤検出して 偽陽性を出した(実測)。
+#   ★∴ 将来 コードを走査する処理を 足す時は ★必ず 自分を 除外すること。
+
 OUT = os.path.join(STRUCT, "LEDGER_ACCOUNT_TREE.json")
 
 TARGET = 12              # ★詳細1本あたりの 明細の 目安(★粒度は ここで 決める=指標では 決めない)
