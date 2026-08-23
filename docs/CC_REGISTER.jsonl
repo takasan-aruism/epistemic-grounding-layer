@@ -1035,3 +1035,4 @@
 {"kind": "DOC", "doc_id": "ART-224853a3f3", "path": "docs/CC_MGR_2026-08-23_RTHREAD_LEDGER_DETERMINATION_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-23T16:27:53"}
 {"kind": "DOC", "doc_id": "ART-84ba0797d0", "path": "docs/CC_MGR_2026-08-23_READER_DETECTOR_QUALITY_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-23T16:55:58"}
 {"kind": "DOC", "doc_id": "ART-84ba0797d0", "path": "docs/CC_MGR_2026-08-23_READER_DETECTOR_QUALITY_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-23T17:04:44"}
+{"kind": "DOC", "doc_id": "ART-84ba0797d0", "path": "docs/CC_MGR_2026-08-23_READER_DETECTOR_QUALITY_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-23T17:28:42"}

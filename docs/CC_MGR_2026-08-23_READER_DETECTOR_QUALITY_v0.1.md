@@ -139,3 +139,75 @@ GT を「読み手だけ」に絞ると TP がほぼ消える（172 → 14 → �
 `basename` 衝突は **検出器と私の計器の両方に同じ欠陥**があった。
 ∴ 「別 AXIS に分ける」ではなく **修理の中心に据える**。
 ★`basename` を鍵にする限り、どちらも直らない（[[numbers-need-their-key]] の型）。
+
+---
+
+## 8. 修理と再測定（2026-08-23）
+
+### 直したもの（★`path_owner` は触らない ―― repo で絞っており衝突の影響を受けない）
+| 行 | 関数 | 直し |
+|---|---|---|
+| `readers()` | ①登記器自身(`SELF`)を除外 ②`ast` でコメント・文字列を落とした本文で判定 ③読み呼び出しが同じ file に在ることを要求 ④owner を import して読み関数を呼ぶ file を拾う ⑤`repo` を鍵に足す |
+| `live_ref()` | ★`readers()` と同じ判定に揃える（★片方だけ直さない） |
+
+★特別扱いは **1件も書いていない**（台帳ごとに同じ手続き）。
+
+### ★AXIS の成立条件（Taka 裁定 ―― recall=1.0 ではない）
+| 条件 | 実測 | 判定 |
+|---|---|---|
+| FP 442 → 0 | **442 → 0** | ✅ |
+| precision 1.000 | **1.000** | ✅ |
+| recall 0.893 | **0.893** | ✅ |
+| 衝突除外時 recall 0.967 | **0.967** | ✅ |
+| 特別扱い 0 | **0** | ✅ |
+| 2回独立実行で同一結果 | **同一**（前景 / 背後の2回とも FP=0・衝突除き 1.000/0.967） | ✅ |
+
+対照（Taka 指定）: `CANONICAL 13件中 s10 が reader に出る` → **13 → 0**。
+
+### 性能（★並列化は不要だった）
+台帳ごとに 769 file を `ast.parse` し直していた ∴ 1台帳 10.7秒 × 56 = **約10分**。
+★解析を1回だけ作って使い回す → **2台帳目以降 0.09秒**、`build()` 全体 **31秒**。
+★Taka から「CPU 24コアで並列化できる」と提案を受けたが、★キャッシュで解決したため使っていない。
+
+### 登記簿の再生成と、reader 以外の属性の変化
+```
+--apply → wrote LEDGER_REGISTRY.jsonl (56 ledgers)
+--check → 0 mismatch(es) over 56 ledgers
+rthread : role=CANONICAL / liveness=LIVE / rows=3357
+role 内訳: CANONICAL 13 / EXPERIMENT_RESIDUE 12 / IDLE 12 / REPLICA 9
+          / INSTANCE_STORE 7 / SHIPMENT 2 / GOVERNANCE_LIVE 1
+```
+★`liveness` / `role` が5件動いたが **意図しない変化ではない**。
+`liveness` は `live`（=`live_ref` の結果）から導出される（`s10:500`）∴ reader を直せば連動するのが設計。
+
+| 台帳 | live_readers | 変化 | 中身 |
+|---|---|---|---|
+| `ds/data/event_trace.jsonl` | 0 → **4** | IDLE → **LIVE** | ★偽陰性が解消され正しく LIVE に |
+| `egl/REVIEW_LEDGER` / `egl/audit_backlog` / `rri/rri/ambiguity_patterns` | 1 → 0 | LIVE → IDLE/ORPHAN | ★偽陽性が消え正しく非 LIVE に |
+| `dev-workcell/data/pending_actor` | 0 → 0 | LIVE → IDLE | 同上 |
+
+### ★`--check` の mismatch 1 → 0（Taka 裁定＝解釈A を採用）
+`rri/rri/ambiguity_patterns.jsonl` は reader 検出修正により `live_referenced=False` と再判定された
+∴ `live-read-but-genuinely-no-writer` から外れるのは**正しい**。
+★ただし `writer_resolution=NONE_ORPHAN` / `liveness=ORPHAN` / `role=EXPERIMENT_RESIDUE` は
+**別の事実として保持する**。必要なら残骸整理 AXIS で扱う。**今回の修理には混ぜない**。
+
+### ★残った偽陰性 18件（隠さず記録する）
+```
+DESIGN_EVIDENCE_LEDGER.jsonl(4本) FN = twoder/authority_rules.py / authority_summary.py
+                                       / management_packet.py / webui.py
+twoder/audit/ROADMAP_REGISTRY.jsonl FN = twoder/acceptance_path_check.py / wiring_state_rederive.py
+型: public API / wrapper 経由 14件 ／ basename 直書き（検出器が落とした）4件
+```
+★**未解決の限界**:
+- **3段以上の間接呼び出し**（A→B→C→`_read`）は追えない。いまは **2段まで**
+- **委譲型**（台帳名を書くが `open` は別関数・別モジュールに委譲）は拾えない
+- 動的 import（importlib）・`getattr` 経由の呼び出しは拾えない
+
+★これは **GT（真値）側の限界と同じ**であり、★検出器と GT の両方に残っている。
+
+## 9. 別 AXIS へ送るもの（★今回に混ぜない ―― Taka 裁定）
+1. **basename identity collision 22本** … `events.jsonl` 9 / `REVIEW_LEDGER` 5
+   / `DESIGN_EVIDENCE_LEDGER` 4 / `audit_backlog` 4。★検出器・計器の両方に効く
+2. **残った FN 18件** … 3段以上の間接呼び出し・委譲型の未解決
+3. **`ambiguity_patterns.jsonl` の writer 欠損** … 残骸整理 AXIS
