@@ -306,6 +306,70 @@ def emit(result, dry=False):
     return info
 
 
+def write_to_detail(task_id, result, event_id, dry=False):
+    """★[Claude実装] 2026-08-24(★GDW-ESDE §0=『TASKについて得られたESDE情報は
+    原則としてTASKの台帳明細へ戻す』)。
+
+    ★新しい口を作らない= 既存の `rri.request_thread` の2つだけを呼ぶ。
+      `record_evidence(question_id=None)`  … ★依頼(thread)全体の根拠
+        （逐語「question_id が None → その依頼(thread)全体の 根拠(明細まで 絞れなかった)」）
+      `raise_question` ＋ `record_evidence(question_id=…)` … ★finding 1件ごとの明細
+    ★新しい語を作らない= basis_kind=LOCAL_MEASUREMENT / validation_mode=MEASURED（既存語）。
+      ★測れなかった指標が在る時は `UNRESOLVED`（★UNVERIFIED を そのまま写す既存語）。
+    ★provenance= `recorded_by` / `recorded_via`(既存欄)。★誰が書いたかを空にしない。
+    ★evidence_refs には ★引ける id だけ 入れる=
+      task_id と 計器の artifact id。★event_id は 引けない(ETR-NORUN の衝突・58.4%)ため
+      ★ref に しない=`evidence_text` に 文字列として 残す(★引けない物を『根拠』に 指さない)。
+    ★何も止めない・何も直さない。
+    """
+    sys.path.insert(0, "/home/takasan/rri")
+    from rri import request_thread as RT
+    import datetime
+    ts = datetime.datetime.now().isoformat()
+    rth = _get("/api/rthread?task_id=%s" % task_id)
+    tid = rth.get("thread_id")
+    if not tid:
+        return {"wrote": False, "why": "この task に thread が無い(★明細へ戻せない)"}
+
+    o = result["outputs"]
+    unresolved = any((m or {}).get("status") in ("UNVERIFIED", "UNRESOLVED")
+                     for m in o.values() if isinstance(m, dict))
+    mode = "UNRESOLVED" if unresolved else "MEASURED"
+    refs = [task_id, "ART-1a882c44e2"]              # ★どちらも /api/resolve で引ける
+    parts = []
+    for k in ("equality", "symmetry", "hierarchy", "linkage"):
+        m = o.get(k)
+        if not m:
+            continue
+        if "present" in m:
+            parts.append("%s %s/%s" % (k, m["present"], m["required"]))
+        elif "passed" in m:
+            parts.append("%s %s/%s" % (k, m["passed"], m["required"]))
+        else:
+            parts.append("%s %s" % (k, m.get("status") or m.get("required")))
+    text = "ESDE %s ／ %s ／ 記録=%s ／ 計器=s_esde_evaluate" % (result["axis"], " ／ ".join(parts), event_id)
+
+    out = {"wrote": not dry, "thread_id": tid, "validation_mode": mode, "evidence_refs": refs,
+           "evaluation_evidence_id": None, "findings": []}
+    if dry:
+        out["would_write"] = text
+        return out
+    out["evaluation_evidence_id"] = RT.record_evidence(
+        tid, None, refs, "LOCAL_MEASUREMENT", mode, ts,
+        evidence_text=text, recorded_by="ESDE_WORKER", recorded_via="direct")
+
+    for f in (o.get("findings") or []):             # ★finding は 1件ずつ 明細に する
+        memo = "[ESDE finding] %s / %s → %s ｜ %s" % (
+            f.get("finding_id"), f.get("severity"), f.get("handoff_to"), (f.get("what") or "")[:120])
+        qid = RT.raise_question(tid, memo, ts)
+        eid = RT.record_evidence(tid, qid, refs, "LOCAL_MEASUREMENT", mode, ts,
+                                 evidence_text=text, recorded_by="ESDE_WORKER", recorded_via="direct")
+        # ★誰が書いたかを 明細側にも 残す(★既存語 STRUCTURE を 使う=新しい語を 作らない)
+        RT.record_actor(tid, qid, "QUESTION", "ESDE_WORKER", "STRUCTURE", "direct", ts)
+        out["findings"].append({"question_id": qid, "evidence_id": eid})
+    return out
+
+
 def _summary(r):
     o = r["outputs"]
     parts = []
@@ -327,8 +391,9 @@ def _summary(r):
 
 def main(argv):
     dry = "--dry" in argv or "--check" in argv
-    if "--task" in argv:
-        results = [axis_task(argv[argv.index("--task") + 1])]
+    task_arg = argv[argv.index("--task") + 1] if "--task" in argv else None
+    if task_arg:
+        results = [axis_task(task_arg)]
     else:
         results = [axis_real_repo_reflection(), axis_2der_identity(), axis_rri()]
     red = []
@@ -340,6 +405,11 @@ def main(argv):
                  info["truncated"], info["event_id"]))
         if info["truncated"]:
             red.append("TRUNCATED: %s(★欠損IDが切れた=分母つきで残らない)" % r["axis"])
+        if task_arg and "--no-detail" not in argv:        # ★★§0: 結果を TASK の明細へ戻す
+            w = write_to_detail(task_arg, r, info["event_id"], dry=dry)
+            print("   ★明細へ: wrote=%s thread=%s mode=%s evidence=%s findings=%d"
+                  % (w.get("wrote"), w.get("thread_id"), w.get("validation_mode"),
+                     w.get("evaluation_evidence_id"), len(w.get("findings") or [])))
         cc = r["outputs"].get("cross_check_vs_human")
         if cc:
             print("   ★人の評価との照合: symmetry=%s hierarchy=%s" % (cc["symmetry"], cc["hierarchy"]))
