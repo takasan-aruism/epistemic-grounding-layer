@@ -38,6 +38,7 @@
 {"actually_loaded": ["MENU_RESTRICTION_BUILD4_ROWS.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_d5v_far_error_pairs", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_de_route_equiv", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": true, "path": "rri_records.jsonl", "required_by_contract": true, "stage": "s_embed_axes", "verdict": "OK"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_esde_evaluate", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["ENTRYPOINTS_EXT.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_exec_arch_acd", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["DESIGN_EVIDENCE_LEDGER.jsonl", "ds_events.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_existence_premise_1c", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["EDGE_INVENTORY.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_front_door_bypass_inventory", "verdict": "UNRESOLVED_NO_CONTRACT"}

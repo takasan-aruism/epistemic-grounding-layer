@@ -1,0 +1,360 @@
+#!/usr/bin/env python3
+"""[Claude実装] s_esde_evaluate — ESDE 構造監査を 2DER の観測値から出す計器（★Taka 主題 2026-08-23/24）。
+
+★なぜ置くのか（★2026-08-24 実測）=
+  ★これまで ESDE の数字は ★私の scratchpad のスクリプトが出していた。
+  ★`ESDE_EVALUATION` を emit する呼び手は 2DER の中に ★0件だった
+  ∴ ★セッションが終わると 再測定できない ―― ★「記録は在るが 書き手が居ない」を 私自身が作っていた。
+  ★裁定②「修理後に同じ計器で再測定する」も その状態では 実行できない。
+
+★測るもの（★OPERATING §3-9 の6概念のうち 機械で取れる3つ）=
+  対等性 EQUALITY   同じ構造空間に載っているか（★発行された ID が 相互参照の口から引けるか）
+  対称性 SYMMETRY   書いた event type を 誰が読むか（★名前で探さない・正本§10②）
+  階層性 HIERARCHY  ★required − enforced = violation
+                    ★required は 独立した出所からのみ（Taka 裁定 2026-08-24=
+                      正本 / Taka裁定 / 確定済み設計明細 / 確定済み PLAN・contract）
+                    ★enforcement と同じコード上の定数や門は required にしない
+  連動性 LINKAGE    ★declared の出所が本線で生まれない（正本§6）∴ ★UNVERIFIED のまま
+
+★出す先= 既存 ETRACE の `component=ESDE_EVALUATION`。★新台帳0・新state0・新ID0。
+  形は `domain_dw.record_stages` の前例と同じ（`emit(component, function, inputs, outputs)` 1行）。
+  `inputs/outputs` の上限は 2000B。3指標を丸ごと詰めて約 440B（★欠損ID 60〜70件まで入る）。
+
+★scope を必ず入れる（Taka 裁定 2026-08-24 ①②）=
+  ★私は以前 記録を引ける場所が欲しくて 無関係な task_id に貼り付け、
+  ★画面上「この task の構造評価」に見えていた。★同じ穴を掘らない。
+
+★何も止めない（Taka 裁定 2026-08-23 ①「初期は止めない・記録のみ」）。
+★ESDE は修理しない（監査役が開発者になって本線を乗っ取るため）。finding は handoff 先を書くだけ。
+
+usage:
+  s_esde_evaluate.py               # 全軸を測って ETRACE へ記録する
+  s_esde_evaluate.py --dry         # 測るだけ（★書き込み0）
+  s_esde_evaluate.py --check       # ★書き込み0で 測り直し、前回の記録と数を突き合わせる
+  s_esde_evaluate.py --task TASK-… # TASK 起点で 1件だけ測る
+"""
+import ast
+import glob
+import json
+import os
+import re
+import sys
+import urllib.request
+import base64
+
+ROOTS = ("twoder", "egl", "dev-workcell", "rri", "ds")
+SKIP = ("/regression/", "/test_", "/tests/", "/.git/", "/experiments/", "/docs/SUBMIT_")
+FRONT = "http://100.107.6.119:8770"
+TOKEN = "/home/takasan/twoder/.access_token"
+
+
+_SELF = os.path.abspath(__file__)
+
+
+def _files():
+    """★自分自身は 走査しない(★計器が 自分を 数えると 分母が 汚れる)。"""
+    return [p for r in ROOTS for p in glob.glob("/home/takasan/" + r + "/**/*.py", recursive=True)
+            if not any(s in p for s in SKIP) and os.path.abspath(p) != _SELF]
+
+
+def _get(path):
+    tok = open(TOKEN).read().strip()
+    auth = base64.b64encode(("taka:" + tok).encode()).decode()
+    req = urllib.request.Request(FRONT + path, headers={"Authorization": "Basic " + auth})
+    return json.load(urllib.request.urlopen(req, timeout=300))
+
+
+# ── 対等性 ──────────────────────────────────────────────────
+_MINT = re.compile(r'["\']([A-Z][A-Z0-9_]{1,12}[-:])["\']\s*\+')
+_FSTR = re.compile(r'["\']([A-Z][A-Z0-9_]{1,12})-%[sd]')
+# ★識別子でない物は 名指しで 除く(★実測で 1件ずつ 確かめた・2026-08-24)
+_NOT_ID = {"UNIQUE-": "content_hash", "AB-": "scope文字列", "IA-": "idempotency_key",
+           # ★2026-08-24: ★この計器自身の 軸の名前(`"TASK:" + task_id`)を ID の発行点と
+           #   ★誤検出していた=★計器が自分を数えていた。★名指しで 除く。
+           "TASK:": "この計器の軸名(s_esde_evaluate)"}
+
+
+def axis_2der_identity():
+    """発行された ID が 相互参照の口から引けるか。★producer 側は下限(この形しか拾えない)。"""
+    minted = {}
+    for p in _files():
+        try:
+            s = open(p, encoding="utf-8", errors="ignore").read()
+        except Exception:
+            continue
+        for m in list(_MINT.finditer(s)) + list(_FSTR.finditer(s)):
+            g = m.group(1)
+            pre = g if g.endswith(("-", ":")) else g + "-"
+            minted.setdefault(pre, set()).add(p.replace("/home/takasan/", ""))
+    ids_src = open("/home/takasan/twoder/ids.py", encoding="utf-8").read()
+    resolvable = set(re.findall(r'rid\.startswith\(["\']([A-Za-z0-9_:-]+)["\']\)', ids_src))
+    w = open("/home/takasan/twoder/webui.py", encoding="utf-8").read()
+    m = re.search(r'rid\.split\("-",\s*1\)\[0\] in \(([^)]*)\)', w)
+    if m:
+        resolvable |= {x.strip().strip("\"'") + "-" for x in m.group(1).split(",") if x.strip()}
+    real = {k: v for k, v in minted.items() if k not in _NOT_ID}
+    ok = {k for k in real if any(k == r or k.startswith(r) or r.startswith(k) for r in resolvable)}
+    ng = sorted(set(real) - ok)
+    return {"axis": "2DER_IDENTITY", "scope_kind": "REPO", "scope_id": "2DER",
+            "inputs": {"producer_source": "AST/正規表現で発行点を全件走査(本番 .py %d本)。★下限=別の作り方は拾えない" % len(_files()),
+                       "consumer_source": "twoder/ids.py::resolve + webui.resolve_view = %d種" % len(resolvable)},
+            "outputs": {"equality": {"required": len(real), "present": len(ok), "incompatible_ID": ng,
+                                     "identity_rule": "接頭辞ごとの個別分岐。★受け皿なし=未対応はどのIDでも None",
+                                     "status": "PRESENT" if not ng else "BROKEN",
+                                     "not_identifiers_excluded": [k + "(" + v + ")" for k, v in _NOT_ID.items()],
+                                     "producer_is_lower_bound": True}}}
+
+
+# ── 対称性 ──────────────────────────────────────────────────
+def axis_rri():
+    """公開関数が書く event type を 誰が読むか。★名前の一致では探さない(正本§10②)。"""
+    src_path = "/home/takasan/rri/rri/request_thread.py"
+    src = open(src_path, encoding="utf-8").read()
+    tree, lines = ast.parse(src), src.splitlines()
+    writers = {}
+    for n in tree.body:
+        if not (isinstance(n, ast.FunctionDef) and not n.name.startswith("_")):
+            continue
+        seg = "\n".join(lines[n.lineno - 1:(n.end_lineno or n.lineno)])
+        tps = sorted(set(re.findall(r'"type"\s*:\s*"([A-Z_]+)"', seg)))
+        if tps:
+            writers[n.name] = tps
+    files = _files()
+    rows, missing = [], []
+    for w, tps in sorted(writers.items()):
+        n_read = 0
+        for tp in tps:
+            for p in files:
+                try:
+                    s = open(p, encoding="utf-8", errors="ignore").read()
+                except Exception:
+                    continue
+                for l in s.splitlines():
+                    if ('"%s"' % tp) not in l and ("'%s'" % tp) not in l:
+                        continue
+                    if '"type"' in l and "_append" in l:      # ★書いている行は 読み手に 数えない
+                        continue
+                    n_read += 1
+        rows.append({"writer": w, "types": tps, "reader_lines": n_read})
+        if not n_read:
+            missing.append(w)
+    return {"axis": "RRI", "scope_kind": "MODULE", "scope_id": "rri/rri/request_thread.py",
+            "inputs": {"symmetry_method": "書いた event type を誰が読むか(★名前でなく作用・正本§10②)",
+                       "enforced_source": "AST: 公開関数 %d本" % len(writers)},
+            "outputs": {"symmetry": {"required": len(rows), "present": len(rows) - len(missing),
+                                     "missing_ID": missing, "per_writer": rows},
+                        "linkage": {"status": "UNVERIFIED",
+                                    "why": "declared edge の出所が本線で生まれない(正本§6)"}}}
+
+
+# ── 階層性 ──────────────────────────────────────────────────
+# ★required の出所は ★正本§4（独立した文書）。★enforcement と同じ場所からは取らない（Taka 裁定）。
+_CANON_BOUNDARIES = [
+    ("authority は Taka のみ", "INTERIM_APPROVERS"),
+    ("自己発行の禁止", "_FORBIDDEN_ATTRIB"),
+    ("reconciler は read-only", "_READ_ONLY_GIT"),
+    ("書込は energize 必須", ("apply_cycle", "energize")),   # ★署名の必須引数
+    ("新規配置と既存変更の責務差", None),                     # ★符号化なし
+]
+# ★対称性の counterpart も 正本§4 から（★同一性が 3種類 混在する＝実測 2026-08-24）
+_CANON_COUNTERPARTS = [("ENERGIZATION_ADJUDICATION", "ENERGIZATION_ADJUDICATION"),
+                       ("ENERGIZATION_REVOCATION", "ENERGIZATION_REVOCATION"),
+                       ("RECONCILIATION_*", "emit_reconciliation"),
+                       ("PATCH_APPLICATION", "emit_patch_application"),
+                       ("real energize", "mint_real_energize"),
+                       ("artifact -> patch", "source_to_patch")]
+_WRITE_HINT = ("emit", "append", "write", "record", "_append", "dump")
+
+
+def _enforced_consts():
+    out = {}
+    for p in _files():
+        try:
+            t = ast.parse(open(p, encoding="utf-8", errors="ignore").read())
+        except Exception:
+            continue
+        for n in t.body:
+            if isinstance(n, ast.Assign) and len(n.targets) == 1 and isinstance(n.targets[0], ast.Name):
+                nm, v = n.targets[0].id, n.value
+                isset = isinstance(v, (ast.Set, ast.List, ast.Tuple)) or (
+                    isinstance(v, ast.Call) and getattr(v.func, "id", "") in ("frozenset", "set"))
+                if isset and (nm.isupper() or (nm.startswith("_") and nm[1:].isupper())):
+                    out.setdefault(nm, p.replace("/home/takasan/", "") + ":%d" % n.lineno)
+    return out
+
+
+def _sig_required(func, arg):
+    for p in _files():
+        try:
+            t = ast.parse(open(p, encoding="utf-8", errors="ignore").read())
+        except Exception:
+            continue
+        for n in ast.walk(t):
+            if isinstance(n, ast.FunctionDef) and n.name == func:
+                names = [a.arg for a in n.args.args]
+                nd = len(n.args.defaults)
+                req = names[:len(names) - nd] if nd else names
+                if arg in req:
+                    return p.replace("/home/takasan/", "") + ":%d" % n.lineno
+    return None
+
+
+def axis_real_repo_reflection():
+    """★required は 正本§4（独立文書）／ enforced はコード。★人の値と答え合わせできる唯一の軸。"""
+    files = _files()
+    enf = _enforced_consts()
+    hier, viol = [], []
+    for label, tok in _CANON_BOUNDARIES:
+        if isinstance(tok, tuple):
+            at = _sig_required(*tok)
+            hier.append({"boundary": label, "enforced": bool(at), "how": "署名の必須引数(境界と名乗っていない)", "at": at})
+        elif tok and tok in enf:
+            hier.append({"boundary": label, "enforced": True, "how": "allowlist定数", "at": enf[tok]})
+        else:
+            hier.append({"boundary": label, "enforced": False, "how": "符号化なし", "at": None})
+        if not hier[-1]["enforced"]:
+            viol.append(label)
+    sym, miss = [], []
+    for name, tok in _CANON_COUNTERPARTS:
+        hits, w = [], 0
+        for p in files:
+            try:
+                s = open(p, encoding="utf-8", errors="ignore").read()
+            except Exception:
+                continue
+            if p.endswith("/%s.py" % tok):        # ★モジュールが書き手の場合
+                w += 1
+            for l in s.splitlines():
+                if tok in l:
+                    hits.append(l.strip())
+                    if ("def %s(" % tok) in l:                     # ★関数が書き手
+                        w += 1
+                    elif any(k in l for k in _WRITE_HINT) and "def " not in l:   # ★event 名の文字列
+                        w += 1
+        sym.append({"counterpart": name, "occurrences": len(hits), "writer_sites": w})
+        if not w:
+            miss.append(name)
+    return {"axis": "REAL_REPO_REFLECTION", "scope_kind": "REPO", "scope_id": "energization/bridge",
+            "inputs": {"required_source": "CANON:ESDE_EVALUATION_DOMAIN_MANAGER_v0.1 §4(★独立文書)",
+                       "enforced_source": "AST:allowlist定数%d件 + 署名の必須引数" % len(enf)},
+            "outputs": {"symmetry": {"required": len(sym), "present": len(sym) - len(miss),
+                                     "missing_ID": miss, "per_counterpart": sym},
+                        "hierarchy": {"required": len(hier), "passed": len(hier) - len(viol),
+                                      "violation_ID": viol, "unreachable": 0, "per_boundary": hier},
+                        "linkage": {"status": "UNVERIFIED",
+                                    "why": "declared edge の出所が本線で生まれない(正本§6)"},
+                        "cross_check_vs_human": {"symmetry_expected": [6, 4, 2],
+                                                 "hierarchy_expected": [5, 4, 1],
+                                                 "symmetry": [len(sym), len(sym) - len(miss), len(miss)] == [6, 4, 2],
+                                                 "hierarchy": [len(hier), len(hier) - len(viol), len(viol)] == [5, 4, 1]}}}
+
+
+# ── TASK 起点 ────────────────────────────────────────────────
+_RESOLVABLE_PRE = {"ETR", "TASK", "ART", "ACC", "AX", "ADM", "THREAD", "Q", "QE", "RTHREAD",
+                   "UTT", "DE", "CHG", "INTV", "SUBMIT", "ITEM", "ROADMAP", "PHASE", "AMEND"}
+
+
+def axis_task(task_id):
+    """★関係集合は 既存の3口だけから 投影する(★新台帳0)。"""
+    res = _get("/api/resolve?id=%s" % task_id)
+    etr = (_get("/api/etrace?task_id=%s" % task_id) or {}).get("task_trace") or {}
+    rth = _get("/api/rthread?task_id=%s" % task_id)
+    providers = res.get("providers") or []
+    blockers = res.get("completion_blockers") or []
+    events = etr.get("events") or []
+    typed = rth.get("typed") or []
+    refs = [x for r in typed for x in (r.get("refs") or [])]
+    pre = set(re.findall(r"\b([A-Z][A-Z0-9]{1,10})-[0-9a-zA-Z]{4,}",
+                         json.dumps(events, ensure_ascii=False)))
+    eq = [{"what": "%s:%s" % (r.get("kind"), r.get("value")), "ok": bool(r.get("resolved")),
+           "src": "明細の refs(★既存機構の判定)"} for r in refs]
+    eq += [{"what": "etrace の %s-*" % p, "ok": p in _RESOLVABLE_PRE, "src": "ids.resolve と突き合わせ"}
+           for p in sorted(pre)]
+    ng = [x["what"] for x in eq if not x["ok"]]
+    req = [r for r in typed if r.get("kind") in ("SPEC", "CONSTRAINT", "GOAL")]
+    return {"axis": "TASK:" + task_id, "scope_kind": "TASK", "scope_id": task_id,
+            "inputs": {"relation_set_source": "★既存の3口のみ= /api/resolve + /api/etrace?task_id + /api/rthread?task_id",
+                       "relation_set_size": len(providers) + len(events) + len(typed) + len(refs),
+                       "required_source": "DESIGN_DETAIL(この task の明細・現在有効版の SPEC/CONSTRAINT/GOAL)"},
+            "outputs": {"equality": {"required": len(eq), "present": len(eq) - len(ng),
+                                     "incompatible_ID": ng, "status": "PRESENT" if not ng else "BROKEN"},
+                        "hierarchy": {"required": len(req), "note": "enforced の照合は別段(この計器は分母を出す)"},
+                        "linkage": {"observed_stages": len(providers), "declared": None, "status": "UNVERIFIED",
+                                    "observed_ID": ["%s←%s" % (p.get("phase"), p.get("identity")) for p in providers]},
+                        "completion_blockers": {"count": len(blockers),
+                                                "ID": [b.get("id") for b in blockers]}}}
+
+
+# ── 記録 ────────────────────────────────────────────────────
+def emit(result, dry=False):
+    """★既存 ETRACE へ 1行。★scope を必ず入れる。★何も止めない。"""
+    sys.path.insert(0, "/home/takasan/ds")
+    from ds import etrace as ET
+    inputs = dict(result["inputs"], axis=result["axis"],
+                  scope_kind=result["scope_kind"], scope_id=result["scope_id"],
+                  key_note="証拠から決めた(★自己申告0)。★blocking しない=記録のみ")
+    si, ti = ET._clip(inputs)
+    so, to = ET._clip(result["outputs"])
+    info = {"axis": result["axis"], "inputs_bytes": len(si), "outputs_bytes": len(so),
+            "truncated": bool(ti or to)}
+    if dry:
+        info["event_id"] = None
+        return info
+    tid = result["scope_id"] if result["scope_kind"] == "TASK" else None
+    info["event_id"] = ET.emit("ESDE_EVALUATION", "measured", inputs, result["outputs"],
+                               "OK", task_id=tid, fail_open=True)
+    return info
+
+
+def _summary(r):
+    o = r["outputs"]
+    parts = []
+    for k in ("equality", "symmetry", "hierarchy"):
+        m = o.get(k)
+        if not m:
+            continue
+        if "present" in m:
+            bad = m.get("incompatible_ID") or m.get("missing_ID") or []
+            parts.append("%s %d/%d(欠%d)" % (k[:3], m["present"], m["required"], len(bad)))
+        elif "passed" in m:
+            parts.append("%s %d/%d(違反%d)" % (k[:3], m["passed"], m["required"], len(m.get("violation_ID") or [])))
+        else:
+            parts.append("%s required=%s" % (k[:3], m.get("required")))
+    if o.get("linkage"):
+        parts.append("lnk " + str(o["linkage"].get("status")))
+    return " ／ ".join(parts)
+
+
+def main(argv):
+    dry = "--dry" in argv or "--check" in argv
+    if "--task" in argv:
+        results = [axis_task(argv[argv.index("--task") + 1])]
+    else:
+        results = [axis_real_repo_reflection(), axis_2der_identity(), axis_rri()]
+    red = []
+    for r in results:
+        info = emit(r, dry=dry)
+        print("%-28s %s" % (r["axis"], _summary(r)))
+        print("   scope=%s/%s  in=%dB out=%dB 切=%s  event=%s"
+              % (r["scope_kind"], r["scope_id"], info["inputs_bytes"], info["outputs_bytes"],
+                 info["truncated"], info["event_id"]))
+        if info["truncated"]:
+            red.append("TRUNCATED: %s(★欠損IDが切れた=分母つきで残らない)" % r["axis"])
+        cc = r["outputs"].get("cross_check_vs_human")
+        if cc:
+            print("   ★人の評価との照合: symmetry=%s hierarchy=%s" % (cc["symmetry"], cc["hierarchy"]))
+            for k in ("symmetry", "hierarchy"):
+                if not cc[k]:
+                    red.append("CROSS_CHECK_FAILED: %s の %s が 正本§4 の値と一致しない" % (r["axis"], k))
+    if "--check" in argv:
+        if red:
+            print("\nS_ESDE_EVALUATE --check: RED")
+            for m in red:
+                print("  " + m)
+            return 1
+        print("\nS_ESDE_EVALUATE --check: GREEN (★書き込み0 ／ 人の評価と一致 ／ 切り捨てなし)")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main(sys.argv[1:]))
