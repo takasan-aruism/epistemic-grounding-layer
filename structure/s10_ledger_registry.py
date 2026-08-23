@@ -213,6 +213,14 @@ CANONICAL_LEDGERS = {
     "twoder/audit/ARTIFACT_REGISTRY.jsonl", "dev-workcell/data/pending_actor.jsonl",
     "twoder/failure_memory.jsonl", "twoder/failure_recurrence.jsonl",
     "twoder/audit/COMPLETION_DEFINITION_REGISTRY.jsonl",
+    # ★★2026-08-23(★Taka 裁定=『rri/rri/rthread_events.jsonl を CANONICAL SoR として扱う』)。
+    #   ★根拠= `rri/rri/request_thread.py` の docstring 逐語
+    #     「sole writer of rthread_events.jsonl。★first-class store は event stream のみ(architecture)」
+    #   ★9軸の確定は `egl/docs/CC_MGR_2026-08-23_RTHREAD_LEDGER_DETERMINATION_v0.1.md`(ART-224853a3f3)。
+    #   ★再生成できない= `question_id` は (thread_id, memo, ts, account_id) の sha1 ∴ ts が失われると
+    #     同じ id を 作り直せない ／ annotation・科目提案・disposal・actor は 他の どこにも 無い。
+    #   ★事前確認= `production_writer_count == 1`(★CANONICAL の 必須条件)を 満たす。
+    "rri/rri/rthread_events.jsonl",
 }
 
 
