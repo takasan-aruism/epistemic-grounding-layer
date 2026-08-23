@@ -1053,3 +1053,4 @@
 {"kind": "DONE", "doc_id": "ART-948e04d27a", "by": "MGR", "by_doc_id": "ART-576edd4ee2", "ts": "2026-08-24T03:49:37"}
 {"kind": "DONE", "doc_id": "ART-53632b55e4", "by": "MGR", "by_doc_id": "ART-cafd51b14e", "ts": "2026-08-24T03:49:37"}
 {"kind": "DONE", "doc_id": "ART-fd56608eab", "by": "MGR", "by_doc_id": "ART-d44fb3ff4c", "ts": "2026-08-24T03:49:37"}
+{"kind": "DOC", "doc_id": "ART-f5478d8f15", "path": "docs/CC_MGR_2026-08-24_A1_EFFECT_ON_A_FAILED_REQUEST_v0.1.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T04:02:41"}
