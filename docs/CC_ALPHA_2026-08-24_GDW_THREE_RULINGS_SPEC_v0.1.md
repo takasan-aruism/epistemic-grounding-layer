@@ -148,14 +148,45 @@ destructive operation / findingの処分 / Domain境界を越える操作。
 ★門を Worker 側に置いた理由 = **Domain を経由せず Worker を直接叩いても外れない**ため
 （Taka 逐語「文書規律ではなく機械的に破れない方がいい」）。
 
-## 2.6 封印試験（★通ることだけ見ない。実際に拒否させた）
+## 2.6 封印試験
+
+### ★★初版の試験は無効だった（★訂正）
+
+初版はここに「4件とも通った」と書いた。**その試験は本番の呼び方をしていなかった。**
+
+**実際には、私の入れた門が本番の書き戻しを壊していた。**
+
+- 常駐はこの計器を **subprocess** で起こす ∴ `sys.path[0]` は計器の置き場であって
+  **`/home/takasan` は入っていない**。
+- ∴ `from twoder import authority` が **`ModuleNotFoundError`** で落ち、
+  書き戻しは行なわれず `main` が非0で終わった（実測）。
+- **見落とした理由** = 私の手元では既に `/home/takasan` が `sys.path` に在ったため、
+  in-process で呼んだ試験は4件とも通ってしまった。
+  ★『**本番と同じ呼び方で測る**』を自分が破った。
+
+★直し = `write_to_detail` で `/home/takasan` を `sys.path` へ入れる
+（★`/home/takasan/twoder` ではない ―― `twoder/operator.py` が stdlib を隠すのを避ける）。
+
+### ★★同じ型の欠陥がもう1件、自分の計器に在った
+
+門で止めた時も出力は `wrote=False thread=None` だけで、
+**「明細が無い」場合と見分けがつかなかった。**
+
+★これは私が状況表の計器に3件出したのと**同じ欠陥**
+（`ART-8810d0646e` ―― 「**測れなかった」を「測って無かった」と書かない**）。
+∴ 書かなかった時は**必ず理由を出す**ようにした。
+
+### 直したあとの試験（★本番と同じ subprocess で実行）
 
 | 試験 | 結果 |
 |---|---|
-| 1. 現行の行為は通るか | `requires_approval=False` ✅ |
-| 2. **POLICY から外したら止まるか** | `wrote=False / why="authority: requires approval"` ／ **書く前に返っている**（`thread_id=None`） ✅ |
-| 3. 未知の行為（将来 state 変更を足した場合） | `gate("ESDE_ADVANCE_STATE") requires_approval=True` ✅ |
-| 4. 計器の回帰 | `s_esde_evaluate --check` **GREEN** 維持 ✅ |
+| A. 書き戻しが通るか | `wrote=True` / `thread=RTHREAD-53614fdb` / `evidence=QE-9b769dfd`（★id は決定論 ∴ 冪等） ✅ |
+| B. **POLICY から外したら止まるか** | `wrote=False` ／ **理由= `authority: requires approval`** ✅ |
+| C. thread が無い時 | `wrote=False` ／ **理由= `この task に thread が無い`** ← **B と見分けがつく** ✅ |
+| D. 計器の回帰 | `s_esde_evaluate --check` **GREEN** ✅ |
+
+★B の試験は `authority.py` から当該1行を実際に外して subprocess を起こし、
+終了後にバイト一致で戻すところまで確認している（★門を実際に拒否させた）。
 
 ★★**効き目の本体は「この行為が通ること」ではなく「POLICY に無い行為が止まること」。**
 将来ここに状態変更を足しても、行為名が POLICY に無ければ fail-closed で止まる
