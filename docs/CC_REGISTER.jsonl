@@ -1073,3 +1073,4 @@
 {"kind": "DOC", "doc_id": "ART-01c8634905", "path": "docs/CC_MGR_2026-08-24_LEDGER_DOMAIN_INTEGRATED_v0.1.md", "type": "BUILD_SPEC", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T13:56:03"}
 {"kind": "DOC", "doc_id": "ART-d7083009b3", "path": "docs/CC_ALPHA_2026-08-24_TOPDOWN_ESDE_RRI_V1.md", "type": "BUILD_SPEC", "from": "DESIGN", "to": "MGR", "build_role": "IMPL_SOURCE", "supersedes": null, "ts": "2026-08-24T15:16:56"}
 {"kind": "DOC", "doc_id": "ART-7391be827a", "path": "docs/CC_MGR_2026-08-24_IDENTITY_OPS_INVESTIGATION.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T16:45:46"}
+{"kind": "DOC", "doc_id": "ART-90fe700269", "path": "docs/CC_MGR_2026-08-24_UNASSIGNED_CAUSE_DECOMPOSITION.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T18:41:07"}
