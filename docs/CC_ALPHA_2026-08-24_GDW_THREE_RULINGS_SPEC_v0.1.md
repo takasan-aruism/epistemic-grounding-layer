@@ -76,6 +76,38 @@ DOMAIN_OPERATIONS = {"dw": [...], "route_table": [...], "esde": [...], "ledger":
 | `esde` | `twoder/domain_esde.py` | 3 | `egl/structure/s_esde_evaluate.py` |
 | `ledger` | `twoder/domain_ledger.py` | 5 | 同モジュール内（W1/W2/W3） |
 
+## 1.35 ★Ledger Domain（EVO-0100）へ — この調査はそのまま使える
+
+`TAKA_SPEC_2026-08-24_LEDGER_DOMAIN_v0.1.md`（ART-dd54fb656c）**§4 逐語**:
+
+> Worker構成（**名称は既存語調査後に確定**。以下は責務名）
+
+★**その既存語調査は 2026-08-24 に済んでいる**（上の §1.1）。**やり直さなくてよい。**
+
+| 探していたもの | 結論（実測） |
+|---|---|
+| 役（Manager / Worker …）の既存語 | **在る** — `dev-workcell/dw/workcell.py:31` `ROLES` 5件（MANAGER / WORKER / AUDITOR / ADJUDICATOR / RUNTIME） |
+| 運用上の責任領域（Domain）の既存語 | **無い** — 語彙表10本を全件見たが0本 |
+| Domain 名の事実上の登記 | `manager_v0.DOMAIN_OPERATIONS` の4キー（`ledger` は**既に載っている**） |
+| `DOMAINS` 16件 | **使ってはいけない**（開発対象領域・Taka 裁定 2026-08-24） |
+
+★∴ Ledger Worker の名前は **`ROLES` の `WORKER`** を役として使い、
+個々の Worker は `authority.POLICY` の行為名（`LEDGER_CLASSIFY` 等・既に3行在る）で識別できる。
+**新しい役の語彙を作る必要は無い。**
+
+## 1.36 ★併せて渡す — 今日踏んだ罠（同じ形なら同じ所で落ちる）
+
+Ledger Worker を **subprocess で起こす**なら、今日 ESDE で踏んだ穴が同じ場所に在る:
+
+- `from twoder import authority` は **subprocess では `ModuleNotFoundError`**。
+  `sys.path[0]` は起こされた script の置き場であって `/home/takasan` ではない。
+- **`--check` はこれを捕まえない**。書き込み0の経路は門を通らないため
+  ―― ★「GREEN だから大丈夫」がこの故障の型に対して成り立たない。
+- ★対処は §2.6 に実測つきで書いた（`--check` に import + 門 + 負の対照 を入れる）。
+
+★`domain_ledger` は **in-process** で `_gate` を呼んでいるので**現状は無事**。
+★Worker を別プロセスに切り出した瞬間に踏む。
+
 ## 1.4 まだやらないこと（★Taka 裁定どおり）
 
 - 新台帳を作らない。
