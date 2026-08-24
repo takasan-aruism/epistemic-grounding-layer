@@ -1,0 +1,45 @@
+{
+  "claim_ids": [],
+  "content_hash": "sha256:79ffb08d4f294735012666657babbc80def860e543b43d7e0b92afd85486695b",
+  "created_at": "2026-08-24T18:40:00",
+  "created_by_context_id": "CC_ALPHA",
+  "created_by_role": "ESDE",
+  "domain": "Python runtime / import resolution",
+  "known_failures": [
+    {
+      "evidence_ids": [
+        "CHG-0238",
+        "CHG-0245"
+      ],
+      "measured": "6/6 test_*.py rc!=0  ->  with -P  0/6",
+      "status": "ACTIVE",
+      "what": "twoder/operator.py shadows stdlib operator when sys.path[0]=/home/takasan/twoder"
+    }
+  ],
+  "open_uncertainty_ids": [],
+  "packet_id": "KPKT-PY-IMPORT-RESOLUTION",
+  "packet_version": 1,
+  "parent_requirement_id": "ITEM-2DER-EVO-0104",
+  "source_artifact_ids": [
+    "ART-d7083009b3"
+  ],
+  "source_evidence_ids": [
+    "CHG-0238",
+    "CHG-0245"
+  ],
+  "supersedes_packet_id": null,
+  "valid_from": "2026-08-24",
+  "valid_until": null,
+  "version_compatibility": [
+    {
+      "applies_when": ">=3.11",
+      "effect": "a same-named module in the script dir no longer shadows the stdlib",
+      "evidence_ids": [
+        "CHG-0245"
+      ],
+      "mechanism": "-P / PYTHONSAFEPATH keeps the script dir out of sys.path[0]",
+      "status": "ACTIVE",
+      "subject": "CPython"
+    }
+  ]
+}
