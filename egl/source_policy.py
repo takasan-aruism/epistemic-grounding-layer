@@ -63,6 +63,14 @@ ENTITY_REGISTRY = [
     {"host": "github.com", "path": "huggingface/transformers", "entity": "transformers", "kind": "OFFICIAL_REPOSITORY"},
     {"host": "docs.vllm.ai", "path": "", "entity": "vLLM", "kind": "OFFICIAL_DOCS"},        # host 全体が公式
     {"host": "huggingface.co", "path": "docs", "entity": None, "kind": "OFFICIAL_DOCS"},    # /docs/ のみ公式(UGC 除外, Probe B)
+    # ★★[Claude実装] 2026-08-24 Taka 裁定④(ITEM-2DER-EVO-0104 Phase3 逐語=
+    #   『docs.python.org はPhase 3のPython pilot開始時に既存ENTITY_REGISTRYへ追加してよい』)。
+    #   ★host 全体が公式(UGC ではない)∴ path="" —— `docs.vllm.ai` と同じ扱い。
+    #   ★Python を pilot にする理由= ★Bottom-Up の実測が豊富(2026-08-24 だけで
+    #     `operator.py` の stdlib 遮蔽 / `sys.path` / `subprocess` / `cwd` を ★3回 踏んだ)。
+    #   ★www.python.org は 足さない= ★踏んだ問題は 全部 language/stdlib の話で
+    #     ★必要が出てから 足す(★推測で 広げない)。
+    {"host": "docs.python.org", "path": "", "entity": "Python", "kind": "OFFICIAL_DOCS"},
 ]
 
 
