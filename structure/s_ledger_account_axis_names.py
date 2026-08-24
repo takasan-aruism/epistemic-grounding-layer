@@ -331,12 +331,50 @@ def _tree_entries():
     return d["categories"] + d["details"]
 
 
+def _tree_missing():
+    """★★まだ 名前の 無い 軸だけを 返す(★2026-08-25 Taka 裁定)。
+
+    ★なぜ 要るか(★実測)= `--tree` は ★95軸 全部を 命名し直して `TREE_OUT` を まるごと 上書きする。
+      ★LLM は 同じ 入力でも 揺れる ∴ ★既に 名前が 在る 51件が ★書き換わり得る=
+      ★『確定名を 書き換える』ことに なる(★Taka 逐語=『LLM出力をそのまま正式名として確定しない』)。
+    ★∴ ★対象を ★『行が 無い』＋『行は 在るが name が None』の 軸だけに 絞る。
+    ★★既存の 行は 1バイトも 触らない= `--missing` の 書き出しは ★併合(下の main)。
+    """
+    axes = _tree_entries()
+    try:
+        have = {r["axis_id"]: r for r in json.load(open(TREE_OUT, encoding="utf-8"))["names"]}
+    except Exception:
+        have = {}
+    return [a for a in axes
+            if a["axis_id"] not in have or not (have[a["axis_id"]] or {}).get("name")]
+
+
 def main(argv):
     # ★--tree=★2層(カテゴリ→詳細)を 命名する。★入口も 出口も 別ファイル(★1層の 結果を 壊さない)。
     if "--tree" in argv:
         global OUT
         OUT = TREE_OUT
-        entries = _tree_entries()
+        # ★★`--missing`= ★まだ 名前の 無い 軸だけ(★既存の 行は 併合して 保つ)。
+        only_missing = "--missing" in argv
+        entries = _tree_missing() if only_missing else _tree_entries()
+        if only_missing and not entries:
+            print("[build --tree --missing] 対象 0件(★名前の 無い 軸は 無い)")
+            return 0
+        if only_missing and "--check" not in argv:
+            prev = []
+            try:
+                prev = json.load(open(TREE_OUT, encoding="utf-8"))["names"]
+            except Exception:
+                prev = []
+            keep = [r for r in prev if r["axis_id"] not in {a["axis_id"] for a in entries}]
+            rows = keep + build(entries)
+            rows.sort(key=lambda r: (r.get("level", 0), r["axis_id"]))
+            open(TREE_OUT, "w", encoding="utf-8").write(_ser(rows))
+            n_en = sum(1 for r in rows if str(r["name_en_status"]).startswith("CONSENSUS_"))
+            n_ja = sum(1 for r in rows if str(r["name_status"]).startswith("CONSENSUS_"))
+            print("[build --tree --missing] 命名した=%d / 保った既存=%d / 合計=%d 英語成立=%d 日本語成立=%d"
+                  % (len(entries), len(keep), len(rows), n_en, n_ja))
+            return 0
         if "--check" in argv:
             return check(entries)
         rows = build(entries)
