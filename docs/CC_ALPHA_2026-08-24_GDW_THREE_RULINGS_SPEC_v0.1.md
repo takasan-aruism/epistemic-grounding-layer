@@ -45,8 +45,13 @@
 運用上の Domain 名は現在 **`twoder/manager_v0.py` の `DOMAIN_OPERATIONS` のキー**にしか無い。
 
 ```
-DOMAIN_OPERATIONS = {"dw": [...], "route_table": [...], "esde": [...], "ledger": [...]}   # ← 4件
+DOMAIN_OPERATIONS = {"dw":…, "route_table":…, "esde":…, "ledger":…, "sysops":…}   # ← 5件
 ```
+
+★★この数は動く（★私はこの節に一度「3件」、次に「4件」と書いた）。
+**2026-08-24 14:2x に `sysops` が入って5件になった**（EVO-0102 Phase3・別インスタンス）。
+∴ ★**この文書の数を正本にしない。正本は `manager_v0.DOMAIN_OPERATIONS` そのもの。**
+★ここに載せるのは「どこを見れば分かるか」だけにする。
 
 ★これは**台帳ではなくコード上の対応表**。∴ **適切な登記先は無い。**
 
@@ -67,7 +72,7 @@ DOMAIN_OPERATIONS = {"dw": [...], "route_table": [...], "esde": [...], "ledger":
 `DOMAINS` は「どんな技術領域の仕事か」、Domain は「誰が運用の責任を持つ区画か」。
 ★同じ表に入れてはならない。
 
-現在の Domain（**4件**・出所は `manager_v0.DOMAIN_OPERATIONS`・2026-08-24 実測）:
+Domain の一覧（**2026-08-24 14:2x 時点のスナップショット**。★正本は `DOMAIN_OPERATIONS`）:
 
 | Domain | Domain Manager | 操作 | Worker |
 |---|---|---|---|
@@ -75,6 +80,11 @@ DOMAIN_OPERATIONS = {"dw": [...], "route_table": [...], "esde": [...], "ledger":
 | `route_table` | `twoder/domain_dw.py`（★実体は分離前・足場負債） | 1 | — |
 | `esde` | `twoder/domain_esde.py` | 3 | `egl/structure/s_esde_evaluate.py` |
 | `ledger` | `twoder/domain_ledger.py` | 5 | 同モジュール内（W1/W2/W3） |
+| `sysops` | `twoder/domain_sysops.py` | 6 | 同モジュール内（W1〜W4） |
+
+★**5件とも「運用上の責任領域」であって `DOMAINS` 16件（開発対象領域）ではない。**
+★`sysops` が入ったことで、①の定義（DOMAINS とは別物）は **3つの独立した Domain で成立した**
+（`esde` / `ledger` / `sysops` —— どれも `DOMAINS` に足していない）。
 
 ## 1.35 ★Ledger Domain（EVO-0100）へ — この調査はそのまま使える
 
@@ -107,6 +117,33 @@ Ledger Worker を **subprocess で起こす**なら、今日 ESDE で踏んだ�
 
 ★`domain_ledger` は **in-process** で `_gate` を呼んでいるので**現状は無事**。
 ★Worker を別プロセスに切り出した瞬間に踏む。
+
+### ★★2件目が出た —— `domain_sysops`（EVO-0102 Phase3・2026-08-24 14:2x）
+
+`twoder/domain_sysops.py:193` は `subprocess.run([sys.executable, p], cwd=root, ...)` で
+`test_*.py` を起こす。★**`cwd` と `sys.path[0]` が repo の直下になる。**
+
+★`/home/takasan/twoder/` には **`operator.py`** が在り、**stdlib の `operator` を隠す**
+（`import json` → `re` → `enum` → `functools` → `collections` → `from operator import eq` で落ちる）。
+
+**実測（`sysops_failing_tests` と同じ呼び方で再現）:**
+
+| repo | `test_*.py` | 測った | `rc != 0` | うち `operator` 遮蔽 |
+|---|---|---|---|---|
+| `dev-workcell`（★既定） | 15本 | 6本 | **0本** | 0本 |
+| `twoder` | 8本 | 6本 | **6本** | **6本** |
+
+★**既定（`repo="dev-workcell"`）は無事。** ∴ いま壊れてはいない。
+★**但し `repo` は引数**で `sysops_failing_tests` は `DOMAIN_OPERATIONS` に載っている
+∴ **`repo="twoder"` で呼ぶと「twoder の試験が全部落ちている」と報告する。**
+★どれも本当は落ちていない —— **偽の失敗** であり、追いかけた人の時間が消える。
+
+★直し方の案（★実装は担当が決める）:
+`env["PYTHONPATH"] = "/home/takasan"` を渡す / `cwd` を `/home/takasan` にする /
+`repo="twoder"` を弾く。★どれを採るかは EVO-0102 の担当の判断。
+
+★★私が今日踏んだのと**同じ根**: **`subprocess` は親の `sys.path` を継がない。**
+`cwd` と `sys.path[0]` が変わることを、**呼ぶ前に測る**。
 
 ## 1.4 まだやらないこと（★Taka 裁定どおり）
 
