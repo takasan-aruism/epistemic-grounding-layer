@@ -253,12 +253,47 @@ HTTP / JSON / system services ＝ **12領域**）でも、V1 では**まだ多�
 | Phase | 内容 | 実装 | 受入 |
 |---|---|---|---|
 | **1** | 全件調査 | **0行**（★本書＝完了） | 分類表（§1.1）が埋まった |
-| **2** | ★**配線** —— `to_domain` 経由で `acquisition` を **1 leg** 走らせる | 表に操作名1つ | ★**本線から呼ばれた証拠が1件**（ETRACE） |
+| **2** | ★**配線** —— `to_domain` 経由で `acquisition` を **1 leg** 走らせる | 表に操作名1つ | ★§4.1 を見ること（★初版の条件は**測れなかった**） |
 | **3** | 1領域（**vLLM**）で locator → 取得 → `policy_match` を通す | 小 | `required` と `observed` が一致した記録1件 |
 | **4** | 変化の検出（同じ leg を2回・`content_hash` 比較） | 小 | ★変化が**観測できた**（分類表はまだ作らない） |
 | **5** | Bottom-Up → Top-Down（failure から領域を昇格候補にする） | 小 | 候補が**観測から**出た（人が書いていない） |
 
 ★Phase 2 が通らない限り 3 以降へ進まない。★**Knowledge Map の件数を成果にしない。**
+
+## 4.1 ★Phase 2 の受入条件を書き直した（★初版は測れなかった）
+
+初版はこう書いた —— 「**本線から呼ばれた証拠が ETRACE に1件**」。
+★**これは測れない。** 実測して分かった:
+
+| 測ったもの | 値 |
+|---|---|
+| ETRACE の `component=EGL` / `append_event` | **31,007 件** |
+| ★うち `task_id` を持つもの | **0 件（0.0%）** |
+
+**理由:** `egl/egl/core.py:132` の橋は `emit("EGL", "append_event", …)` を
+**`task_id` なしで**出す。`task_id` は `LegIntent` の payload には在るが、
+それは **EGL 自身の event store** の中で、**ETRACE の行には出ない**。
+
+∴ ETRACE を見ても「**本線から来たのか demo/experiment が走ったのか区別できない**」。
+★実際 14:31:44 の `RawObservation` は私ではない誰かの走行だった。
+
+★★これは私が今日ずっと出してきた欠陥と**同じ型** —— **数に鍵が無い**。
+★自分の受入条件で同じことをやっていた（★Taka が裁定する前に見つけた）。
+
+### 書き直した受入条件
+
+| # | 条件 | どこで測るか |
+|---|---|---|
+| 1 | Domain Manager が **自分の ETRACE 記録**を1件出す（★`task_id` 付き） | `component=<DOMAIN>` の行に `task_id` が在る。★`ESDE_EVALUATION` が既にこの形 |
+| 2 | その記録が **EGL の id を指す** | `outputs` に `LEG-…` / `ARUN-…` が入っている |
+| 3 | その `LEG-…` が EGL 側で引ける | `core.get_state(leg_id)` が返る（★別の出所で照合） |
+| 4 | `task_id` が front door で引ける | `/api/resolve?id=TASK-…` |
+
+★★**「EGL の記録が在る」を証拠にしない。「Domain がその記録を作った」を証拠にする。**
+★理由: 前者は 31,007 件すでに在り、**何も区別しない**。
+
+★併せて —— **`emit` に `task_id` を足す**という直し方もあり得るが、
+それは `egl/egl/core.py` の**全 EGL 記録に効く変更**なので**私は決めない**（§5 の裁定に追加）。
 
 ---
 
@@ -272,4 +307,10 @@ HTTP / JSON / system services ＝ **12領域**）でも、V1 では**まだ多�
    ★§22 の「external canonical first」を本当にやるなら要るが、**新しい外向きの口**なので私は決めない。
 4. **`ENTITY_REGISTRY` に docs.python.org を足すか。**（Phase 3 の2番目に必要・1行）
 
-★1〜4 のどれも**新台帳を作らない**。
+5. **`egl/egl/core.py` の ETRACE 橋に `task_id` を足すか。**
+   ★実測 = EGL の append_event は **31,007件すべてが `task_id` なし**（§4.1）。
+   ★足せば「どの TASK の走行か」が ETRACE 単体で分かるようになるが、
+   **全 EGL 記録に効く変更**なので私は決めない。
+   ★足さなくても Phase 2 は通る（§4.1 の書き直した条件で測れる）。
+
+★1〜5 のどれも**新台帳を作らない**。
