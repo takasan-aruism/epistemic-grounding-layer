@@ -1078,3 +1078,4 @@
 {"kind": "DOC", "doc_id": "ART-1fb96478a8", "path": "docs/CC_ALPHA_2026-08-24_ESDE_BIDIRECTIONAL_SURVEY_v0.1.md", "type": "FINDING", "from": "DESIGN", "to": "MGR", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T20:33:49"}
 {"kind": "DOC", "doc_id": "ART-be7398ed4f", "path": "docs/CC_MGR_2026-08-24_PROPOSE_WIRED_AT_COMMON_POINT.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T21:17:22"}
 {"kind": "DOC", "doc_id": "ART-afbf4457d8", "path": "docs/CC_MGR_2026-08-24_ABSORPTION_SURVEY.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-24T22:18:22"}
+{"kind": "DOC", "doc_id": "ART-6e8e306153", "path": "docs/CC_MGR_2026-08-25_CLEAN_REBUILD_VS_INCREMENTAL.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-25T01:51:03"}
