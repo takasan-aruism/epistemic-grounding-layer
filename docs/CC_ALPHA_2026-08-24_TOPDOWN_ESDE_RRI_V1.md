@@ -36,6 +36,39 @@
 
 ∴ **V1 の Phase 2 は「Knowledge Map を作る」ではなく「在るものを本線へ繋ぐ」。**
 
+## 0.1 ★「在る」だけでなく「今も動く」ことを確かめた（通信0・2026-08-24 実測）
+
+★★私が「配線しろ」と言うなら、**配線先が動くことを先に確かめる義務がある**
+（★確かめずに提案すると「動かない物へ繋げ」と言ったことになる）。
+
+★通信は一切していない —— `adapter_class="ACQ_MANUAL"` + `injected`（hermetic）。
+★本物のデータにも触っていない —— `EGL_DATA_DIR` を scratchpad へ向けた。
+
+| 段 | 結果 | 発行された id |
+|---|---|---|
+| `core.run_start` | OK | `RUN-00001` |
+| `SP.mk_source_policy` | OK | `SPOL-00001` |
+| `P.mk_gap` | OK | `KGAP-00001` |
+| `P.mk_search_plan` | OK | `SPLAN-00001` |
+| `ACQ.mk_leg_intent` | OK | `LEG-00001` |
+| `ACQ.acquire(injected)` | OK | `ARUN-00001` |
+
+★★語彙も**実際に引けた**（V1 の主張の再確認）:
+
+| 呼び出し | 返り |
+|---|---|
+| `qualify_locator("https://docs.vllm.ai/en/latest/")` | **`('OFFICIAL_DOCS', 'vLLM')`** |
+| `qualify_locator("https://github.com/vllm-project/vllm")` | **`('OFFICIAL_REPOSITORY', 'vLLM')`** |
+| `qualify_locator("https://example.invalid/x")` | **`('UNKNOWN', None)`** ← ★強い種別を捏造しない |
+| `policy_match("OFFICIAL_DOCS", "OFFICIAL_DOCS")` | `True` |
+| `policy_match("OFFICIAL_DOCS", "COMMUNITY_REPORT")` | `False` |
+
+**11/11 通った。落ちたもの 0。**
+
+★★∴ **素案 §11「Knowledge Route」の中核は既に動いている。**
+`locator → (source_kind, entity)` が機械で出て、`required` と `observed` の一致も判定できる。
+★**足りないのは呼び出し元 1箇所だけ。** これが Phase 2 の全内容。
+
 ---
 
 # 1. 全件調査（Phase 1・実装0）
