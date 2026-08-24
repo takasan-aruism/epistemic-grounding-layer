@@ -21,8 +21,8 @@
 | **原文** | **EXISTS** | `QUESTION_TYPED.source_text` | 逐語「原文そのまま（★切らない）」 |
 | **kind** | **EXISTS** | `QUESTION_TYPED.kind` | 6語＋UNVERIFIED（FACT/CHANGE/SPEC/TEST/CONSTRAINT/GOAL）★fail-closed |
 | **対象** | **PARTIAL** | `QUESTION_TYPED.action` / `.goal` | ★「導出できた時だけ」＝空の場合が在る |
-| **上位概念への参照** | **EXISTS** | **`QUESTION_TYPED.parent_request_id`** | ★これが**分解の親**そのもの |
-| **下位概念への参照** | **PARTIAL** | 上の**逆引きで導出可**（専用欄は無い） | ★1パスで作れるが口が無い |
+| **上位概念への参照** | ★~~EXISTS~~ → **MISSING** | ~~`QUESTION_TYPED.parent_request_id`~~ | ★**訂正。§9.1 を見ること** |
+| **下位概念への参照** | ★~~PARTIAL~~ → **MISSING** | ~~逆引きで導出可~~ | ★**訂正。§9.1 を見ること** |
 | **横関係** | ★**MISSING** | — | `refs` は在るが**関係の型を持たない**（下記） |
 | **根拠** | **EXISTS** | `record_evidence` → `QE-` ＋ `basis_kind` 9語 / `validation_mode` 6語 | `EVIDENCE_NEEDS_REF` で fail-closed |
 | **gap** | **EXISTS** | `GAP_PRESENTED` ／ `DISPOSALS.OPEN_GAP` | — |
@@ -209,3 +209,75 @@ RRI / Knowledge Supply（既存）→ source → evidence
 3. **§9 C の実証は 1 の後** —— 横が持てるまで C は測れない。
 
 ★★新台帳0 / 新state0 / 新ID族0 / 新しい正式な軸語彙0 / 新Worker0 / **実装0行**で本調査を終えた。
+
+---
+
+# 9.1 ★★訂正 —— 「上位概念への参照は EXISTS」は誤りだった（Taka 裁定③の実証で判明）
+
+## 何を間違えたか
+
+私は §1 の表で `parent_request_id` を「**上位概念への参照 EXISTS**」「これが**分解の親**そのもの」と書いた。
+★**欄の名前から意味を推測しただけで、値を1件も見ていなかった。**
+
+## 実測（★全 thread・全 typed = 1198件）
+
+| `parent_request_id` が指す先 | 件数 |
+|---|---|
+| **`TASK-…`** | **1197（99.9%）** |
+| **他の `QT-`（明細どうし）** | **0** |
+| `Q-…`（問い） | 0 |
+| `None` | 1 |
+
+★∴ `parent_request_id` は **TASK を指す1段だけ**であり、**明細間の階層ではない**。
+構造は **TASK → 明細 n件のフラットな1段**で、**木になっていない**。
+
+## §9 A/B の実証結果（Taka 裁定③・`TASK-2DER-3339A186` / typed 58 / refs 14）
+
+| 指標 | A（上流分解） | B（局所展開） |
+|---|---|---|
+| 到達した明細 | **0** | **0** |
+| ①不足数 | 0 | 0 |
+| ②既存IDへの接続数 | 0 | 0 |
+| ③根拠付き情報数 | 0 | 0 |
+| ④重複数 | 0 | 0 |
+| ⑤追加質問後に埋まった | ★測れない | ★測れない |
+| ⑥実際に使われた | ★測れない | ★測れない |
+
+★★**A と B は「差が出た」のではなく「どちらも成立しなかった」。**
+降りる先も昇る先も無いので、**探索経路として区別できない**。
+★対象は機械で選んだ（typed と refs を両方持つ最大の1本）。★文章品質は評価していない。
+
+## ★∴ 欠損は1つではなく2つ
+
+| | 状態 |
+|---|---|
+| **横（`refs` に関係型）** | ★**足せる** —— §9.2 の実測で成立を確認 |
+| **上下（明細間の親子）** | ★**そもそも無い** —— これが A/B が成立しない**唯一の理由** |
+
+★★**横だけ足しても §9 A/B は測れない。**
+
+# 9.2 ★① refs 調査の結果 —— 「関係型1欄の追加」で成立する
+
+| 観点 | 実測 |
+|---|---|
+| **writer** | **1本だけ**（`request_thread.py:253` の `record_typed`）。★ref の中身を**検証していない**（`kind` は fail-closed だが `refs` は素通し） |
+| **reader** | `list_typed` は `refs` を**丸ごと**コピー（内側の鍵を絞らない）／`detail_refs.summarize` は `kind`/`value`/`resolved` だけ読む／UI JS は `resolved` のみ |
+| **未知欄の扱い** | ★**無視される** —— `relation` を足した ref を `summarize` に通して正常動作（total 2 / alive 1 / missing 1） |
+| **往復** | ★**保たれた** —— `relation="LATERAL_AFFECTS"` を `record_typed` で書き、`list_typed` で**そのまま戻った**（`QT-c7c3e968`） |
+| **identity** | `typed_id` は決定論（`_mint`）。★ref 自体に id は無い ∴ **関係に独立した id は付かない** |
+| **根拠 / actor / disposal との関係** | いずれも**別の event**（`record_evidence` / `record_actor` / `dispose_question`）で、`refs` とは**結び付いていない** |
+
+★∴ **独立 event は不要。** 横関係に独立したライフサイクルが要るという実測は**まだ無い**
+（★根拠・actor・disposal が `refs` と結び付いていないので、そもそも横関係だけを処分する経路が無い）。
+
+# 9.3 ★裁定に戻す最小要素 —— 1つだけ
+
+**「明細間の親子」が存在しない。**
+
+★これが A/B が成立しない唯一の理由。★横（`refs` の関係型）は足せるが、**上下が無いと A/B は測れない**。
+
+★私は**どう足すかを決めない**。観測された事実は次の2つだけ:
+
+1. `parent_request_id` は **TASK 専用**として 1197件で使われている ∴ **意味を変えると既存記録が壊れる**
+2. `refs` は **未知欄を通す**ことが実測で分かっている ∴ **上下も `refs` の関係型で表せる可能性**が在る
+   （★但しこれは①の裁定「横連動は refs 拡張」の**範囲を超える**ので、裁定が要る）
