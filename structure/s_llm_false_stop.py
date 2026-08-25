@@ -21,6 +21,7 @@ usage:
   s_llm_false_stop.py [--limit N] [--repeat N] # 実測(front door + :8005 を実走)
   s_llm_false_stop.py --repeat 3 --record ITEM-2DER-EVO-0107   # 実測して 台帳へ 明細を1件 入れる
   s_llm_false_stop.py --repeat 3 --prob 10                     # 止まった件の ★確率 p を 追加で測る
+  s_llm_false_stop.py --gate route --prob 10                   # 別の門(経路を決める側)で 同じことを測る
 """
 import base64, json, os, re, sys, urllib.request
 
@@ -221,6 +222,21 @@ def self_test():
     pr = measure_prob(rows, lambda t: ("DIRECT", False), [rows[0]["task_id"]], trials=5)
     if pr[rows[0]["task_id"]]["p"] != 0.0:
         red.append("NEG5: all-pass gate measured p=%.2f" % pr[rows[0]["task_id"]]["p"])
+    # ★陰性⑥: route 門の結果に 停止の語を書かない(2026-08-26 の事故の再発防止)
+    fake_route = {"n": 55, "repeat": 1, "gate": "route(x)", "stopped_per_run": [0],
+                  "stopped_at_least_once": 0, "stopped_every_run": 0, "flaky_stops": [],
+                  "definition_violations": [], "cluster_minority": [], "false_stops": 0,
+                  "false_stop_rate": 0.0,
+                  "label_stability": {"stable": 49, "n": 55, "rate": 0.891},
+                  "prob": {"T1": {"p": 0.0, "stops": 0, "trials": 10, "strategies": {"OBSERVE": 10}},
+                           "T2": {"p": 0.0, "stops": 0, "trials": 10,
+                                  "strategies": {"OBSERVE": 7, "BUILD_OR_MODIFY": 3}}}}
+    txt = " ".join(detail_lines(fake_route))
+    for bad in ("停止が一件も再現しない", "抽選器", "誤停止"):
+        if bad in txt:
+            red.append("NEG6: route 門の明細に 停止の語 %r が入った" % bad)
+    if "行き先が変わった" not in txt:
+        red.append("NEG6: route 門の明細に 行き先の揺れが書かれていない")
     # 陰性③: 正規化が語を落としていない(別の依頼が同じ束に入らない)
     if len(cluster(rows)) != 2:
         red.append("NEG3: normalize collapsed distinct requests (clusters=%d)" % len(cluster(rows)))
@@ -229,7 +245,7 @@ def self_test():
         for m in red:
             print("  " + m)
         return 1
-    print("s_llm_false_stop --self-test: GREEN (陰性5 / 陽性4 とも期待どおり)")
+    print("s_llm_false_stop --self-test: GREEN (陰性6 / 陽性4 とも期待どおり)")
     return 0
 
 
@@ -242,12 +258,40 @@ def _post(path, payload, timeout=300):
 
 
 def detail_lines(rep):
-    """★何をした → どうなった → こうなった の形で 1測定 1明細を作る(★決定論・語を作らない)。"""
+    """★何をした → どうなった → こうなった の形で 1測定 1明細を作る(★決定論・語を作らない)。
+
+    ★★門の種類で 文型を分ける(2026-08-26 実測の事故: route 門の結果を 停止用の文型で書き、
+       『停止が一件も再現しない=抽選』『p が 0 でも 1 でもない』という ★偽の文を 台帳に入れた。
+       route 門は 構造上 止まらない ∴ 停止 0 は 発見ではない)。"""
+    if str(rep.get("gate", "")).startswith("route"):
+        return _detail_lines_route(rep)
+    return _detail_lines_stop(rep)
+
+
+def _detail_lines_route(rep):
+    """経路を決める門: ★停止の語を1つも使わない。見るのは ラベルが揺れるか だけ。"""
+    ls = rep.get("label_stability") or {}
+    lines = ["s_llm_false_stop を 門=%s で %d本 x 各%d回 実走した → ラベルが全試行 同じ %d/%d = %.0f%% → %s"
+             % (rep.get("gate"), rep["n"],
+                (list(rep.get("prob", {}).values()) or [{"trials": 0}])[0]["trials"],
+                ls.get("stable", 0), ls.get("n", rep["n"]), 100.0 * (ls.get("rate") or 0),
+                ("残りは走行ごとに行き先が変わる" if ls.get("stable", 0) < ls.get("n", rep["n"])
+                 else "全件で行き先が一定"))]
+    unstable = [(t, v["strategies"]) for t, v in (rep.get("prob") or {}).items()
+                if len(v["strategies"]) > 1]
+    if unstable:
+        lines.append("行き先が変わった件を名指しした → %s → 同じ依頼文が 走行ごとに 別の枝へ行く"
+                     % " ".join("%s%s" % (t, json.dumps(d, ensure_ascii=False)) for t, d in unstable[:8]))
+    lines.append("★この門は 構造上 止まらない ∴ 停止率と p は 測っていない(0 と書かない)")
+    return lines
+
+
+def _detail_lines_stop(rep):
     per = "/".join(str(x) for x in rep["stopped_per_run"])
     lines = ["s_llm_false_stop を %d本 x 反復%d回 で実走した → 走行ごとの停止 %s・1回でも止まった %d/%d・"
-             "★3回とも止まった %d/%d → %s"
+             "★%d回とも止まった %d/%d → %s"
              % (rep["n"], rep["repeat"], per, rep["stopped_at_least_once"], rep["n"],
-                rep["stopped_every_run"], rep["n"],
+                rep["repeat"], rep["stopped_every_run"], rep["n"],
                 ("停止が一件も再現しない=止める判断が規則でなく抽選" if rep["stopped_every_run"] == 0
                  else "再現する停止が %d件 在る" % rep["stopped_every_run"]))]
     lines.append("誤停止を3型で数えた(定義違反/束の少数側/反復の少数側) → 定義違反 %d件・束の少数側 %d件・"
@@ -258,6 +302,11 @@ def detail_lines(rep):
     if rep["flaky_stops"]:
         lines.append("反復で割れた件を名指しした → %s → 同じ入力で止まったり止まらなかったり ∴ 少なくとも片方は誤り"
                      % " ".join("%s(%s)" % (t, c) for t, c in rep["flaky_stops"]))
+    if rep.get("label_stability"):
+        ls = rep["label_stability"]
+        lines.append("門 %s で ラベルが全試行 同じか数えた → %d/%d = %.0f%% → %s"
+                     % (rep.get("gate", "?"), ls["stable"], ls["n"], 100.0 * (ls["rate"] or 0),
+                        "残りは走行ごとに行き先が変わる" if ls["stable"] < ls["n"] else "全件で行き先が一定"))
     if rep.get("prob"):
         ps = sorted(rep["prob"].items(), key=lambda x: -x[1]["p"])
         lines.append("止まった件の確率 p を各%d回で測った → %s → %s"
@@ -277,6 +326,34 @@ def record(rep, item, actor="2DER", evidence="s_llm_false_stop.py"):
     return _post("/api/submit", {"raw": raw})
 
 
+# ── 門は 差し替えられる(★1つの計器で 複数の門を 同じ形で測る)────────────────────────
+#   contract: gate(text) -> (label, stopped_bool)
+#   ★route 門は「止める/止めない」ではなく ★行き先が変わるか を見る ∴ stopped は常に False とし、
+#     ★label(=下流の枝)の 揺れを --prob の分布で 読む。
+ROUTE_BRANCH = {   # Phase 3 実測: request_type の 6語 -> 下流は 4挙動(submit.py:573/1026/1099/1107/1217)
+    "OBSERVE_CURRENT_STATE": "OBSERVE",
+    "RESUME_PRIOR": "RESUME",
+    "BUILD_CAPABILITY": "BUILD_OR_MODIFY",
+    "MODIFY_EXISTING": "BUILD_OR_MODIFY",
+    "DECIDE": "ELSE",
+    "OTHER": "ELSE",
+}
+
+
+def route_gate(text):
+    """rri/rri/request_type.py:classify_request_type -> 下流の枝。"""
+    sys.path.insert(0, "/home/takasan/rri")
+    from rri import request_type as RT
+    o = RT.classify_request_type(text) or {}
+    return ROUTE_BRANCH.get(o.get("request_type"), "ELSE"), False
+
+
+def label_stability(prob):
+    """--prob の結果から ★ラベルが全試行で同じだった件数を数える。"""
+    same = sum(1 for v in prob.values() if len(v["strategies"]) == 1)
+    return {"stable": same, "n": len(prob), "rate": round(same / len(prob), 3) if prob else None}
+
+
 def default_gate(text):
     sys.path.insert(0, "/home/takasan/rri")
     from rri import intent_strategy as IST
@@ -293,12 +370,21 @@ def main(argv):
     repeat = 3
     if "--repeat" in argv:
         repeat = int(argv[argv.index("--repeat") + 1])
+    gate = default_gate
+    gate_name = "stop(intent_strategy.resolve_consensus)"
+    if "--gate" in argv and argv[argv.index("--gate") + 1] == "route":
+        gate, gate_name = route_gate, "route(request_type.classify_request_type)"
     rows = fetch_requests(limit)
     print("front door から全文で取れた依頼文: %d本 / 反復 %d回" % (len(rows), repeat))
-    out = measure_repeat(rows, default_gate, repeat=repeat)
+    print("門: %s" % gate_name)
+    out = measure_repeat(rows, gate, repeat=repeat)
+    out["gate"] = gate_name
     if "--prob" in argv:
         trials = int(argv[argv.index("--prob") + 1])
-        out["prob"] = measure_prob(rows, default_gate, out["stopped_ids"], trials=trials)
+        # ★route 門は 止まらない ∴ 候補が0件になる → 全件を引く(★ここで黙って0件にしない)
+        ids = out["stopped_ids"] or [r["task_id"] for r in rows]
+        out["prob"] = measure_prob(rows, gate, ids, trials=trials)
+        out["label_stability"] = label_stability(out["prob"])
     print(json.dumps(out, ensure_ascii=False, indent=2))
     if "--record" in argv:
         item = argv[argv.index("--record") + 1]
