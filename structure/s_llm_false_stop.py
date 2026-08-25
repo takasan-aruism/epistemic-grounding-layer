@@ -10,13 +10,16 @@
    2 と 4 に 動いた)。∴ ★既定で 反復する(--repeat)。
 
 ★入力は front door からしか取らない(台帳を直読しない)。
-★このモジュールは ★何も書かない(台帳0・state0・ID族0)。報告するだけ。
+★このモジュールは ★台帳を直接書かない(新台帳0・新state0・新ID族0)。
+★`--record ITEM-…` を付けた時だけ、★既存の front door の 封印 DETAIL 口へ 自分の結果を投函する
+  (=★計器が 自分の測定を 台帳に入れる。★記帳を 人の手番に しない)。
 ★★全文を使う(2026-08-26 実測: goal_head の120字 切片で測ると 停止率が 25% と出て、
    全文では 4% だった= 6倍。切片で測った数字を門の性質として報告しない)。
 
 usage:
-  s_llm_false_stop.py --self-test        # 計器の陰性/陽性対照だけ(LLM 0回)
-  s_llm_false_stop.py [--limit N]        # 実測(front door + :8005 を実走)
+  s_llm_false_stop.py --self-test              # 計器の陰性/陽性対照だけ(LLM 0回)
+  s_llm_false_stop.py [--limit N] [--repeat N] # 実測(front door + :8005 を実走)
+  s_llm_false_stop.py --repeat 3 --record ITEM-2DER-EVO-0107   # 実測して 台帳へ 明細を1件 入れる
 """
 import base64, json, os, re, sys, urllib.request
 
@@ -196,6 +199,42 @@ def self_test():
     return 0
 
 
+def _post(path, payload, timeout=300):
+    data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
+    req = urllib.request.Request(FRONT + path, data=data,
+                                 headers={"Authorization": _auth(), "Content-Type": "application/json"})
+    with urllib.request.urlopen(req, timeout=timeout) as r:
+        return json.loads(r.read())
+
+
+def detail_lines(rep):
+    """★何をした → どうなった → こうなった の形で 1測定 1明細を作る(★決定論・語を作らない)。"""
+    per = "/".join(str(x) for x in rep["stopped_per_run"])
+    lines = ["s_llm_false_stop を %d本 x 反復%d回 で実走した → 走行ごとの停止 %s・1回でも止まった %d/%d・"
+             "★3回とも止まった %d/%d → %s"
+             % (rep["n"], rep["repeat"], per, rep["stopped_at_least_once"], rep["n"],
+                rep["stopped_every_run"], rep["n"],
+                ("停止が一件も再現しない=止める判断が規則でなく抽選" if rep["stopped_every_run"] == 0
+                 else "再現する停止が %d件 在る" % rep["stopped_every_run"]))]
+    lines.append("誤停止を3型で数えた(定義違反/束の少数側/反復の少数側) → 定義違反 %d件・束の少数側 %d件・"
+                 "反復で割れた %d件 → 誤停止 %d/%d = %.1f%%"
+                 % (len(rep["definition_violations"]), len(rep["cluster_minority"]),
+                    len(rep["flaky_stops"]), rep["false_stops"], rep["n"],
+                    100.0 * (rep["false_stop_rate"] or 0)))
+    if rep["flaky_stops"]:
+        lines.append("反復で割れた件を名指しした → %s → 同じ入力で止まったり止まらなかったり ∴ 少なくとも片方は誤り"
+                     % " ".join("%s(%s)" % (t, c) for t, c in rep["flaky_stops"]))
+    return lines
+
+
+def record(rep, item, actor="2DER", evidence="s_llm_false_stop.py"):
+    """★既存の封印 DETAIL 口へ投函する。★新しい入口を作らない・新語を作らない。"""
+    raw = "\n".join(["<<<2DER:DETAIL>>>", "item: " + item, "actor: " + actor, "via: front_door",
+                      "provenance: MEASURED", "evidence: " + evidence]
+                     + ["- " + l for l in detail_lines(rep)] + ["<<<2DER:END>>>"])
+    return _post("/api/submit", {"raw": raw})
+
+
 def default_gate(text):
     sys.path.insert(0, "/home/takasan/rri")
     from rri import intent_strategy as IST
@@ -216,6 +255,15 @@ def main(argv):
     print("front door から全文で取れた依頼文: %d本 / 反復 %d回" % (len(rows), repeat))
     out = measure_repeat(rows, default_gate, repeat=repeat)
     print(json.dumps(out, ensure_ascii=False, indent=2))
+    if "--record" in argv:
+        item = argv[argv.index("--record") + 1]
+        print("\n投函する明細:")
+        for l in detail_lines(out):
+            print("  - " + l)
+        r = record(out, item)
+        print("front door の返り: request_type=%s trace_key=%s"
+              % ((r or {}).get("request_type"), (r or {}).get("trace_key")))
+        print("★200 は『入った』ではない ∴ 呼び手が引いて確かめること")
     return 0
 
 
