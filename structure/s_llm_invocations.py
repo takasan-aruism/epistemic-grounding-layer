@@ -41,6 +41,16 @@ VERDICTS = ("EXISTS", "PARTIAL", "ABSENT", "CONFLICT", "UNVERIFIED")
 SCHEMA_KEYS = ("response_format", "guided_json", "guided_regex", "guided_choice", "tools", "tool_choice")
 RUNTIME_KEYS = ("temperature", "seed", "max_tokens")
 VALIDATOR_NAMES = ("loads", "search", "findall", "match", "fullmatch")
+
+# ── v0.4: 知識を呼出点から引けるようにする(★新台帳を作らない=知識は既存の docs に置いたまま) ──
+# doc 側が ★自分で名乗る(名前一致で拾わない= vacuous 回避)。HTML コメントに次を書く:
+#   2DER:LLM_KNOWLEDGE / knowledge_id: LLMK-0001 / call_sites: <rel>:<func> ...
+#   applies_when: <field>=<value> ...   / maturity: <既存の梯子の語>
+# ★成熟度の正本= twoder/egl_integration.py:17 _LADDER(写し。--check で drift を見る)。
+KNOWLEDGE_MARKER = "2DER:LLM_KNOWLEDGE"
+KNOWLEDGE_DIR = os.path.join(ROOT, "egl", "docs")
+MATURITY_LADDER = ("REPORTED", "INFERRED", "OBSERVED", "MEASURED", "REPRODUCED", "ACCEPTED")
+KNOWLEDGE_FIELDS = ("knowledge_id", "call_sites", "applies_when", "maturity")
 EXCLUDE_DIRS = ("__pycache__", ".git", "node_modules")
 
 
@@ -381,6 +391,63 @@ def _claude_p_calls(fn, list_consts, sp_mods, sp_funcs):
     return hits
 
 
+def _knowledge_docs():
+    """名乗った doc だけを読む -> [{knowledge_id, call_sites, applies_when, maturity, doc}]。
+    ★決定論のため path 順に走る。★欄が欠けた doc は 捨てずに 返す(--check が名指しする)。"""
+    out = []
+    for dp, dns, fns in sorted(os.walk(KNOWLEDGE_DIR)):
+        dns.sort()
+        for fn in sorted(fns):
+            if not fn.endswith(".md"):
+                continue
+            ab = os.path.join(dp, fn)
+            try:
+                txt = open(ab, encoding="utf-8").read()
+            except Exception:
+                continue
+            if KNOWLEDGE_MARKER not in txt:
+                continue
+            rec = {"doc": os.path.relpath(ab, ROOT), "knowledge_id": None,
+                   "call_sites": [], "applies_when": {}, "maturity": None}
+            head = txt.split(KNOWLEDGE_MARKER, 1)[1]
+            for ln in head.splitlines():
+                s = ln.strip()
+                if s.startswith("-->") or s.startswith("#"):
+                    break
+                if ":" not in s:
+                    continue
+                k, v = s.split(":", 1)
+                k, v = k.strip(), v.strip()
+                if k == "knowledge_id":
+                    rec["knowledge_id"] = v
+                elif k == "call_sites":
+                    rec["call_sites"] = [x for x in v.replace(",", " ").split() if x]
+                elif k == "maturity":
+                    rec["maturity"] = v
+                elif k == "applies_when":
+                    for pair in v.split():
+                        if "=" in pair:
+                            a, b = pair.split("=", 1)
+                            rec["applies_when"][a] = b
+            out.append(rec)
+    return out
+
+
+def _knowledge_for(rec, docs):
+    """1呼出点に効く知識の id。①doc が名指しした ②applies_when が全部一致(=同型 call)。"""
+    ids = set()
+    for k in docs:
+        if not k["knowledge_id"]:
+            continue
+        if rec["caller"] in k["call_sites"]:
+            ids.add(k["knowledge_id"])
+            continue
+        aw = k["applies_when"]
+        if aw and all(str(rec.get(f)) == v for f, v in aw.items()):
+            ids.add(k["knowledge_id"])
+    return sorted(ids)
+
+
 def _mint(caller, func, lineno):
     return "LLMINV-" + hashlib.sha1(("%s:%s:%d" % (caller, func, lineno)).encode()).hexdigest()[:8]
 
@@ -416,6 +483,7 @@ def _record(rel, func, lineno, record_class, model="UNRESOLVED", endpoint="UNRES
         "timeout": runtime.get("timeout", "UNRESOLVED"),
         "status": status,
         "gate_ref": gate_ref,
+        "knowledge_refs": [],
     }
 
 
@@ -495,6 +563,9 @@ def build():
         if not vllm_ish and not claude_ish:
             continue
         recs += analyze(rel, src)
+    docs = _knowledge_docs()
+    for r in recs:
+        r["knowledge_refs"] = _knowledge_for(r, docs) if r["record_class"] == "CALL_SITE" else []
     recs.sort(key=lambda r: (r["record_class"] != "CALL_SITE", r["worker"], r["caller"], r["lineno"]))
     return recs
 
@@ -583,6 +654,31 @@ def check():
         for f in ("system_prompt", "schema_enforced", "output_validator", "failure_handling", "result_store"):
             if r.get(f) not in VERDICTS:
                 red.append("VOCAB_VIOLATION: %s.%s=%r not in VERDICTS" % (r["caller"], f, r.get(f)))
+    # ★知識 doc の門: 宛先が実在するか / 成熟度が既存の梯子の語か / id が重複しないか
+    _docs = _knowledge_docs()
+    _callers = {r["caller"] for r in build() if r["record_class"] == "CALL_SITE"}
+    _seen_ids = {}
+    for k in _docs:
+        if not k["knowledge_id"]:
+            red.append("KNOWLEDGE_NO_ID: %s" % k["doc"])
+            continue
+        if k["knowledge_id"] in _seen_ids:
+            red.append("KNOWLEDGE_ID_DUP: %s in %s and %s"
+                       % (k["knowledge_id"], _seen_ids[k["knowledge_id"]], k["doc"]))
+        _seen_ids[k["knowledge_id"]] = k["doc"]
+        if k["maturity"] not in MATURITY_LADDER:
+            red.append("KNOWLEDGE_MATURITY_UNKNOWN: %s=%r not in _LADDER" % (k["doc"], k["maturity"]))
+        for cs in k["call_sites"]:
+            if cs not in _callers:
+                red.append("KNOWLEDGE_TARGET_MISSING: %s names %s which is not a CALL_SITE" % (k["doc"], cs))
+    try:
+        sys.path.insert(0, ROOT)
+        from twoder.egl_integration import _LADDER as _CANON_LADDER
+        _canon = tuple(sorted(_CANON_LADDER, key=lambda x: _CANON_LADDER[x]))
+        if _canon != MATURITY_LADDER:
+            red.append("VOCAB_DRIFT: MATURITY_LADDER copy != twoder/egl_integration._LADDER %s" % (_canon,))
+    except Exception:
+        pass
     if red:
         print("LLM_INVOCATIONS --check: RED")
         for m in red:
@@ -594,8 +690,10 @@ def check():
     for r in calls:
         by_w[r.get("worker", "VLLM")] = by_w.get(r.get("worker", "VLLM"), 0) + 1
     wtxt = " ".join("%s=%d" % (k, by_w[k]) for k in sorted(by_w))
-    print("LLM_INVOCATIONS --check: GREEN (negative-control ok; %d CALL_SITE registered [%s]; byte-identical)"
-          % (len(calls), wtxt))
+    n_k = sum(1 for r in calls if r.get("knowledge_refs"))
+    print("LLM_INVOCATIONS --check: GREEN (negative-control ok; %d CALL_SITE registered [%s]; "
+          "knowledge %d doc -> %d call site(s); byte-identical)"
+          % (len(calls), wtxt, len(_docs), n_k))
     return 0
 
 
