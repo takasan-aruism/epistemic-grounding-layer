@@ -100,6 +100,25 @@ INHERIT_MIN_SHARE = 0.5     # ★過半数(★一意性から 決まる= 勘で 
 SPLIT_MIN_SHARE = 0.25      # ★分割の 疑いを 記録する 線(★記録だけ= 適用しない)
 
 
+def _assigned_account_ids():
+    """★★割当で 一度でも 使われた 科目(★`QUESTION_ACCOUNT_ASSIGNED` の account_id)。
+
+    ★台帳は 直読しない= ★rri の 公開関数から 引く。★引けなければ 空集合=
+      ★『引けない』を『使われて いない』と 混同しない ため ★下では 空の時 誰も 止めない。
+    """
+    try:
+        sys.path.insert(0, "/home/takasan/rri")
+        from rri import request_thread as RT
+        out = set()
+        for t in (RT.list_threads() or []):
+            for a in (RT.list_assignments(t["thread_id"]) or []):
+                if a.get("account_id"):
+                    out.add(a["account_id"])
+        return out
+    except Exception:
+        return set()
+
+
 def _adopted_accounts():
     """★★採択済みの 科目(chart)を 引く。★台帳は 直読しない= rri の 関数から 引く。
 
@@ -129,6 +148,48 @@ def _prev_doc():
         return None                        # ★読めない を『無い』と 混同しない= 初回扱いに 落とす
 
 
+# ★★2026-08-25 Taka 裁定(A)= 逐語
+#   『Aを実装してよい。ただし「世代が古い」という理由だけでtreeから除外しない。
+#     ★2世代以上前 かつ、現行chart・assignment・現在入力から必要性が確認できないentryのみ、
+#     自動持ち越しを終了する。★これは廃止ではなく派生treeへの惰性コピー停止であり、
+#     chart・assignment・履歴・identityは変更しない。
+#     ★Bで成立した「既存割当がtree外を指さない」不変条件を維持すること。』
+#
+# ★★『世代』の数え方= ★既存の欄では 数えられない(実測= carried_generations のような 欄は 無い)。
+#   ★新しい state を 作らず ★entry の 中に 通し番号を 1つ 置く= `carried_generations`。
+#   ★これは ★状態機械の state では ない= ★控えの 中の 数え(★台帳では ない)。
+#   ★1世代目(初めて 持ち越した 回)= 1 ／ 次の 回で 2 ―― ★2以上が『2世代以上前』。
+#
+# ★★『必要性が確認できない』の 3条件(★すべてに 当たらない 時だけ 停止)=
+#   ①`chart` に 無い(★採択されて いない)
+#   ②割当で 一度も 使われて いない(★`QUESTION_ACCOUNT_ASSIGNED` の account_id に 無い)
+#   ③★持ち越し固有の 明細が 無い(★その members が ★全部 生きた塊にも 在る= ★純粋な 写し)
+#   ★★③が 要となる 理由(実測 2026-08-25)= ★持ち越し 189件は ★全部 share=1.000
+#     (★中央値も 最大も 1.000)= ★生きた塊の 完全な 写し。
+#     ★『1件でも 重なれば 必要』と すると ★189/189 が 必要に なり ★何も 止まらない=
+#     ★『写しを 必要と 数える』ことに なる ∴ ★固有の 明細で 見る。
+#
+# ★★停止しても 失われない こと= ★chart / assignment / 履歴 / identity は 1バイトも 変えない。
+#   ★止めるのは ★次の 控えへ 惰性で 写す ことだけ(★逐語『惰性コピー停止』)。
+CARRY_MIN_GENERATIONS = 2      # ★『2世代以上前』(★裁定の 逐語)
+
+
+def _still_needed(p, adopted, assigned_ids, live_members):
+    """★★持ち越しを 続ける 必要性が 確認できるか(★3つの 出所の どれか 1つでも 当たれば True)。
+
+    ★返り= (needed, why)。★`why` は ★どの 出所で 確認できたかを 残す(★理由を 消さない)。
+    """
+    aid = p.get("axis_id")
+    if aid in adopted:
+        return True, "chart(採択済み)"
+    if aid in assigned_ids:
+        return True, "assignment(割当で使われた)"
+    own = set(p.get("members") or ()) - live_members
+    if own:
+        return True, "現在入力(持ち越し固有の明細 %d件)" % len(own)
+    return False, None
+
+
 def _retire_or_adopted(p, adopted, why, ops):
     """★★持ち越す 1件に ★札を 付ける(★Taka 裁定 B)。
 
@@ -147,7 +208,7 @@ def _retire_or_adopted(p, adopted, why, ops):
     return dict(p, carried_forward=True, identity_op_pending="RETIRE_CANDIDATE")
 
 
-def _inherit(prefix, prev_entries, fresh):
+def _inherit(prefix, prev_entries, fresh, live_members=None, assigned_ids=None):
     """★★新しい 塊へ ★既存の axis_id を 継承する。★書き込み 0 ／ LLM 0 ／ 決定論。
 
     ★引数 `fresh` = [{"idx":[…], "members":[…], "parent":…}] の 並び(★clustering の 結果)。
@@ -174,17 +235,44 @@ def _inherit(prefix, prev_entries, fresh):
     claims = {}                            # fresh index → [(overlap, prev_entry)]
     ops, carried = [], []
     adopted = _adopted_accounts()          # ★B: 採択済み= 廃止候補では ない
+    lm = set(live_members or ())
+    ai = set(assigned_ids or ())
+    stopped = []                           # ★A: 惰性コピーを 止めた もの(★数を 残す)
+
+    def _carry(entry):
+        """★★A= ★2世代以上前 かつ 必要性が 確認できない なら ★次の 控えへ 写さない。
+
+        ★★これは 廃止では ない= ★chart / assignment / 履歴 / identity は 1バイトも 変えない。
+        ★世代は entry の 中で 数える(★写すたび +1)。
+        """
+        gen = int(entry.get("carried_generations") or 0) + 1
+        entry = dict(entry, carried_generations=gen)
+        if gen >= CARRY_MIN_GENERATIONS:
+            needed, why_need = _still_needed(entry, adopted, ai, lm)
+            if not needed:
+                stopped.append({"axis_id": entry.get("axis_id"), "generations": gen,
+                                "n_members": len(entry.get("members") or ()),
+                                "why": "★2世代以上 かつ chart/assignment/現在入力の どれからも "
+                                       "必要性が 確認できない ∴ ★惰性コピーを 止める"
+                                       "(★廃止では ない= 履歴も identity も 触って いない)"})
+                return None
+            entry["carried_needed_by"] = why_need
+        return entry
     for p in sorted(prev, key=lambda e: e["axis_id"]):
         pm = set(p.get("members") or ())
         if not pm:
-            carried.append(_retire_or_adopted(p, adopted, "members 0件", ops))
+            _e = _carry(_retire_or_adopted(p, adopted, "members 0件", ops))
+            if _e is not None:
+                carried.append(_e)
             continue
         shares = sorted(((len(pm & fs) / float(len(pm)), len(pm & fs), i)
                          for i, fs in enumerate(fresh_sets)), key=lambda t: (-t[0], t[2]))
         top = shares[0] if shares else (0.0, 0, None)
         if top[0] <= INHERIT_MIN_SHARE:
-            carried.append(_retire_or_adopted(
+            _e = _carry(_retire_or_adopted(
                 p, adopted, "過半数を 引き継ぐ 塊が 無い(最大 share=%.3f)" % top[0], ops))
+            if _e is not None:
+                carried.append(_e)
             continue
         claims.setdefault(top[2], []).append((top[1], p))
         spread = [{"share": round(sh, 4), "fresh_index": i}
@@ -197,8 +285,11 @@ def _inherit(prefix, prev_entries, fresh):
         cl.sort(key=lambda t: (-t[0], t[1]["axis_id"]))
         assign[i] = cl[0][1]["axis_id"]
         for ov, p in cl[1:]:               # ★★統合は 自動で 適用しない= 持ち越す
-            carried.append(dict(p, carried_forward=True,
-                                identity_op_pending="MERGE_ABSORBED_CANDIDATE"))
+            _e = _carry(dict(p, carried_forward=True,
+                             identity_op_pending="MERGE_ABSORBED_CANDIDATE"))
+            if _e is None:
+                continue                   # ★A で 止めた= 上申にも 積まない
+            carried.append(_e)
             ops.append({"op": "MERGE_ABSORBED_CANDIDATE", "axis_id": p["axis_id"],
                         "why": "同じ 塊を %s も 主張した(★統合は 自動更新に 含めない)" % cl[0][1]["axis_id"]})
     # ★★2026-08-25 実測で 直した(★私の 設計欠陥)=
@@ -235,7 +326,8 @@ def _inherit(prefix, prev_entries, fresh):
         ops = [o for o in ops if o["axis_id"] not in inherited_ids]
     ops.sort(key=lambda o: (o["op"], o["axis_id"]))
     carried.sort(key=lambda e: e["axis_id"])
-    return assign, carried, ops
+    stopped.sort(key=lambda e: e["axis_id"])
+    return assign, carried, ops, stopped
 
 
 def measure():
@@ -261,7 +353,14 @@ def measure():
         if not idx:
             continue
         fresh_cats.append({"idx": idx, "members": sorted(recs[i][0] for i in idx)})
-    cat_assign, cat_carried, ops = _inherit("LCAT", (prev or {}).get("categories"), fresh_cats)
+    # ★A= 必要性の 出所を 集める(★chart は `_adopted_accounts` が 引く ／ ここでは 割当と 現在入力)。
+    _assigned_ids = _assigned_account_ids()
+    _live_members_cat = set()
+    for _f in fresh_cats:
+        _live_members_cat |= set(_f["members"])
+    cat_assign, cat_carried, ops, cat_stopped = _inherit(
+        "LCAT", (prev or {}).get("categories"), fresh_cats,
+        live_members=_live_members_cat, assigned_ids=_assigned_ids)
 
     cats = []
     for ci, f in enumerate(fresh_cats):
@@ -288,7 +387,12 @@ def measure():
         else:
             fresh_details.append({"idx": idx, "parent": parent,
                                   "members": sorted(recs[i][0] for i in idx)})
-    det_assign, det_carried, det_ops = _inherit("LDET", (prev or {}).get("details"), fresh_details)
+    _live_members_det = set()
+    for _f in fresh_details:
+        _live_members_det |= set(_f["members"])
+    det_assign, det_carried, det_ops, det_stopped = _inherit(
+        "LDET", (prev or {}).get("details"), fresh_details,
+        live_members=_live_members_det, assigned_ids=_assigned_ids)
     ops = ops + det_ops
 
     details, inherited, minted = [], 0, 0
@@ -332,6 +436,11 @@ def measure():
             "details_inherited": inherited,
             "details_new_candidates": minted,
             "details_carried_forward": len(det_carried),
+            # ★★A= ★惰性コピーを 止めた もの(★廃止では ない= 履歴も identity も 触って いない)
+            "carry_stopped_details": len(det_stopped),
+            "carry_stopped_categories": len(cat_stopped),
+            "carry_min_generations": CARRY_MIN_GENERATIONS,
+            "carry_stopped": (det_stopped + cat_stopped)[:50],
             "categories_carried_forward": len(cat_carried),
             "prev_details": len((prev or {}).get("details") or []),
             "prev_categories": len((prev or {}).get("categories") or []),
@@ -357,7 +466,18 @@ def _state(doc):
       ★これを バイト比較に 入れると ★決定論の 検査が ★永久に RED に なる=★鍵が 違う。
     ★∴ ★状態(categories / details / 指標)で 判定し ★`_identity` は 別に 表示する。
     """
-    return {k: v for k, v in (doc or {}).items() if k != "_identity"}
+    # ★★2026-08-25 実測で 足した= ★`carried_generations` は ★写すたび +1 する ∴
+    #   ★状態に 入れると ★決定論の 検査が ★永久に RED に なる(★`_identity` と 同じ 理由=
+    #   ★これは 状態では なく ★遷移の 数え)。★実測= 2回目と3回目で 詳細/カテゴリは 同じ 110/15 だが
+    #   ★世代だけが 3 → 4 と 動いて いた。
+    #   ★★塊の 同一性(axis_id / members / parent)は 比較の 対象に 残す= ★甘くして いない。
+    def _strip(e):
+        return {k: v for k, v in (e or {}).items() if k != "carried_generations"}
+    out = {k: v for k, v in (doc or {}).items() if k != "_identity"}
+    for key in ("details", "categories"):
+        if isinstance(out.get(key), list):
+            out[key] = [_strip(e) for e in out[key]]
+    return out
 
 
 def main(argv):
