@@ -51,6 +51,13 @@ KNOWLEDGE_MARKER = "2DER:LLM_KNOWLEDGE"
 KNOWLEDGE_DIR = os.path.join(ROOT, "egl", "docs")
 MATURITY_LADDER = ("REPORTED", "INFERRED", "OBSERVED", "MEASURED", "REPRODUCED", "ACCEPTED")
 KNOWLEDGE_FIELDS = ("knowledge_id", "call_sites", "applies_when", "maturity")
+
+# ── Phase 2(分類)の材料。★語彙は作らず ★測った事実を2つ足すだけ ──
+#   prompt_source = user メッセージの本文が どこから来るか。PARAM = 呼び手が渡す
+#                   ∴ ★この呼出点は用途を持たない(用途は呼び手に在る)。
+#   answer_used   = 返答の本文を読むか。ABSENT = ★到達性/待ち時間の測定であって推論ではない。
+ANSWER_MARKS = {"VLLM": ("choices", "message", "content", "reasoning_content", "text"),
+                "CLAUDE_P": ("stdout", "result", "content")}
 EXCLUDE_DIRS = ("__pycache__", ".git", "node_modules")
 
 
@@ -248,6 +255,56 @@ def _failure_handling_of(fn, call_node):
                 for x in ast.walk(b):
                     if x is call_node:
                         return "EXISTS"
+    return "ABSENT"
+
+
+def _prompt_source_of(fn, worker):
+    """user メッセージ本文の出所 -> PARAM / LITERAL / PYTHON / PARAM_MIXED / UNRESOLVED。"""
+    if worker == "CLAUDE_P":
+        return "PARAM"          # argv の穴に 呼び手が prompt を入れる(3本とも同型・実測)
+    d = _payload_dict(fn)
+    if d is None:
+        return "UNRESOLVED"
+    msgs = _dict_get(d, "messages")
+    names = {a.arg for a in fn.args.args} | {a.arg for a in fn.args.kwonlyargs}
+    if isinstance(msgs, ast.Name):
+        # ★messages ごと 呼び手から来る = この呼出点は用途を持たない
+        if msgs.id in names:
+            return "PARAM"
+        for n in ast.walk(fn):        # 局所で組んでいるなら その式を見る
+            if isinstance(n, ast.Assign) and any(
+                    isinstance(t, ast.Name) and t.id == msgs.id for t in n.targets):
+                used = {x.id for x in ast.walk(n.value) if isinstance(x, ast.Name)}
+                return "PARAM_MIXED" if used & names else "PYTHON"
+        return "UNRESOLVED"
+    if not isinstance(msgs, ast.List):
+        return "UNRESOLVED"
+    for m in msgs.elts:
+        if not isinstance(m, ast.Dict):
+            continue
+        role = _dict_get(m, "role")
+        if not (isinstance(role, ast.Constant) and role.value == "user"):
+            continue
+        v = _dict_get(m, "content")
+        if isinstance(v, ast.Constant) and isinstance(v.value, str):
+            return "LITERAL"
+        if isinstance(v, ast.Name):
+            return "PARAM" if v.id in names else "PYTHON"
+        if isinstance(v, (ast.JoinedStr, ast.BinOp, ast.Call)):
+            used = {n.id for n in ast.walk(v) if isinstance(n, ast.Name)}
+            return "PARAM_MIXED" if used & names else "PYTHON"
+        return "UNRESOLVED"
+    return "UNRESOLVED"
+
+
+def _answer_used_of(fn, worker):
+    """返答の本文を読むか。★worker ごとに marker が違う(vLLM の語を CLI に当てない)。"""
+    marks = ANSWER_MARKS.get(worker, ())
+    for n in ast.walk(fn):
+        if isinstance(n, ast.Constant) and isinstance(n.value, str) and n.value in marks:
+            return "EXISTS"
+        if isinstance(n, ast.Attribute) and n.attr in marks:
+            return "EXISTS"
     return "ABSENT"
 
 
@@ -456,7 +513,7 @@ def _record(rel, func, lineno, record_class, model="UNRESOLVED", endpoint="UNRES
             gate_ref="NONE", status="UNRESOLVED", worker="VLLM", runtime=None,
             system_prompt="UNVERIFIED", system_prompt_source="UNRESOLVED",
             schema_enforced="UNVERIFIED", output_validator="UNVERIFIED",
-            failure_handling="UNVERIFIED"):
+            failure_handling="UNVERIFIED", prompt_source="UNRESOLVED", answer_used="UNVERIFIED"):
     runtime = runtime or {}
     caller = "%s:%s" % (rel.replace("\\", "/"), func)
     return {
@@ -477,6 +534,8 @@ def _record(rel, func, lineno, record_class, model="UNRESOLVED", endpoint="UNRES
         # ★result_store は ★呼び手の側に在る ∴ この scope(呼出点の関数)では 決められない。
         #   ★埋めない= UNVERIFIED。★0件・不在と 書かない。
         "result_store": "UNVERIFIED",
+        "prompt_source": prompt_source,
+        "answer_used": answer_used,
         "temperature": runtime.get("temperature", "UNRESOLVED"),
         "seed": runtime.get("seed", "UNRESOLVED"),
         "max_tokens": runtime.get("max_tokens", "UNRESOLVED"),
@@ -515,6 +574,8 @@ def analyze(rel, src):
             _has_fmt = "--output-format" in [a for a in argv if a]
             recs.append(_record(rel, fn.name, lineno, "CALL_SITE", worker="CLAUDE_P",
                                 model="UNRESOLVED", endpoint="CLI(claude -p)", status="LIVE",
+                                prompt_source=_prompt_source_of(fn, "CLAUDE_P"),
+                                answer_used=_answer_used_of(fn, "CLAUDE_P"),
                                 system_prompt=("EXISTS" if _has_sys else "ABSENT"),
                                 system_prompt_source=("CLI_FLAG" if _has_sys else "ABSENT"),
                                 schema_enforced=("EXISTS" if _has_fmt else "ABSENT"),
@@ -531,6 +592,8 @@ def analyze(rel, src):
                                 endpoint=_endpoint_of(src, const_map, fn),
                                 runtime=_runtime_of(fn, const_map, uo),
                                 system_prompt=_sp, system_prompt_source=_sps,
+                                prompt_source=_prompt_source_of(fn, "VLLM"),
+                                answer_used=_answer_used_of(fn, "VLLM"),
                                 schema_enforced=_schema_enforced_of(fn),
                                 output_validator=_output_validator_of(fn),
                                 failure_handling=_failure_handling_of(fn, uo),
@@ -651,7 +714,8 @@ def check():
         r = json.loads(l)
         if r["record_class"] != "CALL_SITE":
             continue
-        for f in ("system_prompt", "schema_enforced", "output_validator", "failure_handling", "result_store"):
+        for f in ("system_prompt", "schema_enforced", "output_validator", "failure_handling",
+                  "result_store", "answer_used"):
             if r.get(f) not in VERDICTS:
                 red.append("VOCAB_VIOLATION: %s.%s=%r not in VERDICTS" % (r["caller"], f, r.get(f)))
     # ★知識 doc の門: 宛先が実在するか / 成熟度が既存の梯子の語か / id が重複しないか
