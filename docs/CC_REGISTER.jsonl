@@ -1081,3 +1081,4 @@
 {"kind": "DOC", "doc_id": "ART-6e8e306153", "path": "docs/CC_MGR_2026-08-25_CLEAN_REBUILD_VS_INCREMENTAL.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-25T01:51:03"}
 {"kind": "DOC", "doc_id": "ART-959410e9cd", "path": "docs/CC_MGR_2026-08-25_IDENTITY_OPS_ACCUMULATION.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-25T14:52:24"}
 {"kind": "DOC", "doc_id": "ART-615e7bfd67", "path": "docs/CC_MGR_2026-08-25_ACTOR_MISSING_SURVEY.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-25T15:57:20"}
+{"kind": "DOC", "doc_id": "ART-935df30be2", "path": "docs/CC_MGR_2026-08-25_EVIDENCE_CODE_SURVEY.md", "type": "FINDING", "from": "MGR", "to": "TAKA", "build_role": "REFERENCE", "supersedes": null, "ts": "2026-08-25T19:59:09"}
