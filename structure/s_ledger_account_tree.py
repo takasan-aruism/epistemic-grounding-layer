@@ -100,6 +100,24 @@ INHERIT_MIN_SHARE = 0.5     # ★過半数(★一意性から 決まる= 勘で 
 SPLIT_MIN_SHARE = 0.25      # ★分割の 疑いを 記録する 線(★記録だけ= 適用しない)
 
 
+def _adopted_accounts():
+    """★★採択済みの 科目(chart)を 引く。★台帳は 直読しない= rri の 関数から 引く。
+
+    ★★2026-08-25 Taka 裁定(B)で 足した= ★『chart に在る科目は RETIRE_CANDIDATE と呼ばない』。
+      ★足した 理由(実測)= ★持ち越し 157件のうち ★33件が chart に在る= ★現役の 科目 だった。
+        ★それを 毎回 『廃止候補』として 上申に 積んで いた= ★誤りの 再生産
+        (★同型の 誤解を ART-7391be827a でも 出した= 『RETIRE 20件は 死んだ科目でなく 現役20科目』)。
+    ★引けなければ 空集合= ★『引けない』を『採択されていない』と 混同しない ため
+      ★下では ★空の時は 従来どおり(★誰も 除かない)。
+    """
+    try:
+        sys.path.insert(0, "/home/takasan/rri")
+        from rri import request_thread as RT
+        return set(RT._load_chart()[1] or ())
+    except Exception:
+        return set()
+
+
 def _prev_doc():
     """★1つ前の 控えを 読む(★これが 同一性の 出所)。★無ければ None= 初回は 従来どおり。"""
     if not os.path.isfile(OUT):
@@ -109,6 +127,24 @@ def _prev_doc():
             return json.load(fh)
     except Exception:
         return None                        # ★読めない を『無い』と 混同しない= 初回扱いに 落とす
+
+
+def _retire_or_adopted(p, adopted, why, ops):
+    """★★持ち越す 1件に ★札を 付ける(★Taka 裁定 B)。
+
+    ★`chart` に 在る= ★採択済みの 現役科目 ∴ ★『廃止候補』とは 呼ばない=
+      ★`identity_op_pending` を 立てず ★`ops`(上申)にも 積まない。
+      ★但し ★持ち越しは する= ★tree から 消すと ★既存割当が tree の 外を 指す
+      (★`domain_ledger` の 門が それを 見て いる)。
+    ★`chart` に 無い= ★従来どおり `RETIRE_CANDIDATE`。
+    ★★これは 抑止では なく ★誤りの 修正= ★数え方を 変えて いない。
+    """
+    if p.get("axis_id") in adopted:
+        return dict(p, carried_forward=True, adopted_in_chart=True,
+                    identity_op_pending=None,
+                    carried_why="★採択済み(chart)ゆえ 持ち越す= ★廃止候補では ない")
+    ops.append({"op": "RETIRE_CANDIDATE", "axis_id": p["axis_id"], "why": why})
+    return dict(p, carried_forward=True, identity_op_pending="RETIRE_CANDIDATE")
 
 
 def _inherit(prefix, prev_entries, fresh):
@@ -123,24 +159,32 @@ def _inherit(prefix, prev_entries, fresh):
     prev = [e for e in (prev_entries or []) if str(e.get("axis_id", "")).startswith(prefix + "-")]
     if not prev:
         return {}, [], []
+    # ★★2026-08-25 実測で 直した(★入口の 一意化)=
+    #   ★前回の 控えに ★同じ axis_id が 2行 以上 在ると ★別々の p が 別々の 塊を 主張し得る
+    #   ∴ ★assign の 値が 重複する(★実測= LDET-d153d542 が 前回 3行 / 今回 2行)。
+    #   ★1つの id は ★1つの entry= ★members が 最も 多い もの(★現物に 近い)を 残す。
+    #   ★★消して いない= ★同じ id の 写しを 1つに 畳むだけ。
+    _by = {}
+    for e in prev:
+        k = e.get("axis_id")
+        if k not in _by or len(e.get("members") or ()) > len(_by[k].get("members") or ()):
+            _by[k] = e
+    prev = sorted(_by.values(), key=lambda e: e["axis_id"])
     fresh_sets = [set(f["members"]) for f in fresh]
     claims = {}                            # fresh index → [(overlap, prev_entry)]
     ops, carried = [], []
+    adopted = _adopted_accounts()          # ★B: 採択済み= 廃止候補では ない
     for p in sorted(prev, key=lambda e: e["axis_id"]):
         pm = set(p.get("members") or ())
         if not pm:
-            carried.append(dict(p, carried_forward=True,
-                                identity_op_pending="RETIRE_CANDIDATE"))
-            ops.append({"op": "RETIRE_CANDIDATE", "axis_id": p["axis_id"], "why": "members 0件"})
+            carried.append(_retire_or_adopted(p, adopted, "members 0件", ops))
             continue
         shares = sorted(((len(pm & fs) / float(len(pm)), len(pm & fs), i)
                          for i, fs in enumerate(fresh_sets)), key=lambda t: (-t[0], t[2]))
         top = shares[0] if shares else (0.0, 0, None)
         if top[0] <= INHERIT_MIN_SHARE:
-            carried.append(dict(p, carried_forward=True,
-                                identity_op_pending="RETIRE_CANDIDATE"))
-            ops.append({"op": "RETIRE_CANDIDATE", "axis_id": p["axis_id"],
-                        "why": "過半数を 引き継ぐ 塊が 無い(最大 share=%.3f)" % top[0]})
+            carried.append(_retire_or_adopted(
+                p, adopted, "過半数を 引き継ぐ 塊が 無い(最大 share=%.3f)" % top[0], ops))
             continue
         claims.setdefault(top[2], []).append((top[1], p))
         spread = [{"share": round(sh, 4), "fresh_index": i}
@@ -157,6 +201,38 @@ def _inherit(prefix, prev_entries, fresh):
                                 identity_op_pending="MERGE_ABSORBED_CANDIDATE"))
             ops.append({"op": "MERGE_ABSORBED_CANDIDATE", "axis_id": p["axis_id"],
                         "why": "同じ 塊を %s も 主張した(★統合は 自動更新に 含めない)" % cl[0][1]["axis_id"]})
+    # ★★2026-08-25 実測で 直した(★私の 設計欠陥)=
+    #   ★同じ 既存 id が ★『継承先(assign)』と ★『持ち越し(carried)』の ★両方に 出て いた。
+    #   ★実測= 詳細 267行 / 一意 262 ∴ ★4件が 重複(LDET-d153d542 は ★3行)。
+    #   ★因果= ①ある回で p が 塊A を 主張して 継承 → ②次の回で p の members は 前回の まま(持ち越しは
+    #     members を 更新しない)∴ ★過半数を 失い RETIRE/MERGE 側へ 落ちる → ★同じ id で 2行に なる。
+    #   ★★1つの id は ★1つの entry でなければ ならない(★試験
+    #     `test_two_levels_and_parenting` が『同じ 詳細科目が 2つの 親に 付いて いる』で 落ちた)。
+    #   ★★決め方= ★★継承が 勝つ= ★assign に 出た id は ★carried から 除く。
+    #     ★理由= 継承側は ★いまの members を 持つ(★現物)／ 持ち越し側は ★前回の members(★写し)。
+    #     ★『現物 が 在るのに 写しを 残す』のは ★二重計上。
+    #   ★★これは 抑止では なく ★同一性の 保存= ★消しては いない(★同じ id が 1行に なるだけ)。
+    # ★★出口の 一意化= ★同じ id を 2つの 塊が 継承しない。
+    #   ★強い 方(overlap 最大 → 同率なら fresh index が 小さい 方)が 勝ち、
+    #   ★負けた 塊は ★継承を 諦める= ★新規 id を 打つ(`assign` から 落とす)。
+    #   ★★これも 消して いない= ★1つの id が 1つの 塊に 付く だけ。
+    best = {}
+    for i, cl in sorted(claims.items()):
+        aid = assign.get(i)
+        if aid is None:
+            continue
+        ov = max((t[0] for t in cl), default=0)
+        if aid not in best or (ov, -i) > best[aid][0]:
+            best[aid] = ((ov, -i), i)
+    keep = {v[1] for v in best.values()}
+    for i in list(assign):
+        if i not in keep:
+            del assign[i]                  # ★負けた 塊= 新規 id を 打つ
+    inherited_ids = set(assign.values())
+    dropped = [e for e in carried if e["axis_id"] in inherited_ids]
+    carried = [e for e in carried if e["axis_id"] not in inherited_ids]
+    if dropped:
+        ops = [o for o in ops if o["axis_id"] not in inherited_ids]
     ops.sort(key=lambda o: (o["op"], o["axis_id"]))
     carried.sort(key=lambda e: e["axis_id"])
     return assign, carried, ops
