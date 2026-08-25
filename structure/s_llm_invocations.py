@@ -258,10 +258,120 @@ def _failure_handling_of(fn, call_node):
     return "ABSENT"
 
 
+def _claude_prompt_source(fn):
+    """CLI 起動の prompt が どこから来るか。★決め打ちにしない(2026-08-25: PARAM 決め打ちで 4件 誤った)。
+    2つの形を辿る: ①argv の literal 要素が Name ②`cmd[2] = <式>` の代入。"""
+    names = {a.arg for a in fn.args.args} | {a.arg for a in fn.args.kwonlyargs}
+
+    def _of(expr):
+        if isinstance(expr, ast.Constant) and isinstance(expr.value, str):
+            return "LITERAL"
+        if isinstance(expr, ast.Name):
+            if expr.id in names:
+                return "PARAM"
+            for n in ast.walk(fn):                    # 局所で組んでいるなら その式を見る
+                if isinstance(n, ast.Assign) and any(
+                        isinstance(t, ast.Name) and t.id == expr.id for t in n.targets):
+                    return _of(n.value)
+            return "UNRESOLVED"
+        used = {x.id for x in ast.walk(expr) if isinstance(x, ast.Name)}
+        has_lit = any(isinstance(x, ast.Constant) and isinstance(x.value, str) and len(x.value) > 20
+                      for x in ast.walk(expr))
+        if used & names or has_lit:
+            return "PARAM_MIXED" if (used & names) else "PYTHON"
+        return "PYTHON"
+
+    # ② cmd[<i>] = <式>(argv の穴を埋める形)
+    for n in ast.walk(fn):
+        if isinstance(n, ast.Assign):
+            for t in n.targets:
+                if isinstance(t, ast.Subscript) and isinstance(t.value, ast.Name):
+                    return _of(n.value)
+    # ① argv の literal 要素に Name が在る形
+    for n in ast.walk(fn):
+        if not isinstance(n, ast.List):
+            continue
+        vals = [e for e in n.elts]
+        if vals and isinstance(vals[0], ast.Constant) and vals[0].value == CLAUDE_BIN:
+            for e in vals[1:]:
+                if isinstance(e, ast.Name):
+                    return _of(e)
+    return "UNRESOLVED"
+
+
+def _content_exprs(fn, worker):
+    """prompt になる式を返す。VLLM= messages の content 値 / CLAUDE_P= argv の prompt 位置。"""
+    if worker == "CLAUDE_P":
+        out = []
+        for n in ast.walk(fn):
+            if isinstance(n, ast.Assign):
+                for t in n.targets:
+                    if isinstance(t, ast.Subscript) and isinstance(t.value, ast.Name):
+                        out.append(n.value)
+        if out:
+            return out
+        for n in ast.walk(fn):
+            if isinstance(n, ast.List) and n.elts and isinstance(n.elts[0], ast.Constant) \
+                    and n.elts[0].value == CLAUDE_BIN:
+                for e in n.elts[1:]:
+                    if isinstance(e, ast.Name):
+                        out.append(e)
+        return out
+    d = _payload_dict(fn)
+    if d is None:
+        return []
+    msgs = _dict_get(d, "messages")
+    if isinstance(msgs, ast.Name):
+        for n in ast.walk(fn):
+            if isinstance(n, ast.Assign) and any(
+                    isinstance(t, ast.Name) and t.id == msgs.id for t in n.targets):
+                msgs = n.value
+                break
+    out = []
+    for m in ast.walk(msgs) if msgs is not None else []:
+        if isinstance(m, ast.Dict):
+            v = _dict_get(m, "content")
+            if v is not None:
+                out.append(v)
+    return out
+
+
+def _prompt_literal_chars(fn, worker):
+    """★この呼出点に 書かれている 指示文の字数(dict の鍵は数えない)。
+    ★閾値を持たない= 0 なら『渡すだけ』・大きいほど『この場で問いを作っている』。
+    Name は 局所の代入を 1段 たどる(prompt = "..." % x の形を拾う)。"""
+    total = 0
+    seen = set()
+
+    def walk_expr(e, depth=0):
+        nonlocal total
+        if e is None or depth > 3:
+            return
+        if isinstance(e, ast.Constant) and isinstance(e.value, str):
+            total += len(e.value)
+            return
+        if isinstance(e, ast.Name):
+            if e.id in seen:
+                return
+            seen.add(e.id)
+            for n in ast.walk(fn):
+                if isinstance(n, ast.Assign) and any(
+                        isinstance(t, ast.Name) and t.id == e.id for t in n.targets):
+                    walk_expr(n.value, depth + 1)
+                    return
+            return
+        for child in ast.iter_child_nodes(e):
+            walk_expr(child, depth + 1)
+
+    for e in _content_exprs(fn, worker):
+        walk_expr(e)
+    return total
+
+
 def _prompt_source_of(fn, worker):
     """user メッセージ本文の出所 -> PARAM / LITERAL / PYTHON / PARAM_MIXED / UNRESOLVED。"""
     if worker == "CLAUDE_P":
-        return "PARAM"          # argv の穴に 呼び手が prompt を入れる(3本とも同型・実測)
+        return _claude_prompt_source(fn)
     d = _payload_dict(fn)
     if d is None:
         return "UNRESOLVED"
@@ -513,7 +623,8 @@ def _record(rel, func, lineno, record_class, model="UNRESOLVED", endpoint="UNRES
             gate_ref="NONE", status="UNRESOLVED", worker="VLLM", runtime=None,
             system_prompt="UNVERIFIED", system_prompt_source="UNRESOLVED",
             schema_enforced="UNVERIFIED", output_validator="UNVERIFIED",
-            failure_handling="UNVERIFIED", prompt_source="UNRESOLVED", answer_used="UNVERIFIED"):
+            failure_handling="UNVERIFIED", prompt_source="UNRESOLVED", answer_used="UNVERIFIED",
+            prompt_literal_chars=0):
     runtime = runtime or {}
     caller = "%s:%s" % (rel.replace("\\", "/"), func)
     return {
@@ -535,6 +646,7 @@ def _record(rel, func, lineno, record_class, model="UNRESOLVED", endpoint="UNRES
         #   ★埋めない= UNVERIFIED。★0件・不在と 書かない。
         "result_store": "UNVERIFIED",
         "prompt_source": prompt_source,
+        "prompt_literal_chars": prompt_literal_chars,
         "answer_used": answer_used,
         "temperature": runtime.get("temperature", "UNRESOLVED"),
         "seed": runtime.get("seed", "UNRESOLVED"),
@@ -575,6 +687,7 @@ def analyze(rel, src):
             recs.append(_record(rel, fn.name, lineno, "CALL_SITE", worker="CLAUDE_P",
                                 model="UNRESOLVED", endpoint="CLI(claude -p)", status="LIVE",
                                 prompt_source=_prompt_source_of(fn, "CLAUDE_P"),
+                                prompt_literal_chars=_prompt_literal_chars(fn, "CLAUDE_P"),
                                 answer_used=_answer_used_of(fn, "CLAUDE_P"),
                                 system_prompt=("EXISTS" if _has_sys else "ABSENT"),
                                 system_prompt_source=("CLI_FLAG" if _has_sys else "ABSENT"),
@@ -593,6 +706,7 @@ def analyze(rel, src):
                                 runtime=_runtime_of(fn, const_map, uo),
                                 system_prompt=_sp, system_prompt_source=_sps,
                                 prompt_source=_prompt_source_of(fn, "VLLM"),
+                                prompt_literal_chars=_prompt_literal_chars(fn, "VLLM"),
                                 answer_used=_answer_used_of(fn, "VLLM"),
                                 schema_enforced=_schema_enforced_of(fn),
                                 output_validator=_output_validator_of(fn),
