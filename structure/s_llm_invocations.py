@@ -30,6 +30,17 @@ WRAPPER_NAMES = ("_chat", "adjudicate", "call_vllm")
 CLAUDE_BIN = "claude"                         # headless Claude Code worker(CLI)
 CLAUDE_PRINT_FLAGS = ("-p", "--print")        # 非対話(1往復)である証拠
 SUBPROC_FUNCS = ("run", "Popen", "check_output", "call", "check_call")
+
+# ── v0.3(Inference Control §13 Phase 1 の残り): 欄を「埋める」のでなく ★既存の閉じた語彙へ写す ──
+# ★新語を作らない。正本= twoder/handoff_contract.py:44 VERDICTS(写し。--check で drift を見る)。
+#   EXISTS   = 在る(呼出点の本文から取れた)
+#   ABSENT   = 探して 無い(★設計上 持っていない)
+#   UNVERIFIED = この scope では 決められない(★0件と書かない)
+# ★PARTIAL / CONFLICT は この計器では 発生しない(1呼出点に1つの事実しか見ていない) ∴ 使わない。
+VERDICTS = ("EXISTS", "PARTIAL", "ABSENT", "CONFLICT", "UNVERIFIED")
+SCHEMA_KEYS = ("response_format", "guided_json", "guided_regex", "guided_choice", "tools", "tool_choice")
+RUNTIME_KEYS = ("temperature", "seed", "max_tokens")
+VALIDATOR_NAMES = ("loads", "search", "findall", "match", "fullmatch")
 EXCLUDE_DIRS = ("__pycache__", ".git", "node_modules")
 
 
@@ -117,6 +128,117 @@ def _endpoint_of(module_text, const_map, fn):
         if p in blob:
             return p
     return "UNRESOLVED"
+
+
+def _payload_dict(fn):
+    """呼出の body になる dict(model/messages を持つ最初の Dict)。無ければ None。"""
+    for n in ast.walk(fn):
+        if not isinstance(n, ast.Dict):
+            continue
+        keys = {k.value for k in n.keys if isinstance(k, ast.Constant) and isinstance(k.value, str)}
+        if "model" in keys and "messages" in keys:
+            return n
+    return None
+
+
+def _dict_get(d, key):
+    for k, v in zip(d.keys, d.values):
+        if isinstance(k, ast.Constant) and k.value == key:
+            return v
+    return None
+
+
+def _lit_or_unresolved(node, const_map, fn=None):
+    """定数なら値、module 定数名なら値、関数の既定引数なら値。取れなければ UNRESOLVED(捏造しない)。"""
+    if isinstance(node, ast.Constant) and not isinstance(node.value, (dict, list)):
+        return json.dumps(node.value, ensure_ascii=False)
+    if isinstance(node, ast.Name):
+        if node.id in const_map:
+            return const_map[node.id]
+        if fn is not None:                      # 関数の既定引数(seed=0 / max_tokens=1200)
+            args = fn.args
+            defaults = list(args.defaults)
+            pos = list(args.args)[len(args.args) - len(defaults):]
+            for a, d in zip(pos, defaults):
+                if a.arg == node.id and isinstance(d, ast.Constant):
+                    return json.dumps(d.value, ensure_ascii=False)
+            for a, d in zip(args.kwonlyargs, args.kw_defaults):
+                if a.arg == node.id and isinstance(d, ast.Constant):
+                    return json.dumps(d.value, ensure_ascii=False)
+    return "UNRESOLVED"
+
+
+def _runtime_of(fn, const_map, call_node):
+    """temperature / seed / max_tokens / timeout。★取れないものは UNRESOLVED のまま残す。"""
+    out = {k: "UNRESOLVED" for k in RUNTIME_KEYS}
+    out["timeout"] = "UNRESOLVED"
+    d = _payload_dict(fn)
+    if d is not None:
+        for k in RUNTIME_KEYS:
+            v = _dict_get(d, k)
+            if v is not None:
+                out[k] = _lit_or_unresolved(v, const_map, fn)
+    if call_node is not None:
+        for kw in call_node.keywords:
+            if kw.arg == "timeout":
+                out["timeout"] = _lit_or_unresolved(kw.value, const_map, fn)
+    return out
+
+
+def _system_prompt_of(fn):
+    """messages に role=system が在るか -> (verdict, source)。★source は1つのことだけ指す。"""
+    d = _payload_dict(fn)
+    if d is None:
+        return "UNVERIFIED", "UNRESOLVED"
+    msgs = _dict_get(d, "messages")
+    if not isinstance(msgs, ast.List):
+        return "UNVERIFIED", "UNRESOLVED"
+    for m in msgs.elts:
+        if not isinstance(m, ast.Dict):
+            return "UNVERIFIED", "UNRESOLVED"
+        role = _dict_get(m, "role")
+        if isinstance(role, ast.Constant) and role.value == "system":
+            content = _dict_get(m, "content")
+            if isinstance(content, ast.Constant):
+                return "EXISTS", "LITERAL"
+            if isinstance(content, ast.Name):
+                names = {a.arg for a in fn.args.args} | {a.arg for a in fn.args.kwonlyargs}
+                return "EXISTS", ("PARAM" if content.id in names else "PYTHON")
+            return "EXISTS", "PYTHON"
+    return "ABSENT", "ABSENT"          # ★messages は読めた・system 役が 無い(設計上 持っていない)
+
+
+def _schema_enforced_of(fn):
+    d = _payload_dict(fn)
+    if d is None:
+        return "UNVERIFIED"
+    keys = {k.value for k in d.keys if isinstance(k, ast.Constant) and isinstance(k.value, str)}
+    return "EXISTS" if keys & set(SCHEMA_KEYS) else "ABSENT"
+
+
+def _output_validator_of(fn):
+    """返答を そのまま使わずに 通す物が 在るか(json.loads / re.* / parse_*)。"""
+    for n in ast.walk(fn):
+        if not isinstance(n, ast.Call):
+            continue
+        f = n.func
+        nm = f.attr if isinstance(f, ast.Attribute) else (f.id if isinstance(f, ast.Name) else "")
+        if nm in VALIDATOR_NAMES or nm.startswith("parse_"):
+            return "EXISTS"
+    return "ABSENT"
+
+
+def _failure_handling_of(fn, call_node):
+    """呼出が try の中に在るか。★『在る/無い』だけを言う(質は見ていない)。"""
+    if call_node is None:
+        return "UNVERIFIED"
+    for n in ast.walk(fn):
+        if isinstance(n, ast.Try):
+            for b in n.body:
+                for x in ast.walk(b):
+                    if x is call_node:
+                        return "EXISTS"
+    return "ABSENT"
 
 
 def _model_of(fn, const_map):
@@ -264,7 +386,11 @@ def _mint(caller, func, lineno):
 
 
 def _record(rel, func, lineno, record_class, model="UNRESOLVED", endpoint="UNRESOLVED",
-            gate_ref="NONE", status="UNRESOLVED", worker="VLLM"):
+            gate_ref="NONE", status="UNRESOLVED", worker="VLLM", runtime=None,
+            system_prompt="UNVERIFIED", system_prompt_source="UNRESOLVED",
+            schema_enforced="UNVERIFIED", output_validator="UNVERIFIED",
+            failure_handling="UNVERIFIED"):
+    runtime = runtime or {}
     caller = "%s:%s" % (rel.replace("\\", "/"), func)
     return {
         "invocation_id": _mint(rel, func, lineno),
@@ -275,12 +401,19 @@ def _record(rel, func, lineno, record_class, model="UNRESOLVED", endpoint="UNRES
         "class": _klass(rel),
         "model": model,
         "endpoint": endpoint,
-        "system_prompt_source": "UNRESOLVED",
+        "system_prompt": system_prompt,
+        "system_prompt_source": system_prompt_source,
         "context_builder": "PYTHON",
-        "schema_enforced": "UNRESOLVED",
-        "output_validator": "UNRESOLVED",
-        "failure_handling": "UNRESOLVED",
-        "result_store": "UNRESOLVED",
+        "schema_enforced": schema_enforced,
+        "output_validator": output_validator,
+        "failure_handling": failure_handling,
+        # ★result_store は ★呼び手の側に在る ∴ この scope(呼出点の関数)では 決められない。
+        #   ★埋めない= UNVERIFIED。★0件・不在と 書かない。
+        "result_store": "UNVERIFIED",
+        "temperature": runtime.get("temperature", "UNRESOLVED"),
+        "seed": runtime.get("seed", "UNRESOLVED"),
+        "max_tokens": runtime.get("max_tokens", "UNRESOLVED"),
+        "timeout": runtime.get("timeout", "UNRESOLVED"),
         "status": status,
         "gate_ref": gate_ref,
     }
@@ -303,16 +436,36 @@ def analyze(rel, src):
     # v0.2: CLAUDE_P worker(headless claude -p)。endpoint は CLI、model は CLI 既定ゆえ UNRESOLVED(捏造しない)。
     for fn in funcs:
         for lineno, argv in _claude_p_calls(fn, list_consts, sp_mods, sp_funcs):
+            _cnode = None
+            for n in ast.walk(fn):
+                if isinstance(n, ast.Call) and n.lineno == lineno:
+                    _cnode = n
+                    break
+            # ★CLI に system prompt の旗が在るか(--system-prompt / --append-system-prompt)。
+            _has_sys = any(a and a.startswith("--") and "system-prompt" in a for a in argv)
+            # ★--output-format json は 返答の形の 指定 ∴ schema_enforced は EXISTS。
+            _has_fmt = "--output-format" in [a for a in argv if a]
             recs.append(_record(rel, fn.name, lineno, "CALL_SITE", worker="CLAUDE_P",
-                                model="UNRESOLVED", endpoint="CLI(claude -p)", status="LIVE"))
+                                model="UNRESOLVED", endpoint="CLI(claude -p)", status="LIVE",
+                                system_prompt=("EXISTS" if _has_sys else "ABSENT"),
+                                system_prompt_source=("CLI_FLAG" if _has_sys else "ABSENT"),
+                                schema_enforced=("EXISTS" if _has_fmt else "ABSENT"),
+                                output_validator=_output_validator_of(fn),
+                                failure_handling=_failure_handling_of(fn, _cnode)))
 
     call_funcs = set()
     for fn in funcs:
         uo = _has_urlopen(fn)
         if uo is not None and _func_is_llm(fn, const_map):
+            _sp, _sps = _system_prompt_of(fn)
             recs.append(_record(rel, fn.name, uo.lineno, "CALL_SITE",
                                 model=_model_of(fn, const_map),
                                 endpoint=_endpoint_of(src, const_map, fn),
+                                runtime=_runtime_of(fn, const_map, uo),
+                                system_prompt=_sp, system_prompt_source=_sps,
+                                schema_enforced=_schema_enforced_of(fn),
+                                output_validator=_output_validator_of(fn),
+                                failure_handling=_failure_handling_of(fn, uo),
                                 status="GATED(USE_VLLM_INFERENCE)"
                                        if "USE_VLLM_INFERENCE" in src else "LIVE",
                                 gate_ref="USE_VLLM_INFERENCE" if "USE_VLLM_INFERENCE" in src else "NONE"))
@@ -412,6 +565,24 @@ def check():
             red.append("UNREGISTERED_CALL_SITE: %s" % r["caller"])
     if not _negative_control_ok():
         red.append("NEGATIVE_CONTROL_FAILED: detector flagged a docstring-only module as CALL_SITE (vacuous)")
+    # ★語彙 drift: 正本(twoder/handoff_contract.VERDICTS)と 写しが ずれたら 赤。
+    try:
+        sys.path.insert(0, ROOT)
+        from twoder.handoff_contract import VERDICTS as _CANON
+        if tuple(_CANON) != tuple(VERDICTS):
+            red.append("VOCAB_DRIFT: VERDICTS copy != twoder/handoff_contract.VERDICTS %s" % (tuple(_CANON),))
+    except Exception:
+        pass                                  # ★引けなければ 黙って通す(この計器は 台帳であって 門ではない)
+    # ★閉じた語彙の外の値を 書いていないか(自分の記録を 自分で数える)
+    for l in existing.splitlines():
+        if not l.strip():
+            continue
+        r = json.loads(l)
+        if r["record_class"] != "CALL_SITE":
+            continue
+        for f in ("system_prompt", "schema_enforced", "output_validator", "failure_handling", "result_store"):
+            if r.get(f) not in VERDICTS:
+                red.append("VOCAB_VIOLATION: %s.%s=%r not in VERDICTS" % (r["caller"], f, r.get(f)))
     if red:
         print("LLM_INVOCATIONS --check: RED")
         for m in red:
