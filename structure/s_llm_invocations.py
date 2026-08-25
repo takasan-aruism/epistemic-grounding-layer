@@ -728,6 +728,67 @@ def analyze(rel, src):
     return recs
 
 
+def _module_tail(rel):
+    return rel[:-3].replace("\\", "/").split("/")[-1]
+
+
+def _imports_of(tree):
+    """-> (module別名 -> module末尾名, from-import した名前 -> (module末尾名, 元の名前))"""
+    alias, names = {}, {}
+    for n in ast.walk(tree):
+        if isinstance(n, ast.Import):
+            for a in n.names:
+                alias[a.asname or a.name.split(".")[0]] = a.name.split(".")[-1]
+        elif isinstance(n, ast.ImportFrom) and n.module:
+            for a in n.names:
+                names[a.asname or a.name] = (n.module.split(".")[-1], a.name)
+    return alias, names
+
+
+def _callers_of(call_sites):
+    """★一次関数の呼び手を ★解決して 数える(名前一致では数えない= get/chat/fn が全レポで衝突する)。
+    -> [(caller_rel, caller_func, lineno, prim_caller)]。決定論のため path/行 順に返す。"""
+    prims = []
+    for r in call_sites:
+        rel, func = r["caller"].split(":", 1)
+        prims.append((rel, func, _module_tail(rel), r["caller"]))
+    out = []
+    for repo, rel, ab in _iter_py():
+        try:
+            tree = ast.parse(open(ab, encoding="utf-8").read())
+        except Exception:
+            continue
+        defined = {n.name for n in ast.walk(tree)
+                   if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+        alias, fromnames = _imports_of(tree)
+        # Call -> 最内の関数
+        owner = {}
+        for f in ast.walk(tree):
+            if isinstance(f, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                for x in ast.walk(f):
+                    if isinstance(x, ast.Call):
+                        cur = owner.get(id(x))
+                        if cur is None or f.lineno > cur.lineno:
+                            owner[id(x)] = f
+        for n in ast.walk(tree):
+            if not isinstance(n, ast.Call):
+                continue
+            f = n.func
+            for prel, pfunc, ptail, pid in prims:
+                ok = False
+                if isinstance(f, ast.Name) and f.id == pfunc:
+                    ok = (rel == prel and pfunc in defined) or \
+                         (f.id in fromnames and fromnames[f.id][1] == pfunc
+                          and fromnames[f.id][0] == ptail)
+                elif isinstance(f, ast.Attribute) and f.attr == pfunc and isinstance(f.value, ast.Name):
+                    ok = alias.get(f.value.id) == ptail or f.value.id == ptail
+                if ok:
+                    enc = owner.get(id(n))
+                    out.append((rel, enc.name if enc else "<module>", n.lineno, pid))
+    out.sort()
+    return out
+
+
 def build():
     recs = []
     for repo, rel, ab in _iter_py():
@@ -740,10 +801,18 @@ def build():
         if not vllm_ish and not claude_ish:
             continue
         recs += analyze(rel, src)
+    # ★Phase 2: 用途の単位は 呼出点でなく ★呼び手 ∴ 呼び手も 台帳に登記する(新台帳0・既存の record_class を1つ足す)。
+    site_recs = [r for r in recs if r["record_class"] == "CALL_SITE"]
+    for crel, cfunc, clineno, pid in _callers_of(site_recs):
+        rr = _record(crel, cfunc, clineno, "CALLER")
+        rr["calls"] = pid
+        rr["worker"] = next((s["worker"] for s in site_recs if s["caller"] == pid), "VLLM")
+        recs.append(rr)
     docs = _knowledge_docs()
     for r in recs:
         r["knowledge_refs"] = _knowledge_for(r, docs) if r["record_class"] == "CALL_SITE" else []
-    recs.sort(key=lambda r: (r["record_class"] != "CALL_SITE", r["worker"], r["caller"], r["lineno"]))
+    _ORDER = {"CALL_SITE": 0, "CALLER": 1, "WRAPPER_DEF": 2, "MENTION_ONLY": 3}
+    recs.sort(key=lambda r: (_ORDER.get(r["record_class"], 9), r["worker"], r["caller"], r["lineno"]))
     return recs
 
 
@@ -868,10 +937,11 @@ def check():
     for r in calls:
         by_w[r.get("worker", "VLLM")] = by_w.get(r.get("worker", "VLLM"), 0) + 1
     wtxt = " ".join("%s=%d" % (k, by_w[k]) for k in sorted(by_w))
+    n_caller = sum(1 for r in rows if r["record_class"] == "CALLER")
     n_k = sum(1 for r in calls if r.get("knowledge_refs"))
     print("LLM_INVOCATIONS --check: GREEN (negative-control ok; %d CALL_SITE registered [%s]; "
-          "knowledge %d doc -> %d call site(s); byte-identical)"
-          % (len(calls), wtxt, len(_docs), n_k))
+          "%d caller(s); knowledge %d doc -> %d call site(s); byte-identical)"
+          % (len(calls), wtxt, n_caller, len(_docs), n_k))
     return 0
 
 
@@ -884,9 +954,10 @@ def main(argv):
     n_call = sum(1 for r in recs if r["record_class"] == "CALL_SITE")
     n_wrap = sum(1 for r in recs if r["record_class"] == "WRAPPER_DEF")
     n_ment = sum(1 for r in recs if r["record_class"] == "MENTION_ONLY")
+    n_caller = sum(1 for r in recs if r["record_class"] == "CALLER")
     n_cp = sum(1 for r in recs if r["record_class"] == "CALL_SITE" and r["worker"] == "CLAUDE_P")
-    print("wrote %d records to %s (CALL_SITE=%d [VLLM=%d CLAUDE_P=%d] WRAPPER_DEF=%d MENTION_ONLY=%d)"
-          % (len(recs), OUT, n_call, n_call - n_cp, n_cp, n_wrap, n_ment))
+    print("wrote %d records to %s (CALL_SITE=%d [VLLM=%d CLAUDE_P=%d] CALLER=%d WRAPPER_DEF=%d MENTION_ONLY=%d)"
+          % (len(recs), OUT, n_call, n_call - n_cp, n_cp, n_caller, n_wrap, n_ment))
     return 0
 
 
