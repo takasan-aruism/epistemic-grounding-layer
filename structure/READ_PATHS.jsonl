@@ -55,6 +55,7 @@
 {"actually_loaded": ["LEDGER_ACCOUNT_AXES_CANDIDATE.json", "LEDGER_ACCOUNT_AXES_STABILITY.json"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_ledger_account_axes", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["LEDGER_ACCOUNT_AXES_CANDIDATE.json", "LEDGER_ACCOUNT_AXIS_NAMES.json", "LEDGER_ACCOUNT_TREE.json", "LEDGER_ACCOUNT_TREE_NAMES.json"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_ledger_account_axis_names", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["LEDGER_ACCOUNT_TREE.json"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_ledger_account_tree", "verdict": "UNRESOLVED_NO_CONTRACT"}
+{"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_llm_false_stop", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": ["LLM_INVOCATIONS.jsonl"], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_llm_invocations", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_long_input_build3", "verdict": "UNRESOLVED_NO_CONTRACT"}
 {"actually_loaded": [], "path": "*", "required_by_contract": "UNRESOLVED_NO_CONTRACT", "stage": "s_menu_restriction_build4", "verdict": "UNRESOLVED_NO_CONTRACT"}
