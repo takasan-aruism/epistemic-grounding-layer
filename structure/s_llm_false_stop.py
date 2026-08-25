@@ -20,6 +20,7 @@ usage:
   s_llm_false_stop.py --self-test              # 計器の陰性/陽性対照だけ(LLM 0回)
   s_llm_false_stop.py [--limit N] [--repeat N] # 実測(front door + :8005 を実走)
   s_llm_false_stop.py --repeat 3 --record ITEM-2DER-EVO-0107   # 実測して 台帳へ 明細を1件 入れる
+  s_llm_false_stop.py --repeat 3 --prob 10                     # 止まった件の ★確率 p を 追加で測る
 """
 import base64, json, os, re, sys, urllib.request
 
@@ -82,6 +83,26 @@ def cluster(rows):
     return cl
 
 
+def measure_prob(rows, gate, ids, trials=10):
+    """★止まった件の 確率 p を 直接測る。★反復3回では 集計自体が揺れる(2026-08-26 実測:
+    『3回とも止まった』が 走行ごとに 0件 と 1件 に動いた) ∴ 候補だけ 多く引く。
+    -> {task_id: {"p":…, "stops":…, "trials":…, "strategies":{…}}}"""
+    by_id = {r["task_id"]: r for r in rows}
+    out = {}
+    for tid in ids:
+        r = by_id.get(tid)
+        if not r:
+            continue
+        got = [gate(r["text"]) for _ in range(trials)]
+        stops = sum(1 for _, st in got if st)
+        strat = {}
+        for s_, _ in got:
+            strat[s_] = strat.get(s_, 0) + 1
+        out[tid] = {"p": round(stops / trials, 2), "stops": stops, "trials": trials,
+                    "strategies": dict(sorted(strat.items(), key=lambda x: -x[1]))}
+    return out
+
+
 def measure_repeat(rows, gate, repeat=3, well_formed=None):
     """★同じ標本を repeat 回 通す。-> 集計 dict。★1回ぶんの数字は『走行の1標本』として残す。"""
     runs = [measure(rows, gate, well_formed) for _ in range(repeat)]
@@ -98,6 +119,7 @@ def measure_repeat(rows, gate, repeat=3, well_formed=None):
     fs |= {t for t, _ in flaky}
     return {
         "n": len(rows), "repeat": repeat,
+        "stopped_ids": sorted(stops),
         "stopped_per_run": [r["stopped"] for r in runs],
         "stop_rate_per_run": [r["stop_rate"] for r in runs],
         "stopped_at_least_once": len(ids),
@@ -187,6 +209,18 @@ def self_test():
     rr = measure_repeat(rows, lambda t: ("DIRECT", False), repeat=3)
     if rr["flaky_stops"] or rr["false_stops"]:
         red.append("NEG4: stable pass-gate flagged flaky=%s fs=%d" % (rr["flaky_stops"], rr["false_stops"]))
+    # 陽性④: p が既知の門(2回に1回 止まる)-> p≈0.5 が返る
+    _c = {"i": 0}
+    def _half(t):
+        _c["i"] += 1
+        return ("PREMISE_PROBE", True) if _c["i"] % 2 else ("DIRECT", False)
+    pr = measure_prob(rows, _half, [rows[0]["task_id"]], trials=10)
+    if pr[rows[0]["task_id"]]["p"] != 0.5:
+        red.append("POS4: known p=0.5 gate measured as %.2f" % pr[rows[0]["task_id"]]["p"])
+    # 陰性⑤: 常に通す門 -> p=0.0
+    pr = measure_prob(rows, lambda t: ("DIRECT", False), [rows[0]["task_id"]], trials=5)
+    if pr[rows[0]["task_id"]]["p"] != 0.0:
+        red.append("NEG5: all-pass gate measured p=%.2f" % pr[rows[0]["task_id"]]["p"])
     # 陰性③: 正規化が語を落としていない(別の依頼が同じ束に入らない)
     if len(cluster(rows)) != 2:
         red.append("NEG3: normalize collapsed distinct requests (clusters=%d)" % len(cluster(rows)))
@@ -195,7 +229,7 @@ def self_test():
         for m in red:
             print("  " + m)
         return 1
-    print("s_llm_false_stop --self-test: GREEN (陰性4 / 陽性3 とも期待どおり)")
+    print("s_llm_false_stop --self-test: GREEN (陰性5 / 陽性4 とも期待どおり)")
     return 0
 
 
@@ -224,6 +258,14 @@ def detail_lines(rep):
     if rep["flaky_stops"]:
         lines.append("反復で割れた件を名指しした → %s → 同じ入力で止まったり止まらなかったり ∴ 少なくとも片方は誤り"
                      % " ".join("%s(%s)" % (t, c) for t, c in rep["flaky_stops"]))
+    if rep.get("prob"):
+        ps = sorted(rep["prob"].items(), key=lambda x: -x[1]["p"])
+        lines.append("止まった件の確率 p を各%d回で測った → %s → %s"
+                     % (ps[0][1]["trials"], " ".join("%s=%.2f" % (t, v["p"]) for t, v in ps),
+                        ("p が 0 でも 1 でもない ∴ 門は判定器でなく抽選器"
+                         if all(0 < v["p"] < 1 or v["p"] == 0 for _, v in ps) and
+                         not any(v["p"] == 1.0 for _, v in ps)
+                         else "p=1.0 の件が在る ∴ 再現する停止が存在する")))
     return lines
 
 
@@ -254,6 +296,9 @@ def main(argv):
     rows = fetch_requests(limit)
     print("front door から全文で取れた依頼文: %d本 / 反復 %d回" % (len(rows), repeat))
     out = measure_repeat(rows, default_gate, repeat=repeat)
+    if "--prob" in argv:
+        trials = int(argv[argv.index("--prob") + 1])
+        out["prob"] = measure_prob(rows, default_gate, out["stopped_ids"], trials=trials)
     print(json.dumps(out, ensure_ascii=False, indent=2))
     if "--record" in argv:
         item = argv[argv.index("--record") + 1]
