@@ -10,16 +10,16 @@
    2 と 4 に 動いた)。∴ ★既定で 反復する(--repeat)。
 
 ★入力は front door からしか取らない(台帳を直読しない)。
-★このモジュールは ★台帳を直接書かない(新台帳0・新state0・新ID族0)。
-★`--record ITEM-…` を付けた時だけ、★既存の front door の 封印 DETAIL 口へ 自分の結果を投函する
-  (=★計器が 自分の測定を 台帳に入れる。★記帳を 人の手番に しない)。
+★このモジュールは ★何も書かない・★意味を付けない(★事実だけ 返す)。
+★★2026-08-27 是正= ★明細の文を組むのも 投函も ★`twoder/domain_inference_control.py`(Domain Manager)へ 移した。
+  ★理由= GDW 正本 §6「Workerは事実を作る。Managerは意味と次の行動を決める」を 私が 破っていた
+  (★門を 差し替えた 瞬間に 偽の意味づけが 台帳へ 入った= 数値は正しく 解釈だけが 偽)。
 ★★全文を使う(2026-08-26 実測: goal_head の120字 切片で測ると 停止率が 25% と出て、
    全文では 4% だった= 6倍。切片で測った数字を門の性質として報告しない)。
 
 usage:
   s_llm_false_stop.py --self-test              # 計器の陰性/陽性対照だけ(LLM 0回)
   s_llm_false_stop.py [--limit N] [--repeat N] # 実測(front door + :8005 を実走)
-  s_llm_false_stop.py --repeat 3 --record ITEM-2DER-EVO-0107   # 実測して 台帳へ 明細を1件 入れる
   s_llm_false_stop.py --repeat 3 --prob 10                     # 止まった件の ★確率 p を 追加で測る
   s_llm_false_stop.py --gate route --prob 10                   # 別の門(経路を決める側)で 同じことを測る
 """
@@ -222,21 +222,6 @@ def self_test():
     pr = measure_prob(rows, lambda t: ("DIRECT", False), [rows[0]["task_id"]], trials=5)
     if pr[rows[0]["task_id"]]["p"] != 0.0:
         red.append("NEG5: all-pass gate measured p=%.2f" % pr[rows[0]["task_id"]]["p"])
-    # ★陰性⑥: route 門の結果に 停止の語を書かない(2026-08-26 の事故の再発防止)
-    fake_route = {"n": 55, "repeat": 1, "gate": "route(x)", "stopped_per_run": [0],
-                  "stopped_at_least_once": 0, "stopped_every_run": 0, "flaky_stops": [],
-                  "definition_violations": [], "cluster_minority": [], "false_stops": 0,
-                  "false_stop_rate": 0.0,
-                  "label_stability": {"stable": 49, "n": 55, "rate": 0.891},
-                  "prob": {"T1": {"p": 0.0, "stops": 0, "trials": 10, "strategies": {"OBSERVE": 10}},
-                           "T2": {"p": 0.0, "stops": 0, "trials": 10,
-                                  "strategies": {"OBSERVE": 7, "BUILD_OR_MODIFY": 3}}}}
-    txt = " ".join(detail_lines(fake_route))
-    for bad in ("停止が一件も再現しない", "抽選器", "誤停止"):
-        if bad in txt:
-            red.append("NEG6: route 門の明細に 停止の語 %r が入った" % bad)
-    if "行き先が変わった" not in txt:
-        red.append("NEG6: route 門の明細に 行き先の揺れが書かれていない")
     # 陰性③: 正規化が語を落としていない(別の依頼が同じ束に入らない)
     if len(cluster(rows)) != 2:
         red.append("NEG3: normalize collapsed distinct requests (clusters=%d)" % len(cluster(rows)))
@@ -245,85 +230,18 @@ def self_test():
         for m in red:
             print("  " + m)
         return 1
-    print("s_llm_false_stop --self-test: GREEN (陰性6 / 陽性4 とも期待どおり)")
+    print("s_llm_false_stop --self-test: GREEN (陰性5 / 陽性4 とも期待どおり ★意味づけの対照は Domain Manager 側)")
     return 0
 
 
-def _post(path, payload, timeout=300):
-    data = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-    req = urllib.request.Request(FRONT + path, data=data,
-                                 headers={"Authorization": _auth(), "Content-Type": "application/json"})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
-        return json.loads(r.read())
 
 
-def detail_lines(rep):
-    """★何をした → どうなった → こうなった の形で 1測定 1明細を作る(★決定論・語を作らない)。
-
-    ★★門の種類で 文型を分ける(2026-08-26 実測の事故: route 門の結果を 停止用の文型で書き、
-       『停止が一件も再現しない=抽選』『p が 0 でも 1 でもない』という ★偽の文を 台帳に入れた。
-       route 門は 構造上 止まらない ∴ 停止 0 は 発見ではない)。"""
-    if str(rep.get("gate", "")).startswith("route"):
-        return _detail_lines_route(rep)
-    return _detail_lines_stop(rep)
 
 
-def _detail_lines_route(rep):
-    """経路を決める門: ★停止の語を1つも使わない。見るのは ラベルが揺れるか だけ。"""
-    ls = rep.get("label_stability") or {}
-    lines = ["s_llm_false_stop を 門=%s で %d本 x 各%d回 実走した → ラベルが全試行 同じ %d/%d = %.0f%% → %s"
-             % (rep.get("gate"), rep["n"],
-                (list(rep.get("prob", {}).values()) or [{"trials": 0}])[0]["trials"],
-                ls.get("stable", 0), ls.get("n", rep["n"]), 100.0 * (ls.get("rate") or 0),
-                ("残りは走行ごとに行き先が変わる" if ls.get("stable", 0) < ls.get("n", rep["n"])
-                 else "全件で行き先が一定"))]
-    unstable = [(t, v["strategies"]) for t, v in (rep.get("prob") or {}).items()
-                if len(v["strategies"]) > 1]
-    if unstable:
-        lines.append("行き先が変わった件を名指しした → %s → 同じ依頼文が 走行ごとに 別の枝へ行く"
-                     % " ".join("%s%s" % (t, json.dumps(d, ensure_ascii=False)) for t, d in unstable[:8]))
-    lines.append("★この門は 構造上 止まらない ∴ 停止率と p は 測っていない(0 と書かない)")
-    return lines
 
 
-def _detail_lines_stop(rep):
-    per = "/".join(str(x) for x in rep["stopped_per_run"])
-    lines = ["s_llm_false_stop を %d本 x 反復%d回 で実走した → 走行ごとの停止 %s・1回でも止まった %d/%d・"
-             "★%d回とも止まった %d/%d → %s"
-             % (rep["n"], rep["repeat"], per, rep["stopped_at_least_once"], rep["n"],
-                rep["repeat"], rep["stopped_every_run"], rep["n"],
-                ("停止が一件も再現しない=止める判断が規則でなく抽選" if rep["stopped_every_run"] == 0
-                 else "再現する停止が %d件 在る" % rep["stopped_every_run"]))]
-    lines.append("誤停止を3型で数えた(定義違反/束の少数側/反復の少数側) → 定義違反 %d件・束の少数側 %d件・"
-                 "反復で割れた %d件 → 誤停止 %d/%d = %.1f%%"
-                 % (len(rep["definition_violations"]), len(rep["cluster_minority"]),
-                    len(rep["flaky_stops"]), rep["false_stops"], rep["n"],
-                    100.0 * (rep["false_stop_rate"] or 0)))
-    if rep["flaky_stops"]:
-        lines.append("反復で割れた件を名指しした → %s → 同じ入力で止まったり止まらなかったり ∴ 少なくとも片方は誤り"
-                     % " ".join("%s(%s)" % (t, c) for t, c in rep["flaky_stops"]))
-    if rep.get("label_stability"):
-        ls = rep["label_stability"]
-        lines.append("門 %s で ラベルが全試行 同じか数えた → %d/%d = %.0f%% → %s"
-                     % (rep.get("gate", "?"), ls["stable"], ls["n"], 100.0 * (ls["rate"] or 0),
-                        "残りは走行ごとに行き先が変わる" if ls["stable"] < ls["n"] else "全件で行き先が一定"))
-    if rep.get("prob"):
-        ps = sorted(rep["prob"].items(), key=lambda x: -x[1]["p"])
-        lines.append("止まった件の確率 p を各%d回で測った → %s → %s"
-                     % (ps[0][1]["trials"], " ".join("%s=%.2f" % (t, v["p"]) for t, v in ps),
-                        ("p が 0 でも 1 でもない ∴ 門は判定器でなく抽選器"
-                         if all(0 < v["p"] < 1 or v["p"] == 0 for _, v in ps) and
-                         not any(v["p"] == 1.0 for _, v in ps)
-                         else "p=1.0 の件が在る ∴ 再現する停止が存在する")))
-    return lines
 
 
-def record(rep, item, actor="2DER", evidence="s_llm_false_stop.py"):
-    """★既存の封印 DETAIL 口へ投函する。★新しい入口を作らない・新語を作らない。"""
-    raw = "\n".join(["<<<2DER:DETAIL>>>", "item: " + item, "actor: " + actor, "via: front_door",
-                      "provenance: MEASURED", "evidence: " + evidence]
-                     + ["- " + l for l in detail_lines(rep)] + ["<<<2DER:END>>>"])
-    return _post("/api/submit", {"raw": raw})
 
 
 # ── 門は 差し替えられる(★1つの計器で 複数の門を 同じ形で測る)────────────────────────
@@ -386,15 +304,6 @@ def main(argv):
         out["prob"] = measure_prob(rows, gate, ids, trials=trials)
         out["label_stability"] = label_stability(out["prob"])
     print(json.dumps(out, ensure_ascii=False, indent=2))
-    if "--record" in argv:
-        item = argv[argv.index("--record") + 1]
-        print("\n投函する明細:")
-        for l in detail_lines(out):
-            print("  - " + l)
-        r = record(out, item)
-        print("front door の返り: request_type=%s trace_key=%s"
-              % ((r or {}).get("request_type"), (r or {}).get("trace_key")))
-        print("★200 は『入った』ではない ∴ 呼び手が引いて確かめること")
     return 0
 
 
