@@ -668,6 +668,7 @@ def _record(rel, func, lineno, record_class, model="UNRESOLVED", endpoint="UNRES
         "status": status,
         "gate_ref": gate_ref,
         "knowledge_refs": [],
+        "sample_route": "UNRESOLVED",
     }
 
 
@@ -741,6 +742,33 @@ def analyze(rel, src):
     return recs
 
 
+def _required_arity(fn):
+    """★既定値の無い 引数の数。★<module> 直書きは None(関数でない)。"""
+    if fn is None:
+        return None
+    a = fn.args
+    pos = list(a.posonlyargs) + list(a.args)
+    n = max(0, len(pos) - len(a.defaults))
+    n += sum(1 for d in a.kw_defaults if d is None)
+    if pos and pos[0].arg in ("self", "cls"):
+        n = max(0, n - 1)
+    return n
+
+
+def _sample_route(fn):
+    """★この呼び手を 走らせるのに 何が要るか。★引数の 形だけで 決める(★名前で 推測しない)。
+
+    NO_ARGS   … 必須引数 0 = ★そのまま 呼べる
+    ONE_ARG   … 必須引数 1 = ★標本を 1つ 渡せば 呼べる(★front door の 依頼文で 足りうる)
+    MULTI_ARG … 必須引数 2 以上 = ★標本の 口を 作らないと 呼べない
+    MODULE    … 関数の外(module 直書き)= ★呼び出す 単位が 無い
+    """
+    n = _required_arity(fn)
+    if n is None:
+        return "MODULE"
+    return "NO_ARGS" if n == 0 else ("ONE_ARG" if n == 1 else "MULTI_ARG")
+
+
 def _module_tail(rel):
     return rel[:-3].replace("\\", "/").split("/")[-1]
 
@@ -771,8 +799,13 @@ def _callers_of(call_sites):
             tree = ast.parse(open(ab, encoding="utf-8").read())
         except Exception:
             continue
-        defined = {n.name for n in ast.walk(tree)
-                   if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))}
+        fn_by_name = {}
+        for _f in ast.walk(tree):
+            if isinstance(_f, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                cur = fn_by_name.get(_f.name)
+                if cur is None or _f.lineno > cur.lineno:
+                    fn_by_name[_f.name] = _f
+        defined = set(fn_by_name)
         alias, fromnames = _imports_of(tree)
         # Call -> 最内の関数
         owner = {}
@@ -797,7 +830,8 @@ def _callers_of(call_sites):
                     ok = alias.get(f.value.id) == ptail or f.value.id == ptail
                 if ok:
                     enc = owner.get(id(n))
-                    out.append((rel, enc.name if enc else "<module>", n.lineno, pid))
+                    out.append((rel, enc.name if enc else "<module>", n.lineno, pid,
+                                _sample_route(enc)))
     out.sort()
     return out
 
@@ -816,9 +850,10 @@ def build():
         recs += analyze(rel, src)
     # ★Phase 2: 用途の単位は 呼出点でなく ★呼び手 ∴ 呼び手も 台帳に登記する(新台帳0・既存の record_class を1つ足す)。
     site_recs = [r for r in recs if r["record_class"] == "CALL_SITE"]
-    for crel, cfunc, clineno, pid in _callers_of(site_recs):
+    for crel, cfunc, clineno, pid, sroute in _callers_of(site_recs):
         rr = _record(crel, cfunc, clineno, "CALLER")
         rr["calls"] = pid
+        rr["sample_route"] = sroute
         rr["worker"] = next((s["worker"] for s in site_recs if s["caller"] == pid), "VLLM")
         recs.append(rr)
     docs = _knowledge_docs()
