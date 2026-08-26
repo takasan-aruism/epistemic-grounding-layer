@@ -32,12 +32,25 @@ CLAUDE_PRINT_FLAGS = ("-p", "--print")        # 非対話(1往復)である証�
 SUBPROC_FUNCS = ("run", "Popen", "check_output", "call", "check_call")
 
 # ── v0.3(Inference Control §13 Phase 1 の残り): 欄を「埋める」のでなく ★既存の閉じた語彙へ写す ──
-# ★新語を作らない。正本= twoder/handoff_contract.py:44 VERDICTS(写し。--check で drift を見る)。
+# ★新語を作らない。★2026-08-27 是正= ★写しを持たず 正本から ★引く
+#   (★submit_client --rules 逐語「★語彙を写して手元に持つ(★必ずずれる ∴ ここに聞く)」は やってはいけない事)。
+#   ★引けなければ ★止める(fail-closed)= ★写しに 退避しない。
 #   EXISTS   = 在る(呼出点の本文から取れた)
 #   ABSENT   = 探して 無い(★設計上 持っていない)
 #   UNVERIFIED = この scope では 決められない(★0件と書かない)
 # ★PARTIAL / CONFLICT は この計器では 発生しない(1呼出点に1つの事実しか見ていない) ∴ 使わない。
-VERDICTS = ("EXISTS", "PARTIAL", "ABSENT", "CONFLICT", "UNVERIFIED")
+def _canon(module, name, order_by_value=False):
+    """★正本から 語彙を 引く。★写さない ／ ★引けなければ 例外(fail-closed)。"""
+    import importlib
+    if ROOT not in sys.path:
+        sys.path.insert(0, ROOT)
+    v = getattr(importlib.import_module(module), name)
+    if order_by_value:                      # dict(語 -> 順序) の形(_LADDER)
+        return tuple(sorted(v, key=lambda x: v[x]))
+    return tuple(v)
+
+
+VERDICTS = _canon("twoder.handoff_contract", "VERDICTS")
 SCHEMA_KEYS = ("response_format", "guided_json", "guided_regex", "guided_choice", "tools", "tool_choice")
 RUNTIME_KEYS = ("temperature", "seed", "max_tokens")
 VALIDATOR_NAMES = ("loads", "search", "findall", "match", "fullmatch")
@@ -49,7 +62,7 @@ VALIDATOR_NAMES = ("loads", "search", "findall", "match", "fullmatch")
 # ★成熟度の正本= twoder/egl_integration.py:17 _LADDER(写し。--check で drift を見る)。
 KNOWLEDGE_MARKER = "2DER:LLM_KNOWLEDGE"
 KNOWLEDGE_DIR = os.path.join(ROOT, "egl", "docs")
-MATURITY_LADDER = ("REPORTED", "INFERRED", "OBSERVED", "MEASURED", "REPRODUCED", "ACCEPTED")
+MATURITY_LADDER = _canon("twoder.egl_integration", "_LADDER", order_by_value=True)
 KNOWLEDGE_FIELDS = ("knowledge_id", "call_sites", "applies_when", "maturity")
 
 # ── Phase 2(分類)の材料。★語彙は作らず ★測った事実を2つ足すだけ ──
@@ -882,14 +895,11 @@ def check():
             red.append("UNREGISTERED_CALL_SITE: %s" % r["caller"])
     if not _negative_control_ok():
         red.append("NEGATIVE_CONTROL_FAILED: detector flagged a docstring-only module as CALL_SITE (vacuous)")
-    # ★語彙 drift: 正本(twoder/handoff_contract.VERDICTS)と 写しが ずれたら 赤。
-    try:
-        sys.path.insert(0, ROOT)
-        from twoder.handoff_contract import VERDICTS as _CANON
-        if tuple(_CANON) != tuple(VERDICTS):
-            red.append("VOCAB_DRIFT: VERDICTS copy != twoder/handoff_contract.VERDICTS %s" % (tuple(_CANON),))
-    except Exception:
-        pass                                  # ★引けなければ 黙って通す(この計器は 台帳であって 門ではない)
+    # ★2026-08-27: ★写しを持たなくなった ∴ drift は 原理的に 起きない。
+    #   ★代わりに「正本から 引けているか」を 見る(★引けなければ 語彙が 空= 台帳が 作れない)。
+    if not VERDICTS or not MATURITY_LADDER:
+        red.append("VOCAB_UNREADABLE: 正本から語彙を引けていない(VERDICTS=%s / LADDER=%s)"
+                   % (VERDICTS, MATURITY_LADDER))
     # ★閉じた語彙の外の値を 書いていないか(自分の記録を 自分で数える)
     for l in existing.splitlines():
         if not l.strip():
@@ -918,14 +928,6 @@ def check():
         for cs in k["call_sites"]:
             if cs not in _callers:
                 red.append("KNOWLEDGE_TARGET_MISSING: %s names %s which is not a CALL_SITE" % (k["doc"], cs))
-    try:
-        sys.path.insert(0, ROOT)
-        from twoder.egl_integration import _LADDER as _CANON_LADDER
-        _canon = tuple(sorted(_CANON_LADDER, key=lambda x: _CANON_LADDER[x]))
-        if _canon != MATURITY_LADDER:
-            red.append("VOCAB_DRIFT: MATURITY_LADDER copy != twoder/egl_integration._LADDER %s" % (_canon,))
-    except Exception:
-        pass
     if red:
         print("LLM_INVOCATIONS --check: RED")
         for m in red:
