@@ -163,13 +163,33 @@ def axis_rri():
         rows.append({"writer": w, "types": tps, "reader_lines": n_read})
         if not n_read:
             missing.append(w)
+    # ★★2026-08-27(Taka 指示)= ★連動性で 効いた形を ここへ 写す=
+    #   ★『2つの面を 突き合わせ ★食い違いを 向きで 分ける』。
+    #   ★これまで 測っていたのは ★片側だけ= 『書くのに 読み手が 居ない』。
+    #   ★★逆向き= 『語は 閉じた表に 在るのに ★書き手が 居ない』= ★別の 欠損。
+    #     ★原因が 別= 前者は 書きっぱなし ／ 後者は ★表だけ 増えて 実体が 無い。
+    written = {t for tps in writers.values() for t in tps}
+    declared_types = []
+    try:                                        # ★閉じた表は RRI が 持つ(★私が 定義しない)
+        sys.path.insert(0, "/home/takasan/rri")
+        from rri import request_thread as _RT
+        declared_types = sorted(_RT.EVENT_TYPES)
+    except Exception:
+        declared_types = []
+    no_writer = [t for t in declared_types if t not in written]
     return {"axis": "RRI", "scope_kind": "MODULE", "scope_id": "rri/rri/request_thread.py",
             "inputs": {"symmetry_method": "書いた event type を誰が読むか(★名前でなく作用・正本§10②)",
                        "enforced_source": "AST: 公開関数 %d本" % len(writers),
+                       "declared_source": "rri.request_thread.EVENT_TYPES(★閉じた表・%d語)"
+                                          % len(declared_types),
                        "reader_surface": "★.py/.sh/.json (%d本)。★.py だけだと .sh の読み手を見落とす"
                                          % len(files)},
             "outputs": {"symmetry": {"required": len(rows), "present": len(rows) - len(missing),
-                                     "missing_ID": missing, "per_writer": rows},
+                                     "missing_ID": missing, "per_writer": rows,
+                                     # ★★向きで 分ける(★総合点に 潰さない)
+                                     "reverse_declared": len(declared_types),
+                                     "reverse_present": len(declared_types) - len(no_writer),
+                                     "reverse_no_writer_ID": no_writer},
                         "linkage": {"status": "UNVERIFIED",
                                     "why": "declared edge の出所が本線で生まれない(正本§6)"}}}
 
@@ -471,6 +491,13 @@ def _summary(r):
         if "present" in m:
             bad = m.get("incompatible_ID") or m.get("missing_ID") or []
             parts.append("%s %d/%d(欠%d)" % (k[:3], m["present"], m["required"], len(bad)))
+            # ★★2026-08-27= ★逆向きを 測った軸は ★要約にも 出す。
+            #   ★出さないと ★片側が 満点(13/13 欠0)の 時に ★健全に 見えて しまう
+            #   (★実測= 順 13/13 欠0 の 裏で ★逆 7/9 欠2)。
+            if m.get("reverse_declared") is not None:
+                parts.append("%s逆 %d/%d(欠%d)" % (k[:3], m["reverse_present"],
+                                                  m["reverse_declared"],
+                                                  len(m.get("reverse_no_writer_ID") or [])))
         elif "passed" in m:
             parts.append("%s %d/%d(違反%d)" % (k[:3], m["passed"], m["required"], len(m.get("violation_ID") or [])))
         else:
