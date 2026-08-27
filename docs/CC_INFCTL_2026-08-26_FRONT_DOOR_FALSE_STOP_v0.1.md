@@ -1,8 +1,8 @@
 <!--
 2DER:LLM_KNOWLEDGE
 knowledge_id: LLMK-0006
-call_sites: rri/rri/intent_strategy.py:_llm
-maturity: MEASURED
+call_sites: rri/rri/intent_strategy.py:_llm rri/rri/request_type.py:_chat
+maturity: REPRODUCED
 -->
 
 # front door の誤停止を 正解なしで数える v0.1
@@ -222,3 +222,32 @@ RRI の K3（合議は p=0.5 を不動点とする増幅器・`P(hold)=3p²−2p
 「揺れているのか、それとも規則なのか」を**判定する仕事**が計器に移った。
 次回は **`--repeat 3 --prob 10 --record ITEM-…`** を打つだけで、
 停止率・flaky・p・誤停止が **分母つきで台帳に入る**。
+
+---
+
+# ★2門目で再現した（同日・これが REPRODUCED の根拠）
+
+上までは **`intent_strategy`（止める門）1本**の実測だった ∴ **相関であって再現ではない**。
+**経路を決める門 `request_type` でも同じことが起きるか**を、**同じ標本55本の全文**で測った。
+
+| 対象 | 測ったもの | 結果 |
+|---|---|---|
+| `rri/rri/intent_strategy.py:_llm`（止める門） | 停止が再現するか | **3回とも止まった 0/55**・p = 0.80/0.50/0.40/0.20/0.10 |
+| **`rri/rri/request_type.py:_chat`（経路を決める門）** | ラベル / 下流の枝が再現するか | 語が10回とも同じ **41/55=75%**／**下流の枝が10回とも同じ 44/55=80%** |
+| 同上（引き直し・計器経由） | 同上 | 枝が同じ **49/55=89%** |
+
+**∴ 2つの独立した門で「出力は決定でなく確率」が確認された。**
+ただし **度合いは違う**: 止める門は **一件も再現しない**（0/55）が、経路の門は **8割は安定**し、
+不安定な件も **7〜9割は同じ枝**へ行く（優勢な側が在る）。
+
+★引き直しで 80% → 89% と動いた ∴ **10回でも集計はまだ動く**。この数字自体を固定値として扱わない。
+
+## ★成熟度を MEASURED → REPRODUCED へ上げた根拠
+
+Domain Manager が明示した昇格条件（`domain_inference_control.KNOWLEDGE_PROMOTION`）:
+
+> **REPRODUCED = ★2つ以上の独立した呼出点で同じ結論が確認され、doc が `call_sites:` でそれを名乗っていること**
+
+本 doc は `rri/rri/intent_strategy.py:_llm` と `rri/rri/request_type.py:_chat` の2門を名乗る ∴ 条件を満たす。
+
+★**ACCEPTED には上げない**: モデルは1つ（Qwen3.6-35B-A3B）・標本は55本の1母集団・`claude -p` との比較は0回。
