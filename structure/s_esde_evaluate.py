@@ -174,6 +174,49 @@ def axis_rri():
                                     "why": "declared edge の出所が本線で生まれない(正本§6)"}}}
 
 
+# ── 連動性 ──────────────────────────────────────────────────
+# ★★2026-08-27(Taka 指示)= ★これまで linkage は 全軸で UNVERIFIED だった
+#   (逐語『declared edge の出所が本線で生まれない(正本§6)』)。
+#   ★★出所が 見つかった= ★EGL は ★同じ 存在を ★2つの 面で 持っている:
+#     declared … `core.by_type`(sqlite の projection)= ★系が 「今こう持っている」と 言う 面
+#     observed … `core.read_events`(event log)      = ★実際に 起きた 面
+#   ★正本§1 の 連動性=『declared edge と observed edge の 一致・伝播』に そのまま 当たる。
+#   ★★総合点に しない= ★分母(比べた型)/分子(一致した型)/★欠損ID(型名)を そのまま 残す。
+def axis_egl_projection():
+    """★連動性= 同じ存在を 2つの面が 数える。★一致しない型を 欠損IDとして 出す。"""
+    import collections
+    import sqlite3
+    sys.path.insert(0, "/home/takasan/egl")
+    from egl import core
+    obs = collections.Counter()
+    for ev in core.read_events():                 # ★observed= 実際に起きた CREATE
+        t = ev.get("object_type")
+        if t and ev.get("event_type") == "CREATE":
+            obs[t] += 1
+    con = sqlite3.connect(str(core.SQLITE))
+    try:
+        in_sql = {r[0] for r in con.execute("SELECT DISTINCT object_type FROM objects")}
+        dec = {t: len(core.by_type(con, t) or []) for t in (set(obs) | in_sql)}
+    finally:
+        con.close()
+    types = sorted(set(dec) | set(obs))
+    broken = [t for t in types if dec.get(t, 0) != obs.get(t, 0)]
+    # ★★『食い違い』を 1つに 潰さない= ★向きで 分ける(★原因が 別)
+    behind = [t for t in broken if dec.get(t, 0) < obs.get(t, 0)]    # projection が 遅れている
+    only = [t for t in broken if dec.get(t, 0) > obs.get(t, 0)]      # projection にしか 無い
+    return {"axis": "EGL_PROJECTION", "scope_kind": "REPO", "scope_id": "EGL",
+            "inputs": {"declared_source": "egl.core.by_type(sqlite %s の objects)" % core.SQLITE.name,
+                       "observed_source": "egl.core.read_events(%s の CREATE)" % core.EVENTS.name,
+                       "key_note": "★同じ存在の 2つの面を 型ごとに 突き合わせる(★件数の 鍵は CREATE 1回=1存在)"},
+            "outputs": {"linkage": {"declared": len(types), "observed": len(types) - len(broken),
+                                    "broken_ID": broken,
+                                    "status": "PRESENT" if not broken else "BROKEN",
+                                    "broken_projection_behind": behind,
+                                    "broken_projection_only": only,
+                                    "per_broken": [{"type": t, "declared": dec.get(t, 0),
+                                                    "observed": obs.get(t, 0)} for t in broken]}}}
+
+
 # ── 階層性 ──────────────────────────────────────────────────
 # ★required の出所は ★正本§4（独立した文書）。★enforcement と同じ場所からは取らない（Taka 裁定）。
 _CANON_BOUNDARIES = [
@@ -432,8 +475,14 @@ def _summary(r):
             parts.append("%s %d/%d(違反%d)" % (k[:3], m["passed"], m["required"], len(m.get("violation_ID") or [])))
         else:
             parts.append("%s required=%s" % (k[:3], m.get("required")))
-    if o.get("linkage"):
-        parts.append("lnk " + str(o["linkage"].get("status")))
+    m = o.get("linkage")
+    if m:
+        # ★★2026-08-27= ★測れた時は ★分母つきで 出す(★status だけだと 何件 欠けたか 見えない)
+        if "declared" in m and m.get("declared") is not None and "observed" in m:
+            parts.append("lnk %s/%s(欠%d)" % (m.get("observed"), m.get("declared"),
+                                              len(m.get("broken_ID") or [])))
+        else:
+            parts.append("lnk " + str(m.get("status")))
     return " ／ ".join(parts)
 
 
@@ -475,7 +524,9 @@ def main(argv):
     if task_arg:
         results = [axis_task(task_arg)]
     else:
-        results = [axis_real_repo_reflection(), axis_2der_identity(), axis_rri()]
+        # ★★2026-08-27= ★連動性の軸を 1本 足した(★他の3軸は 1行も 直していない)
+        results = [axis_real_repo_reflection(), axis_2der_identity(), axis_rri(),
+                   axis_egl_projection()]
     red = []
     for r in results:
         info = emit(r, dry=dry)
