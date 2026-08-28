@@ -2,7 +2,7 @@
 2DER:LLM_KNOWLEDGE
 knowledge_id: LLMK-0006
 call_sites: rri/rri/intent_strategy.py:_llm rri/rri/request_type.py:_chat
-maturity: REPRODUCED
+maturity: MEASURED
 -->
 
 # front door の誤停止を 正解なしで数える v0.1
@@ -251,3 +251,25 @@ Domain Manager が明示した昇格条件（`domain_inference_control.KNOWLEDGE
 本 doc は `rri/rri/intent_strategy.py:_llm` と `rri/rri/request_type.py:_chat` の2門を名乗る ∴ 条件を満たす。
 
 ★**ACCEPTED には上げない**: モデルは1つ（Qwen3.6-35B-A3B）・標本は55本の1母集団・`claude -p` との比較は0回。
+
+---
+
+## ★REPRODUCED を取り消して MEASURED へ戻した（2026-08-28・★親仕様 §3.4 違反の是正）
+
+親仕様 `2DER_PARALLEL_LLM_OPERATIONS_SPEC.md` §3.4 逐語:
+
+> evidence class を区別: REPORTED / INFERRED / OBSERVED / MEASURED / REPRODUCED / ACCEPTED / CONTRADICTED。
+> ★**MEASURED への昇格は、実施者が行ってはならない。**
+
+★**測った本人（私）が昇格させた。** これは §11「行ってはならないこと」の
+「★evidence class を独断で昇格する」に当たる。
+
+★私は同じ日に `LLMK-0007` で **自分の門に止められて下げている**（`call_sites` が2未満）。
+∴ ★**門の形式は守り、原則（実施者が昇格しない）は見ていなかった。**
+★門を通ったことと、規則を守ったことは別である。
+
+**戻す順序について**: 独立した確認者を探す道も在ったが、★探す間 `REPRODUCED` のまま残ると
+**その間に誰かが根拠として使える** ∴ **先に戻し、確認は後で取る**（監視Agent の指摘に同意）。
+
+★実測そのもの（2門で確認・intent_strategy と request_type）は取り消していない。
+**取り消したのは「私が昇格させた」という手続き**である。
