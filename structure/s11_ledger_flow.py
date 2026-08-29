@@ -12,8 +12,9 @@ s10（登記簿）は各台帳を孤立点として登記した。本器は台�
     → 【この間に書き手が居ない】→ dev-workcell/events に CREATE を書く
     submit.py:408 の create_task は存在するが raw_input 起点（自律選択ではない）。
 
-出力: egl/docs/2DER_LEDGER_FLOW.md（mermaid + 説明）。--check で行番号裏づけを検証。
+出力: egl/docs/2DER_LEDGER_FLOW.md（mermaid + 説明）。--check で**呼出が実在するか**を検証（行番号は資料生成時に ast で引く）。
 """
+import ast
 import json, re, sys
 from pathlib import Path
 
@@ -21,41 +22,76 @@ ROOT = Path("/home/takasan")
 S = ROOT / "egl" / "structure"
 REG = {r["ledger_id"]: r for r in map(json.loads, open(S / "LEDGER_REGISTRY.jsonl"))}
 
-# 1 往復の write シーケンス。各要素: (系, 台帳ID, 呼出ファイル:行, 期待シンボル, 説明)
-# 行番号は grep 実測（2026-07-22）。--check が各行に期待シンボルが在ることを確認する。
-# 行番号は grep 実測。front-door slice1b(submit.py に optional ts 追加, DE-0539)で +2 行ずれたため更新(2026-07-26)。
+# 1 往復の write シーケンス。各要素: (系, 台帳ID, 呼出ファイル, 期待シンボル, 説明)
+# ★★[Claude実装/STRUCTURE] 2026-08-27(ITEM-2DER-EVO-0120 の作業表 #13):
+#   ★★行番号を書くのを やめた。★理由= ★行番号は 手で 直す仕事を 生み続けていた=
+#     2026-07-26 に 一度 直しており(「+2 行ずれたため更新」)、2026-08-27 に また 5件 全部が ずれた
+#     (★実測= 139→345 / 113→318 / 125→331 / 181→394 / 412→1134)。★呼出は 5件とも 消えていない=
+#     ★腐っていたのは ★行番号だけ で、★図の主張は 正しかった。
+#   ★★直し= ★呼出の 在り処は ★ast で その場で 引く(`_call_lines`)。★図には 引いた 行を 載せる
+#     ∴ ★資料は 生成のたびに 現在の行に 揃い、★人が 直す仕事は 0 になる。
+#   ★★門は 緩めていない= ★『その呼出が 消えた』時は 前と同じく RED になる(★弱くなったのは
+#     『行がずれた』という ★人には 直せても 機械には 意味の無い 検知だけ)。
 FORWARD = [
-    ("DS",  "ds/ds_events.jsonl",              "twoder/submit.py:139", "record_dialogue_event", "入力を対話イベントとして記録"),
-    ("RRI", "rri/rri_records.jsonl",           "twoder/submit.py:113", "detect",                "admission/intent を解決・記録"),
-    ("EGL", "egl/DESIGN_EVIDENCE_LEDGER.jsonl","twoder/submit.py:125", "admit_design_evidence", "DE admission（admission request 時）"),
-    ("EGL", "egl/data/events.jsonl",           "twoder/submit.py:181", "answer_question",       "self-grounding 照会 → EGL SoR event"),
-    ("DW",  "dev-workcell/events.jsonl",       "twoder/submit.py:412", "create_task",           "タスク生成（CREATE）※raw_input 起点"),
+    ("DS",  "ds/ds_events.jsonl",              "twoder/submit.py", "record_dialogue_event", "入力を対話イベントとして記録"),
+    ("RRI", "rri/rri_records.jsonl",           "twoder/submit.py", "detect",                "admission/intent を解決・記録"),
+    ("EGL", "egl/DESIGN_EVIDENCE_LEDGER.jsonl","twoder/submit.py", "admit_design_evidence", "DE admission（admission request 時）"),
+    ("EGL", "egl/data/events.jsonl",           "twoder/submit.py", "answer_question",       "self-grounding 照会 → EGL SoR event"),
+    ("DW",  "dev-workcell/events.jsonl",       "twoder/submit.py", "create_task",           "タスク生成（CREATE）※raw_input 起点"),
 ]
 RETURN = [
-    ("DW",  "dev-workcell/events.jsonl",       "twoder/return_loop.py:23", "build_result_packet",  "結果パケット生成"),
-    ("EGL", "egl/DESIGN_EVIDENCE_LEDGER.jsonl","twoder/return_loop.py:28", "ingest_result_packet", "EGL が admit/reject"),
-    ("RRI", "rri/rri_records.jsonl",           "twoder/return_loop.py:33", "form_residual",        "RRI residual/focus 更新"),
-    ("DS",  "ds/ds_events.jsonl",              "twoder/return_loop.py:38", "record_dialogue_event","DS 暫定スレッド更新（ループ閉）"),
+    ("DW",  "dev-workcell/events.jsonl",       "twoder/return_loop.py", "build_result_packet",  "結果パケット生成"),
+    ("EGL", "egl/DESIGN_EVIDENCE_LEDGER.jsonl","twoder/return_loop.py", "ingest_result_packet", "EGL が admit/reject"),
+    ("RRI", "rri/rri_records.jsonl",           "twoder/return_loop.py", "form_residual",        "RRI residual/focus 更新"),
+    ("DS",  "ds/ds_events.jsonl",              "twoder/return_loop.py", "record_dialogue_event","DS 暫定スレッド更新（ループ閉）"),
 ]
 # 欠損辺 ①→②（自律選択 → タスク生成の producer 不在）
 MISSING = {
-    "reads":  ("twoder/audit/ROADMAP_REGISTRY.jsonl", "twoder/task_selector.py:388", "select_next",
+    "reads":  ("twoder/audit/ROADMAP_REGISTRY.jsonl", "twoder/task_selector.py", "select_next",
                "ROADMAP ITEM を選ぶ（READ-ONLY, :7 『never dispatches』）"),
     "should_write": ("dev-workcell/events.jsonl", "create_task", "CREATE を書くべき先"),
-    "gap": "select_next の勝者を create_task に渡す書き手が存在しない。submit.py:408 は raw_input 起点で自律選択を経由しない。",
+    "gap": "select_next の勝者を create_task に渡す書き手が存在しない。submit.py の create_task 呼出は raw_input 起点で自律選択を経由しない。",
 }
+
+
+def _call_lines(relpath, sym):
+    """`relpath` の中で `sym` を **呼んでいる** 行番号を ast で全部返す。
+
+    ★文字列一致では ない= ★コメントや docstring に 名前が 出るだけでは 当たらない
+      (★行番号の 検査より 強い= ★『呼んでいる』ことを 見ている)。
+    ★引けない(ファイルが読めない/構文が壊れている)ときは None を返す= ★0件と 混ぜない。
+    """
+    try:
+        tree = ast.parse((ROOT / relpath).read_text(encoding="utf-8"))
+    except Exception:
+        return None
+    out = []
+    for n in ast.walk(tree):
+        if isinstance(n, ast.Call):
+            nm = getattr(n.func, "id", None) or getattr(n.func, "attr", None)
+            if nm == sym:
+                out.append(n.lineno)
+    return sorted(out)
+
+
+def _loc(relpath, sym):
+    """資料に載せる 在り処。★行は その場で 引く(★手で 書かない)。"""
+    ln = _call_lines(relpath, sym)
+    if ln is None:
+        return "%s:?" % relpath
+    if not ln:
+        return "%s:(呼出なし)" % relpath
+    return "%s:%s" % (relpath, ",".join(str(x) for x in ln))
 
 
 def verify():
     bad = []
-    for _, _, loc, sym, _ in FORWARD + RETURN:
-        f, ln = loc.rsplit(":", 1)
-        try:
-            line = (ROOT / f).read_text().splitlines()[int(ln) - 1]
-        except Exception:
-            bad.append((loc, "line-out-of-range")); continue
-        if sym not in line:
-            bad.append((loc, "expected %r not on line: %s" % (sym, line.strip()[:70])))
+    for _, _, f, sym, _ in FORWARD + RETURN:
+        ln = _call_lines(f, sym)
+        if ln is None:
+            bad.append((f, "読めない/構文が壊れている（★呼出の有無を判定していない）")); continue
+        if not ln:
+            bad.append((f, "expected call %r が 1箇所も無い=図の主張が消えた" % sym))
     # 欠損辺の裏づけ: task_selector は READ-ONLY を宣言し create_task を呼ばない
     ts = (ROOT / "twoder/task_selector.py").read_text()
     if "never dispatches" not in ts:
@@ -105,7 +141,7 @@ def doc():
     o.append("  1,313 のコード辺は人間が捌けないが、台帳 12 ノードなら本線が読める。")
     o.append("- **正直な設計:** データは台帳ファイル間を直接流れない。orchestrator（`submit.py` 前向き /")
     o.append("  `return_loop.py` 戻り）が各台帳の **sole writer** を順に呼ぶ。図の辺 = 1 往復の write シーケンス。")
-    o.append("- **生成:** `egl/structure/s11_ledger_flow.py`（`--check` で各行番号の裏づけを検証＝腐敗検知）")
+    o.append("- **生成:** `egl/structure/s11_ledger_flow.py`（`--check` で**呼出が実在するか**を検証＝腐敗検知。★表の行番号は生成時に ast で引いた実測であり、手で書いた値ではない）")
     o.append("- **典拠:** s10 登記簿（writer 解析）+ submit.py/return_loop.py の実行番号 + DE-0490（台帳保全済み）\n")
     o.append("## §1. 本線（canonical 12 本、すべて sole writer）\n")
     o.append(mermaid())
@@ -113,18 +149,19 @@ def doc():
     o.append("## §2. 前向き 1 往復（`submit.py`）\n")
     o.append("| # | 系 | 台帳 | 呼出 | シンボル | 何を書くか |")
     o.append("|---|---|---|---|---|---|")
-    for i, (sysn, lid, loc, sym, desc) in enumerate(FORWARD, 1):
-        o.append(f"| {i} | {sysn} | `{lid.split('/')[-1]}` | `{loc}` | `{sym}` | {desc} |")
+    for i, (sysn, lid, f, sym, desc) in enumerate(FORWARD, 1):
+        o.append(f"| {i} | {sysn} | `{lid.split('/')[-1]}` | `{_loc(f, sym)}` | `{sym}` | {desc} |")
     o.append("")
     o.append("## §3. 戻り（`return_loop.py`）— ループは閉じている\n")
     o.append("| # | 系 | 台帳 | 呼出 | シンボル | 何を書くか |")
     o.append("|---|---|---|---|---|---|")
-    for i, (sysn, lid, loc, sym, desc) in enumerate(RETURN, 1):
-        o.append(f"| {i} | {sysn} | `{lid.split('/')[-1]}` | `{loc}` | `{sym}` | {desc} |")
+    for i, (sysn, lid, f, sym, desc) in enumerate(RETURN, 1):
+        o.append(f"| {i} | {sysn} | `{lid.split('/')[-1]}` | `{_loc(f, sym)}` | `{sym}` | {desc} |")
     o.append("")
     o.append("## §4. 欠損辺 ①→②（台帳語での再定義）\n")
     o.append("**前ターンの『task_selector→create_task の producer 不在』を、この図の欠損 1 辺として書き直す:**\n")
-    rlid, rloc, rsym, rdesc = MISSING["reads"]
+    rlid, rfile, rsym, rdesc = MISSING["reads"]
+    rloc = _loc(rfile, rsym)
     wlid, wsym, wdesc = MISSING["should_write"]
     o.append("```")
     o.append(f"  {rlid.split('/')[-1]}  ──読む──▶  {rloc} ({rsym})")

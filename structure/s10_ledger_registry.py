@@ -245,6 +245,31 @@ def _code_only_cached(k, txt):
     return _CODE_CACHE[k]
 
 
+def _src_seg(txt, n, lines):
+    """`ast.get_source_segment(txt, n)`(padded=False)と ★同じ物を 返す。
+
+    ★違いは ★行の配列を 呼び手から 受け取る ことだけ(★毎回 割り直さない)。
+    ★`lines` が None の ときは ★標準の関数へ そのまま 委ねる。
+    """
+    if lines is None:
+        return ast.get_source_segment(txt, n)
+    try:
+        if n.end_lineno is None or n.end_col_offset is None:
+            return None
+        lineno = n.lineno - 1
+        end_lineno = n.end_lineno - 1
+        col = n.col_offset
+        end_col = n.end_col_offset
+    except AttributeError:
+        return None
+    if end_lineno == lineno:
+        return lines[lineno].encode()[col:end_col].decode()
+    first = lines[lineno].encode()[col:].decode()
+    last = lines[end_lineno].encode()[:end_col].decode()
+    mid = lines[lineno + 1:end_lineno]
+    return "".join([first] + mid + [last])
+
+
 def _code_only(txt):
     """★コメントと 文字列リテラルを 落とした 本文。
 
@@ -255,9 +280,18 @@ def _code_only(txt):
     try:
         t = ast.parse(txt)
         segs = []
+        # ★★[Claude実装/STRUCTURE] 2026-08-28: ★行分割を 1回に する(★出力は 1バイトも 変えない)。
+        #   ★理由= `ast.get_source_segment` は ★呼ばれる たびに `_splitlines_no_ff` で
+        #     ★全文を 行へ 割る ∴ ★文字列リテラルの 数だけ O(ファイル長) が 掛かる
+        #     (★実測 2026-08-28= 1本あたり 約27ms ／ `--check` 全体の 78.7%)。
+        #   ★直し= ★行の配列を 1回だけ 作り、★あとは `ast.get_source_segment` と 同じ式で 切る
+        #     (★col_offset は utf-8 の バイト位置 ∴ encode/decode も 同じに 揃える)。
+        #   ★`_splitlines_no_ff` は 私物の 実装では ない= ★標準 `ast` の 物を そのまま 使う。
+        #     ★引けない Python では ★従来の `get_source_segment` に 戻す(★黙って 別物に しない)。
+        _lines = ast._splitlines_no_ff(txt) if hasattr(ast, "_splitlines_no_ff") else None
         for n in ast.walk(t):
             if isinstance(n, ast.Constant) and isinstance(n.value, str):
-                seg = ast.get_source_segment(txt, n)
+                seg = _src_seg(txt, n, _lines)
                 if seg and len(seg) > 4:
                     segs.append(seg)
         for seg in sorted(set(segs), key=len, reverse=True):
@@ -391,7 +425,17 @@ def readers(base, writers, repo=None):
         if k == SELF or k in ow:
             continue
         hit = False
-        if base in _code_only_cached(k, txt) and _READ_CALL.search(txt):
+        # ★★[Claude実装/STRUCTURE] 2026-08-28: ★前置きの篩(★判定は 1つも 変えていない)。
+        #   ★根拠= `_code_only` は ★文字列とコメントの 範囲を ★空白1個に 置き換えるだけ
+        #     ∴ ★残った文字は 全部 元の txt の 文字であり、★挿入されるのは 空白のみ。
+        #     ∴ ★空白を含まない base が code_only に 在るなら ★txt にも 必ず 在る
+        #       (★空白を跨いだ 一致は 起き得ない)。★対偶= `base not in txt` なら 計算する必要が 無い。
+        #   ★実測 2026-08-28= 台帳の basename 43個は ★どれも 空白を含まない ／
+        #     ★778本の .py の うち ★いずれかの台帳名を含むのは 104本(13.4%)だけ=
+        #     ★674本(86.6%)は `_code_only`(★1本あたり 約18ms)を 計算せずに 済む。
+        #   ★空白を含む base が 将来 現れた ときは ★篩を 使わない(★安全側へ 倒す)。
+        if (" " in base or base in txt) and _READ_CALL.search(txt) \
+                and base in _code_only_cached(k, txt):
             hit = True
         elif _calls_owner_read_cached(k, txt, ow, read_funcs):
             hit = True
@@ -473,7 +517,58 @@ def classify_writer(repo, base, ow, all_owner_index):
     return "NONE_ORPHAN"
 
 
-def build():
+def _count_nonblank(p, chunk=8 << 20):
+    """空でない行を数える。★`read_text().splitlines()` と **同じ数** を返す。
+
+    ★★[Claude実装/STRUCTURE] 2026-08-28: ★丸ごと読むのをやめた理由=
+      ★49冊の合計 1,156MB のうち ★1,059.7MB が `ds/data/event_trace.jsonl` 1本で、
+      ★`--check` の peak RSS が 5.96GB に跳ねていた(★実測)。
+    ★★意味は 1つも 変えていない= ★`str.splitlines()` は `\n` 以外にも
+      `\x0b \x0c \x1c \x1d \x1e \x85 \u2028 \u2029` で 切る ∴
+      ★file を 1行ずつ 回す(=`\n` だけで 切る)と ★数が 変わり得る。
+      ∴ ★塊で 読んで ★`splitlines(keepends=True)` を 使い、★境界の 半端だけ 持ち越す。
+    """
+    if not p.exists():
+        return 0
+    n, tail = 0, ""
+    with p.open("r", errors="ignore") as fh:
+        while True:
+            buf = fh.read(chunk)
+            if not buf:
+                break
+            parts = (tail + buf).splitlines(keepends=True)
+            tail = parts.pop() if parts else ""
+            # ★keepends で 終端子が 付いている物だけが 「1行として確定した」物
+            if tail and tail.splitlines() == [tail]:
+                pass                      # ★終端子が 付いていない= 次の塊へ 持ち越す
+            else:
+                parts.append(tail); tail = ""
+            for ln in parts:
+                if ln.strip():
+                    n += 1
+    if tail.strip():
+        n += 1
+    return n
+
+
+def build(light=False):
+    """★`light=True` は ★`--check` 専用の 形。★判定に 使う欄だけを 作る。
+
+    ★★[Claude実装/STRUCTURE] 2026-08-28(ITEM-2DER-EVO-0120 の作業表 #10):
+      ★実測(2026-08-28)= `--check` は 34.32秒 / peak RSS 5.96GB。★内訳を 2段で 割ったら
+        段1 下ごしらえ 0.08秒 ／ 段2 1冊ずつ 33.89秒(0.692秒/冊)。★段2 の中は:
+          readers 15.13秒(45.6%) ／ genesis(git log) 8.81秒(26.6%) ／
+          ★行数を数える 6.65秒(20.1%) ／ last_touch 2.03秒(6.1%) ／ 残り 1.0%未満。
+      ★★`--check` が 読む欄は 8つ(`declared_sole_writer` `production_writer_count`
+        `writer_production` `writer_nonproduction` `live_referenced` `writer_resolution`
+        `role` `ledger_id`)だけ ∴ ★`rows` `genesis` `purpose_raw` `last_touch` `idle_days` は
+        ★作っても 1度も 読まれない= ★17.6秒(53.1%)が 捨てる物の ために 使われていた。
+      ★★行数は 台帳を 丸ごと text で 読んでいた= ★49冊の 合計 1,156MB の うち
+        ★1,059.7MB が `ds/data/event_trace.jsonl` 1本 ∴ ★RSS 5.96GB の 主因も ここ。
+      ★★門は 緩めていない= ★判定に 使う欄は 1つも 減らしていない。
+        ★`--apply` は 従来どおり `light=False`= ★台帳の 中身は 1バイトも 変わらない
+        (★実測で 49行 全欄が 一致することを 確かめてある)。
+    """
     rows = []
     entries = sorted(all_ledgers().items())
     # basename -> それを所有する writer prog（他パスで検出されたもの）
@@ -487,9 +582,12 @@ def build():
     for key, (repo, rel, tracked) in entries:
         base = os.path.basename(rel)
         p = ROOT / repo / rel
-        n = sum(1 for ln in p.read_text(errors="ignore").splitlines() if ln.strip()) if p.exists() else 0
-        gen = genesis(repo, rel, tracked)
-        lt, lt_src = last_touch(repo, rel, tracked)
+        if light:                       # ★`--check` が 読まない欄は 作らない(★値は None= ★0 では ない)
+            n, gen, lt, lt_src = None, {}, None, None
+        else:
+            n = _count_nonblank(p)
+            gen = genesis(repo, rel, tracked)
+            lt, lt_src = last_touch(repo, rel, tracked)
         ow = owner_cache[(repo, base)]
         prod = ow["production"]
         sole = declared_sole_writer(prod)
@@ -507,7 +605,8 @@ def build():
             "genesis": gen,
             "purpose_raw": {  # 発明しない。事実のみ。
                 "genesis_subject": gen.get("subject"),
-                "writer_docstring": docfirst(sole or (prod[0] if prod else (ow["programs"][0] if ow["programs"] else ""))),
+                "writer_docstring": (None if light else
+                                     docfirst(sole or (prod[0] if prod else (ow["programs"][0] if ow["programs"] else "")))),
             },
             "writer_programs": ow["programs"],
             "writer_production": prod,
@@ -525,7 +624,7 @@ def build():
                 "sor": sor_flag(ow["programs"], rel),
                 "shipment_or_docs_copy": is_ship,
                 "last_touch": lt, "last_touch_source": lt_src,
-                "idle_days": idle_days(lt),
+                "idle_days": (None if light else idle_days(lt)),
             },
             "liveness": (
                 "REPLICA_SHADOW" if wres.startswith("BOOTSTRAP_REPLICA")
@@ -543,7 +642,8 @@ def build():
 
 
 def main():
-    rows = build()
+    # ★`--check` は 判定に 使う欄だけ 作る(★`--apply` と 表示は 従来どおり 全欄)。
+    rows = build(light=("--check" in sys.argv))
     if "--check" in sys.argv:
         bad = []
         for r in rows:

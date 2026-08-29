@@ -4,7 +4,7 @@
   1,313 のコード辺は人間が捌けないが、台帳 12 ノードなら本線が読める。
 - **正直な設計:** データは台帳ファイル間を直接流れない。orchestrator（`submit.py` 前向き /
   `return_loop.py` 戻り）が各台帳の **sole writer** を順に呼ぶ。図の辺 = 1 往復の write シーケンス。
-- **生成:** `egl/structure/s11_ledger_flow.py`（`--check` で各行番号の裏づけを検証＝腐敗検知）
+- **生成:** `egl/structure/s11_ledger_flow.py`（`--check` で**呼出が実在するか**を検証＝腐敗検知。★表の行番号は生成時に ast で引いた実測であり、手で書いた値ではない）
 - **典拠:** s10 登記簿（writer 解析）+ submit.py/return_loop.py の実行番号 + DE-0490（台帳保全済み）
 
 ## §1. 本線（canonical 12 本、すべて sole writer）
@@ -39,11 +39,11 @@ flowchart LR
 
 | # | 系 | 台帳 | 呼出 | シンボル | 何を書くか |
 |---|---|---|---|---|---|
-| 1 | DS | `ds_events.jsonl` | `twoder/submit.py:137` | `record_dialogue_event` | 入力を対話イベントとして記録 |
-| 2 | RRI | `rri_records.jsonl` | `twoder/submit.py:111` | `detect` | admission/intent を解決・記録 |
-| 3 | EGL | `DESIGN_EVIDENCE_LEDGER.jsonl` | `twoder/submit.py:123` | `admit_design_evidence` | DE admission（admission request 時） |
-| 4 | EGL | `events.jsonl` | `twoder/submit.py:179` | `answer_question` | self-grounding 照会 → EGL SoR event |
-| 5 | DW | `events.jsonl` | `twoder/submit.py:408` | `create_task` | タスク生成（CREATE）※raw_input 起点 |
+| 1 | DS | `ds_events.jsonl` | `twoder/submit.py:345,1041` | `record_dialogue_event` | 入力を対話イベントとして記録 |
+| 2 | RRI | `rri_records.jsonl` | `twoder/submit.py:318,616,653,718` | `detect` | admission/intent を解決・記録 |
+| 3 | EGL | `DESIGN_EVIDENCE_LEDGER.jsonl` | `twoder/submit.py:331` | `admit_design_evidence` | DE admission（admission request 時） |
+| 4 | EGL | `events.jsonl` | `twoder/submit.py:394` | `answer_question` | self-grounding 照会 → EGL SoR event |
+| 5 | DW | `events.jsonl` | `twoder/submit.py:1134,1278` | `create_task` | タスク生成（CREATE）※raw_input 起点 |
 
 ## §3. 戻り（`return_loop.py`）— ループは閉じている
 
@@ -59,7 +59,7 @@ flowchart LR
 **前ターンの『task_selector→create_task の producer 不在』を、この図の欠損 1 辺として書き直す:**
 
 ```
-  ROADMAP_REGISTRY.jsonl  ──読む──▶  twoder/task_selector.py:388 (select_next)
+  ROADMAP_REGISTRY.jsonl  ──読む──▶  twoder/task_selector.py:(呼出なし) (select_next)
        ROADMAP ITEM を選ぶ（READ-ONLY, :7 『never dispatches』）
                           │
                     ✗ 書き手が居ない
@@ -67,7 +67,7 @@ flowchart LR
   dev-workcell/events.jsonl  (create_task = CREATE を書くべき先)
 ```
 
-select_next の勝者を create_task に渡す書き手が存在しない。submit.py:408 は raw_input 起点で自律選択を経由しない。
+select_next の勝者を create_task に渡す書き手が存在しない。submit.py の create_task 呼出は raw_input 起点で自律選択を経由しない。
 
 **つまり:** 本線の write シーケンス（§2/§3）は閉じているが、**ROADMAP_REGISTRY（自律選択の台帳）だけが
 この輪に接続していない。** ROADMAP を読む `select_next` は存在し READ-ONLY だが、その勝者を
@@ -78,16 +78,10 @@ select_next の勝者を create_task に渡す書き手が存在しない。subm
 
 ## §5. instance store（本線ではない、点2の区別）
 
-canonical event log とは別に、reader コードが live なだけの **instance store が 7 本**ある
+canonical event log とは別に、reader コードが live なだけの **instance store が 1 本**ある
 （`egl/data_*/events.jsonl`, `run_sor/events.jsonl` 等）。同一 writer（core.py 等）が
 scenario ごとに作った実体で、本線ノードではない。LIVE 分類が到達性と現用を混ぜないよう分離した。
 
 | instance store | 行 | 放置日 |
 |---|--:|--:|
 | `dev-workcell/run_sor/events.jsonl` | 160 | 0 |
-| `egl/data_jrev0003/events.jsonl` | 40 | 17 |
-| `egl/data_gate4/events.jsonl` | 31 | 16 |
-| `egl/data_acq_task/events.jsonl` | 23 | 16 |
-| `egl/data_sleepmode_claim/events.jsonl` | 22 | 15 |
-| `egl/data_acq_live/events.jsonl` | 12 | 17 |
-| `egl/data_sleepmode_acq/events.jsonl` | 7 | 15 |
