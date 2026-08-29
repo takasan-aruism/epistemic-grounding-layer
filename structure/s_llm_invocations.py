@@ -695,7 +695,11 @@ def _record(rel, func, lineno, record_class, model="UNRESOLVED", endpoint="UNRES
         "seed": runtime.get("seed", "UNRESOLVED"),
         "max_tokens": runtime.get("max_tokens", "UNRESOLVED"),
         "timeout": runtime.get("timeout", "UNRESOLVED"),
-        "enable_thinking": runtime.get("enable_thinking", "ABSENT"),
+        # ★★2026-08-29 直した= ★CLI(CLAUDE_P)に vLLM の欄を 当てない。
+        #   ★enable_thinking は :8005 の chat_template_kwargs の話 ∴ CLI には 当たらない。
+        #   ★前は CLAUDE_P 4件を ABSENT と 数えて ★分母を 19 と 報告していた(★正は 15)。
+        #   ★これは 2026-08 に 一度 直した『vLLM の marker を CLI に当てる』と ★同じ型の 再発。
+        "enable_thinking": (runtime.get("enable_thinking", "ABSENT") if worker == "VLLM" else "N/A(worker=%s)" % worker),
         "status": status,
         "gate_ref": gate_ref,
         "knowledge_refs": [],
