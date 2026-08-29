@@ -199,19 +199,34 @@ def _lit_or_unresolved(node, const_map, fn=None):
 
 
 def _runtime_of(fn, const_map, call_node):
-    """temperature / seed / max_tokens / timeout。★取れないものは UNRESOLVED のまま残す。"""
+    """temperature / seed / max_tokens / timeout / enable_thinking。★取れないものは UNRESOLVED のまま残す。"""
     out = {k: "UNRESOLVED" for k in RUNTIME_KEYS}
     out["timeout"] = "UNRESOLVED"
+    # ★★2026-08-29 追加(★実測で 要ると判った欄)= enable_thinking。
+    #   ★実走で 確かめた= ★答えが返るかを 決めているのは max_tokens ではなく ★これ。
+    #     enable_thinking=False なら max_tokens 32 で 2/2 返る。★既定(有)は 512 でも 1/2。
+    #   ★3値で 残す= ★ABSENT(書いていない= 既定= thinking 有) / 値 / UNRESOLVED(引数で決まる)。
+    #     ★『書いていない』と『引数で決まる』を 混ぜない。
+    out["enable_thinking"] = "ABSENT"
     d = _payload_dict(fn)
     if d is not None:
         for k in RUNTIME_KEYS:
             v = _dict_get(d, k)
             if v is not None:
                 out[k] = _lit_or_unresolved(v, const_map, fn)
+        ctk = _dict_get(d, "chat_template_kwargs")          # ★payload に 直に 積む形
+        if ctk is not None:
+            if isinstance(ctk, ast.Dict):
+                et = _dict_get(ctk, "enable_thinking")
+                out["enable_thinking"] = (_lit_or_unresolved(et, const_map, fn) if et is not None else "ABSENT")
+            else:
+                out["enable_thinking"] = "UNRESOLVED"
     if call_node is not None:
         for kw in call_node.keywords:
             if kw.arg == "timeout":
                 out["timeout"] = _lit_or_unresolved(kw.value, const_map, fn)
+            if kw.arg == "enable_thinking":                  # ★包み(qwen_raw_call 等)へ 渡す形
+                out["enable_thinking"] = _lit_or_unresolved(kw.value, const_map, fn)
     return out
 
 
@@ -421,9 +436,24 @@ def _prompt_source_of(fn, worker):
 
 
 def _answer_used_of(fn, worker):
-    """返答の本文を読むか。★worker ごとに marker が違う(vLLM の語を CLI に当てない)。"""
+    """返答の本文を読むか。★worker ごとに marker が違う(vLLM の語を CLI に当てない)。
+
+    ★★2026-08-29 直した(★実測で 露見)= ★依頼文の側の語を 拾って EXISTS に していた。
+      ★実例= experiment_full_swap.py:gen は payload の
+        messages[{"role":"user","content":"reply OK"}] の ★"content" に 当たっていた。
+        ★あの関数は urlopen が 成功したら True を返すだけで ★返りを 1文字も 読んでいない。
+      ★直し= ★payload(依頼文)の 中に在る語は 数えない。★読む側だけ 数える。
+      ★これは 材料からラベルへ 漏れる のと 同じ形= ★問いの側の語で 答えを 判定していた。
+    """
     marks = ANSWER_MARKS.get(worker, ())
+    payload = _payload_dict(fn)
+    inside = set()
+    if payload is not None:
+        for n in ast.walk(payload):
+            inside.add(id(n))
     for n in ast.walk(fn):
+        if id(n) in inside:
+            continue                      # ★依頼文の中= 読んでいる証拠に ならない
         if isinstance(n, ast.Constant) and isinstance(n.value, str) and n.value in marks:
             return "EXISTS"
         if isinstance(n, ast.Attribute) and n.attr in marks:
@@ -665,6 +695,7 @@ def _record(rel, func, lineno, record_class, model="UNRESOLVED", endpoint="UNRES
         "seed": runtime.get("seed", "UNRESOLVED"),
         "max_tokens": runtime.get("max_tokens", "UNRESOLVED"),
         "timeout": runtime.get("timeout", "UNRESOLVED"),
+        "enable_thinking": runtime.get("enable_thinking", "ABSENT"),
         "status": status,
         "gate_ref": gate_ref,
         "knowledge_refs": [],
