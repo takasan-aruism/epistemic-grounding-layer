@@ -12,10 +12,23 @@ POP = "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scrat
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-def _call(prompt, max_tokens=4096):
-    """★:8005 を 実走。★thinking は 切る(★LLMK-0010 の 実測)。"""
-    from twoder.runtime_supervisor import qwen_raw_call as Q
-    return Q(prompt, max_tokens=max_tokens, seed=0, enable_thinking=False, timeout=300)
+def _call(prompt, max_tokens=None):
+    """★:8005 を 実走。★引数は ★方針層が 決める(★固定値を 置かない)。
+
+    ★★2026-08-30 [Claude実装/Topology]= ★`twoder.detail_llm` へ 繋いだ(★ITEM-2DER-EVO-0038)。
+      ★それまでは `max_tokens=4096` の 固定 ∴ ★方針層(★可変 / 予算の門 / 400 の 扱い)が
+      ★誰にも 呼ばれていなかった。
+
+    ★★`body` を 渡さない= ★`call_for_detail` は 省略時 `prompt` を 見積もりに 使う ∴
+      ★骨格(★実測 385〜409字)が ★既に 入った 側で 数える(★`PROMPT_SKELETON_CHARS=200` を
+      ★さらに 積む= ★過大に 見積もる 側= ★400 を 出さない 側)。
+      ★`body=goal` と 渡すと ★骨格を 200 と 見積もる ∴ ★2倍 足りない。
+
+    ★★いまの母集団では 返りは 変わらない= ★実測 22件 すべて `plan_max_tokens` が 4096
+      (★goal の長さ 965〜3069字)∴ ★固定値 4096 と 同じ。★効くのは ★長い入力が 来た時だけ。
+    """
+    from twoder.detail_llm import call_for_detail as C
+    return C(prompt, seed=0, timeout=300, max_tokens=max_tokens)
 
 
 def _parse_json(text):
