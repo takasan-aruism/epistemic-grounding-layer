@@ -71,6 +71,19 @@ ENTITY_REGISTRY = [
     #   ★www.python.org は 足さない= ★踏んだ問題は 全部 language/stdlib の話で
     #     ★必要が出てから 足す(★推測で 広げない)。
     {"host": "docs.python.org", "path": "", "entity": "Python", "kind": "OFFICIAL_DOCS"},
+    # ★★[Claude実装/Topology] 2026-08-31 ITEM-2DER-EVO-0044 受入③。
+    #   ★足した根拠は ★実測(2026-08-30〜31)= ★この面を 実際に 取った=
+    #     静的 800 バイト(本文 10字)→ ★描画で 33,853 バイト・条文が 取れた。
+    #   ★host 全体が 公式(★政府の 法令データベース= UGC では ない)∴ path=""。
+    #   ★`elaws.e-gov.go.jp` は ★`laws.e-gov.go.jp` へ 転送される(実測)∴ ★両方 登記する=
+    #     ★`qualify_locator` は ★転送後の final_url で 見る(Probe C)ので 後者が 効く が、
+    #     ★転送前の locator で 引かれる 経路も 在る ので 落とさない。
+    #   ★★足さなかった物と 理由(★推測で 広げない)=
+    #     ・ja/en.wikipedia.org … ★UGC ∴ ★公式では ない(★取れる ことと 公式で ある ことは 別)。
+    #     ・arxiv.org … ★査読前 ∴ ★公式の 宣言でも 仕様でも ない。
+    #     ★どちらも ★UNKNOWN の まま が 正しい(★強い種別を 捏造しない= この表の 元からの 規則)。
+    {"host": "laws.e-gov.go.jp", "path": "", "entity": "日本国法令", "kind": "OFFICIAL_DOCS"},
+    {"host": "elaws.e-gov.go.jp", "path": "", "entity": "日本国法令", "kind": "OFFICIAL_DOCS"},
 ]
 
 

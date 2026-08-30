@@ -4,11 +4,15 @@ adapter が **transport_status**(通信の成否)と **content_status**(取れ�
 AB-2 の肝: HTTP 200 でも Cloudflare challenge / JS-required / auth wall / empty はあり得る → adapter が
 body を classify する。adapter honesty(誤分類/嘘)は宣言済み非保証(contracts): 単一プロセスでは検出不能。
 """
-import json, socket, base64, urllib.request, urllib.error
+import json, re, socket, base64, urllib.request, urllib.error
 from urllib.parse import urlparse
 
 ADAPTER_VERSION = "0.1"
 USER_AGENT = "EGL-acquisition/0.1 (research; stdlib urllib)"
+# ★★[Claude実装/Topology] 2026-08-31 EVO-0044= ★検索面だけ ブラウザの名乗りを 使う。
+#   ★既定の名乗りでも 通るが ★検索面は 断ることが ある ∴ ★この口 だけに 限る(★他は 変えない)。
+_BROWSER_UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) "
+               "Chrome/120.0 Safari/537.36")
 TIMEOUT = 20
 MAX_BYTES = 5_000_000
 
@@ -282,12 +286,88 @@ def fetch_http_render(leg):
                  "chars": len(text)})
 
 
+# ---------- ACQ_WEB_SEARCH(★出所を 表に 持たずに 探す) ----------
+def fetch_web_search(leg):
+    """★★[Claude実装/Topology] 2026-08-31 ITEM-2DER-EVO-0044 受入③。
+
+    ★足した理由= ★出所が 表(`ENTITY_REGISTRY` 5件 / `DOCS_BASES` 4件)に 限られ、
+      ★どちらも vLLM/GPU 系 ∴ ★一般の題材の 出所が 0件 だった。
+    ★★表を 増やす のでは 閉じない= ★題材が 増えるたびに 人が 1行 足す 形に なる
+      ∴ ★『表に 無い 題材を 引ける』側を 足す。
+    ★★鍵(API key)は 要らない= ★DuckDuckGo の html 面(★実測 2026-08-31・10件・鍵 不要)。
+      ★Google は 鍵か 規約上の 手当てが 要る ∴ ★入れない(★レベル2 と 記録した)。
+
+    ★`leg.target_locator` は ★問い の 文字列 か ★html.duckduckgo.com の URL。
+    ★返りは ★`ACQ_GITHUB_SEARCH` と 同じ 形= ★1件の adapter_result で
+      ★provenance に 結果一覧(title / url)を 載せる。★本文は 取らない=
+      ★取るのは 次の leg(★`ACQ_HTTP_STATIC` か `ACQ_HTTP_RENDER`)の 仕事。
+    ★★出所の 種別は ここで 決めない= ★`source_policy.qualify_locator` が 決める
+      (★検索で 出た から といって 公式には ならない)。
+    """
+    import urllib.parse as _up
+    q = leg["target_locator"]
+    # ★★2026-08-31 実測で 分かった 弱さ(★私の 早すぎた 断定を 直す)=
+    #   ★html 面を 直に 叩くと ★12件ほどで ★202 を 返し ★本文が CAPTCHA に なる
+    #     (逐語『Select all squares containing a duck』)。★60秒 待っても 戻らなかった。
+    #   ★∴ ★第一手は ★この機械に 在る `ddgs`(9.14.4・実測で 挑戦画面の 下でも 引けた)。
+    #     ★html 面は ★控え。★どちらで 引いたかは provenance の `engine` に 出す
+    #     (★どの層で 答えが 出たかを 隠さない)。
+    if not str(q).startswith(("http://", "https://")):
+        try:
+            from ddgs import DDGS
+            with DDGS() as _d:
+                _rows = list(_d.text(str(q), max_results=20))
+            _hits = [{"title": x.get("title") or "", "url": x.get("href") or ""} for x in _rows]
+            if _hits:
+                _raw = json.dumps(_hits, ensure_ascii=False).encode("utf-8")
+                return _res("SUCCESS", "OBSERVED", None, "application/json", _raw,
+                            {"final_url": None, "query": str(q), "n_hits": len(_hits),
+                             "hits": _hits[:20], "engine": "ddgs",
+                             "note": "★本文は 取らない= 次の leg が 取る"})
+        except Exception:
+            pass                       # ★控えへ 落ちる(★落ちたことは engine で 分かる)
+    url = q if str(q).startswith(("http://", "https://")) else (
+        "https://html.duckduckgo.com/html/?q=" + _up.quote(str(q)))
+    r = _http_get(url, {"User-Agent": _BROWSER_UA})
+    ts = _transport_from(r)
+    # ★202 + 挑戦の 語= ★『取れない』では なく ★『断られた』∴ 既存の語で 名指す。
+    #   ★形は 既存の 前例と 同じ(`fetch_github_search` の 403 + rate limit)。★新語は 作らない。
+    if r["status"] == 202 and any(m in r["body"].lower() for m in (b"anomaly", b"challenge")):
+        return _res("RATE_LIMITED", None, r["status"], r["headers"].get("Content-Type"), None,
+                    {"final_url": r["final_url"], "query": str(q), "n_hits": 0, "hits": [],
+                     "engine": "duckduckgo-html",
+                     "reason": "★202 + 挑戦画面(CAPTCHA)= ★人の確認を 求められた"})
+    hits, cs = [], None
+    if ts == "SUCCESS":
+        try:
+            from bs4 import BeautifulSoup
+        except Exception as ex:
+            return _res("PARSER_FAILED", None, r["status"], r["headers"].get("Content-Type"), None,
+                        {"reason": "bs4 unavailable: %s" % type(ex).__name__})
+        try:
+            soup = BeautifulSoup(r["body"], "lxml")
+            for a in soup.select("a.result__a"):
+                href = a.get("href", "")
+                m = re.search(r"uddg=([^&]+)", href)
+                hits.append({"title": a.get_text(" ", strip=True),
+                             "url": _up.unquote(m.group(1)) if m else href})
+            cs = "OBSERVED" if hits else "EMPTY"
+        except Exception:
+            cs = "UNEXPECTED_CONTENT"
+    raw = json.dumps(hits, ensure_ascii=False).encode("utf-8") if ts == "SUCCESS" else None
+    return _res(ts, cs, r["status"], "application/json", raw,
+                {"final_url": r["final_url"], "query": str(q), "n_hits": len(hits), "hits": hits[:20],
+                 "engine": "duckduckgo-html", "note": "★本文は 取らない= 次の leg が 取る"})
+
+
 def fetch(leg):
     ac = leg["adapter_class"]
     if ac == "ACQ_HTTP_STATIC":
         return fetch_http_static(leg)
     if ac == "ACQ_HTTP_RENDER":
         return fetch_http_render(leg)
+    if ac == "ACQ_WEB_SEARCH":
+        return fetch_web_search(leg)
     if ac == "ACQ_GITHUB":
         return fetch_github(leg)
     if ac == "ACQ_GITHUB_SEARCH":

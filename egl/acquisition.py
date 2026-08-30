@@ -29,7 +29,8 @@ CONTENT_STATUSES = {"OBSERVED", "CHALLENGE_PAGE", "AUTH_WALL", "PLACEHOLDER", "E
 # §6 first slice adapters(実 fetch は adapter 実装が担う。runner は adapter_result を受ける形にして
 # テストを hermetic に保つ = adapter が status を付す事実は変えず、ネットワーク非決定性をテストから排除)。
 ADAPTERS = {"ACQ_GITHUB", "ACQ_GITHUB_SEARCH", "ACQ_GITHUB_ISSUE", "ACQ_GITHUB_PROV", "ACQ_HTTP_STATIC", "ACQ_MANUAL",
-            "ACQ_HTTP_RENDER"}   # ★[Claude実装/Topology] 2026-08-31 EVO-0044 受入②= 描画の口を1語 足した
+            "ACQ_HTTP_RENDER",   # ★[Claude実装/Topology] 2026-08-31 EVO-0044 受入②= 描画の口を1語 足した
+            "ACQ_WEB_SEARCH"}    # ★[Claude実装/Topology] 2026-08-31 EVO-0044 受入③= 表に無い題材を引ける口
 
 
 def content_hash(raw_bytes):

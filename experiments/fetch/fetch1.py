@@ -59,7 +59,7 @@ TABLE = [
     ("CSV",                "表",            "テキスト", 1, "datasets/gdp 562,767B"),
     ("JSON API",           "構造データ",    "テキスト", 1, "Wikipedia REST 2,410B / GitHub API 6,617B"),
     ("Atom/RSS",           "見出し",        "テキスト", 1, "arXiv API 4,557B / Yahoo topics 3,118B"),
-    ("検索(DuckDuckGo)",   "題名+URL",      "テキスト", 1, "html.duckduckgo.com 10件・鍵 不要"),
+    ("検索(DuckDuckGo)",   "題名+URL",      "テキスト", 1, "★訂正= html面は12件ほどでCAPTCHA(202)。ddgs 経由なら10/10・各20件"),
     ("YouTube",            "題名・説明",    "テキスト", 1, "HTML の JS から 題名と shortDescription を 取れた"),
     ("画像",               "画像そのもの",  "画像",     1, "wikimedia Example.jpg 9,022B"),
     ("X(プロフィール)",    "名前/数/紹介",  "テキスト", 1, "静的HTML 292,877B→2,178字(名前・投稿数・追随者)"),
@@ -192,7 +192,25 @@ def k_rss(url):
 
 
 def k_search(query, max_n=10):
-    """★鍵の 要らない 検索= DuckDuckGo の html 面。★実測 10件。"""
+    """★鍵の 要らない 検索。★第一手は `ddgs`・控えが html 面。
+
+    ★★2026-08-31 訂正(★私の 早すぎた 断定)= ★html 面を 直に 叩くと ★12件ほどで
+      ★202 を 返し 本文が CAPTCHA に なる(逐語『Select all squares containing a duck』)。
+      ★60秒 待っても 戻らなかった。★『10件 取れた』を 1回 見て レベル1 と 書いたのが 誤り。
+    ★★`ddgs`(9.14.4・この機械に 在る)なら ★挑戦画面の 下でも 引けた= ★連続10件 10/10・各20件。
+    """
+    try:
+        from ddgs import DDGS
+        with DDGS() as d:
+            rows = list(d.text(query, max_results=max_n))
+        hits = [{"title": x.get("title") or "", "url": x.get("href") or ""} for x in rows]
+        if hits:
+            return {"ok": True, "kind": "search", "target": query, "sec": None, "status": None,
+                    "content_type": "application/json", "bytes": 0, "chars": sum(len(h["title"]) for h in hits),
+                    "preview": " / ".join(h["title"] for h in hits)[:400],
+                    "hits": hits, "n_hits": len(hits), "engine": "ddgs"}
+    except Exception:
+        pass
     url = "https://html.duckduckgo.com/html/?q=" + urllib.parse.quote(query)
     r = _get(url)
     if not r["ok"]:
@@ -206,7 +224,7 @@ def k_search(query, max_n=10):
         hits.append({"title": a.get_text(" ", strip=True),
                      "url": urllib.parse.unquote(m.group(1)) if m else href})
     return _ok("search", query, r, "\n".join(h["title"] for h in hits),
-               {"hits": hits, "n_hits": len(hits)})
+               {"hits": hits, "n_hits": len(hits), "engine": "duckduckgo-html"})
 
 
 def k_youtube(url):
