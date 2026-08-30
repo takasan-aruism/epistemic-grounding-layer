@@ -205,10 +205,11 @@ def k_search(query, max_n=10):
             rows = list(d.text(query, max_results=max_n))
         hits = [{"title": x.get("title") or "", "url": x.get("href") or ""} for x in rows]
         if hits:
+            body = "\n".join("%s\t%s" % (h["title"], h["url"]) for h in hits)
             return {"ok": True, "kind": "search", "target": query, "sec": None, "status": None,
-                    "content_type": "application/json", "bytes": 0, "chars": sum(len(h["title"]) for h in hits),
-                    "preview": " / ".join(h["title"] for h in hits)[:400],
-                    "hits": hits, "n_hits": len(hits), "engine": "ddgs"}
+                    "content_type": "application/json", "bytes": len(body.encode()),
+                    "chars": len(body), "preview": " / ".join(h["title"] for h in hits)[:400],
+                    "hits": hits, "n_hits": len(hits), "engine": "ddgs", "_text": body}
     except Exception:
         pass
     url = "https://html.duckduckgo.com/html/?q=" + urllib.parse.quote(query)
@@ -361,10 +362,13 @@ def main(argv):
         return 2
     target = argv[1]
     out = argv[argv.index("--out") + 1] if "--out" in argv else None
+    # ★★2026-08-31 直した= ★`pdf` の `--out` が ★生の PDF を 書いていた ∴
+    #   ★本文を 使う 側(★LLM 担当= 分解の 材料)には 使えなかった。
+    #   ★`--out` は ★どの種類でも ★本文を 書く。★生のまま 欲しい ときは `file` を 使う。
     r = k_auto(target) if kind == "auto" else (
-        KINDS[kind](target, out) if kind in ("pdf", "file") else KINDS[kind](target))
+        KINDS[kind](target, out) if kind == "file" else KINDS[kind](target))
     text = r.pop("_text", None)
-    if out and text is not None and kind not in ("pdf", "file"):
+    if out and text is not None and kind != "file":
         open(out, "w", encoding="utf-8").write(text)
         r["out"] = out
     print(json.dumps(r, ensure_ascii=False, indent=1))

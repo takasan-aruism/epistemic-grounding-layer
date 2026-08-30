@@ -22,7 +22,8 @@
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C01_web.txt"
   },
   {
    "id": "C02",
@@ -36,12 +37,13 @@
    "chars": 11957,
    "bytes": 33853,
    "error": null,
-   "sec": 2.01,
+   "sec": 2.03,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C02_render.txt"
   },
   {
    "id": "C03",
@@ -55,12 +57,13 @@
    "chars": 10,
    "bytes": 800,
    "error": null,
-   "sec": 0.28,
+   "sec": 0.33,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C03_web.txt"
   },
   {
    "id": "C04",
@@ -79,7 +82,8 @@
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C04_pdf.txt"
   },
   {
    "id": "C05",
@@ -93,12 +97,13 @@
    "chars": 144695,
    "bytes": 151191,
    "error": null,
-   "sec": 1.23,
+   "sec": 1.22,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C05_web.txt"
   },
   {
    "id": "C06",
@@ -112,12 +117,13 @@
    "chars": 562767,
    "bytes": 562767,
    "error": null,
-   "sec": 0.23,
+   "sec": 0.22,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C06_web.txt"
   },
   {
    "id": "C07",
@@ -131,12 +137,13 @@
    "chars": 1984,
    "bytes": 2410,
    "error": null,
-   "sec": 0.53,
+   "sec": 0.28,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C07_json.txt"
   },
   {
    "id": "C08",
@@ -155,7 +162,8 @@
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C08_json.txt"
   },
   {
    "id": "C09",
@@ -169,12 +177,13 @@
    "chars": 6617,
    "bytes": 6617,
    "error": null,
-   "sec": 0.31,
+   "sec": 0.34,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C09_json.txt"
   },
   {
    "id": "C10",
@@ -188,12 +197,13 @@
    "chars": 139,
    "bytes": 3009,
    "error": null,
-   "sec": 0.12,
+   "sec": 0.13,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C10_rss.txt"
   },
   {
    "id": "C11",
@@ -204,11 +214,12 @@
    "expect": "ok",
    "basis": "ddgs 経由 20件(★html面は12件ほどでCAPTCHA)",
    "ok": true,
-   "chars": 245,
-   "bytes": 0,
+   "chars": 730,
+   "bytes": 1114,
    "error": null,
-   "sec": 2.09,
-   "本線の語": null
+   "sec": 1.96,
+   "本線の語": null,
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C11_search.txt"
   },
   {
    "id": "C12",
@@ -219,11 +230,12 @@
    "expect": "ok",
    "basis": "ddgs 経由 20件",
    "ok": true,
-   "chars": 301,
-   "bytes": 0,
+   "chars": 788,
+   "bytes": 1152,
    "error": null,
-   "sec": 1.77,
-   "本線の語": null
+   "sec": 4.22,
+   "本線の語": null,
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C12_search.txt"
   },
   {
    "id": "C13",
@@ -235,14 +247,15 @@
    "basis": "題名と説明。★HTML 1,376,037B だが 本文0字",
    "ok": true,
    "chars": 2454,
-   "bytes": 1359387,
+   "bytes": 1328700,
    "error": null,
-   "sec": 0.73,
+   "sec": 0.59,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C13_youtube.txt"
   },
   {
    "id": "C14",
@@ -261,7 +274,8 @@
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C14_file.bin"
   },
   {
    "id": "C15",
@@ -272,15 +286,16 @@
    "expect": "ok_meta_only",
    "basis": "2,178字= 名前/投稿数/追随者。★投稿本文は 入らない",
    "ok": true,
-   "chars": 2543,
-   "bytes": 298506,
+   "chars": 2546,
+   "bytes": 298512,
    "error": null,
-   "sec": 1.48,
+   "sec": 1.7,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C15_xprofile.txt"
   },
   {
    "id": "C16",
@@ -294,12 +309,13 @@
    "chars": null,
    "bytes": null,
    "error": "HTTPError: HTTP Error 404: Not Found",
-   "sec": 0.63,
+   "sec": 0.51,
    "本線の語": {
     "transport": "NOT_FOUND_REMOTE",
     "content": null,
     "http": 404
-   }
+   },
+   "本文の落とし先": null
   },
   {
    "id": "C17",
@@ -313,12 +329,13 @@
    "chars": null,
    "bytes": null,
    "error": "HTTPError: HTTP Error 400: Bad Request",
-   "sec": 0.24,
+   "sec": 0.25,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
-   }
+   },
+   "本文の落とし先": null
   },
   {
    "id": "C18",
@@ -337,7 +354,8 @@
     "transport": "PAYMENT_REQUIRED",
     "content": null,
     "http": 402
-   }
+   },
+   "本文の落とし先": null
   },
   {
    "id": "C19",
@@ -351,12 +369,13 @@
    "chars": null,
    "bytes": null,
    "error": "HTTPError: HTTP Error 503: Service Unavailable",
-   "sec": 0.22,
+   "sec": 0.21,
    "本線の語": {
     "transport": "SERVER_ERROR",
     "content": null,
     "http": 503
-   }
+   },
+   "本文の落とし先": null
   },
   {
    "id": "C20",
@@ -370,12 +389,13 @@
    "chars": null,
    "bytes": null,
    "error": "HTTPError: HTTP Error 404: Not Found",
-   "sec": 0.29,
+   "sec": 0.3,
    "本線の語": {
     "transport": "NOT_FOUND_REMOTE",
     "content": null,
     "http": 404
-   }
+   },
+   "本文の落とし先": null
   }
  ]
 }

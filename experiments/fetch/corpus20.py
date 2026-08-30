@@ -5,7 +5,8 @@
   ★私が 2026-08-30〜31 に ★1件ずつ 実走して レベルを 決めた ★20行 の 方です。
   ★同じ『20』が 2つ 在る ので ★鍵(何を 分母に したか)を 必ず 添える こと。
 
-★★使い方= python3 egl/experiments/fetch/corpus20.py [--json 出力先]
+★★使い方= python3 egl/experiments/fetch/corpus20.py [--json 出力先] [--dump 本文の置き場]
+  ★`--dump` を 付けると ★取れた 本文を 1件1ファイルで 落とす(★LLM 担当が 分解の 材料に する)。
   ★毎回 実走して ★その場の 数を 出す(★古い数を 貼らない)。
 
 ★★1件の 形=
@@ -63,10 +64,13 @@ def transport_of(target):
         return {"transport": "★引けない", "error": type(ex).__name__}
 
 
-def run(kind, target):
+def run(kind, target, dump=None):
+    """★`dump` を 渡すと ★取れた 本文を ★ファイルに 落とす(★LLM 担当が 分解の 材料に する)。"""
     t0 = time.time()
-    p = subprocess.run([sys.executable, FETCH1, kind, target],
-                       capture_output=True, timeout=180)
+    cmd = [sys.executable, FETCH1, kind, target]
+    if dump:
+        cmd += ["--out", dump]
+    p = subprocess.run(cmd, capture_output=True, timeout=180)
     sec = round(time.time() - t0, 2)
     try:
         return json.loads(p.stdout.decode("utf-8", "replace")), sec
@@ -76,18 +80,28 @@ def run(kind, target):
 
 def main(argv):
     out = argv[argv.index("--json") + 1] if "--json" in argv else None
+    dumpdir = argv[argv.index("--dump") + 1] if "--dump" in argv else None
+    if dumpdir:
+        import os as _os
+        _os.makedirs(dumpdir, exist_ok=True)
     rows = []
     print("★外部取得 試験用 20件(★私の20行。★RRI の20本とは 別物)")
     print("  %-4s %-12s %-2s %-9s %-14s %8s %7s %-18s" % ("id", "領域", "Lv", "口", "期待", "実測chars", "秒", "本線の語"))
     print("  " + "-" * 104)
     for cid, area, lv, kind, target, expect, basis in CASES:
-        r, sec = run(kind, target)
+        _dump = None
+        if dumpdir:
+            import os as _os
+            _ext = "bin" if kind == "file" else "txt"     # ★画像は 生のまま ∴ 名前を 分ける
+            _dump = _os.path.join(dumpdir, "%s_%s.%s" % (cid, kind, _ext))
+        r, sec = run(kind, target, _dump)
         got = r.get("chars", r.get("bytes", 0)) or 0
         tr = transport_of(target)
         rows.append({"id": cid, "領域": area, "level": lv, "kind": kind, "target": target,
                      "expect": expect, "basis": basis, "ok": bool(r.get("ok")),
                      "chars": r.get("chars"), "bytes": r.get("bytes"),
-                     "error": r.get("error"), "sec": sec, "本線の語": tr})
+                     "error": r.get("error"), "sec": sec, "本線の語": tr,
+                     "本文の落とし先": r.get("out")})
         print("  %-4s %-12s %-2d %-9s %-14s %8s %6.1fs %-18s %s"
               % (cid, area, lv, kind, expect, got, sec,
                  (tr or {}).get("transport") or "-", "" if r.get("ok") else "★通らない"))
