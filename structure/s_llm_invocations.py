@@ -435,6 +435,14 @@ def _prompt_source_of(fn, worker):
     return "UNRESOLVED"
 
 
+def _touches_inference(fn, worker):
+    """★推論の口を 叩くか。★:8005 を 叩くだけの 管理API(/is_sleeping / /v1/models)と 分ける。"""
+    if worker != "VLLM":
+        return "N/A(worker=%s)" % worker
+    src = ast.dump(fn)
+    return "EXISTS" if ("chat/completions" in src or "messages" in src) else "ABSENT"
+
+
 def _answer_used_of(fn, worker):
     """返答の本文を読むか。★worker ごとに marker が違う(vLLM の語を CLI に当てない)。
 
@@ -667,7 +675,7 @@ def _record(rel, func, lineno, record_class, model="UNRESOLVED", endpoint="UNRES
             system_prompt="UNVERIFIED", system_prompt_source="UNRESOLVED",
             schema_enforced="UNVERIFIED", output_validator="UNVERIFIED",
             failure_handling="UNVERIFIED", prompt_source="UNRESOLVED", answer_used="UNVERIFIED",
-            prompt_literal_chars=0):
+            prompt_literal_chars=0, touches_inference="UNVERIFIED"):
     runtime = runtime or {}
     caller = "%s:%s" % (rel.replace("\\", "/"), func)
     return {
@@ -700,6 +708,12 @@ def _record(rel, func, lineno, record_class, model="UNRESOLVED", endpoint="UNRES
         #   ★前は CLAUDE_P 4件を ABSENT と 数えて ★分母を 19 と 報告していた(★正は 15)。
         #   ★これは 2026-08 に 一度 直した『vLLM の marker を CLI に当てる』と ★同じ型の 再発。
         "enable_thinking": (runtime.get("enable_thinking", "ABSENT") if worker == "VLLM" else "N/A(worker=%s)" % worker),
+        # ★★2026-08-30 足した(★GDW C の5点確認で 露見)= ★『:8005 を 叩く』と『★推論させる』は 別。
+        #   ★実測= VLLM 35件のうち ★7件は ★本体に messages も chat/completions も 無い=
+        #     ★/is_sleeping や /v1/models を 叩く ★管理API= ★推論では ない。
+        #   ★これを 混ぜると ★『LLM 呼出点』の 分母が ★7件 過大に なる。
+        #   ★答えを 読んでいない(answer_used=ABSENT)9件のうち ★7件が これだった。
+        "touches_inference": touches_inference,
         "status": status,
         "gate_ref": gate_ref,
         "knowledge_refs": [],
@@ -738,6 +752,7 @@ def analyze(rel, src):
                                 prompt_source=_prompt_source_of(fn, "CLAUDE_P"),
                                 prompt_literal_chars=_prompt_literal_chars(fn, "CLAUDE_P"),
                                 answer_used=_answer_used_of(fn, "CLAUDE_P"),
+                                touches_inference=_touches_inference(fn, "CLAUDE_P"),
                                 system_prompt=("EXISTS" if _has_sys else "ABSENT"),
                                 system_prompt_source=("CLI_FLAG" if _has_sys else "ABSENT"),
                                 schema_enforced=("EXISTS" if _has_fmt else "ABSENT"),
@@ -757,6 +772,7 @@ def analyze(rel, src):
                                 prompt_source=_prompt_source_of(fn, "VLLM"),
                                 prompt_literal_chars=_prompt_literal_chars(fn, "VLLM"),
                                 answer_used=_answer_used_of(fn, "VLLM"),
+                                touches_inference=_touches_inference(fn, "VLLM"),
                                 schema_enforced=_schema_enforced_of(fn),
                                 output_validator=_output_validator_of(fn),
                                 failure_handling=_failure_handling_of(fn, uo),
