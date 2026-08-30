@@ -14,15 +14,22 @@ import hashlib
 from . import core, source_policy as SP, etb as ETB
 
 # §8 AB-2: 通信の成否と、取れた中身が観測に足るか を分ける。
+# ★★[Claude実装/Topology] 2026-08-31 ITEM-2DER-EVO-0044 受入①= ★5語 足した。
+#   ★足さないと ★`adapters._transport_from` が 返す 新しい語で ★下の 87行が ValueError で 止まる。
+#   ★語を 増やした 根拠は ★実測(httpbingo.org・分母20)= ★10 status が NOT_RETRIEVABLE に 潰れていた。
+#   ★他の 読み手は 全部 `!= "SUCCESS"` で 見ている(★全レポ grep 済) ∴ ★足しても 動きは 変わらない。
 TRANSPORT_STATUSES = {"SUCCESS", "NOT_RETRIEVABLE", "ACCESS_DENIED", "AUTH_REQUIRED", "RATE_LIMITED",
                       "ROBOTS_DISALLOWED", "NOT_FOUND_REMOTE", "TIMEOUT", "NETWORK_ERROR",
-                      "PARSER_FAILED", "UNSUPPORTED_CONTENT", "ADAPTER_ERROR"}
+                      "PARSER_FAILED", "UNSUPPORTED_CONTENT", "ADAPTER_ERROR",
+                      "PAYMENT_REQUIRED", "NOT_MODIFIED", "LEGAL_BLOCK", "SERVER_ERROR",
+                      "BAD_REQUEST"}
 CONTENT_STATUSES = {"OBSERVED", "CHALLENGE_PAGE", "AUTH_WALL", "PLACEHOLDER", "EMPTY",
                     "UNEXPECTED_CONTENT", "UNSUPPORTED"}
 
 # §6 first slice adapters(実 fetch は adapter 実装が担う。runner は adapter_result を受ける形にして
 # テストを hermetic に保つ = adapter が status を付す事実は変えず、ネットワーク非決定性をテストから排除)。
-ADAPTERS = {"ACQ_GITHUB", "ACQ_GITHUB_SEARCH", "ACQ_GITHUB_ISSUE", "ACQ_GITHUB_PROV", "ACQ_HTTP_STATIC", "ACQ_MANUAL"}
+ADAPTERS = {"ACQ_GITHUB", "ACQ_GITHUB_SEARCH", "ACQ_GITHUB_ISSUE", "ACQ_GITHUB_PROV", "ACQ_HTTP_STATIC", "ACQ_MANUAL",
+            "ACQ_HTTP_RENDER"}   # ★[Claude実装/Topology] 2026-08-31 EVO-0044 受入②= 描画の口を1語 足した
 
 
 def content_hash(raw_bytes):

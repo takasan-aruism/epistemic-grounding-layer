@@ -62,8 +62,20 @@ def _transport_from(resp):
     if resp["error"] == "network":
         return "NETWORK_ERROR"
     s = resp["status"]
+    # ★★[Claude実装/Topology] 2026-08-31 ITEM-2DER-EVO-0044 受入①。
+    #   ★足す前に ★どの status が ★実際に ここまで 届くかを 測った(httpbingo.org・分母20)=
+    #     ★301 302 303 307 308 は ★1つも 届かない= `urlopen` が 自動で 追う ∴ ★見えるのは 200。
+    #     ∴ ★『3xx を 足す』は ★死んだ枝に なる ので 足さない(★RRI の前提は ここが 違った)。
+    #   ★実際に 届いて NOT_RETRIEVABLE に 潰れていた= 300 304 400 402 405 418 451 500 502 503 の 10個。
+    #   ★★語を 増やすのは ★下流の 動きが 変わる 物だけ(★418 は 潰したまま)=
+    #     402 課金が要る / 304 変わっていない / 451 法的に 出せない / 5xx 相手側の一時障害 /
+    #     300・400・405 こちらの 作り方が 違う。
+    #   ★★語は `egl.acquisition.TRANSPORT_STATUSES` にも 足した= ★足さないと ★白名簿で ValueError。
     return {200: "SUCCESS", 401: "AUTH_REQUIRED", 403: "ACCESS_DENIED",
-            404: "NOT_FOUND_REMOTE", 410: "NOT_FOUND_REMOTE", 429: "RATE_LIMITED"}.get(
+            404: "NOT_FOUND_REMOTE", 410: "NOT_FOUND_REMOTE", 429: "RATE_LIMITED",
+            402: "PAYMENT_REQUIRED", 304: "NOT_MODIFIED", 451: "LEGAL_BLOCK",
+            500: "SERVER_ERROR", 502: "SERVER_ERROR", 503: "SERVER_ERROR",
+            300: "BAD_REQUEST", 400: "BAD_REQUEST", 405: "BAD_REQUEST"}.get(
         s, "NOT_RETRIEVABLE")
 
 
@@ -224,10 +236,58 @@ def fetch_github_prov(leg):
     return _res(ts, cs, r["status"], "application/vnd.github+json", raw if ts == "SUCCESS" else None, prov)
 
 
+# ---------- ACQ_HTTP_RENDER(★描画してから 本文を 取る) ----------
+def fetch_http_render(leg):
+    """★★[Claude実装/Topology] 2026-08-31 ITEM-2DER-EVO-0044 受入②。
+
+    ★足した理由(★実測)= ★静的取得だけでは ★本文が 出ない 面が ある。
+      ★e-Gov 憲法= 静的 800 バイト(本文 10字)→ ★描画後 11,957字・条文が 取れる。
+      ★同じ機械で 2.0〜2.1秒(★3回とも)。
+    ★★呼ぶ口は 新しく 作らない= ★`playwright` は ★この機械に 既に 入っている(実測)。
+    ★★静的の 代わりでは ない= ★静的で 足りる 面まで 描画すると 遅くなる
+      ∴ ★`adapter_class` で ★呼び手が 選ぶ(★自動で 落とさない= 本線は 明示で 選ぶ)。
+    ★★返りの 形は 他の adapter と 同じ= `_res(...)`。★content_status も 同じ分類器を 通す。
+    """
+    url = leg["target_locator"]
+    if urlparse(url).scheme not in ("http", "https"):
+        return _res("UNSUPPORTED_CONTENT", None, None, None, None, {"reason": "non-http scheme"})
+    try:
+        from playwright.sync_api import sync_playwright
+    except Exception as ex:
+        return _res("ADAPTER_ERROR", None, None, None, None,
+                    {"reason": "playwright unavailable: %s" % type(ex).__name__})
+    import time as _t
+    t0 = _t.time()
+    try:
+        with sync_playwright() as p:
+            br = p.chromium.launch()
+            pg = br.new_page(user_agent=USER_AGENT)
+            resp = pg.goto(url, wait_until="networkidle", timeout=TIMEOUT * 1000 * 3)
+            status = resp.status if resp is not None else None
+            final = pg.url
+            text = pg.inner_text("body")
+            br.close()
+    except Exception as ex:
+        low = str(ex).lower()
+        ts = "TIMEOUT" if ("timeout" in low or "timed out" in low) else "ADAPTER_ERROR"
+        return _res(ts, None, None, None, None,
+                    {"reason": "%s: %s" % (type(ex).__name__, str(ex)[:120]), "rendered": True})
+    raw = text.encode("utf-8")[:MAX_BYTES]
+    if status is not None and status != 200:
+        return _res(_transport_from({"error": None, "status": status}), None, status,
+                    "text/plain", None, {"final_url": final, "rendered": True})
+    cs = classify_content(raw, "text/plain", status, {})
+    return _res("SUCCESS", cs, status, "text/plain", raw,
+                {"final_url": final, "rendered": True, "render_sec": round(_t.time() - t0, 2),
+                 "chars": len(text)})
+
+
 def fetch(leg):
     ac = leg["adapter_class"]
     if ac == "ACQ_HTTP_STATIC":
         return fetch_http_static(leg)
+    if ac == "ACQ_HTTP_RENDER":
+        return fetch_http_render(leg)
     if ac == "ACQ_GITHUB":
         return fetch_github(leg)
     if ac == "ACQ_GITHUB_SEARCH":
