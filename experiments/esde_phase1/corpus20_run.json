@@ -1,0 +1,401 @@
+{
+ "generated_by": "TOPOLOGY_CLAUDE",
+ "item": "ITEM-2DER-EVO-0047",
+ "note": "★RRI の20本とは別物。★私が実走して決めた20行。",
+ "n": 20,
+ "n_ok": 15,
+ "rows": [
+  {
+   "id": "C01",
+   "領域": "一般WEB",
+   "level": 1,
+   "kind": "web",
+   "target": "https://ja.wikipedia.org/wiki/徳川家康",
+   "expect": "ok",
+   "basis": "本文 115,553字",
+   "ok": true,
+   "chars": 116191,
+   "bytes": 1660927,
+   "error": null,
+   "sec": 1.01,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C01_web.txt"
+  },
+  {
+   "id": "C02",
+   "領域": "法令(SPA)",
+   "level": 1,
+   "kind": "render",
+   "target": "https://elaws.e-gov.go.jp/document?lawid=321CONSTITUTION",
+   "expect": "ok",
+   "basis": "静的800B→描画 11,957字 2.0秒",
+   "ok": true,
+   "chars": 11957,
+   "bytes": 33853,
+   "error": null,
+   "sec": 2.2,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C02_render.txt"
+  },
+  {
+   "id": "C03",
+   "領域": "法令(静的)",
+   "level": 1,
+   "kind": "web",
+   "target": "https://elaws.e-gov.go.jp/document?lawid=321CONSTITUTION",
+   "expect": "ok_but_thin",
+   "basis": "800B・本文10字= ★取れたが 使えない",
+   "ok": true,
+   "chars": 10,
+   "bytes": 800,
+   "error": null,
+   "sec": 0.33,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C03_web.txt"
+  },
+  {
+   "id": "C04",
+   "領域": "論文PDF",
+   "level": 1,
+   "kind": "pdf",
+   "target": "https://arxiv.org/pdf/1706.03762",
+   "expect": "ok",
+   "basis": "39,919字(pdftotext)",
+   "ok": true,
+   "chars": 39919,
+   "bytes": 2215244,
+   "error": null,
+   "sec": 0.23,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C04_pdf.txt"
+  },
+  {
+   "id": "C05",
+   "領域": "プレーン",
+   "level": 1,
+   "kind": "web",
+   "target": "https://www.gutenberg.org/files/11/11-0.txt",
+   "expect": "ok",
+   "basis": "151,191B",
+   "ok": true,
+   "chars": 144695,
+   "bytes": 151191,
+   "error": null,
+   "sec": 1.41,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C05_web.txt"
+  },
+  {
+   "id": "C06",
+   "領域": "表(CSV)",
+   "level": 1,
+   "kind": "web",
+   "target": "https://raw.githubusercontent.com/datasets/gdp/main/data/gdp.csv",
+   "expect": "ok",
+   "basis": "562,767B",
+   "ok": true,
+   "chars": 562767,
+   "bytes": 562767,
+   "error": null,
+   "sec": 0.4,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C06_web.txt"
+  },
+  {
+   "id": "C07",
+   "領域": "API(百科)",
+   "level": 1,
+   "kind": "json",
+   "target": "https://ja.wikipedia.org/api/rest_v1/page/summary/徳川家康",
+   "expect": "ok",
+   "basis": "2,410B",
+   "ok": true,
+   "chars": 1984,
+   "bytes": 2410,
+   "error": null,
+   "sec": 0.28,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C07_json.txt"
+  },
+  {
+   "id": "C08",
+   "領域": "API(論文)",
+   "level": 1,
+   "kind": "json",
+   "target": "http://export.arxiv.org/api/query?search_query=all:transformer&max_results=2",
+   "expect": "ok",
+   "basis": "4,557B Atom",
+   "ok": true,
+   "chars": 4557,
+   "bytes": 4557,
+   "error": null,
+   "sec": 0.46,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C08_json.txt"
+  },
+  {
+   "id": "C09",
+   "領域": "API(コード)",
+   "level": 1,
+   "kind": "json",
+   "target": "https://api.github.com/repos/python/cpython",
+   "expect": "ok",
+   "basis": "6,617B",
+   "ok": true,
+   "chars": 6617,
+   "bytes": 6617,
+   "error": null,
+   "sec": 0.31,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C09_json.txt"
+  },
+  {
+   "id": "C10",
+   "領域": "RSS",
+   "level": 1,
+   "kind": "rss",
+   "target": "https://news.yahoo.co.jp/rss/topics/top-picks.xml",
+   "expect": "ok",
+   "basis": "3,118B",
+   "ok": true,
+   "chars": 139,
+   "bytes": 3009,
+   "error": null,
+   "sec": 0.16,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C10_rss.txt"
+  },
+  {
+   "id": "C11",
+   "領域": "検索",
+   "level": 1,
+   "kind": "search",
+   "target": "徳川家康 生年",
+   "expect": "ok",
+   "basis": "ddgs 経由 20件(★html面は12件ほどでCAPTCHA)",
+   "ok": true,
+   "chars": 774,
+   "bytes": 1282,
+   "error": null,
+   "sec": 3.49,
+   "本線の語": null,
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C11_search.txt"
+  },
+  {
+   "id": "C12",
+   "領域": "検索(法令)",
+   "level": 1,
+   "kind": "search",
+   "target": "日本国憲法 第九条",
+   "expect": "ok",
+   "basis": "ddgs 経由 20件",
+   "ok": true,
+   "chars": 895,
+   "bytes": 1243,
+   "error": null,
+   "sec": 1.78,
+   "本線の語": null,
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C12_search.txt"
+  },
+  {
+   "id": "C13",
+   "領域": "動画メタ",
+   "level": 1,
+   "kind": "youtube",
+   "target": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+   "expect": "ok",
+   "basis": "題名と説明。★HTML 1,376,037B だが 本文0字",
+   "ok": true,
+   "chars": 2454,
+   "bytes": 1531213,
+   "error": null,
+   "sec": 0.76,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C13_youtube.txt"
+  },
+  {
+   "id": "C14",
+   "領域": "画像",
+   "level": 1,
+   "kind": "file",
+   "target": "https://upload.wikimedia.org/wikipedia/commons/a/a9/Example.jpg",
+   "expect": "ok",
+   "basis": "9,022B jpeg",
+   "ok": true,
+   "chars": null,
+   "bytes": 9022,
+   "error": null,
+   "sec": 0.29,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C14_file.bin"
+  },
+  {
+   "id": "C15",
+   "領域": "SNSプロフ",
+   "level": 1,
+   "kind": "xprofile",
+   "target": "https://x.com/elonmusk",
+   "expect": "ok_meta_only",
+   "basis": "2,178字= 名前/投稿数/追随者。★投稿本文は 入らない",
+   "ok": true,
+   "chars": 2761,
+   "bytes": 309508,
+   "error": null,
+   "sec": 1.21,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": "/tmp/claude-1000/-home-takasan/b2930a6c-e4f7-42f6-82da-6d48a6998fb7/scratchpad/corpus20_text/C15_xprofile.txt"
+  },
+  {
+   "id": "C16",
+   "領域": "SNS投稿",
+   "level": 3,
+   "kind": "web",
+   "target": "https://x.com/elonmusk/status/1",
+   "expect": "expect_no_body",
+   "basis": "★ログインが 要る= 本文0字が 正解",
+   "ok": false,
+   "chars": null,
+   "bytes": null,
+   "error": "HTTPError: HTTP Error 404: Not Found",
+   "sec": 0.54,
+   "本線の語": {
+    "transport": "NOT_FOUND_REMOTE",
+    "content": null,
+    "http": 404
+   },
+   "本文の落とし先": null
+  },
+  {
+   "id": "C17",
+   "領域": "SNS(FB)",
+   "level": 3,
+   "kind": "web",
+   "target": "https://www.facebook.com/Meta/",
+   "expect": "expect_fail",
+   "basis": "★HTTP 400 が 正解",
+   "ok": false,
+   "chars": null,
+   "bytes": null,
+   "error": "HTTPError: HTTP Error 400: Bad Request",
+   "sec": 0.24,
+   "本線の語": {
+    "transport": "SUCCESS",
+    "content": "OBSERVED",
+    "http": 200
+   },
+   "本文の落とし先": null
+  },
+  {
+   "id": "C18",
+   "領域": "課金",
+   "level": 3,
+   "kind": "web",
+   "target": "https://httpbingo.org/status/402",
+   "expect": "expect_fail",
+   "basis": "★402= PAYMENT_REQUIRED が 正解",
+   "ok": false,
+   "chars": null,
+   "bytes": null,
+   "error": "HTTPError: HTTP Error 402: Payment Required",
+   "sec": 0.32,
+   "本線の語": {
+    "transport": "PAYMENT_REQUIRED",
+    "content": null,
+    "http": 402
+   },
+   "本文の落とし先": null
+  },
+  {
+   "id": "C19",
+   "領域": "相手側障害",
+   "level": 2,
+   "kind": "web",
+   "target": "https://httpbingo.org/status/503",
+   "expect": "expect_fail",
+   "basis": "★503= SERVER_ERROR が 正解",
+   "ok": false,
+   "chars": null,
+   "bytes": null,
+   "error": "HTTPError: HTTP Error 503: Service Unavailable",
+   "sec": 0.21,
+   "本線の語": {
+    "transport": "SERVER_ERROR",
+    "content": null,
+    "http": 503
+   },
+   "本文の落とし先": null
+  },
+  {
+   "id": "C20",
+   "領域": "存在しない",
+   "level": 2,
+   "kind": "web",
+   "target": "https://ja.wikipedia.org/wiki/存在しない頁_ZZZQQ_20260831",
+   "expect": "expect_fail",
+   "basis": "★404= NOT_FOUND_REMOTE が 正解",
+   "ok": false,
+   "chars": null,
+   "bytes": null,
+   "error": "HTTPError: HTTP Error 404: Not Found",
+   "sec": 0.62,
+   "本線の語": {
+    "transport": "NOT_FOUND_REMOTE",
+    "content": null,
+    "http": 404
+   },
+   "本文の落とし先": null
+  }
+ ]
+}
