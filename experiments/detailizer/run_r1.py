@@ -119,3 +119,29 @@ def main(argv):
 
 if __name__ == "__main__":
     main(sys.argv[1:])
+
+# ── ノイズ帯を 先に 出す(★Topology 指摘 2026-08-30 / ★LLMK-0011) ─────────────
+#   ★実測= 同じ設問・temperature=0・seed=0 でも ★長い出力は 5回とも 違う
+#     (top_k=1 でも 4/4 揺れる= sampling では ない)。
+#   ∴ ★版を 比べる前に ★同じ版を 複数回 引いて ★幅を 出す。
+#     ★COMPARE_RULES『帯が無い時は 差を言わない』を ★このハーネスにも 当てる。
+def noise_band(ver, tids, rounds=3):
+    """★同じ版を rounds 回 引いて ★被覆率の 幅を 返す。★差を 言う前に これを 出す。"""
+    import statistics
+    P = __import__("prompts_%s" % ver)
+    pop = json.load(open(POP))
+    per_round = []
+    for _ in range(rounds):
+        cov = []
+        for tid in tids:
+            goal = pop[tid]["goal"]
+            obj = _parse_json(_call(P.R1_GENERATOR % goal).get("content") or "")
+            cands = (obj or {}).get("candidates") or []
+            cov.append(mechanical_check(goal, cands)["被覆率"])
+        per_round.append(round(statistics.median(cov), 1))
+    return {"版": ver, "周": rounds, "分母(TASK)": len(tids),
+            "各周の被覆率 中央値": per_round,
+            "★ノイズ帯": round(max(per_round) - min(per_round), 1),
+            "★読み方": ("★この幅を 超えない 差は ★差では ない。"
+                         "★幅が 出ていない ときは ★差を 言わない")}
+
