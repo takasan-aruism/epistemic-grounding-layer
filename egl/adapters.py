@@ -38,7 +38,29 @@ def classify_content(body, content_type, status, headers):
     return "OBSERVED"
 
 
+def _ascii_locator(url):
+    """★★[Claude実装/Topology] 2026-08-31 ITEM-2DER-EVO-0044。
+
+    ★直した欠陥(★実測)= ★URL に ASCII 以外(日本語 等)が 入ると ★`urlopen` が
+      ★`UnicodeEncodeError` を 投げる ∴ ★transport の 語にも ならず ★呼び手へ 例外が 飛ぶ。
+      ★実測 3件= ja.wikipedia の 記事 / 同 REST API / 存在しない 頁。
+      ★対照= 同じ面の ASCII だけの URL(en.wikipedia)は SUCCESS 1,665,050 バイト。
+    ★★これは ★題材が 日本語の とき だけ 出る= ★2DER が 今 向いている 題材が まさに それ
+      (徳川家康 / 日本国憲法)。
+
+    ★★ASCII だけの URL は ★1バイトも 触らない= ★既存の 動きを 変えない(★二重符号化も 起きない)。
+    """
+    if all(ord(c) < 128 for c in (url or "")):
+        return url
+    from urllib.parse import urlsplit as _us, urlunsplit as _uus, quote as _q
+    p = _us(url)
+    return _uus((p.scheme, p.netloc.encode("idna").decode("ascii") if any(ord(c) > 127 for c in p.netloc) else p.netloc,
+                 _q(p.path, safe="/:@%~+,;=$&()*!'"),
+                 _q(p.query, safe="=&:/?%~+,;$()*!'"), p.fragment))
+
+
 def _http_get(url, extra_headers=None):
+    url = _ascii_locator(url)
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT, **(extra_headers or {})})
     try:
         with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
