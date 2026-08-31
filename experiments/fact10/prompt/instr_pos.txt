@@ -1,0 +1,251 @@
+【目的】
+
+SOURCEの各記述について、
+
+「何について、何が記述されているか」
+
+を一件ずつ独立したFACTとして抽出する。
+
+各FACTは原則として、
+
+subject / predicate / object_or_value
+
+で表現する。
+
+必要な場合のみ context を付ける。
+
+
+【基本形式】
+
+例:
+
+「AはBの親である」
+→
+subject: A
+predicate: parent_of
+object_or_value: B
+
+「Aの兵力は300である」
+→
+subject: A
+predicate: troop_strength
+object_or_value: 300
+
+「Aは場所Xにいた」
+→
+subject: A
+predicate: located_at
+object_or_value: 場所X
+
+「AがBを攻撃した」
+→
+subject: A
+predicate: attacked
+object_or_value: B
+
+「Aは重傷を負った」
+→
+subject: A
+predicate: injury
+object_or_value: 重傷
+
+
+【抽出原則】
+
+SOURCEに明示されている情報を対象とする。
+
+人物、組織、物、場所、数量、時間、制度、状態、出来事、環境について、
+そこに記述されているものをすべて対象とする。
+
+SOURCEに登場するすべての存在を対等に扱う。
+
+SOURCEの各記述について、そのFACTを実際に担っているsubjectをその都度決定する。
+
+
+【subject】
+
+subjectには、そのFACTの属性・状態・関係・行為を実際に担っている存在を置く。
+
+各記述について、その属性・状態・関係・行為が誰のものかを確かめ、
+その担い手をsubjectにする。
+
+FACTごとに、subjectをその場で決め直す。
+
+例:
+
+「Aが300人を率いてB軍と戦った」
+
+兵力300が実際にA軍の兵力を意味する場合:
+
+A軍 / troop_strength / 300
+
+とする。
+
+兵力の担い手はA軍であるため、subjectはA軍にする。
+
+
+【FACTの原子性】
+
+一つのFACTには、原則として一つの述語だけを含める。
+
+一つの記述が複数の独立した情報を含む場合は分割する。
+
+例:
+
+「Aは場所Xで生まれた」
+
+必要なら:
+
+A / birth_place / 場所X
+
+とする。
+
+出生日時も明示されている場合:
+
+A / birth_date / 日時Y
+A / birth_place / 場所X
+
+のように別FACTにする。
+
+
+例:
+
+「AはBを攻撃して勝利した」
+
+A / attacked / B
+A / battle_result / 勝利
+
+のように分割する。
+
+
+【predicate】
+
+predicateは、そのFACTが何を記述しているかを表す短い語句にする。
+
+可能な限り一つの意味だけを持たせる。
+
+predicateは、観察できる関係・属性・行為の名前にする。
+
+良い例:
+
+parent_of
+member_of
+located_at
+troop_strength
+injury
+attacked
+appointed_as
+name
+birth_date
+birth_place
+
+上の良い例と同じ粒度の、具体的な語をpredicateにする。
+
+同じ意味には可能な限り同じpredicateを使用する。
+
+
+【object_or_value】
+
+object_or_valueには、
+predicateが直接指す存在または値を置く。
+
+値そのものだけを置く。
+
+例:
+
+良い:
+subject: A
+predicate: injury
+object_or_value: 重傷
+
+「重傷」のように、値だけを短く置く。
+
+
+【context】
+
+contextは、そのFACTが成立する範囲を特定するために必要な場合だけ使用する。
+
+対象:
+
+- 時間
+- 場所
+- 出来事
+- 条件
+- その他、そのFACTの成立範囲
+
+contextには、そのFACTの成立範囲だけを書く。
+
+contextが不要ならnullにする。
+
+
+【SOURCE BASIS】
+
+各FACTには、そのFACTを直接支持するSOURCE内の記述をsource_basisとして残す。
+
+source_basisには、SOURCE内の記述をそのまま引用する。
+
+一つのsource_basisから複数のFACTを抽出してよい。
+
+FACTの内容はsource_basisから直接確認できる形にする。
+
+
+【守ること】
+
+以下を守る。
+
+- SOURCEの記述をそのままFACTへ写す
+- すべての記述を等しく扱う
+- 各記述の担い手をsubjectにする
+- SOURCEに書かれている語だけを使う
+- SOURCEに明示された関係だけを書く
+- SOURCEに明示された行為と状態だけを書く
+- 一件ずつ独立した行として書く
+- facts と residual の2つだけを出力する
+- 出力は指定のJSON形式だけにする
+
+
+【出力前確認】
+
+各FACTについて次を確認する。
+
+1. subjectは本当にそのFACTを担う存在か
+2. subjectは各記述の担い手になっているか
+3. predicateは一つの意味を表しているか
+4. object_or_valueは一つの値だけか
+5. contextはそのFACTの成立範囲だけか
+6. source_basisだけからFACTを確認できるか
+7. すべての語がSOURCEに在るか
+
+条件を満たすようにFACTを修正する。
+
+
+【情報保存】
+
+SOURCEに明示された意味のある情報について、
+安全にFACTへ変換できるものはFACTにする。
+
+FACTへ変換しなかった記述は、すべて residual に残す。
+
+
+【OUTPUT】
+
+JSONのみを出力する。
+
+{
+  "facts": [
+    {
+      "id": "F001",
+      "subject": "...",
+      "predicate": "...",
+      "object_or_value": "...",
+      "context": null,
+      "source_basis": "..."
+    }
+  ],
+  "residual": [
+    {
+      "source_basis": "...",
+      "reason": "residual に残した理由"
+    }
+  ]
+}
