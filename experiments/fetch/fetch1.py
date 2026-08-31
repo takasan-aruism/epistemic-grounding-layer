@@ -156,12 +156,54 @@ def material_quality(text):
                 "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"}
     body = [l for l in lines if len(l) >= 12 and _re.search(r"[。．\.！？!?]", l)]
     tot = sum(len(l) for l in lines)
+    _ud = round(1.0 * len(_re.findall(r"https?://", text)) / len(lines), 3)
     return {"chars": len(text), "lines": len(lines), "body_lines": len(body),
             "body_ratio": round(100.0 * sum(len(l) for l in body) / tot, 1),
             "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
-            "url_density": round(1.0 * len(_re.findall(r"https?://", text)) / len(lines), 3),
+            "url_density": _ud,
             "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+            "material_kind": _material_kind(_ud),
             "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"}
+
+
+# ★★観測された 境界(★2026-09-01 実測・分母24= 私16 ＋ Inference Control 8)。
+#   ★本文の 最大= 0.013 ／ ★索引の 最小= 1.000 ∴ ★その間は ★1件も 観測が 無い。
+BODY_MAX_URL_DENSITY = 0.013
+INDEX_MIN_URL_DENSITY = 1.000
+REFERENCE_THRESHOLD = 0.5      # ★MGR 裁定①で 採った 線(★隙間の 真ん中・発明した数では ない)
+
+
+def _material_kind(url_density):
+    """★材料が 索引か 本文かを 3値で 返す(★MGR 裁定 2026-09-01)。
+
+    ★★裁定の 逐語= ①『閾値 0.5 は 採る。理由= 重なり0・2面が 別材料で 同じ中点
+      (彼ら 0.501 / あなた 0.507)・0.5 は 隙間の 真ん中で 発明した数でない』
+      ②『但し ★2値にしない= あなた自身が「0.1〜0.9 は 1件も 出ていないが 無いとは 言えない
+      (24件で 出なかっただけ)」と 書いた ∴ 中間が 来た時の 挙動が 未定義。
+      ★3値目 UNKNOWN を 置き ★門は UNKNOWN で 止まる(fail-closed)』。
+
+    ★★私の 読み方= ★線は ★観測された 境界に 置く。★観測が 0件の 帯は ★UNKNOWN。
+      ・`<= 0.013`(★本文の 観測された 上限) → ★`BODY`
+      ・`>= 1.000`(★索引の 観測された 下限) → ★`INDEX`
+      ・★その間 → ★`UNKNOWN`= ★24件で 1件も 出ていない 帯 ∴ ★私は 何も 知らない。
+    ★★0.5 は ★参考線として 残す(★UNKNOWN の 中で どちら寄りかは 出す)が
+      ★判定には 使わない= ★『出なかった』を『無い』と 読み替えない ため。
+    ★★門は UNKNOWN で 止まる= ★止めるのは ★渡す側の 役 ／ ★私は ★語を 返すだけ。
+    """
+    if url_density is None:
+        return {"kind": "UNKNOWN", "why": "★測っていない", "stops_gate": True}
+    if url_density <= BODY_MAX_URL_DENSITY:
+        return {"kind": "BODY", "why": "★本文として 観測された 帯(<= %.3f)" % BODY_MAX_URL_DENSITY,
+                "stops_gate": False}
+    if url_density >= INDEX_MIN_URL_DENSITY:
+        return {"kind": "INDEX", "why": "★索引として 観測された 帯(>= %.3f)" % INDEX_MIN_URL_DENSITY,
+                "stops_gate": False}
+    return {"kind": "UNKNOWN",
+            "why": ("★観測が 0件の 帯(%.3f 〜 %.3f)= ★24件で 1件も 出ていない ∴ 判定しない"
+                    % (BODY_MAX_URL_DENSITY, INDEX_MIN_URL_DENSITY)),
+            "leans": "INDEX 寄り" if url_density >= REFERENCE_THRESHOLD else "BODY 寄り",
+            "leans_note": "★参考(★MGR 裁定①の 0.5)= ★判定には 使わない",
+            "stops_gate": True}
 
 
 def _ok(kind, target, r, text=None, extra=None):

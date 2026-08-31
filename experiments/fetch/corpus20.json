@@ -17,19 +17,26 @@
    "chars": 116192,
    "bytes": 1660959,
    "error": null,
-   "sec": 0.99,
+   "sec": 1.02,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C01_web.txt",
+   "本文の落とし先": null,
    "材料の質": {
     "chars": 116192,
     "lines": 10767,
     "body_lines": 859,
     "body_ratio": 44.1,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 0.001,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "BODY",
+     "why": "★本文として 観測された 帯(<= 0.013)",
+     "stops_gate": false
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -45,19 +52,26 @@
    "chars": 11957,
    "bytes": 33853,
    "error": null,
-   "sec": 2.17,
+   "sec": 2.1,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C02_render.txt",
+   "本文の落とし先": null,
    "材料の質": {
     "chars": 11957,
     "lines": 545,
     "body_lines": 215,
     "body_ratio": 86.8,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 0.0,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "BODY",
+     "why": "★本文として 観測された 帯(<= 0.013)",
+     "stops_gate": false
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -73,19 +87,26 @@
    "chars": 10,
    "bytes": 800,
    "error": null,
-   "sec": 0.29,
+   "sec": 0.31,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C03_web.txt",
+   "本文の落とし先": null,
    "材料の質": {
     "chars": 10,
     "lines": 1,
     "body_lines": 0,
     "body_ratio": 0.0,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 0.0,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "BODY",
+     "why": "★本文として 観測された 帯(<= 0.013)",
+     "stops_gate": false
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -101,19 +122,26 @@
    "chars": 39919,
    "bytes": 2215244,
    "error": null,
-   "sec": 0.24,
+   "sec": 0.22,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C04_pdf.txt",
+   "本文の落とし先": null,
    "材料の質": {
     "chars": 39919,
     "lines": 1030,
     "body_lines": 299,
     "body_ratio": 60.8,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 0.001,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "BODY",
+     "why": "★本文として 観測された 帯(<= 0.013)",
+     "stops_gate": false
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -129,19 +157,26 @@
    "chars": 144695,
    "bytes": 151191,
    "error": null,
-   "sec": 1.31,
+   "sec": 1.28,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C05_web.txt",
+   "本文の落とし先": null,
    "材料の質": {
     "chars": 144695,
     "lines": 2496,
     "body_lines": 1263,
     "body_ratio": 47.5,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 0.0,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "BODY",
+     "why": "★本文として 観測された 帯(<= 0.013)",
+     "stops_gate": false
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -157,19 +192,26 @@
    "chars": 562767,
    "bytes": 562767,
    "error": null,
-   "sec": 0.39,
+   "sec": 0.38,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C06_web.txt",
+   "本文の落とし先": null,
    "材料の質": {
     "chars": 562767,
     "lines": 13980,
     "body_lines": 13979,
     "body_ratio": 100.0,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 0.0,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "BODY",
+     "why": "★本文として 観測された 帯(<= 0.013)",
+     "stops_gate": false
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -185,19 +227,26 @@
    "chars": 1984,
    "bytes": 2410,
    "error": null,
-   "sec": 0.5,
+   "sec": 0.28,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C07_json.txt",
+   "本文の落とし先": null,
    "材料の質": {
     "chars": 1984,
     "lines": 1,
     "body_lines": 1,
     "body_ratio": 100.0,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 10.0,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "INDEX",
+     "why": "★索引として 観測された 帯(>= 1.000)",
+     "stops_gate": false
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -219,13 +268,22 @@
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C08_json.txt",
+   "本文の落とし先": null,
    "材料の質": {
     "chars": 4557,
     "lines": 67,
     "body_lines": 8,
     "body_ratio": 59.8,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 0.209,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "UNKNOWN",
+     "why": "★観測が 0件の 帯(0.013 〜 1.000)= ★24件で 1件も 出ていない ∴ 判定しない",
+     "leans": "BODY 寄り",
+     "leans_note": "★参考(★MGR 裁定①の 0.5)= ★判定には 使わない",
+     "stops_gate": true
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -241,19 +299,28 @@
    "chars": 6617,
    "bytes": 6617,
    "error": null,
-   "sec": 0.32,
+   "sec": 0.09,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C09_json.txt",
+   "本文の落とし先": null,
    "材料の質": {
     "chars": 6617,
     "lines": 136,
     "body_lines": 2,
     "body_ratio": 3.7,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 0.478,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "UNKNOWN",
+     "why": "★観測が 0件の 帯(0.013 〜 1.000)= ★24件で 1件も 出ていない ∴ 判定しない",
+     "leans": "BODY 寄り",
+     "leans_note": "★参考(★MGR 裁定①の 0.5)= ★判定には 使わない",
+     "stops_gate": true
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -266,8 +333,8 @@
    "expect": "ok",
    "basis": "3,118B",
    "ok": true,
-   "chars": 133,
-   "bytes": 3009,
+   "chars": 130,
+   "bytes": 3002,
    "error": null,
    "sec": 0.12,
    "本線の語": {
@@ -275,13 +342,20 @@
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C10_rss.txt",
+   "本文の落とし先": null,
    "材料の質": {
-    "chars": 133,
+    "chars": 130,
     "lines": 8,
     "body_lines": 0,
     "body_ratio": 0.0,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 0.0,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "BODY",
+     "why": "★本文として 観測された 帯(<= 0.013)",
+     "stops_gate": false
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -294,18 +368,25 @@
    "expect": "ok",
    "basis": "ddgs 経由 20件(★html面は12件ほどでCAPTCHA)",
    "ok": true,
-   "chars": 751,
-   "bytes": 1023,
+   "chars": 762,
+   "bytes": 1202,
    "error": null,
-   "sec": 3.39,
+   "sec": 2.39,
    "本線の語": null,
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C11_search.txt",
+   "本文の落とし先": null,
    "材料の質": {
-    "chars": 751,
+    "chars": 762,
     "lines": 10,
-    "body_lines": 4,
-    "body_ratio": 60.0,
+    "body_lines": 3,
+    "body_ratio": 41.8,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 1.0,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "INDEX",
+     "why": "★索引として 観測された 帯(>= 1.000)",
+     "stops_gate": false
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -318,18 +399,25 @@
    "expect": "ok",
    "basis": "ddgs 経由 20件",
    "ok": true,
-   "chars": 739,
-   "bytes": 1101,
+   "chars": 934,
+   "bytes": 1630,
    "error": null,
-   "sec": 1.48,
+   "sec": 2.89,
    "本線の語": null,
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C12_search.txt",
+   "本文の落とし先": null,
    "材料の質": {
-    "chars": 739,
+    "chars": 934,
     "lines": 10,
     "body_lines": 1,
-    "body_ratio": 14.2,
+    "body_ratio": 11.7,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 1.0,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "INDEX",
+     "why": "★索引として 観測された 帯(>= 1.000)",
+     "stops_gate": false
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -343,21 +431,30 @@
    "basis": "題名と説明。★HTML 1,376,037B だが 本文0字",
    "ok": true,
    "chars": 2454,
-   "bytes": 1317577,
+   "bytes": 1308064,
    "error": null,
-   "sec": 0.74,
+   "sec": 0.68,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C13_youtube.txt",
+   "本文の落とし先": null,
    "材料の質": {
     "chars": 2454,
     "lines": 44,
     "body_lines": 4,
     "body_ratio": 39.8,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 0.25,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "UNKNOWN",
+     "why": "★観測が 0件の 帯(0.013 〜 1.000)= ★24件で 1件も 出ていない ∴ 判定しない",
+     "leans": "BODY 寄り",
+     "leans_note": "★参考(★MGR 裁定①の 0.5)= ★判定には 使わない",
+     "stops_gate": true
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -373,13 +470,13 @@
    "chars": null,
    "bytes": 9022,
    "error": null,
-   "sec": 0.29,
+   "sec": 0.3,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C14_file.bin",
+   "本文の落とし先": "/tmp/Example.jpg",
    "材料の質": null
   },
   {
@@ -391,22 +488,29 @@
    "expect": "ok_meta_only",
    "basis": "2,178字= 名前/投稿数/追随者。★投稿本文は 入らない",
    "ok": true,
-   "chars": 1751,
-   "bytes": 276072,
+   "chars": 1757,
+   "bytes": 267766,
    "error": null,
-   "sec": 1.47,
+   "sec": 1.55,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C15_xprofile.txt",
+   "本文の落とし先": null,
    "材料の質": {
-    "chars": 1751,
+    "chars": 1757,
     "lines": 119,
     "body_lines": 4,
-    "body_ratio": 15.0,
+    "body_ratio": 14.9,
+    "body_ratio_note": "★索引と本文を分けられない(実測 分母16で完全に重なる)= 判別に使わない",
     "url_density": 0.0,
+    "url_density_note": "★索引を名指せる(実測 索引 1.000 ／ 本文 0.000〜0.013= 重なり0)",
+    "material_kind": {
+     "kind": "BODY",
+     "why": "★本文として 観測された 帯(<= 0.013)",
+     "stops_gate": false
+    },
     "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
    }
   },
@@ -422,7 +526,7 @@
    "chars": null,
    "bytes": null,
    "error": "HTTPError: HTTP Error 404: Not Found",
-   "sec": 0.55,
+   "sec": 0.5,
    "本線の語": {
     "transport": "NOT_FOUND_REMOTE",
     "content": null,
@@ -443,7 +547,7 @@
    "chars": null,
    "bytes": null,
    "error": "HTTPError: HTTP Error 400: Bad Request",
-   "sec": 0.29,
+   "sec": 0.31,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
@@ -506,7 +610,7 @@
    "chars": null,
    "bytes": null,
    "error": "HTTPError: HTTP Error 404: Not Found",
-   "sec": 0.65,
+   "sec": 0.85,
    "本線の語": {
     "transport": "NOT_FOUND_REMOTE",
     "content": null,
