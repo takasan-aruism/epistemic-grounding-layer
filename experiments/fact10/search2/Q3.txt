@@ -1,0 +1,198 @@
+{
+  "facts": [
+    {
+      "id": "F001",
+      "subject": "潮科技",
+      "predicate": "has_url",
+      "object_or_value": "https://36kr.com/p/1722873217025",
+      "context": null,
+      "source_basis": "潮科技 | 快速入门量子力学，看这篇就够啦！ -36氪\thttps://36kr.com/p/1722873217025"
+    },
+    {
+      "id": "F002",
+      "subject": "潮科技",
+      "predicate": "title",
+      "object_or_value": "快速入门量子力学，看这篇就够啦！",
+      "context": null,
+      "source_basis": "潮科技 | 快速入门量子力学，看这篇就够啦！ -36氪\thttps://36kr.com/p/1722873217025"
+    },
+    {
+      "id": "F003",
+      "subject": "潮科技",
+      "predicate": "platform",
+      "object_or_value": "36氪",
+      "context": null,
+      "source_basis": "潮科技 | 快速入门量子力学，看这篇就够啦！ -36氪\thttps://36kr.com/p/1722873217025"
+    },
+    {
+      "id": "F004",
+      "subject": "圏論的量子力学入門",
+      "predicate": "has_url",
+      "object_or_value": "https://yerebatan.com/17365809723",
+      "context": null,
+      "source_basis": "圏論的量子力学入門 | ヤマダウェブコム\thttps://yerebatan.com/17365809723"
+    },
+    {
+      "id": "F005",
+      "subject": "圏論的量子力学入門",
+      "predicate": "publisher",
+      "object_or_value": "ヤマダウェブコム",
+      "context": null,
+      "source_basis": "圏論的量子力学入門 | ヤマダウェブコム\thttps://yerebatan.com/17365809723"
+    },
+    {
+      "id": "F006",
+      "subject": "野村泰紀",
+      "predicate": "author",
+      "object_or_value": "【#1】量子力学の説明に入るまえに。",
+      "context": null,
+      "source_basis": "【#1】量子力学の説明に入るまえに。／ 執筆：野村泰紀 | POPEYE...\thttps://popeyemagazine.jp/post-222658/"
+    },
+    {
+      "id": "F007",
+      "subject": "【#1】量子力学の説明に入るまえに。",
+      "predicate": "has_url",
+      "object_or_value": "https://popeyemagazine.jp/post-222658/",
+      "context": null,
+      "source_basis": "【#1】量子力学の説明に入るまえに。／ 執筆：野村泰紀 | POPEYE...\thttps://popeyemagazine.jp/post-222658/"
+    },
+    {
+      "id": "F008",
+      "subject": "【#1】量子力学の説明に入るまえに。",
+      "predicate": "publisher",
+      "object_or_value": "POPEYE",
+      "context": null,
+      "source_basis": "【#1】量子力学の説明に入るまえに。／ 執筆：野村泰紀 | POPEYE...\thttps://popeyemagazine.jp/post-222658/"
+    },
+    {
+      "id": "F009",
+      "subject": "taiking_1111",
+      "predicate": "has_url",
+      "object_or_value": "https://note.com/taiking_1111/n/nf6880ad5564f",
+      "context": null,
+      "source_basis": "note.com/taiking_1111/n/nf6880ad5564f\thttps://note.com/taiking_1111/n/nf6880ad5564f"
+    },
+    {
+      "id": "F010",
+      "subject": "Tanaka's HP",
+      "predicate": "has_url",
+      "object_or_value": "https://www.sci.u-hyogo.ac.jp/material/photo_phys/tanaka/quantummechanics.html",
+      "context": null,
+      "source_basis": "Tanaka's HP\thttps://www.sci.u-hyogo.ac.jp/material/photo_phys/tanaka/quantummechanics.html"
+    },
+    {
+      "id": "F011",
+      "subject": "Tanaka's HP",
+      "predicate": "host_domain",
+      "object_or_value": "www.sci.u-hyogo.ac.jp",
+      "context": null,
+      "source_basis": "Tanaka's HP\thttps://www.sci.u-hyogo.ac.jp/material/photo_phys/tanaka/quantummechanics.html"
+    },
+    {
+      "id": "F012",
+      "subject": "Octo Knot(オクトノット)",
+      "predicate": "has_url",
+      "object_or_value": "https://8knot.nttdata.com/column/4923072",
+      "context": null,
+      "source_basis": "Octo Knot(オクトノット)｜【量子とは何か～物理学者vs光～（中編）】\thttps://8knot.nttdata.com/column/4923072"
+    },
+    {
+      "id": "F013",
+      "subject": "Octo Knot(オクトノット)",
+      "predicate": "title",
+      "object_or_value": "【量子とは何か～物理学者vs光～（中編）】",
+      "context": null,
+      "source_basis": "Octo Knot(オクトノット)｜【量子とは何か～物理学者vs光～（中編）】\thttps://8knot.nttdata.com/column/4923072"
+    },
+    {
+      "id": "F014",
+      "subject": "Octo Knot(オクトノット)",
+      "predicate": "publisher",
+      "object_or_value": "NTT DATA",
+      "context": null,
+      "source_basis": "Octo Knot(オクトノット)｜【量子とは何か～物理学者vs光～（中編）】\thttps://8knot.nttdata.com/column/4923072"
+    },
+    {
+      "id": "F015",
+      "subject": "campus.nikki.ne.jp",
+      "predicate": "has_url",
+      "object_or_value": "https://campus.nikki.ne.jp/university/569/1375574/",
+      "context": null,
+      "source_basis": "campus.nikki.ne.jp/university/569/1375574\thttps://campus.nikki.ne.jp/university/569/1375574/"
+    },
+    {
+      "id": "F016",
+      "subject": "finance.sina.com.cn",
+      "predicate": "has_url",
+      "object_or_value": "https://finance.sina.com.cn/tech/2021-07-11/doc-ikqciyzk4442573.shtml",
+      "context": null,
+      "source_basis": "finance.sina.com.cn/tech/2021-07-11/doc-ikqciyzk4442573.shtml\thttps://finance.sina.com.cn/tech/2021-07-11/doc-ikqciyzk4442573.shtml"
+    },
+    {
+      "id": "F017",
+      "subject": "finance.sina.com.cn",
+      "predicate": "publish_date",
+      "object_or_value": "2021-07-11",
+      "context": null,
+      "source_basis": "finance.sina.com.cn/tech/2021-07-11/doc-ikqciyzk4442573.shtml\thttps://finance.sina.com.cn/tech/2021-07-11/doc-ikqciyzk4442573.shtml"
+    },
+    {
+      "id": "F018",
+      "subject": "denso.sokei.co.jp",
+      "predicate": "has_url",
+      "object_or_value": "http://denso.sokei.co.jp/tech_primer/se_tech_prim.pdf",
+      "context": null,
+      "source_basis": "denso.sokei.co.jp/tech_primer/se_tech_prim.pdf\thttp://denso.sokei.co.jp/tech_primer/se_tech_prim.pdf"
+    },
+    {
+      "id": "F019",
+      "subject": "denso.sokei.co.jp",
+      "predicate": "file_type",
+      "object_or_value": "PDF",
+      "context": null,
+      "source_basis": "denso.sokei.co.jp/tech_primer/se_tech_prim.pdf\thttp://denso.sokei.co.jp/tech_primer/se_tech_prim.pdf"
+    },
+    {
+      "id": "F020",
+      "subject": "es.osaka-u.ac.jp",
+      "predicate": "has_url",
+      "object_or_value": "https://www.es.osaka-u.ac.jp/ja/student/school-of-engineering-science/curriculum/images/H24senmon2.pdf",
+      "context": null,
+      "source_basis": "es.osaka-u.ac.jp/ja/student/school-of-engineering-science/curriculum...\thttps://www.es.osaka-u.ac.jp/ja/student/school-of-engineering-science/curriculum/images/H24senmon2.pdf"
+    },
+    {
+      "id": "F021",
+      "subject": "es.osaka-u.ac.jp",
+      "predicate": "file_type",
+      "object_or_value": "PDF",
+      "context": null,
+      "source_basis": "es.osaka-u.ac.jp/ja/student/school-of-engineering-science/curriculum...\thttps://www.es.osaka-u.ac.jp/ja/student/school-of-engineering-science/curriculum/images/H24senmon2.pdf"
+    }
+  ],
+  "residual": [
+    {
+      "source_basis": "潮科技 | 快速入门量子力学，看这篇就够啦！ -36氪\thttps://36kr.com/p/1722873217025",
+      "reason": "URLとタイトルは既にFACT化されているため、残りの記述（例：「快速入门量子力学」が内容であるという文脈的な関係）は、既存のFACTで十分カバーされており、独立した原子的事实として抽出する必要性が低い。"
+    },
+    {
+      "source_basis": "note.com/taiking_1111/n/nf6880ad5564f\thttps://note.com/taiking_1111/n/nf6880ad5564f",
+      "reason": "URLの重複および簡略化された形式のみであり、新しい属性情報がないため、既存のFACT（F009）でカバー可能。"
+    },
+    {
+      "source_basis": "campus.nikki.ne.jp/university/569/1375574\thttps://campus.nikki.ne.jp/university/569/1375574/",
+      "reason": "URLの重複および簡略化された形式のみであり、新しい属性情報がないため、既存のFACT（F015）でカバー可能。"
+    },
+    {
+      "source_basis": "finance.sina.com.cn/tech/2021-07-11/doc-ikqciyzk4442573.shtml\thttps://finance.sina.com.cn/tech/2021-07-11/doc-ikqciyzk4442573.shtml",
+      "reason": "URLの重複および簡略化された形式のみであり、新しい属性情報がないため、既存のFACT（F016, F017）でカバー可能。"
+    },
+    {
+      "source_basis": "denso.sokei.co.jp/tech_primer/se_tech_prim.pdf\thttps://denso.sokei.co.jp/tech_primer/se_tech_prim.pdf",
+      "reason": "URLの重複および簡略化された形式のみであり、新しい属性情報がないため、既存のFACT（F018, F019）でカバー可能。"
+    },
+    {
+      "source_basis": "es.osaka-u.ac.jp/ja/student/school-of-engineering-science/curriculum...\thttps://www.es.osaka-u.ac.jp/ja/student/school-of-engineering-science/curriculum/images/H24senmon2.pdf",
+      "reason": "URLの重複および簡略化された形式のみであり、新しい属性情報がないため、既存のFACT（F020, F021）でカバー可能。"
+    }
+  ]
+}

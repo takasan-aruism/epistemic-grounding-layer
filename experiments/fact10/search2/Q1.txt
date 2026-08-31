@@ -1,0 +1,126 @@
+{
+  "facts": [
+    {
+      "id": "F001",
+      "subject": "料理研究家",
+      "predicate": "created_content",
+      "object_or_value": "至高のハンバーグ",
+      "context": null,
+      "source_basis": "料理研究家が本気で作る「至高のハンバーグ」"
+    },
+    {
+      "id": "F002",
+      "subject": "至高のハンバーグ",
+      "predicate": "has_video_url",
+      "object_or_value": "https://www.youtube.com/watch?v=qgL4wLgADUI",
+      "context": null,
+      "source_basis": "料理研究家が本気で作る「至高のハンバーグ」『Hamburg... - YouTube	https://www.youtube.com/watch?v=qgL4wLgADUI"
+    },
+    {
+      "id": "F003",
+      "subject": "本当に美味しいハンバーグ",
+      "predicate": "is_recipe_type",
+      "object_or_value": "定番レシピ",
+      "context": null,
+      "source_basis": "本当に美味しいハンバーグ｜何度も作りたい定番レシピVol.40"
+    },
+    {
+      "id": "F004",
+      "subject": "本当に美味しいハンバーグ",
+      "predicate": "has_article_url",
+      "object_or_value": "https://oceans-nadia.com/user/34575/article/969",
+      "context": null,
+      "source_basis": "本当に美味しいハンバーグ｜何度も作りたい定番レシピVol.40	https://oceans-nadia.com/user/34575/article/969"
+    },
+    {
+      "id": "F005",
+      "subject": "ハンバーグソース",
+      "predicate": "has_recipe_count",
+      "object_or_value": "30",
+      "context": null,
+      "source_basis": "【混ぜるだけ！ 絶品ハンバーグソース】簡単＆本格 人気レシピ30..."
+    },
+    {
+      "id": "F006",
+      "subject": "ハンバーグソース",
+      "predicate": "has_recipe_url",
+      "object_or_value": "https://delishkitchen.tv/curations/7350",
+      "context": null,
+      "source_basis": "【混ぜるだけ！ 絶品ハンバーグソース】簡単＆本格 人気レシピ30...	https://delishkitchen.tv/curations/7350"
+    },
+    {
+      "id": "F007",
+      "subject": "家庭的な基本のハンバーグ",
+      "predicate": "has_recipe_url",
+      "object_or_value": "https://www.sirogohan.com/recipe/hanba-gu/",
+      "context": null,
+      "source_basis": "家庭的な基本のハンバーグのレシピ/作り方：白ごはん.com	https://www.sirogohan.com/recipe/hanba-gu/"
+    },
+    {
+      "id": "F008",
+      "subject": "ハンバーグレシピ",
+      "predicate": "has_ranking_url",
+      "object_or_value": "https://cookai-recipe.com/hamburg-recipe/1631.html",
+      "context": null,
+      "source_basis": "【人気1位】ハンバーグレシピのTOP20... | クーカイ-Cookai-	https://cookai-recipe.com/hamburg-recipe/1631.html"
+    },
+    {
+      "id": "F009",
+      "subject": "ふっくらジューシーハンバーグ",
+      "predicate": "has_recipe_url",
+      "object_or_value": "https://park.ajinomoto.co.jp/recipe/card/707446/",
+      "context": null,
+      "source_basis": "ふっくらジューシーハンバーグの作り方 | レシピ |【味の素パーク】	https://park.ajinomoto.co.jp/recipe/card/707446/"
+    },
+    {
+      "id": "F010",
+      "subject": "鶏ひき肉の和風ハンバーグ",
+      "predicate": "has_recipe_url",
+      "object_or_value": "https://cookien.com/recipe/11903/",
+      "context": null,
+      "source_basis": "鶏ひき肉の和風ハンバーグのレシピ/作り方 | つくおき	https://cookien.com/recipe/11903/"
+    },
+    {
+      "id": "F011",
+      "subject": "株式会社マルシンフーズ",
+      "predicate": "has_recipe_url",
+      "object_or_value": "https://www.marushin-foods.co.jp/recipe/hamburg/",
+      "context": null,
+      "source_basis": "レシピ | 株式会社マルシンフーズ	https://www.marushin-foods.co.jp/recipe/hamburg/"
+    },
+    {
+      "id": "F012",
+      "subject": "7premium.jp",
+      "predicate": "has_blog_detail_url",
+      "object_or_value": "https://7premium.jp/blog/detail?id=1548",
+      "context": null,
+      "source_basis": "7premium.jp/blog/detail?id=1548	https://7premium.jp/blog/detail?id=1548"
+    },
+    {
+      "id": "F013",
+      "subject": "キッコーマン",
+      "predicate": "has_tips_url",
+      "object_or_value": "https://www.kikkoman.co.jp/homecook/tsushin/tips0072/",
+      "context": null,
+      "source_basis": "kikkoman.co.jp/homecook/tsushin/tips0072	https://www.kikkoman.co.jp/homecook/tsushin/tips0072/"
+    }
+  ],
+  "residual": [
+    {
+      "source_basis": "料理研究家が本気で作る「至高のハンバーグ」『Hamburg... - YouTube",
+      "reason": "URLとタイトルが結合された形式であり、FACT化にはURLとタイトルを分離する必要があるが、SOURCEの記述自体がURLへのリンクとして機能しているため、URLをobjectとするFACT(F002)として抽出済み。タイトル部分の「Hamburg...」は省略記号を含む不完全な表記であり、独立した事実として扱うには曖昧さがあるため、F001で「至高のハンバーグ」として抽出し、F002でURLを関連付けた。"
+    },
+    {
+      "source_basis": "本当に美味しいハンバーグ｜何度も作りたい定番レシピVol.40",
+      "reason": "「本当に美味しいハンバーグ」は記事のタイトルであり、特定のレシピ名として固有名詞的に扱えるためFACT化した。"
+    },
+    {
+      "source_basis": "【混ぜるだけ！ 絶品ハンバーグソース】簡単＆本格 人気レシピ30...",
+      "reason": "「30」はレシピの数を示す数値として明確な情報であるためFACT化した。"
+    },
+    {
+      "source_basis": "【人気1位】ハンバーグレシピのTOP20...",
+      "reason": "「TOP20」はリストの範囲を示す情報であるが、具体的な20個のレシピ名や順位の詳細はSOURCEに明示されていないため、URLの存在と「人気1位」という位置づけ（ただし詳細不明）を考慮し、URLの抽出に留めた。"
+    }
+  ]
+}

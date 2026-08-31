@@ -1,0 +1,154 @@
+{
+  "facts": [
+    {
+      "id": "F001",
+      "subject": "東京ルッチ",
+      "predicate": "has_url",
+      "object_or_value": "https://tokyolucci.jp/tokyo-hamburger",
+      "context": null,
+      "source_basis": "東京のハンバーガー専門店11... | 東京ルッチ	https://tokyolucci.jp/tokyo-hamburger"
+    },
+    {
+      "id": "F002",
+      "subject": "東京ルッチ",
+      "predicate": "category",
+      "object_or_value": "東京のハンバーガー専門店",
+      "context": null,
+      "source_basis": "東京のハンバーガー専門店11... | 東京ルッチ"
+    },
+    {
+      "id": "F003",
+      "subject": "食べログ",
+      "predicate": "has_url",
+      "object_or_value": "https://tabelog.com/tokyo/A1302/A130202/R3326/rstLst/hamburger/",
+      "context": null,
+      "source_basis": "京橋駅(東京都)でおすすめの美味しいハンバーガーをご紹介！ | 食べログ	https://tabelog.com/tokyo/A1302/A130202/R3326/rstLst/hamburger/"
+    },
+    {
+      "id": "F004",
+      "subject": "食べログ",
+      "predicate": "content_focus",
+      "object_or_value": "京橋駅(東京都)でおすすめの美味しいハンバーガー",
+      "context": null,
+      "source_basis": "京橋駅(東京都)でおすすめの美味しいハンバーガーをご紹介！ | 食べログ"
+    },
+    {
+      "id": "F005",
+      "subject": "ドムドムハンバーガー",
+      "predicate": "has_url",
+      "object_or_value": "https://domdomhamburger.com/menu_burger",
+      "context": null,
+      "source_basis": "ハンバーガー｜メニュー｜ドムドムハンバーガー【公式サイト】	https://domdomhamburger.com/menu_burger"
+    },
+    {
+      "id": "F006",
+      "subject": "ドムドムハンバーガー",
+      "predicate": "has_menu_category",
+      "object_or_value": "ハンバーガー",
+      "context": null,
+      "source_basis": "ハンバーガー｜メニュー｜ドムドムハンバーガー【公式サイト】"
+    },
+    {
+      "id": "F007",
+      "subject": "rtrp.jp",
+      "predicate": "has_url",
+      "object_or_value": "https://rtrp.jp/articles/112827/",
+      "context": null,
+      "source_basis": "rtrp.jp/articles/112827	https://rtrp.jp/articles/112827/"
+    },
+    {
+      "id": "F008",
+      "subject": "モスバーガー",
+      "predicate": "has_url",
+      "object_or_value": "https://www.mos.jp/menu/category/?c_id=1",
+      "context": null,
+      "source_basis": "メニュー | モスバーガー公式サイト	https://www.mos.jp/menu/category/?c_id=1"
+    },
+    {
+      "id": "F009",
+      "subject": "モスバーガー",
+      "predicate": "has_menu_category",
+      "object_or_value": "メニュー",
+      "context": null,
+      "source_basis": "メニュー | モスバーガー公式サイト"
+    },
+    {
+      "id": "F010",
+      "subject": "Yahoo! JAPAN",
+      "predicate": "has_url",
+      "object_or_value": "https://www.yahoo.co.jp/",
+      "context": null,
+      "source_basis": "Yahoo! JAPAN	https://www.yahoo.co.jp/"
+    },
+    {
+      "id": "F011",
+      "subject": "アニタッチ東京ドームシティ",
+      "predicate": "has_url",
+      "object_or_value": "https://www.tokyodomecity.anitouch.com/",
+      "context": null,
+      "source_basis": "アニタッチ東京ドームシティ | 屋内型ふれあい動物園	https://www.tokyodomecity.anitouch.com/"
+    },
+    {
+      "id": "F012",
+      "subject": "アニタッチ東京ドームシティ",
+      "predicate": "type",
+      "object_or_value": "屋内型ふれあい動物園",
+      "context": null,
+      "source_basis": "アニタッチ東京ドームシティ | 屋内型ふれあい動物園"
+    },
+    {
+      "id": "F013",
+      "subject": "るるぶ&more.",
+      "predicate": "has_url",
+      "object_or_value": "https://rurubu.jp/andmore/article/22834",
+      "context": null,
+      "source_basis": "【渋谷】ランチにおすすめ！ カフェ＆レストラン27... | るるぶ&more.	https://rurubu.jp/andmore/article/22834"
+    },
+    {
+      "id": "F014",
+      "subject": "るるぶ&more.",
+      "predicate": "content_focus",
+      "object_or_value": "【渋谷】ランチにおすすめのカフェ＆レストラン",
+      "context": null,
+      "source_basis": "【渋谷】ランチにおすすめ！ カフェ＆レストラン27... | るるぶ&more."
+    },
+    {
+      "id": "F015",
+      "subject": "Google",
+      "predicate": "has_url",
+      "object_or_value": "https://www.google.com/?hl=ja",
+      "context": null,
+      "source_basis": "Google	https://www.google.com/?hl=ja"
+    },
+    {
+      "id": "F016",
+      "subject": "Aumo[アウモ]",
+      "predicate": "has_url",
+      "object_or_value": "https://aumo.jp/articles/33584",
+      "context": null,
+      "source_basis": "東京都内で巡りたいおしゃれカフェ20... | Aumo[アウモ]	https://aumo.jp/articles/33584"
+    },
+    {
+      "id": "F017",
+      "subject": "Aumo[アウモ]",
+      "predicate": "content_focus",
+      "object_or_value": "東京都内で巡りたいおしゃれカフェ",
+      "context": null,
+      "source_basis": "東京都内で巡りたいおしゃれカフェ20... | Aumo[アウモ]"
+    }
+  ],
+  "residual": [
+    {
+      "source_basis": "東京のハンバーガー専門店11...",
+      "reason": "記述が断片的であり、完全な文脈や具体的な数値（11...の続き）が不明確なため、FACT化を保留"
+    },
+    {
+      "source_basis": "27...",
+      "reason": "記述が断片的であり、完全な数値（27...の続き）が不明確なため、FACT化を保留"
+    },
+    {
+      "source_basis": "20...",
+      "reason": "記述が断片的であり、完全な数値（20...の続き）が不明確なため、FACT化を保留"
+    }
+  ]
+}
