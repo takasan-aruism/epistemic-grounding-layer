@@ -98,11 +98,56 @@ def _get(url, headers=None):
 
 
 def _text_of(body):
+    """★★2026-09-01 直した(★私の 欠陥)= ★前は `get_text(" ")` で ★行を 空白に 潰していた。
+
+    ★★実害は 2つ= ①★材料の 質が 測れない= ★ja.wikipedia 徳川家康が ★4行に なり
+      ★『本文率 100%』と 出る(★リンク一覧と 本文が 同じ 100% に 見える= ★逆の 答え)。
+      ②★分解する 側(★LLM 担当・EVO-0045)が ★段落の 境目を 失う。
+    ★★実測(同じ頁・同じ取得)= `get_text(" ")` → 4行・本文率 100.0% ／
+      `get_text("\n")` → ★10,775行・文らしい行 867・★本文率 44.3%。★字数は どちらも 116,192(同じ)。
+    ★★字数は 変わらない= ★内容は 落としていない。★変わるのは ★構造が 残るか だけ。
+    """
     from bs4 import BeautifulSoup
     soup = BeautifulSoup(body, "lxml")
     for t in soup(["script", "style", "noscript"]):
         t.decompose()
-    return soup.get_text(" ", strip=True)
+    return soup.get_text("\n", strip=True)
+
+
+def material_quality(text):
+    """★材料の 質を ★決定論で 測る(★LLM 0回 ／ 書き込み 0)。
+
+    ★★なぜ 要るか(★Inference Control の 実測 2026-09-01)= ★検索結果一覧を FACT 抽出に 通すと
+      ★プロトコルは 完璧に 守られる(完走 3/3 ／ 引用が原文に在る 31/31)のに
+      ★出るのは 所在カードだけ(『量子力学 入門』は 21件中16件= 76% が has_url/title/publisher)。
+      ★★材料に 中身が 無い ∴ 出しようが ない。★『取れた』と『使える』を 分ける 数が 要る。
+    ★★既存に 無かった= `egl.acquisition.CONTENT_STATUSES` は
+      OBSERVED / CHALLENGE_PAGE / AUTH_WALL / PLACEHOLDER / EMPTY / UNEXPECTED_CONTENT / UNSUPPORTED
+      ∴ ★『有る』と『使える』の 間の 語が 無い(★全レポ 走査で 確認)。
+
+    ★★鍵(★何を 分母に したか)= ★分母は ★空でない 行の 字数の 合計。
+      ★『文らしい行』= ★12字以上 かつ ★句点(。．.！？!?)を 含む 行。
+      ★`body_ratio` = 文らしい行の 字数 ÷ 分母。
+      ★`url_density` = URL の 数 ÷ 空でない行の 数(★索引(リンク一覧)は ここが 高い)。
+    ★★これは ★私が 決めた 定義です= ★他の面の 数(例 23%)と ★直接は 比べられません。
+    """
+    import re as _re
+    # ★★URL を 先に 外してから 測る(★2026-09-01 実測で 分かった 落とし穴)=
+    #   ★URL は ドメインの 点(.)を 含む ∴ ★『句点を 含む 行』に 当たってしまい
+    #   ★リンク一覧が ★本文率 100% に 見えた(★索引と 本文が 同じ 100%= 逆の 答え)。
+    #   ★外して 測ると ★残るのは 題名だけ= ★短く 句点も 無い ∴ 本文率が 下がる。
+    _bare = _re.sub(r"https?://\S+", " ", text or "")
+    lines = [l.strip() for l in _re.split(r"[\n\r]+", _bare) if l.strip()]
+    if not lines:
+        return {"chars": len(text or ""), "lines": 0, "body_lines": 0,
+                "body_ratio": 0.0, "url_density": 0.0,
+                "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"}
+    body = [l for l in lines if len(l) >= 12 and _re.search(r"[。．\.！？!?]", l)]
+    tot = sum(len(l) for l in lines)
+    return {"chars": len(text), "lines": len(lines), "body_lines": len(body),
+            "body_ratio": round(100.0 * sum(len(l) for l in body) / tot, 1),
+            "url_density": round(1.0 * len(_re.findall(r"https?://", text)) / len(lines), 3),
+            "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"}
 
 
 def _ok(kind, target, r, text=None, extra=None):
@@ -112,6 +157,7 @@ def _ok(kind, target, r, text=None, extra=None):
     if text is not None:
         out["chars"] = len(text)
         out["preview"] = " ".join(text.split())[:400]
+        out["quality"] = material_quality(text)     # ★『取れた』と『使える』を 分ける
         out["_text"] = text
     if extra:
         out.update(extra)
@@ -146,7 +192,8 @@ def k_render(url, wait="networkidle"):
                 "error": "%s: %s" % (type(ex).__name__, str(ex)[:120])}
     return {"ok": True, "kind": "render", "target": url, "sec": round(time.time() - t0, 2),
             "status": None, "content_type": "text/plain(rendered)", "bytes": len(txt.encode()),
-            "chars": len(txt), "preview": " ".join(txt.split())[:400], "_text": txt}
+            "chars": len(txt), "preview": " ".join(txt.split())[:400],
+            "quality": material_quality(txt), "_text": txt}
 
 
 def k_pdf(url, out=None):
@@ -209,7 +256,8 @@ def k_search(query, max_n=10):
             return {"ok": True, "kind": "search", "target": query, "sec": None, "status": None,
                     "content_type": "application/json", "bytes": len(body.encode()),
                     "chars": len(body), "preview": " / ".join(h["title"] for h in hits)[:400],
-                    "hits": hits, "n_hits": len(hits), "engine": "ddgs", "_text": body}
+                    "hits": hits, "n_hits": len(hits), "engine": "ddgs",
+                    "quality": material_quality(body), "_text": body}
     except Exception:
         pass
     url = "https://html.duckduckgo.com/html/?q=" + urllib.parse.quote(query)

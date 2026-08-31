@@ -86,8 +86,9 @@ def main(argv):
         _os.makedirs(dumpdir, exist_ok=True)
     rows = []
     print("★外部取得 試験用 20件(★私の20行。★RRI の20本とは 別物)")
-    print("  %-4s %-12s %-2s %-9s %-14s %8s %7s %-18s" % ("id", "領域", "Lv", "口", "期待", "実測chars", "秒", "本線の語"))
-    print("  " + "-" * 104)
+    print("  %-4s %-12s %-2s %-9s %-12s %8s %7s %-17s %6s %6s"
+          % ("id", "領域", "Lv", "口", "期待", "実測chars", "秒", "本線の語", "本文率", "URL密"))
+    print("  " + "-" * 118)
     for cid, area, lv, kind, target, expect, basis in CASES:
         _dump = None
         if dumpdir:
@@ -101,10 +102,14 @@ def main(argv):
                      "expect": expect, "basis": basis, "ok": bool(r.get("ok")),
                      "chars": r.get("chars"), "bytes": r.get("bytes"),
                      "error": r.get("error"), "sec": sec, "本線の語": tr,
-                     "本文の落とし先": r.get("out")})
-        print("  %-4s %-12s %-2d %-9s %-14s %8s %6.1fs %-18s %s"
+                     "本文の落とし先": r.get("out"), "材料の質": r.get("quality")})
+        _q = r.get("quality") or {}
+        print("  %-4s %-12s %-2d %-9s %-12s %8s %6.1fs %-17s %6s %6s %s"
               % (cid, area, lv, kind, expect, got, sec,
-                 (tr or {}).get("transport") or "-", "" if r.get("ok") else "★通らない"))
+                 (tr or {}).get("transport") or "-",
+                 ("%.1f%%" % _q["body_ratio"]) if _q.get("body_ratio") is not None else "-",
+                 ("%.3f" % _q["url_density"]) if _q.get("url_density") is not None else "-",
+                 "" if r.get("ok") else "★通らない"))
     n_ok = sum(1 for x in rows if x["ok"])
     print()
     print("  ★分母 %d ／ 通った %d ／ 通らない %d" % (len(rows), n_ok, len(rows) - n_ok))

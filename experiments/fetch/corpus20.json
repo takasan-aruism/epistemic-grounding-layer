@@ -14,16 +14,24 @@
    "expect": "ok",
    "basis": "本文 115,553字",
    "ok": true,
-   "chars": 116191,
-   "bytes": 1660927,
+   "chars": 116192,
+   "bytes": 1660959,
    "error": null,
-   "sec": 1.0,
+   "sec": 0.99,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C01_web.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C01_web.txt",
+   "材料の質": {
+    "chars": 116192,
+    "lines": 10767,
+    "body_lines": 859,
+    "body_ratio": 44.1,
+    "url_density": 0.001,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C02",
@@ -37,13 +45,21 @@
    "chars": 11957,
    "bytes": 33853,
    "error": null,
-   "sec": 2.03,
+   "sec": 2.17,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C02_render.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C02_render.txt",
+   "材料の質": {
+    "chars": 11957,
+    "lines": 545,
+    "body_lines": 215,
+    "body_ratio": 86.8,
+    "url_density": 0.0,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C03",
@@ -57,13 +73,21 @@
    "chars": 10,
    "bytes": 800,
    "error": null,
-   "sec": 0.33,
+   "sec": 0.29,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C03_web.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C03_web.txt",
+   "材料の質": {
+    "chars": 10,
+    "lines": 1,
+    "body_lines": 0,
+    "body_ratio": 0.0,
+    "url_density": 0.0,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C04",
@@ -77,13 +101,21 @@
    "chars": 39919,
    "bytes": 2215244,
    "error": null,
-   "sec": 0.23,
+   "sec": 0.24,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C04_pdf.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C04_pdf.txt",
+   "材料の質": {
+    "chars": 39919,
+    "lines": 1030,
+    "body_lines": 299,
+    "body_ratio": 60.8,
+    "url_density": 0.001,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C05",
@@ -97,13 +129,21 @@
    "chars": 144695,
    "bytes": 151191,
    "error": null,
-   "sec": 1.22,
+   "sec": 1.31,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C05_web.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C05_web.txt",
+   "材料の質": {
+    "chars": 144695,
+    "lines": 2496,
+    "body_lines": 1263,
+    "body_ratio": 47.5,
+    "url_density": 0.0,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C06",
@@ -117,13 +157,21 @@
    "chars": 562767,
    "bytes": 562767,
    "error": null,
-   "sec": 0.22,
+   "sec": 0.39,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C06_web.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C06_web.txt",
+   "材料の質": {
+    "chars": 562767,
+    "lines": 13980,
+    "body_lines": 13979,
+    "body_ratio": 100.0,
+    "url_density": 0.0,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C07",
@@ -137,13 +185,21 @@
    "chars": 1984,
    "bytes": 2410,
    "error": null,
-   "sec": 0.28,
+   "sec": 0.5,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C07_json.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C07_json.txt",
+   "材料の質": {
+    "chars": 1984,
+    "lines": 1,
+    "body_lines": 1,
+    "body_ratio": 100.0,
+    "url_density": 10.0,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C08",
@@ -157,13 +213,21 @@
    "chars": 4557,
    "bytes": 4557,
    "error": null,
-   "sec": 0.11,
+   "sec": 0.49,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C08_json.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C08_json.txt",
+   "材料の質": {
+    "chars": 4557,
+    "lines": 67,
+    "body_lines": 8,
+    "body_ratio": 59.8,
+    "url_density": 0.209,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C09",
@@ -177,13 +241,21 @@
    "chars": 6617,
    "bytes": 6617,
    "error": null,
-   "sec": 0.34,
+   "sec": 0.32,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C09_json.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C09_json.txt",
+   "材料の質": {
+    "chars": 6617,
+    "lines": 136,
+    "body_lines": 2,
+    "body_ratio": 3.7,
+    "url_density": 0.478,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C10",
@@ -194,16 +266,24 @@
    "expect": "ok",
    "basis": "3,118B",
    "ok": true,
-   "chars": 139,
+   "chars": 133,
    "bytes": 3009,
    "error": null,
-   "sec": 0.13,
+   "sec": 0.12,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C10_rss.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C10_rss.txt",
+   "材料の質": {
+    "chars": 133,
+    "lines": 8,
+    "body_lines": 0,
+    "body_ratio": 0.0,
+    "url_density": 0.0,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C11",
@@ -214,12 +294,20 @@
    "expect": "ok",
    "basis": "ddgs 経由 20件(★html面は12件ほどでCAPTCHA)",
    "ok": true,
-   "chars": 730,
-   "bytes": 1114,
+   "chars": 751,
+   "bytes": 1023,
    "error": null,
-   "sec": 1.96,
+   "sec": 3.39,
    "本線の語": null,
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C11_search.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C11_search.txt",
+   "材料の質": {
+    "chars": 751,
+    "lines": 10,
+    "body_lines": 4,
+    "body_ratio": 60.0,
+    "url_density": 1.0,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C12",
@@ -230,12 +318,20 @@
    "expect": "ok",
    "basis": "ddgs 経由 20件",
    "ok": true,
-   "chars": 788,
-   "bytes": 1152,
+   "chars": 739,
+   "bytes": 1101,
    "error": null,
-   "sec": 4.22,
+   "sec": 1.48,
    "本線の語": null,
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C12_search.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C12_search.txt",
+   "材料の質": {
+    "chars": 739,
+    "lines": 10,
+    "body_lines": 1,
+    "body_ratio": 14.2,
+    "url_density": 1.0,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C13",
@@ -247,15 +343,23 @@
    "basis": "題名と説明。★HTML 1,376,037B だが 本文0字",
    "ok": true,
    "chars": 2454,
-   "bytes": 1328700,
+   "bytes": 1317577,
    "error": null,
-   "sec": 0.59,
+   "sec": 0.74,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C13_youtube.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C13_youtube.txt",
+   "材料の質": {
+    "chars": 2454,
+    "lines": 44,
+    "body_lines": 4,
+    "body_ratio": 39.8,
+    "url_density": 0.25,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C14",
@@ -275,7 +379,8 @@
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C14_file.bin"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C14_file.bin",
+   "材料の質": null
   },
   {
    "id": "C15",
@@ -286,16 +391,24 @@
    "expect": "ok_meta_only",
    "basis": "2,178字= 名前/投稿数/追随者。★投稿本文は 入らない",
    "ok": true,
-   "chars": 2546,
-   "bytes": 298512,
+   "chars": 1751,
+   "bytes": 276072,
    "error": null,
-   "sec": 1.7,
+   "sec": 1.47,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C15_xprofile.txt"
+   "本文の落とし先": "/home/takasan/egl/experiments/fetch/corpus20_text/C15_xprofile.txt",
+   "材料の質": {
+    "chars": 1751,
+    "lines": 119,
+    "body_lines": 4,
+    "body_ratio": 15.0,
+    "url_density": 0.0,
+    "key": "★分母=空でない行の字数合計 ／ 文らしい行=12字以上かつ句点を含む"
+   }
   },
   {
    "id": "C16",
@@ -309,13 +422,14 @@
    "chars": null,
    "bytes": null,
    "error": "HTTPError: HTTP Error 404: Not Found",
-   "sec": 0.51,
+   "sec": 0.55,
    "本線の語": {
     "transport": "NOT_FOUND_REMOTE",
     "content": null,
     "http": 404
    },
-   "本文の落とし先": null
+   "本文の落とし先": null,
+   "材料の質": null
   },
   {
    "id": "C17",
@@ -329,13 +443,14 @@
    "chars": null,
    "bytes": null,
    "error": "HTTPError: HTTP Error 400: Bad Request",
-   "sec": 0.25,
+   "sec": 0.29,
    "本線の語": {
     "transport": "SUCCESS",
     "content": "OBSERVED",
     "http": 200
    },
-   "本文の落とし先": null
+   "本文の落とし先": null,
+   "材料の質": null
   },
   {
    "id": "C18",
@@ -349,13 +464,14 @@
    "chars": null,
    "bytes": null,
    "error": "HTTPError: HTTP Error 402: Payment Required",
-   "sec": 0.21,
+   "sec": 0.22,
    "本線の語": {
     "transport": "PAYMENT_REQUIRED",
     "content": null,
     "http": 402
    },
-   "本文の落とし先": null
+   "本文の落とし先": null,
+   "材料の質": null
   },
   {
    "id": "C19",
@@ -369,13 +485,14 @@
    "chars": null,
    "bytes": null,
    "error": "HTTPError: HTTP Error 503: Service Unavailable",
-   "sec": 0.21,
+   "sec": 0.22,
    "本線の語": {
     "transport": "SERVER_ERROR",
     "content": null,
     "http": 503
    },
-   "本文の落とし先": null
+   "本文の落とし先": null,
+   "材料の質": null
   },
   {
    "id": "C20",
@@ -389,13 +506,14 @@
    "chars": null,
    "bytes": null,
    "error": "HTTPError: HTTP Error 404: Not Found",
-   "sec": 0.3,
+   "sec": 0.65,
    "本線の語": {
     "transport": "NOT_FOUND_REMOTE",
     "content": null,
     "http": 404
    },
-   "本文の落とし先": null
+   "本文の落とし先": null,
+   "材料の質": null
   }
  ]
 }
