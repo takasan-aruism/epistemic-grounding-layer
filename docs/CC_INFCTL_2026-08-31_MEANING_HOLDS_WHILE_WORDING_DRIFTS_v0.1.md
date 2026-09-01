@@ -1,5 +1,12 @@
 # LLMK-0012 字面は揺れても 意味は揺れない ── 測る物を 一致率から 5段階の評点へ
 
+<!-- 2DER:LLM_KNOWLEDGE
+knowledge_id: LLMK-0012
+call_sites: 
+applies_when: 同じ資料を 繰り返し処理して 安定しているかを 見るとき
+maturity: MEASURED
+-->
+
 - knowledge_id: LLMK-0012
 - maturity: MEASURED
 - 測ったHEAD: egl f4bab19 ／ 実走 vLLM Qwen3.6-35B-A3B

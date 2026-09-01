@@ -1,5 +1,12 @@
 # LLMK-0011 seed と temperature=0 では 長い出力は 固定できない
 
+<!-- 2DER:LLM_KNOWLEDGE
+knowledge_id: LLMK-0011
+call_sites: twoder/runtime_supervisor.py:qwen_raw_call
+applies_when: seed を 指定して 再現を 期待するとき
+maturity: MEASURED
+-->
+
 - knowledge_id: LLMK-0011
 - maturity: MEASURED
 - 測ったHEAD: egl 4fd9c26 ／ 実走 vLLM Qwen3.6-35B-A3B（TP2 / max-num-seqs 32 / prefix-caching 有 / kv-cache fp8）

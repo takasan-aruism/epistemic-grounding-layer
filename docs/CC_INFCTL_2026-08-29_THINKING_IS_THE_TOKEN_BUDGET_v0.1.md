@@ -1,5 +1,12 @@
 # LLMK-0010 答えが返るかを決めているのは max_tokens ではなく enable_thinking
 
+<!-- 2DER:LLM_KNOWLEDGE
+knowledge_id: LLMK-0010
+call_sites: twoder/runtime_supervisor.py:qwen_raw_call
+applies_when: worker=VLLM
+maturity: MEASURED
+-->
+
 - knowledge_id: LLMK-0010
 - maturity: MEASURED
 - 測ったHEAD: egl df4b45b ／ 実走 vLLM Qwen3.6-35B-A3B（max-num-seqs 32 / max-model-len 65536 / TP2 / gpu-util 0.92）
